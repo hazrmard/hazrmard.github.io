@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://iahmed.me/post/is_cold_the_new_hot/</loc>
+    <lastmod>2017-01-31T11:00:25-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://iahmed.me/post/GravitationalSlingshots/</loc>
+    <lastmod>2017-01-31T10:48:32-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/about/</loc>
     <lastmod>2017-01-28T16:14:31-06:00</lastmod>
   </url>
@@ -121,6 +131,12 @@
   </url>
   
   <url>
+    <loc>http://iahmed.me/tags/classical-mechanics/</loc>
+    <lastmod>2017-01-31T10:48:32-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/categories/developer/</loc>
     <lastmod>2016-09-06T02:01:26+00:00</lastmod>
     <priority>0</priority>
@@ -139,6 +155,12 @@
   </url>
   
   <url>
+    <loc>http://iahmed.me/tags/gravity/</loc>
+    <lastmod>2017-01-31T10:48:32-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/tags/hpc/</loc>
     <lastmod>2016-04-29T23:23:16+00:00</lastmod>
     <priority>0</priority>
@@ -146,7 +168,7 @@
   
   <url>
     <loc>http://iahmed.me/</loc>
-    <lastmod>2016-11-01T01:00:00-05:00</lastmod>
+    <lastmod>2017-01-31T11:00:25-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -182,13 +204,13 @@
   
   <url>
     <loc>http://iahmed.me/categories/physics/</loc>
-    <lastmod>2016-08-14T03:29:23+00:00</lastmod>
+    <lastmod>2017-01-31T11:00:25-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://iahmed.me/post/</loc>
-    <lastmod>2016-09-06T02:01:26+00:00</lastmod>
+    <lastmod>2017-01-31T11:00:25-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -205,6 +227,12 @@
   </url>
   
   <url>
+    <loc>http://iahmed.me/tags/quantum-mechanics/</loc>
+    <lastmod>2017-01-31T11:00:25-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/tags/</loc>
     <priority>0</priority>
   </url>
@@ -212,6 +240,12 @@
   <url>
     <loc>http://iahmed.me/tags/testing/</loc>
     <lastmod>2016-09-06T02:01:26+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://iahmed.me/tags/thermodynamics/</loc>
+    <lastmod>2017-01-31T11:00:25-06:00</lastmod>
     <priority>0</priority>
   </url>
   

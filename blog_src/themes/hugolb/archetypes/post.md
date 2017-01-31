@@ -5,5 +5,5 @@ date = ""
 tags = []
 categories = []
 series = []
-isexternal = "false"
+isexternal = false
 +++
