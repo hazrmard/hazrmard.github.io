@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/post/index.xml</link>
+    <description>Recent content in Posts on Ibrahim Ahmed</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ibrahim Ahmed</copyright>
+    <lastBuildDate>Tue, 06 Sep 2016 02:01:26 +0000</lastBuildDate>
+    <atom:link href="http://iahmed.me/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Testing code with sensitive data</title>
+      <link>http://iahmed.me/post/2016-09-05-testing-code-with-sensitive-data/</link>
+      <pubDate>Tue, 06 Sep 2016 02:01:26 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-09-05-testing-code-with-sensitive-data/</guid>
+      <description>&lt;p&gt;I recently renewed work on my first ever &lt;a href=&#34;https://github.com/hazrmard/imgurPCA&#34;&gt;github project&lt;/a&gt;. Over the course of a whole year when that project was dormant, I&amp;#8217;d learned some new tricks. I now try to focus on writing tests for my projects. It is immensely convenient when I add features here  and there and need to check the whole code for errors.&lt;/p&gt;
+
+&lt;p class=&#34;&#34;&gt;
+  Anyways, my project requires API keys to imgur.com. However I do not want to hard-code them into my &lt;em&gt;&lt;a href=&#34;https://github.com/hazrmard/imgurPCA/blob/master/test.py&#34;&gt;test.py&lt;/a&gt;&lt;/em&gt; file. But I also do not want to manually provide keys every time I run tests. So what do I do?
+&lt;/p&gt;
+
+&lt;p class=&#34;&#34;&gt;
+  If you develop on Windows, have you heard of our lord and savior Powershell? Powershell is a scripting environment (like cmd on steroids) akin to bash on linux. I simply wrote a PS script that substitutes keys into &lt;em&gt;test.py. &lt;/em&gt;Then it runs the file, and before exiting removes the API keys again. To illustrate:
+&lt;/p&gt;
+
+&lt;pre class=&#34;toolbar-overlay:false lang:python decode:true&#34; title=&#34;test.py in default state&#34;&gt;&lt;code&gt;CLIENT_ID = &#39;&#39;
+CLIENT_SECRET = &#39;&#39;
+
+# my tests&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My script that looks for &lt;code&gt;CLIENT_ID&lt;/code&gt; and &lt;code&gt;CLIENT_SECRET&lt;/code&gt; and inserts API keys:&lt;/p&gt;
+
+&lt;pre class=&#34;toolbar-overlay:false lang:ps decode:true &#34; title=&#34;A powershell script to add API keys&#34;&gt;&lt;code&gt;$id = &#34;SOME_ID&#34;
+$secret = &#34;SOME_SECRET&#34;
+$file = &#34;test.py&#34;
+
+$content = Get-Content $file
+$content -replace &#34;CLIENT_ID = &#39;&#39;&#34;, &#34;CLIENT_ID = &#39;$id&#39;&#34; |
+         % {$_.replace(&#34;CLIENT_SECRET = &#39;&#39;&#34;, &#34;CLIENT_SECRET = &#39;$secret&#39;&#34;)} |
+         Set-Content $file
+
+python $file
+
+ $content -replace &#34;CLIENT_ID = &#39;$id&#39;&#34;, &#34;CLIENT_ID = &#39;&#39;&#34; |
+          % {$_.replace(&#34;CLIENT_SECRET = &#39;$secret&#39;&#34;, &#34;CLIENT_SECRET = &#39;&#39;&#34;)} |
+          Set-Content $file
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Immediately after the code is run (&lt;code&gt;python $file&lt;/code&gt;). The file is restored to its initial state so I can upload it to github safely.&lt;/p&gt;
+
+&lt;p&gt;If you already have some sensitive information uploaded to github or in your git history, check out &lt;a href=&#34;https://rtyley.github.io/bfg-repo-cleaner/&#34;&gt;BFG&lt;/a&gt;. It is a tool that can purge files/replace text from git history permanently.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A case study in choosing algorithms</title>
+      <link>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</link>
+      <pubDate>Sun, 14 Aug 2016 03:29:23 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</guid>
+      <description>&lt;p&gt;This past year, I have been crunching data from &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos&#34;&gt;dark matter simulations&lt;/a&gt;. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that&amp;#8217;s right &amp;#8211; 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.&lt;/p&gt;
+
+&lt;p&gt;Around the time I began working on this, I was taking an algorithms course. And we had just learned about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Bin_packing_problem&#34;&gt;bin packing problem&lt;/a&gt;. It involves figuring out the best way to fit an arbitrary number of objects with different sizes into a set of bins so the least amount of bins are used. And it is a hard problem to figure out fast. To get around the difficulty, computer scientists come up with &lt;a href=&#34;https://en.wikipedia.org/wiki/Heuristic_(computer_science)&#34;&gt;heuristics&lt;/a&gt;: shortcuts that give a &amp;#8220;good enough&amp;#8221; answer. And one heuristic is the First-fit algorithm. Essentially: find the fist bin with enough space, dump the object in, repeat.&lt;/p&gt;
+
+&lt;p&gt;Now, this bin packing problem was similar to my parallelization challenge. I had to divide my data into multiple processes to be computed independently. And so, with the enthusiasm that comes only with applying newfound knowledge, I &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos#multi-core-processing&#34;&gt;wrote some code&lt;/a&gt;. It read the data, assigned them &amp;#8220;size&amp;#8221; based on the big-O complexity of my calculations, and binned them for each process. Sweet, right?&lt;/p&gt;
+
+&lt;p&gt;Not so fast. I was noticing that my processes were still taking different times to finish. The disparity was more than I was happy with. There could be several reasons. One, big-O complexity rarely ever translates to proportionate running times as it ignores factors such as OS background. Two, I was not accounting for file i/o and lower-order big-O complexities while &amp;#8220;sizing&amp;#8221; data. In practice vs. theory, these things matter. So what could I do?&lt;/p&gt;
+
+&lt;p&gt;My solution in the end was quite simple, and my biggest lesson with parallel computing. Instead of pre-partitioning data for each process, I kept it all in a single pool. As soon as a process was free, it took one package from the pool and did its thing. The processes naturally divvied up the work. All was well! Now this might be parallel 101 for many, but I was so caught up in the fancy new algorithm I had learned that I did not pause to see if a plebeian approach, so to speak, may work better.&lt;/p&gt;
+
+&lt;p&gt;Now, as my pizza arrives and my script chugs through terabytes of data, I can watch Netflix in peace knowing that my pet processes are making the best of their time.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Markov Chains – Random Text Generation</title>
+      <link>http://iahmed.me/post/2016-04-29-markov-chains/</link>
+      <pubDate>Fri, 29 Apr 2016 23:23:16 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-04-29-markov-chains/</guid>
+      <description>&lt;p&gt;This semester I am taking a course in &lt;a href=&#34;http://sc3260s16.github.io/&#34;&gt;High Performance Computing&lt;/a&gt; where I get to work with multi-core systems like computing clusters and graphics cards. For my final project I decided to develop a random text generator and see if I could speed it up.&lt;/p&gt;
+
+&lt;p&gt;A popular method of generating random text (that is grammatically correct) is using &lt;strong&gt;Markov chains&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-is-a-markov-chain&#34;&gt;What is a Markov chain?&lt;/h3&gt;
+
+&lt;p&gt;A Markov chain is a state machine. The next output depends on the current state. So if you were generating random text, the word to follow would depend on the current word(s). A way to model real speech would be to parse some text and to make a table of prefixes and suffixes. So for example, for the prefix &amp;#8220;how are you&amp;#8221;, the possible suffixes might be &amp;#8220;feeling?&amp;#8221;, &amp;#8220;doing?&amp;#8221;, &amp;#8220;able&amp;#8221; depending on the context.&lt;figure id=&#34;attachment_33&#34; style=&#34;width: 300px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;size-medium wp-image-33&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing-300x76.png&#34; alt=&#34;Parsing text: prefixes of 2 words and suffix of 1 word.&#34; width=&#34;300&#34; height=&#34;76&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing-300x76.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing-768x195.png 768w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing-1024x260.png 1024w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing.png 1381w&#34; sizes=&#34;(max-width: 300px) 100vw, 300px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;Parsing text: prefixes of 2 words and suffix of 1 word.&lt;/figcaption&gt;&lt;/figure&gt; &lt;figure id=&#34;attachment_34&#34; style=&#34;width: 300px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;img class=&#34;size-medium wp-image-34&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_table-300x105.png&#34; alt=&#34;A table of prefixes and possible suffixes.&#34; width=&#34;300&#34; height=&#34;105&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_table-300x105.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_table-768x269.png 768w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_table-1024x358.png 1024w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_table.png 1235w&#34; sizes=&#34;(max-width: 300px) 100vw, 300px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;A table of prefixes and possible suffixes.&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;Once a table is built, you can randomly walk over the table to generate text that more or less follows the syntax of the input text. Let&amp;#8217;s say you were making a Markov chain of order 2 i.e. prefixes of 2 words. First you&amp;#8217;d select a random prefix from the table. That prefix would have a list of possible suffixes. You randomly choose one. Now you have three words printed out: the prefix (2 words) and the suffix (1 word). To find out the next word, you simply create a new prefix consisting of the last word in the previous prefix and your current suffix. So if you chose &amp;#8220;The quick&amp;#8221; as a prefix, and you got &amp;#8220;brown&amp;#8221; as a suffix, the next prefix would be &amp;#8220;quick brown&amp;#8221;. That would yield another word from which you&amp;#8217;d make another prefix and so on.&lt;/p&gt;
+
+&lt;h3 id=&#34;speeding-up-the-process&#34;&gt;Speeding up the process&lt;/h3&gt;
+
+&lt;p&gt;One way to speed up the process is to use multiple threads to create the chain from a body of text. Each thread parses a certain section of the input, creates a table, and merges it with the universal Markov chain.&lt;figure id=&#34;attachment_35&#34; style=&#34;width: 660px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;wp-image-35 size-large&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel-1024x489.png&#34; alt=&#34;Parallel Markov chain generation.&#34; width=&#34;660&#34; height=&#34;315&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel-1024x489.png 1024w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel-300x143.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel-768x367.png 768w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel.png 1465w&#34; sizes=&#34;(max-width: 660px) 100vw, 660px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;Parallel Markov chain generation.&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;However chain generation is only one part of the process which includes other tasks that happen serially. And given that chain generation takes linear time with respect to the input, I was not expecting a dramatic speed-up by parallelizing code.&lt;figure id=&#34;attachment_36&#34; style=&#34;width: 300px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;wp-image-36 size-medium&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_process-300x280.png&#34; alt=&#34;markov_process&#34; width=&#34;300&#34; height=&#34;280&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_process-300x280.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_process.png 753w&#34; sizes=&#34;(max-width: 300px) 100vw, 300px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;The whole random text generation process.&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;I implemented the process in my first ever complete C++ project. I used p_threads for parallel implementation. I could have used multiple processes, but the cost of inter-process communication was too much for O(n) process, I thought. I tested out my code on War and Peace by Leo Tolstoy with different prefix lengths and threads. The speed-ups were decent but not spectacular:&lt;figure id=&#34;attachment_37&#34; style=&#34;width: 660px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;size-large wp-image-37&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup-1024x615.png&#34; alt=&#34;Speed-up vs. threads for different orders (prefix sizes).&#34; width=&#34;660&#34; height=&#34;396&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup-1024x615.png 1024w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup-300x180.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup-768x461.png 768w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup.png 1242w&#34; sizes=&#34;(max-width: 660px) 100vw, 660px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;Speed-up vs. threads for different orders (prefix sizes).&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;The source code can be found &lt;a href=&#34;https://github.com/hazrmard/Markovia&#34;&gt;here.&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Starting Android Development</title>
+      <link>http://iahmed.me/post/2016-03-04-starting-android-development/</link>
+      <pubDate>Sat, 05 Mar 2016 03:55:04 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-03-04-starting-android-development/</guid>
+      <description>&lt;p&gt;I have always been fascinated with mobile app development. Over the last couple of years in college, I made a few attempts to get started with Android applications. I watched tutorial series, reading blogs, attending introductory workshops. Nope. Nothing seemed to stick. What was wrong?&lt;/p&gt;
+
+&lt;p&gt;I realized what the problem was: All tutorials began in the same way, more or less. Wherever I looked, I saw the face of my old frenemy: Hello World. I&amp;#8217;d gotten so used to writing hello world code for everything I learned: C, Java, Python etc., that repeating the same thing, albeit differently, got monotonous.&lt;/p&gt;
+
+&lt;p&gt;So, one weekend I sat down with an idea for an app. I was going to make a simple fact generator that takes content from reddit. I had been toying with the idea for quite a while, so I was invested in the endeavor. The next 24 hours were spent looking over reddit&amp;#8217;s API documentation, the android developer website, and Stack Overflow. It was a grueling process. Occasionally I&amp;#8217;d hit a dead end and take a break out of frustration. But I did not relent. Come what may, there would be an android application written by my hands before the weekend was over. And behold, there was:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://iahmed.me/img/wp-content/til.png&#34; alt=&#34;TIL - icon&#34; /&gt;&lt;br /&gt;
+Where I had expected to use some simple android APIs, I ended up things from using local storage to background threads. While that may be trivial to a good android developer, using those APIs on my very first app was very exciting to me. My very first app was of some utility, and that was motivation enough for me to start learning more.&lt;/p&gt;
+
+&lt;p&gt;So my advice: pick an idea that you like. Reserve a day or two to work on it. And harness the power of internet search.&lt;/p&gt;
+
+&lt;p&gt;My app is available at: &lt;a href=&#34;https://github.com/hazrmard/TIL&#34; target=&#34;_blank&#34;&gt;github.com/hazrmard/TIL&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Developing with C/C&#43;&#43; on console</title>
+      <link>http://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</link>
+      <pubDate>Sat, 30 Jan 2016 04:30:28 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</guid>
+      <description>&lt;p class=&#34;&#34;&gt;
+  I am taking a High Performance Computing course this semester. For that we have to &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;ssh&lt;/span&gt; into the university&amp;#8217;s computing cluster. The interface is entirely console based. Now that might seem awesome at first: typing away commands like a &amp;#8220;hacker&amp;#8221;. And it is awesome. But after a while it gets tiring, particularly when I am writing code.
+&lt;/p&gt;
+
+&lt;p class=&#34;&#34;&gt;
+  With C/C++, source files are compiled into an executable. Then the program can be run. This usually takes two sets of commands:
+&lt;/p&gt;
+
+&lt;pre class=&#34;lang:default decode:true &#34;&gt;$ g++ &amp;lt;file.cpp&amp;gt; -o &amp;lt;executable_name&amp;gt;
+$ ./&amp;lt;executable_name&amp;gt;&lt;/pre&gt;
+
+&lt;p&gt;But then I discovered the wonders of &lt;span class=&#34;lang:default decode:true  crayon-inline&#34;&gt;bash&lt;/span&gt; commands.  &lt;span class=&#34;lang:default decode:true  crayon-inline&#34;&gt;Bash&lt;/span&gt;  is the environment of the Linux terminal. It lets you define functions that you can call later. The function I wrote was:&lt;/p&gt;
+
+&lt;pre class=&#34;lang:sh decode:true &#34;&gt;&lt;code&gt;cpp() {
+        local fname=$1
+        local exe_name=${fname/.cpp/.exe}
+        echo &#34;$(tput setaf 3)Compiling: &#34; $fname &#34;-&amp;gt; &#34; $exe_name&#34;; args=&amp;gt;[${@:2}]$(tput sgr0)&#34;
+        g++ $1 -o $exe_name
+        ./$exe_name &#34;${@:2}&#34;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I put this function in my &lt;span class=&#34;lang:sh decode:true  crayon-inline &#34;&gt;.bashrc&lt;/span&gt; file so it&amp;#8217;s available whenever I log in to my terminal. With this function,  I can just pass the &lt;span class=&#34;lang:sh decode:true  crayon-inline &#34;&gt;.cpp&lt;/span&gt; file as an argument along with other command line arguments. The function compiles and runs the source file together:&lt;/p&gt;
+
+&lt;pre class=&#34;lang:sh decode:true &#34;&gt;&lt;code&gt;$ cpp &amp;lt;source_file.cpp&amp;gt; &amp;lt;any arguments&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Viola!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Talking With Satellites</title>
+      <link>http://iahmed.me/post/2015-10-14-talking-with-satellites/</link>
+      <pubDate>Wed, 14 Oct 2015 19:16:21 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-10-14-talking-with-satellites/</guid>
+      <description>&lt;p style=&#34;text-align: center;&#34;&gt;
+  &lt;a href=&#34;https://my.vanderbilt.edu/ibrahim/2015/10/talking-with-satellites/&#34; target=&#34;_blank&#34;&gt;Talking with Satellites&lt;/a&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Making a simple web app blindfolded, and with both arms tied…</title>
+      <link>http://iahmed.me/post/2015-09-20-a-simple-webapp/</link>
+      <pubDate>Mon, 21 Sep 2015 04:32:06 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-09-20-a-simple-webapp/</guid>
+      <description>&lt;p&gt;Over the last weekend, I was looking to brush up my web-dev skills (what little I had learned on the side). I decided to make a simple web app for my residents to use (I am a Resident Advisor).&lt;/p&gt;
+
+&lt;p&gt;Objective: Display tips, event news, free food notifications provided regularly by RAs and faculty to residents on a website.&lt;/p&gt;
+
+&lt;p&gt;Front-end: A simple site with a big red button that would display &amp;#8220;tips&amp;#8221; one at a time.&lt;/p&gt;
+
+&lt;p&gt;Back-end: Umm&amp;#8230;&lt;/p&gt;
+
+&lt;p&gt;I was using &lt;a href=&#34;https://pages.github.com/&#34; target=&#34;_blank&#34;&gt;GitHub pages&lt;/a&gt; to host my app. And GitHub pages do not let any one mess with back-end voodoo. The solution? Google Sheets!&lt;/p&gt;
+
+&lt;p&gt;It was the perfect back-end. I created a Google Form linked to my sheet and gave it to other RAs and faculty members. That way they wouldn&amp;#8217;t have to see the labyrinthine array of cells. Plus, the form would help eliminate user error from directly working on the spreadsheet. And another big plus: I could add data validation features and data processing functions in sheets so everything would be in pristine condition.&lt;/p&gt;
+
+&lt;p&gt;Then I used this awesome library: &lt;a href=&#34;https://github.com/jsoma/tabletop&#34; target=&#34;_blank&#34;&gt;Tabletop.js&lt;/a&gt; to pull in my spreadsheet data. The rest was just using JavaScript to display the information however I pleased.&lt;/p&gt;
+
+&lt;p&gt;Simple. As. That.&lt;/p&gt;
+
+&lt;p&gt;You can see it in action &lt;a href=&#34;http://hazrmard.github.io/VandySays&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Parsing websites on a budget</title>
+      <link>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</link>
+      <pubDate>Thu, 23 Jul 2015 01:32:40 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</guid>
+      <description>&lt;p&gt;Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The &amp;#8216;standard&amp;#8217; way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Having enough bandwidth&lt;/li&gt;
+&lt;li&gt;Knowing a server side language&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Say, hypothetically, that you fulfil none of these requirements. What now? Well, you can try to bypass the server and extract the website&amp;#8217;s contents directly to your page. But that won&amp;#8217;t work. All thanks to the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy&#34; target=&#34;_blank&#34;&gt;Same Origin Policy&lt;/a&gt;. So most, if not all, attempts you make to read content from another domain will be denied by your browser (_&lt;a href=&#34;http://security.stackexchange.com/questions/8264/why-is-the-same-origin-policy-so-important&#34; target=&#34;_blank&#34;&gt;read more: why is this important?&lt;/a&gt;_).  Another approach would be to use iframe elements in your page to load foreign content. But that technique can be used maliciously (if, for example, someone superimposes a hidden PayPal pay button in an iframe on top of another visible button). So many sites have scripts in place to detect if they are being displayed in an iframe and measures to prevent that.&lt;/p&gt;
+
+&lt;p&gt;It seems hopeless! But despair not, you do what I did: harness the almighty power of &lt;a href=&#34;https://developer.yahoo.com/yql&#34; target=&#34;_blank&#34;&gt;Yahoo! Query Language (YQL)&lt;/a&gt;. YQL is like SQL &amp;#8211; but with a &amp;#8216;Y&amp;#8217;. And where SQL queries tables for information, YQL queries web pages (among other things) for information. So, for example to extract hyperlinks, the query would be:&lt;/p&gt;
+
+&lt;p style=&#34;text-align: center;&#34;&gt;
+  &lt;code&gt;select * from html where url=&#39;http://en.wikipedia.org/wiki/Yahoo&#39; and xpath=&#39;//a&#39;&lt;/code&gt;
+&lt;/p&gt;
+
+&lt;p style=&#34;text-align: left;&#34;&gt;
+  And you can put that query in an &lt;a href=&#34;http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp&#34; target=&#34;_blank&#34;&gt;XMLHttpRequest (XHR)&lt;/a&gt; using the endpoint specified in the YQL documentation to get your results. So for the above query the XHR URL would be:
+&lt;/p&gt;
+
+&lt;p&gt;&lt;pre&gt;&lt;code&gt;&lt;a href=&#34;https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D&#39;http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FYahoo&#39;%20and%20xpath%3D&#39;%2F%2Fa&#39;&amp;amp;format=json&amp;amp;env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&#34;&gt;https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D&#39;http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FYahoo&#39;%20and%20xpath%3D&#39;%2F%2Fa&#39;&amp;amp;format=json&amp;amp;env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p style=&#34;text-align: left;&#34;&gt;
+  The &lt;a href=&#34;https://developer.yahoo.com/yql/&#34; target=&#34;_blank&#34;&gt;YQL&lt;/a&gt; page will give you the URL for any request you make. And then you can use that as a template in your web app. Yay! You can see an implementation of this in a project of mine: &lt;a href=&#34;http://lab.iahmed.me/webweb&#34; target=&#34;_blank&#34;&gt;WebWeb&lt;/a&gt; (&lt;code&gt;&amp;lt;a href=&#34;https://github.com/hazrmard/WebWeb&#34; target=&#34;_blank&#34;&gt;source code&amp;lt;/a&gt;&lt;/code&gt;). Happy coding!
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Let there be a blog</title>
+      <link>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</link>
+      <pubDate>Sat, 04 Jul 2015 16:50:32 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</guid>
+      <description>&lt;p&gt;&amp;#8230;and lo and behold, there was.&lt;/p&gt;
+
+&lt;p&gt;A while back I discovered my interest in web development. I taught myself HTML, CSS, and JavaScript. This blog is the latest in my attempts to learn web technologies.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

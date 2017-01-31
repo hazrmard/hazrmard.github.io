@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yql on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/tags/yql/index.xml</link>
+    <description>Recent content in Yql on Ibrahim Ahmed</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ibrahim Ahmed</copyright>
+    <atom:link href="http://iahmed.me/tags/yql/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Parsing websites on a budget</title>
+      <link>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</link>
+      <pubDate>Thu, 23 Jul 2015 01:32:40 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</guid>
+      <description>&lt;p&gt;Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The &amp;#8216;standard&amp;#8217; way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Having enough bandwidth&lt;/li&gt;
+&lt;li&gt;Knowing a server side language&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Say, hypothetically, that you fulfil none of these requirements. What now? Well, you can try to bypass the server and extract the website&amp;#8217;s contents directly to your page. But that won&amp;#8217;t work. All thanks to the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy&#34; target=&#34;_blank&#34;&gt;Same Origin Policy&lt;/a&gt;. So most, if not all, attempts you make to read content from another domain will be denied by your browser (_&lt;a href=&#34;http://security.stackexchange.com/questions/8264/why-is-the-same-origin-policy-so-important&#34; target=&#34;_blank&#34;&gt;read more: why is this important?&lt;/a&gt;_).  Another approach would be to use iframe elements in your page to load foreign content. But that technique can be used maliciously (if, for example, someone superimposes a hidden PayPal pay button in an iframe on top of another visible button). So many sites have scripts in place to detect if they are being displayed in an iframe and measures to prevent that.&lt;/p&gt;
+
+&lt;p&gt;It seems hopeless! But despair not, you do what I did: harness the almighty power of &lt;a href=&#34;https://developer.yahoo.com/yql&#34; target=&#34;_blank&#34;&gt;Yahoo! Query Language (YQL)&lt;/a&gt;. YQL is like SQL &amp;#8211; but with a &amp;#8216;Y&amp;#8217;. And where SQL queries tables for information, YQL queries web pages (among other things) for information. So, for example to extract hyperlinks, the query would be:&lt;/p&gt;
+
+&lt;p style=&#34;text-align: center;&#34;&gt;
+  &lt;code&gt;select * from html where url=&#39;http://en.wikipedia.org/wiki/Yahoo&#39; and xpath=&#39;//a&#39;&lt;/code&gt;
+&lt;/p&gt;
+
+&lt;p style=&#34;text-align: left;&#34;&gt;
+  And you can put that query in an &lt;a href=&#34;http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp&#34; target=&#34;_blank&#34;&gt;XMLHttpRequest (XHR)&lt;/a&gt; using the endpoint specified in the YQL documentation to get your results. So for the above query the XHR URL would be:
+&lt;/p&gt;
+
+&lt;p&gt;&lt;pre&gt;&lt;code&gt;&lt;a href=&#34;https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D&#39;http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FYahoo&#39;%20and%20xpath%3D&#39;%2F%2Fa&#39;&amp;amp;format=json&amp;amp;env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&#34;&gt;https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D&#39;http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FYahoo&#39;%20and%20xpath%3D&#39;%2F%2Fa&#39;&amp;amp;format=json&amp;amp;env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p style=&#34;text-align: left;&#34;&gt;
+  The &lt;a href=&#34;https://developer.yahoo.com/yql/&#34; target=&#34;_blank&#34;&gt;YQL&lt;/a&gt; page will give you the URL for any request you make. And then you can use that as a template in your web app. Yay! You can see an implementation of this in a project of mine: &lt;a href=&#34;http://lab.iahmed.me/webweb&#34; target=&#34;_blank&#34;&gt;WebWeb&lt;/a&gt; (&lt;code&gt;&amp;lt;a href=&#34;https://github.com/hazrmard/WebWeb&#34; target=&#34;_blank&#34;&gt;source code&amp;lt;/a&gt;&lt;/code&gt;). Happy coding!
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

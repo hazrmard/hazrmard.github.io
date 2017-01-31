@@ -1,0 +1,37 @@
+{{partial "header.html" .}}
+<div class="content">
+    <h1 class="post-title">{{.Title | humanize}}</h1>
+    <div class="front-matter">
+        <em>{{dateFormat "Monday, Jan 2, 2006" .Date}}</em>
+        {{range $k, $v := .Site.Taxonomies}}
+            {{if (isset $.Params $k)}}
+                {{if (gt (len (index $.Params $k)) 0)}}
+                    <br/>{{$k | humanize}}:
+                        {{range (index $.Params $k)}}
+                            <a href="/{{$k}}/{{. | urlize}}">{{. | humanize}}</a>,
+                        {{end}}
+                {{end}}
+            {{end}}
+        {{end}}
+    </div>
+    {{if .Params.isexternal}}
+        <a href="{{.Params.link}}">Content hosted here.</a>
+    {{else}}
+        {{.Content}}
+    {{end}}
+    <br/>
+    <div class="navigation">
+        {{if .PrevInSection}}
+            <a href="{{.PrevInSection.Permalink}}"><div class="prev">
+                ← Previous {{.Type | humanize}}
+            </div></a>
+        {{end}}
+        {{if .NextInSection}}
+            <a href="{{.NextInSection.Permalink}}"><div class="next">
+                Next {{.Type | humanize}} →
+            </div></a>
+        {{end}}
+    </div>
+</div>
+{{partial "sidebar.html" .}}
+{{partial "footer.html" .}}

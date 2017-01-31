@@ -1,0 +1,15 @@
+{{partial "header.html" .}}
+<div class="content">
+    <h1 class="page-title">{{.Data.Plural | humanize}}</h1>
+    <ul class="terms-list">
+        {{ range $k, $v := .Data.Terms.Alphabetical}}
+            <a href="/{{ $.Data.Plural }}/{{$v.Name | urlize }}">
+            <li class="terms">
+                {{ $v.Name | humanize }} ({{ $v.Count }})
+            </li></a>
+        {{ end }}
+    </ul>
+</div>
+
+{{partial "sidebar.html" .}}
+{{partial "footer.html" .}}

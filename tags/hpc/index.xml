@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hpc on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/tags/hpc/index.xml</link>
+    <description>Recent content in Hpc on Ibrahim Ahmed</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ibrahim Ahmed</copyright>
+    <atom:link href="http://iahmed.me/tags/hpc/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Markov Chains – Random Text Generation</title>
+      <link>http://iahmed.me/post/2016-04-29-markov-chains/</link>
+      <pubDate>Fri, 29 Apr 2016 23:23:16 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-04-29-markov-chains/</guid>
+      <description>&lt;p&gt;This semester I am taking a course in &lt;a href=&#34;http://sc3260s16.github.io/&#34;&gt;High Performance Computing&lt;/a&gt; where I get to work with multi-core systems like computing clusters and graphics cards. For my final project I decided to develop a random text generator and see if I could speed it up.&lt;/p&gt;
+
+&lt;p&gt;A popular method of generating random text (that is grammatically correct) is using &lt;strong&gt;Markov chains&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-is-a-markov-chain&#34;&gt;What is a Markov chain?&lt;/h3&gt;
+
+&lt;p&gt;A Markov chain is a state machine. The next output depends on the current state. So if you were generating random text, the word to follow would depend on the current word(s). A way to model real speech would be to parse some text and to make a table of prefixes and suffixes. So for example, for the prefix &amp;#8220;how are you&amp;#8221;, the possible suffixes might be &amp;#8220;feeling?&amp;#8221;, &amp;#8220;doing?&amp;#8221;, &amp;#8220;able&amp;#8221; depending on the context.&lt;figure id=&#34;attachment_33&#34; style=&#34;width: 300px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;size-medium wp-image-33&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing-300x76.png&#34; alt=&#34;Parsing text: prefixes of 2 words and suffix of 1 word.&#34; width=&#34;300&#34; height=&#34;76&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing-300x76.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing-768x195.png 768w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing-1024x260.png 1024w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parsing.png 1381w&#34; sizes=&#34;(max-width: 300px) 100vw, 300px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;Parsing text: prefixes of 2 words and suffix of 1 word.&lt;/figcaption&gt;&lt;/figure&gt; &lt;figure id=&#34;attachment_34&#34; style=&#34;width: 300px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;img class=&#34;size-medium wp-image-34&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_table-300x105.png&#34; alt=&#34;A table of prefixes and possible suffixes.&#34; width=&#34;300&#34; height=&#34;105&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_table-300x105.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_table-768x269.png 768w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_table-1024x358.png 1024w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_table.png 1235w&#34; sizes=&#34;(max-width: 300px) 100vw, 300px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;A table of prefixes and possible suffixes.&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;Once a table is built, you can randomly walk over the table to generate text that more or less follows the syntax of the input text. Let&amp;#8217;s say you were making a Markov chain of order 2 i.e. prefixes of 2 words. First you&amp;#8217;d select a random prefix from the table. That prefix would have a list of possible suffixes. You randomly choose one. Now you have three words printed out: the prefix (2 words) and the suffix (1 word). To find out the next word, you simply create a new prefix consisting of the last word in the previous prefix and your current suffix. So if you chose &amp;#8220;The quick&amp;#8221; as a prefix, and you got &amp;#8220;brown&amp;#8221; as a suffix, the next prefix would be &amp;#8220;quick brown&amp;#8221;. That would yield another word from which you&amp;#8217;d make another prefix and so on.&lt;/p&gt;
+
+&lt;h3 id=&#34;speeding-up-the-process&#34;&gt;Speeding up the process&lt;/h3&gt;
+
+&lt;p&gt;One way to speed up the process is to use multiple threads to create the chain from a body of text. Each thread parses a certain section of the input, creates a table, and merges it with the universal Markov chain.&lt;figure id=&#34;attachment_35&#34; style=&#34;width: 660px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;wp-image-35 size-large&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel-1024x489.png&#34; alt=&#34;Parallel Markov chain generation.&#34; width=&#34;660&#34; height=&#34;315&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel-1024x489.png 1024w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel-300x143.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel-768x367.png 768w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_parallel.png 1465w&#34; sizes=&#34;(max-width: 660px) 100vw, 660px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;Parallel Markov chain generation.&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;However chain generation is only one part of the process which includes other tasks that happen serially. And given that chain generation takes linear time with respect to the input, I was not expecting a dramatic speed-up by parallelizing code.&lt;figure id=&#34;attachment_36&#34; style=&#34;width: 300px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;wp-image-36 size-medium&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_process-300x280.png&#34; alt=&#34;markov_process&#34; width=&#34;300&#34; height=&#34;280&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_process-300x280.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_process.png 753w&#34; sizes=&#34;(max-width: 300px) 100vw, 300px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;The whole random text generation process.&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;I implemented the process in my first ever complete C++ project. I used p_threads for parallel implementation. I could have used multiple processes, but the cost of inter-process communication was too much for O(n) process, I thought. I tested out my code on War and Peace by Leo Tolstoy with different prefix lengths and threads. The speed-ups were decent but not spectacular:&lt;figure id=&#34;attachment_37&#34; style=&#34;width: 660px&#34; class=&#34;wp-caption aligncenter&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;size-large wp-image-37&#34; src=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup-1024x615.png&#34; alt=&#34;Speed-up vs. threads for different orders (prefix sizes).&#34; width=&#34;660&#34; height=&#34;396&#34; srcset=&#34;http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup-1024x615.png 1024w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup-300x180.png 300w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup-768x461.png 768w, http://iahmed.me/img/wp-content/uploads/2016/04/markov_speedup.png 1242w&#34; sizes=&#34;(max-width: 660px) 100vw, 660px&#34; /&gt;&lt;figcaption class=&#34;wp-caption-text&#34;&gt;Speed-up vs. threads for different orders (prefix sizes).&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;The source code can be found &lt;a href=&#34;https://github.com/hazrmard/Markovia&#34;&gt;here.&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
