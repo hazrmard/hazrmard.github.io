@@ -8,7 +8,8 @@ categories:
 tags:
   - android
   - mobile-dev
-
+hasequations: false
+hascode: false
 ---
 I have always been fascinated with mobile app development. Over the last couple of years in college, I made a few attempts to get started with Android applications. I watched tutorial series, reading blogs, attending introductory workshops. Nope. Nothing seemed to stick. What was wrong?<!--more-->
 

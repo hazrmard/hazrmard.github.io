@@ -9,7 +9,8 @@ tags:
   - C++
   - hpc
   - markov
-
+hasequations: false
+hascode: false
 ---
 This semester I am taking a course in [High Performance Computing][1] where I get to work with multi-core systems like computing clusters and graphics cards. For my final project I decided to develop a random text generator and see if I could speed it up.
 

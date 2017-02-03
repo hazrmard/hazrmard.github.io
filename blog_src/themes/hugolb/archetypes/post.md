@@ -6,4 +6,6 @@ tags = []
 categories = []
 series = []
 isexternal = false
+hasequations = false
+hascode = false
 +++

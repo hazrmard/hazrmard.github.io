@@ -1,16 +1,9 @@
 {{partial "header.html" .}}
 <div class="content">
     <h1 class="page-title">{{if isset .Data "Plural"}}{{.Data.Plural | humanize}} → {{end}}{{.Title}}</h1>
-    <!-- <ul> -->
     {{ range .Data.Pages }}
         {{.Render "meta"}}
-        <!-- <li>{{if .Params.isexternal}}
-                <a href="{{ .Params.link }}">{{ .Title | humanize}}</a>
-            {{else}}
-                <a href="{{ .RelPermalink }}">{{ .Title | humanize}}</a>
-            {{end}}</li> -->
     {{ end }}
-    <!-- </ul> -->
 </div>
 {{partial "sidebar.html" .}}
 {{partial "footer.html" .}}

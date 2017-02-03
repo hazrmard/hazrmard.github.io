@@ -5,5 +5,6 @@ title = "imgurPCA"
 isexternal = true
 image = "/img/projects/imgur.png"
 link = "https://github.com/hazrmard/imgurPCA"
-
+hasequations = false
+hascode = false
 +++

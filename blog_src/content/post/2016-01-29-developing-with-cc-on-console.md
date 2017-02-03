@@ -9,7 +9,8 @@ tags:
   - bash
   - C/C++
   - linux
-
+hasequations: false
+hascode: true
 ---
 <p class="">
   I am taking a High Performance Computing course this semester. For that we have to <span class="lang:default decode:true  crayon-inline ">ssh</span> into the university&#8217;s computing cluster. The interface is entirely console based. Now that might seem awesome at first: typing away commands like a &#8220;hacker&#8221;. And it is awesome. But after a while it gets tiring, particularly when I am writing code.<!--more-->

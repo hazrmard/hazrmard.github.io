@@ -5,5 +5,6 @@ title = "AdEmbargo"
 isexternal = true
 image = ""
 link = "https://github.com/hazrmard/AdEmbargo"
-
+hasequations = false
+hascode = false
 +++

@@ -5,5 +5,6 @@ title = "gobol"
 isexternal = true
 image = "/img/projects/gobol.png"
 link = "https://github.com/hazrmard/gobol"
-
+hasequations = false
+hascode = false
 +++

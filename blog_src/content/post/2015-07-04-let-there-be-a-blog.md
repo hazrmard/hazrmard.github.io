@@ -5,7 +5,8 @@ layout: post
 date: 2015-07-04T16:50:32+00:00
 categories:
   - Meta
-
+hasequations: false
+hascode: false
 ---
 &#8230;and lo and behold, there was.
 

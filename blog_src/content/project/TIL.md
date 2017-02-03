@@ -5,5 +5,6 @@ description = "Android app for parsing facts on reddit"
 title = "TIL"
 isexternal = true
 image = "/img/wp-content/til.png"
-
+hasequations = false
+hascode = false
 +++

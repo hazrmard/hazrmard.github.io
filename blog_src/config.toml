@@ -5,7 +5,7 @@ theme = "hugolb"
 copyright = "Ibrahim Ahmed"
 
 [params]
-    splashSubheading = "Electrical Engineering | Physics"
+    splashSubheading = "I like coding, space, & games."
     blogroot = "Posts"
     defaultprojimg = "/img/gear.png"
 

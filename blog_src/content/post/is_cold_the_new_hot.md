@@ -6,7 +6,8 @@ date = "2017-01-31T11:00:25-06:00"
 description = ""
 title = "Is cold the new hot?"
 isexternal = false
-
+hasequations = false
+hascode = false
 +++
 
 _Note: This article was originally published on

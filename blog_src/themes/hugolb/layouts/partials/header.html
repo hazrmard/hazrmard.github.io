@@ -7,9 +7,16 @@
         <link rel="stylesheet" type="text/css" href="/css/splash.css">
     {{end}}
     {{if .IsPage}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css">
-        <script>hljs.initHighlightingOnLoad();</script>
+        {{if .Params.hascode}}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css">
+            <script>hljs.initHighlightingOnLoad();</script>
+        {{end}}
+        {{if .Params.hasequations}}
+            <script type="text/javascript" async
+                src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+            </script>
+        {{end}}
     {{end}}
     <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
     <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">

@@ -6,7 +6,8 @@ description = ""
 title = "Gravitational Slingshots"
 isexternal = false
 series = []
-
+hasequations = false
+hascode = false
 +++
 _Note: This article was originally published on
 [astroibrahim](astroibrahim.wordpress.com) on Apr 10, 2013._

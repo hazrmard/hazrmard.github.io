@@ -9,7 +9,8 @@ tags:
   - git
   - powershell
   - testing
-
+hasequations: false
+hascode: true
 ---
 I recently renewed work on my first ever [github project][1]. Over the course of a whole year when that project was dormant, I&#8217;d learned some new tricks. I now try to focus on writing tests for my projects. It is immensely convenient when I add features here  and there and need to check the whole code for errors.
 

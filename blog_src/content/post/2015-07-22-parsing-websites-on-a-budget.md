@@ -10,7 +10,8 @@ tags:
   - web app
   - web scraping
   - YQL
-
+hasequations: false
+hascode: true
 ---
 Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The &#8216;standard&#8217; way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:<!--more-->
 

@@ -8,7 +8,8 @@ categories:
 tags:
   - javascript
   - web app
-
+hasequations: false
+hascode: false
 ---
 Over the last weekend, I was looking to brush up my web-dev skills (what little I had learned on the side). I decided to make a simple web app for my residents to use (I am a Resident Advisor).
 

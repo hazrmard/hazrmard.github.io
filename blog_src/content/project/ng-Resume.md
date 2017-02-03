@@ -5,5 +5,6 @@ title = "ng-Résumé"
 isexternal = true
 image = "/img/projects/ng-Resume.png"
 link = "https://github.com/hazrmard/ng-Resume"
-
+hasequations = false
+hascode = false
 +++

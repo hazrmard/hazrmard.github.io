@@ -6,7 +6,8 @@ date: 2016-08-14T03:29:23+00:00
 categories:
   - Developer
   - Physics
-
+hasequations: false
+hascode: false
 ---
 This past year, I have been crunching data from [dark matter simulations][1]. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that&#8217;s right &#8211; 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.<!--more-->
 
