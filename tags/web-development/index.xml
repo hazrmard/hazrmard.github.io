@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Javascript on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/tags/javascript/index.xml</link>
-    <description>Recent content in Javascript on Ibrahim Ahmed</description>
+    <title>Web Development on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/tags/web-development/index.xml</link>
+    <description>Recent content in Web Development on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://iahmed.me/tags/web-development/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Optimizing static sites with hugo</title>

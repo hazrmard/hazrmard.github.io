@@ -8,6 +8,7 @@ categories:
 tags:
   - javascript
   - web app
+  - web development
 hasequations: false
 hascode: false
 ---

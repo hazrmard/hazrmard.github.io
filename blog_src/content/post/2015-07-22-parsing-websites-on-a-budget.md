@@ -8,6 +8,7 @@ categories:
 tags:
   - javascript
   - web app
+  - web development
   - web scraping
   - YQL
 hasequations: false

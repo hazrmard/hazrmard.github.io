@@ -1,8 +1,19 @@
+/*Colour Scheme
+#104050
+#26596A
+#6C929F
+
+#554300
+#806915
+#AA9239
+#D4BE6A
+#FFEDAA*/
+
 .sidebar, .submenu {
     background-color: #26596A;
 }
 .title .site-name {
-    color: #457585;
+    color: #6C929F;
 }
 .sb-option {
     background-color: inherit;
@@ -39,6 +50,17 @@
     color: #806915;
     text-decoration: underline;
     transition: 0.25s;
+}
+blockquote {
+    background-color: #FFEDAA;
+    border-left: 1em solid #D4BE6A;
+    padding: 0.25em 0.5em;
+    color: #806915;
+    font-size: 110%;
+}
+.content > p > code {
+    background-color: #FFEDAA;
+    padding: 0em 0.25em;
 }
 .prev, .next {
     color: #806915;

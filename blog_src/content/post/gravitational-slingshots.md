@@ -38,7 +38,7 @@ Intuitively it seems that way, but it is all a matter of
 relativity.
 
 <figure>
-    <img src="/img/posts/slingshot.png">
+    <img src="/img/posts/gravitational-slingshots/slingshot.png">
 </figure>
 
 Imagine there is a probe approaching a planet with a velocity

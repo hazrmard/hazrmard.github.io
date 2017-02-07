@@ -60,7 +60,7 @@ In a system with infinite states, energy and disorder have a
 positive relationship.
 
 <figure>
-    <img src="/img/posts/temp_infinite.png">
+    <img src="/img/posts/is-cold-the-new-hot/temp_infinite.png">
     <figcaption>In a system with infinite states, energy and
     disorder have a positive relationship.</figcaption>
 </figure>
@@ -91,7 +91,7 @@ In a system with finite states, energy and disorder develop a
 negative relationship.
 
 <figure>
-    <img src="/img/posts/temp_finite.png">
+    <img src="/img/posts/is-cold-the-new-hot/temp_finite.png">
     <figcaption>In a system with finite states, energy and  
     disorder develop a negative relationship.</figcaption>
 </figure>

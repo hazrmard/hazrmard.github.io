@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Meta on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/categories/meta/index.xml</link>
-    <description>Recent content in Meta on Ibrahim Ahmed</description>
+    <title>Hugo on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/tags/hugo/index.xml</link>
+    <description>Recent content in Hugo on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/categories/meta/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://iahmed.me/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Optimizing static sites with hugo</title>
@@ -99,18 +99,6 @@ draft = true
 &lt;a href=&#34;https://highlightjs.org/&#34;&gt;&lt;code&gt;Highlight.js&lt;/code&gt;&lt;/a&gt;. This speeds up my load times and
 frees up the generous CDNs from unnecessary traffic. All it took was a few lines.
 Win-Win.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Let there be a blog</title>
-      <link>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</link>
-      <pubDate>Sat, 04 Jul 2015 16:50:32 +0000</pubDate>
-      
-      <guid>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</guid>
-      <description>&lt;p&gt;&amp;#8230;and lo and behold, there was.&lt;/p&gt;
-
-&lt;p&gt;A while back I discovered my interest in web development. I taught myself HTML, CSS, and JavaScript. This blog is the latest in my attempts to learn web technologies.&lt;/p&gt;
 </description>
     </item>
     
