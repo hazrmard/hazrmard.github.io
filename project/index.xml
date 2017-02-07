@@ -56,6 +56,48 @@
     </item>
     
     <item>
+      <title>SatTrack</title>
+      <link>http://iahmed.me/project/SatTrack/</link>
+      <pubDate>Fri, 01 Apr 2016 00:00:00 -0600</pubDate>
+      
+      <guid>http://iahmed.me/project/SatTrack/</guid>
+      <description>&lt;p&gt;SatTrack is the software-side of my senior engineering project at Vanderbilt
+University. I led a team of 4 students to design a software-defined radio system
+that can track and receive scientific data from cube satellites.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&#34;http://iahmed.me/img/projects/SatTrack_poster.png&#34;&gt;
+    &lt;figcaption&gt;Poster for the project.&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;em&gt;SatTrack&lt;/em&gt; provides the front/back end of the entire interface. The software
+can be run from any system that supports Python. It calculates satellite position
+in real-time based on current location. There is a companion module on an Arduino
+which controls antenna servos using those coordinates.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;SatTrack&lt;/em&gt; can be used in a python script for flexibility. It comes with a
+very convenient graphical interface hosted on a browser that can be served on a
+local network. So you can control the whole system from your smartphone from a
+distance.&lt;/p&gt;
+
+&lt;p&gt;A demo of the interface on a computer:
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/AYTlRSY0r2I&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The interface on a mobile device:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/QayhI7FTyIs&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+</description>
+    </item>
+    
+    <item>
       <title>TIL</title>
       <link>http://iahmed.me/project/TIL/</link>
       <pubDate>Tue, 01 Mar 2016 00:00:00 -0600</pubDate>
@@ -74,12 +116,27 @@
     </item>
     
     <item>
-      <title>SatTrack</title>
-      <link>http://iahmed.me/project/SatTrack/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 -0600</pubDate>
+      <title>UNIVERSE</title>
+      <link>http://iahmed.me/project/UNIVERSE/</link>
+      <pubDate>Fri, 01 May 2015 21:24:37 -0600</pubDate>
       
-      <guid>http://iahmed.me/project/SatTrack/</guid>
-      <description></description>
+      <guid>http://iahmed.me/project/UNIVERSE/</guid>
+      <description>&lt;p&gt;&lt;em&gt;UNIVERSE&lt;/em&gt; is an Agent Based Model of population dynamics of alien space-faring
+civilizations in the galaxy. It simulates how civilizations may interact with
+each other given limited resources. I developed this for my Modeling and
+Simulation course with my partner Michael Schoenfield. The model considers
+resources, technology, trade, and war when deciding on behavior of each
+civilization.&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/lx2XMPPomMI&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;p&gt;A presentation explaining the project can be found
+&lt;a href=&#34;https://drive.google.com/file/d/0B_Qh0MNg09l0R1ZIaUFxRk13eE0/view?usp=sharing&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

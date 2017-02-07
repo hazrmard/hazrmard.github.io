@@ -6,90 +6,55 @@
     
     
         
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css">
-            <script>hljs.initHighlightingOnLoad();</script>
-        
         
     
     <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
     <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
-    <title>Developing with C/C&#43;&#43; on console</title>
+    <title>UNIVERSE</title>
 </head>
 <body>
     <div class="container">
 
 <div class="content">
-    <h1 class="post-title">Developing with C/C&#43;&#43; on console</h1>
+    <h1 class="post-title">UNIVERSE</h1>
     <div class="front-matter">
     
-        <em>Saturday, Jan 30, 2016</em>
+        <em>May 2015</em>
     
     
-        
-            
-                <br/>Categories:
-                    
-                        <a href="/categories/developer">Developer</a>,
-                    
-            
         
     
         
     
-        
-            
-                <br/>Tags:
-                    
-                        <a href="/tags/bash">Bash</a>,
-                    
-                        <a href="/tags/c/c&#43;&#43;">C/ c&#43;&#43;</a>,
-                    
-                        <a href="/tags/linux">Linux</a>,
-                    
-            
         
     
 </div>
 
     
-    <p class="">
-  I am taking a High Performance Computing course this semester. For that we have to <span class="lang:default decode:true  crayon-inline ">ssh</span> into the university&#8217;s computing cluster. The interface is entirely console based. Now that might seem awesome at first: typing away commands like a &#8220;hacker&#8221;. And it is awesome. But after a while it gets tiring, particularly when I am writing code.
-</p>
+        <blockquote>Project hosted at: <a href="https://sourceforge.net/projects/abmuniverse/">https://sourceforge.net/projects/abmuniverse/</a></blockquote>
+    
+    <p><em>UNIVERSE</em> is an Agent Based Model of population dynamics of alien space-faring
+civilizations in the galaxy. It simulates how civilizations may interact with
+each other given limited resources. I developed this for my Modeling and
+Simulation course with my partner Michael Schoenfield. The model considers
+resources, technology, trade, and war when deciding on behavior of each
+civilization.</p>
 
-<p class="">
-  With C/C++, source files are compiled into an executable. Then the program can be run. This usually takes two sets of commands:
-</p>
 
-<pre class="lang:default decode:true ">$ g++ &lt;file.cpp&gt; -o &lt;executable_name&gt;
-$ ./&lt;executable_name&gt;</pre>
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//www.youtube.com/embed/lx2XMPPomMI" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" allowfullscreen frameborder="0"></iframe>
+ </div>
 
-<p>But then I discovered the wonders of <span class="lang:default decode:true  crayon-inline">bash</span> commands.  <span class="lang:default decode:true  crayon-inline">Bash</span>  is the environment of the Linux terminal. It lets you define functions that you can call later. The function I wrote was:</p>
 
-<pre class="lang:sh decode:true "><code>cpp() {
-        local fname=$1
-        local exe_name=${fname/.cpp/.exe}
-        echo "$(tput setaf 3)Compiling: " $fname "-&gt; " $exe_name"; args=&gt;[${@:2}]$(tput sgr0)"
-        g++ $1 -o $exe_name
-        ./$exe_name "${@:2}"
-}
-</code></pre>
+<p>A presentation explaining the project can be found
+<a href="https://drive.google.com/file/d/0B_Qh0MNg09l0R1ZIaUFxRk13eE0/view?usp=sharing">here</a>.</p>
 
-<p>I put this function in my <span class="lang:sh decode:true  crayon-inline ">.bashrc</span> file so it&#8217;s available whenever I log in to my terminal. With this function,  I can just pass the <span class="lang:sh decode:true  crayon-inline ">.cpp</span> file as an argument along with other command line arguments. The function compiles and runs the source file together:</p>
-
-<pre class="lang:sh decode:true "><code>$ cpp &lt;source_file.cpp&gt; &lt;any arguments&gt;</code></pre>
-
-<p>Viola!</p>
     <br/>
     <div class="navigation">
     
-        <a href="http://iahmed.me/post/2015-10-14-talking-with-satellites/"><div class="prev">
-            ← Previous Post
-        </div></a>
     
-    
-        <a href="http://iahmed.me/post/2016-03-04-starting-android-development/"><div class="next">
-            Next Post →
+        <a href="http://iahmed.me/project/ng-Resume/"><div class="next">
+            Next Project →
         </div></a>
     
 </div>
