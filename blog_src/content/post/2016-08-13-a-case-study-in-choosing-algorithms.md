@@ -6,6 +6,8 @@ date: 2016-08-14T03:29:23+00:00
 categories:
   - Developer
   - Physics
+tags:
+  - Algorithms
 hasequations: false
 hascode: false
 ---

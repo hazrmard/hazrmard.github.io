@@ -57,6 +57,7 @@ blockquote {
     padding: 0.25em 0.5em;
     color: #806915;
     font-size: 110%;
+    word-wrap: break-word;
 }
 .content > p > code {
     background-color: #FFEDAA;
@@ -85,6 +86,7 @@ blockquote {
 .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
     text-decoration: none;
     color: #554300;
+    word-wrap: break-word;
 }
 .front-matter {
     color: #D4BE6A;
