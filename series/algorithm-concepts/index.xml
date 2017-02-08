@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Algorithms on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/tags/algorithms/index.xml</link>
-    <description>Recent content in Algorithms on Ibrahim Ahmed</description>
+    <title>Algorithm Concepts on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/series/algorithm-concepts/index.xml</link>
+    <description>Recent content in Algorithm Concepts on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://iahmed.me/series/algorithm-concepts/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Algorithms: Balancing</title>
@@ -152,25 +152,6 @@ analysis of algorithms.&lt;/p&gt;
 Spinrad&amp;rsquo;s&lt;/a&gt; excellent
 lecture on balancing.&lt;/em&gt;&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>A case study in choosing algorithms</title>
-      <link>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</link>
-      <pubDate>Sun, 14 Aug 2016 03:29:23 +0000</pubDate>
-      
-      <guid>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</guid>
-      <description>&lt;p&gt;This past year, I have been crunching data from &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos&#34;&gt;dark matter simulations&lt;/a&gt;. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that&amp;#8217;s right &amp;#8211; 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.&lt;/p&gt;
-
-&lt;p&gt;Around the time I began working on this, I was taking an algorithms course. And we had just learned about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Bin_packing_problem&#34;&gt;bin packing problem&lt;/a&gt;. It involves figuring out the best way to fit an arbitrary number of objects with different sizes into a set of bins so the least amount of bins are used. And it is a hard problem to figure out fast. To get around the difficulty, computer scientists come up with &lt;a href=&#34;https://en.wikipedia.org/wiki/Heuristic_(computer_science)&#34;&gt;heuristics&lt;/a&gt;: shortcuts that give a &amp;#8220;good enough&amp;#8221; answer. And one heuristic is the First-fit algorithm. Essentially: find the fist bin with enough space, dump the object in, repeat.&lt;/p&gt;
-
-&lt;p&gt;Now, this bin packing problem was similar to my parallelization challenge. I had to divide my data into multiple processes to be computed independently. And so, with the enthusiasm that comes only with applying newfound knowledge, I &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos#multi-core-processing&#34;&gt;wrote some code&lt;/a&gt;. It read the data, assigned them &amp;#8220;size&amp;#8221; based on the big-O complexity of my calculations, and binned them for each process. Sweet, right?&lt;/p&gt;
-
-&lt;p&gt;Not so fast. I was noticing that my processes were still taking different times to finish. The disparity was more than I was happy with. There could be several reasons. One, big-O complexity rarely ever translates to proportionate running times as it ignores factors such as OS background. Two, I was not accounting for file i/o and lower-order big-O complexities while &amp;#8220;sizing&amp;#8221; data. In practice vs. theory, these things matter. So what could I do?&lt;/p&gt;
-
-&lt;p&gt;My solution in the end was quite simple, and my biggest lesson with parallel computing. Instead of pre-partitioning data for each process, I kept it all in a single pool. As soon as a process was free, it took one package from the pool and did its thing. The processes naturally divvied up the work. All was well! Now this might be parallel 101 for many, but I was so caught up in the fancy new algorithm I had learned that I did not pause to see if a plebeian approach, so to speak, may work better.&lt;/p&gt;
-
-&lt;p&gt;Now, as my pizza arrives and my script chugs through terabytes of data, I can watch Netflix in peace knowing that my pet processes are making the best of their time.&lt;/p&gt;</description>
     </item>
     
   </channel>

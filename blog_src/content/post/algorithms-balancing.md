@@ -8,7 +8,7 @@ hascode = false
 series = ["Algorithm concepts"]
 isexternal = false
 tags = ["Algorithms", "Graphs"]
-draft = true
+draft = false
 
 +++
 Balancing in algorithms refers to minimizing the complexity of an algorithm by

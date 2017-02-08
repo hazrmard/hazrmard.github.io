@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://iahmed.me/post/algorithms-balancing/</loc>
+    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/post/optimizing-static-sites-with-hugo/</loc>
     <lastmod>2017-02-06T10:07:58-06:00</lastmod>
   </url>
@@ -112,8 +117,14 @@
   </url>
   
   <url>
+    <loc>http://iahmed.me/series/algorithm-concepts/</loc>
+    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/tags/algorithms/</loc>
-    <lastmod>2016-08-14T03:29:23+00:00</lastmod>
+    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -154,7 +165,7 @@
   
   <url>
     <loc>http://iahmed.me/categories/developer/</loc>
-    <lastmod>2017-02-06T10:07:58-06:00</lastmod>
+    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -167,6 +178,12 @@
   <url>
     <loc>http://iahmed.me/tags/git/</loc>
     <lastmod>2016-09-06T02:01:26+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://iahmed.me/tags/graphs/</loc>
+    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -190,7 +207,7 @@
   
   <url>
     <loc>http://iahmed.me/</loc>
-    <lastmod>2017-02-06T10:07:58-06:00</lastmod>
+    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -238,7 +255,7 @@
   
   <url>
     <loc>http://iahmed.me/post/</loc>
-    <lastmod>2017-02-06T10:07:58-06:00</lastmod>
+    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -257,6 +274,11 @@
   <url>
     <loc>http://iahmed.me/tags/quantum-mechanics/</loc>
     <lastmod>2017-01-31T11:00:25-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://iahmed.me/series/</loc>
     <priority>0</priority>
   </url>
   
