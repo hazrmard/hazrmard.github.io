@@ -40,7 +40,7 @@ In \\(big-O\\) notation:
 $$O(T(n)) = O(f(g(n))) + O(f(n/g(n)))$$
 
 We need to minimize \\(O(T(n))\\). Notice that the sum will be dominated by
-whichever term is larger on the right hand side. Which means that \\(f(g(n)\\)
+whichever term is larger on the right hand side. Which means that \\(f(g(n))\\)
 and \\(f(n/g(n))\\) must be within a constant factor of each other. Essentially,
 in \\(big-O\\) terms:
 $$f(g(n)) = f(n/g(n))$$
@@ -50,29 +50,29 @@ For simplicity, assume that \\(f(n) = n\\), then:
 $$g(n) = {n \over g(n)}$$
 $$\therefore g(n) = \sqrt{n}$$
 
-## Example: The student dropping problem
-**Problem**: _Say you have 2 students and a building with \\(n\\) storeys. You
-want to find the storey that will cause a fatal fall. What is the fastest way
-to figure it out?_
+## Example: The egg dropping problem
+**Problem**: _Say you have 2 eggs and a building with \\(n\\) storeys. You
+want to find the storey that will cause the egg to break when dropped from it.
+What is the fastest way to figure it out?_
 
-**Solution**: A trivial approach is to have one student jump off from storeys
-1 to \\(n\\) until s/he dies. This is going to take \\(n = O(n)\\) attempts.
+**Solution**: A trivial approach is to drop one egg from storeys
+1 to \\(n\\) until it breaks. This is going to take \\(n = O(n)\\) attempts.
 Good, but we can do better.
 
-There are two students. Let's have one student jump off every 5 storeys. Then
-if the student dies in his/her \\(k^{th}\\) attempt we will know that the 'fatal'
+There are two eggs. Let's drop one egg every 5 storeys. Then
+if the egg breaks on the \\(k^{th}\\) attempt we will know that the 'fatal'
 storey is between \\((k-1)\times 5\\) and \\(k \times 5\\) storeys. Then the
-second student will jump the 5 storeys from \\((k-1)\times 5\\) to
+second egg will be dropped from the 5 storeys from \\((k-1)\times 5\\) to
 \\(k \times 5 - 1\\). Therefore the total attempts would be:
 $${n \over 5} + 5$$
 
 Which is less than \\(n\\) but in \\(big-O\\) notation has the same complexity:
 $$O({n \over 5} + 5) = O(n)$$
 
-Our approach with using two students is sound. It is reducing total attempts.
-Let's generalize the solution. Say the first student jumps off every \\(g(n)\\)
+Our approach with using two eggs is sound. It is reducing total attempts.
+Let's generalize the solution. Say the egg is dropped every \\(g(n)\\)
 storeys for a total of \\(n/g(n)\\) attempts. Then, like before, the
-second student will only have to jump \\(g(n)\\) times. This gives the total
+second egg will only be dropped \\(g(n)\\) times. This gives the total
 attempts as:
 $${n \over g(n)} + g(n)$$
 
@@ -81,8 +81,8 @@ to be equally partitioned so one stage does not dominate the other.
 $$\therefore {n \over g(n)} = g(n)$$
 $$g(n) = \sqrt{n}$$
 
-Thus if the first student makes \\(\sqrt{n}\\) jumps over the same interval, then
-the second student will have to make only \\(\sqrt{n}\\) attempts, giving the
+Thus if the first egg makes \\(\sqrt{n}\\) drops over the same interval, then
+the second egg will have to make only \\(\sqrt{n}\\) drops, giving the
 total of:
 $$\sqrt{n} + \sqrt{n} = O(\sqrt{n}) \lt O(n)$$
 
@@ -124,7 +124,7 @@ Delete the neighbourhood from the graph. Greedily colour the remaining graph.
 The 2-colouring step will happen at most \\(n/g(n)\\) times (since we remove
 at least \\(g(n)\\) vertices each step). So it will use \\(O(n/g(n))\\) colours.
 After the 2-colouring step, only vertices with degree < \\(g(n)\\) will remain,
-which will take \\(O(g(n))\\) colours. So the total numbe of colours will be:
+which will take \\(O(g(n))\\) colours. So the total number of colours will be:
 $$O({n \over g(n)}) + O(g(n))$$
 
 Balancing both stages gives us:
