@@ -111,7 +111,7 @@ switch between 2 colours for each new vertex. We can use this to convert our
 problem into a sequence of 2- and greedy- colourings.
 
 <figure>
-    <img src="/img/posts/algorithms-balancing/3-colourable.png"
+    <img src="/img/posts/algorithm-concepts/3-colourable.png"
         alt="3-colourable graph">
     <figcaption>A triangle is the simplest 3-colourable graph. Each vertex's
         neighbourhood is 2-colourable.
