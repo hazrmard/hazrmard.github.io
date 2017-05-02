@@ -9,7 +9,7 @@ hasequations = true
 isexternal = false
 description = ""
 date = "2017-02-24T12:41:52-06:00"
-draft = true
+draft = false
 +++
 
 _Note: This is the second post in the series:

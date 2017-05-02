@@ -8,10 +8,11 @@ Hi. My name is Ibrahim. I am a Masters student at Vanderbilt University with a
 concentration in Electrical Engineering (EE). I also have a double major in EE and
 physics.
 
-I am interested in hardware & software design, machine learning, web & mobile
+I am interested in electronics, computer vision, machine learning, web & mobile
 development, and astrophysics.
 
-Currently my research is on adaptive fault tolerant systems using reinforcement learning. Prior to that, last summer, I was involved with making sense of
+Currently my research is on adaptive fault tolerant systems using reinforcement
+learning. Prior to that, last summer, I was involved with making sense of
 terabytes of data from simulations on [Dark Matter](https://en.wikipedia.org/wiki/Dark_matter).
 
 I like to play tennis, badminton, and video games. Also, In my free time, I read
