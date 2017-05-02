@@ -7,26 +7,31 @@
     
         
         
+            <script type="text/javascript" async
+                src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+            </script>
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+            </script>
+        
     
     <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
     <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
-    <title>A case study in choosing algorithms</title>
+    <title>Stellar Equations: Continuity</title>
 </head>
 <body>
     <div class="container">
 
 <div class="content">
-    <h1 class="post-title">A case study in choosing algorithms</h1>
+    <h1 class="post-title">Stellar Equations: Continuity</h1>
     <div class="front-matter">
     
-        <em>Sunday, Aug 14, 2016</em>
+        <em>Thursday, Feb 23, 2017</em>
     
     
         
             
                 <br/>Categories:
-                    
-                        <a href="/categories/developer">Developer</a>,
                     
                         <a href="/categories/physics">Physics</a>,
                     
@@ -34,12 +39,23 @@
         
     
         
+            
+                <br/>Series:
+                    
+                        <a href="/series/the-four-stellar-equations">The four stellar equations</a>,
+                    
+            
+        
     
         
             
                 <br/>Tags:
                     
-                        <a href="/tags/algorithms">Algorithms</a>,
+                        <a href="/tags/astrophysics">Astrophysics</a>,
+                    
+                        <a href="/tags/astronomy">Astronomy</a>,
+                    
+                        <a href="/tags/space">Space</a>,
                     
             
         
@@ -47,26 +63,46 @@
 </div>
 
     
-    <p>This past year, I have been crunching data from <a href="https://github.com/hazrmard/DarkMatterHalos">dark matter simulations</a>. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that&#8217;s right &#8211; 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.</p>
+    <p>Stars essentially are balls of extremely hot, compressed, ionized gas (plasma).
+Their properties therefore depend on their mass, temperature, and density.
+Analyzing these properties gives us four equations that govern the structure of
+a star. The first of these is the <strong>Equation of Continuity</strong>. The equation of
+continuity relates the mass of a shell inside a star to the density at that
+distance from the center of the star.</p>
 
-<p>Around the time I began working on this, I was taking an algorithms course. And we had just learned about the <a href="https://en.wikipedia.org/wiki/Bin_packing_problem">bin packing problem</a>. It involves figuring out the best way to fit an arbitrary number of objects with different sizes into a set of bins so the least amount of bins are used. And it is a hard problem to figure out fast. To get around the difficulty, computer scientists come up with <a href="https://en.wikipedia.org/wiki/Heuristic_(computer_science)">heuristics</a>: shortcuts that give a &#8220;good enough&#8221; answer. And one heuristic is the First-fit algorithm. Essentially: find the fist bin with enough space, dump the object in, repeat.</p>
+<p>Assuming a star is a perfect sphere, its volume is given by:</p>
 
-<p>Now, this bin packing problem was similar to my parallelization challenge. I had to divide my data into multiple processes to be computed independently. And so, with the enthusiasm that comes only with applying newfound knowledge, I <a href="https://github.com/hazrmard/DarkMatterHalos#multi-core-processing">wrote some code</a>. It read the data, assigned them &#8220;size&#8221; based on the big-O complexity of my calculations, and binned them for each process. Sweet, right?</p>
+<p>$$\begin{equation} V = \frac{4}{3}\pi r^{2} \end{equation}$$</p>
 
-<p>Not so fast. I was noticing that my processes were still taking different times to finish. The disparity was more than I was happy with. There could be several reasons. One, big-O complexity rarely ever translates to proportionate running times as it ignores factors such as OS background. Two, I was not accounting for file i/o and lower-order big-O complexities while &#8220;sizing&#8221; data. In practice vs. theory, these things matter. So what could I do?</p>
+<p>The volume of a shell in the star a distance \(r\) from the center and of
+thickness \(dr\) is given by:</p>
 
-<p>My solution in the end was quite simple, and my biggest lesson with parallel computing. Instead of pre-partitioning data for each process, I kept it all in a single pool. As soon as a process was free, it took one package from the pool and did its thing. The processes naturally divvied up the work. All was well! Now this might be parallel 101 for many, but I was so caught up in the fancy new algorithm I had learned that I did not pause to see if a plebeian approach, so to speak, may work better.</p>
+<p>$$\begin{equation} dV = 4\pi r^{2} dr \end{equation}$$</p>
 
-<p>Now, as my pizza arrives and my script chugs through terabytes of data, I can watch Netflix in peace knowing that my pet processes are making the best of their time.</p>
+<p>And assuming that the density is radially uniform, and is given by \(\rho(r)\),
+the mass \(dM\) of a shell in the star a distance \(r\) from the center becomes:</p>
+
+<p>$$\begin{equation}dM(r) = \rho(r) \times dV =
+    4\pi r^{2} \rho(r) dr \end{equation}$$</p>
+
+<blockquote>
+<p>$$\frac{dM(r)}{dr} = 4\pi r^{2} \rho(r)$$</p>
+</blockquote>
+
+<p>Where \(M(r)\) is the total mass enclosed at a radius \(r\) from the
+center of the star. This equation describes the conservation of mass in a star.
+That is, the sum of masses of all shells inside the star will be the mass of the
+star itself.</p>
+
     <br/>
     <div class="navigation">
     
-        <a href="http://iahmed.me/post/2016-04-29-markov-chains/"><div class="prev">
+        <a href="http://iahmed.me/post/algorithm-concepts/algorithms-balancing/"><div class="prev">
             ← Previous Post
         </div></a>
     
     
-        <a href="http://iahmed.me/post/2016-09-05-testing-code-with-sensitive-data/"><div class="next">
+        <a href="http://iahmed.me/post/stellar-equations/2-hydrostatic-equilibrium/"><div class="next">
             Next Post →
         </div></a>
     

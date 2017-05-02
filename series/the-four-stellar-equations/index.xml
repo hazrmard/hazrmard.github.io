@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Four Stellar Equations on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/series/the-four-stellar-equations/</link>
+    <description>Recent content in The Four Stellar Equations on Ibrahim Ahmed</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ibrahim Ahmed</copyright>
+    <lastBuildDate>Thu, 23 Feb 2017 22:09:15 -0600</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/series/the-four-stellar-equations/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Stellar Equations: Continuity</title>
+      <link>http://iahmed.me/post/stellar-equations/1-continuity/</link>
+      <pubDate>Thu, 23 Feb 2017 22:09:15 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/stellar-equations/1-continuity/</guid>
+      <description>Stars essentially are balls of extremely hot, compressed, ionized gas (plasma). Their properties therefore depend on their mass, temperature, and density. Analyzing these properties gives us four equations that govern the structure of a star. The first of these is the Equation of Continuity. The equation of continuity relates the mass of a shell inside a star to the density at that distance from the center of the star.
+Assuming a star is a perfect sphere, its volume is given by:</description>
+    </item>
+    
+    <item>
+      <title>Stellar Equations: Hydrostatic Equilibrium</title>
+      <link>http://iahmed.me/post/stellar-equations/2-hydrostatic-equilibrium/</link>
+      <pubDate>Fri, 24 Feb 2017 12:41:52 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/stellar-equations/2-hydrostatic-equilibrium/</guid>
+      <description>Note: This is the second post in the series: The Four Stellar Equations
+The star is stable. Despite being very massive, it does not collapse under its own gravity. This means that there is a force within the star that is opposing the inwards gravitational force. That force is a simple result of Newton&amp;rsquo;s third law: every action has an equal and opposite reaction.
+ The inwards force of gravity is countered by the outwards reaction due to the pressure at that depth.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Meta on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/categories/meta/index.xml</link>
+    <link>http://iahmed.me/categories/meta/</link>
     <description>Recent content in Meta on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/categories/meta/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Feb 2017 10:07:58 -0600</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/categories/meta/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Optimizing static sites with hugo</title>
@@ -15,91 +18,8 @@
       <pubDate>Mon, 06 Feb 2017 10:07:58 -0600</pubDate>
       
       <guid>http://iahmed.me/post/optimizing-static-sites-with-hugo/</guid>
-      <description>&lt;p&gt;According to &lt;a href=&#34;http://httparchive.org/trends.php&#34;&gt;httparchive&lt;/a&gt; the average size
-of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age
-where the internet is the primary media delivery platform - but it is worth
-noting that most web pages serve text as their primary content. Looking at the
-report sheds light on what constitutes an average web page:&lt;/p&gt;
-
-&lt;p&gt;The HTML content takes up around 50-60kB. Images, understandably, make up the
-biggest chunk with ~1.6MB. Around another ~200kB are taken up by CSS and Font
-files. What is surprising to me is that the next biggest chunk, at above 400kB,
-is JavaScript.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;http://iahmed.me/img/posts/optimizing-static-sites-with-hugo/chart.png&#34;&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;The portion I want to go after is &lt;code&gt;JavaScript&lt;/code&gt;. Granted that JavaScript is
-indispensable to web development. However in excess it can weigh everything
-down. Particularly in cases when it - instead of &lt;code&gt;CSS&lt;/code&gt; -  is used to add
-responsivity to a website. In my experience &lt;code&gt;jQuery&lt;/code&gt; is the biggest culprit
-of unnecessary bloat. But I digress.&lt;/p&gt;
-
-&lt;p&gt;While I was building this website using &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; I realized
-that I would need additional JavaScript libraries for highlighting code and
-rendering math. And these libraries take up a ton of space. This:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Increases the bandwidth cost for the user, and&lt;/li&gt;
-&lt;li&gt;Increases loading times which make browsing experience clunky.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;http://iahmed.me/img/posts/optimizing-static-sites-with-hugo/network_stats.png&#34;&gt;
-    &lt;figcaption&gt;An overview of network traffic for a webpage on this site using
-        MathJax library&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Above is network traffic for a page on this site that uses 3rd party JS libraries
-to render equations. Around 200/218kB of network traffic is for that one library.
-This may seem a trivial amount of data but I believe that any optimization is
-good optimization (&lt;em&gt;in production especially&lt;/em&gt;). So I harnessed all the flexibility
-a static site can offer. When I now build my site, only pages that render
-equations or contain code request external libraries. Thus different pages on my
-site have different - but the leanest possible - network traffic signatures.&lt;/p&gt;
-
-&lt;p&gt;How did I do it? When building sites using Hugo, for each post I can define
-variables that Hugo can use while rendering a page template into HTML. These
-variables are called &lt;em&gt;front matter&lt;/em&gt; in Hugo-speak. For example, &lt;em&gt;front matter&lt;/em&gt;
-for this page looks like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;+++
-categories = [&amp;quot;Developer&amp;quot;, &amp;quot;Meta&amp;quot;]
-date = &amp;quot;2017-02-03T10:07:58-06:00&amp;quot;
-hasequations = false
-title = &amp;quot;Optimizing static sites with hugo&amp;quot;
-hascode = true
-isexternal = false
-series = []
-description = &amp;quot;&amp;quot;
-tags = [&amp;quot;Javascript&amp;quot;, &amp;quot;Hugo&amp;quot;]
-draft = true
-+++
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And the &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section for the HTML template looks like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-HTML&#34;&gt;{{if .IsPage}}
-    {{if .Params.hascode}}
-        &amp;lt;script src=&amp;quot;https://V_V_LONG_PATH_TO_LIBRARY/highlight.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-        &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;https://EVEN_LONGER_PATH.min.css&amp;quot;&amp;gt;
-        &amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
-    {{end}}
-    {{if .Params.hasequations}}
-        &amp;lt;script type=&amp;quot;text/javascript&amp;quot; async
-            src=&amp;quot;https://DECENT_LENGTH_PATH/MathJax.js?config=TeX-AMS_CHTML&amp;quot;&amp;gt;
-        &amp;lt;/script&amp;gt;
-    {{end}}
-{{end}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So now, only when I set &lt;code&gt;hasequations&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; does the page load
-&lt;a href=&#34;https://www.mathjax.org/&#34;&gt;&lt;code&gt;MathJax&lt;/code&gt;&lt;/a&gt;. Same with &lt;code&gt;hascode&lt;/code&gt; and
-&lt;a href=&#34;https://highlightjs.org/&#34;&gt;&lt;code&gt;Highlight.js&lt;/code&gt;&lt;/a&gt;. This speeds up my load times and
-frees up the generous CDNs from unnecessary traffic. All it took was a few lines.
-Win-Win.&lt;/p&gt;
-</description>
+      <description>According to httparchive the average size of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age where the internet is the primary media delivery platform - but it is worth noting that most web pages serve text as their primary content. Looking at the report sheds light on what constitutes an average web page:
+The HTML content takes up around 50-60kB. Images, understandably, make up the biggest chunk with ~1.</description>
     </item>
     
     <item>
@@ -108,10 +28,8 @@ Win-Win.&lt;/p&gt;
       <pubDate>Sat, 04 Jul 2015 16:50:32 +0000</pubDate>
       
       <guid>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</guid>
-      <description>&lt;p&gt;&amp;#8230;and lo and behold, there was.&lt;/p&gt;
-
-&lt;p&gt;A while back I discovered my interest in web development. I taught myself HTML, CSS, and JavaScript. This blog is the latest in my attempts to learn web technologies.&lt;/p&gt;
-</description>
+      <description>&amp;#8230;and lo and behold, there was.
+A while back I discovered my interest in web development. I taught myself HTML, CSS, and JavaScript. This blog is the latest in my attempts to learn web technologies.</description>
     </item>
     
   </channel>

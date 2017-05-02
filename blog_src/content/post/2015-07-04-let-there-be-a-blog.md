@@ -1,8 +1,7 @@
 ---
 title: Let there be a blog
-author: ahmedi
-layout: post
 date: 2015-07-04T16:50:32+00:00
+description : ""
 categories:
   - Meta
 hasequations: false

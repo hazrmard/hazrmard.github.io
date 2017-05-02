@@ -2,12 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Personal on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/categories/personal/index.xml</link>
+    <link>http://iahmed.me/categories/personal/</link>
     <description>Recent content in Personal on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/categories/personal/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Mar 2016 03:55:04 +0000</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/categories/personal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Starting Android Development</title>
+      <link>http://iahmed.me/post/2016-03-04-starting-android-development/</link>
+      <pubDate>Sat, 05 Mar 2016 03:55:04 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-03-04-starting-android-development/</guid>
+      <description>&lt;p&gt;I have always been fascinated with mobile app development. Over the last couple of years in college, I made a few attempts to get started with Android applications. I watched tutorial series, reading blogs, attending introductory workshops. Nope. Nothing seemed to stick. What was wrong?&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Talking With Satellites</title>
@@ -15,29 +27,7 @@
       <pubDate>Wed, 14 Oct 2015 19:16:21 +0000</pubDate>
       
       <guid>http://iahmed.me/post/2015-10-14-talking-with-satellites/</guid>
-      <description>&lt;p&gt;This year I am leading a senior design team in developing a
-software defined radio that can talk with a satellite that
-&lt;a href=&#34;http://www.amsat.org/?p=3689&#34;&gt;Vanderbilt just launched&lt;/a&gt;.
-Compared to a normal radio, an SDR has most of the signal
-processing functions implemented virtually. This means that
-it can change its operation on the fly. An interesting
-application of SDRs is cognitive radio: that is, radios
-communicating with other radios in their vicinity and
-adjusting their frequencies to maximize their use of the
-bandwidth.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;http://iahmed.me/img/posts/cubesat.gif&#34;&gt;
-    &lt;figcaption&gt;A CubeSat&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Our project involves integrating an SDR with a satellite
-tracking antenna system, processing the signal and passing
-it on to a satellite specific application to decrypt it. If
-we are successful, we will not only be able to talk to our
-own CubeSat, but have a chat with astronauts abroad the
-International Space Station. How cool is that!&lt;/p&gt;
-</description>
+      <description>This year I am leading a senior design team in developing a software defined radio that can talk with a satellite that Vanderbilt just launched. Compared to a normal radio, an SDR has most of the signal processing functions implemented virtually. This means that it can change its operation on the fly. An interesting application of SDRs is cognitive radio: that is, radios communicating with other radios in their vicinity and adjusting their frequencies to maximize their use of the bandwidth.</description>
     </item>
     
   </channel>

@@ -1,6 +1,6 @@
 +++
 hasequations = true
-categories = ["Developer"]
+categories = ["Engineering"]
 date = "2017-02-06T18:47:26-06:00"
 description = ""
 title = "Algorithms: Balancing"

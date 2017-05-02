@@ -2,156 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Algorithms on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/tags/algorithms/index.xml</link>
+    <link>http://iahmed.me/tags/algorithms/</link>
     <description>Recent content in Algorithms on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Feb 2017 18:47:26 -0600</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Algorithms: Balancing</title>
-      <link>http://iahmed.me/post/algorithms-balancing/</link>
+      <link>http://iahmed.me/post/algorithm-concepts/algorithms-balancing/</link>
       <pubDate>Mon, 06 Feb 2017 18:47:26 -0600</pubDate>
       
-      <guid>http://iahmed.me/post/algorithms-balancing/</guid>
-      <description>
-
-&lt;p&gt;Balancing in algorithms refers to minimizing the complexity of an algorithm by
-making sure that its constituent parts share the load efficiently. It is &lt;em&gt;not&lt;/em&gt; a
-technique for solving problems. Instead it helps us understand how an existing
-solution may be optimized.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-theory-of-balancing&#34;&gt;The theory of balancing&lt;/h2&gt;
-
-&lt;p&gt;Say there is a problem of size \(n\). The problem is such that it can be
-broken down into a sequence of smaller problems. There are many ways the problem
-can be broken down:&lt;/p&gt;
-
-&lt;p&gt;Solve the problem in 1 chunk:
-$$T(n) = f(n)$$&lt;/p&gt;
-
-&lt;p&gt;Or solve the problem in chunks of 5:
-$$T(n) = f(5) + f(n/5)$$&lt;/p&gt;
-
-&lt;p&gt;Of course, the relations above are not unique. There are a multitude
-of ways that problems can be abstracted. But the question arises: what division
-of load is best?&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s assume we want to break down the problem into \(g(n)\) chunks. Then
-the size of the sub-problem becomes \(n/g(n)\). The time to solve the problem
-becomes:
-$$T(n) = f(g(n)) + f(n/g(n))$$&lt;/p&gt;
-
-&lt;p&gt;In \(big-O\) notation:
-$$O(T(n)) = O(f(g(n))) + O(f(n/g(n)))$$&lt;/p&gt;
-
-&lt;p&gt;We need to minimize \(O(T(n))\). Notice that the sum will be dominated by
-whichever term is larger on the right hand side. Which means that \(f(g(n))\)
-and \(f(n/g(n))\) must be within a constant factor of each other. Essentially,
-in \(big-O\) terms:
-$$f(g(n)) = f(n/g(n))$$&lt;/p&gt;
-
-&lt;p&gt;Solving this for \(g(n)\) gives us the ideal size for partitioning the problem.
-For simplicity, assume that \(f(n) = n\), then:
-$$g(n) = {n \over g(n)}$$
-$$\therefore g(n) = \sqrt{n}$$&lt;/p&gt;
-
-&lt;h2 id=&#34;example-the-egg-dropping-problem&#34;&gt;Example: The egg dropping problem&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;Problem&lt;/strong&gt;: &lt;em&gt;Say you have 2 eggs and a building with \(n\) storeys. You
-want to find the storey that will cause the egg to break when dropped from it.
-What is the fastest way to figure it out?&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Solution&lt;/strong&gt;: A trivial approach is to drop one egg from storeys
-1 to \(n\) until it breaks. This is going to take \(n = O(n)\) attempts.
-Good, but we can do better.&lt;/p&gt;
-
-&lt;p&gt;There are two eggs. Let&amp;rsquo;s drop one egg every 5 storeys. Then
-if the egg breaks on the \(k^{th}\) attempt we will know that the &amp;lsquo;fatal&amp;rsquo;
-storey is between \((k-1)\times 5\) and \(k \times 5\) storeys. Then the
-second egg will be dropped from the 5 storeys from \((k-1)\times 5\) to
-\(k \times 5 - 1\). Therefore the total attempts would be:
-$${n \over 5} + 5$$&lt;/p&gt;
-
-&lt;p&gt;Which is less than \(n\) but in \(big-O\) notation has the same complexity:
-$$O({n \over 5} + 5) = O(n)$$&lt;/p&gt;
-
-&lt;p&gt;Our approach with using two eggs is sound. It is reducing total attempts.
-Let&amp;rsquo;s generalize the solution. Say the egg is dropped every \(g(n)\)
-storeys for a total of \(n/g(n)\) attempts. Then, like before, the
-second egg will only be dropped \(g(n)\) times. This gives the total
-attempts as:
-$${n \over g(n)} + g(n)$$&lt;/p&gt;
-
-&lt;p&gt;To minimize the total complexity (attempts) the two stages of the solution need
-to be equally partitioned so one stage does not dominate the other.
-$$\therefore {n \over g(n)} = g(n)$$
-$$g(n) = \sqrt{n}$$&lt;/p&gt;
-
-&lt;p&gt;Thus if the first egg makes \(\sqrt{n}\) drops over the same interval, then
-the second egg will have to make only \(\sqrt{n}\) drops, giving the
-total of:
-$$\sqrt{n} + \sqrt{n} = O(\sqrt{n}) \lt O(n)$$&lt;/p&gt;
-
-&lt;h2 id=&#34;example-graph-colouring&#34;&gt;Example: Graph colouring&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;Problem:&lt;/strong&gt; &lt;em&gt;Colour a 3-Colourable graph in polynomial time with as few colours
-as possible.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt; A graph is said to be \(n\)-colourable if all vertices can be
-assigned 1 of \(n\) colours without adjacent vertices having the same colour.
-Graph colouring is an &lt;a href=&#34;https://en.wikipedia.org/wiki/NP-completeness&#34;&gt;NP-Complete&lt;/a&gt;
-problem (except for 1 and 2 colouring). This means that an optimal solution
-cannot be found in polynomial time. Colouring a 3-colourable graph with exactly
-3 colours might be hard, but we can attempt to use as few colours as possible in
-polynomial time.&lt;/p&gt;
-
-&lt;p&gt;One approach is called &lt;a href=&#34;https://en.wikipedia.org/wiki/Greedy_coloring&#34;&gt;Greedy colouring&lt;/a&gt;.
-We look at all vertices in a sequence. Each vertex is assigned the first
-&amp;ldquo;available&amp;rdquo; colour. A colour is &amp;ldquo;available&amp;rdquo; if it is not assigned to any of the
-vertex&amp;rsquo;s neighbours. So if a graph has a maximum degree \(d\), then the worst
-case scenario for greedy colouring will take \(d+1\) colours.&lt;/p&gt;
-
-&lt;p&gt;The greedy approach, however, is not leveraging what we know about our graph:
-it is 3-colourable. Which means that every vertex&amp;rsquo;s neighbourhood is 2-colourable!
-2-colouring is a simple problem. Essentially do any traversal of a graph and
-switch between 2 colours for each new vertex. We can use this to convert our
-problem into a sequence of 2- and greedy- colourings.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;http://iahmed.me/img/posts/algorithms-balancing/3-colourable.png&#34;
-        alt=&#34;3-colourable graph&#34;&gt;
-    &lt;figcaption&gt;A triangle is the simplest 3-colourable graph. Each vertex&#39;s
-        neighbourhood is 2-colourable.
-    &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Here is how the new solution works: consider all vertices of degree \(\gt g(n)\).
-For each such vertex, 2-colour its neighbourhood. Never use those colours again.
-Delete the neighbourhood from the graph. Greedily colour the remaining graph.
-The 2-colouring step will happen at most \(n/g(n)\) times (since we remove
-at least \(g(n)\) vertices each step). So it will use \(O(n/g(n))\) colours.
-After the 2-colouring step, only vertices with degree &amp;lt; \(g(n)\) will remain,
-which will take \(O(g(n))\) colours. So the total number of colours will be:
-$$O({n \over g(n)}) + O(g(n))$$&lt;/p&gt;
-
-&lt;p&gt;Balancing both stages gives us:
-$${n \over g(n)} = g(n) \Rightarrow g(n) = \sqrt{n}$$&lt;/p&gt;
-
-&lt;p&gt;Therefore, 2-colouring all vertices with degree \(\gt \sqrt{n}\) and greedy
-colouring the remaining vertices will take \(O(\sqrt{n})\) colours. This
-is called &lt;em&gt;Widgerson&amp;rsquo;s Algorithm&lt;/em&gt; after (surprise!) Avi Widgerson.&lt;/p&gt;
-
-&lt;p&gt;Balancing may not apply to all approaches. Nonetheless it is a powerful tool for
-analysis of algorithms.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;em&gt;This article was written from my notes of &lt;a href=&#34;https://engineering.vanderbilt.edu/bio/jeremy-spinrad&#34;&gt;Dr. Jeremy
-Spinrad&amp;rsquo;s&lt;/a&gt; excellent
-lecture on balancing.&lt;/em&gt;&lt;/p&gt;
-</description>
+      <guid>http://iahmed.me/post/algorithm-concepts/algorithms-balancing/</guid>
+      <description>Balancing in algorithms refers to minimizing the complexity of an algorithm by making sure that its constituent parts share the load efficiently. It is not a technique for solving problems. Instead it helps us understand how an existing solution may be optimized.
+The theory of balancing Say there is a problem of size \(n\). The problem is such that it can be broken down into a sequence of smaller problems.</description>
     </item>
     
     <item>
@@ -160,17 +28,7 @@ lecture on balancing.&lt;/em&gt;&lt;/p&gt;
       <pubDate>Sun, 14 Aug 2016 03:29:23 +0000</pubDate>
       
       <guid>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</guid>
-      <description>&lt;p&gt;This past year, I have been crunching data from &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos&#34;&gt;dark matter simulations&lt;/a&gt;. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that&amp;#8217;s right &amp;#8211; 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.&lt;/p&gt;
-
-&lt;p&gt;Around the time I began working on this, I was taking an algorithms course. And we had just learned about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Bin_packing_problem&#34;&gt;bin packing problem&lt;/a&gt;. It involves figuring out the best way to fit an arbitrary number of objects with different sizes into a set of bins so the least amount of bins are used. And it is a hard problem to figure out fast. To get around the difficulty, computer scientists come up with &lt;a href=&#34;https://en.wikipedia.org/wiki/Heuristic_(computer_science)&#34;&gt;heuristics&lt;/a&gt;: shortcuts that give a &amp;#8220;good enough&amp;#8221; answer. And one heuristic is the First-fit algorithm. Essentially: find the fist bin with enough space, dump the object in, repeat.&lt;/p&gt;
-
-&lt;p&gt;Now, this bin packing problem was similar to my parallelization challenge. I had to divide my data into multiple processes to be computed independently. And so, with the enthusiasm that comes only with applying newfound knowledge, I &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos#multi-core-processing&#34;&gt;wrote some code&lt;/a&gt;. It read the data, assigned them &amp;#8220;size&amp;#8221; based on the big-O complexity of my calculations, and binned them for each process. Sweet, right?&lt;/p&gt;
-
-&lt;p&gt;Not so fast. I was noticing that my processes were still taking different times to finish. The disparity was more than I was happy with. There could be several reasons. One, big-O complexity rarely ever translates to proportionate running times as it ignores factors such as OS background. Two, I was not accounting for file i/o and lower-order big-O complexities while &amp;#8220;sizing&amp;#8221; data. In practice vs. theory, these things matter. So what could I do?&lt;/p&gt;
-
-&lt;p&gt;My solution in the end was quite simple, and my biggest lesson with parallel computing. Instead of pre-partitioning data for each process, I kept it all in a single pool. As soon as a process was free, it took one package from the pool and did its thing. The processes naturally divvied up the work. All was well! Now this might be parallel 101 for many, but I was so caught up in the fancy new algorithm I had learned that I did not pause to see if a plebeian approach, so to speak, may work better.&lt;/p&gt;
-
-&lt;p&gt;Now, as my pizza arrives and my script chugs through terabytes of data, I can watch Netflix in peace knowing that my pet processes are making the best of their time.&lt;/p&gt;</description>
+      <description>&lt;p&gt;This past year, I have been crunching data from &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos&#34;&gt;dark matter simulations&lt;/a&gt;. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that&amp;#8217;s right &amp;#8211; 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Quantum Mechanics on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/tags/quantum-mechanics/index.xml</link>
+    <link>http://iahmed.me/tags/quantum-mechanics/</link>
     <description>Recent content in Quantum Mechanics on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/tags/quantum-mechanics/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Jan 2017 11:00:25 -0600</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/tags/quantum-mechanics/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Is cold the new hot?</title>
@@ -15,101 +18,10 @@
       <pubDate>Tue, 31 Jan 2017 11:00:25 -0600</pubDate>
       
       <guid>http://iahmed.me/post/is-cold-the-new-hot/</guid>
-      <description>&lt;p&gt;&lt;em&gt;Note: This article was originally published on
-&lt;a href=&#34;astroibrahim.wordpress.com&#34;&gt;astroibrahim&lt;/a&gt; on April 17, 2013.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Yes.&lt;/p&gt;
-
-&lt;p&gt;A few days back, a friend shared an
-&lt;a href=&#34;http://www.nature.com/news/quantum-gas-goes-below-absolute-zero-1.12146&#34;&gt;article&lt;/a&gt; with me. It talked of
-how scientists had managed to achieve temperatures below absolute
-zero. Does it mean that temperature has to be redefined? Has our
-understanding of thermodynamics been flawed for the past hundred
-years. No, it turns out. It is all a matter of semantics.&lt;/p&gt;
-
-&lt;p&gt;Absolute Zero. This is the temperature at which a particle has
-the minimum possible energy. The energy is NOT zero because that
-would violate the Heisenberg uncertainty principle (that you
-cannot know the energy and its duration with absolute certainty).
-However that zero-state energy is a quantum quantity, so for all
-intents and purposes, the particle itself appears stationary.
-Classically, it is impossible to go below absolute zero because
-for all the matter that we know of, it will never have negative
-energy (because the zero state energy prevents energy from going
-past zero and into the negative).&lt;/p&gt;
-
-&lt;p&gt;Therefore when you talk of temperatures below absolute zero, and
-you know that there is nothing wrong with absolute zero, then
-logically there must be something going on with “Temperature”.
-The layperson will call temperature the hotness of something.
-Some one more well versed in science will call it the average
-kinetic energy of the particles. All of these definitions are
-correct in the same way Newton’s gravity is correct i.e. it works
-for our observations. But in order to really understand
-temperature, you need to understand entropy.&lt;/p&gt;
-
-&lt;p&gt;Entropy in a sense is the amount of disorder in a system. Imagine
-making a mound of sand on a table. Now shake the table. The sand
-particles will spread out as they roll down from the mound.
-Because the particles are now spread out, the entropy of the
-system has increased. The farther a particle is from the original
-position of the mound, the more effectively it has harnessed the
-energy you gave the system by vibrating the table. If the table
-was infinitely expansive, the particles would continue spreading
-out and absorbing the energy you provide and increasing the
-entropy of the system.&lt;/p&gt;
-
-&lt;p&gt;In a system with infinite states, energy and disorder have a
-positive relationship.
-In a system with infinite states, energy and disorder have a
-positive relationship.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;http://iahmed.me/img/posts/is-cold-the-new-hot/temp_infinite.png&#34;&gt;
-    &lt;figcaption&gt;In a system with infinite states, energy and
-    disorder have a positive relationship.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;This is temperature, the ratio of energy required to the change
-in entropy. The greater the energy required for the same increase
-in entropy, the greater will be the temperature.&lt;/p&gt;
-
-&lt;p&gt;But there is a catch: what if you provide more energy to the
-system but the disorder (entropy) decreases instead. Is it
-possible to shake the table and make the sand particles more
-ordered? If it is, then that would mean that the temperature of
-the system is negative because the change in energy is positive,
-but the change in entropy is negative, so the ratio (which
-represents temperature) is negative. Imagine that the table is
-not infinite. Instead it has little walls on the edges. As you
-shake the table, the sand particles start to spread out (they
-gain energy, and increase entropy). The temperature increases.
-But there comes a point when they reach the edges. Then they
-start to accumulate again. The more you shake the table, the
-greater is the particle accumulation on the edges. At that point,
-an increase in energy of the system is in fact decreasing its
-disorder. Thus the temperature has become negative.&lt;/p&gt;
-
-&lt;p&gt;In a system with finite states, energy and disorder develop a
-negative relationship.
-In a system with finite states, energy and disorder develop a
-negative relationship.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;http://iahmed.me/img/posts/is-cold-the-new-hot/temp_finite.png&#34;&gt;
-    &lt;figcaption&gt;In a system with finite states, energy and  
-    disorder develop a negative relationship.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;That is exactly what the scientists mentioned in the article did.
-They trapped the molecules using lasers and magnetic fields, so
-that after absorbing certain amount of energy, the barriers
-created by the magnetic fields and lasers would cause particles
-to accumulate around the same energies. In the classical sense,
-the particles were hotter because they had a greater energy, but
-since the disorder in the system was lessened, their temperature
-was negative i.e. below absolute zero.&lt;/p&gt;
-</description>
+      <description>Note: This article was originally published on astroibrahim on April 17, 2013.
+Yes.
+A few days back, a friend shared an article with me. It talked of how scientists had managed to achieve temperatures below absolute zero. Does it mean that temperature has to be redefined? Has our understanding of thermodynamics been flawed for the past hundred years. No, it turns out. It is all a matter of semantics.
+Absolute Zero.</description>
     </item>
     
   </channel>

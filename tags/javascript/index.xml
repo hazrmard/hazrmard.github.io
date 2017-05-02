@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Javascript on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/tags/javascript/index.xml</link>
+    <link>http://iahmed.me/tags/javascript/</link>
     <description>Recent content in Javascript on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Feb 2017 10:07:58 -0600</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Optimizing static sites with hugo</title>
@@ -15,91 +18,8 @@
       <pubDate>Mon, 06 Feb 2017 10:07:58 -0600</pubDate>
       
       <guid>http://iahmed.me/post/optimizing-static-sites-with-hugo/</guid>
-      <description>&lt;p&gt;According to &lt;a href=&#34;http://httparchive.org/trends.php&#34;&gt;httparchive&lt;/a&gt; the average size
-of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age
-where the internet is the primary media delivery platform - but it is worth
-noting that most web pages serve text as their primary content. Looking at the
-report sheds light on what constitutes an average web page:&lt;/p&gt;
-
-&lt;p&gt;The HTML content takes up around 50-60kB. Images, understandably, make up the
-biggest chunk with ~1.6MB. Around another ~200kB are taken up by CSS and Font
-files. What is surprising to me is that the next biggest chunk, at above 400kB,
-is JavaScript.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;http://iahmed.me/img/posts/optimizing-static-sites-with-hugo/chart.png&#34;&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;The portion I want to go after is &lt;code&gt;JavaScript&lt;/code&gt;. Granted that JavaScript is
-indispensable to web development. However in excess it can weigh everything
-down. Particularly in cases when it - instead of &lt;code&gt;CSS&lt;/code&gt; -  is used to add
-responsivity to a website. In my experience &lt;code&gt;jQuery&lt;/code&gt; is the biggest culprit
-of unnecessary bloat. But I digress.&lt;/p&gt;
-
-&lt;p&gt;While I was building this website using &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; I realized
-that I would need additional JavaScript libraries for highlighting code and
-rendering math. And these libraries take up a ton of space. This:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Increases the bandwidth cost for the user, and&lt;/li&gt;
-&lt;li&gt;Increases loading times which make browsing experience clunky.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;http://iahmed.me/img/posts/optimizing-static-sites-with-hugo/network_stats.png&#34;&gt;
-    &lt;figcaption&gt;An overview of network traffic for a webpage on this site using
-        MathJax library&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Above is network traffic for a page on this site that uses 3rd party JS libraries
-to render equations. Around 200/218kB of network traffic is for that one library.
-This may seem a trivial amount of data but I believe that any optimization is
-good optimization (&lt;em&gt;in production especially&lt;/em&gt;). So I harnessed all the flexibility
-a static site can offer. When I now build my site, only pages that render
-equations or contain code request external libraries. Thus different pages on my
-site have different - but the leanest possible - network traffic signatures.&lt;/p&gt;
-
-&lt;p&gt;How did I do it? When building sites using Hugo, for each post I can define
-variables that Hugo can use while rendering a page template into HTML. These
-variables are called &lt;em&gt;front matter&lt;/em&gt; in Hugo-speak. For example, &lt;em&gt;front matter&lt;/em&gt;
-for this page looks like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;+++
-categories = [&amp;quot;Developer&amp;quot;, &amp;quot;Meta&amp;quot;]
-date = &amp;quot;2017-02-03T10:07:58-06:00&amp;quot;
-hasequations = false
-title = &amp;quot;Optimizing static sites with hugo&amp;quot;
-hascode = true
-isexternal = false
-series = []
-description = &amp;quot;&amp;quot;
-tags = [&amp;quot;Javascript&amp;quot;, &amp;quot;Hugo&amp;quot;]
-draft = true
-+++
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And the &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section for the HTML template looks like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-HTML&#34;&gt;{{if .IsPage}}
-    {{if .Params.hascode}}
-        &amp;lt;script src=&amp;quot;https://V_V_LONG_PATH_TO_LIBRARY/highlight.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-        &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;https://EVEN_LONGER_PATH.min.css&amp;quot;&amp;gt;
-        &amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
-    {{end}}
-    {{if .Params.hasequations}}
-        &amp;lt;script type=&amp;quot;text/javascript&amp;quot; async
-            src=&amp;quot;https://DECENT_LENGTH_PATH/MathJax.js?config=TeX-AMS_CHTML&amp;quot;&amp;gt;
-        &amp;lt;/script&amp;gt;
-    {{end}}
-{{end}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So now, only when I set &lt;code&gt;hasequations&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; does the page load
-&lt;a href=&#34;https://www.mathjax.org/&#34;&gt;&lt;code&gt;MathJax&lt;/code&gt;&lt;/a&gt;. Same with &lt;code&gt;hascode&lt;/code&gt; and
-&lt;a href=&#34;https://highlightjs.org/&#34;&gt;&lt;code&gt;Highlight.js&lt;/code&gt;&lt;/a&gt;. This speeds up my load times and
-frees up the generous CDNs from unnecessary traffic. All it took was a few lines.
-Win-Win.&lt;/p&gt;
-</description>
+      <description>According to httparchive the average size of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age where the internet is the primary media delivery platform - but it is worth noting that most web pages serve text as their primary content. Looking at the report sheds light on what constitutes an average web page:
+The HTML content takes up around 50-60kB. Images, understandably, make up the biggest chunk with ~1.</description>
     </item>
     
     <item>
@@ -110,21 +30,7 @@ Win-Win.&lt;/p&gt;
       <guid>http://iahmed.me/post/2015-09-20-a-simple-webapp/</guid>
       <description>&lt;p&gt;Over the last weekend, I was looking to brush up my web-dev skills (what little I had learned on the side). I decided to make a simple web app for my residents to use (I am a Resident Advisor).&lt;/p&gt;
 
-&lt;p&gt;Objective: Display tips, event news, free food notifications provided regularly by RAs and faculty to residents on a website.&lt;/p&gt;
-
-&lt;p&gt;Front-end: A simple site with a big red button that would display &amp;#8220;tips&amp;#8221; one at a time.&lt;/p&gt;
-
-&lt;p&gt;Back-end: Umm&amp;#8230;&lt;/p&gt;
-
-&lt;p&gt;I was using &lt;a href=&#34;https://pages.github.com/&#34; target=&#34;_blank&#34;&gt;GitHub pages&lt;/a&gt; to host my app. And GitHub pages do not let any one mess with back-end voodoo. The solution? Google Sheets!&lt;/p&gt;
-
-&lt;p&gt;It was the perfect back-end. I created a Google Form linked to my sheet and gave it to other RAs and faculty members. That way they wouldn&amp;#8217;t have to see the labyrinthine array of cells. Plus, the form would help eliminate user error from directly working on the spreadsheet. And another big plus: I could add data validation features and data processing functions in sheets so everything would be in pristine condition.&lt;/p&gt;
-
-&lt;p&gt;Then I used this awesome library: &lt;a href=&#34;https://github.com/jsoma/tabletop&#34; target=&#34;_blank&#34;&gt;Tabletop.js&lt;/a&gt; to pull in my spreadsheet data. The rest was just using JavaScript to display the information however I pleased.&lt;/p&gt;
-
-&lt;p&gt;Simple. As. That.&lt;/p&gt;
-
-&lt;p&gt;You can see it in action &lt;a href=&#34;http://hazrmard.github.io/VandySays&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
+&lt;p&gt;Objective: Display tips, event news, free food notifications provided regularly by RAs and faculty to residents on a website.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -133,30 +39,7 @@ Win-Win.&lt;/p&gt;
       <pubDate>Thu, 23 Jul 2015 01:32:40 +0000</pubDate>
       
       <guid>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</guid>
-      <description>&lt;p&gt;Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The &amp;#8216;standard&amp;#8217; way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Having enough bandwidth&lt;/li&gt;
-&lt;li&gt;Knowing a server side language&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Say, hypothetically, that you fulfil none of these requirements. What now? Well, you can try to bypass the server and extract the website&amp;#8217;s contents directly to your page. But that won&amp;#8217;t work. All thanks to the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy&#34; target=&#34;_blank&#34;&gt;Same Origin Policy&lt;/a&gt;. So most, if not all, attempts you make to read content from another domain will be denied by your browser (_&lt;a href=&#34;http://security.stackexchange.com/questions/8264/why-is-the-same-origin-policy-so-important&#34; target=&#34;_blank&#34;&gt;read more: why is this important?&lt;/a&gt;_).  Another approach would be to use iframe elements in your page to load foreign content. But that technique can be used maliciously (if, for example, someone superimposes a hidden PayPal pay button in an iframe on top of another visible button). So many sites have scripts in place to detect if they are being displayed in an iframe and measures to prevent that.&lt;/p&gt;
-
-&lt;p&gt;It seems hopeless! But despair not, you do what I did: harness the almighty power of &lt;a href=&#34;https://developer.yahoo.com/yql&#34; target=&#34;_blank&#34;&gt;Yahoo! Query Language (YQL)&lt;/a&gt;. YQL is like SQL &amp;#8211; but with a &amp;#8216;Y&amp;#8217;. And where SQL queries tables for information, YQL queries web pages (among other things) for information. So, for example to extract hyperlinks, the query would be:&lt;/p&gt;
-
-&lt;p style=&#34;text-align: center;&#34;&gt;
-  &lt;code&gt;select * from html where url=&#39;http://en.wikipedia.org/wiki/Yahoo&#39; and xpath=&#39;//a&#39;&lt;/code&gt;
-&lt;/p&gt;
-
-&lt;p style=&#34;text-align: left;&#34;&gt;
-  And you can put that query in an &lt;a href=&#34;http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp&#34; target=&#34;_blank&#34;&gt;XMLHttpRequest (XHR)&lt;/a&gt; using the endpoint specified in the YQL documentation to get your results. So for the above query the XHR URL would be:
-&lt;/p&gt;
-
-&lt;p&gt;&lt;pre&gt;&lt;code&gt;&lt;a href=&#34;https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D&#39;http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FYahoo&#39;%20and%20xpath%3D&#39;%2F%2Fa&#39;&amp;amp;format=json&amp;amp;env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&#34;&gt;https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D&#39;http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FYahoo&#39;%20and%20xpath%3D&#39;%2F%2Fa&#39;&amp;amp;format=json&amp;amp;env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
-
-&lt;p style=&#34;text-align: left;&#34;&gt;
-  The &lt;a href=&#34;https://developer.yahoo.com/yql/&#34; target=&#34;_blank&#34;&gt;YQL&lt;/a&gt; page will give you the URL for any request you make. And then you can use that as a template in your web app. Yay! You can see an implementation of this in a project of mine: &lt;a href=&#34;http://lab.iahmed.me/webweb&#34; target=&#34;_blank&#34;&gt;WebWeb&lt;/a&gt; (&lt;code&gt;&amp;lt;a href=&#34;https://github.com/hazrmard/WebWeb&#34; target=&#34;_blank&#34;&gt;source code&amp;lt;/a&gt;&lt;/code&gt;). Happy coding!
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The &amp;#8216;standard&amp;#8217; way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:&lt;/p&gt;</description>
     </item>
     
   </channel>

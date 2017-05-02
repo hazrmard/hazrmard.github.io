@@ -2,55 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Testing on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/tags/testing/index.xml</link>
+    <link>http://iahmed.me/tags/testing/</link>
     <description>Recent content in Testing on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/tags/testing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Sep 2016 02:01:26 +0000</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/tags/testing/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Testing code with sensitive data</title>
-      <link>http://iahmed.me/post/2016-09-05-testing-code-with-sensitive-data/</link>
+      <link>http://iahmed.me/post/testing-code-with-sensitive-data/</link>
       <pubDate>Tue, 06 Sep 2016 02:01:26 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/2016-09-05-testing-code-with-sensitive-data/</guid>
+      <guid>http://iahmed.me/post/testing-code-with-sensitive-data/</guid>
       <description>&lt;p&gt;I recently renewed work on my first ever &lt;a href=&#34;https://github.com/hazrmard/imgurPCA&#34;&gt;github project&lt;/a&gt;. Over the course of a whole year when that project was dormant, I&amp;#8217;d learned some new tricks. I now try to focus on writing tests for my projects. It is immensely convenient when I add features here  and there and need to check the whole code for errors.&lt;/p&gt;
 
 &lt;p class=&#34;&#34;&gt;
   Anyways, my project requires API keys to imgur.com. However I do not want to hard-code them into my &lt;em&gt;&lt;a href=&#34;https://github.com/hazrmard/imgurPCA/blob/master/test.py&#34;&gt;test.py&lt;/a&gt;&lt;/em&gt; file. But I also do not want to manually provide keys every time I run tests. So what do I do?
-&lt;/p&gt;
-
-&lt;p class=&#34;&#34;&gt;
-  If you develop on Windows, have you heard of our lord and savior Powershell? Powershell is a scripting environment (like cmd on steroids) akin to bash on linux. I simply wrote a PS script that substitutes keys into &lt;em&gt;test.py. &lt;/em&gt;Then it runs the file, and before exiting removes the API keys again. To illustrate:
-&lt;/p&gt;
-
-&lt;pre class=&#34;toolbar-overlay:false lang:python decode:true&#34; title=&#34;test.py in default state&#34;&gt;&lt;code&gt;CLIENT_ID = &#39;&#39;
-CLIENT_SECRET = &#39;&#39;
-
-# my tests&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;My script that looks for &lt;code&gt;CLIENT_ID&lt;/code&gt; and &lt;code&gt;CLIENT_SECRET&lt;/code&gt; and inserts API keys:&lt;/p&gt;
-
-&lt;pre class=&#34;toolbar-overlay:false lang:ps decode:true &#34; title=&#34;A powershell script to add API keys&#34;&gt;&lt;code&gt;$id = &#34;SOME_ID&#34;
-$secret = &#34;SOME_SECRET&#34;
-$file = &#34;test.py&#34;
-
-$content = Get-Content $file
-$content -replace &#34;CLIENT_ID = &#39;&#39;&#34;, &#34;CLIENT_ID = &#39;$id&#39;&#34; |
-         % {$_.replace(&#34;CLIENT_SECRET = &#39;&#39;&#34;, &#34;CLIENT_SECRET = &#39;$secret&#39;&#34;)} |
-         Set-Content $file
-
-python $file
-
- $content -replace &#34;CLIENT_ID = &#39;$id&#39;&#34;, &#34;CLIENT_ID = &#39;&#39;&#34; |
-          % {$_.replace(&#34;CLIENT_SECRET = &#39;$secret&#39;&#34;, &#34;CLIENT_SECRET = &#39;&#39;&#34;)} |
-          Set-Content $file
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Immediately after the code is run (&lt;code&gt;python $file&lt;/code&gt;). The file is restored to its initial state so I can upload it to github safely.&lt;/p&gt;
-
-&lt;p&gt;If you already have some sensitive information uploaded to github or in your git history, check out &lt;a href=&#34;https://rtyley.github.io/bfg-repo-cleaner/&#34;&gt;BFG&lt;/a&gt;. It is a tool that can purge files/replace text from git history permanently.&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
   </channel>

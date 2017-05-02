@@ -1,8 +1,7 @@
 ---
 title: Talking With Satellites
-author: ahmedi
-layout: post
 date: 2015-10-14T19:16:21+00:00
+description : ""
 categories:
   - Engineering
   - Personal

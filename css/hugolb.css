@@ -83,6 +83,9 @@ html, body {
     display: inline-block;
     text-align: justify;
 }
+.content * {
+    word-wrap: break-word;
+}
 .content .post-title {
     text-align: left;
 }

@@ -1,10 +1,9 @@
 ---
 title: Markov Chains – Random Text Generation
-author: ahmedi
-layout: post
 date: 2016-04-29T23:23:16+00:00
+description : ""
 categories:
-  - Developer
+  - Engineering
 tags:
   - C++
   - hpc

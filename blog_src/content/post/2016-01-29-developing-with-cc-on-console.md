@@ -1,8 +1,7 @@
 ---
 title: Developing with C/C++ on console
-author: ahmedi
-layout: post
 date: 2016-01-30T04:30:28+00:00
+description : ""
 categories:
   - Developer
 tags:

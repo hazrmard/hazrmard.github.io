@@ -1,8 +1,7 @@
 ---
 title: Parsing websites on a budget
-author: ahmedi
-layout: post
 date: 2015-07-23T01:32:40+00:00
+description : ""
 categories:
   - Developer
 tags:

@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C/C&#43;&#43; on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/tags/c/c&#43;&#43;/index.xml</link>
+    <link>http://iahmed.me/tags/c/c&#43;&#43;/</link>
     <description>Recent content in C/C&#43;&#43; on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <atom:link href="http://iahmed.me/tags/c/c&#43;&#43;/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Jan 2016 04:30:28 +0000</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/tags/c/c++/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Developing with C/C&#43;&#43; on console</title>
@@ -16,32 +19,7 @@
       
       <guid>http://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</guid>
       <description>&lt;p class=&#34;&#34;&gt;
-  I am taking a High Performance Computing course this semester. For that we have to &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;ssh&lt;/span&gt; into the university&amp;#8217;s computing cluster. The interface is entirely console based. Now that might seem awesome at first: typing away commands like a &amp;#8220;hacker&amp;#8221;. And it is awesome. But after a while it gets tiring, particularly when I am writing code.
-&lt;/p&gt;
-
-&lt;p class=&#34;&#34;&gt;
-  With C/C++, source files are compiled into an executable. Then the program can be run. This usually takes two sets of commands:
-&lt;/p&gt;
-
-&lt;pre class=&#34;lang:default decode:true &#34;&gt;$ g++ &amp;lt;file.cpp&amp;gt; -o &amp;lt;executable_name&amp;gt;
-$ ./&amp;lt;executable_name&amp;gt;&lt;/pre&gt;
-
-&lt;p&gt;But then I discovered the wonders of &lt;span class=&#34;lang:default decode:true  crayon-inline&#34;&gt;bash&lt;/span&gt; commands.  &lt;span class=&#34;lang:default decode:true  crayon-inline&#34;&gt;Bash&lt;/span&gt;  is the environment of the Linux terminal. It lets you define functions that you can call later. The function I wrote was:&lt;/p&gt;
-
-&lt;pre class=&#34;lang:sh decode:true &#34;&gt;&lt;code&gt;cpp() {
-        local fname=$1
-        local exe_name=${fname/.cpp/.exe}
-        echo &#34;$(tput setaf 3)Compiling: &#34; $fname &#34;-&amp;gt; &#34; $exe_name&#34;; args=&amp;gt;[${@:2}]$(tput sgr0)&#34;
-        g++ $1 -o $exe_name
-        ./$exe_name &#34;${@:2}&#34;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I put this function in my &lt;span class=&#34;lang:sh decode:true  crayon-inline &#34;&gt;.bashrc&lt;/span&gt; file so it&amp;#8217;s available whenever I log in to my terminal. With this function,  I can just pass the &lt;span class=&#34;lang:sh decode:true  crayon-inline &#34;&gt;.cpp&lt;/span&gt; file as an argument along with other command line arguments. The function compiles and runs the source file together:&lt;/p&gt;
-
-&lt;pre class=&#34;lang:sh decode:true &#34;&gt;&lt;code&gt;$ cpp &amp;lt;source_file.cpp&amp;gt; &amp;lt;any arguments&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Viola!&lt;/p&gt;</description>
+  I am taking a High Performance Computing course this semester. For that we have to &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;ssh&lt;/span&gt; into the university&amp;#8217;s computing cluster. The interface is entirely console based. Now that might seem awesome at first: typing away commands like a &amp;#8220;hacker&amp;#8221;. And it is awesome. But after a while it gets tiring, particularly when I am writing code.</description>
     </item>
     
   </channel>

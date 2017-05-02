@@ -1,10 +1,9 @@
 ---
 title: Starting Android Development
-author: ahmedi
-layout: post
 date: 2016-03-05T03:55:04+00:00
+description : ""
 categories:
-  - Developer
+  - Personal
 tags:
   - android
   - mobile-dev

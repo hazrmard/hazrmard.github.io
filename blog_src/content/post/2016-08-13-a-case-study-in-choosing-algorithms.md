@@ -1,10 +1,9 @@
 ---
 title: A case study in choosing algorithms
-author: ahmedi
-layout: post
 date: 2016-08-14T03:29:23+00:00
+description : ""
 categories:
-  - Developer
+  - Engineering
   - Physics
 tags:
   - Algorithms

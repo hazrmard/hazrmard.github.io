@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+        
+        
+            <script type="text/javascript" async
+                src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+            </script>
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+            </script>
+        
+    
+    <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
+    <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
+    <title>Stellar Equations: Hydrostatic Equilibrium</title>
+</head>
+<body>
+    <div class="container">
+
+<div class="content">
+    <h1 class="post-title">Stellar Equations: Hydrostatic Equilibrium</h1>
+    <div class="front-matter">
+    
+        <em>Friday, Feb 24, 2017</em>
+    
+    
+        
+            
+                <br/>Categories:
+                    
+                        <a href="/categories/physics">Physics</a>,
+                    
+            
+        
+    
+        
+            
+                <br/>Series:
+                    
+                        <a href="/series/the-four-stellar-equations">The four stellar equations</a>,
+                    
+            
+        
+    
+        
+            
+                <br/>Tags:
+                    
+                        <a href="/tags/astronomy">Astronomy</a>,
+                    
+                        <a href="/tags/space">Space</a>,
+                    
+                        <a href="/tags/astrophysics">Astrophysics</a>,
+                    
+            
+        
+    
+</div>
+
+    
+    <p><em>Note: This is the second post in the series:
+<a href="/series/the-four-stellar-equations">The Four Stellar Equations</a></em></p>
+
+<p>The star is stable. Despite being very massive, it does not collapse under its
+own gravity. This means that there is a force within the star that is opposing
+the inwards gravitational force. That force is a simple result of Newton&rsquo;s
+third law: every action has an equal and opposite reaction.</p>
+
+<figure>
+    <img src="/img/posts/stellar-equations/2-newton.png">
+    <figcaption>The inwards force of gravity is countered by the outwards 
+        reaction due to the pressure at that depth.
+    </figcaption>
+</figure>
+
+<p>As gravity pushes inwards, the plasma inside the star is compressed. The deeper
+we go inside the star, the greater the pressure becomes since more and more of
+the star&rsquo;s mass is pushing down on us. Just like the pressure increases as we
+dive deeper into water. And just like in water, the increasing pressure at
+greater depth generates a bouyancy force which counters our weight, making us
+float. This pressure gradient stabilizes the star against its own gravity.</p>
+
+<p>Consider a parcel a distance \(r\) from the center of the star. The parcel is
+of thickness \(\delta r\). Let&rsquo;s say the pressure is given by \(P(r)\).
+We know that, by definition, the force experienced due to gravitational pressure
+at a distance \(r\) from the center is:</p>
+
+<p>$$\begin{equation}F(r) = P(r) \times A \end{equation}$$</p>
+
+<p>Where \(A\) is the area of the parcel bearing the weight of plasma pushing
+down. Since the pressure at the bottom of the parcel is greater, the bottom
+experiences more force compared to the top of the parcel. This creates a net
+upward force. This balances our the weight of the parcel - stablizing it.</p>
+
+<figure>
+    <img src="/img/posts/stellar-equations/2-parcel.png">
+    <figcaption>A parcel of plasma experiences forces on all sides due to
+    pressure at that depth. Forces at the bottom are larger due to greater
+    depth which generates a net upwards force.
+    </figcaption>
+</figure>
+
+<p>Essentially:</p>
+
+<p>$$\begin{equation}[P(r) - P(r+\delta r)] \times A = m\times g\end{equation}$$</p>
+
+<p>Where \(g\) is the strength of the gravitational field a distance \(r\) from
+the center of the star, and \(m\) is the mass of the parcel. However, we can
+simplify this equation further.</p>
+
+<p>We can use <a href="https://www.math.hmc.edu/calculus/tutorials/taylors_thm/">Taylor&rsquo;s Theorem</a>
+to expand pressure at \(r+\delta r\):</p>
+
+<p>$$P(r+dr) \approx P(r) + \frac{dP}{dr} \times \delta r$$</p>
+
+<p>On the right-hand-side of \((2)\) we can represent gravitational field strength
+as:</p>
+
+<p>$$g = \frac{GM(r)}{r^{2}}$$</p>
+
+<p>Including both of these simplifications gives us:</p>
+
+<p>$$\begin{equation}[P(r) - (P(r) + \frac{dP}{dr} \times \delta r)] \times A =
+    \frac{GM(r)}{r^{2}} \times m \end{equation}$$</p>
+
+<p>$$-\frac{dP}{dr} \times \delta r \times A = \frac{GM(r)}{r^{2}} \times m $$</p>
+
+<p>Where \(\delta r \times \delta A \) is the volume of the parcel, and
+dividing my \(m\) yields density \(\frac{1}{\rho (r)}\):</p>
+
+<blockquote>
+<p>$$-\frac{1}{\rho (r)}\frac{dP}{dr} = \frac{GM(r)}{r^{2}}$$</p>
+</blockquote>
+
+<p>According to the <strong>Equation of Hydrostatic Equilibrium</strong>, the variation of
+pressure with depth in a star is proportional to the density and strength of
+gravity at that depth.</p>
+
+    <br/>
+    <div class="navigation">
+    
+        <a href="http://iahmed.me/post/stellar-equations/1-continuity/"><div class="prev">
+            ← Previous Post
+        </div></a>
+    
+    
+</div>
+
+</div>
+<div class="sidebar">
+    <div class="menu-icon"><h2>≡</h2></div>
+    <div class="title"><h1 class="site-name">Ibrahim Ahmed</h1>
+        
+            <div class="sb-links">
+                
+                    <a href="https://www.linkedin.com/in/IbrahimAhmed1"><img src="/img/LinkIcons/svg/linkedin.svg"/></a>
+                
+                    <a href="https://github.com/hazrmard"><img src="/img/LinkIcons/svg/github.svg"/></a>
+                
+                    <a href="http://stackoverflow.com/users/4591810/hazrmard"><img src="/img/LinkIcons/svg/stackoverflow.svg"/></a>
+                
+            </div>
+        
+    </div>
+    <ul class="menu-list">
+        
+            <a href="/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/home.svg" alt="Home"/><span class="menu-option-name">Home</span>
+                
+                
+            </li></a>
+        
+            <a href="/about/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/person.svg" alt="About Me"/><span class="menu-option-name">About Me</span>
+                
+                
+            </li></a>
+        
+            <a href="/resume/Ibrahim_Ahmed_pf_pub.pdf">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/document.svg" alt="Resume"/><span class="menu-option-name">Resume</span>
+                
+                
+            </li></a>
+        
+            <a href="#noexist">
+            <li class="sb-option dropdown">
+                
+                    <img src="/img/LinkIcons/svg/pencil.svg" alt="Posts"/><span class="menu-option-name">Posts</span>
+                
+                
+                <div class="submenu"><ul>
+                    
+                        
+                            <a href="/categories"><li>By Categories</li></a>
+                        
+                    
+                        
+                            <a href="/series"><li>By Series</li></a>
+                        
+                    
+                        
+                            <a href="/tags"><li>By Tags</li></a>
+                        
+                    
+                    <a href="/post"><li>All</li></a>
+                </ul></div>
+                
+            </li></a>
+        
+            <a href="/project/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/terminal.svg" alt="Projects"/><span class="menu-option-name">Projects</span>
+                
+                
+            </li></a>
+        
+    </ul>
+</div>
+
+    <div class="footer">
+        <div class="copyright">© Ibrahim Ahmed</div>
+    </div>
+</div>
+</body>
+</html>
+

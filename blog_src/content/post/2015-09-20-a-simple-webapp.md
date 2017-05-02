@@ -1,8 +1,7 @@
 ---
 title: Making a simple web app blindfolded, and with both arms tied…
-author: ahmedi
-layout: post
 date: 2015-09-21T04:32:06+00:00
+description : ""
 categories:
   - Developer
 tags:
