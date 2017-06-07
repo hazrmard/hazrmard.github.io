@@ -1,0 +1,468 @@
+{
+    "personal_info": {
+        "name":     "Ibrahim Ahmed",
+        "email":    "ibrahim.ahmed@vanderbilt.edu",
+        "phone":    "",
+        "links":  [
+            {
+                "title":    "Home",
+                "url":      "http://iahmed.me"
+            },
+            {
+                "title":    "GitHub",
+                "url":      "https://github.com/hazrmard"
+            },
+            {
+                "title":    "LinkedIn",
+                "url":      "https://linkedin.com/in/ibrahimahmed1"
+            },
+            {
+                "title":    "StackOverflow",
+                "url":      "http://stackoverflow.com/users/4591810/hazrmard"
+            }
+        ]
+    },
+
+    "education":    [
+        {
+            "school":   "Vanderbilt University",
+            "year":     "2016-",
+            "degree":   "MS/PhD",
+            "major":    "Electrical Engineering",
+            "gpa":      "",
+            "courses":  ["Solid State Materials", "Advanced High Performance Computing",
+                        "Advanced Real-time Systems", "Computer Vision"],
+            "tags":     ["education"]
+        },
+        {
+            "school":   "Vanderbilt University",
+            "year":     "2012-16",
+            "degree":   "Bachelors of Engineering",
+            "major":    "Electrical Engineering",
+            "gpa":      "",
+            "courses":  ["FPGA Design", "Modelling and Simulation", "VLSI Design",
+                        "High Performance Computing", "Algorithms", "Microcontrollers",
+                        "Introductory Applied Machine Learning"],
+            "tags":     ["education"]
+        },
+        {
+            "school":   "Vanderbilt University",
+            "year":     "2012-16",
+            "degree":   "Bachelors of Science",
+            "major":    "Physics",
+            "gpa":      "",
+            "courses":  ["Galactic and Stellar Astrophysics", "Modern Physics",
+                        "Quantum Mechanics"],
+            "tags":     ["education"]
+        }
+    ],
+
+    "experience":     [
+        {
+            "title":        "Research Assistant",
+            "workplace":    "Institute of Software and Integrated Systems",
+            "time":         "Jan '17 - Present",
+            "achievements": ["Implement reinforcement learning algorithms for fault-tolerant control of physical systems.",
+                            "Design a framework to define, simulate, learn from, and visualize linear/non-linear environments.",
+                            "Devise and compare various tabular/functional approaches for learning optimal control behaviours."],
+            "technologies": ["Python", "Flask", "Numpy", "Ahkab", "D3.js"],
+            "links":        [{
+                "title":    "Documentation",
+                "url":      "http://iahmed.me/QLearning"
+            },{
+                "title":    "GitHub",
+                "url":      "https://github.com/hazrmard/QLearning"
+            }],
+            "tags":         ["experience", "work"]
+        },
+        {
+            "title":        "Teaching Assistant",
+            "workplace":    "Vanderbilt University School of Engineering",
+            "time":         "Aug '16 - Present",
+            "achievements": ["Mentor engineering design teams through their senior design projects.",
+                            "Grade team reports and provide logistical assistance to instructor.",
+                            "Train students in use of electrical and mechanical equipment."],
+            "technologies": [],
+            "links":        [],
+            "tags":         ["experience", "work"]
+        },
+        {
+            "title":        "Research Intern",
+            "workplace":    "Vanderbilt Department of Physics & Astronomy",
+            "time":         "Jun '16 - Aug '16'",
+            "achievements": ["Performed data mining on dark matter simulation data (~4TB).",
+                            "Visualized halo formation and evolution using simulation results.",
+                            "Coded and schedule jobs on the university's computing cluster: ACCRE.",
+                            "Developed tools to generate animated snapshots of halo evolution.",
+                            "Analyzed particle distributions in different halo finder protocols (AHF, Rockstar)."],
+            "technologies": ["Python", "Numpy", "C", "Bash"],
+            "links":        [{
+                "title":    "GitHub",
+                "url":      "https://github.com/hazrmard/DMHaloAnalysis"
+                },
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/hinge"
+                    }],
+            "tags":         ["Astrophysics", "scientific computing", "research", "data analysis", "open source", "experience", "HPC - High Performance Computing", "work"]
+        },
+        {
+            "title":        "Research Assistant",
+            "workplace":    "Vanderbilt Department of Physics & Astronomy",
+            "time":         "Sep '15 - Apr '16",
+            "achievements": ["Design an algorithm to fit dark matter N-body simulation data to ellipsoidal halos.",
+                            "Obtain half mass radii to improve upon the Navarro–Frenk–White (NFW) profile.",
+                            "Program a flexible multi-core processing interface to achieve data parallelism on distributed systems.",
+                            "Incorporate existing code for reading simulation data into a modular and scalable Python class for use in further research."],
+            "technologies": ["Python", "Matplotlib", "Numpy"],
+            "links":        [{
+                "title":    "GitHub",
+                "url":      "https://github.com/hazrmard/DarkMatterHalos"
+                }],
+            "tags":         ["Astrophysics", "scientific computing", "research", "data analysis", "open source", "experience", "HPC - High Performance Computing", "work"]
+        },
+        {
+            "title":        "Team Leader",
+            "workplace":    "Vanderbilt School of Engineering - Senior Design",
+            "time":         "Sep '15 - Apr '16",
+            "achievements": ["Develop digital signal processing module in python using GNURadio for RTL software defined radios.",
+                            "Design a satellite tracking antenna using servo motors and 3D printed components.",
+                            "Program a real-time trajectory visualization and motor control interface in D3.js, Python, and C via a browser, local server, and Arduino Uno board."],
+            "technologies": ["Linux", "Raspberry Pi", "Arduino", "GNURadio", "Python", "HTML/CSS", "Javascript"],
+            "links":        [],
+            "tags":         ["experience", "work"]
+        },
+        {
+            "title":        "Business Intelligence Intern",
+            "workplace":    "Schneider Electric",
+            "time":         "Jun '15 - Aug '15",
+            "achievements": ["Wrote SQL query backwards compatible with SQL Server 2005 to consolidate 40 million records into 1.5 million records with no data loss.",
+                            "Developed and documented a python module to resolve record timing conflicts in SQL joins. Integrated with main data workflow in Alteryx.",
+                            "Designed and scripted data visualizations in Domo to serve location specific content to sales managers all over continental US.",
+                            "Programmed a SQL procedure to take selective backups monthly that reduced backup size by 75%."],
+            "technologies": ["T-SQL", "Alteryx", "Domo", "Python"],
+            "links":        [{
+                "title":    "GitHub",
+                "url":      "https://github.com/hazrmard/ResolveDateConflict"
+                }],
+            "tags":         ["experience", "analytics", "work"]
+        },
+        {
+            "title":        "Student Helpdesk Assistant",
+            "workplace":    "Vanderbilt University IT",
+            "time":         "Aug '13 - Jun '15",
+            "achievements": ["Diagnosed and troubleshot computer, smartphone, and campus wide IT issues.",
+                            "Recovered $3000 worth of accidentally deleted data from hard drives.",
+                            "Assisted students in setting up course-specific applications on their computers."],
+            "technologies": ["Windows", "Mac OS X", "Linux"],
+            "links":        [],
+            "tags":         ["experience", "customer service", "consulting", "work"]
+        },
+        {
+            "title":        "Research Intern",
+            "workplace":    "Vanderbilt University School of Engineering",
+            "time":         "Jun '14 - Aug '14",
+            "achievements": ["Studied sources of radiation induced errors and programmed an Altera DE2 FPGA board to test SRAM chips for soft errors after irradiation.",
+                            "Wrote documentation and designed schematics for researchers at the Institute of Space and Defense Electronics."],
+            "technologies": ["VHDL"],
+            "links":        [],
+            "tags":         ["experience", "research", "work"]
+        },
+        {
+            "title":        "Instructor",
+            "workplace":    "Android Application Development Workshop - NUST, Pakistan",
+            "time":         "Jun '13",
+            "achievements": ["Proposed and organized a week-long workshop attended by 40 professionals and graduate and undergraduate students.",
+                            "Taught basic application development skills for Android using MIT AppInventor to attendees with diverse technical skillsets.",
+                            "Mentored teams for final day projects and provided one-on-one guidance."],
+            "technologies": ["MIT AppInventor"],
+            "links":        [{
+                "title":    "NUST.edu.pk",
+                "url":      "http://www.nust.edu.pk/INSTITUTIONS/Schools/SEECS/News/Pages/Workshop-on-Android-Programming.aspx"
+                }],
+            "tags":         ["experience", "teaching", "work"]
+        }
+    ],
+
+    "projects":   [
+        {
+            "title":        "FeatureTrack",
+            "time":         "Apr '17",
+            "blurb":        "Learning object detection from video",
+            "description":  "FeatureTrack presents a streamlined workflow for using video streams to learn object classifiers and implement them on other video streams while producing a console friendly output. It integrates varuious tools that ship wiht OpenCV.",
+            "technologies": ["C++", "OpenCV"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/FeatureTrack"
+                }],
+            "tags":         ["open source", "projects", "computer vision"]
+        },
+        {
+            "title":        "Urdown",
+            "time":         "Oct '16",
+            "blurb":        "An Urdu markdown editor.",
+            "description":  "Urdown (Udru + Markdown) is an online markdown editor with preference for right-to-left languages like Urdu. It can optionally embed left-to-right languages like English as well.",
+            "technologies": ["AngularJS", "HTML/CSS"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/Urdown"
+                },
+                {
+                    "title":    "Live Demo",
+                    "url":      "https://hazrmard.github.io/Urdown"
+                    }],
+            "tags":         ["open source", "projects"]
+        },
+        {
+            "title":        "gobol",
+            "time":         "Oct '16",
+            "blurb":        "Console based chat",
+            "description":  "gobol is a lightweight, portable, cross-platform chat application that runs in console.",
+            "technologies": ["Go"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/gobol"
+                }],
+            "tags":         ["open source", "projects"]
+        },
+        {
+            "title":        "goinit",
+            "time":         "Sep '16",
+            "blurb":        "Dynamic workspaces for Go",
+            "description":  "A set of Powershell, batch file, and bash scripts that modify environment variables to dynamically set up workspaces for Go. This allows the user to maintain their Go projects along with other source code.",
+            "technologies": ["Powershell", "Batch file", "Bash"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/goinit"
+                }],
+            "tags":         ["open source", "projects"]
+        },
+        {
+            "title":        "imgurPCA v2",
+            "time":         "Aug '16 - ",
+            "blurb":        "Machine learning on imgur.com",
+            "description":  "Parsing comments on imgur.com for principal component analysis. Parsed comments are pre-processed for feature selection before being passed for analysis and later clustering.",
+            "technologies": ["Python", "Numpy"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/imgurPCA"
+                }],
+            "tags":         ["open source", "projects"]
+        },
+
+        {
+            "title":        "AdEmbargo",
+            "time":         "Aug '16",
+            "blurb":        "Ad blocker",
+            "description":  "A systems level implementation of ad blocking on Windows PCs. AdEbmargo is a powershell script that modifies the hosts file using a curated list of adware providers. This blocks ad traffic to all applications running on the OS.",
+            "technologies": ["Powershell"],
+            "links":        [{
+                "title":    "GitHub",
+                "url":      "https://github.com/hazrmard/AdEmbargo"
+                }],
+            "tags":         ["open source", "projects"]
+        },
+        {
+            "title":        "Markovia",
+            "time":         "Apr '16",
+            "blurb":        "Random text generator.",
+            "description":  "A multi-threaded random text generator that uses Markov chains of different orders to generate text based on the word frequency distribution in the input. Options include number of threads, order of chain, size of output.",
+            "technologies": ["C++", "P_thread"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/Markovia"
+                },
+                {
+                    "title":    "Blog Post",
+                    "url":      "http://blog.iahmed.me/markov-chains"
+                }],
+            "tags":         ["open source", "projects", "cygwin"]
+        },
+        {
+            "title":        "ng-Resume",
+            "time":         "Mar '16",
+            "blurb":        "Interactive mobile-friendly resume.",
+            "description":  "A simple mobile friendly AngularJS application that reads JSON data and renders it as a resume/CV. Provides users the option to choose what information to display as well as an ability to tweak appearance and content order. This resume was made from ng-Resume.",
+            "technologies": ["AngularJS", "HTML/CSS", "JSON"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/ng-Resume"
+                },
+                {
+                    "title":    "Live Demo",
+                    "url":      "https://hazrmard.github.io/ng-Resume"
+                    }],
+            "tags":         ["open source", "projects", "javascript"]
+        },
+        {
+            "title":        "TIL - Today I Learned",
+            "time":         "Feb '16 - Mar '16",
+            "blurb":        "Learn interesting tidbits from Reddit.",
+            "description":  "An android application that parses /r/TodayILearned on Reddit for interesting facts based on user preferences. It has day/night mode, sharing, and further reading options. All content is accessed after getting OAuth2 tokens. Non-UI operations are executed on background threads.",
+            "technologies": ["Java", "Android", "OAuth2"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/TIL"
+                },
+                {
+                    "title":    "Google Play",
+                    "url":      "https://play.google.com/store/apps/details?id=me.iahmed.til"
+                    }],
+            "tags":         ["open source", "projects"]
+        },
+        {
+            "title":        "SatTrack",
+            "time":         "Sep '15 - Jun '16'",
+            "blurb":        "Tracking satellites in real time.",
+            "description":  "A simple, easy to use library for visualizing satellite paths, predicting future passes, and tracking satellite trajectories using servo motors. Developed for Institute for Space and Defense Electronics - Software Defined Radio (ISDE-SDR) project at Vanderbilt.",
+            "technologies": ["Python", "Javascript", "jQuery", "D3.js", "HTML/CSS", "Arduino"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/SatTrack"
+                }],
+            "tags":         ["open source", "projects"]
+        },{
+            "title":        "PersonalizedGroupMail",
+            "time":         "Oct '15",
+            "blurb":        "Send personalized batch messages.",
+            "description":  "An easy to use class for sending out a batch email with personalized greetings to increase audience engagement. Recipient data can either be entered programmatically or imported from a csv file. Plain text and HTML formatted emails are supported. Made as a side project for my Resident Advisor duties.",
+            "technologies": ["Python"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/PersonalizedGroupMail"
+                }],
+            "tags":         ["open source", "projects"]
+        },
+        {
+            "title":        "VandySays",
+            "time":         "Sep '15",
+            "blurb":        "Get tips for a better day.",
+            "description":  "A web app with Google Forms at the back end hosted on Github Pages. Intended to display news/tips uploaded by Resident Advisors to students. All entries come with an expiration date. Can be adapted for any Google Form.",
+            "technologies": ["Javascript", "jQuery","HTML/CSS"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/VandySays"
+                },
+                {
+                    "title":    "GitHub Pages",
+                    "url":      "http://hazrmard.github.io/VandySays/"
+                    }],
+            "tags":         ["open source", "projects"]
+        },
+        {
+            "title":        "project:UNIVERSE",
+            "time":         "Mar '15 - Apr'15",
+            "blurb":        "Lots of alien spaceships.",
+            "description":  "Acronym for: Ultra Nice Implementation of Various Entities Roaming Space Existentially. An agent based model of population dynamics in the galaxy. It simulates 4 space faring civilizations each with individual characteristics exploring planets to accumulate resources. Variables tracked are resources, population, trade, technology, and wars.",
+            "technologies": ["NetLogo"],
+            "links":        [
+                {
+                    "title":    "Sourceforge",
+                    "url":      "https://sourceforge.net/projects/abmuniverse/"
+                },
+                {
+                    "title":    "Documentation",
+                    "url":      "https://sourceforge.net/projects/abmuniverse/files/UNIVERSE.pdf/download"
+                    }],
+            "tags":         ["open source", "projects", "simulation", "physics"]
+        },
+        {
+            "title":        "WebWeb",
+            "time":         "Jul '15",
+            "blurb":        "Mapping links to a site.",
+            "description":  "A web app that uses Yahoo Query Language to parse web pages for hyperlinks. Parsed links are displayed in a dynamically created table.",
+            "technologies": ["jQuery", "HTML/CSS", "YQL"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/WebWeb"
+                },
+                {
+                    "title":    "iahmed.me",
+                    "url":      "http://lab.iahmed.me/WebWeb"
+                    }],
+            "tags":         ["open source", "projects", "javascript"]
+        }
+    ],
+
+    "skills":   [
+        {
+            "title":        "Programming",
+            "skills":       ["C", "C++", "Python (Numpy, Django, Matplotlib)", "Go", "Java", "Android", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
+        },
+        {
+            "title":        "Engineering",
+            "skills":       ["VHDL", "MatLab", "Octave", "Mathematica", "Cadence", "LTSpice"]
+        }
+    ],
+
+    "extracurriculars": [
+        {
+            "title":        "Resident Advisor",
+            "time":         "Aug '15 - May '16",
+            "description":  ["Oversee administrative floor activities in Lewis Hall.",
+                            "Support 60 residents with academic and personal issues.",
+                            "Collaborate with other Resident Advisors to create a friendly atmosphere for student residents.",
+                            "Arrange recreational and educational activities with students."],
+            "details":      "",
+            "links":        [],
+            "tags":         []
+        },
+        {
+            "title":        "Mentor and Technical Specialist - Vanderbilt Design Studio",
+            "time":         "Jan '15 - Apr '16",
+            "description":  ["Maintain and repair 3D printers, electronics, and tools at the Design Studio.",
+                            "Assist users in design process with Makerbot Desktop and Autodesk 123D Design."],
+            "details":      "",
+            "links":        [],
+            "tags":         []
+        },
+        {
+            "title":        "AcFee Subcommittee for Cultural Organizations",
+            "time":         "Jan '15 - May '15",
+            "description":  ["Reviewed campus organizations’ annual applications for funding.",
+                            "Allocated $218,000 from university funds to 43 organizations based on performance analyses."],
+            "details":      "",
+            "links":        [],
+            "tags":         []
+        },
+        {
+            "title":        "Vanderbilt Student Volunteers for Science",
+            "time":         "Jan '14 - May '14",
+            "description":  ["Received training for teaching science subjects to middle school students",
+                            "Taught robotics using Lego Mindstorms to 8th graders in Nashville over several sessions."],
+            "details":      "",
+            "links":        [],
+            "tags":         []
+        }
+    ],
+
+    "honors":       [
+        {
+            "title":        "Dean's List",
+            "details":      "Fall '12, '14, '15, Spring '13, '14, '15",
+            "tags":         ["honors"]
+        },
+        {
+            "title":        "Honorable Mention",
+            "details":      "International Physics Olympiad '11",
+            "tags":         ["honors"]
+        },
+        {
+            "title":        "Sigma Pi Sigma",
+            "details":      "Society of Physics Students",
+            "tags":         ["honors"]
+        }
+    ]
+}

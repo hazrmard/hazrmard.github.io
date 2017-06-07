@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Series on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/series/</link>
+    <description>Recent content in Series on Ibrahim Ahmed</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ibrahim Ahmed</copyright>
+    <lastBuildDate>Mon, 06 Feb 2017 18:47:26 -0600</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/series/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Algorithm Concepts</title>
+      <link>http://iahmed.me/series/algorithm-concepts/</link>
+      <pubDate>Mon, 06 Feb 2017 18:47:26 -0600</pubDate>
+      
+      <guid>http://iahmed.me/series/algorithm-concepts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The Four Stellar Equations</title>
+      <link>http://iahmed.me/series/the-four-stellar-equations/</link>
+      <pubDate>Thu, 23 Feb 2017 22:09:15 -0600</pubDate>
+      
+      <guid>http://iahmed.me/series/the-four-stellar-equations/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

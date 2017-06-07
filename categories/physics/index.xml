@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Physics on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/categories/physics/</link>
+    <description>Recent content in Physics on Ibrahim Ahmed</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ibrahim Ahmed</copyright>
+    <lastBuildDate>Fri, 24 Feb 2017 12:41:52 -0600</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/categories/physics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Stellar Equations: Hydrostatic Equilibrium</title>
+      <link>http://iahmed.me/post/stellar-equations/2-hydrostatic-equilibrium/</link>
+      <pubDate>Fri, 24 Feb 2017 12:41:52 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/stellar-equations/2-hydrostatic-equilibrium/</guid>
+      <description>Note: This is the second post in the series: The Four Stellar Equations
+The star is stable. Despite being very massive, it does not collapse under its own gravity. This means that there is a force within the star that is opposing the inwards gravitational force. That force is a simple result of Newton&amp;rsquo;s third law: every action has an equal and opposite reaction.
+ The inwards force of gravity is countered by the outwards reaction due to the pressure at that depth.</description>
+    </item>
+    
+    <item>
+      <title>Stellar Equations: Continuity</title>
+      <link>http://iahmed.me/post/stellar-equations/1-continuity/</link>
+      <pubDate>Thu, 23 Feb 2017 22:09:15 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/stellar-equations/1-continuity/</guid>
+      <description>Stars essentially are balls of extremely hot, compressed, ionized gas (plasma). Their properties therefore depend on their mass, temperature, and density. Analyzing these properties gives us four equations that govern the structure of a star. The first of these is the Equation of Continuity. The equation of continuity relates the mass of a shell inside a star to the density at that distance from the center of the star.
+Assuming a star is a perfect sphere, its volume is given by:</description>
+    </item>
+    
+    <item>
+      <title>Is cold the new hot?</title>
+      <link>http://iahmed.me/post/is-cold-the-new-hot/</link>
+      <pubDate>Tue, 31 Jan 2017 11:00:25 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/is-cold-the-new-hot/</guid>
+      <description>Note: This article was originally published on astroibrahim on April 17, 2013.
+Yes.
+A few days back, a friend shared an article with me. It talked of how scientists had managed to achieve temperatures below absolute zero. Does it mean that temperature has to be redefined? Has our understanding of thermodynamics been flawed for the past hundred years. No, it turns out. It is all a matter of semantics.
+Absolute Zero.</description>
+    </item>
+    
+    <item>
+      <title>Gravitational Slingshots</title>
+      <link>http://iahmed.me/post/gravitational-slingshots/</link>
+      <pubDate>Tue, 31 Jan 2017 10:48:32 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/gravitational-slingshots/</guid>
+      <description>Note: This article was originally published on astroibrahim on Apr 10, 2013.
+I always wondered why doesn’t the sun slow space probes down when they are leaving the Earth for outer planets. Isn’t there a risk that the probe might change its trajectory and fall into the sun? There is. You see, the more distant the space probe gets from the Sun, the more potential energy it gains. However, energy must be conserved at all costs.</description>
+    </item>
+    
+    <item>
+      <title>A case study in choosing algorithms</title>
+      <link>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</link>
+      <pubDate>Sun, 14 Aug 2016 03:29:23 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</guid>
+      <description>&lt;p&gt;This past year, I have been crunching data from &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos&#34;&gt;dark matter simulations&lt;/a&gt;. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that&amp;#8217;s right &amp;#8211; 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

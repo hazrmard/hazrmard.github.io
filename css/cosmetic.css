@@ -1,0 +1,107 @@
+/*site-wide colours/styling for sidebar and content*/
+
+colour-scheme {
+    color:
+    #104050
+    #26596A
+    #6C929F
+
+    #554300
+    #806915
+    #AA9239
+    #D4BE6A
+    #FFEDAA
+}
+
+.sidebar, .submenu {
+    background-color: #26596A;
+}
+.title .site-name {
+    color: #6C929F;
+}
+.sb-option {
+    background-color: inherit;
+    transition: 0.25s;
+}
+.sb-option:hover,
+.submenu li:hover {
+    background-color: #104050;
+    transition: 0.25s;
+}
+.menu-list a:link,
+.menu-list a:visited {
+    color: #6C929F;
+    text-decoration: none;
+}
+
+
+
+a:link,
+a:visited {
+    text-decoration: none;
+    color: #AA9239;
+    transition: 0.25s;
+}
+a:hover {
+    color: #806915;
+    text-decoration: underline;
+    transition: 0.25s;
+}
+blockquote {
+    background-color: #FFEDAA;
+    border-left: 1em solid #D4BE6A;
+    padding: 0.25em 0.5em;
+    color: #806915;
+}
+.content > p > code {
+    background-color: #FFEDAA;
+    padding: 0em 0.25em;
+}
+.prev, .next {
+    color: #806915;
+    background-color: #FFEDAA;
+    padding: 0.5em;
+    transition: 0.25s;
+}
+.prev:hover, .next:hover {
+    background-color: #806915;
+    color: #FFEDAA;
+    transition: 0.25s;
+}
+
+.post-summary {
+    background-color: #FFEDAA;
+}
+
+.post-title,
+.page-title,
+.post-summary .post-title a:link,
+.post-summary .post-title a:visited,
+h1, h2, h3, h4, h5, h6 {
+    text-decoration: none;
+    color: #554300;
+}
+.front-matter {
+    color: #D4BE6A;
+}
+.terms {
+    text-decoration: none;
+    color: #806915;
+}
+
+.terms {
+    background-color: #FFEDAA;
+}
+
+.proj-summary {
+    background-color: #FFEDAA;
+    box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
+    transition: 0.25s;
+}
+.proj-summary:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
+    transition: 0.25s;
+}
+.proj-summary .front-matter {
+    color: #806915;
+}

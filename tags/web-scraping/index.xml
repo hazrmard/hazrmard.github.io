@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web Scraping on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/tags/web-scraping/</link>
+    <description>Recent content in Web Scraping on Ibrahim Ahmed</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ibrahim Ahmed</copyright>
+    <lastBuildDate>Thu, 23 Jul 2015 01:32:40 +0000</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/tags/web-scraping/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Parsing websites on a budget</title>
+      <link>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</link>
+      <pubDate>Thu, 23 Jul 2015 01:32:40 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</guid>
+      <description>&lt;p&gt;Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The &amp;#8216;standard&amp;#8217; way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Ibrahim Ahmed</title>
+    <link>http://iahmed.me/post/</link>
+    <description>Recent content in Posts on Ibrahim Ahmed</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ibrahim Ahmed</copyright>
+    <lastBuildDate>Fri, 24 Feb 2017 12:41:52 -0600</lastBuildDate>
+    
+	<atom:link href="http://iahmed.me/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Stellar Equations: Hydrostatic Equilibrium</title>
+      <link>http://iahmed.me/post/stellar-equations/2-hydrostatic-equilibrium/</link>
+      <pubDate>Fri, 24 Feb 2017 12:41:52 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/stellar-equations/2-hydrostatic-equilibrium/</guid>
+      <description>Note: This is the second post in the series: The Four Stellar Equations
+The star is stable. Despite being very massive, it does not collapse under its own gravity. This means that there is a force within the star that is opposing the inwards gravitational force. That force is a simple result of Newton&amp;rsquo;s third law: every action has an equal and opposite reaction.
+ The inwards force of gravity is countered by the outwards reaction due to the pressure at that depth.</description>
+    </item>
+    
+    <item>
+      <title>Stellar Equations: Continuity</title>
+      <link>http://iahmed.me/post/stellar-equations/1-continuity/</link>
+      <pubDate>Thu, 23 Feb 2017 22:09:15 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/stellar-equations/1-continuity/</guid>
+      <description>Stars essentially are balls of extremely hot, compressed, ionized gas (plasma). Their properties therefore depend on their mass, temperature, and density. Analyzing these properties gives us four equations that govern the structure of a star. The first of these is the Equation of Continuity. The equation of continuity relates the mass of a shell inside a star to the density at that distance from the center of the star.
+Assuming a star is a perfect sphere, its volume is given by:</description>
+    </item>
+    
+    <item>
+      <title>Algorithms: Balancing</title>
+      <link>http://iahmed.me/post/algorithm-concepts/algorithms-balancing/</link>
+      <pubDate>Mon, 06 Feb 2017 18:47:26 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/algorithm-concepts/algorithms-balancing/</guid>
+      <description>Balancing in algorithms refers to minimizing the complexity of an algorithm by making sure that its constituent parts share the load efficiently. It is not a technique for solving problems. Instead it helps us understand how an existing solution may be optimized.
+The theory of balancing Say there is a problem of size \(n\). The problem is such that it can be broken down into a sequence of smaller problems.</description>
+    </item>
+    
+    <item>
+      <title>Optimizing static sites with hugo</title>
+      <link>http://iahmed.me/post/optimizing-static-sites-with-hugo/</link>
+      <pubDate>Mon, 06 Feb 2017 10:07:58 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/optimizing-static-sites-with-hugo/</guid>
+      <description>According to httparchive the average size of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age where the internet is the primary media delivery platform - but it is worth noting that most web pages serve text as their primary content. Looking at the report sheds light on what constitutes an average web page:
+The HTML content takes up around 50-60kB. Images, understandably, make up the biggest chunk with ~1.</description>
+    </item>
+    
+    <item>
+      <title>Is cold the new hot?</title>
+      <link>http://iahmed.me/post/is-cold-the-new-hot/</link>
+      <pubDate>Tue, 31 Jan 2017 11:00:25 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/is-cold-the-new-hot/</guid>
+      <description>Note: This article was originally published on astroibrahim on April 17, 2013.
+Yes.
+A few days back, a friend shared an article with me. It talked of how scientists had managed to achieve temperatures below absolute zero. Does it mean that temperature has to be redefined? Has our understanding of thermodynamics been flawed for the past hundred years. No, it turns out. It is all a matter of semantics.
+Absolute Zero.</description>
+    </item>
+    
+    <item>
+      <title>Gravitational Slingshots</title>
+      <link>http://iahmed.me/post/gravitational-slingshots/</link>
+      <pubDate>Tue, 31 Jan 2017 10:48:32 -0600</pubDate>
+      
+      <guid>http://iahmed.me/post/gravitational-slingshots/</guid>
+      <description>Note: This article was originally published on astroibrahim on Apr 10, 2013.
+I always wondered why doesn’t the sun slow space probes down when they are leaving the Earth for outer planets. Isn’t there a risk that the probe might change its trajectory and fall into the sun? There is. You see, the more distant the space probe gets from the Sun, the more potential energy it gains. However, energy must be conserved at all costs.</description>
+    </item>
+    
+    <item>
+      <title>Testing code with sensitive data</title>
+      <link>http://iahmed.me/post/testing-code-with-sensitive-data/</link>
+      <pubDate>Tue, 06 Sep 2016 02:01:26 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/testing-code-with-sensitive-data/</guid>
+      <description>&lt;p&gt;I recently renewed work on my first ever &lt;a href=&#34;https://github.com/hazrmard/imgurPCA&#34;&gt;github project&lt;/a&gt;. Over the course of a whole year when that project was dormant, I&amp;#8217;d learned some new tricks. I now try to focus on writing tests for my projects. It is immensely convenient when I add features here  and there and need to check the whole code for errors.&lt;/p&gt;
+
+&lt;p class=&#34;&#34;&gt;
+  Anyways, my project requires API keys to imgur.com. However I do not want to hard-code them into my &lt;em&gt;&lt;a href=&#34;https://github.com/hazrmard/imgurPCA/blob/master/test.py&#34;&gt;test.py&lt;/a&gt;&lt;/em&gt; file. But I also do not want to manually provide keys every time I run tests. So what do I do?
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A case study in choosing algorithms</title>
+      <link>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</link>
+      <pubDate>Sun, 14 Aug 2016 03:29:23 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</guid>
+      <description>&lt;p&gt;This past year, I have been crunching data from &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos&#34;&gt;dark matter simulations&lt;/a&gt;. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that&amp;#8217;s right &amp;#8211; 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Markov Chains – Random Text Generation</title>
+      <link>http://iahmed.me/post/2016-04-29-markov-chains/</link>
+      <pubDate>Fri, 29 Apr 2016 23:23:16 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-04-29-markov-chains/</guid>
+      <description>&lt;p&gt;This semester I am taking a course in &lt;a href=&#34;http://sc3260s16.github.io/&#34;&gt;High Performance Computing&lt;/a&gt; where I get to work with multi-core systems like computing clusters and graphics cards. For my final project I decided to develop a random text generator and see if I could speed it up.&lt;/p&gt;
+
+&lt;p&gt;A popular method of generating random text (that is grammatically correct) is using &lt;strong&gt;Markov chains&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Starting Android Development</title>
+      <link>http://iahmed.me/post/2016-03-04-starting-android-development/</link>
+      <pubDate>Sat, 05 Mar 2016 03:55:04 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-03-04-starting-android-development/</guid>
+      <description>&lt;p&gt;I have always been fascinated with mobile app development. Over the last couple of years in college, I made a few attempts to get started with Android applications. I watched tutorial series, reading blogs, attending introductory workshops. Nope. Nothing seemed to stick. What was wrong?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Developing with C/C&#43;&#43; on console</title>
+      <link>http://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</link>
+      <pubDate>Sat, 30 Jan 2016 04:30:28 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</guid>
+      <description>&lt;p class=&#34;&#34;&gt;
+  I am taking a High Performance Computing course this semester. For that we have to &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;ssh&lt;/span&gt; into the university&amp;#8217;s computing cluster. The interface is entirely console based. Now that might seem awesome at first: typing away commands like a &amp;#8220;hacker&amp;#8221;. And it is awesome. But after a while it gets tiring, particularly when I am writing code.</description>
+    </item>
+    
+    <item>
+      <title>Talking With Satellites</title>
+      <link>http://iahmed.me/post/2015-10-14-talking-with-satellites/</link>
+      <pubDate>Wed, 14 Oct 2015 19:16:21 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-10-14-talking-with-satellites/</guid>
+      <description>This year I am leading a senior design team in developing a software defined radio that can talk with a satellite that Vanderbilt just launched. Compared to a normal radio, an SDR has most of the signal processing functions implemented virtually. This means that it can change its operation on the fly. An interesting application of SDRs is cognitive radio: that is, radios communicating with other radios in their vicinity and adjusting their frequencies to maximize their use of the bandwidth.</description>
+    </item>
+    
+    <item>
+      <title>Making a simple web app blindfolded, and with both arms tied…</title>
+      <link>http://iahmed.me/post/2015-09-20-a-simple-webapp/</link>
+      <pubDate>Mon, 21 Sep 2015 04:32:06 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-09-20-a-simple-webapp/</guid>
+      <description>&lt;p&gt;Over the last weekend, I was looking to brush up my web-dev skills (what little I had learned on the side). I decided to make a simple web app for my residents to use (I am a Resident Advisor).&lt;/p&gt;
+
+&lt;p&gt;Objective: Display tips, event news, free food notifications provided regularly by RAs and faculty to residents on a website.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Parsing websites on a budget</title>
+      <link>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</link>
+      <pubDate>Thu, 23 Jul 2015 01:32:40 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</guid>
+      <description>&lt;p&gt;Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The &amp;#8216;standard&amp;#8217; way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Let there be a blog</title>
+      <link>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</link>
+      <pubDate>Sat, 04 Jul 2015 16:50:32 +0000</pubDate>
+      
+      <guid>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</guid>
+      <description>&amp;#8230;and lo and behold, there was.
+A while back I discovered my interest in web development. I taught myself HTML, CSS, and JavaScript. This blog is the latest in my attempts to learn web technologies.</description>
+    </item>
+    
+  </channel>
+</rss>

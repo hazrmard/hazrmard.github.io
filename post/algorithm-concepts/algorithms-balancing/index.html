@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
+    <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
+    
+    
+
+    
+        
+        
+            <script type="text/javascript" async
+                src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+            </script>
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+            </script>
+        
+    
+
+    
+
+    <title>Algorithms: Balancing</title>
+</head>
+<body>
+    <div class="container">
+
+<div class="content">
+    <h1 class="post-title">Algorithms: Balancing</h1>
+    <div class="front-matter">
+    
+        <em>Monday, Feb 6, 2017</em>
+    
+    
+        
+            
+                <br/>Categories:
+                    
+                        <a href="/categories/engineering">Engineering</a>,
+                    
+            
+        
+    
+        
+            
+                <br/>Series:
+                    
+                        <a href="/series/algorithm-concepts">Algorithm concepts</a>,
+                    
+            
+        
+    
+        
+            
+                <br/>Tags:
+                    
+                        <a href="/tags/algorithms">Algorithms</a>,
+                    
+                        <a href="/tags/graphs">Graphs</a>,
+                    
+            
+        
+    
+</div>
+
+    
+    
+
+<p>Balancing in algorithms refers to minimizing the complexity of an algorithm by
+making sure that its constituent parts share the load efficiently. It is <em>not</em> a
+technique for solving problems. Instead it helps us understand how an existing
+solution may be optimized.</p>
+
+<h2 id="the-theory-of-balancing">The theory of balancing</h2>
+
+<p>Say there is a problem of size \(n\). The problem is such that it can be
+broken down into a sequence of smaller problems. There are many ways the problem
+can be broken down:</p>
+
+<p>Solve the problem in 1 chunk:
+$$T(n) = f(n)$$</p>
+
+<p>Or solve the problem in chunks of 5:
+$$T(n) = f(5) + f(n/5)$$</p>
+
+<p>Of course, the relations above are not unique. There are a multitude
+of ways that problems can be abstracted. But the question arises: what division
+of load is best?</p>
+
+<p>Let&rsquo;s assume we want to break down the problem into \(g(n)\) chunks. Then
+the size of the sub-problem becomes \(n/g(n)\). The time to solve the problem
+becomes:
+$$T(n) = f(g(n)) + f(n/g(n))$$</p>
+
+<p>In \(big-O\) notation:
+$$O(T(n)) = O(f(g(n))) + O(f(n/g(n)))$$</p>
+
+<p>We need to minimize \(O(T(n))\). Notice that the sum will be dominated by
+whichever term is larger on the right hand side. Which means that \(f(g(n))\)
+and \(f(n/g(n))\) must be within a constant factor of each other. Essentially,
+in \(big-O\) terms:
+$$f(g(n)) = f(n/g(n))$$</p>
+
+<p>Solving this for \(g(n)\) gives us the ideal size for partitioning the problem.
+For simplicity, assume that \(f(n) = n\), then:
+$$g(n) = {n \over g(n)}$$
+$$\therefore g(n) = \sqrt{n}$$</p>
+
+<h2 id="example-the-egg-dropping-problem">Example: The egg dropping problem</h2>
+
+<p><strong>Problem</strong>: <em>Say you have 2 eggs and a building with \(n\) storeys. You
+want to find the storey that will cause the egg to break when dropped from it.
+What is the fastest way to figure it out?</em></p>
+
+<p><strong>Solution</strong>: A trivial approach is to drop one egg from storeys
+1 to \(n\) until it breaks. This is going to take \(n = O(n)\) attempts.
+Good, but we can do better.</p>
+
+<p>There are two eggs. Let&rsquo;s drop one egg every 5 storeys. Then
+if the egg breaks on the \(k^{th}\) attempt we will know that the &lsquo;fatal&rsquo;
+storey is between \((k-1)\times 5\) and \(k \times 5\) storeys. Then the
+second egg will be dropped from the 5 storeys from \((k-1)\times 5\) to
+\(k \times 5 - 1\). Therefore the total attempts would be:
+$${n \over 5} + 5$$</p>
+
+<p>Which is less than \(n\) but in \(big-O\) notation has the same complexity:
+$$O({n \over 5} + 5) = O(n)$$</p>
+
+<p>Our approach with using two eggs is sound. It is reducing total attempts.
+Let&rsquo;s generalize the solution. Say the egg is dropped every \(g(n)\)
+storeys for a total of \(n/g(n)\) attempts. Then, like before, the
+second egg will only be dropped \(g(n)\) times. This gives the total
+attempts as:
+$${n \over g(n)} + g(n)$$</p>
+
+<p>To minimize the total complexity (attempts) the two stages of the solution need
+to be equally partitioned so one stage does not dominate the other.
+$$\therefore {n \over g(n)} = g(n)$$
+$$g(n) = \sqrt{n}$$</p>
+
+<p>Thus if the first egg makes \(\sqrt{n}\) drops over the same interval, then
+the second egg will have to make only \(\sqrt{n}\) drops, giving the
+total of:
+$$\sqrt{n} + \sqrt{n} = O(\sqrt{n}) \lt O(n)$$</p>
+
+<h2 id="example-graph-colouring">Example: Graph colouring</h2>
+
+<p><strong>Problem:</strong> <em>Colour a 3-Colourable graph in polynomial time with as few colours
+as possible.</em></p>
+
+<p><strong>Solution:</strong> A graph is said to be \(n\)-colourable if all vertices can be
+assigned 1 of \(n\) colours without adjacent vertices having the same colour.
+Graph colouring is an <a href="https://en.wikipedia.org/wiki/NP-completeness">NP-Complete</a>
+problem (except for 1 and 2 colouring). This means that an optimal solution
+cannot be found in polynomial time. Colouring a 3-colourable graph with exactly
+3 colours might be hard, but we can attempt to use as few colours as possible in
+polynomial time.</p>
+
+<p>One approach is called <a href="https://en.wikipedia.org/wiki/Greedy_coloring">Greedy colouring</a>.
+We look at all vertices in a sequence. Each vertex is assigned the first
+&ldquo;available&rdquo; colour. A colour is &ldquo;available&rdquo; if it is not assigned to any of the
+vertex&rsquo;s neighbours. So if a graph has a maximum degree \(d\), then the worst
+case scenario for greedy colouring will take \(d+1\) colours.</p>
+
+<p>The greedy approach, however, is not leveraging what we know about our graph:
+it is 3-colourable. Which means that every vertex&rsquo;s neighbourhood is 2-colourable!
+2-colouring is a simple problem. Essentially do any traversal of a graph and
+switch between 2 colours for each new vertex. We can use this to convert our
+problem into a sequence of 2- and greedy- colourings.</p>
+
+<figure>
+    <img src="/img/posts/algorithm-concepts/3-colourable.png"
+        alt="3-colourable graph">
+    <figcaption>A triangle is the simplest 3-colourable graph. Each vertex's
+        neighbourhood is 2-colourable.
+    </figcaption>
+</figure>
+
+<p>Here is how the new solution works: consider all vertices of degree \(\gt g(n)\).
+For each such vertex, 2-colour its neighbourhood. Never use those colours again.
+Delete the neighbourhood from the graph. Greedily colour the remaining graph.
+The 2-colouring step will happen at most \(n/g(n)\) times (since we remove
+at least \(g(n)\) vertices each step). So it will use \(O(n/g(n))\) colours.
+After the 2-colouring step, only vertices with degree &lt; \(g(n)\) will remain,
+which will take \(O(g(n))\) colours. So the total number of colours will be:
+$$O({n \over g(n)}) + O(g(n))$$</p>
+
+<p>Balancing both stages gives us:
+$${n \over g(n)} = g(n) \Rightarrow g(n) = \sqrt{n}$$</p>
+
+<p>Therefore, 2-colouring all vertices with degree \(\gt \sqrt{n}\) and greedy
+colouring the remaining vertices will take \(O(\sqrt{n})\) colours. This
+is called <em>Widgerson&rsquo;s Algorithm</em> after (surprise!) Avi Widgerson.</p>
+
+<p>Balancing may not apply to all approaches. Nonetheless it is a powerful tool for
+analysis of algorithms.</p>
+
+<hr />
+
+<p><em>This article was written from my notes of <a href="https://engineering.vanderbilt.edu/bio/jeremy-spinrad">Dr. Jeremy
+Spinrad&rsquo;s</a> excellent
+lecture on balancing.</em></p>
+
+    <br/>
+    <div class="navigation">
+    
+        <a href="http://iahmed.me/post/optimizing-static-sites-with-hugo/"><div class="prev">
+            ← Previous Post
+        </div></a>
+    
+    
+        <a href="http://iahmed.me/post/stellar-equations/1-continuity/"><div class="next">
+            Next Post →
+        </div></a>
+    
+</div>
+
+</div>
+<div class="sidebar">
+    <div class="menu-icon"><h2>≡</h2></div>
+    <div class="title"><h1 class="site-name">Ibrahim Ahmed</h1>
+        
+            <div class="sb-links">
+                
+                    <a href="https://www.linkedin.com/in/IbrahimAhmed1"><img src="/img/LinkIcons/svg/linkedin.svg"/></a>
+                
+                    <a href="https://github.com/hazrmard"><img src="/img/LinkIcons/svg/github.svg"/></a>
+                
+                    <a href="http://stackoverflow.com/users/4591810/hazrmard"><img src="/img/LinkIcons/svg/stackoverflow.svg"/></a>
+                
+            </div>
+        
+    </div>
+    <ul class="menu-list">
+        
+            <a href="/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/home.svg" alt="Home"/><span class="menu-option-name">Home</span>
+                
+                
+            </li></a>
+        
+            <a href="/about/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/person.svg" alt="About Me"/><span class="menu-option-name">About Me</span>
+                
+                
+            </li></a>
+        
+            <a href="/resume/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/document.svg" alt="Resume"/><span class="menu-option-name">Resume</span>
+                
+                
+            </li></a>
+        
+            <a href="#noexist">
+            <li class="sb-option dropdown">
+                
+                    <img src="/img/LinkIcons/svg/pencil.svg" alt="Posts"/><span class="menu-option-name">Posts</span>
+                
+                
+                <div class="submenu"><ul>
+                    
+                        
+                            <a href="/categories"><li>By Categories</li></a>
+                        
+                    
+                        
+                            <a href="/series"><li>By Series</li></a>
+                        
+                    
+                        
+                            <a href="/tags"><li>By Tags</li></a>
+                        
+                    
+                    <a href="/post"><li>All</li></a>
+                </ul></div>
+                
+            </li></a>
+        
+            <a href="/project/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/terminal.svg" alt="Projects"/><span class="menu-option-name">Projects</span>
+                
+                
+            </li></a>
+        
+    </ul>
+</div>
+
+    <div class="footer">
+        <div class="copyright">© Ibrahim Ahmed</div>
+    </div>
+</div>
+</body>
+</html>
+
