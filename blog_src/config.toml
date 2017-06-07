@@ -36,7 +36,7 @@ ignoreFiles = [".+pptx$"]
     [[params.menu.main]]
         name = "Resume"
         weight = 20
-        url = "/resume/Ibrahim_Ahmed_pf_pub.pdf"
+        url = "/resume/"
         image = "/img/LinkIcons/svg/document.svg"
     [[params.menu.main]]
         name = "Posts"
