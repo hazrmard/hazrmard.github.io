@@ -32,7 +32,7 @@
             "gpa":      "",
             "courses":  ["Solid State Materials", "Advanced High Performance Computing",
                         "Advanced Real-time Systems", "Computer Vision"],
-            "tags":     ["education"]
+            "tags":     ["education", "courses"]
         },
         {
             "school":   "Vanderbilt University",
@@ -189,7 +189,7 @@
             "title":        "FeatureTrack",
             "time":         "Apr '17",
             "blurb":        "Learning object detection from video",
-            "description":  "FeatureTrack presents a streamlined workflow for using video streams to learn object classifiers and implement them on other video streams while producing a console friendly output. It integrates varuious tools that ship wiht OpenCV.",
+            "description":  "FeatureTrack presents a streamlined workflow for using video streams to learn object classifiers and implement them on other video streams while producing a console friendly output. It integrates varuious tools that ship with OpenCV.",
             "technologies": ["C++", "OpenCV"],
             "links":        [
                 {
@@ -399,7 +399,7 @@
     "skills":   [
         {
             "title":        "Programming",
-            "skills":       ["C", "C++", "Python (Numpy, Django, Matplotlib)", "Go", "Java", "Android", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
+            "skills":       ["C/C++ (OpenCV, OpenMP, RTOS)","Python (Numpy, Django, Matplotlib)", "Go", "Java", "Android", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
         },
         {
             "title":        "Engineering",
