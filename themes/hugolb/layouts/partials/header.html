@@ -12,9 +12,9 @@
     {{end}}
 
     {{if .IsPage}}
-        {{if .Params.hascode}}
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css">
+        {{if and .Params.hascode  (not .Site.Params.pygmentsCodeFences) }}
+            <script src="/js/highlight/highlight.pack.js"></script>
+            <link rel="stylesheet" type="text/css" href="/js/highlight/styles/atom-one-dark.css">
             <script>hljs.initHighlightingOnLoad();</script>
         {{end}}
         {{if .Params.hasequations}}

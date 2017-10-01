@@ -3,9 +3,12 @@ title = "Ibrahim Ahmed"
 languageCode = "en-us"
 theme = "hugolb"
 copyright = "Ibrahim Ahmed"
-ignoreFiles = [".+pptx$"]
 
 [params]
+    ignoreFiles = [".+pptx$"]
+    pygmentsCodeFences = false
+    pygmentsCodefencesGuessSyntax = true
+    
     splashSubheading = "I like coding, space, & games."
     blogroot = "Posts"
     defaultprojimg = "/img/gear.png"

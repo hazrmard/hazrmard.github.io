@@ -1,7 +1,7 @@
 +++
-title = ""
+title = "{{ replace .TranslationBaseName "-" " " | title}}"
+date = "{{ .Date }}"
 description = ""
-date = ""
 tags = []
 categories = []
 series = []

@@ -31,7 +31,8 @@
             "major":    "Electrical Engineering",
             "gpa":      "",
             "courses":  ["Solid State Materials", "Advanced High Performance Computing",
-                        "Advanced Real-time Systems", "Computer Vision"],
+                        "Advanced Real-time Systems", "Computer Vision", "Advanced Image Processing",
+                        "Embedded Systems"],
             "tags":     ["education", "courses"]
         },
         {
@@ -57,24 +58,30 @@
         }
     ],
 
-    "experience":     [
+    "research":         [
         {
-            "title":        "Research Assistant",
-            "workplace":    "Institute of Software and Integrated Systems",
-            "time":         "Jan '17 - Present",
-            "achievements": ["Implement reinforcement learning algorithms for fault-tolerant control of physical systems.",
-                            "Design a framework to define, simulate, learn from, and visualize linear/non-linear environments.",
-                            "Devise and compare various tabular/functional approaches for learning optimal control behaviours."],
-            "technologies": ["Python", "Flask", "Numpy", "Ahkab", "D3.js"],
-            "links":        [{
-                "title":    "Documentation",
-                "url":      "http://iahmed.me/QLearning"
-            },{
-                "title":    "GitHub",
-                "url":      "https://github.com/hazrmard/QLearning"
+            "title":        "Masters Thesis",
+            "advisor":      "Dr. Gautam Biswas",
+            "time":         "2016 - ",
+            "description":  "Adaptive fault-tolerant control for real-time systems using reinforcement learning (RL).",
+            "achievements":["Developing a modular RL library with support for system design, modification, visualization, and learning in descrete and continuous spaces.",
+                            "Modelling an aircraft fuel tank system as a non-stationary environment for the learning agent.",
+                            "Applying variations of Q-Learning (online/offline, multi-step backup, priority sweeping) to gauge learning performance."                
+            ],
+            "technologies": ["Python (ahkab, flask, numpy)", "Javascript (D3.js)"],
+            "links":[{
+                "title": "Github",
+                "url":  "https://github.com/hazrmard/QLearning"
+            },
+            {
+                "title": "Documentation (under construction)",
+                "url":  "https://hazrmard.github.io/QLearning"
             }],
-            "tags":         ["experience", "work"]
-        },
+            "tags": ["research", "artificial intelligence", "AI"]
+        }
+    ],
+
+    "experience":     [
         {
             "title":        "Teaching Assistant",
             "workplace":    "Vanderbilt University School of Engineering",
@@ -95,7 +102,7 @@
                             "Coded and schedule jobs on the university's computing cluster: ACCRE.",
                             "Developed tools to generate animated snapshots of halo evolution.",
                             "Analyzed particle distributions in different halo finder protocols (AHF, Rockstar)."],
-            "technologies": ["Python", "Numpy", "C", "Bash"],
+            "technologies": ["Python (numpy, matplotlib)", "C", "Bash"],
             "links":        [{
                 "title":    "GitHub",
                 "url":      "https://github.com/hazrmard/DMHaloAnalysis"
@@ -114,7 +121,7 @@
                             "Obtain half mass radii to improve upon the Navarro–Frenk–White (NFW) profile.",
                             "Program a flexible multi-core processing interface to achieve data parallelism on distributed systems.",
                             "Incorporate existing code for reading simulation data into a modular and scalable Python class for use in further research."],
-            "technologies": ["Python", "Matplotlib", "Numpy"],
+            "technologies": ["Python (matplotlib, numpy)"],
             "links":        [{
                 "title":    "GitHub",
                 "url":      "https://github.com/hazrmard/DarkMatterHalos"
