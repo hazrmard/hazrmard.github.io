@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     
-	<atom:link href="http://iahmed.me/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Developer</title>
-      <link>http://iahmed.me/categories/developer/</link>
-      <pubDate>Mon, 06 Feb 2017 10:07:58 -0600</pubDate>
+      <link>/categories/developer/</link>
+      <pubDate>Sat, 30 Sep 2017 17:29:58 -0500</pubDate>
       
-      <guid>http://iahmed.me/categories/developer/</guid>
+      <guid>/categories/developer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Engineering</title>
-      <link>http://iahmed.me/categories/engineering/</link>
+      <link>/categories/engineering/</link>
       <pubDate>Mon, 06 Feb 2017 18:47:26 -0600</pubDate>
       
-      <guid>http://iahmed.me/categories/engineering/</guid>
+      <guid>/categories/engineering/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Meta</title>
-      <link>http://iahmed.me/categories/meta/</link>
+      <link>/categories/meta/</link>
       <pubDate>Mon, 06 Feb 2017 10:07:58 -0600</pubDate>
       
-      <guid>http://iahmed.me/categories/meta/</guid>
+      <guid>/categories/meta/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Personal</title>
-      <link>http://iahmed.me/categories/personal/</link>
+      <link>/categories/personal/</link>
       <pubDate>Sat, 05 Mar 2016 03:55:04 +0000</pubDate>
       
-      <guid>http://iahmed.me/categories/personal/</guid>
+      <guid>/categories/personal/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Physics</title>
-      <link>http://iahmed.me/categories/physics/</link>
+      <link>/categories/physics/</link>
       <pubDate>Fri, 24 Feb 2017 12:41:52 -0600</pubDate>
       
-      <guid>http://iahmed.me/categories/physics/</guid>
+      <guid>/categories/physics/</guid>
       <description></description>
     </item>
     

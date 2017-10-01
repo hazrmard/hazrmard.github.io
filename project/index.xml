@@ -2,95 +2,95 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/project/</link>
+    <link>/project/</link>
     <description>Recent content in Projects on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     <lastBuildDate>Tue, 01 Nov 2016 01:00:00 -0500</lastBuildDate>
     
-	<atom:link href="http://iahmed.me/project/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Urdown</title>
-      <link>http://iahmed.me/project/urdown/</link>
+      <link>/project/urdown/</link>
       <pubDate>Tue, 01 Nov 2016 01:00:00 -0500</pubDate>
       
-      <guid>http://iahmed.me/project/urdown/</guid>
+      <guid>/project/urdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gobol</title>
-      <link>http://iahmed.me/project/gobol/</link>
+      <link>/project/gobol/</link>
       <pubDate>Sat, 01 Oct 2016 00:00:00 -0600</pubDate>
       
-      <guid>http://iahmed.me/project/gobol/</guid>
+      <guid>/project/gobol/</guid>
       <description></description>
     </item>
     
     <item>
       <title>AdEmbargo</title>
-      <link>http://iahmed.me/project/adembargo/</link>
+      <link>/project/adembargo/</link>
       <pubDate>Mon, 01 Aug 2016 00:00:00 -0600</pubDate>
       
-      <guid>http://iahmed.me/project/adembargo/</guid>
+      <guid>/project/adembargo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>imgurPCA</title>
-      <link>http://iahmed.me/project/imgurpca/</link>
+      <link>/project/imgurpca/</link>
       <pubDate>Mon, 01 Aug 2016 00:00:00 -0600</pubDate>
       
-      <guid>http://iahmed.me/project/imgurpca/</guid>
+      <guid>/project/imgurpca/</guid>
       <description></description>
     </item>
     
     <item>
       <title>DarkMatterHalos</title>
-      <link>http://iahmed.me/project/darkmatterhalos/</link>
+      <link>/project/darkmatterhalos/</link>
       <pubDate>Fri, 01 Jul 2016 00:00:00 -0600</pubDate>
       
-      <guid>http://iahmed.me/project/darkmatterhalos/</guid>
+      <guid>/project/darkmatterhalos/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SatTrack</title>
-      <link>http://iahmed.me/project/sattrack/</link>
+      <link>/project/sattrack/</link>
       <pubDate>Fri, 01 Apr 2016 00:00:00 -0600</pubDate>
       
-      <guid>http://iahmed.me/project/sattrack/</guid>
+      <guid>/project/sattrack/</guid>
       <description>SatTrack is the software-side of my senior engineering project at Vanderbilt University. I led a team of 4 students to design a software-defined radio system that can track and receive scientific data from cube satellites.
  Poster for the project.  SatTrack provides the front/back end of the entire interface. The software can be run from any system that supports Python. It calculates satellite position in real-time based on current location.</description>
     </item>
     
     <item>
       <title>TIL</title>
-      <link>http://iahmed.me/project/til/</link>
+      <link>/project/til/</link>
       <pubDate>Tue, 01 Mar 2016 00:00:00 -0600</pubDate>
       
-      <guid>http://iahmed.me/project/til/</guid>
+      <guid>/project/til/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ng-Résumé</title>
-      <link>http://iahmed.me/project/ng-resume/</link>
+      <link>/project/ng-resume/</link>
       <pubDate>Tue, 01 Mar 2016 00:00:00 -0600</pubDate>
       
-      <guid>http://iahmed.me/project/ng-resume/</guid>
+      <guid>/project/ng-resume/</guid>
       <description></description>
     </item>
     
     <item>
       <title>UNIVERSE</title>
-      <link>http://iahmed.me/project/universe/</link>
+      <link>/project/universe/</link>
       <pubDate>Fri, 01 May 2015 21:24:37 -0600</pubDate>
       
-      <guid>http://iahmed.me/project/universe/</guid>
+      <guid>/project/universe/</guid>
       <description>UNIVERSE is an Agent Based Model of population dynamics of alien space-faring civilizations in the galaxy. It simulates how civilizations may interact with each other given limited resources. I developed this for my Modeling and Simulation course with my partner Michael Schoenfield. The model considers resources, technology, trade, and war when deciding on behavior of each civilization.
   A presentation explaining the project can be found here.</description>
     </item>

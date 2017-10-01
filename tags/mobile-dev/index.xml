@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mobile Dev on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/tags/mobile-dev/</link>
+    <link>/tags/mobile-dev/</link>
     <description>Recent content in Mobile Dev on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     <lastBuildDate>Sat, 05 Mar 2016 03:55:04 +0000</lastBuildDate>
     
-	<atom:link href="http://iahmed.me/tags/mobile-dev/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/mobile-dev/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Starting Android Development</title>
-      <link>http://iahmed.me/post/2016-03-04-starting-android-development/</link>
+      <link>/post/2016-03-04-starting-android-development/</link>
       <pubDate>Sat, 05 Mar 2016 03:55:04 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/2016-03-04-starting-android-development/</guid>
+      <guid>/post/2016-03-04-starting-android-development/</guid>
       <description>&lt;p&gt;I have always been fascinated with mobile app development. Over the last couple of years in college, I made a few attempts to get started with Android applications. I watched tutorial series, reading blogs, attending introductory workshops. Nope. Nothing seemed to stick. What was wrong?&lt;/p&gt;</description>
     </item>
     
