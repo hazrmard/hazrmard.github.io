@@ -1,4 +1,4 @@
-baseurl = "http://iahmed.me"
+baseurl = ""
 title = "Ibrahim Ahmed"
 languageCode = "en-us"
 theme = "hugolb"
@@ -6,8 +6,6 @@ copyright = "Ibrahim Ahmed"
 
 [params]
     ignoreFiles = [".+pptx$"]
-    pygmentsCodeFences = false
-    pygmentsCodefencesGuessSyntax = true
     
     splashSubheading = "I like coding, space, & games."
     blogroot = "Posts"

@@ -12,14 +12,14 @@
     {{end}}
 
     {{if .IsPage}}
-        {{if and .Params.hascode  (not .Site.Params.pygmentsCodeFences) }}
+        {{if .Params.hascode}}
             <script src="/js/highlight/highlight.pack.js"></script>
             <link rel="stylesheet" type="text/css" href="/js/highlight/styles/atom-one-dark.css">
             <script>hljs.initHighlightingOnLoad();</script>
         {{end}}
         {{if .Params.hasequations}}
             <script type="text/javascript" async
-                src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
             </script>
             <script type="text/x-mathjax-config">
                 MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });

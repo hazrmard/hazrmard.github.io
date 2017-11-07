@@ -20,3 +20,6 @@ $$x=(-b +- sqrt(b^2 – 4ac)) \over (2a)$$
 is a line break like this.
 >
 > This is another para of quotes.
+
+### `iframe` demo:
+{{< frame src="/post/is-cold-the-new-hot" >}}

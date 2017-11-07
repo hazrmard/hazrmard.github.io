@@ -1,0 +1,14 @@
+<div class="iframe-div" style="width:100%">
+    <iframe style="width:100%; border:0" scrolling="no"
+    onload="(function(self) {
+        window.iframe = self;
+        self.height = self.contentDocument.body.scrollHeight;
+    })(this);
+    "
+    {{ if .IsNamedParams }}
+        src="{{.Get "src" }}">
+    {{ else }}
+        src="{{.Get 0}}">
+    {{ end }}
+    </iframe>
+</div>
