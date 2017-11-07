@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on Ibrahim Ahmed</title>
+    <link>/tags/machine-learning/</link>
+    <description>Recent content in Machine Learning on Ibrahim Ahmed</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ibrahim Ahmed</copyright>
+    <lastBuildDate>Fri, 20 Oct 2017 20:59:42 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Escaping Echochambers</title>
+      <link>/post/escaping-echochambers/</link>
+      <pubDate>Fri, 20 Oct 2017 20:59:42 -0500</pubDate>
+      
+      <guid>/post/escaping-echochambers/</guid>
+      <description>The echochamber effect is a worrisome issue in social media. It risks isolating users in exclusive groups as they repeatedly subscribe to content that reinforces their biases. To keep users engaged, websites expose users to content similar to their history. You will get recommendations for movies you may like, or peoply you may befriend, or communities you may join - all based on some measure of similarity with your profile.</description>
+    </item>
+    
+  </channel>
+</rss>

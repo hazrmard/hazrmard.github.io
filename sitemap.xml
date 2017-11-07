@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/escaping-echochambers/</loc>
+    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/maintaining-a-hugo-blog/</loc>
     <lastmod>2017-09-30T17:29:58-05:00</lastmod>
   </url>
@@ -204,7 +209,7 @@
   
   <url>
     <loc>/categories/engineering/</loc>
-    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
+    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -240,7 +245,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-09-30T17:29:58-05:00</lastmod>
+    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -253,6 +258,12 @@
   <url>
     <loc>/tags/linux/</loc>
     <lastmod>2016-01-30T04:30:28+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/machine-learning/</loc>
+    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -288,13 +299,19 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-09-30T17:29:58-05:00</lastmod>
+    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/powershell/</loc>
     <lastmod>2017-09-30T17:29:58-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/principal-component-analysis/</loc>
+    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -343,6 +360,12 @@
   <url>
     <loc>/tags/thermodynamics/</loc>
     <lastmod>2017-01-31T11:00:25-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/visualization/</loc>
+    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
     <priority>0</priority>
   </url>
   
