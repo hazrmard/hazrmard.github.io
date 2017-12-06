@@ -102,8 +102,10 @@
 
 <div class="resume" ng-controller="resumeController">
     ﻿
-
-<input type="text" autofocus="autofocus" placeholder="Search resume" ng-model="search"/><br>
+<div class="top-inp-pdf">
+	<input type="text" autofocus="autofocus" placeholder="Search resume" ng-model="search"/>
+	<div ng-if="resumeData.pdf_link.length"><a href="{{resumeData.pdf_link}}">PDF Version</a></div>
+</div></br>
 
 <div class="section head">
 	<h1 class="h1">{{resumeData.personal_info.name}}</h1>
@@ -139,8 +141,8 @@
 <div class="section" ng-show="res.length">
 	<h2 class="h2">Research</h2>
 	<div class="research subsection" ng-repeat="r in res = (resumeData.research | filter:search | lowercase)">
-		<h3 class="h4 workplace">{{r.title}}</h4>
-		<h4 class="h4 time">{{r.time}}</h4>
+		<!-- <h3 class="h4 workplace">{{r.title}}</h4>
+		<h4 class="h4 time">{{r.time}}</h4> -->
 		<div class="details">
 			<div class="subheading" ng-if="r.advisor.length">Advisor: {{r.advisor}}</div>
 			<div ng-if="r.description.length">{{r.description}}</div>
