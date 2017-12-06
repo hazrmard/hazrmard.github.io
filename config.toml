@@ -7,7 +7,7 @@ copyright = "Ibrahim Ahmed"
 [params]
     ignoreFiles = [".+pptx$"]
     
-    splashSubheading = "I like coding, space, & games."
+    splashSubheading = "Electrical Engineering @ Vanderbilt University"
     blogroot = "Posts"
     defaultprojimg = "/img/gear.png"
 

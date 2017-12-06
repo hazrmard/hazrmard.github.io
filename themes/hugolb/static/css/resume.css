@@ -12,8 +12,19 @@ colour-scheme {
     #D4BE6A
     #FFEDAA
 }
+.top-inp-pdf {
+    
+}
+.top-inp-pdf input {
+    float: left;
+    width: 40%;
+}
+.top-inp-pdf div {
+    float: right;
+}
 
 .resume .head {
+    clear: both;
     text-align: center;
     width: 100%;
 }

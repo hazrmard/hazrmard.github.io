@@ -12,7 +12,7 @@ I am interested in electronics, computer vision, machine learning, web & mobile
 development, and astrophysics.
 
 Currently my [research is in Artificial Intelligence][1]. My undergratuate research was
-in [astrophysics concerning dark matter simulations][2]. I also did research concerning 
+in [astrophysics on dark matter simulations][2]. I also did research on 
 radiation hardening experiments for electronics in space.
 
 I like to run, and play tennis, football and video games. I read
