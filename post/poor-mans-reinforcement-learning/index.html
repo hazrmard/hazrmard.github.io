@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
+    <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
+    
+    
+
+    
+        
+        
+            <script type="text/javascript" async
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+            </script>
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({ 
+                    TeX: { equationNumbers: {autoNumber: "AMS"} },
+                    tex2jax: {
+                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                        processEscapes: true
+                    } 
+                });
+            </script>
+        
+    
+
+    
+
+    <title>A Poor Man&#39;s Introduction to Reinforcement Learning</title>
+</head>
+<body>
+    <div class="container">
+
+<div class="content">
+    <h1 class="post-title">A Poor Man&#39;s Introduction to Reinforcement Learning</h1>
+    <div class="front-matter">
+    
+        <em>Monday, Nov 13, 2017</em>
+    
+    
+        
+            
+                <br/>Categories:
+                    
+                        <a href="/categories/engineering">Engineering</a>,
+                    
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                <br/>Tags:
+                    
+                        <a href="/tags/artificial-intelligence">Artificial intelligence</a>,
+                    
+                        <a href="/tags/reinforcement-learning">Reinforcement learning</a>,
+                    
+            
+        
+    
+</div>
+
+    
+    
+
+<p>Reinforcement Learning (RL) is one of the many ways to implement artificial
+intelligence (AI). AI is the design of &ldquo;intelligent&rdquo; agents that maximize their
+chances of success at some goal. The goal can belong to any problem: from
+winning a game of tic-tac-toe, to recognizing speech, to steering a car.</p>
+
+<p>A problem can be approached in many different ways. An agent can search for all
+possible options and choose the best. Or the problem can be formulated as a set
+of logical rules which the agent then applies at each step. The former way may
+require searching too many options. The latter may require meticulous representation
+of the nuances in a system.</p>
+
+<p>RL is built on experience. With each action an agent takes, it gets some
+feedback - reinforcement - from its environment. It uses that reinforcement
+to get better. So RL agents start off poorly, with the expectation that they
+will get better as they blunder their way through the problem.</p>
+
+
+<figure >
+    
+        <img src="/img/posts/poor-mans-RL/three_AI_approaches.gif" alt="Let&#39;s see what sticks: an illustration of various approaches towards implementing AI. Left: An agent tries all options. Centre: An agent formulates the problem and derives the best choice. Right: An agent learns from experience (reinforcement)." />
+    
+    
+    <figcaption>
+        <p>
+        Let&#39;s see what sticks: an illustration of various approaches towards implementing AI. Left: An agent tries all options. Centre: An agent formulates the problem and derives the best choice. Right: An agent learns from experience (reinforcement).
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>A reinforcement learning problem can be viewed as repeated interactions between
+the agent and the environment. An agent can be in one of a number of states. At
+every instance, an agent has a set of actions it can take. For each action, the
+agent will transition to another state. Also, for each action the agent will get
+some feedback from the environment.</p>
+
+
+<figure >
+    
+        <img src="/img/posts/poor-mans-RL/RL_model.png" />
+    
+    
+</figure>
+
+
+<p>The goal of an agent is to maximize the reward it gets from the environment. To
+do that, it learns the <em>value</em> of each state from experience. The value of a
+state is the maximum total reward the agent can expect in the future if it goes
+to that state. The agent <em>explores</em> the environment and takes a record of the
+rewards it received. Once values of states are sufficiently learned, an agent
+can <em>exploit</em> them by acting towards the most valuable state at each step.</p>
+
+<blockquote>
+<p>The <em>value</em> of a state is the maximum total reward the agent can expect in the
+future if it goes to that state.</p>
+</blockquote>
+
+<p>The life of an agent, therefore, is split into two parts: exploraton and
+exploitation. During exploration, the agent may forego valuable states to take
+random/unrewarding actions. Perhaps they may lead to even greater rewards.
+During exploitation, an agent relies on previously learned values for its choice
+of actions. How an agent chooses actions is known as its <em>policy</em>. It can be
+based on a single rule (take most rewarding action), or it can change over time,
+or it can be different for exploration and exploitation.</p>
+
+<blockquote>
+<p>The <em>policy</em> of an agent is the set of rules which govern the choice of the
+next action from the agent&rsquo;s current state.</p>
+</blockquote>
+
+<p>How are the values of states calculated? To rephrase the definition of value: it
+is the total reward from the most rewarding combination of actions from a state.
+For each state, an <em>ideal</em> agent will chart all possible trajectories of actions
+into the future. It will explore each of those trajectories and note the highest
+reward which will become the value.</p>
+
+
+<figure >
+    
+        <img src="/img/posts/poor-mans-RL/state_tree.png" alt="An agent charts all possible action trajectories from the current state (dark blue) to find the most rewarding combinaton of actions. The total reward of that combination is the state&#39;s value. In this case the most rewarding combination is from rewards 1-5-5 which gives a value of 11." />
+    
+    
+    <figcaption>
+        <p>
+        An agent charts all possible action trajectories from the current state (dark blue) to find the most rewarding combinaton of actions. The total reward of that combination is the state&#39;s value. In this case the most rewarding combination is from rewards 1-5-5 which gives a value of 11.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>Sounds daunting, no? The problem can be rephrased using a <strong>dynamic programming</strong>
+approach. Dynamic programming breaks a problem down into similar and smaller
+problems. Each of those problems are recursively broken down into smaller versions
+of themselves until the simplest problem is reached for which we know the answer.
+We can then &ldquo;rebuild&rdquo; our solution from the bottom up.</p>
+
+<p>In the illustration, the agent has a lifetime of 3 steps. At each step, it can
+take 2 actions, and therefore earn 2 rewards. This gives us 8 possible action
+trajectories or reward combinations. The value of the current state, $s0$, is
+the maximum attainable reward:</p>
+
+<p>$$
+value(s0) = \max_{actions}(Reward_{1} + Reward_{2} + Reward_{3})
+$$</p>
+
+<p>We can observe that the maximum reward is the maximizing combination of the
+immediate reward from the current state, and the following rewards from the
+next state:</p>
+
+<p>$$
+value(s0) = \max_{actions}(Reward_{1} + \max_{actions}(Reward_{2} + Reward_{3}))
+$$</p>
+
+<p>The intuition behind this is simple: for a set of all 3 actions to have
+optimal rewards, the subset of the last 2 actions must necessarily be optimal
+too.</p>
+
+<p>Notice we have decomposed our maximization problem into a smaller, similar
+problem. By the definition of value:</p>
+
+<p>$$value(s0) = \max_{actions}(Reward_{1} + value(s1))$$
+$$value(s1) = \max_{actions}(Reward_{2} + value(s2))$$
+$$\vdots$$</p>
+
+<p>Where $s1$ is the state that follows $Reward_{1}$. This is known as the <em>Bellman
+Equation</em>. The value of a state depends on the value of neighbouring states. So
+the agent first solves for those values. Then it compares them to find the
+best combination for the current value.</p>
+
+
+<figure >
+    
+        <img src="/img/posts/poor-mans-RL/dynamic_vis.png" alt="Dynamic programming looks at all reachable states to calculate the value of the current state." />
+    
+    
+    <figcaption>
+        <p>
+        Dynamic programming looks at all reachable states to calculate the value of the current state.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>The dynamic approach is thorough: it looks at every single state to find value.
+This presents a problem, however: what if there are too many states? What if
+the environment is continuous and there are infinitely many states? What if the
+agent needs to learn before a deadline? The methods that follow are faster, but
+they <em>approximate</em> the true value of states.</p>
+
+<p>Enter: <strong>Monte Carlo methods</strong>. Monte Carlo methods forego a complete traversal
+of state-space in favour of sparser, episodic sampling. The learning process
+of an agent is comprised of multiple <em>episodes</em>. For each episode, the agent
+starts at some state. It does not look at all neighbouring states, but picks
+one action to go to the next state. At each step, the agent makes a choice of
+action until it reaches a terminal state. This concludes the episode. An episode
+is a single trajectory of actions. The agent keeps a record of states it
+encounters in an episode, and the rewards it gets from actions. For each state,
+the <em>return</em> is the sum of all rewards that follow.</p>
+
+<blockquote>
+<p>The <em>return</em> of a state is the total reward that follows from that state based
+on the agent&rsquo;s action selection policy.</p>
+</blockquote>
+
+<p>Over multiple episodes, an agent may see a state many times. Each time, an agent
+calculates the return for that state. The average return is the total reward an
+agent can expect from that state. An agent approximates the value of a state by
+its average return. If the agent&rsquo;s <em>policy</em> (how it chooses actions) is somewhat
+<em>greedy</em> i.e. it prefers states with higher returns, then over time the value
+approximation will get closer to the true value of states.</p>
+
+<p>$$value(s0) = Average(Reward_{1} + Reward_{2} + \ldots) = Average(return(s0))$$
+$$value(s1) = Average(Reward_{2} + Reward_{3} + \ldots) = Average(return(s1))$$
+$$\vdots$$</p>
+
+
+<figure >
+    
+        <img src="/img/posts/poor-mans-RL/montecarlo_vis.png" alt="Monte Carlo approaches approximate value of states from average returns over multiple episodes. This illustration shows a single episode. Episodes may cirsscross over state space, so each state is sampled multiple times." />
+    
+    
+    <figcaption>
+        <p>
+        Monte Carlo approaches approximate value of states from average returns over multiple episodes. This illustration shows a single episode. Episodes may cirsscross over state space, so each state is sampled multiple times.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>Monte Carlo methods are appropriate where a learning task can be broken up into
+episodes. For example a game of tic-tac-toe, chess, or go where an episode ends
+when one side wins. Monte Carlo methods update value estimates after each episode
+ends. But what if there is no end? What if episodes are too long?</p>
+
+<p><strong>Temporal Difference</strong> methods alleviate this problem. Like Monte Carlo approaches,
+they are episodic, and require a <em>policy</em> for exploration. Similarly, they
+approximate the value from average returns of a state. Unlike Monte Carlo
+methods, they update value estimates after each action. Let&rsquo;s say an agent is
+at a state $s0$, and takes an action towards $s1$ to get a reward $Reward_{1}$.
+We know that the <em>return</em> of $s0$ is the sum of all future rewards on that policy:</p>
+
+<p>$$return(s0) = Reward_{1} + Reward_{2} + \ldots$$</p>
+
+<p>The agent has not yet seen $(Reward_{2} + \ldots)$. That is the return of the
+next state, $s1$. We can substitute the <em>average</em> return of the next state
+instead. That is just our current estimate of the value of $s1$!</p>
+
+<p>$$return(s0) = Reward_{1} + Average(return(s1)) = Reward_{1} + value(s1)$$</p>
+
+<p>Herein lies the difference with Monte Carlo methods: instead of explicitly
+calculating the return, we estimate it by observing the immediate reward and
+<em>backing-up</em> the remainder from the agent&rsquo;s previous experience. Since we
+introduced one new piece of information - $Reward_{1}$ - our new estimate of
+the <em>return</em> of $s0$ is an updated approximation of the <em>value</em> of $s0$. The
+error with respect to current value approximation is:</p>
+
+<p>$$
+error(s0) = return(s0) - value(s0)
+$$</p>
+
+<p>The current $value(s0)$ needs to be changed by $error(s0)$ to get the next
+approximation. However we do not want to update it all at once. Perhaps the
+agent chose a bad action which gave a poor return. So we weigh the error by
+a <em>learning rate</em> $\alpha$ to update value:</p>
+
+<p>$$
+value(s0) = value(s0) + \alpha \times error(s0)
+$$</p>
+
+
+<figure >
+    
+        <img src="/img/posts/poor-mans-RL/temporal_vis.png" alt="Temporal Difference methods update the value of states after a single step. They use the immediate reward and back-ups of previously calculated values to calculate the change." />
+    
+    
+    <figcaption>
+        <p>
+        Temporal Difference methods update the value of states after a single step. They use the immediate reward and back-ups of previously calculated values to calculate the change.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>At each step, the agent observes the reward, calculates a new estimate of return
+from the previously calculated values, and updates the value of the current state.
+With each iteration, given a partially greedy <em>policy</em>, the agent can expect
+to get better approximations of the true value of states.</p>
+
+<p>A compromise between Monte Carlo and Temporal Difference methods are the
+<strong>Temporal Difference($\lambda$)</strong> methods. Instead of using the immediate
+reward and back-ups of values to estimate <em>return</em>, they observe rewards for
+an additional $\lambda$-steps before taking backups:</p>
+
+<p>$$
+return(s0) = Reward_{1} + \ldots + Reward_{\lambda + 1} + value(s\lambda + 1)
+$$</p>
+
+<p>When $\lambda=0$, this decays into the simple Temporal Difference approach. When
+$\lambda=\infty$, it becomes a Monte Carlo approach.</p>
+
+
+<figure >
+    
+        <img src="/img/posts/poor-mans-RL/multisteptemporal_vis.png" alt="Temporal Difference($\lambda$) methods update the value of states after multiple steps. They use future rewards and back-ups of previously calculated values to calculate the change." />
+    
+    
+    <figcaption>
+        <p>
+        Temporal Difference($\lambda$) methods update the value of states after multiple steps. They use future rewards and back-ups of previously calculated values to calculate the change.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>So far, the agent&rsquo;s exploration has been very linear. It picks one action at
+each state without considering the influence of neighbouring states. The <strong>n-step
+Tree Backup</strong> approach is a generalization of temporal difference methods. When
+calculating the return, the agent also backs up values of states from actions
+<em>not</em> taken. This means that the return of a state is now more representative
+of the <em>average</em> return because the agent considers multiple actions.</p>
+
+
+<figure >
+    
+        <img src="/img/posts/poor-mans-RL/treebackup_vis.png" alt="n-Step Tree Backup approaches weigh the rewards of actions taken, and the values of reachable states not traversed." />
+    
+    
+    <figcaption>
+        <p>
+        n-Step Tree Backup approaches weigh the rewards of actions taken, and the values of reachable states not traversed.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>A mathematical formulation for the n-Step Tree Backup return would be too
+<em>math-y</em> for the purposes of this article. Resources to a more rigorous discussion
+of these concepts are included at the end.</p>
+
+<p>The approaches discussed so far all fall under <em>value iteration</em>. An agent
+calculates the values of states. Whenever an action needs to be chosen, the
+current value function is used to find an appropriate action. The agent generates
+new episodes and values until the values converge.</p>
+
+<p>In <em>Policy iteration</em>, the agent defines its policy and uses it to generate
+episodes and values until the values do not change. Then it re-calculates a new
+policy and repeats the process until the policy converges.</p>
+
+<p>The following illustration gives an overview of the methods discussed here. It
+by no means is an exhaustive summary of reinforcement learning theory. RL is
+an active field of research and presents a promising venue for solving complex
+optimization problems.</p>
+
+
+<figure >
+    
+        <img src="/img/posts/poor-mans-RL/overview.png" alt="Reinforcement learning methods can derive agent behaviour from dense and sparse sampling of state space." />
+    
+    
+    <figcaption>
+        <p>
+        Reinforcement learning methods can derive agent behaviour from dense and sparse sampling of state space.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<hr />
+
+<h3 id="resources">Resources</h3>
+
+<ul>
+<li><p><a href="http://www.jair.org/media/301/live-301-1562-jair.pdf">Kaelbling, Leslie Pack, Michael L. Littman, and Andrew W. Moore. &ldquo;Reinforcement
+learning: A survey.&rdquo; Journal of artificial intelligence research 4 (1996): 237-285.</a></p></li>
+
+<li><p><a href="http://incompleteideas.net/book/the-book-2nd.html">Sutton, Richard S., and Andrew G. Barto. Reinforcement learning: An
+introduction. Second Edition, in progress. MIT Press, Cambridge</a></p></li>
+</ul>
+
+    <br/>
+    <div class="navigation">
+    
+        <a href="/post/escaping-echochambers/"><div class="prev">
+            ← Previous Post
+        </div></a>
+    
+    
+</div>
+
+</div>
+<div class="sidebar">
+    <div class="menu-icon"><h2>≡</h2></div>
+    <div class="title"><h1 class="site-name">Ibrahim Ahmed</h1>
+        
+            <div class="sb-links">
+                
+                    <a href="https://www.linkedin.com/in/IbrahimAhmed1"><img src="/img/LinkIcons/svg/linkedin.svg"/></a>
+                
+                    <a href="https://github.com/hazrmard"><img src="/img/LinkIcons/svg/github.svg"/></a>
+                
+                    <a href="http://stackoverflow.com/users/4591810/hazrmard"><img src="/img/LinkIcons/svg/stackoverflow.svg"/></a>
+                
+            </div>
+        
+    </div>
+    <ul class="menu-list">
+        
+            <a href="/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/home.svg" alt="Home"/><span class="menu-option-name">Home</span>
+                
+                
+            </li></a>
+        
+            <a href="/about/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/person.svg" alt="About Me"/><span class="menu-option-name">About Me</span>
+                
+                
+            </li></a>
+        
+            <a href="/resume/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/document.svg" alt="Resume"/><span class="menu-option-name">Resume</span>
+                
+                
+            </li></a>
+        
+            <a href="#noexist">
+            <li class="sb-option dropdown">
+                
+                    <img src="/img/LinkIcons/svg/pencil.svg" alt="Posts"/><span class="menu-option-name">Posts</span>
+                
+                
+                <div class="submenu"><ul>
+                    
+                        
+                            <a href="/categories"><li>By Categories</li></a>
+                        
+                    
+                        
+                            <a href="/series"><li>By Series</li></a>
+                        
+                    
+                        
+                            <a href="/tags"><li>By Tags</li></a>
+                        
+                    
+                    <a href="/post"><li>All</li></a>
+                </ul></div>
+                
+            </li></a>
+        
+            <a href="/project/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/terminal.svg" alt="Projects"/><span class="menu-option-name">Projects</span>
+                
+                
+            </li></a>
+        
+    </ul>
+</div>
+
+    <div class="footer">
+        <div class="copyright">© Ibrahim Ahmed</div>
+    </div>
+</div>
+</body>
+</html>
+

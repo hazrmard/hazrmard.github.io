@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/poor-mans-reinforcement-learning/</loc>
+    <lastmod>2017-11-13T23:19:08-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/escaping-echochambers/</loc>
     <lastmod>2017-10-20T20:59:42-05:00</lastmod>
   </url>
@@ -161,6 +166,12 @@
   </url>
   
   <url>
+    <loc>/tags/artificial-intelligence/</loc>
+    <lastmod>2017-11-13T23:19:08-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/astronomy/</loc>
     <lastmod>2017-02-24T12:41:52-06:00</lastmod>
     <priority>0</priority>
@@ -209,7 +220,7 @@
   
   <url>
     <loc>/categories/engineering/</loc>
-    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
+    <lastmod>2017-11-13T23:19:08-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -245,7 +256,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
+    <lastmod>2017-11-13T23:19:08-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -299,7 +310,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-10-20T20:59:42-05:00</lastmod>
+    <lastmod>2017-11-13T23:19:08-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -324,6 +335,12 @@
   <url>
     <loc>/tags/quantum-mechanics/</loc>
     <lastmod>2017-01-31T11:00:25-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/reinforcement-learning/</loc>
+    <lastmod>2017-11-13T23:19:08-06:00</lastmod>
     <priority>0</priority>
   </url>
   
