@@ -68,6 +68,8 @@ reward which will become the value.
 {{< figure src="/img/posts/poor-mans-RL/state_tree.png"
     caption="An agent charts all possible action trajectories from the current state (dark blue) to find the most rewarding combinaton of actions. The total reward of that combination is the state's value. In this case the most rewarding combination is from rewards 1-5-5 which gives a value of 11.">}}
 
+## Dynamic Programming
+
 Sounds daunting, no? The problem can be rephrased using a **dynamic programming**
 approach. Dynamic programming breaks a problem down into similar and smaller
 problems. Each of those problems are recursively broken down into smaller versions
@@ -117,6 +119,8 @@ the environment is continuous and there are infinitely many states? What if the
 agent needs to learn before a deadline? The methods that follow are faster, but
 they *approximate* the true value of states.
 
+## Monte Carlo methods
+
 Enter: **Monte Carlo methods**. Monte Carlo methods forego a complete traversal
 of state-space in favour of sparser, episodic sampling. The learning process
 of an agent is comprised of multiple *episodes*. For each episode, the agent
@@ -148,6 +152,8 @@ Monte Carlo methods are appropriate where a learning task can be broken up into
 episodes. For example a game of tic-tac-toe, chess, or go where an episode ends
 when one side wins. Monte Carlo methods update value estimates after each episode
 ends. But what if there is no end? What if episodes are too long?
+
+## Temporal Difference Learning
 
 **Temporal Difference** methods alleviate this problem. Like Monte Carlo approaches,
 they are episodic, and require a *policy* for exploration. Similarly, they
@@ -221,6 +227,8 @@ A mathematical formulation for the n-Step Tree Backup return would be too
 *math-y* for the purposes of this article. Resources to a more rigorous discussion
 of these concepts are included at the end.
 
+## A Final Word
+
 The approaches discussed so far all fall under *value iteration*. An agent
 calculates the values of states. Whenever an action needs to be chosen, the
 current value function is used to find an appropriate action. The agent generates
@@ -231,12 +239,12 @@ episodes and values until the values do not change. Then it re-calculates a new
 policy and repeats the process until the policy converges.
 
 The following illustration gives an overview of the methods discussed here. It
-by no means is an exhaustive summary of reinforcement learning theory. RL is
-an active field of research and presents a promising venue for solving complex
-optimization problems.
+by no means is an exhaustive summary of reinforcement learning theory. It shows
+the different ways agents explore state space to come to a decision about the
+best actions to take.
 
 {{< figure src="/img/posts/poor-mans-RL/overview.png"
-    caption="Reinforcement learning methods can derive agent behaviour from dense and sparse sampling of state space.">}}
+    caption="Reinforcement learning methods can derive agent behaviour from dense and sparse sampling of state space." >}}
 
 ---
 ### Resources

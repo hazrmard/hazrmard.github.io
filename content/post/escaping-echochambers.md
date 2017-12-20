@@ -1,7 +1,7 @@
 +++
 title = "Escaping Echochambers"
 date = "2017-10-20T20:59:42-05:00"
-description = ""
+description = "Using machine learning to encourage discourse."
 tags = ["machine learning", "principal component analysis", "visualization"]
 categories = ["engineering"]
 series = []

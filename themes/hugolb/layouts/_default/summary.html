@@ -3,5 +3,9 @@
     <div class="front-matter">
         <em>{{dateFormat "Monday, Jan 2, 2006" .Date}}</em> | {{.ReadingTime}} min read
     </div>
-    {{.Summary}}
+    {{if (gt (len .Params.description) 0)}}
+        {{.Params.description}}
+    {{else}}
+        {{.Summary}}
+    {{end}}
 </div>
