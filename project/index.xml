@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
-    <lastBuildDate>Tue, 01 Nov 2016 01:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 01 Apr 2017 13:09:45 -0600</lastBuildDate>
     
 	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Feature Track</title>
+      <link>/project/feature-track/</link>
+      <pubDate>Sat, 01 Apr 2017 13:09:45 -0600</pubDate>
+      
+      <guid>/project/feature-track/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>QLearning</title>
+      <link>/project/qlearning/</link>
+      <pubDate>Thu, 01 Dec 2016 13:16:05 -0600</pubDate>
+      
+      <guid>/project/qlearning/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Urdown</title>
@@ -27,6 +45,15 @@
       <pubDate>Sat, 01 Oct 2016 00:00:00 -0600</pubDate>
       
       <guid>/project/gobol/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>goinit</title>
+      <link>/project/goinit/</link>
+      <pubDate>Thu, 01 Sep 2016 13:07:40 -0600</pubDate>
+      
+      <guid>/project/goinit/</guid>
       <description></description>
     </item>
     
@@ -58,6 +85,15 @@
     </item>
     
     <item>
+      <title>Markovia</title>
+      <link>/project/markovia/</link>
+      <pubDate>Fri, 01 Apr 2016 13:14:18 -0600</pubDate>
+      
+      <guid>/project/markovia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>SatTrack</title>
       <link>/project/sattrack/</link>
       <pubDate>Fri, 01 Apr 2016 00:00:00 -0600</pubDate>
@@ -82,6 +118,15 @@
       <pubDate>Tue, 01 Mar 2016 00:00:00 -0600</pubDate>
       
       <guid>/project/ng-resume/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Personalized Group Mail</title>
+      <link>/project/personalized-group-mail/</link>
+      <pubDate>Thu, 01 Oct 2015 13:03:33 -0600</pubDate>
+      
+      <guid>/project/personalized-group-mail/</guid>
       <description></description>
     </item>
     
