@@ -31,10 +31,10 @@
             "degree":   "PhD",
             "major":    "Electrical Engineering",
             "gpa":      "",
-            "courses":  ["Solid State Materials", "Advanced High Performance Computing",
+            "courses":  ["Pattern Recognition", "Project in AI", "Solid State Materials", "Advanced High Performance Computing",
                         "Advanced Real-time Systems", "Computer Vision", "Advanced Image Processing",
                         "Embedded Systems"],
-            "tags":     ["education", "courses"]
+            "tags":     ["education", "courses", "artificial intelligence"]
         },
         {
             "school":   "Vanderbilt University",
@@ -55,7 +55,7 @@
             "title":        "",
             "advisor":      "Dr. Gautam Biswas",
             "time":         "",
-            "description":  "Adaptive fault-tolerant control for real-time systems using reinforcement learning (RL).",
+            "description":  "Adaptive fault-tolerant control using reinforcement learning (RL).",
             "achievements":["Developing a modular RL library with support for system design, modification, visualization, and learning in descrete and continuous spaces.",
                             "Modelling an aircraft fuel tank system as a non-stationary environment for the learning agent.",
                             "Applying variations of Q-Learning (online/offline, multi-step backup, priority sweeping) to gauge learning performance."                
@@ -64,10 +64,6 @@
             "links":[{
                 "title": "Github",
                 "url":  "https://github.com/hazrmard/QLearning"
-            },
-            {
-                "title": "Documentation (under construction)",
-                "url":  "https://hazrmard.github.io/QLearning"
             }],
             "tags": ["research", "artificial intelligence", "AI"]
         }
@@ -109,8 +105,7 @@
             "title":        "Research Assistant",
             "workplace":    "Vanderbilt Department of Physics & Astronomy",
             "time":         "Sep '15 - Apr '16",
-            "achievements": ["Designed an algorithm to fit dark matter N-body simulation data to ellipsoidal halos.",
-                            "Obtain half mass radii to improve upon the Navarro–Frenk–White (NFW) profile.",
+            "achievements": ["Designed an algorithm to fit dark matter N-body point cloud data to ellipsoidal halos.",
                             "Programmed a flexible multi-core processing interface to achieve data parallelism on distributed systems.",
                             "Incorporated existing code for reading simulation data into a modular and scalable Python class for use in further research."],
             "technologies": ["Python (matplotlib, numpy)"],
