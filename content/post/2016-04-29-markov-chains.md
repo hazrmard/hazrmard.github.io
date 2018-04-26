@@ -3,7 +3,7 @@ title: Markov Chains – Random Text Generation
 date: 2016-04-29T23:23:16+00:00
 description : ""
 categories:
-  - Engineering
+  - machine learning
 tags:
   - C++
   - hpc

@@ -1,4 +1,4 @@
-baseurl = ""
+baseurl = "http://iahmed.me/"
 title = "Ibrahim Ahmed"
 languageCode = "en-us"
 theme = "hugolb"
