@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Algorithm Concepts on Ibrahim Ahmed</title>
-    <link>/series/algorithm-concepts/</link>
+    <link>http://iahmed.me/series/algorithm-concepts/</link>
     <description>Recent content in Algorithm Concepts on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     <lastBuildDate>Mon, 06 Feb 2017 18:47:26 -0600</lastBuildDate>
     
-	<atom:link href="/series/algorithm-concepts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://iahmed.me/series/algorithm-concepts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Algorithms: Balancing</title>
-      <link>/post/algorithm-concepts/algorithms-balancing/</link>
+      <link>http://iahmed.me/post/algorithm-concepts/algorithms-balancing/</link>
       <pubDate>Mon, 06 Feb 2017 18:47:26 -0600</pubDate>
       
-      <guid>/post/algorithm-concepts/algorithms-balancing/</guid>
+      <guid>http://iahmed.me/post/algorithm-concepts/algorithms-balancing/</guid>
       <description>Balancing in algorithms refers to minimizing the complexity of an algorithm by making sure that its constituent parts share the load efficiently. It is not a technique for solving problems. Instead it helps us understand how an existing solution may be optimized.
 The theory of balancing Say there is a problem of size \(n\). The problem is such that it can be broken down into a sequence of smaller problems.</description>
     </item>

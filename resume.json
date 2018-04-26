@@ -31,7 +31,7 @@
             "degree":   "PhD",
             "major":    "Electrical Engineering",
             "gpa":      "",
-            "courses":  ["Pattern Recognition", "Project in AI", "Solid State Materials", "Advanced High Performance Computing",
+            "courses":  ["Neural Networks", "Pattern Recognition", "Project in AI", "Solid State Materials", "Advanced High Performance Computing",
                         "Advanced Real-time Systems", "Computer Vision", "Advanced Image Processing",
                         "Embedded Systems"],
             "tags":     ["education", "courses", "artificial intelligence"]
@@ -50,34 +50,15 @@
         }
     ],
 
-    "research":         [
-        {
-            "title":        "",
-            "advisor":      "Dr. Gautam Biswas",
-            "time":         "",
-            "description":  "Adaptive fault-tolerant control using reinforcement learning (RL).",
-            "achievements":["Developing a modular RL library with support for system design, modification, visualization, and learning in descrete and continuous spaces.",
-                            "Modelling an aircraft fuel tank system as a non-stationary environment for the learning agent.",
-                            "Applying variations of Q-Learning (online/offline, multi-step backup, priority sweeping) to gauge learning performance."                
-            ],
-            "technologies": ["Python (ahkab, flask, numpy)", "Javascript (D3.js)"],
-            "links":[{
-                "title": "Github",
-                "url":  "https://github.com/hazrmard/QLearning"
-            }],
-            "tags": ["research", "artificial intelligence", "AI"]
-        }
-    ],
-
     "experience":     [
         {
-            "title":        "Teaching Assistant",
+            "title":        "Graduate Researcher/Teaching Assistant",
             "workplace":    "Vanderbilt University School of Engineering",
             "time":         "Aug '16 - Present",
-            "achievements": ["Mentor engineering design teams through their senior design projects.",
-                            "Grade team reports and provide logistical assistance to instructor.",
-                            "Train students in use of electrical and mechanical equipment."],
-            "technologies": [],
+            "achievements": ["Apply reinforcement learning-based control for fault recovery on aircraft.",
+                            "Process clinical surveys by feature selection, clustering, and classification to diagnose genetic disorders.",
+                            "Mentor 7 engineering design teams over the year for their capstone project."],
+            "technologies": ["Python", "Pandas", "Scikit-learn", "Scipy"],
             "links":        [],
             "tags":         ["experience", "work"]
         },
@@ -85,55 +66,27 @@
             "title":        "Research Intern",
             "workplace":    "Vanderbilt Department of Physics & Astronomy",
             "time":         "Jun '16 - Aug '16'",
-            "achievements": ["Performed data mining on dark matter simulation data (~3.7TB).",
-                            "Visualized halo formation and evolution using simulation results.",
-                            "Coded and scheduled jobs on the university's computing cluster: ACCRE.",
+            "achievements": ["Studied formation of dark matter halos in galaxies via high performance computer simulations.",
+                            "Developed algorithms to fit particle clouds to ellipsoids to verify Cold Dark Matter models of halo formation.",
+                            "Wrote a multiprocessor compatible data mining library to visualize 3.7TB of n-body physics simulation output.",
                             "Developed tools to generate animated snapshots of halo evolution.",
                             "Analyzed particle distributions in different halo finder protocols (AHF, Rockstar)."],
             "technologies": ["Python (numpy, matplotlib)", "C", "Bash"],
             "links":        [{
                 "title":    "GitHub",
                 "url":      "https://github.com/hazrmard/DMHaloAnalysis"
-                },
-                {
-                    "title":    "GitHub",
-                    "url":      "https://github.com/hazrmard/hinge"
-                    }],
-            "tags":         ["Astrophysics", "scientific computing", "research", "data analysis", "open source", "experience", "HPC - High Performance Computing", "work"]
-        },
-        {
-            "title":        "Research Assistant",
-            "workplace":    "Vanderbilt Department of Physics & Astronomy",
-            "time":         "Sep '15 - Apr '16",
-            "achievements": ["Designed an algorithm to fit dark matter N-body point cloud data to ellipsoidal halos.",
-                            "Programmed a flexible multi-core processing interface to achieve data parallelism on distributed systems.",
-                            "Incorporated existing code for reading simulation data into a modular and scalable Python class for use in further research."],
-            "technologies": ["Python (matplotlib, numpy)"],
-            "links":        [{
+                },{
                 "title":    "GitHub",
                 "url":      "https://github.com/hazrmard/DarkMatterHalos"
-                }],
+                    }],
             "tags":         ["Astrophysics", "scientific computing", "research", "data analysis", "open source", "experience", "HPC - High Performance Computing", "work"]
-        },
-        {
-            "title":        "Team Leader",
-            "workplace":    "Vanderbilt School of Engineering - Senior Design",
-            "time":         "Sep '15 - Apr '16",
-            "achievements": ["Developed digital signal processing module in python using GNURadio for RTL software defined radios.",
-                            "Designed a satellite tracking antenna using servo motors and 3D printed components.",
-                            "Programmed a real-time trajectory visualization and motor control interface in D3.js, Python, and C via a browser, local server, and Arduino Uno board."],
-            "technologies": ["Linux", "Raspberry Pi", "Arduino", "GNURadio", "Python", "HTML/CSS", "Javascript"],
-            "links":        [],
-            "tags":         ["experience", "work"]
         },
         {
             "title":        "Business Intelligence Intern",
             "workplace":    "Schneider Electric",
             "time":         "Jun '15 - Aug '15",
-            "achievements": ["Wrote backwards compatible SQL query  to consolidate 40 million sales records into 1.5 million records with no data loss.",
-                            "Developed and documented a python module to resolve record timing conflicts in SQL joins. Integrated with main data workflow in Alteryx.",
-                            "Designed and scripted data visualizations in Domo to serve location specific content to sales managers all over continental US.",
-                            "Programmed a SQL procedure to take selective backups monthly that reduced backup size by 75%."],
+            "achievements": ["Programmed SQL procedures to consolidate 40 million overlapping transactions into 1.5 million records.",
+                            "Rewrote periodic table back-up procedures to eliminate redundancies and reduced backup sizes by 75%."],
             "technologies": ["T-SQL", "Alteryx", "Domo", "Python"],
             "links":        [{
                 "title":    "GitHub",
@@ -156,8 +109,9 @@
             "title":        "Research Intern",
             "workplace":    "Vanderbilt University School of Engineering",
             "time":         "Jun '14 - Aug '14",
-            "achievements": ["Studied sources of radiation induced errors and programmed an Altera DE2 FPGA board to test SRAM chips for soft errors after irradiation.",
-                            "Wrote documentation and designed schematics for researchers at the Institute of Space and Defense Electronics."],
+            "achievements": ["Researched effects of solar and cosmic radiation on memory chips in space.",
+                            "Designed an interface in VHDL on a FPGA to test SRAM chips for single event upsets after irradiation.",
+                            "Documented code and interface operation procedures for use by graduate student researchers."],
             "technologies": ["VHDL"],
             "links":        [],
             "tags":         ["experience", "research", "work"]
@@ -166,7 +120,7 @@
             "title":        "Instructor",
             "workplace":    "Android Application Development Workshop - NUST, Pakistan",
             "time":         "Jun '13",
-            "achievements": ["Proposed and organized a week-long workshop attended by 40 professionals and graduate and undergraduate students.",
+            "achievements": ["Organized a week-long workshop attended by 40 professionals and graduate and undergraduate students.",
                             "Taught basic application development skills for Android using MIT AppInventor to attendees with diverse technical skillsets.",
                             "Mentored teams for final day projects and provided one-on-one guidance."],
             "technologies": ["MIT AppInventor"],
@@ -223,7 +177,7 @@
     "skills":   [
         {
             "title":        "Programming",
-            "skills":       ["C/C++ (OpenCV, OpenMP, RTOS, CUDA)","Python (Numpy, Django, Matplotlib)", "Go", "Java", "Android", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
+            "skills":       ["C/C++ (OpenCV, OpenMP, RTOS, CUDA)","Python (Scipy, Django, Matplotlib, Pandas, Sklearn)", "Go", "Java", "Android", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
         },
         {
             "title":        "Engineering",
@@ -235,10 +189,8 @@
         {
             "title":        "Resident Advisor",
             "time":         "Aug '15 - May '16",
-            "description":  ["Oversaw administrative floor activities in Lewis Hall.",
-                            "Supported 60 residents with academic and personal issues.",
-                            "Collaborated with other Resident Advisors to create a friendly atmosphere for student residents.",
-                            "Arranged recreational and educational activities with students."],
+            "description":  ["Identified residents facing academic or  personal challenges and provided support.",
+                            "Arranged recreational and educational events like movie nights and talks in collaboration with campus organizations to serve a community of 700 residents."],
             "details":      "",
             "links":        [],
             "tags":         ["teamwork", "leadership"]
@@ -288,5 +240,9 @@
             "details":      "Society of Physics Students",
             "tags":         ["honors"]
         }
+    ],
+
+    "publications": [
+        
     ]
 }

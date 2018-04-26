@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Artificial Intelligence on Ibrahim Ahmed</title>
-    <link>/tags/artificial-intelligence/</link>
+    <link>http://iahmed.me/tags/artificial-intelligence/</link>
     <description>Recent content in Artificial Intelligence on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     <lastBuildDate>Mon, 13 Nov 2017 23:19:08 -0600</lastBuildDate>
     
-	<atom:link href="/tags/artificial-intelligence/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://iahmed.me/tags/artificial-intelligence/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A Poor Man&#39;s Introduction to Reinforcement Learning</title>
-      <link>/post/poor-mans-reinforcement-learning/</link>
+      <link>http://iahmed.me/post/poor-mans-reinforcement-learning/</link>
       <pubDate>Mon, 13 Nov 2017 23:19:08 -0600</pubDate>
       
-      <guid>/post/poor-mans-reinforcement-learning/</guid>
+      <guid>http://iahmed.me/post/poor-mans-reinforcement-learning/</guid>
       <description>Reinforcement Learning (RL) is one of the many ways to implement artificial intelligence (AI). AI is the design of &amp;ldquo;intelligent&amp;rdquo; agents that maximize their chances of success at some goal. The goal can belong to any problem: from winning a game of tic-tac-toe, to recognizing speech, to steering a car.
 A problem can be approached in many different ways. An agent can search for all possible options and choose the best.</description>
     </item>

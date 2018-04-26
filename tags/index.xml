@@ -2,292 +2,292 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Ibrahim Ahmed</title>
-    <link>/tags/</link>
+    <link>http://iahmed.me/tags/</link>
     <description>Recent content in Tags on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     <lastBuildDate>Mon, 06 Feb 2017 18:47:26 -0600</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://iahmed.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Algorithms</title>
-      <link>/tags/algorithms/</link>
+      <link>http://iahmed.me/tags/algorithms/</link>
       <pubDate>Mon, 06 Feb 2017 18:47:26 -0600</pubDate>
       
-      <guid>/tags/algorithms/</guid>
+      <guid>http://iahmed.me/tags/algorithms/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Android</title>
-      <link>/tags/android/</link>
+      <link>http://iahmed.me/tags/android/</link>
       <pubDate>Sat, 05 Mar 2016 03:55:04 +0000</pubDate>
       
-      <guid>/tags/android/</guid>
+      <guid>http://iahmed.me/tags/android/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Artificial Intelligence</title>
-      <link>/tags/artificial-intelligence/</link>
+      <link>http://iahmed.me/tags/artificial-intelligence/</link>
       <pubDate>Mon, 13 Nov 2017 23:19:08 -0600</pubDate>
       
-      <guid>/tags/artificial-intelligence/</guid>
+      <guid>http://iahmed.me/tags/artificial-intelligence/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Astronomy</title>
-      <link>/tags/astronomy/</link>
+      <link>http://iahmed.me/tags/astronomy/</link>
       <pubDate>Fri, 24 Feb 2017 12:41:52 -0600</pubDate>
       
-      <guid>/tags/astronomy/</guid>
+      <guid>http://iahmed.me/tags/astronomy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Astrophysics</title>
-      <link>/tags/astrophysics/</link>
+      <link>http://iahmed.me/tags/astrophysics/</link>
       <pubDate>Fri, 24 Feb 2017 12:41:52 -0600</pubDate>
       
-      <guid>/tags/astrophysics/</guid>
+      <guid>http://iahmed.me/tags/astrophysics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Bash</title>
-      <link>/tags/bash/</link>
+      <link>http://iahmed.me/tags/bash/</link>
       <pubDate>Sat, 30 Jan 2016 04:30:28 +0000</pubDate>
       
-      <guid>/tags/bash/</guid>
+      <guid>http://iahmed.me/tags/bash/</guid>
       <description></description>
     </item>
     
     <item>
       <title>C&#43;&#43;</title>
-      <link>/tags/c&#43;&#43;/</link>
+      <link>http://iahmed.me/tags/c&#43;&#43;/</link>
       <pubDate>Fri, 29 Apr 2016 23:23:16 +0000</pubDate>
       
-      <guid>/tags/c&#43;&#43;/</guid>
+      <guid>http://iahmed.me/tags/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
     <item>
       <title>C/C&#43;&#43;</title>
-      <link>/tags/c/c&#43;&#43;/</link>
+      <link>http://iahmed.me/tags/c/c&#43;&#43;/</link>
       <pubDate>Sat, 30 Jan 2016 04:30:28 +0000</pubDate>
       
-      <guid>/tags/c/c&#43;&#43;/</guid>
+      <guid>http://iahmed.me/tags/c/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Classical Mechanics</title>
-      <link>/tags/classical-mechanics/</link>
+      <link>http://iahmed.me/tags/classical-mechanics/</link>
       <pubDate>Tue, 31 Jan 2017 10:48:32 -0600</pubDate>
       
-      <guid>/tags/classical-mechanics/</guid>
+      <guid>http://iahmed.me/tags/classical-mechanics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Git</title>
-      <link>/tags/git/</link>
+      <link>http://iahmed.me/tags/git/</link>
       <pubDate>Tue, 06 Sep 2016 02:01:26 +0000</pubDate>
       
-      <guid>/tags/git/</guid>
+      <guid>http://iahmed.me/tags/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Graphs</title>
-      <link>/tags/graphs/</link>
+      <link>http://iahmed.me/tags/graphs/</link>
       <pubDate>Mon, 06 Feb 2017 18:47:26 -0600</pubDate>
       
-      <guid>/tags/graphs/</guid>
+      <guid>http://iahmed.me/tags/graphs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Gravity</title>
-      <link>/tags/gravity/</link>
+      <link>http://iahmed.me/tags/gravity/</link>
       <pubDate>Tue, 31 Jan 2017 10:48:32 -0600</pubDate>
       
-      <guid>/tags/gravity/</guid>
+      <guid>http://iahmed.me/tags/gravity/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hpc</title>
-      <link>/tags/hpc/</link>
+      <link>http://iahmed.me/tags/hpc/</link>
       <pubDate>Fri, 29 Apr 2016 23:23:16 +0000</pubDate>
       
-      <guid>/tags/hpc/</guid>
+      <guid>http://iahmed.me/tags/hpc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hugo</title>
-      <link>/tags/hugo/</link>
+      <link>http://iahmed.me/tags/hugo/</link>
       <pubDate>Sat, 30 Sep 2017 17:29:58 -0500</pubDate>
       
-      <guid>/tags/hugo/</guid>
+      <guid>http://iahmed.me/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Javascript</title>
-      <link>/tags/javascript/</link>
+      <link>http://iahmed.me/tags/javascript/</link>
       <pubDate>Mon, 06 Feb 2017 10:07:58 -0600</pubDate>
       
-      <guid>/tags/javascript/</guid>
+      <guid>http://iahmed.me/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>/tags/linux/</link>
+      <link>http://iahmed.me/tags/linux/</link>
       <pubDate>Sat, 30 Jan 2016 04:30:28 +0000</pubDate>
       
-      <guid>/tags/linux/</guid>
+      <guid>http://iahmed.me/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Machine Learning</title>
-      <link>/tags/machine-learning/</link>
+      <link>http://iahmed.me/tags/machine-learning/</link>
       <pubDate>Fri, 20 Oct 2017 20:59:42 -0500</pubDate>
       
-      <guid>/tags/machine-learning/</guid>
+      <guid>http://iahmed.me/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Markov</title>
-      <link>/tags/markov/</link>
+      <link>http://iahmed.me/tags/markov/</link>
       <pubDate>Fri, 29 Apr 2016 23:23:16 +0000</pubDate>
       
-      <guid>/tags/markov/</guid>
+      <guid>http://iahmed.me/tags/markov/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mobile Dev</title>
-      <link>/tags/mobile-dev/</link>
+      <link>http://iahmed.me/tags/mobile-dev/</link>
       <pubDate>Sat, 05 Mar 2016 03:55:04 +0000</pubDate>
       
-      <guid>/tags/mobile-dev/</guid>
+      <guid>http://iahmed.me/tags/mobile-dev/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Powershell</title>
-      <link>/tags/powershell/</link>
+      <link>http://iahmed.me/tags/powershell/</link>
       <pubDate>Sat, 30 Sep 2017 17:29:58 -0500</pubDate>
       
-      <guid>/tags/powershell/</guid>
+      <guid>http://iahmed.me/tags/powershell/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Principal Component Analysis</title>
-      <link>/tags/principal-component-analysis/</link>
+      <link>http://iahmed.me/tags/principal-component-analysis/</link>
       <pubDate>Fri, 20 Oct 2017 20:59:42 -0500</pubDate>
       
-      <guid>/tags/principal-component-analysis/</guid>
+      <guid>http://iahmed.me/tags/principal-component-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Quantum Mechanics</title>
-      <link>/tags/quantum-mechanics/</link>
+      <link>http://iahmed.me/tags/quantum-mechanics/</link>
       <pubDate>Tue, 31 Jan 2017 11:00:25 -0600</pubDate>
       
-      <guid>/tags/quantum-mechanics/</guid>
+      <guid>http://iahmed.me/tags/quantum-mechanics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reinforcement Learning</title>
-      <link>/tags/reinforcement-learning/</link>
+      <link>http://iahmed.me/tags/reinforcement-learning/</link>
       <pubDate>Mon, 13 Nov 2017 23:19:08 -0600</pubDate>
       
-      <guid>/tags/reinforcement-learning/</guid>
+      <guid>http://iahmed.me/tags/reinforcement-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Space</title>
-      <link>/tags/space/</link>
+      <link>http://iahmed.me/tags/space/</link>
       <pubDate>Fri, 24 Feb 2017 12:41:52 -0600</pubDate>
       
-      <guid>/tags/space/</guid>
+      <guid>http://iahmed.me/tags/space/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Testing</title>
-      <link>/tags/testing/</link>
+      <link>http://iahmed.me/tags/testing/</link>
       <pubDate>Tue, 06 Sep 2016 02:01:26 +0000</pubDate>
       
-      <guid>/tags/testing/</guid>
+      <guid>http://iahmed.me/tags/testing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Thermodynamics</title>
-      <link>/tags/thermodynamics/</link>
+      <link>http://iahmed.me/tags/thermodynamics/</link>
       <pubDate>Tue, 31 Jan 2017 11:00:25 -0600</pubDate>
       
-      <guid>/tags/thermodynamics/</guid>
+      <guid>http://iahmed.me/tags/thermodynamics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualization</title>
-      <link>/tags/visualization/</link>
+      <link>http://iahmed.me/tags/visualization/</link>
       <pubDate>Fri, 20 Oct 2017 20:59:42 -0500</pubDate>
       
-      <guid>/tags/visualization/</guid>
+      <guid>http://iahmed.me/tags/visualization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Web App</title>
-      <link>/tags/web-app/</link>
+      <link>http://iahmed.me/tags/web-app/</link>
       <pubDate>Mon, 21 Sep 2015 04:32:06 +0000</pubDate>
       
-      <guid>/tags/web-app/</guid>
+      <guid>http://iahmed.me/tags/web-app/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Web Development</title>
-      <link>/tags/web-development/</link>
+      <link>http://iahmed.me/tags/web-development/</link>
       <pubDate>Sat, 30 Sep 2017 17:29:58 -0500</pubDate>
       
-      <guid>/tags/web-development/</guid>
+      <guid>http://iahmed.me/tags/web-development/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Web Scraping</title>
-      <link>/tags/web-scraping/</link>
+      <link>http://iahmed.me/tags/web-scraping/</link>
       <pubDate>Thu, 23 Jul 2015 01:32:40 +0000</pubDate>
       
-      <guid>/tags/web-scraping/</guid>
+      <guid>http://iahmed.me/tags/web-scraping/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Yql</title>
-      <link>/tags/yql/</link>
+      <link>http://iahmed.me/tags/yql/</link>
       <pubDate>Thu, 23 Jul 2015 01:32:40 +0000</pubDate>
       
-      <guid>/tags/yql/</guid>
+      <guid>http://iahmed.me/tags/yql/</guid>
       <description></description>
     </item>
     

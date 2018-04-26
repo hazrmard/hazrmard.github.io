@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Meta on Ibrahim Ahmed</title>
-    <link>/categories/meta/</link>
+    <link>http://iahmed.me/categories/meta/</link>
     <description>Recent content in Meta on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     <lastBuildDate>Mon, 06 Feb 2017 10:07:58 -0600</lastBuildDate>
     
-	<atom:link href="/categories/meta/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://iahmed.me/categories/meta/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Optimizing static sites with hugo</title>
-      <link>/post/optimizing-static-sites-with-hugo/</link>
+      <link>http://iahmed.me/post/optimizing-static-sites-with-hugo/</link>
       <pubDate>Mon, 06 Feb 2017 10:07:58 -0600</pubDate>
       
-      <guid>/post/optimizing-static-sites-with-hugo/</guid>
+      <guid>http://iahmed.me/post/optimizing-static-sites-with-hugo/</guid>
       <description>According to httparchive the average size of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age where the internet is the primary media delivery platform - but it is worth noting that most web pages serve text as their primary content. Looking at the report sheds light on what constitutes an average web page:
 The HTML content takes up around 50-60kB. Images, understandably, make up the biggest chunk with ~1.</description>
     </item>
     
     <item>
       <title>Let there be a blog</title>
-      <link>/post/2015-07-04-let-there-be-a-blog/</link>
+      <link>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</link>
       <pubDate>Sat, 04 Jul 2015 16:50:32 +0000</pubDate>
       
-      <guid>/post/2015-07-04-let-there-be-a-blog/</guid>
+      <guid>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</guid>
       <description>&amp;#8230;and lo and behold, there was.
 A while back I discovered my interest in web development. I taught myself HTML, CSS, and JavaScript. This blog is the latest in my attempts to learn web technologies.</description>
     </item>
