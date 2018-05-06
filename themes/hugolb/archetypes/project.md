@@ -1,5 +1,5 @@
 +++
-title = "{{ replace .TranslationBaseName "-" " " | title}}"
+title = '{{ replace .TranslationBaseName "-" " " | title}}'
 date = "{{ .Date }}"
 description = ""
 link = ""
@@ -8,4 +8,5 @@ isexternal = false
 technologies = []
 hasequations = false
 hascode = false
+includes = []
 +++

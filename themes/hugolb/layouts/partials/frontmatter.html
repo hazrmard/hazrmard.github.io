@@ -5,6 +5,7 @@
         <em>{{dateFormat "Monday, Jan 2, 2006" .Date}}</em>
     {{end}}
     {{range $k, $v := .Site.Taxonomies}}
+    <!-- if taxonom/key $k is set in current page's front matter, then show terms/values -->
         {{if (isset $.Params $k)}}
             {{if (gt (len (index $.Params $k)) 0)}}
                 <br/>{{$k | humanize}}:

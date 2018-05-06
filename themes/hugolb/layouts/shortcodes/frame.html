@@ -2,7 +2,22 @@
     <iframe style="width:100%; border:0" scrolling="no"
     onload="(function(self) {
         window.iframe = self;
-        self.height = self.contentDocument.body.scrollHeight;
+        // local frame
+        if (self.contentDocument) {
+            var frameHeight = self.contentDocument.body.scrollHeight;
+            if (frameHeight == 0) {
+                self.height = self.parentElement.clientWidth;
+                self.scrolling = 'yes';
+            } else {
+                self.height = frameHeight;
+            }
+            
+        }
+        // xorigin frame
+        else {
+            self.height = self.parentElement.clientWidth;
+            self.scrolling = 'yes';
+        }
     })(this);
     "
     {{ if .IsNamedParams }}

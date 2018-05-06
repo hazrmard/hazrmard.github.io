@@ -4,9 +4,15 @@ languageCode = "en-us"
 theme = "hugolb"
 copyright = "Ibrahim Ahmed"
 
+# hugo build parameters
+paginate = 12
+paginatePath = "p"
+ignoreFiles = [".+pptx$"]
+# ====
+
 [params]
-    ignoreFiles = [".+pptx$"]
-    
+# Site/Blog/theme specific parameters
+# ====
     splashSubheading = "Electrical Engineering @ Vanderbilt University"
     blogroot = "Posts"
     defaultprojimg = "/img/gear.png"
@@ -49,8 +55,10 @@ copyright = "Ibrahim Ahmed"
         weight = 40
         url = "/project/"
         image = "/img/LinkIcons/svg/terminal.svg"
+# ====
 
-
+# Other hugo configuration options
+# ====
 [taxonomies]
     tag = "tags"
     category = "categories"

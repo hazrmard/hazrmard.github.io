@@ -57,13 +57,13 @@ blockquote {
     background-color: #FFEDAA;
     padding: 0em 0.25em;
 }
-.prev, .next {
+.prev, .next, .nav-item {
     color: #806915;
     background-color: #FFEDAA;
     padding: 0.5em;
     transition: 0.25s;
 }
-.prev:hover, .next:hover {
+.prev:hover, .next:hover, .nav-item:hover, .nav-item.highlighted {
     background-color: #806915;
     color: #FFEDAA;
     transition: 0.25s;

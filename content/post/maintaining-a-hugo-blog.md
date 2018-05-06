@@ -4,7 +4,7 @@ date = "2017-09-30T17:29:58-05:00"
 description = ""
 tags = ["hugo", "Web development", "Powershell"]
 categories = ["Developer"]
-series = []
+series = ["Hugo site development"]
 isexternal = false
 hasequations = false
 hascode = true
@@ -50,7 +50,7 @@ hugo -d ../
 Which told `hugo` to take everything in my source folder and render it as a
 static site in my root folder. Mind you, this convuluted arrangement wasn't
 simply ignorance. It was that too, but I had to have my rendered site in the
-root folder for GitHub to properly serve it.
+root folder of my repository for GitHub to properly serve it.
 
 This also meant that many changes that did not make it all the way to
 deployment polluted my commit history. This was too messy.

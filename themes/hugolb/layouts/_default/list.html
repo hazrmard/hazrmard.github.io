@@ -1,9 +1,29 @@
+<!-- lists posts by section/taxonomy -->
 {{partial "header.html" .}}
 <div class="content">
-    <h1 class="page-title">{{if isset .Data "Plural"}}{{.Data.Plural | humanize}} → {{end}}{{.Title}}</h1>
-    {{ range .Data.Pages }}
+
+    <h1 class="page-title">
+        <!-- If list is of a taxonomy, show as "taxonomy -> term -->
+        {{if eq .Kind "taxonomy"}}
+            {{.Data.Plural | humanize}} → 
+        {{end}}
+        <!-- Name of list e.g. "Post" or "Engineering" -->
+        {{.Title}}
+    </h1>
+
+    <!-- break down posts into pages -->
+    <!-- each section list only shows pages in that section directory or
+    with an explicit "type=SECION" in front matter -->
+    {{ $paginator := .Paginate (.Data.Pages) }}
+    {{ range $paginator.Pages }}
         {{.Render "meta"}}
     {{ end }}
+    <br/>
+    <!-- passes a dict with "context" and "paginator" keys -->
+    {{partial "list_navigation.html" (dict "context" . "paginator" $paginator) }}
+    <br/>
+    
+
 </div>
 {{partial "sidebar.html" .}}
 {{partial "footer.html" .}}

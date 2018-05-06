@@ -4,7 +4,7 @@ categories = ["Test"]
 tags = ["Test"]
 title = "Test post"
 hasequations = true
-hascode = false
+hascode = true
 isexternal = false
 series = []
 description = ""
@@ -25,6 +25,20 @@ is a line break like this.
 >
 > This is another para of quotes.
 
-## `iframes`:
+## xorigin iframes:
 
-{{< frame src="/post/is-cold-the-new-hot" >}}
+
+{{< frame src="http://iahmed.me" >}}
+
+
+## local iframes:
+
+{{< frame src="/old_www/index.html" >}}
+
+## rendered notebooks (markdown)
+
+{{< notebook src="/static/notebooks/sample.md" >}}
+
+## rendered notebooks (html)
+
+{{< notebook src="/static/notebooks/sample.html" >}}

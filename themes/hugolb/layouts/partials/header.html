@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html {{if eq .Section "resume"}} ng-app=Resume {{end}}>
+<html {{ if eq .Section "resume" }} ng-app=Resume {{end}}>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +7,21 @@
     <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
     <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
     
-    {{if .IsHome}}
+    <!-- Include main page style sheet -->
+    {{ if .IsHome }}
         <link rel="stylesheet" type="text/css" href="/css/splash.css">
-    {{end}}
+    {{ end }}
 
-    {{if .IsPage}}
-        {{if .Params.hascode}}
+    <!-- for regular content pages, include styles and scripts -->
+    {{ if .IsPage }}
+        <!-- include code highlighting -->
+        {{ if .Params.hascode }}
             <script src="/js/highlight/highlight.pack.js"></script>
-            <link rel="stylesheet" type="text/css" href="/js/highlight/styles/atom-one-dark.css">
+            <link rel="stylesheet" type="text/css" href="/css/solarized-light.css">
             <script>hljs.initHighlightingOnLoad();</script>
-        {{end}}
-        {{if .Params.hasequations}}
+        {{ end }}
+        <!-- include mathjax for equation formatting -->
+        {{ if .Params.hasequations }}
             <script type="text/javascript" async
                 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
             </script>
@@ -30,17 +34,25 @@
                     } 
                 });
             </script>
-        {{end}}
-    {{end}}
+        {{ end }}
+        <!-- include additional js files -->
+        {{ range .Params.includes }}
+            <script type="text/javascript" async
+                src="{{ . }}">
+            </script>
+        {{ end }}
+    {{ end }}
 
-    {{if eq .Section "resume"}}
+    <!-- for resume, include angular + resume app js file + styles -->
+    {{ if eq .Section "resume" }}
         <link rel="stylesheet" type="text/css" href="/css/resume.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
         <script>RESUME_JSON_PATH="{{.Params.json}}"</script>
 	    <script src="/js/resume.js"></script>
-    {{end}}
+    {{ end }}
 
-    <title>{{.Title}}</title>
+    <title>{{ .Title }}</title>
 </head>
 <body>
+    <!-- container dive is closed in footer partial -->
     <div class="container">

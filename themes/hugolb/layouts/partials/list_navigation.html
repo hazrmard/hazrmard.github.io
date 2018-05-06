@@ -1,0 +1,13 @@
+<!-- shows page number navigation for list templates -->
+<!-- expects a dict with "context" and "paginator" keys instead of just context as .-->
+<div class="navigation">
+    {{ $paginator := .paginator}}
+    {{ range $index, $pager := $paginator.Pagers }}
+        {{ $num := add $index 1 }}
+        <a href="{{ $pager.URL }}">
+            <div class="nav-item {{ if eq $paginator.PageNumber $num }}highlighted{{ end }}">
+                {{ $num }}
+            </div></a>
+    {{ end }}
+</div>
+    

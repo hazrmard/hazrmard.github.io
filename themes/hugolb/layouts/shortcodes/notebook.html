@@ -1,0 +1,10 @@
+<!-- takes a named path argument relative to draft website source.
+Renders HTML or markdown content inside post. -->
+{{ $file :=  .Get "src"}}
+<!-- if extension HTML, parse as such -->
+{{ if eq (substr $file -1 4) "html" }}
+    {{ readFile $file | safeHTML }}
+{{ else if eq (substr $file -1 2) "md" }}
+<!-- of extension is markdown, process it -->
+    {{ $file | readFile | markdownify }}
+{{ end }}

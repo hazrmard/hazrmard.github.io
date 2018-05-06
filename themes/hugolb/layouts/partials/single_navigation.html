@@ -1,11 +1,11 @@
 <div class="navigation">
     {{if .PrevInSection}}
-        <a href="{{.PrevInSection.Permalink}}"><div class="prev">
+        <a href="{{.PrevInSection.Permalink}}"><div class="prev nav-item">
             ← Previous {{.Type | humanize}}
         </div></a>
     {{end}}
     {{if .NextInSection}}
-        <a href="{{.NextInSection.Permalink}}"><div class="next">
+        <a href="{{.NextInSection.Permalink}}"><div class="next nav-item">
             Next {{.Type | humanize}} →
         </div></a>
     {{end}}

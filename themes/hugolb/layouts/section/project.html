@@ -9,8 +9,19 @@
         {{end}}
     </h1>
     {{.Content}}
-    {{range .Data.Pages}}
+    <!-- {{range .Data.Pages}}
         {{.Render "summary"}}
-    {{end}}
+    {{end}} -->
+    <!-- break down posts into pages -->
+    <!-- each section list only shows pages in that section directory or
+    with an explicit "type=SECION" in front matter -->
+    {{ $paginator := .Paginate (.Data.Pages) }}
+    {{ range $paginator.Pages }}
+        {{.Render "summary"}}
+    {{ end }}
+    <br/>
+    <!-- passes a dict with "context" and "paginator" keys -->
+    {{partial "list_navigation.html" (dict "context" . "paginator" $paginator) }}
+    <br/>
 </div>
 {{partial "footer.html" .}}

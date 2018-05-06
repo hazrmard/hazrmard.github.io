@@ -1,0 +1,218 @@
+﻿html {
+	height: 100%;
+}
+
+body {
+	width: 100vw;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	margin: 0px;
+}
+
+#top-div {
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	background-image: url(images/nebula-min.jpg);
+	background-size: cover;
+	background-attachment: fixed;
+	overflow: hidden;
+}
+
+#centre-div{
+	position: absolute;
+	top: 30%;
+	/*left: 50%;*/
+	width: 100%;
+	/*transform: translate(-50%, -50%);*/
+}
+
+#header-div {
+	padding: 10px;
+	top: 0%;
+	opacity: 0.9;
+	color: white;
+	letter-spacing: 3px;
+}
+
+/*
+.blur{
+  background: url(images/nebula-min.jpg) no-repeat 0% 30% fixed;
+  background-size: cover;
+  position: absolute;
+  height: 100%;
+  width:100%;
+  z-index:-1;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: url(#blur);
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='2');
+  overflow:hidden;
+  padding: 10px;
+  border-color: white;
+	border-style: solid;
+	border-width: 2px 0px 2px 0px;
+}
+
+.blur:after{
+  content:'';
+  height:100%;
+  width:100%;
+  position:absolute;
+}
+*/
+.sub-heading-div {
+	display: inline-block;
+	}
+
+.sub-heading {
+	color: white;
+	transition: color 0.3s;
+}
+
+.sub-heading:hover {
+	color: red;
+}
+
+#link-div {
+	position: absolute;
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	z-index: 5;
+}
+
+.link-div {
+	display: inline-block;
+	background-color: RGBA(255,255,255,0);
+	transition: background-color 0.1s;
+	padding: 10px;
+}
+
+.link-div img {
+	margin: 10px;
+	transition: all 0.1s;
+}
+
+.link-div img:hover {
+	transform: scale(1.1);
+}
+/*
+#vandy-div:hover{
+	background-color: RGBA(162,132,72,1);
+}
+
+#linkedin-div:hover{
+	background-color: RGBA(0,119,181,1);
+}
+
+#git-div:hover{
+	background-color: RGBA(129,0,127,1);#1ABC9C
+}
+
+#resume-div:hover{
+	background-color: #1ABC9C;
+}
+*/
+#top-div * {
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#about-me-master-div {
+	position: absolute;
+	top: 100vh;
+	left: 0px;
+	width: 100%;
+	height: 100vh;
+	background-color: #1A1A1A;
+}
+
+#back-1-container-div div img {
+	position: absolute;
+	height: 100%;
+}
+
+#back-1-container-div {
+	overflow: hidden;
+	background-color: #000014;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-shadow: inset 0px -5px 8px 0px rgba(0,0,0,0.75);
+}
+
+#earth {
+	position: inherit;
+	height: inherit;
+	width: inherit;
+	top: inherit;
+	left: inherit;
+	background-image: url(images/earth-min.png);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 30%;
+	background-position: 20% 100%;
+	-webkit-filter: blur(2px);
+	-moz-filter: blur(2px);
+	filter: blur(2px);
+}
+
+#rocket {
+	position: absolute;
+	height: 60%;
+	width: auto;
+	top: 10%;
+	left: 25%;
+	-webkit-filter: blur(1px);
+	-moz-filter: blur(1px);
+	filter: blur(1px);
+	transform: rotate(45deg);
+}
+
+@keyframes sway {
+	0%		{transform: translateY(0.5em) translateZ(0px) rotate(-15deg);}
+	25%		{transform: translateY(-0.5em) translateZ(0px) rotate(-15deg);}
+	50%		{transform: translateY(-0.5em) translateZ(0px) rotate(-15deg);}
+	100%		{transform: translateY(0.5em) translateZ(0px) rotate(-15deg);}
+}
+
+#astronaut {
+	position: absolute;
+	left: 5%;
+	height: 65%;
+	width: auto;
+	top: 10%;
+	transform: translateZ(0px) rotate(-15deg);
+	animation: sway 10s linear infinite alternate;
+}
+
+#text-div {
+	position: relative;
+	width: 40%;
+	height: 80%;
+	padding-top: auto;
+	padding-bottom: auto;
+	margin-left: 50%;
+	padding: 20px;
+	overflow: auto;
+	text-align: justify;
+}
+
+#text-div p,h2 {
+	color: white;
+}
+
+#vlexo-div {
+	position: absolute;
+	bottom: -100%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	text-align: center;
+	font-size: 75%;
+}
