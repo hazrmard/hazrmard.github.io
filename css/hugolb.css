@@ -78,7 +78,7 @@ html, body {
 .content,
 .resume {
     margin-left: 15%;
-    padding: 2em 0.5em;
+    padding: 2em 0.5em 4em 0.5em;
     width: 70%;
     min-width: 180px;
     max-width: 680px;
@@ -106,6 +106,8 @@ html, body {
     text-align: left;
     font-size: 80%;
 }
+
+/* lists and summaries */
 .grid {
     text-align: inherit;
 }
@@ -137,6 +139,15 @@ html, body {
     text-align: justify;
     padding-top: 0.3em;
 }
+
+/* navigation */
+.navigation {
+    width: 100%;
+}
+.navigation, .nav-item {
+    display: inline-block;
+    text-align: center;
+}
 .prev {
     float: left;
 }
@@ -144,6 +155,7 @@ html, body {
     float: right;
 }
 
+/* taxonomies, terms etc. */
 .terms-list {
     padding-left: 0px;
     text-align: left;
@@ -155,6 +167,7 @@ html, body {
     font-size: 125%;
 }
 
+/* bottom of page */
 .footer {
     position: absolute;
     width: 85%;

@@ -8,8 +8,12 @@
     <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
     
     
+    
 
     
+    
+        
+        
         
         
             <script type="text/javascript" async
@@ -25,13 +29,17 @@
                 });
             </script>
         
+        
+        
     
 
+    
     
 
     <title>A Poor Man&#39;s Introduction to Reinforcement Learning</title>
 </head>
 <body>
+    
     <div class="container">
 
 <div class="content">
@@ -39,6 +47,7 @@
     <div class="front-matter">
     
         <em>Monday, Nov 13, 2017</em>
+    
     
     
         
@@ -50,9 +59,11 @@
             
         
     
+    
         
             
         
+    
     
         
             
@@ -87,7 +98,7 @@ to get better. So RL agents start off poorly, with the expectation that they
 will get better as they blunder their way through the problem.</p>
 
 
-<figure >
+<figure>
     
         <img src="/img/posts/poor-mans-RL/three_AI_approaches.gif" alt="Let&#39;s see what sticks: an illustration of various approaches towards implementing AI. Left: An agent tries all options. Centre: An agent formulates the problem and derives the best choice. Right: An agent learns from experience (reinforcement)." />
     
@@ -111,7 +122,7 @@ agent will transition to another state. Also, for each action the agent will get
 some feedback from the environment.</p>
 
 
-<figure >
+<figure>
     
         <img src="/img/posts/poor-mans-RL/RL_model.png" />
     
@@ -151,7 +162,7 @@ into the future. It will explore each of those trajectories and note the highest
 reward which will become the value.</p>
 
 
-<figure >
+<figure>
     
         <img src="/img/posts/poor-mans-RL/state_tree.png" alt="An agent charts all possible action trajectories from the current state (dark blue) to find the most rewarding combinaton of actions. The total reward of that combination is the state&#39;s value. In this case the most rewarding combination is from rewards 1-5-5 which gives a value of 11." />
     
@@ -210,7 +221,7 @@ the agent first solves for those values. Then it compares them to find the
 best combination for the current value.</p>
 
 
-<figure >
+<figure>
     
         <img src="/img/posts/poor-mans-RL/dynamic_vis.png" alt="Dynamic programming looks at all reachable states to calculate the value of the current state." />
     
@@ -262,7 +273,7 @@ $$value(s1) = Average(Reward_{2} + Reward_{3} + \ldots) = Average(return(s1))$$
 $$\vdots$$</p>
 
 
-<figure >
+<figure>
     
         <img src="/img/posts/poor-mans-RL/montecarlo_vis.png" alt="Monte Carlo approaches approximate value of states from average returns over multiple episodes. This illustration shows a single episode. Episodes may cirsscross over state space, so each state is sampled multiple times." />
     
@@ -322,7 +333,7 @@ value(s0) = value(s0) + \alpha \times error(s0)
 $$</p>
 
 
-<figure >
+<figure>
     
         <img src="/img/posts/poor-mans-RL/temporal_vis.png" alt="Temporal Difference methods update the value of states after a single step. They use the immediate reward and back-ups of previously calculated values to calculate the change." />
     
@@ -357,7 +368,7 @@ $$</p>
 $\lambda=\infty$, it becomes a Monte Carlo approach.</p>
 
 
-<figure >
+<figure>
     
         <img src="/img/posts/poor-mans-RL/multisteptemporal_vis.png" alt="Temporal Difference($\lambda$) methods update the value of states after multiple steps. They use future rewards and back-ups of previously calculated values to calculate the change." />
     
@@ -382,7 +393,7 @@ calculating the return, the agent also backs up values of states from actions
 of the <em>average</em> return because the agent considers multiple actions.</p>
 
 
-<figure >
+<figure>
     
         <img src="/img/posts/poor-mans-RL/treebackup_vis.png" alt="n-Step Tree Backup approaches weigh the rewards of actions taken, and the values of reachable states not traversed." />
     
@@ -420,7 +431,7 @@ the different ways agents explore state space to come to a decision about the
 best actions to take.</p>
 
 
-<figure >
+<figure>
     
         <img src="/img/posts/poor-mans-RL/overview.png" alt="Reinforcement learning methods can derive agent behaviour from dense and sparse sampling of state space." />
     
@@ -452,13 +463,14 @@ introduction. Second Edition, in progress. MIT Press, Cambridge</a></p></li>
     <br/>
     <div class="navigation">
     
-        <a href="http://iahmed.me/post/escaping-echochambers/"><div class="prev">
+        <a href="http://iahmed.me/post/escaping-echochambers/"><div class="prev nav-item">
             ← Previous Post
         </div></a>
     
     
 </div>
 
+    <br/>
 </div>
 <div class="sidebar">
     <div class="menu-icon"><h2>≡</h2></div>
@@ -540,7 +552,8 @@ introduction. Second Edition, in progress. MIT Press, Cambridge</a></p></li>
     <div class="footer">
         <div class="copyright">© Ibrahim Ahmed</div>
     </div>
-</div>
+
+</div> 
 </body>
 </html>
 

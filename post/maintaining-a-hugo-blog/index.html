@@ -8,21 +8,29 @@
     <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
     
     
+    
 
     
+    
+        
         
             <script src="/js/highlight/highlight.pack.js"></script>
-            <link rel="stylesheet" type="text/css" href="/js/highlight/styles/atom-one-dark.css">
+            <link rel="stylesheet" type="text/css" href="/css/solarized-light.css">
             <script>hljs.initHighlightingOnLoad();</script>
         
         
+        
+        
+        
     
 
+    
     
 
     <title>Trials and Tribulations of Maintaining a Hugo Blog</title>
 </head>
 <body>
+    
     <div class="container">
 
 <div class="content">
@@ -30,6 +38,7 @@
     <div class="front-matter">
     
         <em>Saturday, Sep 30, 2017</em>
+    
     
     
         
@@ -41,9 +50,16 @@
             
         
     
+    
         
             
+                <br/>Series:
+                    
+                        <a href="/series/hugo-site-development">Hugo site development</a>,
+                    
+            
         
+    
     
         
             
@@ -100,7 +116,7 @@ command:</p>
 <p>Which told <code>hugo</code> to take everything in my source folder and render it as a
 static site in my root folder. Mind you, this convuluted arrangement wasn&rsquo;t
 simply ignorance. It was that too, but I had to have my rendered site in the
-root folder for GitHub to properly serve it.</p>
+root folder of my repository for GitHub to properly serve it.</p>
 
 <p>This also meant that many changes that did not make it all the way to
 deployment polluted my commit history. This was too messy.</p>
@@ -216,17 +232,18 @@ to quickly render and copy files between branches.</p>
     <br/>
     <div class="navigation">
     
-        <a href="http://iahmed.me/post/stellar-equations/2-hydrostatic-equilibrium/"><div class="prev">
+        <a href="http://iahmed.me/post/stellar-equations/2-hydrostatic-equilibrium/"><div class="prev nav-item">
             ← Previous Post
         </div></a>
     
     
-        <a href="http://iahmed.me/post/escaping-echochambers/"><div class="next">
+        <a href="http://iahmed.me/post/escaping-echochambers/"><div class="next nav-item">
             Next Post →
         </div></a>
     
 </div>
 
+    <br/>
 </div>
 <div class="sidebar">
     <div class="menu-icon"><h2>≡</h2></div>
@@ -308,7 +325,8 @@ to quickly render and copy files between branches.</p>
     <div class="footer">
         <div class="copyright">© Ibrahim Ahmed</div>
     </div>
-</div>
+
+</div> 
 </body>
 </html>
 
