@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
+    <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118761164-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-118761164-1');
+    </script>
+
+    
+    
+    
+
+    
+    
+        
+        
+            <script src="/js/highlight/highlight.pack.js"></script>
+            <link rel="stylesheet" type="text/css" href="/css/solarized-light.css">
+            <script>hljs.initHighlightingOnLoad();</script>
+        
+        
+        
+        
+        
+    
+
+    
+    
+
+    <title>Hugo and Jupyter Notebooks</title>
+</head>
+<body>
+    
+    <div class="container">
+
+<div class="content">
+    <h1 class="post-title">Hugo and Jupyter Notebooks</h1>
+    <div class="front-matter">
+    
+        <em>Monday, Apr 30, 2018</em>
+    
+    
+    
+        
+            
+                <br/>Categories:
+                    
+                        <a href="/categories/developer">Developer</a>,
+                    
+            
+        
+    
+    
+        
+            
+                <br/>Series:
+                    
+                        <a href="/series/hugo-site-development">Hugo site development</a>,
+                    
+            
+        
+    
+    
+        
+            
+                <br/>Tags:
+                    
+                        <a href="/tags/hugo">Hugo</a>,
+                    
+                        <a href="/tags/web-development">Web development</a>,
+                    
+            
+        
+    
+</div>
+
+    
+    <p>[Hugo][1] is a static site generator. It takes a bunch of markdown files and renders them to HTML. It is fast and simple.</p>
+
+<p><img src="/notebooks/../img/posts/hugo-jupyter/md-to-html.png" alt="md2html" /></p>
+
+<p>[Jupyter Notebooks][2] are an interactive front-end for python (with support for other languages too). They execute code, display its output, and render markdown all in a browser window. The notebooks are a neat compilation of formatted code and text generated as HTML.</p>
+
+<p><img src="/notebooks/../img/posts/hugo-jupyter/jupyter-to-html.png" alt="jupyter2html" /></p>
+
+<p>I use Hugo for my site. I use Jupyter Notebooks to quickly prototype ideas or troubleshoot code. Wouldn&rsquo;t it be nice if there were a way to tell Hugo to take my Jupyter Notebooks and render them as static HTML pages on my site?</p>
+
+<p>A less convenient alternative would be to simply link the notebooks for download, or use an external service (like [NBViewer][3]) to render notebooks each time someone visits my site.</p>
+
+<p>I wrote a script that takes my Jupyter notebooks and converts them to markdown and/or html. I can then either add them as a standard Hugo post or embed/append them to existing posts.</p>
+
+<p><img src="/notebooks/../img/posts/hugo-jupyter/jupyter-to-md-to-html.png" alt="jupyter2md2html" /></p>
+
+<p>The script <code>notebook.py</code> runs from the root directory of the hugo site. It detects all Jupyter notebooks in the <code>static/notebooks/</code> directory. The name of the notebooks must be identical to the markdown file that is to be created/appended to.</p>
+
+<p>Indeed, this post was written on Jupyter notebook. I then used the command:</p>
+
+<pre><code>&gt; python notebook.py --files 2018-04-30-hugo-jupyter  # filename w/o extension
+                     --to md                          # convert to markdown
+                     --force                          # overwrite existing .md
+                     --embed                          # embed instead of append
+</code></pre>
+
+<p>The script then placed the converted markdown into <code>post/2018-04-30-hugo-jupyter.md</code>. Since I used the <code>--embed</code> flag, the markdown was placed in the output file, replacing any exisiting contents (instead of appending to the end). Since I used the <code>--force</code> flag, no error was raised if a file with the name already existed. Providing a <code>--section NAME</code> flag will place the output in another section besides the default <code>post</code>.</p>
+
+<p>With this script, I can add hugo directives/shortcodes in Jupyter notebook. They are then rendered by Hugo in the final stage of my site generation.</p>
+
+<p>For example, at the end of this post, I have a shortcode to render my script as python:</p>
+
+<pre><code class="language-python">
+
+
+
+
+    &#34;&#34;&#34;
+This script converts jupyter notebooks into html for rendering by hugo.
+Notebook files are placed in the /static/notebooks/ directory in the source and
+are copied to /notebooks/ folder after conversion to a static site.
+
+* This script is to be called from the website root folder.
+* For embedding notebooks, assumes frontmatter is in TOML format.
+* For images etc. in converted markdown files, assumes static dir is /static/
+* all notebooks to be stored in PRE_NBDIR (default: static/notebooks/)
+* all linked images are local
+
+Requires:
+* hugo.exe in PATH
+* jupyter notebook installed (along with nbconvert python library)
+&#34;&#34;&#34;
+
+import os
+import glob
+import json
+import hashlib
+import shutil
+import re
+from subprocess import Popen
+from argparse import ArgumentParser
+from urllib.parse import quote
+from nbconvert import HTMLExporter, MarkdownExporter
+from nbconvert.writers import FilesWriter
+
+# static dir relative to draft root
+STATIC_DIR = &#39;static&#39;
+STATIC_ABS = os.path.abspath(STATIC_DIR)
+# .ipynb directory relative to draft root
+PRE_NBDIR = os.path.join(STATIC_DIR, &#39;notebooks&#39;)
+# directory where images etc. are stored for markdown files before compilation
+PRE_NBASSETS = os.path.join(PRE_NBDIR, &#39;assets&#39;)
+# location of PRE_NBDIR relative to root after compilation to website
+POST_NBDIR = &#39;/notebooks/&#39;
+# location of PRE_NBASSETS relative to root after compilation to website.
+# os.path.join is not used to preserve starting &#39;/&#39; which hugo reads as
+# website root
+POST_NBASSETS = POST_NBDIR &#43; &#39;assets/&#39;
+# notebook file extension
+EXT = &#39;*.ipynb&#39;
+# file containing store of notebooks since last change
+TRACK = &#39;.snapshot&#39;
+# directory of script
+MYDIR = os.path.dirname(os.path.abspath(__file__))
+# content directory containing markdown posts etc.
+CONTENT_DIR = os.path.join(MYDIR, &#39;content&#39;)
+# frontmatter markers (YAML or TOML)
+FRONT_PAT = r&#39;(?P&lt;type&gt;\&#43;{3}|-{3})\n&#43;(?P&lt;config&gt;.&#43;?)\n&#43;\1.*&#39;
+# links to resources in assets directory, relative to NBDIRs
+ASSETS_PAT = r&#39;(?P&lt;name&gt;\!\[.&#43;?\])\((?P&lt;link&gt;.&#43;?)\)&#39;
+
+parser = ArgumentParser(description=__doc__)
+parser.add_argument(&#39;--files&#39;,
+                    default=&#39;changed&#39;,
+                    help=&#39;all or changed or file.ipynb&#39;)
+parser.add_argument(&#39;--to&#39;,
+                    default=&#39;md&#39;,
+                    help=&#39;html or md or both format.&#39;)
+parser.add_argument(&#39;--embed&#39;,
+                    action=&#39;store_true&#39;,
+                    default=False,
+                    help=&#39;Embed notebook in new post file &#43; delete converted file.&#39;)
+parser.add_argument(&#39;--section&#39;,
+                    default=&#39;post&#39;,
+                    help=&#39;content subdirectory to which notebook post written if embedded.&#39;)
+parser.add_argument(&#39;--force&#39;,
+                    default=False,
+                    help=&#39;Whether to overwrite existing posts with new content.&#39;,
+                    action=&#39;store_true&#39;)
+parser.add_argument(&#39;--append&#39;,
+                    default=False,
+                    help=&#39;Whether to append converted markdown to existing post.&#39;,
+                    action=&#39;store_true&#39;)
+
+
+def convert_html(nbfiles):
+    &#34;&#34;&#34;
+    Convert a notebook to html w/o prompts, anchors, or styles and with embedded
+    images. Change template_file to &#39;full&#39; to embed style as well.
+    &#34;&#34;&#34;
+    hx = HTMLExporter()
+    hx.template_file = &#39;basic&#39;
+    hx.exclude_input_prompt = True
+    hx.exclude_output_prompt = True
+    hx.anchor_link_text = &#39;\t&#39;
+    for nbfile in nbfiles:
+        basepath, _ = os.path.splitext(nbfile)
+        with open(basepath &#43; &#39;.html&#39;, &#39;w&#39;) as f:
+            bd, _ = hx.from_file(nbfile)
+            f.write(bd)
+
+
+def convert_markdown(nbfiles):
+    &#34;&#34;&#34;
+    Converts notebook to markdown with separated images. Images/assets stored in
+    a sub-directory of notebooks and converted .md files.
+    &#34;&#34;&#34;
+    mx = MarkdownExporter()
+    wr = FilesWriter(build_directory=PRE_NBDIR)
+    mx.template_file = &#39;markdown&#39;
+    for nbfile in nbfiles:
+        basepath, _ = os.path.splitext(nbfile)  # path w/o extension
+        basename = os.path.basename(basepath)   # name of notebook file
+        bd, res = mx.from_file(nbfile)          # hex encoded data, asset file name
+        
+        # in case of embedded assets/images, save them to files on disk
+        # rename asset files to remove spaces, add notebook filename as prefix
+        for rfile in list(res[&#39;outputs&#39;].keys()):
+            new_rfile = &#39;_&#39;.join([*basename.split(), *rfile.split()])
+            new_rel_url = quote(POST_NBASSETS &#43; new_rfile)
+            bd = bd.replace(rfile, new_rel_url)
+            res[&#39;outputs&#39;][new_rfile] = res[&#39;outputs&#39;][rfile]
+            del res[&#39;outputs&#39;][rfile]
+        
+        # write hex data as file on disk
+        wr.write(bd, res, basename)
+
+        # move files to assets directory
+        for new_rfile in list(res[&#39;outputs&#39;].keys()):
+            shutil.move(os.path.join(PRE_NBDIR, new_rfile),\
+                        os.path.join(PRE_NBASSETS, new_rfile))
+
+
+def take_snapshot():
+    &#34;&#34;&#34;
+    Checks which notebook files have changed by comparing previously stored md5
+    hashes against newly computed ones.
+    &#34;&#34;&#34;
+    track_path = os.path.join(PRE_NBDIR, TRACK)
+    if not os.path.exists(track_path):
+        hashes = {}
+    else:
+        hashes = json.loads(open(track_path, &#39;r&#39;).read())
+    changed = []
+    for nbfile in glob.glob(os.path.join(PRE_NBDIR, EXT)):
+        basename = os.path.basename(nbfile)
+        md5 = hashlib.md5(open(nbfile, &#39;rb&#39;).read()).hexdigest()
+        if basename in hashes:
+            if md5 == hashes[basename]:
+                continue
+        hashes[basename] = md5
+        changed.append(nbfile)
+    with open(track_path, &#39;w&#39;) as f:
+        f.write(json.dumps(hashes))
+    return changed
+
+
+def embed(nbfiles, section, to_ext, force=False, append=False):
+    for nbfile in nbfiles:
+        basepath, ext = os.path.splitext(nbfile)  # path w/o extension
+        basename = os.path.basename(basepath)   # name of notebook file
+
+        relpath = os.path.join(section, basename&#43;&#39;.md&#39;)
+        abspath = os.path.join(CONTENT_DIR, relpath)
+        sourcepath = basepath &#43; &#39;.&#39; &#43; to_ext  # converted .md or .html file to embed
+
+        if not os.path.exists(abspath):
+            Popen([&#39;hugo&#39;, &#39;new&#39;, relpath]).wait()
+        
+        elif not (force or append):
+            print(relpath, &#39;already exists.&#39;)
+            print(&#39;Could not embed notebook. Provide --force flag to overwrite,\
+            or --append flag to add to existing text.&#39;)
+            return
+
+        
+        with open(abspath, &#39;r&#39;) as f:
+            match = re.search(FRONT_PAT, f.read(), re.DOTALL)
+            prepend = &#39;\n&#39;.join([match[&#39;type&#39;], match[&#39;config&#39;], match[&#39;type&#39;]])
+        
+        mode = &#39;a&#39; if append else &#39;w&#39;
+        with open(abspath, mode) as f:
+            with open(sourcepath, &#39;r&#39;) as g:
+                text = g.read()
+                text = re.sub(ASSETS_PAT, lambda m: &#39;&#39;.join([m.group(&#39;name&#39;), &#39;(&#39;,\
+                                                    POST_NBDIR, m.group(&#39;link&#39;),\
+                                                    &#39;)&#39;]), text)
+                f.write(&#39;\n&#39;.join([prepend, text]))
+        os.remove(sourcepath)
+
+
+
+if __name__ == &#39;__main__&#39;:
+    args = parser.parse_args()
+
+    # create asset directory
+    os.makedirs(PRE_NBASSETS, exist_ok=True)
+
+    if args.files == &#39;all&#39;:
+        changed = glob.glob(os.path.join(PRE_NBDIR, EXT))
+    elif args.files == &#39;changed&#39;:
+        changed = take_snapshot()
+    else:
+        changed = glob.glob(os.path.join(PRE_NBDIR, args.files))
+
+    print(&#39;{} files converting ...&#39;.format(len(changed)), end=&#39;&#39;)
+
+    if args.to == &#39;md&#39; or args.to == &#39;both&#39;:
+        convert_markdown(changed)
+    if args.to == &#39;html&#39; or args.to ==&#39;both&#39;:
+        convert_html(changed)
+    
+    if args.embed:
+        to = &#39;md&#39; if args.to == &#39;both&#39; else args.to
+        embed(changed, args.section, to, args.force, args.append)
+
+    print(&#39;done&#39;)
+
+
+</code></pre>
+
+    <br/>
+    <div class="navigation">
+    
+        <a href="http://iahmed.me/post/2017-11-13-poor-mans-reinforcement-learning/"><div class="prev nav-item">
+            ← Previous Post
+        </div></a>
+    
+    
+</div>
+
+    <br/>
+</div>
+<div class="sidebar">
+    <div class="menu-icon"><h2>≡</h2></div>
+    <div class="title"><h1 class="site-name">Ibrahim Ahmed</h1>
+        
+            <div class="sb-links">
+                
+                    <a href="https://www.linkedin.com/in/IbrahimAhmed1"><img src="/img/LinkIcons/svg/linkedin.svg"/></a>
+                
+                    <a href="https://github.com/hazrmard"><img src="/img/LinkIcons/svg/github.svg"/></a>
+                
+                    <a href="http://stackoverflow.com/users/4591810/hazrmard"><img src="/img/LinkIcons/svg/stackoverflow.svg"/></a>
+                
+            </div>
+        
+    </div>
+    <ul class="menu-list">
+        
+            <a href="/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/home.svg" alt="Home"/><span class="menu-option-name">Home</span>
+                
+                
+            </li></a>
+        
+            <a href="/about/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/person.svg" alt="About Me"/><span class="menu-option-name">About Me</span>
+                
+                
+            </li></a>
+        
+            <a href="/resume/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/document.svg" alt="Résumé"/><span class="menu-option-name">Résumé</span>
+                
+                
+            </li></a>
+        
+            <a href="#noexist">
+            <li class="sb-option dropdown">
+                
+                    <img src="/img/LinkIcons/svg/pencil.svg" alt="Posts"/><span class="menu-option-name">Posts</span>
+                
+                
+                <div class="submenu"><ul>
+                    
+                        
+                            <a href="/categories"><li>By Categories</li></a>
+                        
+                    
+                        
+                            <a href="/series"><li>By Series</li></a>
+                        
+                    
+                        
+                            <a href="/tags"><li>By Tags</li></a>
+                        
+                    
+                    <a href="/post"><li>All</li></a>
+                </ul></div>
+                
+            </li></a>
+        
+            <a href="/project/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/terminal.svg" alt="Projects"/><span class="menu-option-name">Projects</span>
+                
+                
+            </li></a>
+        
+    </ul>
+</div>
+
+    <div class="footer">
+        <div class="copyright">© Ibrahim Ahmed</div>
+    </div>
+
+</div> 
+</body>
+</html>
+

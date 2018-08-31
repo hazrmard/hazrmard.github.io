@@ -14,10 +14,10 @@
     
     <item>
       <title>A Poor Man&#39;s Introduction to Reinforcement Learning</title>
-      <link>http://iahmed.me/post/poor-mans-reinforcement-learning/</link>
+      <link>http://iahmed.me/post/2017-11-13-poor-mans-reinforcement-learning/</link>
       <pubDate>Mon, 13 Nov 2017 23:19:08 -0600</pubDate>
       
-      <guid>http://iahmed.me/post/poor-mans-reinforcement-learning/</guid>
+      <guid>http://iahmed.me/post/2017-11-13-poor-mans-reinforcement-learning/</guid>
       <description>Reinforcement Learning (RL) is one of the many ways to implement artificial intelligence (AI). AI is the design of &amp;ldquo;intelligent&amp;rdquo; agents that maximize their chances of success at some goal. The goal can belong to any problem: from winning a game of tic-tac-toe, to recognizing speech, to steering a car.
 A problem can be approached in many different ways. An agent can search for all possible options and choose the best.</description>
     </item>

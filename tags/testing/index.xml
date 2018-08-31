@@ -14,10 +14,10 @@
     
     <item>
       <title>Testing code with sensitive data</title>
-      <link>http://iahmed.me/post/testing-code-with-sensitive-data/</link>
+      <link>http://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</link>
       <pubDate>Tue, 06 Sep 2016 02:01:26 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/testing-code-with-sensitive-data/</guid>
+      <guid>http://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</guid>
       <description>&lt;p&gt;I recently renewed work on my first ever &lt;a href=&#34;https://github.com/hazrmard/imgurPCA&#34;&gt;github project&lt;/a&gt;. Over the course of a whole year when that project was dormant, I&amp;#8217;d learned some new tricks. I now try to focus on writing tests for my projects. It is immensely convenient when I add features here  and there and need to check the whole code for errors.&lt;/p&gt;
 
 &lt;p class=&#34;&#34;&gt;

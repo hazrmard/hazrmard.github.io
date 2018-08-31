@@ -3,22 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://iahmed.me/project/starsbegone/</loc>
+    <lastmod>2018-05-06T21:23:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://iahmed.me/post/2018-04-30-hugo-jupyter/</loc>
+    <lastmod>2018-04-30T02:51:16-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/project/poormansnn/</loc>
     <lastmod>2018-03-04T13:06:06-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://iahmed.me/post/poor-mans-reinforcement-learning/</loc>
+    <loc>http://iahmed.me/post/2017-11-13-poor-mans-reinforcement-learning/</loc>
     <lastmod>2017-11-13T23:19:08-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://iahmed.me/post/escaping-echochambers/</loc>
+    <loc>http://iahmed.me/post/2017-10-20-escaping-echochambers/</loc>
     <lastmod>2017-10-20T20:59:42-05:00</lastmod>
   </url>
   
   <url>
-    <loc>http://iahmed.me/post/maintaining-a-hugo-blog/</loc>
+    <loc>http://iahmed.me/post/2017-09-30-maintaining-a-hugo-blog/</loc>
     <lastmod>2017-09-30T17:29:58-05:00</lastmod>
   </url>
   
@@ -48,17 +58,17 @@
   </url>
   
   <url>
-    <loc>http://iahmed.me/post/optimizing-static-sites-with-hugo/</loc>
+    <loc>http://iahmed.me/post/2017-02-06-optimizing-static-sites-with-hugo/</loc>
     <lastmod>2017-02-06T10:07:58-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://iahmed.me/post/is-cold-the-new-hot/</loc>
+    <loc>http://iahmed.me/post/2017-01-31-is-cold-the-new-hot/</loc>
     <lastmod>2017-01-31T11:00:25-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://iahmed.me/post/gravitational-slingshots/</loc>
+    <loc>http://iahmed.me/post/2017-01-31-gravitational-slingshots/</loc>
     <lastmod>2017-01-31T10:48:32-06:00</lastmod>
   </url>
   
@@ -83,7 +93,7 @@
   </url>
   
   <url>
-    <loc>http://iahmed.me/post/testing-code-with-sensitive-data/</loc>
+    <loc>http://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</loc>
     <lastmod>2016-09-06T02:01:26+00:00</lastmod>
   </url>
   
@@ -244,7 +254,7 @@
   
   <url>
     <loc>http://iahmed.me/categories/developer/</loc>
-    <lastmod>2017-09-30T17:29:58-05:00</lastmod>
+    <lastmod>2018-04-30T02:51:16-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -280,19 +290,19 @@
   
   <url>
     <loc>http://iahmed.me/tags/hugo/</loc>
-    <lastmod>2017-09-30T17:29:58-05:00</lastmod>
+    <lastmod>2018-04-30T02:51:16-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://iahmed.me/series/hugo-site-development/</loc>
-    <lastmod>2017-09-30T17:29:58-05:00</lastmod>
+    <lastmod>2018-04-30T02:51:16-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://iahmed.me/</loc>
-    <lastmod>2018-03-04T13:06:06-06:00</lastmod>
+    <lastmod>2018-05-06T21:23:01-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -309,13 +319,13 @@
   </url>
   
   <url>
-    <loc>http://iahmed.me/categories/machine-learning/</loc>
+    <loc>http://iahmed.me/tags/machine-learning/</loc>
     <lastmod>2017-10-20T20:59:42-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://iahmed.me/tags/machine-learning/</loc>
+    <loc>http://iahmed.me/categories/machine-learning/</loc>
     <lastmod>2017-10-20T20:59:42-05:00</lastmod>
     <priority>0</priority>
   </url>
@@ -352,7 +362,7 @@
   
   <url>
     <loc>http://iahmed.me/post/</loc>
-    <lastmod>2017-11-13T23:19:08-06:00</lastmod>
+    <lastmod>2018-04-30T02:51:16-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -370,7 +380,7 @@
   
   <url>
     <loc>http://iahmed.me/project/</loc>
-    <lastmod>2018-03-04T13:06:06-06:00</lastmod>
+    <lastmod>2018-05-06T21:23:01-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -436,7 +446,7 @@
   
   <url>
     <loc>http://iahmed.me/tags/web-development/</loc>
-    <lastmod>2017-09-30T17:29:58-05:00</lastmod>
+    <lastmod>2018-04-30T02:51:16-05:00</lastmod>
     <priority>0</priority>
   </url>
   

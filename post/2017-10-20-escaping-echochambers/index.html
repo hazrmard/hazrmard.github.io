@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
+    <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118761164-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-118761164-1');
+    </script>
+
+    
+    
+    
+
+    
+    
+        
+        
+            <script src="/js/highlight/highlight.pack.js"></script>
+            <link rel="stylesheet" type="text/css" href="/css/solarized-light.css">
+            <script>hljs.initHighlightingOnLoad();</script>
+        
+        
+        
+        
+        
+    
+
+    
+    
+
+    <title>Escaping Echochambers</title>
+</head>
+<body>
+    
+    <div class="container">
+
+<div class="content">
+    <h1 class="post-title">Escaping Echochambers</h1>
+    <div class="front-matter">
+    
+        <em>Friday, Oct 20, 2017</em>
+    
+    
+    
+        
+            
+                <br/>Categories:
+                    
+                        <a href="/categories/machine-learning">Machine learning</a>,
+                    
+            
+        
+    
+    
+        
+            
+        
+    
+    
+        
+            
+                <br/>Tags:
+                    
+                        <a href="/tags/machine-learning">Machine learning</a>,
+                    
+                        <a href="/tags/principal-component-analysis">Principal component analysis</a>,
+                    
+                        <a href="/tags/visualization">Visualization</a>,
+                    
+            
+        
+    
+</div>
+
+    
+    
+
+<p>The <a href="https://en.wikipedia.org/wiki/Echo_chamber_(media)">echochamber effect</a> is a worrisome issue in social media. It risks
+isolating users in exclusive groups as they repeatedly subscribe to content that
+reinforces their biases. To keep users engaged, websites expose users to content
+similar to their history. You will get recommendations for movies you may like,
+or peoply you may befriend, or communities you may join - all based on some
+measure of similarity with your <em>profile</em>.</p>
+
+<p>On first glance, this seems convenient: a user does not need to explicitly
+search for content. The digital platform <em>assumes</em> a user&rsquo;s wants. You may even
+be shown interesting things you wouldn&rsquo;t have known to look for. As users consume
+more content, their digital footprints become more accurate descriptors of their
+preferences. It becomes easier to navigate the world wide web: users&rsquo; interests
+are served on a platter. However, this is not a unitateral benefit. An exchange
+is being made in the currency of data: convenience for autonomy. At some point,
+users may find themselves in concord with everything they see online. Gradually,
+all their new Facebook friends share their views. According to news articles
+on their social feeds, the world seems to be going in the exact direction they
+predicted. Every new movie recommendation is a romcom - their guilty pleasure.
+Uncanny.</p>
+
+<p>This is the digital echo chamber. A cocoon spun from our <a href="https://en.wikipedia.org/wiki/Confirmation_bias">Confirmation bias</a>
+and cemented by the <a href="https://en.wikipedia.org/wiki/False_consensus_effect">false consensus</a> created by recommendation systems on
+digital media. It can progress from a benign exploration of ideas to complete
+ideological isolation like the one we observe in current political discourse
+between the Right and the Left.</p>
+
+<p>In the following sections, I discuss how digital content can be processed by way
+of simple examples, and how recommendations can be generated that counter the
+echo chamber effect. For illustration, I will use posts on the image sharing site
+<a href="https://imgur.com">imgur.com</a> as my data points. There are better ways of going about this, no
+doubt. This write-up is intended as an exercise in applying what little I&rsquo;ve
+learned about machine learning. It is also an exercise in avoiding my other
+committments in life.</p>
+
+<h1 id="the-curse-of-dimensionality">The curse of dimensionality</h1>
+
+<p>Imagine you are classifying people in your neighborhood. For each person, you
+take two readings: their age and how long they have lived in the neighborhood.
+You want to find new friends for your neighbours based on the similarities you
+find in the survey. You get the following results:</p>
+
+
+<figure>
+    
+        <img src="/img/posts/escaping-echochambers/2axes.png" />
+    
+    
+</figure>
+
+
+<p>The cluster in the bottom left could be new college graduates who just moved
+into town for their jobs. The top left could be retirees moving into a nearby
+retirement community. People on the far right could be some who&rsquo;ve lived all
+their lives in the neighborhood, or moved there in their youth.  You could
+hypothesize that people who seem to fall in the same cluster will make good
+friends. With just two axes, it is easy to visualize data. And it is easy for
+computers to process it as each datum is represented by only two numbers.</p>
+
+<p>However, describing people just by their age and length of stay is not particularly
+useful. In this context, their interests are also relevant measurements. So now,
+your survey looks like this:</p>
+
+
+<figure>
+    
+        <img src="/img/posts/escaping-echochambers/survey_table.png" />
+    
+    
+</figure>
+
+
+<p>Note that the survey is presented as a table and not a graph. Can you visualize
+data points with several descriptors? It&rsquo;s hard to visualize information when
+there are more variables to consider. It&rsquo;s also less intuitive to make sense
+of patterns (if you can detect any at all). Computers have it hard too. If,
+for example, in the first instance, the survey had answers ranging over 50
+years for age and duration of stay - then there could only be 50 x 50 = 2,500
+distinct points on the graph. But in the second instance, if the survey asks
+people to rate their interests from 0-100, then for each choice of interests,
+the distinct ways a person could be represented would <em>multiply</em> by 100! With
+just two choices of interests, there would be 25 million combinations. This is
+the Curse of Dimensionality.</p>
+
+<blockquote>
+<p>Complexity of a problem is exponential in the number of variables.</p>
+</blockquote>
+
+<p>Moving to the problem at hand: how would you classify digital content like a
+news article, or any page of text? A simple way is to tally the frequencies of
+all words that occur. So an essay on European history would have the word &ldquo;Rome&rdquo;
+more times than a story about kung-fu monks. This will help you discriminate
+between the content of the two data. But there are hundreds of thousands
+of words, and each can occur any number of times. There would be billions of
+ways an article could be represented as a data point.</p>
+
+<h1 id="reducing-dimensions">Reducing dimensions</h1>
+
+<p>We want to simplify the problem. There need to be fewer <em>descriptors</em> for
+the data. But it should not come at the cost of losing information. The
+distinction between data points should be preserved. Consider the survey
+example. In our first case, there were two axes - descriptors. Can we instead
+use one and still tell the points apart?</p>
+
+
+<figure>
+    
+        <img src="/img/posts/escaping-echochambers/dimreduction.gif" />
+    
+    
+</figure>
+
+
+<p>Indeed! Instead of each descriptor corresponding to a single attribute in the
+data, it can represent a combination of attributes. In the above case, a single
+axis encodes information about both age and time in neighbourhood such that
+the points are distinguishable. Note, however, that we cannot cluster points in
+the same way as before as there is some overlap. This is the cost of reduced
+dimensions. Tractability comes at the price of lost information.</p>
+
+
+<figure>
+    
+        <img src="/img/posts/escaping-echochambers/reduced_axis.png" />
+    
+    
+</figure>
+
+
+<p>The new axis is a <em>Principal Component</em>. It is a vector in the direction of
+maximum variance in the data. Points in that direction vary the most, so when
+they are projected on the component, it is easier to tell them apart. A dataset
+can have as many principal components as it has attributes. Each subsequent
+component points in a decreasing direction of variance. Since the point is to
+reduce dimensions, later principal compoents are discarded as they only represent
+smaller and smaller variations.</p>
+
+<blockquote>
+<p>Mathematically, principal components are the <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">eigenvectors of the covariance
+matrix</a> of a data set.</p>
+</blockquote>
+
+<p>Coming to the problem at hand, an article has hundreds or thousands of words.
+Each word frequency is a descriptor which distinguishes one article from the next.
+Managing so many dimensions is intractable. We can make the problem easier by
+finding the principal components of the words in a set of articles. The hope is
+that other articles, when projected on to the principal components, will be
+easily distinguishable as well.</p>
+
+<p>How does projection work? Assume the total vocabulary of a set of articles is
+5 words: <code>[a, b, c, d, e]</code>. Two new articles come along which have the following
+word frequencies:</p>
+
+<pre><code>A1: [a: 2, b:1, c:0, d:2, e:5]
+A2: [a: 3, b:0, c:0, d:1, e:1]
+</code></pre>
+
+<p>A principal component is simply a weighed combination of descriptors. Let&rsquo;s say
+in our case there is one component:</p>
+
+<pre><code>C1 = 2a + 3b -1e
+</code></pre>
+
+<p><code>C1</code> is a single number. We substitute word frequencies into <code>C1</code> to get projections
+of <code>A1</code> and <code>A2</code>:</p>
+
+<pre><code>PA1: 2(2) + 3(1) - 1(5) = 2
+PA2: 2(3) + 3(0) - 1(1) = 5
+</code></pre>
+
+<p>Notice, now, instead of having 5 separate numbers representing an article, there
+is a single descriptor: the projection on the principal component. This way,
+data points with hundreds of attributes can be projected on to a handful of
+principal components.</p>
+
+<h1 id="recommendations">Recommendations</h1>
+
+<p>Principal Component Analysis has made the problem tractable while keeping the
+data points distinguishable. Now comes the problem of generating recommendations.
+Remember, we do not want to recommend very similar articles. That is the entire
+point: to counter the echochamber effect.</p>
+
+<p>Given a user&rsquo;s browsing history, how do we measure the <em>similarity</em> of some
+article to the user&rsquo;s interest? There are many classification methods in machine
+learning like <a href="https://en.wikipedia.org/wiki/Logistic_regression">Logistic Regression</a>, <a href="https://en.wikipedia.org/wiki/Decision_tree">Decision Trees</a>, and <a href="https://en.wikipedia.org/wiki/Support_vector_machine">Support Vector
+Machines</a>. Classifiers can be used to bin new articles into two categories:
+similar and not similar.</p>
+
+<p>Instead of binary classification, a scale can be used as a measure of similarity.
+Given a set of points, each an article on the principal components, their
+weighted average can represent the <em>gist</em> of their content. So if there is a
+list of points a user visited, their centroid - weighed towards more recent
+points - will convey that user&rsquo;s <em>profile</em> so far.</p>
+
+
+<figure>
+    
+        <img src="/img/posts/escaping-echochambers/centroid.png" />
+    
+    
+</figure>
+
+
+<p>That <em>centroid</em> can be a reference for future recommendations. Points falling
+farther away will be recommended more. When a user visits another point, the
+<em>centroid</em> will shift - depicting a change in the user&rsquo;s interest - and so will
+the recommendations.</p>
+
+<h1 id="echochamber-in-action">Echochamber in action</h1>
+
+<p>All the building blocks for a recommendation system are in place:</p>
+
+<ol>
+<li>Use a set of sample articles to get principal components.</li>
+<li>Project data on to principle components to reduce dimensions.</li>
+<li>Track user history and calculate weighted centroid of visited articles.</li>
+<li>Generate recommendation scores for other articles based on distance from centroid.</li>
+</ol>
+
+<p>I wrote a simple application (called <code>Echochamber</code> - <em>imaginative</em>) built on
+top of a machine learning library I&rsquo;ve been working on (<a href="https://github.com/hazrmard/imgurPCA">imgurPCA</a>). The app
+uses user comments on imgur to generate principal components and to analyse posts.</p>
+
+<p>The following illustrations use two components, comprised of 200 words, generated
+from the top posts on imgur for the past year. The points plotted are a random
+assortment of posts that reached imgur&rsquo;s front page on the day I captured the
+data.</p>
+
+
+<figure>
+    
+        <img src="/img/posts/escaping-echochambers/echo_static.png" />
+    
+    
+</figure>
+
+
+<p>Notice that the points (i.e. imgur posts) are reasonably spread apart on just
+two principal components. To see how projections work, lets change the x-axis
+component to the following. This will also show how &ldquo;political&rdquo; some posts are:</p>
+
+<pre><code>trump:1 hillary:1 obama:1
+</code></pre>
+
+
+<figure>
+    
+        <img src="/img/posts/escaping-echochambers/echo_customx.gif" />
+    
+    
+</figure>
+
+
+<p>The posts that drift to the left do not have these words. The posts that
+remain or drift further right have more. Manually selecting axes has its
+benefits and drawbacks. By choosing projections, you can sift through the data
+at your leisure and find patterns. On the flip side, the points may lose their
+distinction.</p>
+
+<p>As a user browses posts, their history is kept and a centroid is calculated
+repersenting their general interest. Based on the distance from the centroid,
+other unvisited posts get a recommendation score:</p>
+
+
+<figure>
+    
+        <img src="/img/posts/escaping-echochambers/echo_choices.gif" />
+    
+    
+</figure>
+
+
+<p>The recommendation scale is the bar at the top. Posts with yellowish hues
+have the highest recommendation based on the user&rsquo;s <em>profile</em> so far.</p>
+
+<h2 id="use-cases">Use cases</h2>
+
+<p><code>Echochamber</code> may be used with crowdsourced anonymous data or individually.
+One application would be to see how a user&rsquo;s profile compares to their network
+on social media, or to the world at large. Different principle components derived
+from different sources will have different projections. A user could place their
+interests on axes generated from scientific articles, or from news stories. Each
+set of components will give users an idea of their shpere of knowledge. The hope
+is that they&rsquo;ll be able to see if they have fallen prey to false consensus.</p>
+
+<p>A website may use similar strategies to diversify a user&rsquo;s recommendations of
+connections and content. Of course, the fiscal returns on showing content not
+necessarily agreeable to users are questionable. Barraging climate change skeptics
+with global warming articles may turn them away from a website and lower revenue.
+But if we are to have meaningful discourse, we must stomach contrary opinions.</p>
+
+<h2 id="how-to-run">How to run</h2>
+
+<p>The setup process for <code>Echochamber</code> is not user friendly, particularly if you are
+unfamiliar with programming and using command-line interfaces.</p>
+
+<p>First, install <a href="https://git-scm.com/"><code>git</code></a> and <a href="https://www.python.org/"><code>python 3</code></a> on your computer. Then open your
+command prompt and clone the repository:</p>
+
+<pre><code class="language-bash">&gt; git clone https://github.com/hazrmard/imgurPCA.git
+</code></pre>
+
+<p>You&rsquo;ll need to have some dependencies installed. In succession:</p>
+
+<pre><code class="language-bash">&gt; pip install flask
+&gt; pip install imgurpython
+&gt; pip install numpy
+</code></pre>
+
+<p>Also you need to obtain keys from imgur so you can access their data. Go <a href="https://api.imgur.com/oauth2/addclient">here</a>
+to register the application and get a client <em>secret</em> and <em>id</em>. Create a file
+called <code>myconfig.py</code> in the cloned repository folder like so:</p>
+
+<pre><code>CID = 'CLIENT ID'
+CS = 'CLIENT SECRET'
+</code></pre>
+
+<p>Finally:</p>
+
+<pre><code class="language-bash">&gt; cd examples
+&gt; python echochamber.py -h
+</code></pre>
+
+<p>This will print out help for the application. The first order of business is
+to create your own set of principal components:</p>
+
+<pre><code class="language-bash">&gt; python echochamber.py --save axes.csv --points 100 --filter filter.txt --words 200 --axes-only
+</code></pre>
+
+<p>This will download 100 top weekly posts from imgur and create 2 principal components
+from them using 200 words (after filtering out common words in <code>filter.txt</code>).
+You can use the <code>--query</code> flag to use a different set of posts from imgur.
+However, you&rsquo;ll need to be familiar with the API and the <code>Query</code> class from
+the <a href="https://github.com/hazrmard/imgurPCA/tree/master/docs">documentation</a>.</p>
+
+<p>To see it in action:</p>
+
+<pre><code class="language-bash">&gt; python echochamber.py --load axes.csv
+</code></pre>
+
+<p>Then open your browser and go to <code>localhost:5000</code>. Viola!</p>
+
+<h1 id="future-work">Future work</h1>
+
+<p>I plan to use sources in addition to imgur for analysis. The base library
+<code>imgurPCA</code> is modular and lets me plug in different back-ends for the same
+interface. I may just parse search engine results, or use a news site&rsquo;s API.</p>
+
+<p>The recommendation algorithm is simplistic. In the future, I plan to employ
+more rigorous approaches like regression, clustering etc. for better classification.
+My current academic research is in reinforcement learning. I may play with the
+idea of using intelligent &ldquo;rebellious&rdquo; agents that diversify a user&rsquo;s browsing
+experience.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Today&rsquo;s world is interconnected as never before. Yet we are ideologically
+stratifying at an ever increasing rate. It is in part due to us seeking
+immediate gratification in perusing familiar content that is readily at
+our fingertips. And it is in part due to us surrendering our digital autonomy
+to algorithms that <em>farm</em> our preferences for clicks. Now is the time to
+introspect - to mitigate the symptoms of digital echochambers before they
+burgeon into an epidemic of historic proportions.</p>
+
+    <br/>
+    <div class="navigation">
+    
+        <a href="http://iahmed.me/post/2017-09-30-maintaining-a-hugo-blog/"><div class="prev nav-item">
+            ← Previous Post
+        </div></a>
+    
+    
+        <a href="http://iahmed.me/post/2017-11-13-poor-mans-reinforcement-learning/"><div class="next nav-item">
+            Next Post →
+        </div></a>
+    
+</div>
+
+    <br/>
+</div>
+<div class="sidebar">
+    <div class="menu-icon"><h2>≡</h2></div>
+    <div class="title"><h1 class="site-name">Ibrahim Ahmed</h1>
+        
+            <div class="sb-links">
+                
+                    <a href="https://www.linkedin.com/in/IbrahimAhmed1"><img src="/img/LinkIcons/svg/linkedin.svg"/></a>
+                
+                    <a href="https://github.com/hazrmard"><img src="/img/LinkIcons/svg/github.svg"/></a>
+                
+                    <a href="http://stackoverflow.com/users/4591810/hazrmard"><img src="/img/LinkIcons/svg/stackoverflow.svg"/></a>
+                
+            </div>
+        
+    </div>
+    <ul class="menu-list">
+        
+            <a href="/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/home.svg" alt="Home"/><span class="menu-option-name">Home</span>
+                
+                
+            </li></a>
+        
+            <a href="/about/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/person.svg" alt="About Me"/><span class="menu-option-name">About Me</span>
+                
+                
+            </li></a>
+        
+            <a href="/resume/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/document.svg" alt="Résumé"/><span class="menu-option-name">Résumé</span>
+                
+                
+            </li></a>
+        
+            <a href="#noexist">
+            <li class="sb-option dropdown">
+                
+                    <img src="/img/LinkIcons/svg/pencil.svg" alt="Posts"/><span class="menu-option-name">Posts</span>
+                
+                
+                <div class="submenu"><ul>
+                    
+                        
+                            <a href="/categories"><li>By Categories</li></a>
+                        
+                    
+                        
+                            <a href="/series"><li>By Series</li></a>
+                        
+                    
+                        
+                            <a href="/tags"><li>By Tags</li></a>
+                        
+                    
+                    <a href="/post"><li>All</li></a>
+                </ul></div>
+                
+            </li></a>
+        
+            <a href="/project/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/terminal.svg" alt="Projects"/><span class="menu-option-name">Projects</span>
+                
+                
+            </li></a>
+        
+    </ul>
+</div>
+
+    <div class="footer">
+        <div class="copyright">© Ibrahim Ahmed</div>
+    </div>
+
+</div> 
+</body>
+</html>
+
