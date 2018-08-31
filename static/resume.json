@@ -147,6 +147,19 @@
             "tags":         ["open source", "projects"]
         },
         {
+            "title":        "PoorMansNN",
+            "time":         "March '18",
+            "blurb":        "A simple neural network library.",
+            "description":  "Dimension-agnostic dense feed forward neural network library with minimal dependencies. Modular and extensible structure with comprehensive documentation.",
+            "technologies": ["Python", "Numpy"],
+            "links":        [
+                {
+                    "title":    "GitHub",
+                    "url":      "https://github.com/hazrmard/PoorMansNN"
+                }],
+            "tags":         ["open source", "projects", "machine learning", "artificial intelligence"]
+        },
+        {
             "title":        "imgurPCA v2",
             "time":         "Aug '16 - ",
             "blurb":        "Machine learning on imgur.com",

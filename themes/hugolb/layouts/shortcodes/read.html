@@ -7,4 +7,10 @@ Renders HTML or markdown content inside post. -->
 {{ else if eq (substr $file -1 2) "md" }}
 <!-- of extension is markdown, process it -->
     {{ $file | readFile | markdownify }}
+{{ else if eq (substr $file -1 2) "js" }}
+<!-- of extension is js, process it -->
+    {{ $file | readFile | safeJS }}
+{{ else }}
+<!-- else just read raw -->
+    {{ $file | readFile }}
 {{ end }}

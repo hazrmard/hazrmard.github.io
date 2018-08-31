@@ -6,6 +6,8 @@ are copied to /notebooks/ folder after conversion to a static site.
 * This script is to be called from the website root folder.
 * For embedding notebooks, assumes frontmatter is in TOML format.
 * For images etc. in converted markdown files, assumes static dir is /static/
+* all notebooks to be stored in PRE_NBDIR (default: static/notebooks/)
+* all linked images are local
 
 Requires:
 * hugo.exe in PATH
@@ -24,13 +26,18 @@ from urllib.parse import quote
 from nbconvert import HTMLExporter, MarkdownExporter
 from nbconvert.writers import FilesWriter
 
-# .ipynb directory relative to website root as a draft
-PRE_NBDIR = os.path.join('static', 'notebooks')
-# # directory where images etc. are stored for markdown files before compilation
+# static dir relative to draft root
+STATIC_DIR = 'static'
+STATIC_ABS = os.path.abspath(STATIC_DIR)
+# .ipynb directory relative to draft root
+PRE_NBDIR = os.path.join(STATIC_DIR, 'notebooks')
+# directory where images etc. are stored for markdown files before compilation
 PRE_NBASSETS = os.path.join(PRE_NBDIR, 'assets')
-# .ipynb directory relative to website root after compilation
+# location of PRE_NBDIR relative to root after compilation to website
 POST_NBDIR = '/notebooks/'
-# directory where images etc. are stored for markdown files afre compilation
+# location of PRE_NBASSETS relative to root after compilation to website.
+# os.path.join is not used to preserve starting '/' which hugo reads as
+# website root
 POST_NBASSETS = POST_NBDIR + 'assets/'
 # notebook file extension
 EXT = '*.ipynb'
@@ -42,6 +49,8 @@ MYDIR = os.path.dirname(os.path.abspath(__file__))
 CONTENT_DIR = os.path.join(MYDIR, 'content')
 # frontmatter markers (YAML or TOML)
 FRONT_PAT = r'(?P<type>\+{3}|-{3})\n+(?P<config>.+?)\n+\1.*'
+# links to resources in assets directory, relative to NBDIRs
+ASSETS_PAT = r'(?P<name>\!\[.+?\])\((?P<link>.+?)\)'
 
 parser = ArgumentParser(description=__doc__)
 parser.add_argument('--files',
@@ -97,6 +106,7 @@ def convert_markdown(nbfiles):
         basename = os.path.basename(basepath)   # name of notebook file
         bd, res = mx.from_file(nbfile)          # hex encoded data, asset file name
         
+        # in case of embedded assets/images, save them to files on disk
         # rename asset files to remove spaces, add notebook filename as prefix
         for rfile in list(res['outputs'].keys()):
             new_rfile = '_'.join([*basename.split(), *rfile.split()])
@@ -104,7 +114,7 @@ def convert_markdown(nbfiles):
             bd = bd.replace(rfile, new_rel_url)
             res['outputs'][new_rfile] = res['outputs'][rfile]
             del res['outputs'][rfile]
-
+        
         # write hex data as file on disk
         wr.write(bd, res, basename)
 
@@ -164,7 +174,11 @@ def embed(nbfiles, section, to_ext, force=False, append=False):
         mode = 'a' if append else 'w'
         with open(abspath, mode) as f:
             with open(sourcepath, 'r') as g:
-                f.write('\n'.join([prepend, g.read()]))
+                text = g.read()
+                text = re.sub(ASSETS_PAT, lambda m: ''.join([m.group('name'), '(',\
+                                                    POST_NBDIR, m.group('link'),\
+                                                    ')']), text)
+                f.write('\n'.join([prepend, text]))
         os.remove(sourcepath)
 
 
