@@ -8,5 +8,6 @@ series = []
 isexternal = false
 hasequations = false
 hascode = false
-includes = []
+includes = []       # any javascript files to include
+draft = true
 +++

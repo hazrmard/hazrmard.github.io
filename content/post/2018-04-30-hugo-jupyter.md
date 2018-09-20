@@ -44,7 +44,10 @@ With this script, I can add hugo directives/shortcodes in Jupyter notebook. They
 
 For example, at the end of this post, I have a shortcode to render my script as python:
 
-
 ```python
 {{< read src="/notebooks.py" >}}
 ```
+
+[1]: https://gohugo.io
+[2]: https://jupyter.org
+[3]: https://nbviewer.jupyter.org

@@ -11,17 +11,9 @@ hascode = true
 +++
 
 
-As of the writing of this post, I maintain this site using my very own theme
-created in hugo. [Hugo][1] is a static site generator. It takes a bunch of
-plain text, applies a theme, and renders it as HTML. This is opposed to
-applications like Wordpress that assemble a page each time its served, to
-put it simply. This *compute once, use many times* approach saves on processing
-time and makes a site more portable. Case in point: this site is hosted on
-[GitHub][2], but I can easily move it to any hosting service.
+As of the writing of this post, I maintain this site using my very own theme created in hugo. [Hugo][1] is a static site generator. It takes a bunch of plain text, applies a theme, and renders it as HTML. This is opposed to applications like Wordpress that assemble a page each time its served, to put it simply. This *compute once, use many times* approach saves on processing time and makes a site more portable. Case in point: this site is hosted on [GitHub][2], but I can easily move it to any hosting service.
 
-When I first started out, the entire site - the source and the rendered HTML
-were stored in the same directory in the same git branch. My file structure
-was something like this:
+When I first started out, the entire site - the source and the rendered HTML were stored in the same directory in the same git branch. My file structure was something like this:
 
 ```
 MySite
@@ -39,27 +31,19 @@ MySite
     |-index.html
 ```
 
-Whenever I made an edit to the site source that I wanted to deploy, I'd first
-manually delete all the folders in my root excepting `src` and then run the
-command:
+Whenever I made an edit to the site source that I wanted to deploy, I'd first manually delete all the folders in my root excepting `src` and then run the command:
 
 ```Powershell
 hugo -d ../
 ```
 
-Which told `hugo` to take everything in my source folder and render it as a
-static site in my root folder. Mind you, this convuluted arrangement wasn't
-simply ignorance. It was that too, but I had to have my rendered site in the
-root folder of my repository for GitHub to properly serve it.
+Which told `hugo` to take everything in my source folder and render it as a static site in my root folder. Mind you, this convuluted arrangement wasn't simply ignorance. It was that too, but I had to have my rendered site in the root folder of my repository for GitHub to properly serve it.
 
-This also meant that many changes that did not make it all the way to
-deployment polluted my commit history. This was too messy.
+This also meant that many changes that did not make it all the way to deployment polluted my commit history. This was too messy.
 
 ### ...evolution
 
-The next step was to divide the source and HTML between two branches. I could
-then tinker with my site to my heart's content. And only changes that satisfied
-me would be committed to the master branch.
+The next step was to divide the source and HTML between two branches. I could then tinker with my site to my heart's content. And only changes that satisfied me would be committed to the master branch.
 
 ```
 >>> BRANCH SRC
@@ -80,8 +64,7 @@ MySite
     |-index.html
 ```
 
-I would render my site into an intermediate folder, switch branches, copy over
-the files and commit changes:
+I would render my site into an intermediate folder, switch branches, copy over the files and commit changes:
 
 ```Powershell
 hugo -d ../intermediate/ -cleanDestinationDir
@@ -91,19 +74,11 @@ Move-Items ../Intermediate/* ./ -Recurse -Force
 # add and commit changes to master branch
 ```
 
-This was much better. I was isolating different aspects of my project. However
-it was still complicated. I couldn't view my source and rendered HTML at the same
-time as git would switch branches in the same folder. I was dissatisfied by the
-frequent overwrite operations incurred by switching branches. Something had to
-be done. Man's pursuit of terminal laziness lends him to amazing feats of
-industry. And so I set about finding a way to further reduce my work load.
+This was much better. I was isolating different aspects of my project. However it was still complicated. I couldn't view my source and rendered HTML at the same time as git would switch branches in the same folder. I was dissatisfied by the frequent overwrite operations incurred by switching branches. Something had to be done. Man's pursuit of terminal laziness lends him to amazing feats of industry. And so I set about finding a way to further reduce my work load.
 
 ### ...enter git worktree
 
-[`worktree`][3] is a git feature that lets you have different branches checked
-out at the *same* time in different directories. So I could have my source and
-master branch folders side-by-side and switch between them without one
-overwriting the other.
+[`worktree`][3] is a git feature that lets you have different branches checked out at the *same* time in different directories. So I could have my source and master branch folders side-by-side and switch between them without one overwriting the other.
 
 From my master branch, I checked out my `src` branch into another folder:
 
@@ -132,9 +107,7 @@ MySite                  <- ...like yin and yang
 
 ### ...industrial revolution!
 
-Finally, it was time to automate my workflow. I wanted to render my source
-into an intermediate folder, copy over the contents to my master branch folder,
-and clean up the mess. Here my ephemeral flirtations with Powershell paid off.
+Finally, it was time to automate my workflow. I wanted to render my source into an intermediate folder, copy over the contents to my master branch folder, and clean up the mess. Here my ephemeral flirtations with Powershell paid off.
 
 ```powershell
 # Runs hugo in source dir and overwrites previous build in destination folder.
@@ -162,9 +135,7 @@ Remove-Item -Path $INTERMEDIATE -Recurse -Force
 
 ### Conclusion
 
-In my current workflow, I have two separate directories for my master and
-source branches, thanks to [`worktree`][3]. And I use my deployment script
-to quickly render and copy files between branches.
+In my current workflow, I have two separate directories for my master and source branches, thanks to [`worktree`][3]. And I use my deployment script to quickly render and copy files between branches.
 
 The time is not far when I'll just dream new blog posts into existence.
 
