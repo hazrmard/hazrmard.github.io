@@ -22,15 +22,5 @@
 The HTML content takes up around 50-60kB. Images, understandably, make up the biggest chunk with ~1.</description>
     </item>
     
-    <item>
-      <title>Let there be a blog</title>
-      <link>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</link>
-      <pubDate>Sat, 04 Jul 2015 16:50:32 +0000</pubDate>
-      
-      <guid>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</guid>
-      <description>&amp;#8230;and lo and behold, there was.
-A while back I discovered my interest in web development. I taught myself HTML, CSS, and JavaScript. This blog is the latest in my attempts to learn web technologies.</description>
-    </item>
-    
   </channel>
 </rss>

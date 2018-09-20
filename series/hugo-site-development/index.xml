@@ -18,8 +18,8 @@
       <pubDate>Mon, 30 Apr 2018 02:51:16 -0500</pubDate>
       
       <guid>http://iahmed.me/post/2018-04-30-hugo-jupyter/</guid>
-      <description>[Hugo][1] is a static site generator. It takes a bunch of markdown files and renders them to HTML. It is fast and simple.
-[Jupyter Notebooks][2] are an interactive front-end for python (with support for other languages too). They execute code, display its output, and render markdown all in a browser window. The notebooks are a neat compilation of formatted code and text generated as HTML.
+      <description>Hugo is a static site generator. It takes a bunch of markdown files and renders them to HTML. It is fast and simple.
+Jupyter Notebooks are an interactive front-end for python (with support for other languages too). They execute code, display its output, and render markdown all in a browser window. The notebooks are a neat compilation of formatted code and text generated as HTML.
 I use Hugo for my site.</description>
     </item>
     

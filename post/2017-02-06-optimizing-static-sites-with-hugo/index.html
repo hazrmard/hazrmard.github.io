@@ -89,30 +89,17 @@
 </div>
 
     
-    <p>According to <a href="http://httparchive.org/trends.php">httparchive</a> the average size
-of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age
-where the internet is the primary media delivery platform - but it is worth
-noting that most web pages serve text as their primary content. Looking at the
-report sheds light on what constitutes an average web page:</p>
+    <p>According to <a href="http://httparchive.org/trends.php">httparchive</a> the average size of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age where the internet is the primary media delivery platform - but it is worth noting that most web pages serve text as their primary content. Looking at the report sheds light on what constitutes an average web page:</p>
 
-<p>The HTML content takes up around 50-60kB. Images, understandably, make up the
-biggest chunk with ~1.6MB. Around another ~200kB are taken up by CSS and Font
-files. What is surprising to me is that the next biggest chunk, at above 400kB,
-is JavaScript.</p>
+<p>The HTML content takes up around 50-60kB. Images, understandably, make up the biggest chunk with ~1.6MB. Around another ~200kB are taken up by CSS and Font files. What is surprising to me is that the next biggest chunk, at above 400kB, is JavaScript.</p>
 
 <figure>
     <img src="/img/posts/optimizing-static-sites-with-hugo/chart.png">
 </figure>
 
-<p>The portion I want to go after is <code>JavaScript</code>. Granted that JavaScript is
-indispensable to web development. However in excess it can weigh everything
-down. Particularly in cases when it - instead of <code>CSS</code> -  is used to add
-responsivity to a website. In my experience <code>jQuery</code> is the biggest culprit
-of unnecessary bloat. But I digress.</p>
+<p>The portion I want to go after is <code>JavaScript</code>. Granted that JavaScript is indispensable to web development. However in excess it can weigh everything down. Particularly in cases when it - instead of <code>CSS</code> -  is used to add responsivity to a website. In my experience <code>jQuery</code> is the biggest culprit of unnecessary bloat. But I digress.</p>
 
-<p>While I was building this website using <a href="https://gohugo.io">Hugo</a> I realized
-that I would need additional JavaScript libraries for highlighting code and
-rendering math. And these libraries take up a ton of space. This:</p>
+<p>While I was building this website using <a href="https://gohugo.io">Hugo</a> I realized that I would need additional JavaScript libraries for highlighting code and rendering math. And these libraries take up a ton of space. This:</p>
 
 <ul>
 <li>Increases the bandwidth cost for the user, and</li>
@@ -125,18 +112,9 @@ rendering math. And these libraries take up a ton of space. This:</p>
         MathJax library</figcaption>
 </figure>
 
-<p>Above is network traffic for a page on this site that uses 3rd party JS libraries
-to render equations. Around 200/218kB of network traffic is for that one library.
-This may seem a trivial amount of data but I believe that any optimization is
-good optimization (<em>in production especially</em>). So I harnessed all the flexibility
-a static site can offer. When I now build my site, only pages that render
-equations or contain code request external libraries. Thus different pages on my
-site have different - but the leanest possible - network traffic signatures.</p>
+<p>Above is network traffic for a page on this site that uses 3rd party JS libraries to render equations. Around 200/218kB of network traffic is for that one library. This may seem a trivial amount of data but I believe that any optimization is good optimization (<em>in production especially</em>). So I harnessed all the flexibility a static site can offer. When I now build my site, only pages that render equations or contain code request external libraries. Thus different pages on my site have different - but the leanest possible - network traffic signatures.</p>
 
-<p>How did I do it? When building sites using Hugo, for each post I can define
-variables that Hugo can use while rendering a page template into HTML. These
-variables are called <em>front matter</em> in Hugo-speak. For example, <em>front matter</em>
-for this page looks like:</p>
+<p>How did I do it? When building sites using Hugo, for each post I can define variables that Hugo can use while rendering a page template into HTML. These variables are called <em>front matter</em> in Hugo-speak. For example, <em>front matter</em> for this page looks like:</p>
 
 <pre><code class="language-toml">+++
 categories = [&quot;Developer&quot;, &quot;Meta&quot;]
@@ -168,11 +146,7 @@ draft = true
 {{end}}
 </code></pre>
 
-<p>So now, only when I set <code>hasequations</code> to <code>true</code> does the page load
-<a href="https://www.mathjax.org/"><code>MathJax</code></a>. Same with <code>hascode</code> and
-<a href="https://highlightjs.org/"><code>Highlight.js</code></a>. This speeds up my load times and
-frees up the generous CDNs from unnecessary traffic. All it took was a few lines.
-Win-Win.</p>
+<p>So now, only when I set <code>hasequations</code> to <code>true</code> does the page load <a href="https://www.mathjax.org/"><code>MathJax</code></a>. Same with <code>hascode</code> and <a href="https://highlightjs.org/"><code>Highlight.js</code></a>. This speeds up my load times and frees up the generous CDNs from unnecessary traffic. All it took was a few lines. Win-Win.</p>
 
     <br/>
     <div class="navigation">

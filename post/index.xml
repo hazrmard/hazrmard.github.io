@@ -18,19 +18,9 @@
       <pubDate>Mon, 30 Apr 2018 02:51:16 -0500</pubDate>
       
       <guid>http://iahmed.me/post/2018-04-30-hugo-jupyter/</guid>
-      <description>[Hugo][1] is a static site generator. It takes a bunch of markdown files and renders them to HTML. It is fast and simple.
-[Jupyter Notebooks][2] are an interactive front-end for python (with support for other languages too). They execute code, display its output, and render markdown all in a browser window. The notebooks are a neat compilation of formatted code and text generated as HTML.
+      <description>Hugo is a static site generator. It takes a bunch of markdown files and renders them to HTML. It is fast and simple.
+Jupyter Notebooks are an interactive front-end for python (with support for other languages too). They execute code, display its output, and render markdown all in a browser window. The notebooks are a neat compilation of formatted code and text generated as HTML.
 I use Hugo for my site.</description>
-    </item>
-    
-    <item>
-      <title>A Poor Man&#39;s Introduction to Reinforcement Learning</title>
-      <link>http://iahmed.me/post/2017-11-13-poor-mans-reinforcement-learning/</link>
-      <pubDate>Mon, 13 Nov 2017 23:19:08 -0600</pubDate>
-      
-      <guid>http://iahmed.me/post/2017-11-13-poor-mans-reinforcement-learning/</guid>
-      <description>Reinforcement Learning (RL) is one of the many ways to implement artificial intelligence (AI). AI is the design of &amp;ldquo;intelligent&amp;rdquo; agents that maximize their chances of success at some goal. The goal can belong to any problem: from winning a game of tic-tac-toe, to recognizing speech, to steering a car.
-A problem can be approached in many different ways. An agent can search for all possible options and choose the best.</description>
     </item>
     
     <item>
@@ -193,16 +183,6 @@ I always wondered why doesn’t the sun slow space probes down when they are lea
       
       <guid>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</guid>
       <description>&lt;p&gt;Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The &amp;#8216;standard&amp;#8217; way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Let there be a blog</title>
-      <link>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</link>
-      <pubDate>Sat, 04 Jul 2015 16:50:32 +0000</pubDate>
-      
-      <guid>http://iahmed.me/post/2015-07-04-let-there-be-a-blog/</guid>
-      <description>&amp;#8230;and lo and behold, there was.
-A while back I discovered my interest in web development. I taught myself HTML, CSS, and JavaScript. This blog is the latest in my attempts to learn web technologies.</description>
     </item>
     
   </channel>
