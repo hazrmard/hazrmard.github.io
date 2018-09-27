@@ -1,0 +1,22 @@
+<!-- renders terms in each "series" -->
+{{partial "header.html" .}}
+
+<div class="content">
+    <h1 class="page-title">{{.Data.Plural | humanize}}</h1>
+    <!-- break down posts into pages -->
+    <!-- each section list only shows pages in that section directory or
+    with an explicit "type=SECION" in front matter -->
+    {{ $paginator := .Paginate (.Data.Pages) }}
+    {{ range $paginator.Pages }}
+        <div class="post-summary">
+            <h3 class="post-title"><a href="{{.RelPermalink}}">{{ .Title }} ({{ len .Pages }})</a></h3>
+            <div class="front-matter">
+            {{ .Params.description }}
+            </div>
+        </div>
+    {{ end }}
+
+</div>
+
+{{partial "sidebar.html" .}}
+{{partial "footer.html" .}}

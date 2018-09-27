@@ -63,3 +63,7 @@ ignoreFiles = [".+pptx$"]
     tag = "tags"
     category = "categories"
     series = "series"
+
+# Blackfriday markdown rendering
+[blackfriday]
+    

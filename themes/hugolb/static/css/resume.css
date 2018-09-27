@@ -42,7 +42,7 @@ colour-scheme {
     border-top: 1px solid #CACFD2;
 }
 
-.resume h1, .resume h2, .resume h3, .resume h4, .resume h5, .resume h6 {
+.resume h1, .resume h2, .resume h5, .resume h6 {
     padding: 0.25em 0em;
     margin: 0px;
 }

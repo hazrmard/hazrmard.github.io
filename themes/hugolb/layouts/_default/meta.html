@@ -7,7 +7,7 @@
                 {{if (gt (len (index $.Params $k)) 0)}}
                     <br/>{{$k | humanize}}:
                         {{range (index $.Params $k)}}
-                            <a href="/{{$k}}/{{. | urlize}}">{{. | humanize}}</a>,
+                            <a href="/{{$k}}/{{. | urlize}}">{{. | title}}</a>,
                         {{end}}
                 {{end}}
             {{end}}

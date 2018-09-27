@@ -18,9 +18,10 @@
 <div class="section" ng-show="edus.length">
 	<h2 class="h2">Education</h2>
 	<div class="education subsection" ng-repeat="edu in edus = (resumeData.education | filter:search | lowercase)">
-		<h3 class="h3">{{edu.degree}} - {{edu.major}}</h3>
-		<h4 class="h4 workplace">{{edu.school}}</h4>
-		<h4 class="h4 time">{{edu.year}}</h4>
+		<h5 class="h5">{{edu.degree}} - {{edu.major}}</h5>
+		<h5 class="h5 workplace">{{edu.school}}</h5>
+		<h5 class="h5 time">{{edu.year}}</h5>
+		<div class="details" ng-if="edu.thesis.length">Thesis: <em>{{edu.thesis}}</em></div>
 		<div class="courses" ng-if="edu.courses.length">
 			<div class="subheading details">Courses:</div>
 			<table class="courses-table table details"><tr>
@@ -38,8 +39,8 @@
 <div class="section" ng-show="res.length">
 	<h2 class="h2">Research</h2>
 	<div class="research subsection" ng-repeat="r in res = (resumeData.research | filter:search | lowercase)">
-		<!-- <h3 class="h4 workplace">{{r.title}}</h4>
-		<h4 class="h4 time">{{r.time}}</h4> -->
+		<!-- <h5 class="h4 workplace">{{r.title}}</h5>
+		<h5 class="h5 time">{{r.time}}</h5> -->
 		<div class="details">
 			<div class="subheading" ng-if="r.advisor.length">Advisor: {{r.advisor}}</div>
 			<div ng-if="r.description.length">{{r.description}}</div>
@@ -61,9 +62,9 @@
 <div class="section" ng-show="exps.length">
 	<h2 class="h2">Experience</h2>
 	<div class="experience subsection" ng-repeat="exp in exps = (resumeData.experience | filter:search | lowercase)">
-		<h3 class="h3 title">{{exp.title}}</h3>
-		<h4 class="h4 workplace">{{exp.workplace}}</h4>
-		<h4 class="h4 time">{{exp.time}}</h4>
+		<h5 class="h5 title">{{exp.title}}</h5>
+		<h5 class="h5 workplace">{{exp.workplace}}</h5>
+		<h5 class="h5 time">{{exp.time}}</h5>
 		<div class="details"><ul>
 			<li ng-repeat="entry in exp.achievements">{{entry}}</li>
 		</ul></div>
@@ -81,8 +82,8 @@
 <div class="section" ng-show="projects.length">
 	<h2 class="h2">Projects</h2>
 	<div class="projects subsection" ng-repeat="project in projects = (resumeData.projects | filter:search | lowercase)">
-		<h3 class="h3 title">{{project.title}}</h3>
-		<h4 class="h4 time" ng-if="project.time.length">{{project.time}}</h4>
+		<h5 class="h5 title">{{project.title}}</h5>
+		<h5 class="h5 time" ng-if="project.time.length">{{project.time}}</h5>
 		<div class="blurb details" ng-if="project.blurb.length">{{project.blurb}}</div>
 		<div class="details" ng-if="project.description.length">{{project.description}}</div>
 		<div class="links" ng-if="project.links.length">
@@ -99,9 +100,9 @@
 <div class="section" ng-show="skillsets.length">
 	<h2 class="h2">Skills</h2>
 	<div class="skills subsection" ng-repeat="skillset in skillsets = (resumeData.skills | filter:search | lowercase)" ng-if="(skillset.skills | filter:search | lowercase).length">
-		<h3 class="h3">{{skillset.title}}</h3>
+		<h5 class="h5">{{skillset.title}}</h5>
 		<div class="technologies">
-			<div class="tech h4" ng-repeat="skill in skills = (skillset.skills | filter:search | lowercase)">
+			<div class="tech h5" ng-repeat="skill in skills = (skillset.skills | filter:search | lowercase)">
 				{{skill}}</div>
 		</div>
 	</div>
@@ -110,8 +111,8 @@
 <div class="section" ng-show="extracurriculars.length">
 	<h2 class="h2">Extracurriculars</h2>
 	<div class="extracurriculars subsection" ng-repeat="extra in extracurriculars = (resumeData.extracurriculars | filter:search | lowercase)">
-		<h3 class="h3 title">{{extra.title}}</h3>
-		<h4 class="h4 time" ng-if="extra.time.length">{{extra.time}}</h4>
+		<h5 class="h5 title">{{extra.title}}</h5>
+		<h5 class="h5 time" ng-if="extra.time.length">{{extra.time}}</h5>
 		<div class="details" ng-if="extra.description.length"><ul>
 			<li ng-repeat="item in extra.description">{{item}}</li>
 		</ul>
@@ -129,7 +130,7 @@
 <div class="section" ng-show="honors.length">
 	<h2 class="h2">Honors</h2>
 	<div class="honors subsection" ng-repeat="honor in honors = (resumeData.honors | filter:search | lowercase)">
-		<h3 class="h3">{{honor.title}}</h3>
+		<h5 class="h5">{{honor.title}}</h5>
 		<div class="details blurb">{{honor.details}}</div>
 	</div>
 </div>

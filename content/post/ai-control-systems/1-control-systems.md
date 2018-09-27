@@ -1,5 +1,5 @@
 +++
-title = 'Control Systems 1: Overview'
+title = 'Control Systems: Overview'
 date = '2018-09-10T11:34:21-05:00'
 description = "A primer for classical control theory."
 tags = ["matlab"]
@@ -28,7 +28,7 @@ Alternatively, the field of control systems can be divided by features or restri
 
 * **Adaptive** control tries to evolve its control strategy as the characteristics of the system change over time which renders a static system model useless.
 
-*  **Optimal** control uses some measure to *evaluate* the state of a system. It tries to maximize that value over time.
+* **Optimal** control uses some measure to *evaluate* the state of a system. It tries to maximize that value over time.
 
 * **Non-linear** control wrestles with systems that cannot be modelled as linear differential equations and so do not lend themselves to a host of methods applicable to solving linear equations.
 

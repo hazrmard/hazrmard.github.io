@@ -27,8 +27,18 @@
     "education":    [
         {
             "school":   "Vanderbilt University",
-            "year":     "Aug '16 - Present",
+            "year":     "Aug '18 - Present",
             "degree":   "PhD",
+            "major":    "Electrical Engineering",
+            "thesis":   "Adaptive fault-tolerant control of hybrid systems using reinforcement learning.",
+            "gpa":      "",
+            "courses":  ["Reinforcement Learning"],
+            "tags":     ["education", "courses", "artificial intelligence"]
+        },
+        {
+            "school":   "Vanderbilt University",
+            "year":     "Aug '16 - Aug '18",
+            "degree":   "MS",
             "major":    "Electrical Engineering",
             "gpa":      "",
             "courses":  ["Neural Networks", "Pattern Recognition", "Project in AI", "Solid State Materials", "Advanced High Performance Computing",
@@ -55,10 +65,10 @@
             "title":        "Graduate Researcher/Teaching Assistant",
             "workplace":    "Vanderbilt University School of Engineering",
             "time":         "Aug '16 - Present",
-            "achievements": ["Apply reinforcement learning-based control for fault recovery on aircraft.",
+            "achievements": ["Build a reinforcement learning library to study fault-tolerant control on aircraft and smart buildings.",
                             "Process clinical surveys by feature selection, clustering, and classification to diagnose genetic disorders.",
-                            "Mentor 7 engineering design teams over the year for their capstone project."],
-            "technologies": ["Python", "Pandas", "Scikit-learn", "Scipy"],
+                            "Generate data-driven models of systems using history of control and output measurements for model-based control."],
+            "technologies": ["Python", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [],
             "tags":         ["experience", "work"]
         },
@@ -134,15 +144,15 @@
 
     "projects":   [
         {
-            "title":        "QLearning",
-            "time":         "Dec '16 - ",
+            "title":        "Agents",
+            "time":         "Dec '16 - Present",
             "blurb":        "Reinforcement learning for fault-tolerant control",
-            "description":  "A library for modeling continuous and discrete systems with faults, applying temporal difference learning algorithms for real-time control, and visualizing and benchmarking performance.",
-            "technologies": ["Python", "Numpy", "Flask", "Javascript (D3.js)"],
+            "description":  "A library for modeling continuous and discrete systems with faults, applying learning algorithms for real-time control, and visualizing and benchmarking performance.",
+            "technologies": ["Python", "Numpy", "Flask"],
             "links":        [
                 {
                     "title":    "GitHub",
-                    "url":      "https://github.com/hazrmard/QLearning"
+                    "url":      "https://github.com/hazrmard/Agents"
                 }],
             "tags":         ["open source", "projects"]
         },
@@ -190,7 +200,7 @@
     "skills":   [
         {
             "title":        "Programming",
-            "skills":       ["C/C++ (OpenCV, OpenMP, RTOS, CUDA)","Python (Scipy, Django, Matplotlib, Pandas, Sklearn)", "Go", "Java", "Android", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
+            "skills":       ["C/C++ (OpenCV, OpenMP, RTOS, CUDA)","Python (PyTorch, Scipy, Django, Matplotlib, Pandas, Sklearn)", "Go", "Java", "Android", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
         },
         {
             "title":        "Engineering",
@@ -256,6 +266,6 @@
     ],
 
     "publications": [
-        
+        "Ibrahim Ahmed, Gautam Biswas, Hamed Khorasghani. 'Comparison of model predictive and reinforcement learning methods for fault tolerant control' in IFAC-PapersOnLine, Warsaw, Poland, 2018."
     ]
 }
