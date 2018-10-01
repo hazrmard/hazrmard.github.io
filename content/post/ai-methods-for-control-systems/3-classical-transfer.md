@@ -9,7 +9,7 @@ isexternal = false
 hasequations = true
 hascode = true
 includes = []
-draft = true
+draft = false
 +++
 
 A transfer function relates the output of a system to its input when it is represented in the Laplace domain. An assumption is made that initial steady-state response is 0. If $Y(s)$ is the output of a system, $X(s)$ is the input, then the transfer function is:
@@ -20,7 +20,7 @@ $$
 
 ### Example - A Car
 
-{{< figure src="/img/posts/ai-control-systems/3-car.png" caption="A car as a system: The input is the acceleration. The output is the total distance travelled. Initial conditions are zero." >}}
+{{< figure src="/img/posts/ai-methods-for-control-systems/3-car.png" caption="A car as a system: The input is the acceleration. The output is the total distance travelled. Initial conditions are zero." >}}
 
 Consider a car as a system. The input $a(t)$ to the car is the acceleration at each time instant. The output $y(t)$ is the total distance it travelled from the start. The system can be described in the time domain as:
 
@@ -70,7 +70,7 @@ $$
 Y(s) = H(s) \cdot \mathcal{L}(\delta(t)) = H(s) \cdot 1 = \frac{1}{s^2}
 $$
 
-{{< figure src="/img/posts/ai-control-systems/3-car-impulse.png" >}}
+{{< figure src="/img/posts/ai-methods-for-control-systems/3-car-impulse.png" >}}
 
 ```matlab
 impulseplot(H, 10);
@@ -91,7 +91,7 @@ $$
 Y(s) = H(s) \cdot \mathcal{L}(u(t)) = H(s) \cdot s = \frac{1}{s}
 $$
 
-{{< figure src="/img/posts/ai-control-systems/3-car-step.png" >}}
+{{< figure src="/img/posts/ai-methods-for-control-systems/3-car-step.png" >}}
 
 ```matlab
 stepplot(H, 10);
