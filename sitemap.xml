@@ -3,6 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://iahmed.me/post/ai-methods-for-control-systems/4-modern-state-space-equations/</loc>
+    <lastmod>2018-09-24T14:17:46-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://iahmed.me/post/ai-methods-for-control-systems/3-classical-transfer/</loc>
+    <lastmod>2018-09-21T15:17:40-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://iahmed.me/post/ai-methods-for-control-systems/2-classical-transforms/</loc>
+    <lastmod>2018-09-10T13:13:41-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://iahmed.me/post/ai-methods-for-control-systems/1-control-systems/</loc>
+    <lastmod>2018-09-10T11:34:21-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/project/agents/</loc>
     <lastmod>2018-08-01T13:16:05-06:00</lastmod>
   </url>
@@ -178,6 +198,11 @@
   </url>
   
   <url>
+    <loc>http://iahmed.me/series/ai-methods-for-control-systems/</loc>
+    <lastmod>2018-09-24T14:17:46-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/series/algorithm-concepts/</loc>
     <lastmod>2017-02-06T18:47:26-06:00</lastmod>
     <priority>0</priority>
@@ -237,6 +262,12 @@
   </url>
   
   <url>
+    <loc>http://iahmed.me/tags/control-systems/</loc>
+    <lastmod>2018-09-24T14:17:46-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/categories/developer/</loc>
     <lastmod>2018-04-30T02:51:16-05:00</lastmod>
     <priority>0</priority>
@@ -244,7 +275,7 @@
   
   <url>
     <loc>http://iahmed.me/categories/engineering/</loc>
-    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
+    <lastmod>2018-09-24T14:17:46-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -286,7 +317,7 @@
   
   <url>
     <loc>http://iahmed.me/</loc>
-    <lastmod>2018-08-01T13:16:05-06:00</lastmod>
+    <lastmod>2018-09-24T14:17:46-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -321,6 +352,12 @@
   </url>
   
   <url>
+    <loc>http://iahmed.me/tags/matlab/</loc>
+    <lastmod>2018-09-24T14:17:46-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://iahmed.me/categories/meta/</loc>
     <lastmod>2017-02-06T10:07:58-06:00</lastmod>
     <priority>0</priority>
@@ -346,7 +383,7 @@
   
   <url>
     <loc>http://iahmed.me/post/</loc>
-    <lastmod>2018-04-30T02:51:16-05:00</lastmod>
+    <lastmod>2018-09-24T14:17:46-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -376,7 +413,7 @@
   
   <url>
     <loc>http://iahmed.me/series/</loc>
-    <lastmod>2017-02-06T18:47:26-06:00</lastmod>
+    <lastmod>2018-09-24T14:17:46-05:00</lastmod>
     <priority>0</priority>
   </url>
   
