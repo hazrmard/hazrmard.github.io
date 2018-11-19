@@ -15,12 +15,22 @@
     <!-- Anything written in "_index.md" for a particular SECTION listing. -->
     {{ .Content }}
 
+    <!-- Any sub-sections -->
+    <ul class="sections-list">
+        {{ range $s := .Sections}}
+            <a href="{{$s.RelPermalink}}">
+            <li class="terms">
+                {{ $s.Name }} ({{ len $s.Pages }})
+            </li></a>
+        {{ end }}
+    </ul>
+
     <!-- break down posts into pages -->
     <!-- each section list only shows pages in that section directory or
     with an explicit "type=SECION" in front matter -->
     {{ $paginator := .Paginate (.Data.Pages) }}
     {{ range $paginator.Pages }}
-        {{.Render "meta"}}
+        {{.Render "summary"}}
     {{ end }}
     <br/>
     <!-- passes a dict with "context" and "paginator" keys -->

@@ -2,15 +2,6 @@
     <h3 class="post-title"><a href="{{.RelPermalink}}">{{.Title}}</a></h3>
     <div class="front-matter">
         <em>{{dateFormat "Monday, Jan 2, 2006" .Date}}</em> | {{.ReadingTime}} min read
-        {{range $k, $v := .Site.Taxonomies}}
-            {{if (isset $.Params $k)}}
-                {{if (gt (len (index $.Params $k)) 0)}}
-                    <br/>{{$k | humanize}}:
-                        {{range (index $.Params $k)}}
-                            <a href="/{{$k}}/{{. | urlize}}">{{. | title}}</a>,
-                        {{end}}
-                {{end}}
-            {{end}}
-        {{end}}
+        {{partial "taxonomies.html" .}}
     </div>
 </div>

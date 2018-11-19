@@ -1,0 +1,10 @@
+{{range $k, $v := $.Site.Taxonomies}}
+    {{if (isset $.Params $k)}}
+        {{if (gt (len (index $.Params $k)) 0)}}
+            <br/>{{$k | humanize}}:
+                {{range (index $.Params $k)}}
+                    <a href="/{{$k}}/{{. | urlize}}">{{. | title}}</a>,
+                {{end}}
+        {{end}}
+    {{end}}
+{{end}}

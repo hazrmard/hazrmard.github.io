@@ -53,6 +53,10 @@ blockquote {
     padding: 0.25em 0.5em;
     color: #806915;
 }
+.outlined {
+    border: 0.2em solid #AA9239;
+    padding: 0.25em 0.5em;
+}
 .content > p > code {
     background-color: #FFEDAA;
     padding: 0em 0.25em;
@@ -69,14 +73,14 @@ blockquote {
     transition: 0.25s;
 }
 
-.post-summary {
+.summary {
     background-color: #FFEDAA;
 }
 
 .post-title,
 .page-title,
-.post-summary .post-title a:link,
-.post-summary .post-title a:visited,
+.summary .post-title a:link,
+.summary .post-title a:visited,
 h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
     color: #554300;
@@ -93,7 +97,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #FFEDAA;
 }
 
-.proj-summary {
+/* .proj-summary {
     background-color: #FFEDAA;
     box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
     transition: 0.25s;
@@ -104,4 +108,4 @@ h1, h2, h3, h4, h5, h6 {
 }
 .proj-summary .front-matter {
     color: #806915;
-}
+} */

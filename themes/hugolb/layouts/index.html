@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="content">
-    {{range first 5 (where .Data.Pages "Section" "post")}}
+    {{range first 10 .Data.Pages}}
         {{.Render "summary"}}
     {{end}}
 </div>

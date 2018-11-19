@@ -1,18 +1,14 @@
+<!-- Shows taxonomies, dates etc. for a post on the post page -->
 <div class="front-matter">
+    <!-- Date -->
     {{if eq .Type "project"}}
         <em>{{dateFormat "Jan 2006" .Date}}</em>
     {{else}}
         <em>{{dateFormat "Monday, Jan 2, 2006" .Date}}</em>
     {{end}}
-    {{range $k, $v := .Site.Taxonomies}}
-    <!-- if taxonom/key $k is set in current page's front matter, then show terms/values -->
-        {{if (isset $.Params $k)}}
-            {{if (gt (len (index $.Params $k)) 0)}}
-                <br/>{{$k | humanize}}:
-                    {{range (index $.Params $k)}}
-                        <a href="/{{$k}}/{{. | urlize}}">{{.}}</a>,
-                    {{end}}
-            {{end}}
-        {{end}}
-    {{end}}
+    <!-- breadcrumb navigation -->
+    {{ .Scratch.Set "sections" (slice .)}}
+    <br/>Section: {{/* partial "breadcrumb.html" . */}}
+    <!-- taxonomies -->
+    {{partial "taxonomies.html" .}}
 </div>

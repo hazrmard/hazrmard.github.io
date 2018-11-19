@@ -16,6 +16,7 @@ ignoreFiles = [".+pptx$"]
     splashSubheading = "Electrical Engineering @ Vanderbilt University"
     blogroot = "Posts"
     defaultprojimg = "/img/gear.png"
+    defaultpostimg = "/img/quill.jpg"
 
     [[params.links]]
         URL = "https://www.linkedin.com/in/IbrahimAhmed1"
@@ -62,7 +63,6 @@ ignoreFiles = [".+pptx$"]
 [taxonomies]
     tag = "tags"
     category = "categories"
-    series = "series"
 
 # Blackfriday markdown rendering
 [blackfriday]

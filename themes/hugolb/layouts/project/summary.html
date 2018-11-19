@@ -1,12 +1,9 @@
-<div class="proj-summary">
+<div class="summary {{.Section}}">
     {{if .Params.isexternal}}
         <a href="{{ .Params.link }}">
     {{else}}
         <a href="{{ .RelPermalink }}">
     {{end}}
-    <h3>
-        {{.Title}}
-    </h3>
     <div class="image"
     {{if .Params.image}}
         style="background-image: url('{{.Params.image}}')"
@@ -14,8 +11,18 @@
         style="background-image: url('{{.Site.Params.defaultprojimg}}')"
     {{end}}>
     </div>
-    <div class="front-matter">
-        <em>{{dateFormat "Jan 2006" .Date}}</em><br/>
-        {{.Description}}
+    <div class="description">
+        <h3>
+            {{.Title}}
+        </h3>
+        <div class="front-matter">
+            <em>{{dateFormat "Jan 2006" .Date}}</em><br/>
+            {{ partial "taxonomies.html" . }}
+        </div>
+        {{if .Params.description }}
+            {{.Params.description}}
+        {{else}}
+            {{.Summary}}
+        {{end}}
     </div>
 </div></a>
