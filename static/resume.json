@@ -62,14 +62,21 @@
 
     "experience":     [
         {
-            "title":        "Graduate Researcher/Teaching Assistant",
+            "title":        "Graduate Researcher",
             "workplace":    "Vanderbilt University School of Engineering",
             "time":         "Aug '16 - Present",
             "achievements": ["Build a reinforcement learning library to study fault-tolerant control on aircraft and smart buildings.",
                             "Process clinical surveys by feature selection, clustering, and classification to diagnose genetic disorders.",
                             "Generate data-driven models of systems using history of control and output measurements for model-based control."],
-            "technologies": ["Python", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
-            "links":        [],
+            "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
+            "links":        [{
+                    "title":    "GitLab",
+                    "url":      "https://git.isis.vanderbilt.edu/SmartBuildings"
+                    },{
+                    "title":    "Research Documentation",
+                    "url":      "https://hazrmard.github.io/EngineeringScienceBuilding"
+                    }
+            ],
             "tags":         ["experience", "work"]
         },
         {
@@ -249,19 +256,24 @@
 
     "honors":       [
         {
+            "title":        "Vanderbilt 3 Minute Thesis Competition '19",
+            "details":      "First Position",
+            "tags":         ["honors", "speaking"]
+        },
+        {
             "title":        "Dean's List",
             "details":      "Fall '12, '14, '15, Spring '13, '14, '15",
-            "tags":         ["honors"]
+            "tags":         ["honors", "academic"]
         },
         {
             "title":        "Honorable Mention",
             "details":      "International Physics Olympiad '11",
-            "tags":         ["honors"]
+            "tags":         ["honors", "academic"]
         },
         {
             "title":        "Sigma Pi Sigma",
             "details":      "Society of Physics Students",
-            "tags":         ["honors"]
+            "tags":         ["honors", "academic"]
         }
     ],
 

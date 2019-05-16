@@ -1,9 +1,4 @@
 <div class="summary {{.Section}}">
-    {{if .Params.isexternal}}
-        <a href="{{ .Params.link }}">
-    {{else}}
-        <a href="{{ .RelPermalink }}">
-    {{end}}
     <div class="image"
     {{if .Params.image}}
         style="background-image: url('{{.Params.image}}')"
@@ -12,9 +7,13 @@
     {{end}}>
     </div>
     <div class="description">
-        <h3>
-            {{.Title}}
-        </h3>
+        {{if .Params.isexternal}}
+            <a href="{{ .Params.link }}">
+        {{else}}
+            <a href="{{ .RelPermalink }}">
+        {{end}}
+            <h3>{{.Title}}</h3>
+        </a>
         <div class="front-matter">
             <em>{{dateFormat "Jan 2006" .Date}}</em><br/>
             {{ partial "taxonomies.html" . }}
@@ -25,4 +24,4 @@
             {{.Summary}}
         {{end}}
     </div>
-</div></a>
+</div>

@@ -73,8 +73,11 @@ blockquote {
     transition: 0.25s;
 }
 
-.summary {
+.summary.post {
     background-color: #FFEDAA;
+}
+.summary.project {
+    background-color: #6C929F;
 }
 
 .post-title,
