@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Developer on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/categories/developer/</link>
-    <description>Recent content in Developer on Ibrahim Ahmed</description>
+    <title>developer on Ibrahim Ahmed</title>
+    <link>https://iahmed.me/categories/developer/</link>
+    <description>Recent content in developer on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     <lastBuildDate>Mon, 30 Apr 2018 02:51:16 -0500</lastBuildDate>
     
-	<atom:link href="http://iahmed.me/categories/developer/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://iahmed.me/categories/developer/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hugo and Jupyter Notebooks</title>
-      <link>http://iahmed.me/post/2018-04-30-hugo-jupyter/</link>
+      <link>https://iahmed.me/post/2018-04-30-hugo-jupyter/</link>
       <pubDate>Mon, 30 Apr 2018 02:51:16 -0500</pubDate>
       
-      <guid>http://iahmed.me/post/2018-04-30-hugo-jupyter/</guid>
+      <guid>https://iahmed.me/post/2018-04-30-hugo-jupyter/</guid>
       <description>Hugo is a static site generator. It takes a bunch of markdown files and renders them to HTML. It is fast and simple.
 Jupyter Notebooks are an interactive front-end for python (with support for other languages too). They execute code, display its output, and render markdown all in a browser window. The notebooks are a neat compilation of formatted code and text generated as HTML.
 I use Hugo for my site.</description>
@@ -25,64 +25,59 @@ I use Hugo for my site.</description>
     
     <item>
       <title>Trials and Tribulations of Maintaining a Hugo Blog</title>
-      <link>http://iahmed.me/post/2017-09-30-maintaining-a-hugo-blog/</link>
+      <link>https://iahmed.me/post/2017-09-30-maintaining-a-hugo-blog/</link>
       <pubDate>Sat, 30 Sep 2017 17:29:58 -0500</pubDate>
       
-      <guid>http://iahmed.me/post/2017-09-30-maintaining-a-hugo-blog/</guid>
+      <guid>https://iahmed.me/post/2017-09-30-maintaining-a-hugo-blog/</guid>
       <description>As of the writing of this post, I maintain this site using my very own theme created in hugo. Hugo is a static site generator. It takes a bunch of plain text, applies a theme, and renders it as HTML. This is opposed to applications like Wordpress that assemble a page each time its served, to put it simply. This compute once, use many times approach saves on processing time and makes a site more portable.</description>
     </item>
     
     <item>
       <title>Optimizing static sites with hugo</title>
-      <link>http://iahmed.me/post/2017-02-06-optimizing-static-sites-with-hugo/</link>
+      <link>https://iahmed.me/post/2017-02-06-optimizing-static-sites-with-hugo/</link>
       <pubDate>Mon, 06 Feb 2017 10:07:58 -0600</pubDate>
       
-      <guid>http://iahmed.me/post/2017-02-06-optimizing-static-sites-with-hugo/</guid>
+      <guid>https://iahmed.me/post/2017-02-06-optimizing-static-sites-with-hugo/</guid>
       <description>According to httparchive the average size of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age where the internet is the primary media delivery platform - but it is worth noting that most web pages serve text as their primary content. Looking at the report sheds light on what constitutes an average web page:
 The HTML content takes up around 50-60kB. Images, understandably, make up the biggest chunk with ~1.</description>
     </item>
     
     <item>
       <title>Testing code with sensitive data</title>
-      <link>http://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</link>
+      <link>https://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</link>
       <pubDate>Tue, 06 Sep 2016 02:01:26 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</guid>
-      <description>&lt;p&gt;I recently renewed work on my first ever &lt;a href=&#34;https://github.com/hazrmard/imgurPCA&#34;&gt;github project&lt;/a&gt;. Over the course of a whole year when that project was dormant, I&amp;#8217;d learned some new tricks. I now try to focus on writing tests for my projects. It is immensely convenient when I add features here  and there and need to check the whole code for errors.&lt;/p&gt;
-
-&lt;p class=&#34;&#34;&gt;
-  Anyways, my project requires API keys to imgur.com. However I do not want to hard-code them into my &lt;em&gt;&lt;a href=&#34;https://github.com/hazrmard/imgurPCA/blob/master/test.py&#34;&gt;test.py&lt;/a&gt;&lt;/em&gt; file. But I also do not want to manually provide keys every time I run tests. So what do I do?
-&lt;/p&gt;</description>
+      <guid>https://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</guid>
+      <description>&lt;p&gt;I recently renewed work on my first ever &lt;a href=&#34;https://github.com/hazrmard/imgurPCA&#34;&gt;github project&lt;/a&gt;. Over the course of a whole year when that project was dormant, I’d learned some new tricks. I now try to focus on writing tests for my projects. It is immensely convenient when I add features here  and there and need to check the whole code for errors.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     
     <item>
       <title>Developing with C/C&#43;&#43; on console</title>
-      <link>http://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</link>
+      <link>https://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</link>
       <pubDate>Sat, 30 Jan 2016 04:30:28 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</guid>
-      <description>&lt;p class=&#34;&#34;&gt;
-  I am taking a High Performance Computing course this semester. For that we have to &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;ssh&lt;/span&gt; into the university&amp;#8217;s computing cluster. The interface is entirely console based. Now that might seem awesome at first: typing away commands like a &amp;#8220;hacker&amp;#8221;. And it is awesome. But after a while it gets tiring, particularly when I am writing code.</description>
+      <guid>https://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     
     <item>
       <title>Making a simple web app blindfolded, and with both arms tied…</title>
-      <link>http://iahmed.me/post/2015-09-20-a-simple-webapp/</link>
+      <link>https://iahmed.me/post/2015-09-20-a-simple-webapp/</link>
       <pubDate>Mon, 21 Sep 2015 04:32:06 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/2015-09-20-a-simple-webapp/</guid>
+      <guid>https://iahmed.me/post/2015-09-20-a-simple-webapp/</guid>
       <description>&lt;p&gt;Over the last weekend, I was looking to brush up my web-dev skills (what little I had learned on the side). I decided to make a simple web app for my residents to use (I am a Resident Advisor).&lt;/p&gt;
-
 &lt;p&gt;Objective: Display tips, event news, free food notifications provided regularly by RAs and faculty to residents on a website.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Parsing websites on a budget</title>
-      <link>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</link>
+      <link>https://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</link>
       <pubDate>Thu, 23 Jul 2015 01:32:40 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</guid>
-      <description>&lt;p&gt;Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The &amp;#8216;standard&amp;#8217; way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:&lt;/p&gt;</description>
+      <guid>https://iahmed.me/post/2015-07-22-parsing-websites-on-a-budget/</guid>
+      <description>&lt;p&gt;Say you are an up and coming web developer. You want to make a web app that can access content on other sites. Perhaps you want to make a word cloud from a news article on BBC. Or you want to see what videos a site has embedded within itself. You could achieve that by doing some server side voodoo. The ‘standard’ way to go about it would be to download the site to your server and then serve its contents to your webpage.  But that would require two things:&lt;/p&gt;</description>
     </item>
     
   </channel>

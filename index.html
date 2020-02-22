@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html >
 <head>
-	<meta name="generator" content="Hugo 0.49" />
+	<meta name="generator" content="Hugo 0.64.1" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -54,65 +54,370 @@
 </div>
 <div class="content">
     
-        <div class="post-summary">
-    <h3 class="post-title"><a href="http://iahmed.me/post/ai-methods-for-control-systems/4-modern-state-space-equations/">Modern control: State space equations</a></h3>
-    <div class="front-matter">
-        <em>Monday, Sep 24, 2018</em> | 4 min read
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
     </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/5-modern-state-transition/">Modern control: Solutions &amp; state transition matrices</a></h3>
+        <div class="front-matter">
+            <em>Monday, Sep 24, 2018</em> | 2 min read
+            
     
-        In modern control approaches, systems are analyzed in time domain as a set of differential equations. Higher order differential equations are decomposed into sets of first order equations of state variables that represent the system internally. This produces three sets of variables:
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+                    <a href="/tags/control-systems">Control Systems</a>,
+                
+        
+    
+
+        </div>
+        
+            The state equation for a linear time-invariant system:
+$$ x&rsquo;(t) = A x(t) + B u(t) $$
+Can be solved for $x(t)$. We collect all terms in $x$:
+$$ x&rsquo;(t) - A x(t) = B u(t) $$
+Multiply equation by $e^{-At}$
+$$ x&rsquo;(t) e^{-At} - A x(t) e^{-At} = B u(t) e^{-At} $$
+Using product rule $d(f;g) = f;dg + g;df$, where:
+To give:
+$$ \frac{d}{dt} (e^{-At} x(t)) = B u(t) e^{-At} $$
+        
+    </div>
+</div>
+
+    
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
+    </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/4-modern-state-space-equations/">Modern control: State space equations</a></h3>
+        <div class="front-matter">
+            <em>Monday, Sep 24, 2018</em> | 3 min read
+            
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+                    <a href="/tags/control-systems">Control Systems</a>,
+                
+        
+    
+
+        </div>
+        
+            In modern control approaches, systems are analyzed in time domain as a set of differential equations. Higher order differential equations are decomposed into sets of first order equations of state variables that represent the system internally. This produces three sets of variables:
  Input variables are stimuli given to the system. Denoted by $u$. Output variables are the result of the current system state and inputs. Denoted by $y$. State variables represent the internal state of a system which may be obscured in the output variables.
-    
+        
+    </div>
 </div>
 
     
-        <div class="post-summary">
-    <h3 class="post-title"><a href="http://iahmed.me/post/ai-methods-for-control-systems/3-classical-transfer/">Classical control: Transfer functions</a></h3>
-    <div class="front-matter">
-        <em>Friday, Sep 21, 2018</em> | 4 min read
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
     </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/3-classical-transfer/">Classical control: Transfer functions</a></h3>
+        <div class="front-matter">
+            <em>Friday, Sep 21, 2018</em> | 4 min read
+            
     
-        A transfer function relates the output of a system to its input when it is represented in the Laplace domain. An assumption is made that initial steady-state response is 0. If $Y(s)$ is the output of a system, $X(s)$ is the input, then the transfer function is:
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+                    <a href="/tags/control-systems">Control Systems</a>,
+                
+        
+    
+
+        </div>
+        
+            A transfer function relates the output of a system to its input when it is represented in the Laplace domain. An assumption is made that initial steady-state response is 0. If $Y(s)$ is the output of a system, $X(s)$ is the input, then the transfer function is:
 $$ H(s) = \frac{Y(s)}{X(s)} $$
-Example - A Car    A car as a system: The input is the acceleration. The output is the total distance travelled.
-    
+Example - A Car   A car as a system: The input is the acceleration. The output is the total distance travelled.
+        
+    </div>
 </div>
 
     
-        <div class="post-summary">
-    <h3 class="post-title"><a href="http://iahmed.me/post/ai-methods-for-control-systems/2-classical-transforms/">Classical control: Transforms</a></h3>
-    <div class="front-matter">
-        <em>Monday, Sep 10, 2018</em> | 5 min read
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
     </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/2-classical-transforms/">Classical control: Transforms</a></h3>
+        <div class="front-matter">
+            <em>Monday, Sep 10, 2018</em> | 4 min read
+            
     
-        Classical control methods simplify handling of a complex system by representing it in a different domain. The equations governing system dynamics are transformed into a different set of variables. A for a function $f(t)$ in the $t$ domain, an oft used transformation is of the form:
-$$ \mathcal{T}(f(t)) = F(s) = \int_{Domain} f(t) \cdot g(s, t)\; dt $$
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/control-systems">Control Systems</a>,
+                
+        
+    
+
+        </div>
+        
+            Classical control methods simplify handling of a complex system by representing it in a different domain. The equations governing system dynamics are transformed into a different set of variables. A for a function $f(t)$ in the $t$ domain, an oft used transformation is of the form:
+$$ \mathcal{T}(f(t)) = F(s) = \int_{Domain} f(t) \cdot g(s, t); dt $$
 Mathematically, the integral removes the $t$ variable and only leaves $s$, thus converting from the $t$ domain to the $s$ domain.
-    
+        
+    </div>
 </div>
 
     
-        <div class="post-summary">
-    <h3 class="post-title"><a href="http://iahmed.me/post/ai-methods-for-control-systems/1-control-systems/">Control Systems: Overview</a></h3>
-    <div class="front-matter">
-        <em>Monday, Sep 10, 2018</em> | 4 min read
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
     </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/1-control-systems/">Control Systems: Overview</a></h3>
+        <div class="front-matter">
+            <em>Monday, Sep 10, 2018</em> | 4 min read
+            
     
-        A primer for classical control theory.
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
     
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+        
+    
+
+        </div>
+        
+            A primer for classical control theory.
+        
+    </div>
 </div>
 
     
-        <div class="post-summary">
-    <h3 class="post-title"><a href="http://iahmed.me/post/2018-04-30-hugo-jupyter/">Hugo and Jupyter Notebooks</a></h3>
-    <div class="front-matter">
-        <em>Monday, Apr 30, 2018</em> | 6 min read
-    </div>
+        <div class="summary project">
+    <div class="image"
     
-        Hugo is a static site generator. It takes a bunch of markdown files and renders them to HTML. It is fast and simple.
+        style="background-image: url('/img/gear.png')"
+    >
+    </div>
+    <div class="description">
+        
+            <a href="https://github.com/hazrmard/Agents">
+        
+            <h3>Agents</h3>
+        </a>
+        <div class="front-matter">
+            <em>Aug 2018</em><br/>
+            
+    
+
+    
+
+        </div>
+        
+            Agents for reinforcement learning based control.
+        
+    </div>
+</div>
+
+    
+        <div class="summary project">
+    <div class="image"
+    
+        style="background-image: url('/img/projects/StarsBegone.png')"
+    >
+    </div>
+    <div class="description">
+        
+            <a href="https://github.com/hazrmard/StarsBegone">
+        
+            <h3>StarsBegone</h3>
+        </a>
+        <div class="front-matter">
+            <em>May 2018</em><br/>
+            
+    
+
+    
+
+        </div>
+        
+            Firefox add-on to toggle member-only posts on Medium.com
+        
+    </div>
+</div>
+
+    
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
+    </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/2018-04-30-hugo-jupyter/">Hugo and Jupyter Notebooks</a></h3>
+        <div class="front-matter">
+            <em>Monday, Apr 30, 2018</em> | 2 min read
+            
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/developer">Developer</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/hugo">Hugo</a>,
+                
+                    <a href="/tags/web-development">Web Development</a>,
+                
+        
+    
+
+        </div>
+        
+            Hugo is a static site generator. It takes a bunch of markdown files and renders them to HTML. It is fast and simple.
 Jupyter Notebooks are an interactive front-end for python (with support for other languages too). They execute code, display its output, and render markdown all in a browser window. The notebooks are a neat compilation of formatted code and text generated as HTML.
 I use Hugo for my site.
+        
+    </div>
+</div>
+
     
+        <div class="summary project">
+    <div class="image"
+    
+        style="background-image: url('/img/projects/PoorMansNN.png')"
+    >
+    </div>
+    <div class="description">
+        
+            <a href="https://github.com/hazrmard/PoorMansNN">
+        
+            <h3>PoorMansNN</h3>
+        </a>
+        <div class="front-matter">
+            <em>Mar 2018</em><br/>
+            
+    
+
+    
+
+        </div>
+        
+            A simple neural network library with minimal dependencies.
+        
+    </div>
+</div>
+
+    
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
+    </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/2017-10-20-escaping-echochambers/">Escaping Echochambers</a></h3>
+        <div class="front-matter">
+            <em>Friday, Oct 20, 2017</em> | 11 min read
+            
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/machine-learning">Machine Learning</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/machine-learning">Machine Learning</a>,
+                
+                    <a href="/tags/principal-component-analysis">Principal Component Analysis</a>,
+                
+                    <a href="/tags/visualization">Visualization</a>,
+                
+        
+    
+
+        </div>
+        
+            The echochamber effect is a worrisome issue in social media. It risks isolating users in exclusive groups as they repeatedly subscribe to content that reinforces their biases. To keep users engaged, websites expose users to content similar to their history. You will get recommendations for movies you may like, or peoply you may befriend, or communities you may join - all based on some measure of similarity with your profile.
+        
+    </div>
 </div>
 
     
@@ -159,10 +464,6 @@ I use Hugo for my site.
                     
                         
                             <a href="/categories"><li>By Categories</li></a>
-                        
-                    
-                        
-                            <a href="/series"><li>By Series</li></a>
                         
                     
                         

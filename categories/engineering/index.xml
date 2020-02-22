@@ -1,84 +1,101 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Engineering on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/categories/engineering/</link>
+    <link>https://iahmed.me/categories/engineering/</link>
     <description>Recent content in Engineering on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     <lastBuildDate>Mon, 24 Sep 2018 14:17:46 -0500</lastBuildDate>
     
-	<atom:link href="http://iahmed.me/categories/engineering/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://iahmed.me/categories/engineering/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Modern control: State space equations</title>
-      <link>http://iahmed.me/post/ai-methods-for-control-systems/4-modern-state-space-equations/</link>
+      <title>Modern control: Solutions &amp; state transition matrices</title>
+      <link>https://iahmed.me/post/ai-methods-for-control-systems/5-modern-state-transition/</link>
       <pubDate>Mon, 24 Sep 2018 14:17:46 -0500</pubDate>
       
-      <guid>http://iahmed.me/post/ai-methods-for-control-systems/4-modern-state-space-equations/</guid>
+      <guid>https://iahmed.me/post/ai-methods-for-control-systems/5-modern-state-transition/</guid>
+      <description>The state equation for a linear time-invariant system:
+$$ x&amp;rsquo;(t) = A x(t) + B u(t) $$
+Can be solved for $x(t)$. We collect all terms in $x$:
+$$ x&amp;rsquo;(t) - A x(t) = B u(t) $$
+Multiply equation by $e^{-At}$
+$$ x&amp;rsquo;(t) e^{-At} - A x(t) e^{-At} = B u(t) e^{-At} $$
+Using product rule $d(f;g) = f;dg + g;df$, where:
+To give:
+$$ \frac{d}{dt} (e^{-At} x(t)) = B u(t) e^{-At} $$</description>
+    </item>
+    
+    <item>
+      <title>Modern control: State space equations</title>
+      <link>https://iahmed.me/post/ai-methods-for-control-systems/4-modern-state-space-equations/</link>
+      <pubDate>Mon, 24 Sep 2018 14:17:46 -0500</pubDate>
+      
+      <guid>https://iahmed.me/post/ai-methods-for-control-systems/4-modern-state-space-equations/</guid>
       <description>In modern control approaches, systems are analyzed in time domain as a set of differential equations. Higher order differential equations are decomposed into sets of first order equations of state variables that represent the system internally. This produces three sets of variables:
  Input variables are stimuli given to the system. Denoted by $u$. Output variables are the result of the current system state and inputs. Denoted by $y$. State variables represent the internal state of a system which may be obscured in the output variables.</description>
     </item>
     
     <item>
       <title>Classical control: Transfer functions</title>
-      <link>http://iahmed.me/post/ai-methods-for-control-systems/3-classical-transfer/</link>
+      <link>https://iahmed.me/post/ai-methods-for-control-systems/3-classical-transfer/</link>
       <pubDate>Fri, 21 Sep 2018 15:17:40 -0500</pubDate>
       
-      <guid>http://iahmed.me/post/ai-methods-for-control-systems/3-classical-transfer/</guid>
+      <guid>https://iahmed.me/post/ai-methods-for-control-systems/3-classical-transfer/</guid>
       <description>A transfer function relates the output of a system to its input when it is represented in the Laplace domain. An assumption is made that initial steady-state response is 0. If $Y(s)$ is the output of a system, $X(s)$ is the input, then the transfer function is:
 $$ H(s) = \frac{Y(s)}{X(s)} $$
-Example - A Car    A car as a system: The input is the acceleration. The output is the total distance travelled.</description>
+Example - A Car   A car as a system: The input is the acceleration. The output is the total distance travelled.</description>
     </item>
     
     <item>
       <title>Classical control: Transforms</title>
-      <link>http://iahmed.me/post/ai-methods-for-control-systems/2-classical-transforms/</link>
+      <link>https://iahmed.me/post/ai-methods-for-control-systems/2-classical-transforms/</link>
       <pubDate>Mon, 10 Sep 2018 13:13:41 -0500</pubDate>
       
-      <guid>http://iahmed.me/post/ai-methods-for-control-systems/2-classical-transforms/</guid>
+      <guid>https://iahmed.me/post/ai-methods-for-control-systems/2-classical-transforms/</guid>
       <description>Classical control methods simplify handling of a complex system by representing it in a different domain. The equations governing system dynamics are transformed into a different set of variables. A for a function $f(t)$ in the $t$ domain, an oft used transformation is of the form:
-$$ \mathcal{T}(f(t)) = F(s) = \int_{Domain} f(t) \cdot g(s, t)\; dt $$
+$$ \mathcal{T}(f(t)) = F(s) = \int_{Domain} f(t) \cdot g(s, t); dt $$
 Mathematically, the integral removes the $t$ variable and only leaves $s$, thus converting from the $t$ domain to the $s$ domain.</description>
     </item>
     
     <item>
       <title>Control Systems: Overview</title>
-      <link>http://iahmed.me/post/ai-methods-for-control-systems/1-control-systems/</link>
+      <link>https://iahmed.me/post/ai-methods-for-control-systems/1-control-systems/</link>
       <pubDate>Mon, 10 Sep 2018 11:34:21 -0500</pubDate>
       
-      <guid>http://iahmed.me/post/ai-methods-for-control-systems/1-control-systems/</guid>
+      <guid>https://iahmed.me/post/ai-methods-for-control-systems/1-control-systems/</guid>
       <description>Overview of control theory A control system is a mechanism that dictates the behaviour of another system. A controller relies on signals it can measure to estimate performance of the system. In response it sends out signals that influence the system towards the desired state.
 A controller is designed by modelling a system as a set of differential equations in time. By analysing that model, a control strategy can be developed.</description>
     </item>
     
     <item>
       <title>Algorithms: Balancing</title>
-      <link>http://iahmed.me/post/algorithm-concepts/algorithms-balancing/</link>
+      <link>https://iahmed.me/post/algorithm-concepts/algorithms-balancing/</link>
       <pubDate>Mon, 06 Feb 2017 18:47:26 -0600</pubDate>
       
-      <guid>http://iahmed.me/post/algorithm-concepts/algorithms-balancing/</guid>
+      <guid>https://iahmed.me/post/algorithm-concepts/algorithms-balancing/</guid>
       <description>Balancing in algorithms refers to minimizing the complexity of an algorithm by making sure that its constituent parts share the load efficiently. It is not a technique for solving problems. Instead it helps us understand how an existing solution may be optimized.
-The theory of balancing Say there is a problem of size \(n\). The problem is such that it can be broken down into a sequence of smaller problems.</description>
+The theory of balancing Say there is a problem of size \(n\). The problem is such that it can be broken down into a sequence of smaller problems. There are many ways the problem can be broken down:</description>
     </item>
     
     <item>
       <title>A case study in choosing algorithms</title>
-      <link>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</link>
+      <link>https://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</link>
       <pubDate>Sun, 14 Aug 2016 03:29:23 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</guid>
-      <description>&lt;p&gt;This past year, I have been crunching data from &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos&#34;&gt;dark matter simulations&lt;/a&gt;. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that&amp;#8217;s right &amp;#8211; 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.&lt;/p&gt;</description>
+      <guid>https://iahmed.me/post/2016-08-13-a-case-study-in-choosing-algorithms/</guid>
+      <description>&lt;p&gt;This past year, I have been crunching data from &lt;a href=&#34;https://github.com/hazrmard/DarkMatterHalos&#34;&gt;dark matter simulations&lt;/a&gt;. Data size can get pretty large when it comes to scientific computing. As I write this post, I have a script running on 3.8 TB (that’s right – 3,700 gigabytes) of cosmic particles. At these levels one starts thinking about parallelizing computations. And therein lay my dilemma and a soon to be learned lesson.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Talking With Satellites</title>
-      <link>http://iahmed.me/post/2015-10-14-talking-with-satellites/</link>
+      <link>https://iahmed.me/post/2015-10-14-talking-with-satellites/</link>
       <pubDate>Wed, 14 Oct 2015 19:16:21 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/2015-10-14-talking-with-satellites/</guid>
+      <guid>https://iahmed.me/post/2015-10-14-talking-with-satellites/</guid>
       <description>This year I am leading a senior design team in developing a software defined radio that can talk with a satellite that Vanderbilt just launched. Compared to a normal radio, an SDR has most of the signal processing functions implemented virtually. This means that it can change its operation on the fly. An interesting application of SDRs is cognitive radio: that is, radios communicating with other radios in their vicinity and adjusting their frequencies to maximize their use of the bandwidth.</description>
     </item>
     

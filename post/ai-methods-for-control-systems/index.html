@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
+    <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118761164-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-118761164-1');
+    </script>
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    <title>AI methods for control systems</title>
+</head>
+<body>
+    
+    <div class="container">
+
+<div class="content">
+
+    <h1 class="page-title">
+        
+        
+        
+        AI methods for control systems
+    </h1>
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
+    </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/5-modern-state-transition/">Modern control: Solutions &amp; state transition matrices</a></h3>
+        <div class="front-matter">
+            <em>Monday, Sep 24, 2018</em> | 2 min read
+            
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+                    <a href="/tags/control-systems">Control Systems</a>,
+                
+        
+    
+
+        </div>
+        
+            The state equation for a linear time-invariant system:
+$$ x&rsquo;(t) = A x(t) + B u(t) $$
+Can be solved for $x(t)$. We collect all terms in $x$:
+$$ x&rsquo;(t) - A x(t) = B u(t) $$
+Multiply equation by $e^{-At}$
+$$ x&rsquo;(t) e^{-At} - A x(t) e^{-At} = B u(t) e^{-At} $$
+Using product rule $d(f;g) = f;dg + g;df$, where:
+To give:
+$$ \frac{d}{dt} (e^{-At} x(t)) = B u(t) e^{-At} $$
+        
+    </div>
+</div>
+
+    
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
+    </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/4-modern-state-space-equations/">Modern control: State space equations</a></h3>
+        <div class="front-matter">
+            <em>Monday, Sep 24, 2018</em> | 3 min read
+            
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+                    <a href="/tags/control-systems">Control Systems</a>,
+                
+        
+    
+
+        </div>
+        
+            In modern control approaches, systems are analyzed in time domain as a set of differential equations. Higher order differential equations are decomposed into sets of first order equations of state variables that represent the system internally. This produces three sets of variables:
+ Input variables are stimuli given to the system. Denoted by $u$. Output variables are the result of the current system state and inputs. Denoted by $y$. State variables represent the internal state of a system which may be obscured in the output variables.
+        
+    </div>
+</div>
+
+    
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
+    </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/3-classical-transfer/">Classical control: Transfer functions</a></h3>
+        <div class="front-matter">
+            <em>Friday, Sep 21, 2018</em> | 4 min read
+            
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+                    <a href="/tags/control-systems">Control Systems</a>,
+                
+        
+    
+
+        </div>
+        
+            A transfer function relates the output of a system to its input when it is represented in the Laplace domain. An assumption is made that initial steady-state response is 0. If $Y(s)$ is the output of a system, $X(s)$ is the input, then the transfer function is:
+$$ H(s) = \frac{Y(s)}{X(s)} $$
+Example - A Car   A car as a system: The input is the acceleration. The output is the total distance travelled.
+        
+    </div>
+</div>
+
+    
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
+    </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/2-classical-transforms/">Classical control: Transforms</a></h3>
+        <div class="front-matter">
+            <em>Monday, Sep 10, 2018</em> | 4 min read
+            
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/control-systems">Control Systems</a>,
+                
+        
+    
+
+        </div>
+        
+            Classical control methods simplify handling of a complex system by representing it in a different domain. The equations governing system dynamics are transformed into a different set of variables. A for a function $f(t)$ in the $t$ domain, an oft used transformation is of the form:
+$$ \mathcal{T}(f(t)) = F(s) = \int_{Domain} f(t) \cdot g(s, t); dt $$
+Mathematically, the integral removes the $t$ variable and only leaves $s$, thus converting from the $t$ domain to the $s$ domain.
+        
+    </div>
+</div>
+
+    
+        <div class="summary post">
+    <div class="image"
+        
+            style="background-image: url('/img/quill.jpg')"
+        >
+    </div>
+    <div class="description">
+        <h3 class="post-title"><a href="https://iahmed.me/post/ai-methods-for-control-systems/1-control-systems/">Control Systems: Overview</a></h3>
+        <div class="front-matter">
+            <em>Monday, Sep 10, 2018</em> | 4 min read
+            
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+        
+    
+
+        </div>
+        
+            A primer for classical control theory.
+        
+    </div>
+</div>
+
+    
+    <br/>
+    
+    
+    <br/>
+    
+
+</div>
+<div class="sidebar">
+    <div class="menu-icon"><h2>≡</h2></div>
+    <div class="title"><h1 class="site-name">Ibrahim Ahmed</h1>
+        
+            <div class="sb-links">
+                
+                    <a href="https://www.linkedin.com/in/IbrahimAhmed1"><img src="/img/LinkIcons/svg/linkedin.svg"/></a>
+                
+                    <a href="https://github.com/hazrmard"><img src="/img/LinkIcons/svg/github.svg"/></a>
+                
+                    <a href="http://stackoverflow.com/users/4591810/hazrmard"><img src="/img/LinkIcons/svg/stackoverflow.svg"/></a>
+                
+            </div>
+        
+    </div>
+    <ul class="menu-list">
+        
+            <a href="/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/home.svg" alt="Home"/><span class="menu-option-name">Home</span>
+                
+                
+            </li></a>
+        
+            <a href="/about/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/person.svg" alt="About Me"/><span class="menu-option-name">About Me</span>
+                
+                
+            </li></a>
+        
+            <a href="/resume/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/document.svg" alt="Résumé"/><span class="menu-option-name">Résumé</span>
+                
+                
+            </li></a>
+        
+            <a href="#noexist">
+            <li class="sb-option dropdown">
+                
+                    <img src="/img/LinkIcons/svg/pencil.svg" alt="Posts"/><span class="menu-option-name">Posts</span>
+                
+                
+                <div class="submenu"><ul>
+                    
+                        
+                            <a href="/categories"><li>By Categories</li></a>
+                        
+                    
+                        
+                            <a href="/tags"><li>By Tags</li></a>
+                        
+                    
+                    <a href="/post"><li>All</li></a>
+                </ul></div>
+                
+            </li></a>
+        
+            <a href="/project/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/terminal.svg" alt="Projects"/><span class="menu-option-name">Projects</span>
+                
+                
+            </li></a>
+        
+    </ul>
+</div>
+
+    <div class="footer">
+        <div class="copyright">© Ibrahim Ahmed</div>
+    </div>
+
+</div> 
+</body>
+</html>
+

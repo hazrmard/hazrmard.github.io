@@ -75,6 +75,7 @@ html, body {
     display: block;
 }
 
+/* main content div */
 .content,
 .resume {
     margin-left: 15%;
@@ -108,37 +109,44 @@ html, body {
 }
 
 /* lists and summaries */
-.grid {
+/* .grid {
     text-align: inherit;
-}
-.post-summary {
+} */
+.summary {
     padding: 0.5em;
     margin: 0.5em 0.5em 0.5em 0em;
 }
-.post-summary h3,
-.proj-summary h3 {
+.summary h3,
+.summary h3 {
     margin: 0px;
 }
-.proj-summary {
+/* .proj-summary {
     display: inline-block;
     margin: 2% 1%;
     padding: 1%;
     width:25%;
     min-width: 144px;
     vertical-align: top;
-}
-.proj-summary .image{
+} */
+.summary .image{
+    display: inline-block;
     background-color: white;
-    width: 100%;
-    padding-bottom: 100%;
+    width: 15%;
+    padding-bottom: 15%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    margin: auto 0px;
 }
-.proj-summary .front-matter, .grid h1 {
+.summary .description {
+    display: inline-block;
+    vertical-align: top;
+    width: 75%;
+}
+/* .proj-summary .front-matter, .grid h1 {
     text-align: justify;
     padding-top: 0.3em;
-}
+} */
 
 /* navigation */
 .navigation {

@@ -1,28 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Git on Ibrahim Ahmed</title>
-    <link>http://iahmed.me/tags/git/</link>
-    <description>Recent content in Git on Ibrahim Ahmed</description>
+    <title>git on Ibrahim Ahmed</title>
+    <link>https://iahmed.me/tags/git/</link>
+    <description>Recent content in git on Ibrahim Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ibrahim Ahmed</copyright>
     <lastBuildDate>Tue, 06 Sep 2016 02:01:26 +0000</lastBuildDate>
     
-	<atom:link href="http://iahmed.me/tags/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://iahmed.me/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Testing code with sensitive data</title>
-      <link>http://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</link>
+      <link>https://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</link>
       <pubDate>Tue, 06 Sep 2016 02:01:26 +0000</pubDate>
       
-      <guid>http://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</guid>
-      <description>&lt;p&gt;I recently renewed work on my first ever &lt;a href=&#34;https://github.com/hazrmard/imgurPCA&#34;&gt;github project&lt;/a&gt;. Over the course of a whole year when that project was dormant, I&amp;#8217;d learned some new tricks. I now try to focus on writing tests for my projects. It is immensely convenient when I add features here  and there and need to check the whole code for errors.&lt;/p&gt;
-
-&lt;p class=&#34;&#34;&gt;
-  Anyways, my project requires API keys to imgur.com. However I do not want to hard-code them into my &lt;em&gt;&lt;a href=&#34;https://github.com/hazrmard/imgurPCA/blob/master/test.py&#34;&gt;test.py&lt;/a&gt;&lt;/em&gt; file. But I also do not want to manually provide keys every time I run tests. So what do I do?
-&lt;/p&gt;</description>
+      <guid>https://iahmed.me/post/2016-09-06-testing-code-with-sensitive-data/</guid>
+      <description>&lt;p&gt;I recently renewed work on my first ever &lt;a href=&#34;https://github.com/hazrmard/imgurPCA&#34;&gt;github project&lt;/a&gt;. Over the course of a whole year when that project was dormant, I’d learned some new tricks. I now try to focus on writing tests for my projects. It is immensely convenient when I add features here  and there and need to check the whole code for errors.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     
   </channel>
