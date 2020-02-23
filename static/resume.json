@@ -1,5 +1,5 @@
 {
-    "pdf_link": "/Ibrahim_Ahmed.pdf",
+    "pdf_link": "https://drive.google.com/file/d/1wz7SoZZ1eSsY-pFO5TNuA6Du0mzaucX_/view?usp=sharing",
     "personal_info": {
         "name":     "Ibrahim Ahmed",
         "email":    "ibrahim.ahmed@vanderbilt.edu",
@@ -65,9 +65,9 @@
             "title":        "Graduate Researcher",
             "workplace":    "Vanderbilt University School of Engineering",
             "time":         "Aug '16 - Present",
-            "achievements": ["Build a reinforcement learning library to study fault-tolerant control on aircraft and smart buildings.",
-                            "Process clinical surveys by feature selection, clustering, and classification to diagnose genetic disorders.",
-                            "Generate data-driven models of systems using history of control and output measurements for model-based control."],
+            "achievements": ["Research reinforcement learning-based control for fault recovery on aircraft and smart buildings.",
+                            "Explore architectures and generate data-driven models of hybrid systems using  neural networks.",
+                            "Develop software for smart building control in production environments."],
             "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [{
                     "title":    "GitLab",
@@ -78,6 +78,17 @@
                     }
             ],
             "tags":         ["experience", "work"]
+        },
+        {
+            "title":        "Applied Scientist Intern",
+            "workplace":    "Amazon Web Services",
+            "time":         "May '19 - Aug '19",
+            "achievements": ["Researched applications of machine learning and digital signal processing in predictive analytics.",
+                            "Applied graph algorithms on hidden markov models (HMMs) to estimate state transition durations.",
+                            "Developed a python framework for fast experimentation by mixing-and-matching models and datasets."],
+            "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
+            "links":        [],
+            "tags":         ["experience", "work", "research", "industry"]
         },
         {
             "title":        "Research Intern",
@@ -102,14 +113,14 @@
             "title":        "Business Intelligence Intern",
             "workplace":    "Schneider Electric",
             "time":         "Jun '15 - Aug '15",
-            "achievements": ["Programmed SQL procedures to consolidate 40 million overlapping transactions into 1.5 million records.",
-                            "Rewrote periodic table back-up procedures to eliminate redundancies and reduced backup sizes by 75%."],
+            "achievements": ["Programmed SQL procedures to consolidate 40 million time-overlapping transactions into 1.5 million records.",
+                            "Rewrote database backup routines to eliminate redundant operations and reduced backup sizes by 75%"],
             "technologies": ["T-SQL", "Alteryx", "Domo", "Python"],
             "links":        [{
                 "title":    "GitHub",
                 "url":      "https://github.com/hazrmard/ResolveDateConflict"
                 }],
-            "tags":         ["experience", "analytics", "work"]
+            "tags":         ["experience", "analytics", "work", "industry"]
         },
         {
             "title":        "Student Helpdesk Assistant",
@@ -124,11 +135,10 @@
         },
         {
             "title":        "Research Intern",
-            "workplace":    "Vanderbilt University School of Engineering",
+            "workplace":    "Institute for Space and Defense Electronics, Vanderbilt University",
             "time":         "Jun '14 - Aug '14",
-            "achievements": ["Researched effects of solar and cosmic radiation on memory chips in space.",
-                            "Designed an interface in VHDL on a FPGA to test SRAM chips for single event upsets after irradiation.",
-                            "Documented code and interface operation procedures for use by graduate student researchers."],
+            "achievements": ["Researched effects of solar and cosmic radiation on SRAM memory chips in space.",
+                            "Designed an FPGA interface in VHDL to test memory chips for single event upsets after irradiation."],
             "technologies": ["VHDL"],
             "links":        [],
             "tags":         ["experience", "research", "work"]
@@ -152,7 +162,7 @@
     "projects":   [
         {
             "title":        "Agents",
-            "time":         "Dec '16 - Present",
+            "time":         "Dec '16 - Sep '18",
             "blurb":        "Reinforcement learning for fault-tolerant control",
             "description":  "A library for modeling continuous and discrete systems with faults, applying learning algorithms for real-time control, and visualizing and benchmarking performance.",
             "technologies": ["Python", "Numpy", "Flask"],
@@ -278,6 +288,7 @@
     ],
 
     "publications": [
-        "Ibrahim Ahmed, Gautam Biswas, Hamed Khorasghani. 'Comparison of model predictive and reinforcement learning methods for fault tolerant control' in IFAC-PapersOnLine, Warsaw, Poland, 2018."
+        "Ibrahim Ahmed, Gautam Biswas, Hamed Khorasghani. 'Comparison of model predictive and reinforcement learning methods for fault tolerant control' in IFAC-PapersOnLine, Warsaw, Poland, 2018.",
+        "Avisek Naug, Ibrahim Ahmed, Gautam Biswas. 'Online Energy Management in Commercial Buildings using Deep Reinforcement Learning' in IEEE International Conference on Smart Computing, (SMARTCOMP), 2019."
     ]
 }

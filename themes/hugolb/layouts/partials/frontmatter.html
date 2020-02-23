@@ -8,7 +8,7 @@
     {{end}}
     <!-- breadcrumb navigation -->
     {{ .Scratch.Set "sections" (slice .)}}
-    <br/>Section: {{/* partial "breadcrumb.html" . */}}
+    <br/>Section: {{partial "breadcrumbs.html" . }}
     <!-- taxonomies -->
     {{partial "taxonomies.html" .}}
 </div>

@@ -1,0 +1,10 @@
+<!-- from  http://hugocodex.org/add-ons/breadcrumbs/ -->
+<a href="/">Home</a>
+{{ $pathComponents := (split .RelPermalink "/") }}
+{{ $pathLen := len $pathComponents }}
+{{ range $idx, $val := $pathComponents }}
+    {{ if and (gt (len $val ) 0) (lt $idx (sub $pathLen 2)) }}
+        {{ $path := delimit (first (add $idx 1) $pathComponents) "/" }}
+        / <a href="{{ $path }}">{{ humanize  $val }}</a>
+    {{ end }}
+{{ end }}
