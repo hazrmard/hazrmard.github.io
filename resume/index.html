@@ -248,6 +248,13 @@
 	</div>
 </div>
 
+<div class="section" ng-show="publications.length">
+	<h2 class="h2">Publications</h2>
+	<div class="publications subsection" ng-repeat="pub in publications = (resumeData.publications | filter:search | lowercase)">
+		<div class="details blurb">{{pub}}</div>
+	</div>
+</div>
+
 
 </div>
     <div class="footer">
