@@ -1,6 +1,6 @@
 +++
-title = 'Neural Networks'
-date = '2018-04-02T23:21:53-05:00'
+title = 'Control systems'
+date = '2018-09-10T11:34:21-05:00'
 description = ""
 tags = []
 categories = []
