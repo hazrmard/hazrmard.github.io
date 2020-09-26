@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
+    <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118761164-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-118761164-1');
+    </script>
+
+    
+    
+    
+
+    
+    
+        
+        
+            <script src="/js/highlight/highlight.pack.js"></script>
+            <link rel="stylesheet" type="text/css" href="/css/solarized-light.css">
+            <script>hljs.initHighlightingOnLoad();</script>
+        
+        
+        
+            <script type="text/javascript" async
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+            </script>
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({ 
+                    TeX: { equationNumbers: {autoNumber: "AMS"} },
+                    tex2jax: {
+                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                        processEscapes: true
+                    } 
+                });
+            </script>
+        
+        
+        
+    
+
+    
+    
+
+    <title>Classical control: Transfer functions</title>
+</head>
+<body>
+    
+    <div class="container">
+
+<div class="content">
+    <h1 class="post-title">Classical control: Transfer functions</h1>
+    
+<div class="front-matter">
+    
+    
+        <em>Friday, Sep 21, 2018</em>
+    
+    
+    
+    <br/>Section: 
+<a href="/">Home</a>
+
+
+
+    
+
+    
+        
+        / <a href="/post">Post</a>
+    
+
+    
+        
+        / <a href="/post/control-systems">Control systems</a>
+    
+
+    
+
+    
+
+    
+    
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+                    <a href="/tags/control-systems">Control Systems</a>,
+                
+        
+    
+
+</div>
+
+    
+    
+    <p>A transfer function relates the output of a system to its input when it is represented in the Laplace domain. An assumption is made that initial steady-state response is 0. If $Y(s)$ is the output of a system, $X(s)$ is the input, then the transfer function is:</p>
+<p>$$
+H(s) = \frac{Y(s)}{X(s)}
+$$</p>
+<h3 id="example---a-car">Example - A Car</h3>
+<figure>
+    <img src="/img/posts/ai-methods-for-control-systems/3-car.png"
+         alt="A car as a system: The input is the acceleration. The output is the total distance travelled. Initial conditions are zero."/> <figcaption>
+            <p>A car as a system: The input is the acceleration. The output is the total distance travelled. Initial conditions are zero.</p>
+        </figcaption>
+</figure>
+
+<p>Consider a car as a system. The input $a(t)$ to the car is the acceleration at each time instant. The output $y(t)$ is the total distance it travelled from the start. The system can be described in the time domain as:</p>
+<!-- raw HTML omitted -->
+<p>Integrating acceleration gives velocity, and integrating velocity gives distance travelled. Taking the Laplace transform using the <a href="https://www.intmath.com/laplace-transformation/table-laplace-transforms.php">table of transforms</a> gives:</p>
+<!-- raw HTML omitted -->
+<p>Thus, the transfer function becomes:</p>
+<!-- raw HTML omitted -->
+<p>A transfer function can be created in MatLab using:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-matlab" data-lang="matlab">s = tf(<span style="color:#e6db74">&#39;s&#39;</span>);    <span style="color:#75715e">% define the s-domain variable as a symbol</span>
+H = <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> s^<span style="color:#ae81ff">2</span>;    <span style="color:#75715e">% define transfer function in terms of symbol</span>
+</code></pre></div><h2 id="response---frequency-domain">Response - Frequency Domain</h2>
+<p>A system&rsquo;s response is the output in reaction to input in the time domain. In the frequency domain, the response is a product of the transfer function and the input:</p>
+<p>$$
+Y(s) = H(s) \cdot X(s)
+$$</p>
+<p>There are several standard inputs used to illustrate system responses.</p>
+<h3 id="impulse-response">Impulse Response</h3>
+<p>An impulse input, $\delta(t)$ is zero everywhere except $t=0$ where $\delta(0)=\infty$. By definition $\int{\delta(t)dt} = 1$ and $\mathcal{L}(\delta(t)) = 1$. The impulse response shows how a system reacts to an instantaneous input.</p>
+<p>For the car example, the impulse response i.e. the distance travelled in response to an instantaneous, fleeting infinite acceleration at $t=0$ is:</p>
+<p>$$
+Y(s) = H(s) \cdot \mathcal{L}(\delta(t)) = H(s) \cdot 1 = \frac{1}{s^2}
+$$</p>
+<figure>
+    <img src="/img/posts/ai-methods-for-control-systems/3-car-impulse.png"/> 
+</figure>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-matlab" data-lang="matlab">impulseplot(H, <span style="color:#ae81ff">10</span>);
+</code></pre></div><p>The impulse response for $a(t) = \delta(t)$ can be verified in the time domain as well:</p>
+<!-- raw HTML omitted -->
+<h3 id="step-response">Step Response</h3>
+<p>A step input, $u(t)$ is zero for $t &lt; 0$ and one for $t \ge 0$. By definition $\mathcal{L}(u(t)) = s$. The unit response shows how a system reacts to a steady constant input.</p>
+<p>For the car example, the step response i.e. the distance travelled in response to a constant acceleration of $1$ starting at $t=0$ is:</p>
+<p>$$
+Y(s) = H(s) \cdot \mathcal{L}(u(t)) = H(s) \cdot s = \frac{1}{s}
+$$</p>
+<figure>
+    <img src="/img/posts/ai-methods-for-control-systems/3-car-step.png"/> 
+</figure>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-matlab" data-lang="matlab">stepplot(H, <span style="color:#ae81ff">10</span>);
+</code></pre></div><p>The step response for $a(t) = u(t)$ can be verified in the time domain as well:</p>
+<!-- raw HTML omitted -->
+<h2 id="response---time-domain">Response - Time Domain</h2>
+<p>In the time domain, response calculation is more complicated. The response is the <a href="https://en.wikipedia.org/wiki/Convolution"><strong>convolution</strong></a> between the impulse response $h(t)$ and the input $x(t)$ in time. The impulse response is the transfer function equivalent in the time domain.</p>
+<!-- raw HTML omitted -->
+<h2 id="poles-and-zeros">Poles and Zeros</h2>
+<p>The transfer function scales input to output. It stands to reason that an infinite scaling of a finite input is undesirable and indicates an unstable system. Similarly, a zero scaling indicates a damped/dissipative system which may or may not be desirable. The form of a transfer function is:</p>
+<p>$$
+H(s) = \frac{N(s)}{D(s)}
+$$</p>
+<p>Where $N$ is the numerator and $D$ is the denominator. A system will be unstable when $D(s) = 0$. These points are known as <em>poles</em>. Conversely, a system&rsquo;s response will tend to $0$ when $N(s) = 0$. These points are known as <em>zeros</em>.</p>
+<p>Recall that $s = \sigma + \iota \omega$. And that in the laplace domain, signals are represented as a combination of <em>decaying sinusoids</em> i.e. $e^{-st}$ for different values of $s$. So for $s=0 \rightarrow e^{-st} = 1$ is constant. For $s=1 + \iota \rightarrow e^{-t}e^{-\iota t}$ is a decaying sinusoid.</p>
+<p>For the car example, the transfer function is $\frac{1}{s^2}$. Poles occur at $s=0$. There are no zeros. This makes sense. A zero frequency variable means constant input i.e. acceleration. <em>Any</em> constant acceleration will cause the response i.e. distance travelled to go to infinity over time. Any other values of $s = \pm \sigma \pm \iota \omega$ will mean that the acceleration will oscillate between positive and negative values that are continuously growing/decaying. So the distances travelled forwards and backwards will never exactly cancel out to $0$ nor will they reach infinity.</p>
+<p>The poles and zeros give valuable information about what frequencies of inputs produce what results. Poles indicate resonant frequencies and must be avoided. Any phisically realizable system must have more zeros than poles. If the system had more poles, it would just magnify responses to all frequencies except for zeros:</p>
+<!-- raw HTML omitted -->
+<p>Meaning that over time, the system response would go to infinity.</p>
+
+    <br/>
+    <div class="navigation">
+    
+        <a href="https://iahmed.me/post/control-systems/2-classical-transforms/"><div class="prev nav-item">
+            ← Previous Post
+        </div></a>
+    
+    
+        <a href="https://iahmed.me/post/control-systems/4-modern-state-space-equations/"><div class="next nav-item">
+            Next Post →
+        </div></a>
+    
+</div>
+
+    <br/>
+</div>
+<div class="sidebar">
+    <div class="menu-icon"><h2>≡</h2></div>
+    <div class="title"><h1 class="site-name">Ibrahim Ahmed</h1>
+        
+            <div class="sb-links">
+                
+                    <a href="https://www.linkedin.com/in/IbrahimAhmed1"><img src="/img/LinkIcons/svg/linkedin.svg"/></a>
+                
+                    <a href="https://github.com/hazrmard"><img src="/img/LinkIcons/svg/github.svg"/></a>
+                
+                    <a href="http://stackoverflow.com/users/4591810/hazrmard"><img src="/img/LinkIcons/svg/stackoverflow.svg"/></a>
+                
+            </div>
+        
+    </div>
+    <ul class="menu-list">
+        
+            <a href="/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/home.svg" alt="Home"/><span class="menu-option-name">Home</span>
+                
+                
+            </li></a>
+        
+            <a href="/about/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/person.svg" alt="About Me"/><span class="menu-option-name">About Me</span>
+                
+                
+            </li></a>
+        
+            <a href="/resume/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/document.svg" alt="Résumé"/><span class="menu-option-name">Résumé</span>
+                
+                
+            </li></a>
+        
+            <a href="#noexist">
+            <li class="sb-option dropdown">
+                
+                    <img src="/img/LinkIcons/svg/pencil.svg" alt="Posts"/><span class="menu-option-name">Posts</span>
+                
+                
+                <div class="submenu"><ul>
+                    
+                        
+                            <a href="/categories"><li>By Categories</li></a>
+                        
+                    
+                        
+                            <a href="/tags"><li>By Tags</li></a>
+                        
+                    
+                    <a href="/post"><li>All</li></a>
+                </ul></div>
+                
+            </li></a>
+        
+            <a href="/project/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/terminal.svg" alt="Projects"/><span class="menu-option-name">Projects</span>
+                
+                
+            </li></a>
+        
+    </ul>
+</div>
+
+    <div class="footer">
+        <div class="copyright">© Ibrahim Ahmed</div>
+    </div>
+
+</div> 
+</body>
+</html>
+

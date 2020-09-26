@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
+    <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118761164-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-118761164-1');
+    </script>
+
+    
+    
+    
+
+    
+    
+        
+        
+        
+        
+            <script type="text/javascript" async
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+            </script>
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({ 
+                    TeX: { equationNumbers: {autoNumber: "AMS"} },
+                    tex2jax: {
+                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                        processEscapes: true
+                    } 
+                });
+            </script>
+        
+        
+        
+    
+
+    
+    
+
+    <title>Control Systems: Overview</title>
+</head>
+<body>
+    
+    <div class="container">
+
+<div class="content">
+    <h1 class="post-title">Control Systems: Overview</h1>
+    
+<div class="front-matter">
+    
+    
+        <em>Monday, Sep 10, 2018</em>
+    
+    
+    
+    <br/>Section: 
+<a href="/">Home</a>
+
+
+
+    
+
+    
+        
+        / <a href="/post">Post</a>
+    
+
+    
+        
+        / <a href="/post/control-systems">Control systems</a>
+    
+
+    
+
+    
+
+    
+    
+    
+        
+            <br/>Categories:
+                
+                    <a href="/categories/engineering">Engineering</a>,
+                
+        
+    
+
+    
+        
+            <br/>Tags:
+                
+                    <a href="/tags/matlab">Matlab</a>,
+                
+        
+    
+
+</div>
+
+    
+    
+    <h2 id="overview-of-control-theory">Overview of control theory</h2>
+<p>A control system is a mechanism that dictates the behaviour of another system. A controller relies on signals it can measure to estimate performance of the system. In response it sends out signals that influence the system towards the desired state.</p>
+<p>A controller is designed by modelling a system as a set of differential equations in time. By analysing that model, a control strategy can be developed. There are two approaches to solving systems modelled as differential equatiosn:</p>
+<ul>
+<li>
+<p><strong>Classical</strong> methods use various transforms (Laplace, Fourier) to convert the set of equations from the time domain into the frequency domain. This can bybass many complications of handling derivatives and integrals.</p>
+</li>
+<li>
+<p><strong>Modern</strong> methods simply a higher order differential equation into a set of lower order differential equations which can be manipulated more easily. These sets of equations are called <em>State equations</em>.</p>
+</li>
+</ul>
+<p>Alternatively, the field of control systems can be divided by features or restrictions present in systems:</p>
+<ul>
+<li>
+<p><strong>Robust</strong> control attempts to acount for inherent inaccuracies an uncertainties in measurement of signals in the systemm.</p>
+</li>
+<li>
+<p><strong>Adaptive</strong> control tries to evolve its control strategy as the characteristics of the system change over time which renders a static system model useless.</p>
+</li>
+<li>
+<p><strong>Optimal</strong> control uses some measure to <em>evaluate</em> the state of a system. It tries to maximize that value over time.</p>
+</li>
+<li>
+<p><strong>Non-linear</strong> control wrestles with systems that cannot be modelled as linear differential equations and so do not lend themselves to a host of methods applicable to solving linear equations.</p>
+</li>
+</ul>
+<p>Yet another way to divide control theory is in how systems are modelled in time:</p>
+<ul>
+<li>
+<p><strong>Continuous</strong> systems vary smoothly as time increases. This is the default assumption when modelling systems in control theory as differential equations and transforms are indended for continuous variables.</p>
+</li>
+<li>
+<p><strong>Discrete</strong> systems vary in time steps. This means there are discontinuities in the system model (infinite gradients etc.). For these class of systems, the <em>z-transform</em> can be used to represent them in a more continuous-friendly form.</p>
+</li>
+</ul>
+<h2 id="what-is-a-system">What is a system?</h2>
+<p>A system is any mechanism that takes an input and produces an output. How systems operate in inputs to produce an output or a response distinguishes them.</p>
+<h3 id="lti-systems">LTI Systems</h3>
+<p>A class of systems convenient to work with is called <strong>Linear Time Invariant (LTI)</strong> systems. Such systems satisfiy two properties:</p>
+<h4 id="linearity">Linearity</h4>
+<p>A linear system is one where the response scales or accumulates as the inputs scale or accumulate. There are two criteria for linearity:</p>
+<ul>
+<li><strong>Additivity</strong>: The sum of outputs of two inputs is the same as the output of the sum of two inputs. Mathematically, if $y$ is the system function, and $x_1$ and $x_2$ are inputs, then:</li>
+</ul>
+<p>$$
+y(x_1 + x_2) = y(x_1) + y(x_2)
+$$</p>
+<ul>
+<li><strong>Homogeneity</strong>: If the input scales by a factor $k$, then the output scales by the same factor:</li>
+</ul>
+<p>$$
+y(k \cdot x) = k \cdot y(x)
+$$</p>
+<h4 id="time-invariance">Time-invariance</h4>
+<p>A time-invariant system does not change its response to the same output at different times. This means that the system output is purely a function of the input and not of time.</p>
+<p>A time-invariant system:</p>
+<p>$$
+y(x(t)) = 3 \cdot x(t)^2 + x(t)
+$$</p>
+<p>A time-variant system:</p>
+<p>$$
+y(x(t)) = t \cdot x(t)
+$$</p>
+<h3 id="system-attributes">System attributes</h3>
+<h4 id="stability">Stability</h4>
+<p>A stable system is one where in response to a bounded input, the output is also bounded. For example, a system susceptible to resonance frequencies will be unstable.</p>
+<h4 id="initial-time">Initial time</h4>
+<p>The initial time of a system is before which there was no input.</p>
+<h4 id="steady-state-response">Steady state response</h4>
+<p>The steady state response of a system is the output when the system has settled in response to inputs. It is defined as the output as $t \rightarrow \infty$. There are several parameters that describe the temporal behaviour of the system:</p>
+<ul>
+<li>
+<p><strong>Step response</strong> is the output of the system in response to a constant $1$ input starting at initial time.</p>
+</li>
+<li>
+<p><strong>Target value</strong> is the output desired from a given input.</p>
+</li>
+<li>
+<p><strong>Rise time</strong> is the time taken to get within a margin of the target value for the first time.</p>
+</li>
+<li>
+<p><strong>Percent overshoot</strong> is how much the response overcompensated relative to the target value.</p>
+</li>
+<li>
+<p><strong>Steady state error</strong> is the final, constant error of the response as $t \rightarrow \infty$.</p>
+</li>
+</ul>
+<h4 id="order">Order</h4>
+<p>The order of a system is a representation of its complexity. It can be denoted by various properties depending on the formulation of the system:</p>
+<ul>
+<li>The highest exponent in the Laplace domain,</li>
+<li>Number of variables in state space equations (see Modern control methods),</li>
+<li>Number of energy storage elements in the model (e.g capacitors, inductors, not resistors).</li>
+</ul>
+
+    <br/>
+    <div class="navigation">
+    
+    
+        <a href="https://iahmed.me/post/control-systems/2-classical-transforms/"><div class="next nav-item">
+            Next Post →
+        </div></a>
+    
+</div>
+
+    <br/>
+</div>
+<div class="sidebar">
+    <div class="menu-icon"><h2>≡</h2></div>
+    <div class="title"><h1 class="site-name">Ibrahim Ahmed</h1>
+        
+            <div class="sb-links">
+                
+                    <a href="https://www.linkedin.com/in/IbrahimAhmed1"><img src="/img/LinkIcons/svg/linkedin.svg"/></a>
+                
+                    <a href="https://github.com/hazrmard"><img src="/img/LinkIcons/svg/github.svg"/></a>
+                
+                    <a href="http://stackoverflow.com/users/4591810/hazrmard"><img src="/img/LinkIcons/svg/stackoverflow.svg"/></a>
+                
+            </div>
+        
+    </div>
+    <ul class="menu-list">
+        
+            <a href="/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/home.svg" alt="Home"/><span class="menu-option-name">Home</span>
+                
+                
+            </li></a>
+        
+            <a href="/about/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/person.svg" alt="About Me"/><span class="menu-option-name">About Me</span>
+                
+                
+            </li></a>
+        
+            <a href="/resume/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/document.svg" alt="Résumé"/><span class="menu-option-name">Résumé</span>
+                
+                
+            </li></a>
+        
+            <a href="#noexist">
+            <li class="sb-option dropdown">
+                
+                    <img src="/img/LinkIcons/svg/pencil.svg" alt="Posts"/><span class="menu-option-name">Posts</span>
+                
+                
+                <div class="submenu"><ul>
+                    
+                        
+                            <a href="/categories"><li>By Categories</li></a>
+                        
+                    
+                        
+                            <a href="/tags"><li>By Tags</li></a>
+                        
+                    
+                    <a href="/post"><li>All</li></a>
+                </ul></div>
+                
+            </li></a>
+        
+            <a href="/project/">
+            <li class="sb-option ">
+                
+                    <img src="/img/LinkIcons/svg/terminal.svg" alt="Projects"/><span class="menu-option-name">Projects</span>
+                
+                
+            </li></a>
+        
+    </ul>
+</div>
+
+    <div class="footer">
+        <div class="copyright">© Ibrahim Ahmed</div>
+    </div>
+
+</div> 
+</body>
+</html>
+

@@ -111,7 +111,7 @@
 <!-- raw HTML omitted -->
 <p>Above is network traffic for a page on this site that uses 3rd party JS libraries to render equations. Around 200/218kB of network traffic is for that one library. This may seem a trivial amount of data but I believe that any optimization is good optimization (<em>in production especially</em>). So I harnessed all the flexibility a static site can offer. When I now build my site, only pages that render equations or contain code request external libraries. Thus different pages on my site have different - but the leanest possible - network traffic signatures.</p>
 <p>How did I do it? When building sites using Hugo, for each post I can define variables that Hugo can use while rendering a page template into HTML. These variables are called <em>front matter</em> in Hugo-speak. For example, <em>front matter</em> for this page looks like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#960050;background-color:#1e0010">+</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#960050;background-color:#1e0010">+++</span>
 <span style="color:#a6e22e">categories</span> = [<span style="color:#e6db74">&#34;Developer&#34;</span>, <span style="color:#e6db74">&#34;Meta&#34;</span>]
 <span style="color:#a6e22e">date</span> = <span style="color:#e6db74">&#34;2017-02-03T10:07:58-06:00&#34;</span>
 <span style="color:#a6e22e">hasequations</span> = <span style="color:#66d9ef">false</span>
@@ -122,7 +122,7 @@
 <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;&#34;</span>
 <span style="color:#a6e22e">tags</span> = [<span style="color:#e6db74">&#34;Javascript&#34;</span>, <span style="color:#e6db74">&#34;Hugo&#34;</span>]
 <span style="color:#a6e22e">draft</span> = <span style="color:#66d9ef">true</span>
-<span style="color:#960050;background-color:#1e0010">+</span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#960050;background-color:#1e0010">+</span>
+<span style="color:#960050;background-color:#1e0010">+++</span>
 </code></pre></div><p>And the <code>&lt;head&gt;</code> section for the HTML template looks like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">{{if .IsPage}}
     {{if .Params.hascode}}

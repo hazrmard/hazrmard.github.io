@@ -136,10 +136,10 @@ MySite
     |-index.html
 </code></pre><p>I would render my site into an intermediate folder, switch branches, copy over the files and commit changes:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">hugo -d ../intermediate/ -cleanDestinationDir
-<span style="color:#75715e"># add and commit changes to src branch</span>
-<span style="color:#75715e"># switch to master branch and copy over the results</span>
+<span style="color:#75715e"># add and commit changes to src branch</span>
+<span style="color:#75715e"># switch to master branch and copy over the results</span>
 Move-Items ../Intermediate/* ./ -Recurse -Force
-<span style="color:#75715e"># add and commit changes to master branch</span>
+<span style="color:#75715e"># add and commit changes to master branch</span>
 </code></pre></div><p>This was much better. I was isolating different aspects of my project. However it was still complicated. I couldn&rsquo;t view my source and rendered HTML at the same time as git would switch branches in the same folder. I was dissatisfied by the frequent overwrite operations incurred by switching branches. Something had to be done. Man&rsquo;s pursuit of terminal laziness lends him to amazing feats of industry. And so I set about finding a way to further reduce my work load.</p>
 <h3 id="enter-git-worktree">&hellip;enter git worktree</h3>
 <p><a href="https://git-scm.com/docs/git-worktree"><code>worktree</code></a> is a git feature that lets you have different branches checked out at the <em>same</em> time in different directories. So I could have my source and master branch folders side-by-side and switch between them without one overwriting the other.</p>
@@ -162,26 +162,26 @@ MySite                  &lt;- ...like yin and yang
     |-index.html
 </code></pre><h3 id="industrial-revolution">&hellip;industrial revolution!</h3>
 <p>Finally, it was time to automate my workflow. I wanted to render my source into an intermediate folder, copy over the contents to my master branch folder, and clean up the mess. Here my ephemeral flirtations with Powershell paid off.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#75715e"># Runs hugo in source dir and overwrites previous build in destination folder.</span>
-<span style="color:#75715e"># Overwrites files in destination folder but does not delete other files.</span>
-<span style="color:#75715e"># Run this from the source folder.</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#75715e"># Runs hugo in source dir and overwrites previous build in destination folder.</span>
+<span style="color:#75715e"># Overwrites files in destination folder but does not delete other files.</span>
+<span style="color:#75715e"># Run this from the source folder.</span>
 
-$SRC = <span style="color:#e6db74">&#39;./&#39;</span>                     <span style="color:#75715e"># path to source</span>
-$INTERMEDIATE = <span style="color:#e6db74">&#39;./public&#39;</span>      <span style="color:#75715e"># intermediate directory</span>
-$DEST = <span style="color:#e6db74">&#39;../hazrmard.github.io&#39;</span> <span style="color:#75715e"># master branch path</span>
+$SRC = <span style="color:#e6db74">&#39;./&#39;</span>                     <span style="color:#75715e"># path to source</span>
+$INTERMEDIATE = <span style="color:#e6db74">&#39;./public&#39;</span>      <span style="color:#75715e"># intermediate directory</span>
+$DEST = <span style="color:#e6db74">&#39;../hazrmard.github.io&#39;</span> <span style="color:#75715e"># master branch path</span>
 
-<span style="color:#75715e"># create intermediate or clean it</span>
+<span style="color:#75715e"># create intermediate or clean it</span>
 <span style="color:#66d9ef">If</span>(!(test-path $INTERMEDIATE))
 {
     New-Item -ItemType Directory -Force -Path $INTERMEDIATE
 } <span style="color:#66d9ef">else</span> {
-    Remove-Item -Path <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$</span><span style="color:#e6db74">INTERMEDIATE/*</span><span style="color:#e6db74">&#34;</span> -Recurse -Force
+    Remove-Item -Path <span style="color:#e6db74">&#34;$INTERMEDIATE/*&#34;</span> -Recurse -Force
 }
 
-&amp; hugo.exe -s $SRC -d $INTERMEDIATE | Out-Null  <span style="color:#75715e"># render site</span>
+&amp; hugo.exe -s $SRC -d $INTERMEDIATE | Out-Null  <span style="color:#75715e"># render site</span>
 
-<span style="color:#75715e"># Copy over and clean up</span>
-Copy-Item -Path <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$</span><span style="color:#e6db74">INTERMEDIATE/*</span><span style="color:#e6db74">&#34;</span> -Destination $DEST -Force -Recurse
+<span style="color:#75715e"># Copy over and clean up</span>
+Copy-Item -Path <span style="color:#e6db74">&#34;$INTERMEDIATE/*&#34;</span> -Destination $DEST -Force -Recurse
 Remove-Item -Path $INTERMEDIATE -Recurse -Force
 </code></pre></div><h3 id="conclusion">Conclusion</h3>
 <p>In my current workflow, I have two separate directories for my master and source branches, thanks to <a href="https://git-scm.com/docs/git-worktree"><code>worktree</code></a>. And I use my deployment script to quickly render and copy files between branches.</p>
