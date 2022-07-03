@@ -13,7 +13,7 @@ ignoreFiles = [".+pptx$"]
 [params]
 # Site/Blog/theme specific parameters
 # ====
-    splashSubheading = "Electrical Engineering @ Vanderbilt University"
+    splashSubheading = ""
     blogroot = "Posts"
     defaultprojimg = "/img/gear.png"
     defaultpostimg = "/img/quill.jpg"
@@ -25,6 +25,10 @@ ignoreFiles = [".+pptx$"]
     [[params.links]]
         URL = "https://github.com/hazrmard"
         image = "/img/LinkIcons/svg/github.svg"
+
+    [[params.links]]
+        URL = "https://scholar.google.com/citations?user=_Nn9bWgAAAAJ&hl=en"
+        image = "/img/LinkIcons/svg/google-scholar.svg"
 
     [[params.links]]
         URL = "http://stackoverflow.com/users/4591810/hazrmard"
@@ -64,6 +68,13 @@ ignoreFiles = [".+pptx$"]
     tag = "tags"
     category = "categories"
 
-# Blackfriday markdown rendering
-[blackfriday]
+[markup]
+    [markup.highlight]
+        codeFences = true
+        lineNos = true
+        style = "solarized-light"
+    [markup.goldmark.renderer]
+        # so html tags inside markdown can be rendered
+        unsafe = true
+
     

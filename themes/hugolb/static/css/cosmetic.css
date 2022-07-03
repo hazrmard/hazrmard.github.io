@@ -84,7 +84,7 @@ blockquote {
 .page-title,
 .summary .post-title a:link,
 .summary .post-title a:visited,
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, strong {
     text-decoration: none;
     color: #554300;
 }
@@ -94,21 +94,9 @@ h1, h2, h3, h4, h5, h6 {
 .terms {
     text-decoration: none;
     color: #806915;
-}
-
-.terms {
     background-color: #FFEDAA;
 }
 
-/* .proj-summary {
-    background-color: #FFEDAA;
-    box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
-    transition: 0.25s;
+details {
+    border: 1px solid #554300;
 }
-.proj-summary:hover {
-    box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
-    transition: 0.25s;
-}
-.proj-summary .front-matter {
-    color: #806915;
-} */

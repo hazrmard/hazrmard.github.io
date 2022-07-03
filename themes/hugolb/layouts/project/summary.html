@@ -1,10 +1,10 @@
 <div class="summary {{.Section}}">
     <div class="image"
-    {{if .Params.image}}
-        style="background-image: url('{{.Params.image}}')"
-    {{else}}
-        style="background-image: url('{{.Site.Params.defaultprojimg}}')"
-    {{end}}>
+        {{if .Params.image}}
+            style="background-image: url('{{.Params.image}}')"
+        {{else}}
+            style="background-image: url('{{.Site.Params.defaultprojimg}}')"
+        {{end}}>
     </div>
     <div class="description">
         {{if .Params.isexternal}}

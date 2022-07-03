@@ -3,14 +3,14 @@ Renders HTML or markdown content inside post. -->
 {{ $file :=  .Get "src"}}
 <!-- if extension HTML, parse as such -->
 {{ if eq (substr $file -1 4) "html" }}
-    {{ readFile $file | safeHTML }}
+    {{- readFile $file | safeHTML -}}
 {{ else if eq (substr $file -1 2) "md" }}
 <!-- of extension is markdown, process it -->
-    {{ $file | readFile | markdownify }}
+    {{- $file | readFile | markdownify -}}
 {{ else if eq (substr $file -1 2) "js" }}
 <!-- of extension is js, process it -->
-    {{ $file | readFile | safeJS }}
+    {{- $file | readFile | safeJS -}}
 {{ else }}
 <!-- else just read raw -->
-    {{ $file | readFile }}
+    {{- $file | readFile -}}
 {{ end }}
