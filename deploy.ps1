@@ -12,7 +12,7 @@ If(!(test-path $INTERMEDIATE))
     Remove-Item -Path "$INTERMEDIATE/*" -Recurse -Force
 }
 
-& hugo.exe -s $SRC -d $INTERMEDIATE | Out-Null
+& hugo.exe -s $SRC -d $INTERMEDIATE --minify | Out-Null
 
 Copy-Item -Path "$INTERMEDIATE/*" -Destination $DEST -Force -Recurse
 Remove-Item -Path $INTERMEDIATE -Recurse -Force
