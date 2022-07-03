@@ -1,105 +1,10 @@
-<!DOCTYPE html>
-<html >
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
-    <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
-
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118761164-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-118761164-1');
-    </script>
-
-    
-    
-    
-
-    
-    
-        
-        
-            <script src="/js/highlight/highlight.pack.js"></script>
-            <link rel="stylesheet" type="text/css" href="/css/solarized-light.css">
-            <script>hljs.initHighlightingOnLoad();</script>
-        
-        
-        
-        
-        
-    
-
-    
-    
-
-    <title>Trials and Tribulations of Maintaining a Hugo Blog</title>
-</head>
-<body>
-    
-    <div class="container">
-
-<div class="content">
-    <h1 class="post-title">Trials and Tribulations of Maintaining a Hugo Blog</h1>
-    
-<div class="front-matter">
-    
-    
-        <em>Saturday, Sep 30, 2017</em>
-    
-    
-    
-    <br/>Section: 
-<a href="/">Home</a>
-
-
-
-    
-
-    
-        
-        / <a href="/post">Post</a>
-    
-
-    
-
-    
-
-    
-    
-    
-        
-            <br/>Categories:
-                
-                    <a href="/categories/developer">Developer</a>,
-                
-        
-    
-
-    
-        
-            <br/>Tags:
-                
-                    <a href="/tags/hugo">Hugo</a>,
-                
-                    <a href="/tags/web-development">Web Development</a>,
-                
-                    <a href="/tags/powershell">Powershell</a>,
-                
-        
-    
-
-</div>
-
-    
-    
-    <p>As of the writing of this post, I maintain this site using my very own theme created in hugo. <a href="https://gohugo.io">Hugo</a> is a static site generator. It takes a bunch of plain text, applies a theme, and renders it as HTML. This is opposed to applications like Wordpress that assemble a page each time its served, to put it simply. This <em>compute once, use many times</em> approach saves on processing time and makes a site more portable. Case in point: this site is hosted on <a href="https://github.com/hazrmard/hazrmard.github.io">GitHub</a>, but I can easily move it to any hosting service.</p>
-<p>When I first started out, the entire site - the source and the rendered HTML were stored in the same directory in the same git branch. My file structure was something like this:</p>
-<pre><code>MySite
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/hugolb.css><link rel=stylesheet type=text/css href=/css/cosmetic.css><script async src="https://www.googletagmanager.com/gtag/js?id=UA-118761164-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-118761164-1')</script><title>Ibrahim Ahmed: Trials and Tribulations of Maintaining a Hugo Blog</title></head><body><div class=container><article class=content><h1 class=post-title>Trials and Tribulations of Maintaining a Hugo Blog</h1><div class=front-matter><em>Saturday, Sep 30, 2017</em><br>Section:
+<a href=/>Home</a>
+/ <a href=/post>Post</a><br>Categories:
+<a href=/categories/developer>Developer</a>,<br>Tags:
+<a href=/tags/hugo>Hugo</a>,
+<a href=/tags/web-development>Web Development</a>,
+<a href=/tags/powershell>Powershell</a>,</div><p>As of the writing of this post, I maintain this site using my very own theme created in hugo. <a href=https://gohugo.io>Hugo</a> is a static site generator. It takes a bunch of plain text, applies a theme, and renders it as HTML. This is opposed to applications like Wordpress that assemble a page each time its served, to put it simply. This <em>compute once, use many times</em> approach saves on processing time and makes a site more portable. Case in point: this site is hosted on <a href=https://github.com/hazrmard/hazrmard.github.io>GitHub</a>, but I can easily move it to any hosting service.</p><p>When I first started out, the entire site - the source and the rendered HTML were stored in the same directory in the same git branch. My file structure was something like this:</p><pre><code>MySite
     |-src\
     |   |-content\
     |   |-static\
@@ -112,13 +17,9 @@
     |-files
     |-like
     |-index.html
-</code></pre><p>Whenever I made an edit to the site source that I wanted to deploy, I&rsquo;d first manually delete all the folders in my root excepting <code>src</code> and then run the command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">hugo -d ../
-</code></pre></div><p>Which told <code>hugo</code> to take everything in my source folder and render it as a static site in my root folder. Mind you, this convuluted arrangement wasn&rsquo;t simply ignorance. It was that too, but I had to have my rendered site in the root folder of my repository for GitHub to properly serve it.</p>
-<p>This also meant that many changes that did not make it all the way to deployment polluted my commit history. This was too messy.</p>
-<h3 id="evolution">&hellip;evolution</h3>
-<p>The next step was to divide the source and HTML between two branches. I could then tinker with my site to my heart&rsquo;s content. And only changes that satisfied me would be committed to the master branch.</p>
-<pre><code>&gt;&gt;&gt; BRANCH SRC
+</code></pre><p>Whenever I made an edit to the site source that I wanted to deploy, I&rsquo;d first manually delete all the folders in my root excepting <code>src</code> and then run the command:</p><div class=highlight><div style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Powershell data-lang=Powershell><span style=color:#268bd2>hugo</span> <span style=color:#268bd2>-d</span> ../
+</code></pre></td></tr></table></div></div><p>Which told <code>hugo</code> to take everything in my source folder and render it as a static site in my root folder. Mind you, this convuluted arrangement wasn&rsquo;t simply ignorance. It was that too, but I had to have my rendered site in the root folder of my repository for GitHub to properly serve it.</p><p>This also meant that many changes that did not make it all the way to deployment polluted my commit history. This was too messy.</p><h3 id=evolution>&mldr;evolution</h3><p>The next step was to divide the source and HTML between two branches. I could then tinker with my site to my heart&rsquo;s content. And only changes that satisfied me would be committed to the master branch.</p><pre><code>&gt;&gt;&gt; BRANCH SRC
 MySite
     |-content\
     |-static\
@@ -134,19 +35,19 @@ MySite
     |-files
     |-like
     |-index.html
-</code></pre><p>I would render my site into an intermediate folder, switch branches, copy over the files and commit changes:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">hugo -d ../intermediate/ -cleanDestinationDir
-<span style="color:#75715e"># add and commit changes to src branch</span>
-<span style="color:#75715e"># switch to master branch and copy over the results</span>
-Move-Items ../Intermediate/* ./ -Recurse -Force
-<span style="color:#75715e"># add and commit changes to master branch</span>
-</code></pre></div><p>This was much better. I was isolating different aspects of my project. However it was still complicated. I couldn&rsquo;t view my source and rendered HTML at the same time as git would switch branches in the same folder. I was dissatisfied by the frequent overwrite operations incurred by switching branches. Something had to be done. Man&rsquo;s pursuit of terminal laziness lends him to amazing feats of industry. And so I set about finding a way to further reduce my work load.</p>
-<h3 id="enter-git-worktree">&hellip;enter git worktree</h3>
-<p><a href="https://git-scm.com/docs/git-worktree"><code>worktree</code></a> is a git feature that lets you have different branches checked out at the <em>same</em> time in different directories. So I could have my source and master branch folders side-by-side and switch between them without one overwriting the other.</p>
-<p>From my master branch, I checked out my <code>src</code> branch into another folder:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">git worktree add ../blogsource src
-</code></pre></div><p>Now, my files looked like:</p>
-<pre><code>blogsource              &lt;- source and HTML existing in harmony...
+</code></pre><p>I would render my site into an intermediate folder, switch branches, copy over the files and commit changes:</p><div class=highlight><div style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Powershell data-lang=Powershell><span style=color:#268bd2>hugo</span> <span style=color:#268bd2>-d</span> ../<span style=color:#268bd2>intermediate</span>/ <span style=color:#268bd2>-cleanDestinationDir</span>
+<span style=color:#93a1a1;font-style:italic># add and commit changes to src branch</span>
+<span style=color:#93a1a1;font-style:italic># switch to master branch and copy over the results</span>
+<span style=color:#cb4b16>Move-Items</span> ../<span style=color:#268bd2>Intermediate</span>/* ./ <span style=color:#268bd2>-Recurse</span> <span style=color:#268bd2>-Force</span>
+<span style=color:#93a1a1;font-style:italic># add and commit changes to master branch</span>
+</code></pre></td></tr></table></div></div><p>This was much better. I was isolating different aspects of my project. However it was still complicated. I couldn&rsquo;t view my source and rendered HTML at the same time as git would switch branches in the same folder. I was dissatisfied by the frequent overwrite operations incurred by switching branches. Something had to be done. Man&rsquo;s pursuit of terminal laziness lends him to amazing feats of industry. And so I set about finding a way to further reduce my work load.</p><h3 id=enter-git-worktree>&mldr;enter git worktree</h3><p><a href=https://git-scm.com/docs/git-worktree><code>worktree</code></a> is a git feature that lets you have different branches checked out at the <em>same</em> time in different directories. So I could have my source and master branch folders side-by-side and switch between them without one overwriting the other.</p><p>From my master branch, I checked out my <code>src</code> branch into another folder:</p><div class=highlight><div style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#268bd2>git</span> <span style=color:#268bd2>worktree</span> <span style=color:#268bd2>add</span> ../<span style=color:#268bd2>blogsource</span> <span style=color:#268bd2>src</span>
+</code></pre></td></tr></table></div></div><p>Now, my files looked like:</p><pre><code>blogsource              &lt;- source and HTML existing in harmony...
     |-content\
     |-static\
     |-themes\
@@ -160,127 +61,49 @@ MySite                  &lt;- ...like yin and yang
     |-files
     |-like
     |-index.html
-</code></pre><h3 id="industrial-revolution">&hellip;industrial revolution!</h3>
-<p>Finally, it was time to automate my workflow. I wanted to render my source into an intermediate folder, copy over the contents to my master branch folder, and clean up the mess. Here my ephemeral flirtations with Powershell paid off.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#75715e"># Runs hugo in source dir and overwrites previous build in destination folder.</span>
-<span style="color:#75715e"># Overwrites files in destination folder but does not delete other files.</span>
-<span style="color:#75715e"># Run this from the source folder.</span>
+</code></pre><h3 id=industrial-revolution>&mldr;industrial revolution!</h3><p>Finally, it was time to automate my workflow. I wanted to render my source into an intermediate folder, copy over the contents to my master branch folder, and clean up the mess. Here my ephemeral flirtations with Powershell paid off.</p><div class=highlight><div style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre style=color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#93a1a1;font-style:italic># Runs hugo in source dir and overwrites previous build in destination folder.</span>
+<span style=color:#93a1a1;font-style:italic># Overwrites files in destination folder but does not delete other files.</span>
+<span style=color:#93a1a1;font-style:italic># Run this from the source folder.</span>
 
-$SRC = <span style="color:#e6db74">&#39;./&#39;</span>                     <span style="color:#75715e"># path to source</span>
-$INTERMEDIATE = <span style="color:#e6db74">&#39;./public&#39;</span>      <span style="color:#75715e"># intermediate directory</span>
-$DEST = <span style="color:#e6db74">&#39;../hazrmard.github.io&#39;</span> <span style="color:#75715e"># master branch path</span>
+<span style=color:#268bd2>$SRC</span> = <span style=color:#2aa198>&#39;./&#39;</span>                     <span style=color:#93a1a1;font-style:italic># path to source</span>
+<span style=color:#268bd2>$INTERMEDIATE</span> = <span style=color:#2aa198>&#39;./public&#39;</span>      <span style=color:#93a1a1;font-style:italic># intermediate directory</span>
+<span style=color:#268bd2>$DEST</span> = <span style=color:#2aa198>&#39;../hazrmard.github.io&#39;</span> <span style=color:#93a1a1;font-style:italic># master branch path</span>
 
-<span style="color:#75715e"># create intermediate or clean it</span>
-<span style="color:#66d9ef">If</span>(!(test-path $INTERMEDIATE))
+<span style=color:#93a1a1;font-style:italic># create intermediate or clean it</span>
+<span style=color:#859900>If</span>(!(<span style=color:#cb4b16>test-path</span> <span style=color:#268bd2>$INTERMEDIATE</span>))
 {
-    New-Item -ItemType Directory -Force -Path $INTERMEDIATE
-} <span style="color:#66d9ef">else</span> {
-    Remove-Item -Path <span style="color:#e6db74">&#34;$INTERMEDIATE/*&#34;</span> -Recurse -Force
+    <span style=color:#cb4b16>New-Item</span> <span style=color:#268bd2>-ItemType</span> <span style=color:#268bd2>Directory</span> <span style=color:#268bd2>-Force</span> <span style=color:#268bd2>-Path</span> <span style=color:#268bd2>$INTERMEDIATE</span>
+} <span style=color:#859900>else</span> {
+    <span style=color:#cb4b16>Remove-Item</span> <span style=color:#268bd2>-Path</span> <span style=color:#2aa198>&#34;$INTERMEDIATE/*&#34;</span> <span style=color:#268bd2>-Recurse</span> <span style=color:#268bd2>-Force</span>
 }
 
-&amp; hugo.exe -s $SRC -d $INTERMEDIATE | Out-Null  <span style="color:#75715e"># render site</span>
+&amp; <span style=color:#268bd2>hugo</span>.<span style=color:#268bd2>exe</span> <span style=color:#268bd2>-s</span> <span style=color:#268bd2>$SRC</span> <span style=color:#268bd2>-d</span> <span style=color:#268bd2>$INTERMEDIATE</span> | <span style=color:#cb4b16>Out-Null</span>  <span style=color:#93a1a1;font-style:italic># render site</span>
 
-<span style="color:#75715e"># Copy over and clean up</span>
-Copy-Item -Path <span style="color:#e6db74">&#34;$INTERMEDIATE/*&#34;</span> -Destination $DEST -Force -Recurse
-Remove-Item -Path $INTERMEDIATE -Recurse -Force
-</code></pre></div><h3 id="conclusion">Conclusion</h3>
-<p>In my current workflow, I have two separate directories for my master and source branches, thanks to <a href="https://git-scm.com/docs/git-worktree"><code>worktree</code></a>. And I use my deployment script to quickly render and copy files between branches.</p>
-<p>The time is not far when I&rsquo;ll just dream new blog posts into existence.</p>
-
-    <br/>
-    <div class="navigation">
-    
-        <a href="https://iahmed.me/post/algorithm-concepts/algorithms-balancing/"><div class="prev nav-item">
-            ← Previous Post
-        </div></a>
-    
-    
-        <a href="https://iahmed.me/post/2017-10-20-escaping-echochambers/"><div class="next nav-item">
-            Next Post →
-        </div></a>
-    
-</div>
-
-    <br/>
-</div>
-<div class="sidebar">
-    <div class="menu-icon"><h2>≡</h2></div>
-    <div class="title"><h1 class="site-name">Ibrahim Ahmed</h1>
-        
-            <div class="sb-links">
-                
-                    <a href="https://www.linkedin.com/in/IbrahimAhmed1"><img src="/img/LinkIcons/svg/linkedin.svg"/></a>
-                
-                    <a href="https://github.com/hazrmard"><img src="/img/LinkIcons/svg/github.svg"/></a>
-                
-                    <a href="http://stackoverflow.com/users/4591810/hazrmard"><img src="/img/LinkIcons/svg/stackoverflow.svg"/></a>
-                
-            </div>
-        
-    </div>
-    <ul class="menu-list">
-        
-            <a href="/">
-            <li class="sb-option ">
-                
-                    <img src="/img/LinkIcons/svg/home.svg" alt="Home"/><span class="menu-option-name">Home</span>
-                
-                
-            </li></a>
-        
-            <a href="/about/">
-            <li class="sb-option ">
-                
-                    <img src="/img/LinkIcons/svg/person.svg" alt="About Me"/><span class="menu-option-name">About Me</span>
-                
-                
-            </li></a>
-        
-            <a href="/resume/">
-            <li class="sb-option ">
-                
-                    <img src="/img/LinkIcons/svg/document.svg" alt="Résumé"/><span class="menu-option-name">Résumé</span>
-                
-                
-            </li></a>
-        
-            <a href="#noexist">
-            <li class="sb-option dropdown">
-                
-                    <img src="/img/LinkIcons/svg/pencil.svg" alt="Posts"/><span class="menu-option-name">Posts</span>
-                
-                
-                <div class="submenu"><ul>
-                    
-                        
-                            <a href="/categories"><li>By Categories</li></a>
-                        
-                    
-                        
-                            <a href="/tags"><li>By Tags</li></a>
-                        
-                    
-                    <a href="/post"><li>All</li></a>
-                </ul></div>
-                
-            </li></a>
-        
-            <a href="/project/">
-            <li class="sb-option ">
-                
-                    <img src="/img/LinkIcons/svg/terminal.svg" alt="Projects"/><span class="menu-option-name">Projects</span>
-                
-                
-            </li></a>
-        
-    </ul>
-</div>
-
-    <div class="footer">
-        <div class="copyright">© Ibrahim Ahmed</div>
-    </div>
-
-</div> 
-</body>
-</html>
-
+<span style=color:#93a1a1;font-style:italic># Copy over and clean up</span>
+<span style=color:#cb4b16>Copy-Item</span> <span style=color:#268bd2>-Path</span> <span style=color:#2aa198>&#34;$INTERMEDIATE/*&#34;</span> <span style=color:#268bd2>-Destination</span> <span style=color:#268bd2>$DEST</span> <span style=color:#268bd2>-Force</span> <span style=color:#268bd2>-Recurse</span>
+<span style=color:#cb4b16>Remove-Item</span> <span style=color:#268bd2>-Path</span> <span style=color:#268bd2>$INTERMEDIATE</span> <span style=color:#268bd2>-Recurse</span> <span style=color:#268bd2>-Force</span>
+</code></pre></td></tr></table></div></div><h3 id=conclusion>Conclusion</h3><p>In my current workflow, I have two separate directories for my master and source branches, thanks to <a href=https://git-scm.com/docs/git-worktree><code>worktree</code></a>. And I use my deployment script to quickly render and copy files between branches.</p><p>The time is not far when I&rsquo;ll just dream new blog posts into existence.</p><br><div class=navigation><a href=https://iahmed.me/post/algorithm-concepts/algorithms-balancing/><div class="prev nav-item">← Previous Post</div></a><a href=https://iahmed.me/post/2017-10-20-escaping-echochambers/><div class="next nav-item">Next Post →</div></a></div><br></article><div class=sidebar><div class=menu-icon><h2>≡</h2></div><div class=title><h1 class=site-name>Ibrahim Ahmed</h1><div class=sb-links><a href=https://www.linkedin.com/in/IbrahimAhmed1><img src=/img/LinkIcons/svg/linkedin.svg></a>
+<a href=https://github.com/hazrmard><img src=/img/LinkIcons/svg/github.svg></a>
+<a href="https://scholar.google.com/citations?user=_Nn9bWgAAAAJ&hl=en"><img src=/img/LinkIcons/svg/google-scholar.svg></a>
+<a href=http://stackoverflow.com/users/4591810/hazrmard><img src=/img/LinkIcons/svg/stackoverflow.svg></a></div></div><ul class=menu-list><a href=/><li class=sb-option><img src=/img/LinkIcons/svg/home.svg alt=Home><span class=menu-option-name>Home</span></li></a><a href=/about/><li class=sb-option><img src=/img/LinkIcons/svg/person.svg alt="About Me"><span class=menu-option-name>About Me</span></li></a><a href=/resume/><li class=sb-option><img src=/img/LinkIcons/svg/document.svg alt=Résumé><span class=menu-option-name>Résumé</span></li></a><a href=#noexist><li class="sb-option dropdown"><img src=/img/LinkIcons/svg/pencil.svg alt=Posts><span class=menu-option-name>Posts</span><div class=submenu><ul><a href=/categories><li>By Categories</li></a><a href=/tags><li>By Tags</li></a><a href=/post><li>All</li></a></ul></div></li></a><a href=/project/><li class=sb-option><img src=/img/LinkIcons/svg/terminal.svg alt=Projects><span class=menu-option-name>Projects</span></li></a></ul></div><div class=footer><div class=copyright>© Ibrahim Ahmed</div></div></div></body></html>
