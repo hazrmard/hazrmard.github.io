@@ -8,7 +8,7 @@ series = ["Hugo site development"]
 isexternal = false
 hasequations = false
 hascode = true
-draft = false
+draft = true
 +++
 
 [Hugo][1] is a static site generator. It takes a bunch of markdown files and renders them to HTML. It is fast and simple.

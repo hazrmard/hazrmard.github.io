@@ -12,9 +12,6 @@ date = "2017-02-24T12:41:52-06:00"
 draft = false
 +++
 
-_Note: This is the second post in the series:
-[The Four Stellar Equations](/series/the-four-stellar-equations)_
-
 The star is stable. Despite being very massive, it does not collapse under its
 own gravity. This means that there is a force within the star that is opposing
 the inwards gravitational force. That force is a simple result of Newton's

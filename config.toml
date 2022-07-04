@@ -15,6 +15,7 @@ ignoreFiles = [".+pptx$"]
 # ====
     splashSubheading = ""
     blogroot = "Posts"
+    keywords = "ML, AI, RL, research, computer science, engineering"
     defaultprojimg = "/img/gear.png"
     defaultpostimg = "/img/quill.jpg"
 

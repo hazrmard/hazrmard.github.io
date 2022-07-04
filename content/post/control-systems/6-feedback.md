@@ -17,7 +17,7 @@ draft = true
 Both modern and classical system representations can be viewed homogenously. Recall that classical methods map inputs to outputs via a transfer function. Moden approaches define state variables describing the internal system dynamics which are then used to compute system output.
 
 $$
-y(t) = \mathcal(L)^{-1} \left{ H(s) X(s) \right}
+y(t) = \mathcal(L)^{-1} \left(H(s) X(s) \right)
 $$
 
 <div>$$
