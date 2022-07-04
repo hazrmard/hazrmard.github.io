@@ -1,0 +1,13 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{ if .IsPage }}
+<!-- TODO: make this more general by iterating over range $k, $v:= .Site.taxonomies and concatenating terms -->
+    {{ $k := delimit (.Params.tags | append .Params.categories) ", " }}
+    <meta name="keywords" content="{{$k}}">
+    <meta name="description" content="{{.Summary}}">
+{{ else }}
+    <meta name="keywords" content="{{.Site.Params.keywords}}">
+    {{ with .Site.GetPage "/" }}
+        <meta name="description" content="{{.Summary}}">
+    {{ end }}
+{{ end }}
