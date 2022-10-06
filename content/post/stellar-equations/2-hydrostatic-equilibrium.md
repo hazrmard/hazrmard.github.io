@@ -9,7 +9,7 @@ hasequations = true
 isexternal = false
 description = ""
 date = "2017-02-24T12:41:52-06:00"
-draft = false
+draft = true
 +++
 
 The star is stable. Despite being very massive, it does not collapse under its

@@ -9,7 +9,7 @@ isexternal = false
 hasequations = true
 hascode = true
 includes = []
-draft = false
+draft = true
 +++
 
 In modern control approaches, systems are analyzed in time domain as a set of differential equations.  Higher order differential equations are decomposed into sets of first order equations of *state variables* that represent the system internally. This produces three sets of variables:

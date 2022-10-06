@@ -7,7 +7,11 @@
         {{end}}>
     </div>
     <div class="description">
-        <h3 class="post-title"><a href="{{.Permalink}}">{{.Title}}</a></h3>
+        {{if .Params.link }}
+            <a href="{{ .Params.link }}"><h3>{{.Title}} 🡵</h3></a>
+        {{else}}
+            <a href="{{ .RelPermalink }}"><h3>{{.Title}}</h3></a>
+        {{end}}
         <div class="front-matter">
             <em>{{dateFormat "Monday, Jan 2, 2006" .Date}}</em> | {{.ReadingTime}} min read
             {{ partial "taxonomies.html" . }}

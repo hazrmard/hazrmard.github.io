@@ -9,7 +9,7 @@ isexternal = false
 hasequations = true
 hascode = false
 includes = []
-draft = false
+draft = true
 +++
 
 Classical control methods simplify handling of a complex system by representing it in a different domain. The equations governing system dynamics are *transformed* into a different set of variables. A for a function $f(t)$ in the $t$ domain, an oft used transformation is of the form:

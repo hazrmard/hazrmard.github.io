@@ -1,5 +1,12 @@
 +++
 title = '{{ replace .TranslationBaseName "-" " " | title}}'
 date = '{{ .Date }}'
-type = "post"
+description = ""
+link = ""
+tags = []
+categories = []
+includes = []       # any javascript files to include
+hasequations = false
+tableofcontents = false
+draft = true
 +++

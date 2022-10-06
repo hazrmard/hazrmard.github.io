@@ -9,7 +9,7 @@ series_weight = 1
 tags = ["astrophysics", "astronomy", "space"]
 date = "2017-02-23T22:09:15-06:00"
 hasequations = true
-draft = false
+draft = true
 +++
 
 Stars essentially are balls of extremely hot, compressed, ionized gas (plasma).

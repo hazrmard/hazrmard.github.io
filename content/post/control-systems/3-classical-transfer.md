@@ -9,7 +9,7 @@ isexternal = false
 hasequations = true
 hascode = true
 includes = []
-draft = false
+draft = true
 +++
 
 A transfer function relates the output of a system to its input when it is represented in the Laplace domain. An assumption is made that initial steady-state response is 0. If $Y(s)$ is the output of a system, $X(s)$ is the input, then the transfer function is:

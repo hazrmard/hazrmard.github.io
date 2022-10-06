@@ -4,7 +4,6 @@ date = "{{ .Date }}"
 description = ""
 link = ""
 image = ""
-isexternal = false
 technologies = []
 hasequations = false
 includes = []

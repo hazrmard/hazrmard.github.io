@@ -1,12 +1,12 @@
 +++
-title = '{{ replace .TranslationBaseName "-" " " | title}}'
-date = '{{ .Date }}'
+title = 'My Research'
+date = '2022-10-04T17:55:54-05:00'
 description = ""
+link = ""
 tags = []
 categories = []
-link = ""
-hasequations = false
 includes = []       # any javascript files to include
+hasequations = false
 tableofcontents = false
 draft = true
 +++
