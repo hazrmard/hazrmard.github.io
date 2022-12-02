@@ -69,18 +69,33 @@
             "title":        "Graduate Researcher",
             "workplace":    "Vanderbilt University School of Engineering",
             "time":         "Aug '16 - Present",
-            "achievements": ["Research reinforcement learning-based control for fault recovery on aircraft and smart buildings.",
-                            "Explore architectures and generate data-driven models of hybrid systems using  neural networks.",
-                            "Develop software for smart building control in production environments."],
+            "achievements": ["Use machine learning algorithms to generate and validate data-driven models of complex real-world systems.",
+                            "Develop reinforcement learning based adaptive fault-tolerant control systems on drones for NASA's System-wide Safety project.",
+                            "Design high fidelity simulation environments using Modelica, Python, and GazeboSim for Octorotor and Building simulations.",
+                            "Deploy smart controllers in the cloud for cooling energy optimization in campus buildings."],
             "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [{
-                    "title":    "GitLab",
+                    "title":    "Smart Buildings Code",
                     "url":      "https://git.isis.vanderbilt.edu/SmartBuildings"
                     },{
                     "title":    "Research Documentation",
                     "url":      "https://hazrmard.github.io/EngineeringScienceBuilding"
+                    },{
+                    "title":    "UAV Simulation",
+                    "url":      "https://github.com/hazrmard/multirotor"
                     }
             ],
+            "tags":         ["experience", "work"]
+        },
+        {
+            "title":        "Research Intern",
+            "workplace":    "TieSet Inc",
+            "time":         "May '20 - Dec '20",
+            "achievements": ["Developed patent proposals for private and interpretable machine learning-based controllers.",
+                            "Implemented a reinforcement learning framework for federated control in smart buildings.",
+                            "Designed OpenRTB-compatible front-end browser library using distributed machine learning for ad-serving without cross-site tracking."],
+            "technologies": ["Python", "PyTorch","Flask"],
+            "links":        [],
             "tags":         ["experience", "work"]
         },
         {
@@ -88,7 +103,6 @@
             "workplace":    "Amazon Web Services",
             "time":         "May '19 - Aug '19",
             "achievements": ["Researched applications of machine learning and digital signal processing in predictive analytics.",
-                            "Applied graph algorithms on hidden markov models (HMMs) to estimate state transition durations.",
                             "Developed a python framework for fast experimentation by mixing-and-matching models and datasets."],
             "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [],
@@ -98,11 +112,10 @@
             "title":        "Research Intern",
             "workplace":    "Vanderbilt Department of Physics & Astronomy",
             "time":         "Jun '16 - Aug '16'",
-            "achievements": ["Studied formation of dark matter halos in galaxies via high performance computer simulations.",
-                            "Developed algorithms to fit particle clouds to ellipsoids to verify Cold Dark Matter models of halo formation.",
-                            "Wrote a multiprocessor compatible data mining library to visualize 3.7TB of n-body physics simulation output.",
-                            "Developed tools to generate animated snapshots of halo evolution.",
-                            "Analyzed particle distributions in different halo finder protocols (AHF, Rockstar)."],
+            "achievements": ["Studied formation of dark matter in galaxies via high performance computer simulations.",
+                            "Developed algorithms to validate simulation results against theoretical models of dark matter formation.",
+                            "Wrote a multiprocessor compatible data mining library to visualize 3.7TB of n-body simulation results.",
+                            "Developed tools to generate animated snapshots of dark matter halo evolution."],
             "technologies": ["Python (numpy, matplotlib)", "C", "Bash"],
             "links":        [{
                 "title":    "GitHub",
@@ -163,60 +176,7 @@
         }
     ],
 
-    "projects":   [
-        {
-            "title":        "Agents",
-            "time":         "Dec '16 - Sep '18",
-            "blurb":        "Reinforcement learning for fault-tolerant control",
-            "description":  "A library for modeling continuous and discrete systems with faults, applying learning algorithms for real-time control, and visualizing and benchmarking performance.",
-            "technologies": ["Python", "Numpy", "Flask"],
-            "links":        [
-                {
-                    "title":    "GitHub",
-                    "url":      "https://github.com/hazrmard/Agents"
-                }],
-            "tags":         ["open source", "projects"]
-        },
-        {
-            "title":        "PoorMansNN",
-            "time":         "March '18",
-            "blurb":        "A simple neural network library.",
-            "description":  "Dimension-agnostic dense feed forward neural network library with minimal dependencies. Modular and extensible structure with comprehensive documentation.",
-            "technologies": ["Python", "Numpy"],
-            "links":        [
-                {
-                    "title":    "GitHub",
-                    "url":      "https://github.com/hazrmard/PoorMansNN"
-                }],
-            "tags":         ["open source", "projects", "machine learning", "artificial intelligence"]
-        },
-        {
-            "title":        "imgurPCA v2",
-            "time":         "Aug '16 - ",
-            "blurb":        "Machine learning on imgur.com",
-            "description":  "Parsing comments on imgur.com for principal component analysis. Parsed comments are pre-processed for feature selection before being passed for analysis and later clustering.",
-            "technologies": ["Python", "Numpy"],
-            "links":        [
-                {
-                    "title":    "GitHub",
-                    "url":      "https://github.com/hazrmard/imgurPCA"
-                }],
-            "tags":         ["open source", "projects"]
-        },
-        {
-            "title":        "SatTrack",
-            "time":         "Sep '15 - Jun '16'",
-            "blurb":        "Tracking satellites in real time.",
-            "description":  "A simple, easy to use library for visualizing satellite paths, predicting future passes, and tracking satellite trajectories using servo motors. Developed for Institute for Space and Defense Electronics - Software Defined Radio (ISDE-SDR) project at Vanderbilt.",
-            "technologies": ["Python", "Javascript", "jQuery", "D3.js", "HTML/CSS", "Arduino"],
-            "links":        [
-                {
-                    "title":    "GitHub",
-                    "url":      "https://github.com/hazrmard/SatTrack"
-                }],
-            "tags":         ["open source", "projects"]
-        }
-    ],
+    "projects":   [],
 
     "skills":   [
         {
@@ -295,6 +255,9 @@
         "Ibrahim Ahmed, Gautam Biswas, Hamed Khorasghani. 'Comparison of model predictive and reinforcement learning methods for fault tolerant control' in IFAC-PapersOnLine, Warsaw, Poland, 2018.",
         "Avisek Naug, Ibrahim Ahmed, Gautam Biswas. 'Online Energy Management in Commercial Buildings using Deep Reinforcement Learning' in IEEE International Conference on Smart Computing, (SMARTCOMP), 2019.",
         "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Fault-Tolerant Control of Degrading Systems with On-Policy Reinforcement Learning' in IEEE IFAC-PapersOnLine, 2020.",
-        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Complementary Meta-Reinforcement Learning for Fault-Adaptive Control' in PHM 2020"
+        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Complementary Meta-Reinforcement Learning for Fault-Adaptive Control' in PHM 2020",
+        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Transfer reinforcement learning for fault-tolerant control by re-using optimal policies' in SysTol 2021.",
+        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Analysis of the deployment strategies of reinforcement learning controllers for complex dynamic systems' in PHM 2021",
+        "Ibrahim Ahmed}, Marcos Quiñones-Grueiro, Gautam Biswas. 'A high-fidelity simulation test-bed for fault-tolerant octo-rotor control using reinforcement learning' in DASC 2022"
     ]
 }
