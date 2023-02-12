@@ -25,3 +25,6 @@
     width: 48px;
     height: auto;
 }
+.splash .content {
+    display: block;
+}
