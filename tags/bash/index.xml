@@ -1,25 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>bash on Ibrahim Ahmed</title>
-    <link>https://iahmed.me/tags/bash/</link>
-    <description>Recent content in bash on Ibrahim Ahmed</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>Ibrahim Ahmed</copyright>
-    <lastBuildDate>Sat, 30 Jan 2016 04:30:28 +0000</lastBuildDate>
-    
-	<atom:link href="https://iahmed.me/tags/bash/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Developing with C/C&#43;&#43; on console</title>
-      <link>https://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</link>
-      <pubDate>Sat, 30 Jan 2016 04:30:28 +0000</pubDate>
-      
-      <guid>https://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bash on Ibrahim Ahmed</title><link>https://iahmed.me/tags/bash/</link><description>Recent content in bash on Ibrahim Ahmed</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Ibrahim Ahmed</copyright><lastBuildDate>Sat, 30 Jan 2016 04:30:28 +0000</lastBuildDate><atom:link href="https://iahmed.me/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Developing with C/C++ on console</title><link>https://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</link><pubDate>Sat, 30 Jan 2016 04:30:28 +0000</pubDate><guid>https://iahmed.me/post/2016-01-29-developing-with-cc-on-console/</guid><description>&lt;p class="">
+I am taking a High Performance Computing course this semester. For that we have to &lt;span class="lang:default decode:true crayon-inline ">ssh&lt;/span> into the university&amp;#8217;s computing cluster. The interface is entirely console based. Now that might seem awesome at first: typing away commands like a &amp;#8220;hacker&amp;#8221;. And it is awesome. But after a while it gets tiring, particularly when I am writing code.</description></item></channel></rss>
