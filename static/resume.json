@@ -69,10 +69,10 @@
             "title":        "Graduate Researcher",
             "workplace":    "Vanderbilt University School of Engineering",
             "time":         "Aug '16 - Present",
-            "achievements": ["Use machine learning algorithms to generate and validate data-driven models of complex real-world systems.",
-                            "Develop reinforcement learning based adaptive fault-tolerant control systems on drones for NASA's System-wide Safety project.",
-                            "Design high fidelity simulation environments using Modelica, Python, and GazeboSim for Octorotor and Building simulations.",
-                            "Deploy smart controllers in the cloud for cooling energy optimization in campus buildings."],
+            "achievements": ["Research machine learning algorithms for optimal control using insights from control theory.",
+                            "Develop reinforcement learning for autonomous drone flight for NASA’s System-wide Safety project by integrating flight and weather data, to quickly adapt flight controller to disturbances.",
+                            "Design high-fidelity simulations for drones and buildings in python, interfacing with 3D physics engine (Gazebo) in C++, with up to 300% faster than real-time simulation using just-in-time compilation.",
+                            "Collaborate with stakeholders on campus to learn, deploy, and maintain cloud-based machine-learning controllers in python for energy optimization in smart buildings using BACNet IoT protocol"],
             "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [{
                     "title":    "Smart Buildings Code",
@@ -91,10 +91,10 @@
             "title":        "Research Intern",
             "workplace":    "TieSet Inc",
             "time":         "May '20 - Dec '20",
-            "achievements": ["Developed patent proposals for private and interpretable machine learning-based controllers.",
-                            "Implemented a reinforcement learning framework for federated control in smart buildings.",
-                            "Designed OpenRTB-compatible front-end browser library using distributed machine learning for ad-serving without cross-site tracking."],
-            "technologies": ["Python", "PyTorch","Flask"],
+            "achievements": ["Drafted patent proposal for distributed, private, and interpretable machine learning-based controllers.",
+                            "Prototyped a reinforcement-learning framework for distributed energy optimization in smart buildings that can adapt to weather changes by exchanging federated knowledge in neural networks.",
+                            "Designed an OpenRTB-compatible JavaScript library using TensorFlow.js, for learning how a user interacts with a website, for ad-serving without cross-site tracking."],
+            "technologies": ["Python", "PyTorch","Flask", "Tensorflow.js"],
             "links":        [],
             "tags":         ["experience", "work"]
         },
@@ -102,8 +102,8 @@
             "title":        "Applied Scientist Intern",
             "workplace":    "Amazon Web Services",
             "time":         "May '19 - Aug '19",
-            "achievements": ["Researched applications of machine learning and digital signal processing in predictive analytics.",
-                            "Developed a python framework for fast experimentation by mixing-and-matching models and datasets."],
+            "achievements": ["Demonstrated uses of wavelet transforms in machine learning for predictive analytics using vibration signals.",
+                            "Reviewed prognostics literature, implemented research papers into code, and conducted feasibility studies for project use case by running parallel exploratory experiments on AWS servers."],
             "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [],
             "tags":         ["experience", "work", "research", "industry"]
@@ -112,10 +112,10 @@
             "title":        "Research Intern",
             "workplace":    "Vanderbilt Department of Physics & Astronomy",
             "time":         "Jun '16 - Aug '16'",
-            "achievements": ["Studied formation of dark matter in galaxies via high performance computer simulations.",
-                            "Developed algorithms to validate simulation results against theoretical models of dark matter formation.",
-                            "Wrote a multiprocessor compatible data mining library to visualize 3.7TB of n-body simulation results.",
-                            "Developed tools to generate animated snapshots of dark matter halo evolution."],
+            "achievements": ["Studied formation of dark matter in galaxies via high performance computer simulations",
+                            "Developed point-cloud processing algorithms to fit simulation results against theoretical models of dark matter formation to validate experiment hypotheses",
+                            "Wrote a parallel data-mining pipeline in python to visualize 3.7TB of n-body simulation results.",
+                            "Developed visualization tools to generate animated snapshots of dark matter halo evolution."],
             "technologies": ["Python (numpy, matplotlib)", "C", "Bash"],
             "links":        [{
                 "title":    "GitHub",
@@ -130,8 +130,9 @@
             "title":        "Business Intelligence Intern",
             "workplace":    "Schneider Electric",
             "time":         "Jun '15 - Aug '15",
-            "achievements": ["Programmed SQL procedures to consolidate 40 million time-overlapping transactions into 1.5 million records.",
-                            "Rewrote database backup routines to eliminate redundant operations and reduced backup sizes by 75%"],
+            "achievements": ["Programmed SQL procedures to consolidate 40 million time-overlapping transactions into 1.5 million records with no data loss.",
+                            "Rewrote database backup routines to eliminate redundancies and reduced backup sizes by 75%.",
+                            "Designed visualizations in Domo from Alteryx workflows using sales operations data in North America."],
             "technologies": ["T-SQL", "Alteryx", "Domo", "Python"],
             "links":        [{
                 "title":    "GitHub",
@@ -140,39 +141,14 @@
             "tags":         ["experience", "analytics", "work", "industry"]
         },
         {
-            "title":        "Student Helpdesk Assistant",
-            "workplace":    "Vanderbilt University IT",
-            "time":         "Aug '13 - Jun '15",
-            "achievements": ["Diagnosed and troubleshot computer, smartphone, and campus wide IT issues.",
-                            "Recovered $3000 worth of accidentally deleted data from hard drives.",
-                            "Assisted students in setting up course-specific applications on their computers."],
-            "technologies": ["Windows", "Mac OS X", "Linux"],
-            "links":        [],
-            "tags":         ["experience", "customer service", "consulting", "work"]
-        },
-        {
             "title":        "Research Intern",
             "workplace":    "Institute for Space and Defense Electronics, Vanderbilt University",
             "time":         "Jun '14 - Aug '14",
             "achievements": ["Researched effects of solar and cosmic radiation on SRAM memory chips in space.",
-                            "Designed an FPGA interface in VHDL to test memory chips for single event upsets after irradiation."],
+                            "Designed an FPGA interface in VHDL to test memory chips for corruption after irradiation."],
             "technologies": ["VHDL"],
             "links":        [],
             "tags":         ["experience", "research", "work"]
-        },
-        {
-            "title":        "Instructor",
-            "workplace":    "Android Application Development Workshop - NUST, Pakistan",
-            "time":         "Jun '13",
-            "achievements": ["Organized a week-long workshop attended by 40 professionals and graduate and undergraduate students.",
-                            "Taught basic application development skills for Android using MIT AppInventor to attendees with diverse technical skillsets.",
-                            "Mentored teams for final day projects and provided one-on-one guidance."],
-            "technologies": ["MIT AppInventor"],
-            "links":        [{
-                "title":    "NUST.edu.pk",
-                "url":      "http://www.nust.edu.pk/INSTITUTIONS/Schools/SEECS/News/Pages/Workshop-on-Android-Programming.aspx"
-                }],
-            "tags":         ["experience", "teaching", "work"]
         }
     ],
 
@@ -181,20 +157,30 @@
     "skills":   [
         {
             "title":        "Programming",
-            "skills":       ["C/C++ (OpenCV, OpenMP, RTOS, CUDA)","Python (PyTorch, Scipy, Django, Matplotlib, Pandas, Sklearn)", "Go", "Java", "Android", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
+            "skills":       ["C/C++ (OpenCV, OpenMP, RTOS, CUDA)","Python (PyTorch, Scipy, Django, Matplotlib, Pandas, Sklearn)", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
         },
         {
             "title":        "Engineering",
-            "skills":       ["VHDL", "MatLab", "Octave", "Mathematica", "Cadence", "LTSpice"]
+            "skills":       ["VHDL", "MatLab", "Octave", "Mathematica"]
         }
     ],
 
     "extracurriculars": [
         {
+            "title":        "Graudate Fellow, Vandirbilt Institute for Digital Learning",
+            "time":         "Aug '17 - May '18",
+            "description":  ["Explored novel uses of digital media (virtual reality, data visualizations) in pedagogy.",
+                            "Scripted and produced videos to distil and convey academic research to a broad lay audience.",
+                            "Curated an online repository of digital learning resources in collaboration with other Fellows."],
+            "details":      "",
+            "links":        [],
+            "tags":         ["teamwork", "leadership"]
+        },
+        {
             "title":        "Resident Advisor",
             "time":         "Aug '15 - May '16",
-            "description":  ["Identified residents facing academic or  personal challenges and provided support.",
-                            "Arranged recreational and educational events like movie nights and talks in collaboration with campus organizations to serve a community of 700 residents."],
+            "description":  ["Organized after-hours recreational and educational programs for a residential community of 650 students.",
+                            "Identified students facing academic and personal challenges and provided mentorship, guidance, and connection with on-campus resources."],
             "details":      "",
             "links":        [],
             "tags":         ["teamwork", "leadership"]
@@ -212,7 +198,7 @@
             "title":        "AcFee Subcommittee for Cultural Organizations",
             "time":         "Jan '15 - May '15",
             "description":  ["Reviewed campus organizations’ annual applications for funding.",
-                            "Allocated $218,000 from university funds to 43 organizations based on performance analyses."],
+                            "Allocated $218,000 from university funds to 43 organizations based on annual performance analyses."],
             "details":      "",
             "links":        [],
             "tags":         ["teamwork", "leadership"]
@@ -220,8 +206,8 @@
         {
             "title":        "Vanderbilt Student Volunteers for Science",
             "time":         "Jan '14 - May '14",
-            "description":  ["Trained for teaching science subjects to middle school students",
-                            "Taught robotics using Lego Mindstorms to 8th graders in Nashville over several sessions."],
+            "description":  ["Taught fundamentals of robotics using LEGO Mindstorms kits to 8th graders in Nashville public schools.",
+                            "Hosted interactive sessions with high school students about careers in engineering."],
             "details":      "",
             "links":        [],
             "tags":         ["teamwork", "leadership"]

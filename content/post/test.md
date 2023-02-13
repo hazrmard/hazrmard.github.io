@@ -15,7 +15,7 @@ tableofcontents = true
 ## Markdown stuff
 
 The quadratic solver formula is:
-\\(x=(-b +- \sqrt(b^2 – 4ac)) \over (2a)\\)
+$(x=(-b +- \sqrt(b^2 – 4ac)) \over (2a))$
 
 $$x=(-b +- \sqrt{b^2 – 4ac}) \over (2a)$$
 
