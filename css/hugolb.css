@@ -5,6 +5,11 @@ html, body {
     width: 100%;
     padding: 0px;
     margin: 0px;
+    font-family: 'Proza Libre', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .container {
