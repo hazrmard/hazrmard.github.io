@@ -12,12 +12,12 @@
     </div>
     <ul class="menu-list">
         {{range .Site.Params.menu.main}}
-            <a href="{{if eq .name $.Site.Params.blogroot}}#noexist{{else}}{{.url}}{{end}}">
-            <li class="sb-option {{if eq .name $.Site.Params.blogroot}}dropdown{{end}}">
-                <!-- <a href="{{if eq .name $.Site.Params.blogroot}}#noexist{{else}}{{.url}}{{end}}"> -->
-                    <img src="{{.image}}" alt="{{.name}}"/><span class="menu-option-name">{{.name}}</span>
-                <!-- </a> -->
-                {{if eq .name $.Site.Params.blogroot}}
+            <!-- <a href="{{if eq .name $.Site.Params.blogroot}}#noexist{{else}}{{.url}}{{end}}"> -->
+            <a href="{{.url}}">
+            <!-- <li class="sb-option {{if eq .name $.Site.Params.blogroot}}dropdown{{end}}"> -->
+            <li class="sb-option">
+                <img src="{{.image}}" alt="{{.name}}"/><span class="menu-option-name">{{.name}}</span>
+                <!-- {{if eq .name $.Site.Params.blogroot}}
                 <div class="submenu"><ul>
                     {{range $k, $v := $.Site.Taxonomies}}
                         {{if gt ($v | len) 0}}
@@ -26,8 +26,9 @@
                     {{end}}
                     <a href="/post"><li>All</li></a>
                 </ul></div>
-                {{end}}
-            </li></a>
+                {{end}} -->
+            </li>
+            </a>
         {{end}}
     </ul>
 </div>
