@@ -1,20 +1,18 @@
 .splash {
-    width: 90%;
-    padding-left: 10%;
-    height: 75vh;
+    width: 85vw;
+    padding-left: 15vw;
+    height: 50vh;
 }
 .splash * {
     margin: 0px;
     padding: 0px;
 }
-.splash .header {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+.splash .hero {
+    transform: translateY(-25%);
     width: 70%;
-    margin: auto;
+    margin: 25vh auto auto auto;
 }
-.splash .header * {
+.splash .hero * {
     padding: 0.2em;
 }
 .splash .links {
@@ -25,6 +23,14 @@
     width: 48px;
     height: auto;
 }
-.splash .content {
-    display: block;
+.splash .sidekick {
+    width: 50%;
+    text-align: center;
+    margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .splash .sidekick {
+        width: 90%;
+    }
 }

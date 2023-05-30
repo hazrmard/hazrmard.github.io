@@ -82,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .content,
 .resume {
-    margin-left: 15%;
+    margin-left: 15vw;
     padding: 2em 0.5em 4em 0.5em;
     width: 70%;
     min-width: 180px;
@@ -208,6 +208,9 @@ details {
     }
     .sidebar:hover .sb-option, .sidebar:active .sb-option {
         text-align: left;
+    }
+    .content{
+        width: 80%;
     }
 }
 

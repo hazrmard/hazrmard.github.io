@@ -1,6 +1,6 @@
 {{partial "header.html" .}}
 <div class="splash">
-    <div class="header">
+    <div class="hero">
         <h1>{{.Site.Title}}</h1>
         {{if .Site.Params.splashSubheading}}
             <h2>{{.Site.Params.splashSubheading}}</h2>
@@ -10,20 +10,17 @@
                 <a href="{{.URL}}"><img src="{{.image}}"/></a>
             {{end}}
         </div>
-        <div class="content">
-            {{.Content}}
-        </div>
+    </div>
+    <div class="sidekick">
+        {{.Content}} 
     </div>
 </div>
 <div class="content">
-    <!-- {{range first 10 .Site.RegularPages}}
-        {{.Render "summary"}}
-    {{end}} -->
-    <!-- render the abot/index.md page -->
-    
-    <a class="twitter-timeline" data-height="512" data-theme="light" href="https://twitter.com/hazrmard?ref_src=twsrc%5Etfw">Tweets by hazrmard</a>
+    {{ with .Site.GetPage "/about/news.md" }}{{ .Content }}{{ end }}
+    <br/>
+    <br/>
+    <a class="twitter-timeline" data-height="512" data-theme="light" href="https://twitter.com/hazrmard?ref_src=twsrc%5Etfw"></a>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 </div>
 {{partial "sidebar.html" .}}
 {{partial "footer.html" .}}
-`
