@@ -5,6 +5,6 @@ title = "Ibrahim Ahmed"
 
 PhD '23. Research in reinforcement learning, simulation, and control.
 
-Writings about work, hobbies, and a pethora of curiosities.
+Writings about work, hobbies, and a plethora of curiosities.
 
 I am looking for full-time roles starting Summer '23.
