@@ -31,11 +31,11 @@
     "education":    [
         {
             "school":   "Vanderbilt University",
-            "year":     "Aug '18 - Present",
+            "year":     "Aug '18 - Aug '23",
             "degree":   "PhD",
             "major":    "Electrical Engineering",
-            "thesis":   "Adaptive fault-tolerant control of hybrid systems using reinforcement learning.",
-            "gpa":      "",
+            "thesis":   "Adaptive fault-tolerant control using reinforcement learning.",
+            "gpa":      "3.85/4.00",
             "courses":  ["Reinforcement Learning"],
             "tags":     ["education", "courses", "artificial intelligence"]
         },
@@ -44,7 +44,7 @@
             "year":     "Aug '16 - Aug '18",
             "degree":   "MS",
             "major":    "Electrical Engineering",
-            "gpa":      "",
+            "gpa":      "3.85/4.00",
             "courses":  ["Neural Networks", "Pattern Recognition", "Project in AI", "Solid State Materials", "Advanced High Performance Computing",
                         "Advanced Real-time Systems", "Computer Vision", "Advanced Image Processing",
                         "Embedded Systems"],
@@ -55,7 +55,7 @@
             "year":     "Aug '12 - May '16",
             "degree":   "BS",
             "major":    "Electrical Engineering and Physics",
-            "gpa":      "",
+            "gpa":      "3.70/4.00",
             "courses":  ["FPGA Design", "Modelling and Simulation", "VLSI Design",
                         "High Performance Computing", "Algorithms", "Microcontrollers",
                         "Introductory Applied Machine Learning", "Galactic and Stellar Astrophysics",
@@ -68,7 +68,7 @@
         {
             "title":        "Graduate Researcher",
             "workplace":    "Vanderbilt University School of Engineering",
-            "time":         "Aug '16 - Present",
+            "time":         "Aug '16 - May '23",
             "achievements": ["Research machine learning algorithms for optimal control using insights from control theory.",
                             "Develop reinforcement learning for autonomous drone flight for NASA’s System-wide Safety project by integrating flight and weather data, to quickly adapt flight controller to disturbances.",
                             "Design high-fidelity simulations for drones and buildings in python, interfacing with 3D physics engine (Gazebo) in C++, with up to 300% faster than real-time simulation using just-in-time compilation.",
@@ -238,12 +238,12 @@
     ],
 
     "publications": [
-        "Ibrahim Ahmed, Gautam Biswas, Hamed Khorasghani. 'Comparison of model predictive and reinforcement learning methods for fault tolerant control' in IFAC-PapersOnLine, Warsaw, Poland, 2018.",
-        "Avisek Naug, Ibrahim Ahmed, Gautam Biswas. 'Online Energy Management in Commercial Buildings using Deep Reinforcement Learning' in IEEE International Conference on Smart Computing, (SMARTCOMP), 2019.",
-        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Fault-Tolerant Control of Degrading Systems with On-Policy Reinforcement Learning' in IEEE IFAC-PapersOnLine, 2020.",
-        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Complementary Meta-Reinforcement Learning for Fault-Adaptive Control' in PHM 2020",
-        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Transfer reinforcement learning for fault-tolerant control by re-using optimal policies' in SysTol 2021.",
+        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'A high-fidelity simulation test-bed for fault-tolerant octo-rotor control using reinforcement learning' in DASC 2022",
         "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Analysis of the deployment strategies of reinforcement learning controllers for complex dynamic systems' in PHM 2021",
-        "Ibrahim Ahmed}, Marcos Quiñones-Grueiro, Gautam Biswas. 'A high-fidelity simulation test-bed for fault-tolerant octo-rotor control using reinforcement learning' in DASC 2022"
+        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Transfer reinforcement learning for fault-tolerant control by re-using optimal policies' in SysTol 2021.",
+        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Complementary Meta-Reinforcement Learning for Fault-Adaptive Control' in PHM 2020",
+        "Ibrahim Ahmed, Marcos Quiñones-Grueiro, Gautam Biswas. 'Fault-Tolerant Control of Degrading Systems with On-Policy Reinforcement Learning' in IEEE IFAC-PapersOnLine, 2020.",
+        "Avisek Naug, Ibrahim Ahmed, Gautam Biswas. 'Online Energy Management in Commercial Buildings using Deep Reinforcement Learning' in IEEE International Conference on Smart Computing, (SMARTCOMP), 2019.",
+        "Ibrahim Ahmed, Gautam Biswas, Hamed Khorasghani. 'Comparison of model predictive and reinforcement learning methods for fault tolerant control' in IFAC-PapersOnLine, Warsaw, Poland, 2018."
     ]
 }
