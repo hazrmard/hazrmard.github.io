@@ -1,5 +1,5 @@
 +++
-categories = ["Developer", "Meta"]
+categories = ["Developer", "Meta", "DevOps"]
 date = "2017-02-06T10:07:58-06:00"
 hasequations = false
 title = "Optimizing static sites with hugo"

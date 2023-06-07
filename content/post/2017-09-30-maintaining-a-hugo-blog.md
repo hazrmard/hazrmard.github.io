@@ -3,7 +3,7 @@ title = "Trials and Tribulations of Maintaining a Hugo Blog"
 date = "2017-09-30T17:29:58-05:00"
 description = ""
 tags = ["hugo", "Web development", "Powershell"]
-categories = ["Developer"]
+categories = ["DevOps", "Developer"]
 series = ["Hugo site development"]
 isexternal = false
 hasequations = false
@@ -131,6 +131,18 @@ If(!(test-path $INTERMEDIATE))
 # Copy over and clean up
 Copy-Item -Path "$INTERMEDIATE/*" -Destination $DEST -Force -Recurse
 Remove-Item -Path $INTERMEDIATE -Recurse -Force
+```
+
+### Continuous deployment and GitHub Actions
+
+The problem with this approach was that I had to manually run the script and commit changes every time I wanted to deploy new content. This added friction to my workflow.
+
+Github Actions were a lifesaver. I set up an existing workflow. First I changed my repository's build and deployment source from Github pages - where it serves static content from a specified branch - to Github Actions, where I could set the script to build the static assets to be deployed.
+
+Using the Hugo pages workflow, and setting the `source` branch as the source of truth, I was able to make Github make the site for me at each commit. I work on my drafts on the `drafts` branch. When I am ready to make changes, I simply push thte commit upstream to the `source` to let Github know I am ready for the goodies.
+
+```powershell
+git push origin drafts:source
 ```
 
 ### Conclusion
