@@ -1,5 +1,5 @@
 +++
-title = 'Using Desktop for Remote SSH'
+title = 'Remote SSH into your home desktop'
 date = '2023-06-07T09:22:00-05:00'
 description = ""
 tags = []
@@ -17,6 +17,8 @@ Things you'll need:
 2. A router
 3. A local desktop
 4. A remote computer
+
+Audience for this post: people who have used SSH before.
 
 Often times I have found myself wanting to access a computer at home while I am traveling. There are options like TeamViewer, which let me control my computer's screen from afar. But, I want something more convenient over the command line, like SSH. That way I can drop in and out of my home machine without breaking my flow.
 
@@ -42,7 +44,7 @@ Exposing your home computer carries safety risks. There are several mitigation m
 
 ## Helpful tips
 
-[SSH setup on windows](https://github.com/PowerShell/Win32-OpenSSH/wiki)
+[SSH setup on windows](https://github.com/PowerShell/Win32-OpenSSH/wiki).
 To make the SSH server start on login, make it a service:
 
 ```powershell
@@ -57,15 +59,15 @@ Make an `~/.ssh/config` file, so you can log in like `ssh desktop` instead of `s
 
 ```bash
 Host desktop
-        HostName SOMETHINGMINE.ddns.net
-        User USERNAME
-        # Password-less login using private keys:
-        IdentityFile ~/.ssh/id_rsa
-        # Smaller SSH packets, but more processing to de/compress
-        Compression yes
-        # a random port number which your router will forward
-        # to your local machine:
-        Port 1776
+    HostName SOMETHINGMINE.ddns.net
+    User USERNAME
+    # Password-less login using private keys:
+    IdentityFile ~/.ssh/id_rsa
+    # Smaller SSH packets, but more processing to de/compress
+    Compression yes
+    # a random port number which your router will forward
+    # to your local machine:
+    Port 1776
 ```
 
 So now, when I `ssh desktop`, I will connect to `SOMETHINGMINE.ddns.net`, which will point to the last recorded IP of my router. My ssh client will look at port 1776, which the router will forward to port 22 of my desktop's local IP address.
