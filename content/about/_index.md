@@ -6,7 +6,9 @@ title = "About Me"
 
 Hi. My name is Ibrahim. I'm on the fun side of my PhD defense, and the not-so-fun side of a job search. I went to Vanderbilt University for my PhD and undergraduate studies.
 
-I have a hobbyist's interest in electronics, web-development, and writing for lay audience.
+I am exploring full-time opportunities in research & applied science roles, with a focus on machine learning and controls. See my [resume](/resume) for more details.
+
+I have a hobbyist's interest in electronics, web-development, and technical writing for a broad audience.
 
 I have a professional interest in electrical engineering, machine learning, reinforcement learning, and all manners of quantitative pursuits.
 

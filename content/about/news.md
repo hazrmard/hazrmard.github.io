@@ -13,6 +13,8 @@ draft = false
 
 **News**
 
+**2023-06:** I am doing a summer research contract on Genetic Algorithms for robotic path planning.
+
 **2023-05:** I successfully defended my thesis on Fault-tolerant control using reinforcement learning.
 
 **2023-05:** Our paper titled "[Model-based adaptation for sample efficient transfer in reinforcement learning control of parameter-varying systems](https://arxiv.org/abs/2305.12158)" was accepted to IEEE CoDIT 2023.
