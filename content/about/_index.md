@@ -14,9 +14,9 @@ I have a professional interest in electrical engineering, machine learning, rein
 
 ## Research
 
-My doctoral research was on [reinforcement learning for fault-tolerant control in unmanned aerial vehicles][6]. I also dabbled in machine learning for control of [smart buildings][1]. I did some undergratuate research in [astrophysics, on dark matter simulations][2]. I also did some research on radiation hardening experiments for electronics in space.
+My PhD thesis was on *Adaptive Fault-tolerant Control Using Reinforcement Learning*. [You can read it here][7]. I investigated how to make data-driven methods more efficient in resource constrained situations where fast adaption was needed. Specifically, I researched [reinforcement learning for fault-tolerant control in unmanned aerial vehicles][6]. I also dabbled in machine learning for control of [smart buildings][1]. I was part of the [Modeling and Analysis of Complex Systems(MACS)][3] group at Vanderbilt University's [Institute for Software Integrated Systems][4].
 
-I was part of the [Modeling and Analysis of Complex Systems(MACS)][3] group at Vanderbilt University's [Institute for Software Integrated Systems][4].
+In my undergraduate career, I worked in [astrophysics, on dark matter simulations][2]. I also did some research on radiation hardening experiments for electronics in space.
 
 <details closed>
 <summary> Here are some short videos about some of my work.</summary>
@@ -39,3 +39,4 @@ I like running, bouldering, playing tennis, and the occasional video game. My fa
 [4]: https://www.isis.vanderbilt.edu/
 [5]: https://git.isis.vanderbilt.edu/systemwidesafety/gazebo-testbed/-/tree/gym-env
 [6]: https://git.isis.vanderbilt.edu/ahmedi/transfer_similarity
+[7]: https://drive.google.com/file/d/1RTEVRd0XCWLuDXY2nkbmYuOaa5xYNkt3/view?usp=sharing
