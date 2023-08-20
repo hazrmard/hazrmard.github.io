@@ -4,7 +4,7 @@ title = "About Me"
 
 +++
 
-Hi. My name is Ibrahim. I'm on the fun side of my PhD defense, and the not-so-fun side of a job search. I went to Vanderbilt University for my PhD and undergraduate studies.
+Hi. My name is Ibrahim. I'm on the fun side of my PhD, and the not-so-fun side of a job search. I went to Vanderbilt University for my PhD and undergraduate studies.
 
 I am exploring full-time opportunities in research & applied science roles, with a focus on machine learning and controls. See my [resume](/resume) for more details.
 
@@ -14,7 +14,9 @@ I have a professional interest in electrical engineering, machine learning, rein
 
 ## Research
 
-My PhD thesis was on *Adaptive Fault-tolerant Control Using Reinforcement Learning*. [You can read it here][7]. I investigated how to make data-driven methods more efficient in resource constrained situations where fast adaptation was needed. Specifically, I researched [reinforcement learning for fault-tolerant control in unmanned aerial vehicles][6]. I also dabbled in machine learning for control of [smart buildings][1]. I was part of the [Modeling and Analysis of Complex Systems(MACS)][3] group at Vanderbilt University's [Institute for Software Integrated Systems][4].
+My PhD thesis was on *Adaptive Fault-tolerant Control Using Reinforcement Learning*. [You can read it here][7]. I investigated how to make data-driven control methods more efficient in resource constrained situations where fast adaptation was needed. Specifically, I researched [reinforcement learning for fault-tolerant control in unmanned aerial vehicles][6]. I also dabbled in machine learning for control of [smart buildings][1]. I was part of the [Modeling and Analysis of Complex Systems(MACS)][3] group at Vanderbilt University's [Institute for Software Integrated Systems][4].
+
+At a couple of internships, I worked with privacy-preserving machine learning, and with digital signal processing for machine learning-based prognostics.
 
 In my undergraduate career, I worked in [astrophysics, on dark matter simulations][2]. I also did some research on radiation hardening experiments for electronics in space.
 
