@@ -13,6 +13,8 @@ draft = false
 
 **News**
 
+**2023-09:** I gave an invited talk on demystifying the AI hype at Tennessee State University.
+
 **2023-06:** I am doing a summer research contract on Genetic Algorithms for robotic path planning.
 
 **2023-05:** I successfully defended my thesis on Fault-tolerant control using reinforcement learning.
