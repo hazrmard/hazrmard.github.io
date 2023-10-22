@@ -66,16 +66,33 @@
 
     "experience":     [
         {
+            "title":        "Research Associate",
+            "workplace":    "Tennessee State University",
+            "time":         "Jun '23 - Sep '23",
+            "achievements": [
+                "Led development on end-user graphical application for robotic path planning in warehouses using Matlab App Designer.",
+                "Optimized order of delivery stops under battery power, congestion, and distance constraints by combining A* search algorithm with custom genetic search operators.",
+                "Improved application latency by 90% down to 1 millisecond by benchmarking planning problems where using brute force would outperform genetic search."
+            ],
+            "technologies": ["Matlab"],
+            "links":        [{
+                    "title":    "Genetic Path Planning",
+                    "url":      "https://github.com/hazrmard/genetic-path-planning"
+                    }
+            ],
+            "tags":         ["experience", "work"]
+        },{
             "title":        "Graduate Researcher",
             "workplace":    "Vanderbilt University School of Engineering",
-            "time":         "Aug '16 - May '23",
-            "achievements": ["Enabled autonomous drone flight with resource-constrained machine learning algorithms combined with classical PID and MPC approaches. Leveraged embedded Ardupilot flight controllers in C++ with reinforcement learning in python (PyTorch).",
-                            "Designed a high-fidelity, object-oriented simulation library for drones with a python front-end. Interfaced with Gazebo physics engine in C++ over user datagram protocol (UDP) for efficient back-end computation.",
-                            "Achieved 300% acceleration in computational simulation code using just-in-time compilation via numba.",
-                            "Deployed end-to-end cloud-based machine-learning control pipelines for 2 campus smart buildings. Optimized temperature setpoints for air-conditioning units for 2-5% annual energy savings.",
-                            "Developed control performance logging framework over e-mail/HTTP using Flask and Dash. Incorporated fallback logic for fault-tolerance to infrastructure down-time and data anomalies.",
-                            "Designed simulations of A/C units and drones by using reproducible physics-based models in Modelica and Matlab Simulink, and data-driven models using deep neural networks in PyTorch.",
-                            "Developed python ETL libraries to parse timeseries building sensor data for from third-party vendors. "],
+            "time":         "Aug '16 - Jun '23",
+            "achievements": [
+                "Enabled machine learning control for autonomous drone flight under faults and disturbances. Programmed embedded Ardupilot flight controller plugins in C++ with reinforcement learning in python (PyTorch).",
+                "Won best paper award for designing a high-fidelity simulation library for drones. Designed front-end in python for machine learning, with a Gazebo physics engine back-end in C++ communicating over protobuf/UDP. Achieved 300% acceleration in simulations using just-in-time compilation via numba.",
+                "Deployed end-to-end cloud-based machine-learning control pipelines for energy optimization in 2 campus smart buildings. Optimized temperature setpoints for air-conditioning units for 2-5% annual energy savings.",
+                "Trained intelligent controllers on simulations of A/C units using reproducible physics-based models in Docker/Modelica and Simulink, and data-driven models using deep neural networks in PyTorch.",
+                "Validated simulations by comparing against real-world performance by writing python ETL libraries to parse timeseries sensor data for from third-party vendors.",
+                "Improved controller explainability for building operators by developing a performance logging web application using Flask and Dash. Incorporated fallback logic for fault-tolerance to infrastructure down-time and data anomalies."
+            ],
             "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [{
                     "title":    "Smart Buildings Code",
@@ -94,8 +111,10 @@
             "title":        "Research Intern",
             "workplace":    "TieSet Inc",
             "time":         "May '20 - Dec '20",
-            "achievements": ["Designed an OpenRTB-compatible JavaScript library for on-device edge-machine learning for privacy-preserving ad-serving. Used TensorFlow.js to learn users’ interactions with a webpage without cross-site tracking. ",
-                            "Spearheaded a patent proposal for a reinforcement-learning framework for distributed energy optimization in smart buildings. Prototyped building controllers using PyTorch that learn from multiple instances running concurrently using federated neural network weights."],
+            "achievements": [
+                "Enabled privacy-preserving ad-serving by designing a JavaScript library for on-device machine learning. Used TensorFlow.js to learn users’ interactions with a webpage without cross-site tracking.",
+                "Spearheaded a patent proposal for a reinforcement-learning framework for distributed energy optimization in smart buildings. Prototyped building controllers using PyTorch that learn from multiple instances running concurrently using federated neural network weights."
+            ],
             "technologies": ["Python", "PyTorch","Flask", "Tensorflow.js"],
             "links":        [],
             "tags":         ["experience", "work"]
@@ -104,8 +123,9 @@
             "title":        "Applied Scientist Intern",
             "workplace":    "Amazon Web Services",
             "time":         "May '19 - Aug '19",
-            "achievements": ["Leveraged digital signal processing (DSP) principles (wavelet transforms) for feature-engineering machine learning models of remaining useful life (RUL) of warehouse machinery.",
-                            "Implemented prognostics research papers into code and conducted feasibility studies by running parallel hyperparameter tuning experiments on m5.24xlarge AWS servers."],
+            "achievements": [
+                "Trained machine learning models of remaining useful life (RUL) of warehouse machinery by leveraging digital signal processing (DSP) principles (wavelet transforms) for feature-engineering vibration signals.",
+                "Implemented prognostics research papers into code and conducted feasibility studies by running parallel hyperparameter tuning experiments on m5.24xlarge AWS servers."],
             "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [],
             "tags":         ["experience", "work", "research", "industry"]
@@ -114,9 +134,10 @@
             "title":        "Research Intern",
             "workplace":    "Vanderbilt Department of Physics & Astronomy",
             "time":         "Jun '16 - Aug '16'",
-            "achievements": ["Studied formation of dark matter in galaxies via high performance computer simulations",
-                            "Developed point-cloud processing algorithms in python to validate simulation results with hypotheses of dark matter distribution in galaxies.",
-                            "Wrote a parallel data-mining pipeline executing python scripts via SLURM on campus supercomputer to visualize 3.7 terabytes of n-body simulations as condensed animations."],
+            "achievements": [
+                "Validated hypotheses of dark matter distribution in galaxies by developing point-cloud processing algorithms in python.",
+                "Visualized 3.7 terabytes of n-body simulations as condensed animations by writing a parallel data-mining pipeline executing python scripts using SLURM on campus supercomputer."
+            ],
             "technologies": ["Python (numpy, matplotlib)", "C", "Bash"],
             "links":        [{
                 "title":    "GitHub",
@@ -157,12 +178,16 @@
 
     "skills":   [
         {
-            "title":        "Programming",
-            "skills":       ["C/C++ (OpenCV, OpenMP, RTOS, CUDA)","Python (PyTorch, Scipy, Django, Matplotlib, Pandas, Sklearn)", "JavaScript (D3.js, AngularJS, jQuery)", "SQL", "HTML", "CSS (Bootstrap)", "Git", "Bash", "Powershell"]
+            "title": "Languages",
+            "skills": ["Python", "C++", "Matlab", "Modelica", "Javascript", "Bash", "Powershell"]
         },
         {
-            "title":        "Engineering",
-            "skills":       ["VHDL", "MatLab", "Octave", "Mathematica"]
+            "title":        "Libraries",
+            "skills":       ["OpenCV", "OpenMP", "RTOS", "CUDA","PyTorch", "Scipy", "Django", "Flask", "Matplotlib", "Plotly", "Dash", "Pandas", "Sklearn", "D3.js", "AngularJS", "jQuery", "SQL", "HTML", "CSS"]
+        },
+        {
+            "title":        "Applications",
+            "skills":       ["Ardupilot", "Gazebo", "Simulink", "Dymola"]
         }
     ],
 
