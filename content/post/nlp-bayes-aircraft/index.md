@@ -1,6 +1,6 @@
 +++
 title = 'Helping fix aircraft - from NLP to Bayes Nets'
-date = '2023-10-25T10:55:00-06:00'
+date = '2023-10-25T10:55:00-05:00'
 description = "NLP to help aircraft mechanics reason about maintenance actions"
 tags = ["nlp", "machine learning"]
 categories = ["developer"]
