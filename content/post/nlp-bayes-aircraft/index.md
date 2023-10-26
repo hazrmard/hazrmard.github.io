@@ -26,11 +26,11 @@ The knowledgebase consists of aircraft manuals and past inspection and maintenan
 
 ## The data
 
-The data was in the shape of natural language documents. Broadly, they were in two categories: problems and actions.
+The data were in the shape of natural language documents. Broadly, they were in two categories: problems and actions.
 
-The first problem with the data was that I did not have the data. It was mildly concerning. The data was going through extensive security clearances before it landed on my desk. While, I wanted I decided to to a literature review and look for similar datasets. That would help me orchestrate a data-processing pipeline which I could transfer over to the real, de-classified data.
+The first problem with the data was that I did not have the data. It was mildly concerning. The data were going through extensive security clearances before it landed on my desk. While, I wanted I decided to to a literature review and look for similar datasets. That would help me orchestrate a data-processing pipeline which I could transfer over to the real, de-classified data.
 
-I found an open source dataset obtained from real-world aircraft. It is called MaintNet. Here is what it looks like:
+I found an open source dataset obtained from real-world aircraft. It is called [MaintNet](https://people.rit.edu/fa3019/MaintNet/data_aviation.html). Here is what it looks like:
 
 ![](maintnet.png)
 
@@ -43,7 +43,9 @@ This was my approach:
 ![](idime_approach.png)
 
 I have heavily redacted parts of data extraction and pre-processing, but the essence of my solution remains. The pipeline converts text into vectors in continuous space, into discrete clusters, and finally into probability distributions.
+
 ### NLP
+
 Natural Language Processing: reasoning about words by representing them as numbers, basically. For this project, the NLP tasks I am concerned about are "text embedding", "document retrieval", and "question answering".
 
 With text embedding, words are represented as a vector. Where vectors in that vector space have correspondences that the words they derived from would have in the language domain. A classical example is the Word2Vec algorithm (modified, original image courtesy of Singrep on Wikipedia):
@@ -97,6 +99,8 @@ That is, for an event $A$ and an event $B$, the probabilities of them occurring 
 In this case, the network has only two nodes: problem and action. The conditional probability distribution looks like this:
 
 ![](idime_conditional_heatmap.png)
+
+The Bayes Net was built using [bnlearn](https://erdogant.github.io/bnlearn/pages/html/index.html).
 
 ## Inference
 
@@ -160,7 +164,7 @@ Fine-tuning a LLM on this corpus may result in a more conversational application
 
 ## Read more about...
 
-[NLP (Wikipedia)](https://en.wikipedia.org/wiki/Natural_language_processing?oldformat=true)
-[LLM (Wikipedia)](https://en.wikipedia.org/wiki/Large_language_model?oldformat=true)
-Bayes Nets: [UC Davis Slides](https://www.cs.ucdavis.edu/~vemuri/classes/ecs170/bayesnet2.pdf), [University of Washington Slides](https://courses.cs.washington.edu/courses/cse473/19sp/slides/cse473sp19-BayesNets.pdf)
+[NLP (Wikipedia)](https://en.wikipedia.org/wiki/Natural_language_processing?oldformat=true)  
+[LLM (Wikipedia)](https://en.wikipedia.org/wiki/Large_language_model?oldformat=true)  
+Bayes Nets: [UC Davis Slides](https://www.cs.ucdavis.edu/~vemuri/classes/ecs170/bayesnet2.pdf), [University of Washington Slides](https://courses.cs.washington.edu/courses/cse473/19sp/slides/cse473sp19-BayesNets.pdf)  
 Manifold Learning: [Excellent Analysis of different techniques](https://jakevdp.github.io/PythonDataScienceHandbook/05.10-manifold-learning.html), [Scikit-Learn reference](https://scikit-learn.org/stable/modules/manifold.html)
