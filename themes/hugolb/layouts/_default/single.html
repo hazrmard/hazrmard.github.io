@@ -5,7 +5,9 @@
     {{ if .Params.link}}
         <blockquote>{{.Type | humanize}} hosted at: <a href="{{.Params.link}}">{{.Params.link}}</a></blockquote>
     {{end}}
+    <br/>
     {{partial "tableofcontents.html" .}}
+    <br/>
     {{.Content}}
     <br/>
     {{partial "single_navigation.html" .}}
