@@ -13,6 +13,8 @@ draft = false
 
 **News**
 
+**2023-10:** I finished a course on using Langchain for function-calling agents on [Deeplearning.ai](deeplearning.ai).
+
 **2023-09:** I gave an invited talk on demystifying the AI hype at Tennessee State University.
 
 **2023-06:** I am doing a summer research contract on Genetic Algorithms for robotic path planning.
