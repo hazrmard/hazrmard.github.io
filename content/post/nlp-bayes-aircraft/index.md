@@ -28,7 +28,7 @@ The knowledgebase consists of aircraft manuals and past inspection and maintenan
 
 The data were in the shape of natural language documents. Broadly, they were in two categories: problems and actions.
 
-The first problem with the data was that I did not have the data. It was mildly concerning. The data were going through extensive security clearances before it landed on my desk. While I waited, I decided to to a literature review and look for similar datasets. That would help me orchestrate a data-processing pipeline which I could transfer over to the real, de-classified data.
+The first problem with the data was that I did not have the data. It was mildly concerning. The data were going through extensive security clearances before it landed on my desk. While I waited, I decided to do a literature review and look for similar datasets. That would help me orchestrate a data-processing pipeline which I could transfer over to the real, de-classified data.
 
 I found an open source dataset obtained from real-world aircraft. It is called [MaintNet](https://people.rit.edu/fa3019/MaintNet/data_aviation.html). Here is what it looks like:
 

@@ -13,6 +13,8 @@ draft = false
 
 **News**
 
+**2023-11**: Public release of [`multirotor 0.5`](https://multirotor.readthedocs.io): a python library for simulating drones.  
+
 **2023-10:** I finished a course on using Langchain for function-calling agents on [Deeplearning.ai](deeplearning.ai).
 
 **2023-09:** I gave an invited talk on demystifying the AI hype at Tennessee State University.
