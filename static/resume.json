@@ -20,10 +20,6 @@
             {
                 "title":    "Google Scholar",
                 "url":      "https://scholar.google.com/citations?user=_Nn9bWgAAAAJ&hl=en"
-            },
-            {
-                "title":    "StackOverflow",
-                "url":      "http://stackoverflow.com/users/4591810/hazrmard"
             }
         ]
     },
@@ -70,9 +66,9 @@
             "workplace":    "Tennessee State University",
             "time":         "Jun '23 - Sep '23",
             "achievements": [
-                "Led development on end-user graphical application for robotic path planning in warehouses using Matlab App Designer.",
-                "Optimized order of delivery stops under battery power, congestion, and distance constraints by combining A* search algorithm with custom genetic search operators.",
-                "Improved application latency by 90% down to 1 millisecond by benchmarking planning problems where using brute force would outperform genetic search."
+                "Designed a GUI route planning application using genetic algorithms for autonomous delivery robots in warehouses.",
+                "Optimized sequence of delivery stops under battery power, congestion, and distance constraints by combining A* search algorithm with custom genetic search operators.",
+                "Reduced planning latency by 90% down to 1 millisecond by benchmarking routing problems where using brute force would outperform genetic search."
             ],
             "technologies": ["Matlab"],
             "links":        [{
@@ -86,12 +82,13 @@
             "workplace":    "Vanderbilt University School of Engineering",
             "time":         "Aug '16 - Jun '23",
             "achievements": [
-                "Enabled machine learning control for autonomous drone flight under faults and disturbances. Programmed embedded Ardupilot flight controller plugins in C++ with reinforcement learning in python (PyTorch).",
-                "Won best paper award for designing a high-fidelity simulation library for drones. Designed front-end in python for machine learning, with a Gazebo physics engine back-end in C++ communicating over protobuf/UDP. Achieved 300% acceleration in simulations using just-in-time compilation via numba.",
-                "Deployed end-to-end cloud-based machine-learning control pipelines for energy optimization in 2 campus smart buildings. Optimized temperature setpoints for air-conditioning units for 2-5% annual energy savings.",
-                "Trained intelligent controllers on simulations of A/C units using reproducible physics-based models in Docker/Modelica and Simulink, and data-driven models using deep neural networks in PyTorch.",
-                "Validated simulations by comparing against real-world performance by writing python ETL libraries to parse timeseries sensor data for from third-party vendors.",
-                "Improved controller explainability for building operators by developing a performance logging web application using Flask and Dash. Incorporated fallback logic for fault-tolerance to infrastructure down-time and data anomalies."
+                "Researched adaptive controller design in a multi-university team for autonomous drone flight under motor faults and wind disturbances using reinforcement learning.",
+                "Developed embedded Ardupilot flight controller plugins in C++ that work with supervisory reinforcement learning controllers in PyTorch by writing a translation layer for the MAVLink protocol.",
+                "Won best paper award at AIAA DASC for designing a simulation library for drones in python and C++ using numba and Gazebo.",
+                "Reduced cooling energy consumption by 2-5% by deploying end-to-end cloud-based machine-learning controllers for energy optimization in 2 campus buildings.",
+                "Increased sample efficiency on real-world data by training reinforcement learning controllers for smart buildings on data-driven models and physics-based simulations in Modelica and Simulink.",
+                "Mitigated transfer gap from training to production by writing ETL libraries to parse timeseries building sensor data from third-party vendors and validating simulations against real-world performance.",
+                "Enhanced building staff’s trust in machine learning controllers by developing a performance logging web application using Dash, with fallback logic for fault-tolerance to infrastructure down-time and data anomalies."
             ],
             "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [{
@@ -112,8 +109,9 @@
             "workplace":    "TieSet Inc",
             "time":         "May '20 - Dec '20",
             "achievements": [
-                "Enabled privacy-preserving ad-serving by designing a JavaScript library for on-device machine learning. Used TensorFlow.js to learn users’ interactions with a webpage without cross-site tracking.",
-                "Spearheaded a patent proposal for a reinforcement-learning framework for distributed energy optimization in smart buildings. Prototyped building controllers using PyTorch that learn from multiple instances running concurrently using federated neural network weights."
+                "As a founding intern, led studies for privacy-preserving experiences in consumer and enterprise electronics.",
+                "Assured private browsing and non-intrusive ad-serving by designing on-device machine learning library on top of tensorflow.js to match advertisement bids with compatible spaces.",
+                "Consolidated intellectual property by writing a patent proposal for federated reinforcement-learning for energy optimization in smart buildings without sharing user data."
             ],
             "technologies": ["Python", "PyTorch","Flask", "Tensorflow.js"],
             "links":        [],
@@ -124,7 +122,7 @@
             "workplace":    "Amazon Web Services",
             "time":         "May '19 - Aug '19",
             "achievements": [
-                "Trained machine learning models of remaining useful life (RUL) of warehouse machinery by leveraging digital signal processing (DSP) principles (wavelet transforms) for feature-engineering vibration signals.",
+                "Predicted remaining useful life (RUL) of warehouse machinery by leveraging digital signal processing (DSP) principles (wavelet transforms) for feature-engineering vibration signals for machine learning models.",
                 "Implemented prognostics research papers into code and conducted feasibility studies by running parallel hyperparameter tuning experiments on m5.24xlarge AWS servers."],
             "technologies": ["Python", "PyTorch", "Pandas", "Scikit-learn", "Scipy", "OpenAI gym"],
             "links":        [],
