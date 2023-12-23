@@ -32,8 +32,8 @@ ignoreFiles = [".+pptx$"]
         image = "/img/LinkIcons/svg/google-scholar.svg"
 
     [[params.links]]
-        URL = "http://stackoverflow.com/users/4591810/hazrmard"
-        image = "/img/LinkIcons/svg/stackoverflow.svg"
+        URL = "https://twitter.com/hazrmard"
+        image = "/img/LinkIcons/svg/twitterx.svg"
 
 
     [[params.menu.main]]

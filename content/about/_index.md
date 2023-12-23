@@ -4,13 +4,13 @@ title = "About Me"
 
 +++
 
-Hi. My name is Ibrahim. I'm on the fun side of my PhD, and the not-so-fun side of a job search. I went to Vanderbilt University for my PhD and undergraduate studies.
+Hi. My name is Ibrahim. I built this website as a teaching aid for myself. I like to sprinkle updates here occasionally.
 
 I am exploring full-time opportunities in research & applied science roles, with a focus on machine learning and controls. See my [resume](/resume) for more details.
 
 I have a hobbyist's interest in electronics, web-development, and technical writing for a broad audience.
 
-I have a professional interest in electrical engineering, machine learning, reinforcement learning, and all manners of quantitative pursuits.
+I have a professional interest in machine learning, reinforcement learning, optimization, and all manners of quantitative pursuits.
 
 ## Research
 
@@ -31,7 +31,7 @@ Here's a video I made on my previous research project. The video was for my fell
 {{< youtube 72nivTdLpgc >}}
 </details>
 
-## Out of the lab
+## What I do for fun
 
 I like running, bouldering, playing tennis, and the occasional video game. My favorite genres are sci-fi and epic fantasy. I love to cook. I approach potlucks extremely competitively :)
 

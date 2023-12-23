@@ -1,7 +1,7 @@
 +++
 title = 'News'
 date = '2023-05-25T16:28:09-04:00'
-description = ""
+description = "Updates from my professional life"
 link = ""
 tags = []
 categories = []
