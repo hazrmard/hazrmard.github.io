@@ -16,11 +16,15 @@
     </div>
 </div>
 <div class="content">
+    <div class="twitter">
+        <a class="twitter-timeline"
+        data-height="400"
+        data-dnt="true"
+        data-chrome="no-header"
+        href="https://twitter.com/hazrmard?ref_src=twsrc%5Etfw">Tweets by Ibrahim</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+    </div>
+    <br/>
     {{ with .Site.GetPage "/about/news.md" }}{{ .Content }}{{ end }}
-    <br/>
-    <br/>
-    <a class="twitter-timeline" data-height="512" data-theme="light" href="https://twitter.com/hazrmard?ref_src=twsrc%5Etfw"></a>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 </div>
 {{partial "sidebar.html" .}}
 {{partial "footer.html" .}}
