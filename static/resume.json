@@ -66,6 +66,19 @@
 
     "experience":     [
         {
+            "title":        "Senior Controls Modeling Engineer",
+            "workplace":    "Trane Technologies",
+            "time":         "Sep '23 - ",
+            "achievements": [
+                "Reduce costs of running intensive workloads in datacenters by developing energy simulations in Modelica to optimize efficiency of building automation systems.",
+                "Enable customers to minimize costs of transporting refrigerated containers by exposing physics and machine learning (ML) models of energy consumption to a python API and using heuristic searches to optimize vehicle configurations in linear time complexity.",
+                "Empower customers to explore ML models by co-developing front-end UI in ReactJS/PlotlyJS with software teams to interactively visualize ML model outputs under confidence bounds."
+            ],
+            "technologies": ["Python","Modelica","Javscript"],
+            "links":        [],
+            "tags":         ["experience", "work", "controls", "optimization"]
+        },
+        {
             "title":        "Research Associate",
             "workplace":    "Tennessee State University",
             "time":         "Jun '23 - Sep '23",
