@@ -71,3 +71,19 @@ Host desktop
 ```
 
 So now, when I `ssh desktop`, I will connect to `SOMETHINGMINE.ddns.net`, which will point to the last recorded IP of my router. My ssh client will look at port 1776, which the router will forward to port 22 of my desktop's local IP address.
+
+## Remote into WSL over SSH
+
+As of this writing, WSL won't start over SSH. However, the following config can get around the limitations. First, update WSL on the host machine `wsl --update`. Then add the config entry:
+
+```bash
+Host desktop-wsl
+    HostName SOMETHINGMINE.ddns.net
+    User USERNAME
+    IdentityFile ~/.ssh/id_rsa
+    Compression yes
+    Port 1776
+    # After logging into windows host, start WSL session:
+    RequestTTY force
+    RemoteCommand & 'C:\Program Files\WSL\wsl.exe' ~
+```
