@@ -1,7 +1,7 @@
 +++
 title = 'Running python on air-gapped systems'
 date = '2024-01-13T12:32:13-06:00'
-description = ""
+description = "How to reproducibly run python code on a system with no internet access."
 tags = ["python"]
 categories = ["Developer"]
 link = ""
@@ -11,7 +11,7 @@ tableofcontents = false
 draft = false
 +++
 
-In this post, I talk about running python code on a "soft" air-gapped system.
+In this post, I talk about running python code on a "soft" air-gapped system. For the final script, scroll to the end.
 
 For research with the Department of Defense (DoD) and the University of Tennessee, Knoxville  (UTK), I worked with restricted data. The DoD was very strict about who had access to the data. After much negotiation and bureaucratic back-and-forth, the data were placed deep inside UTK's high performance compute cluster's (HPC) secure nodes (SN). 
 
@@ -59,7 +59,7 @@ The error messages when importing scientific libraries were long and scary. I em
 
 I scrolled up in my error logs.
 
-```
+```bash
 Could not create symlink to /blah/blah/blah: Permission denied
 ...
 ...
@@ -74,7 +74,7 @@ conda create -p $ENV_DIR python=$PYTHON_VERSION --copy
 
 However, this failed too. Then, I moved to the `tar` command. And what do you know? It has a `--dereference` option!
 
-```
+```bash
 tar -cvzf --dereference $ENV_DIR.tgz ./$ENV_DIR
 tar -cvzf --dereference $DEPS.tgz ./$DEPS
 # (you can also use the -h flag instead of --dereference)
