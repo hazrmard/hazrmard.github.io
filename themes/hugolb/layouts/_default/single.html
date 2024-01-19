@@ -12,5 +12,7 @@
     <br/>
     {{partial "single_navigation.html" .}}
     <br/>
+    <div class="comments">
+        {{ template "_internal/disqus.html" . }}
 </article>
 {{end}}

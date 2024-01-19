@@ -78,4 +78,6 @@ ignoreFiles = [".+pptx$"]
         # so html tags inside markdown can be rendered
         unsafe = true
 
-    
+[services]
+  [services.disqus]
+    shortname = 'iahmed'
