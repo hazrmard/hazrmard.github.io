@@ -101,7 +101,7 @@ For rotational variables a similar analogue exists. Given $M^b$ is the rotating 
 
 $$
 \begin{align}
-    % \hat{r}^b \times \hat{F}^b &= m \cdot \hat{r}^b \times \frac{d \hat{v}^b}{d t} \\\\
+    \hat{r}^b \times \hat{F}^b &= m \cdot \hat{r}^b \times \frac{d \hat{v}^b}{d t} \\\\
     \hat{M}^b &= \hat{I}\frac{d \hat{\omega}}{d t} \\\\
     \hat{M}^b &= \hat{I}\hat{\dot{\omega}} + \hat{\omega} \times \hat{I}\hat{\omega}
 \end{align}
@@ -137,3 +137,111 @@ $$
 $$
 
 The rates of changes of the 12 (linear and angular) state variables can be integrated to track the state of the vehicle.
+
+```python
+def get_state_change_from_dynamics(
+    forces, torques, x, g, mass, inertia_matrix
+):
+    # Store state variables in a readable format
+    xI = x[0]       # Inertial frame positions
+    yI = x[1]
+    zI = x[2]
+    ub = x[3]       # linear velocity along body-frame-x-axis b1
+    vb = x[4]       # linear velocity along body-frame-y-axis b2
+    wb = x[5]       # linear velocity along body-frame-z-axis b3
+    phi = x[6]      # Roll
+    theta = x[7]    # Pitch
+    psi = x[8]      # Yaw
+    p = x[9]        # body-frame-x-axis rotation rate
+    q = x[10]       # body-frame-y-axis rotation rate
+    r = x[11]       # body-frame-z-axis rotation rate
+    
+    # Pre-calculate trig values
+    cphi = np.cos(phi);   sphi = np.sin(phi)    # roll
+    cthe = np.cos(theta); sthe = np.sin(theta)  # pitch
+    cpsi = np.cos(psi);   spsi = np.sin(psi)    # yaw
+
+    f1, f2, f3 = forces # in the body frame (b1, b2, b3)
+    t1, t2, t3 = torques
+    inertia_matrix_inv = np.linang.inv(inertia_matrix)
+    
+    xdot = np.zeros_like(x)
+
+    # velocity = dPosition (inertial frame) / dt (convert body velocity to inertial)
+    xdot[0] = cthe*cpsi*ub + (-cphi * spsi + sphi*sthe*cpsi) * vb + \
+        (sphi*spsi+cphi*sthe*cpsi) * wb  # = xIdot 
+    xdot[1] = cthe*spsi * ub + (cphi*cpsi+sphi*sthe*spsi) * vb + \
+        (-sphi*cpsi+cphi*sthe*spsi) * wb # = yIdot 
+    xdot[2] = (-sthe * ub + sphi*cthe * vb + cphi*cthe * wb) # = zIdot
+
+    # acceleration = dVelocity (body frame) / dt
+    #           External forces     Gravity             Coriolis effect
+    xdot[3] = 1/mass * (f1)     + g * sthe          + r * vb - q * wb  # = udot
+    xdot[4] = 1/mass * (f2)     - g * sphi * cthe   - r * ub + p * wb # = vdot
+    xdot[5] = 1/mass * (f3)     - g * cphi * cthe   + q * ub - p * vb # = wdot
+
+    # Orientation
+    xdot[6] = p + (q*sphi + r*cphi) * sthe / cthe  # = phidot
+    xdot[7] = q * cphi - r * sphi  # = thetadot
+    xdot[8] = (q * sphi + r * cphi) / cthe  # = psidot
+
+    # Angular rate
+    gyro = np.cross(x[9:12], inertia_matrix @ x[9:12])
+    xdot[9:12] = inertia_matrix_inv @ (torques - gyro)
+    
+    return xdot
+```
+
+## Generating forces and torques
+
+### Propellers
+
+Given the propeller geometry parameters, the thrust is modeled by numerically solving the equation for thrust and propeller induced velocity. An alternate approach, relating the thrust constant and propeller velocity can be used as well.
+
+$$
+\begin{align}
+T = k\_{T} \cdot \Omega^2
+\end{align}
+$$
+
+Torque about the yaw axis is modeled as aerodynamic drag, which is equal to the net BLDC motor torque $\tau\_{BLDC}$ near hover conditions. Given the drag coefficient $k_d$,
+
+$$
+\begin{align}
+    \tau = k_{d} \cdot \Omega^2
+\end{align}
+$$
+
+### Motors
+
+The environment models brushless direct current (BLDC) motors independently as sub-objects. Each motor is parameterized by the back electromotive force constant, $k_e$, and the internal resistance $R_{BLDC}$. The torque constant $k_\tau$ is equal to $k_e$ for an ideal square-wave BLDC. $k_\tau$ determines the driving moment of the motor. Dissipative moments are governed by the dynamic friction constant $k_{DF}$, and the aerodynamic drag constant $k_d$. Finally, the net moments $\tau$ and the moment of inertia $J$ of the motor determine how fast the rotor spins. The state of each motor is its angular velocity $\Omega$, applied voltage $v_{BLDC}$, and drawn current $i_{BLDC}$. The dynamics are given by this equation:
+
+$$
+\begin{align}
+    i_{BLDC} &= (v_{BLDC} - k_e \cdot \Omega ) / R_{BLDC}\\\\
+    \tau_{BLDC} &= k_\tau \cdot i_{BLDC} \\\\
+    \tau &= \tau_{BLDC} - k_{DF}\cdot\Omega - k_d\cdot\Omega^2 \\\\
+    \frac{d \Omega}{dt} &= \tau / J
+\end{align}
+$$
+
+## Control
+
+A cascaded PID controller is implemented for position and attitude tracking. A supervisory position PID controller tracks measured lateral velocities and outputs the required pitch and roll needed to reach a specified way-point. A lower-level attitude controller then tracks the pitch, roll, and yaw velocities and outputs the required torques. In parallel, a PID controller tracks vertical velocity and outputs the thrust needed. The eventual output of the cascaded PID setup is the prescribed thrust, and the roll, pitch, and yaw torques. These prescribed dynamics are then allocated via control mixing to the motors.
+
+Control mixing is the procedure of relating the net dynamics (forces and moments) about the vehicle body $D$, to the rotational speeds of the propellers $\hat{\Omega}$. Due to geometry, the lateral forces on the body from the propeller are zero, thus $F\_{b_2}=F_{b_3}=0$. Moments about $b_1$ and $b_2$ are determined by the moment arm $r_{arm}$ and thrust $r\_{arm} \times T$. Yaw moments about $b_3$ are determined by the torque equation \ref{eq:torque}. Putting these relationships together yields the control allocation matrix, and a system of equations linear in $\Omega^2$. Thus, the prescribed dynamics $D$ from the controller can be converted to the prescribed propeller speeds $\Omega$ for each motor:
+
+$$
+\begin{align}
+    \begin{bmatrix}
+    F_{b_1} \\\\
+    F_{b_2} \\\\
+    F_{b_3} \\\\
+    M_{b_1} \\\\
+    M_{b_2} \\\\
+    M_{b_3}
+    \end{bmatrix}
+    &=  \underset{6 \times 1}{D} = \underset{6 \times p}{A} \cdot \underset{p \times 1}{\hat{\Omega}^2} \\\\
+    \hat{\Omega} &= \sqrt{A^{-1} \cdot D}
+\end{align}
+$$
