@@ -169,6 +169,40 @@ $$
 
 The rates of changes of the 12 (linear and angular) state variables can be integrated to track the state of the vehicle.
 
+$$
+\begin{align}
+\begin{bmatrix}
+\dot{\hat{r^n}_1} \\\\
+\dot{\hat{r^n}_2} \\\\
+\dot{\hat{r^n}_3} \\\\
+\\\\
+\dot{\hat{v^b}_1} \\\\
+\dot{\hat{v^b}_2} \\\\
+\dot{\hat{v^b}_3} \\\\
+\\\\
+\dot{\phi} \\\\
+\dot{\theta}\\\\
+\dot{\psi} \\\\
+\\\\
+\dot{\hat{\omega}}
+\end{bmatrix} = \begin{bmatrix}
+c\_\theta   c\_\psi \hat{v^b}_1 + (-c\_\phi   s\_\psi + s\_\phi s\_\theta c\_\psi)   \hat{v^b}_2 +  (s\_\phi s\_\psi+c\_\phi s\_\theta c\_\psi)   \hat{v^b}_3 \\\\
+c\_\theta   s\_\psi   \hat{v^b}_1 + (c\_\phi   c\_\psi+s\_\phi   s\_\theta   s\_\psi)   \hat{v^b}_2 +  (-s\_\phi   c\_\psi+c\_\phi   s\_\theta   s\_\psi)   \hat{v^b}_3 \\\\
+(-s\_\theta   \hat{v^b}_1 + s\_\phi   c\_\theta   \hat{v^b}_2 + c\_\phi   c\_\theta   \hat{v^b}_3) \\\\
+\\\\
+\frac{m}{F_x} + g   s\_\theta          + \omega_3   \hat{v^b}_2 - \omega_2   \hat{v^b}_3 \\\\
+\frac{m}{F_y} - g   s\_\phi   c\_\theta   - \omega_3   \hat{v^b}_1 + \omega_1   \hat{v^b}_3 \\\\
+\frac{m}{F_z}     - g   c\_\phi   c\_\theta   + \omega_2   \hat{v^b}_1 - \omega_1   \hat{v^b}_2 \\\\
+\\\\
+\omega_1 + (\omega_2 s\_\phi + \omega_3 c\_\phi)   s\_\theta / c\_\theta \\\\
+\omega_2   c\_\phi - \omega_3   s\_\phi \\\\
+(\omega_2   s\_\phi + \omega_3   c\_\phi) / c\_\theta \\\\
+\\\\
+I^{-1} \cdot (\hat{\tau} - \hat{\omega} \times I \cdot \hat{\omega})
+\end{bmatrix}
+\end{align}
+$$
+
 ```python
 def get_state_change_from_dynamics(
     forces, torques, x, g, mass, inertia_matrix
