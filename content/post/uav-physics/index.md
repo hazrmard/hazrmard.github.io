@@ -309,4 +309,28 @@ $$
 \end{align}
 $$
 
+For a propeller $p$ with a thrust coefficient $k\_{th,p}$, a drag coefficient $k\_{dr,p}$, at a radius $r_p$ from the center of mass and angle $\theta_p$ from the reference forward direction in the vehicle's frame of reference, and where propellers are alternatively spinning clockwise and counter-clockwise,
+
+$$
+\begin{align}
+    A = \begin{bmatrix}
+        \cdots & k\_{th,i} & \cdots \\\\
+        \cdots & k\_{th,i} \cdot r\_p \sin(\theta_i) & \cdots \\\\
+        \cdots & k\_{th,i} \cdot r\_p \cos(\theta_i) & \cdots
+    \end{bmatrix}
+\end{align}
+$$
+
 A cascaded PID controller is implemented for position and attitude tracking. A supervisory position PID controller tracks measured lateral velocities and outputs the required pitch and roll needed to reach a specified way-point. A lower-level attitude controller then tracks the pitch, roll, and yaw velocities and outputs the required torques. In parallel, a PID controller tracks vertical velocity and outputs the thrust needed. The eventual output of the cascaded PID setup is the prescribed thrust, and the roll, pitch, and yaw torques. These prescribed dynamics are then allocated via control mixing to the motors.
+
+The standard control logic flow of UAVs is depicted in the following figure. In this standard end-to-end approach, the position reference is converted into propeller speed signals
+
+![](./static/cascaded_pid.png)
+
+The cascaded PID controller converts position/yaw references into the desired dynamics (forces and torques, $F_z,\tau_x,\tau_y,\tau_z$) to achieve that reference position and yaw. The control output $u\_{PID}$ aims to minimize the input error $e=\texttt{reference}-\texttt{measurement}$ with respect to the reference and measured states.:
+
+$$
+\begin{align}
+    u\_{PID} = k_p e + k_d \nabla_t e + k_i \int_0^t e \partial t
+\end{align}
+$$
