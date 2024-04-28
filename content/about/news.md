@@ -13,6 +13,8 @@ draft = false
 
 **News**
 
+**2024-04**: I gave a talk at Trane Technologies' Data Science Forum: Reinforcement learning - a theoretical and practical introduction.
+
 **2023-11**: Public release of [`multirotor 0.5`](https://multirotor.readthedocs.io): a python library for simulating drones.  
 
 **2023-10:** I finished a course on using Langchain for function-calling agents on [Deeplearning.ai](deeplearning.ai).
