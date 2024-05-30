@@ -11,33 +11,48 @@ tableofcontents = false
 draft = true
 +++
 
-This article summarizes the physics governing flight of a drone. It also provides convenient python code for these calculations. This work was adapted from my publication at [IEEE CoDiT 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
+This article summarizes the physics governing flight of a drone. It also provides convenient python code for these calculations. This work was adapted from my publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
+
+The following topics are covered, in order:
+
+1. The state variables used to describe the vehicle. Accounting for the effects of different reference frames.
+2. The forces and moments acting on the vehicle in its local reference frame.
+3. Using the forces/moments to calculate the change in state variables.
+4. How propellers and motors are able to generate the forces and torques.
+5. Determining exactly how much force and torque to generate to control the vehicle.
 
 ## Describing the vehicle
 
-### Position and Orientation representation
-
-A multi-rotor UAV is modeled with six degrees of freedom: the three spatial coordinates $x, y, z$ and the three Euler angles $\phi, \theta, \psi$.
+A multi-rotor UAV is modeled with six degrees of freedom: the three spatial coordinates for position: $x, y, z$, and the three Euler angles for orientation: $\phi, \theta, \psi$.
 
 Two reference frames are used for representing the state of the body:
 
-1. Inertial, nominal reference frame $n$ is the static frame of reference where the axes are aligned with arbitrary, global directions. They are represented as $[\hat{x}, \hat{y}, \hat{z}]$.
-2. Body-fixed reference frame $b$ has the axes aligned with respect to the center of gravity of the rigid body in motion. They are represented as $[\hat{b}_1, \hat{b}_2, \hat{b}_3]$. The body frame moves and rotates with the vehicle. Consider the origin of the body frame attached to the center of mass of the drone.
+1. Inertial, nominal reference frame $n$ is the static frame of reference where the axes are aligned with arbitrary, global directions. They are represented as $\hat{n} = [\hat{x}, \hat{y}, \hat{z}]$.
+2. Body-fixed reference frame $b$ has the axes aligned with respect to the center of gravity of the rigid body in motion. They are represented as $\hat{b} = [\hat{b}_1, \hat{b}_2, \hat{b}_3]$. The body frame moves and rotates with the vehicle. Consider the origin of the body frame attached to the center of mass of the drone.
+
+### Position representation
+
+### Orientation representation
 
 ![](./static/normal_inertial_frames.png)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/MISB_ST_0601.8_-_Yaw%2C_Pitch_%26_Roll.png/952px-MISB_ST_0601.8_-_Yaw%2C_Pitch_%26_Roll.png)
 
 Orientation of a body in the inertial reference frame follows the Tait-Bryan angles convention. That is, orientation can be described by three sequential rotations: yaw ($\psi$), pitch ($\theta$), and roll ($\phi$) - *in that order*. The order of rotations matters. Starting from the inertial frame, yaw $\psi$ is rotation $R(\psi)$ of the body frame about the inertial $z$ axis. Pitch $\theta$ is rotation about the $y$ axis after the first rotation of the inertial frame: $R(\theta)\cdot R(\psi)$. And roll $\phi$ is the final rotation about the $x$ axis of the frame after the prior two rotations. The final product is the body reference frame.
+
+By convention, the right handed coordinate system is followed. The direction of the positive $x$ axis in the body frame ($b_1$) is considered "forward"/North orientation. The positive $y$ axis ($b_2$) is "right"/East and the positive $z$ axis ($b_3$) is "down". For rotations about each axis, positive rotation is counter-clockwise, looking at the positive rotation axis coming out of the page.
 
 ![](./static/tait_bryan_angles.svg)
 
 ### Reconciling inertial and body frames
 
-Given a vector in the inertial frame $\hat{r}^n=[x,y,z]^T$ and the same vector viewed in the body frame $\hat{r}^b=[b_1,b_2,b_3]^T$, the rotation matrix from the inertial to body reference frames $R_n^b$ is defined as:
+A body frame may be different from the intertial frame due to (1) displacement and (2) rotation. The body frame's origin is fixed to the origin of the UAV. Therefore, the displacement of the body frame from the inertial frame is the inertial position of the UAV: $\hat{r}^n=[x,y,z]^T$.
+
+A vector relative to the origin of the body frame will appear rotated if displaced to the origin of the inertial frame. Given a vector in the inertial frame $\hat{\mathcal{V}}^n=[x,y,z]^T$ and the same vector displaced to the body frame $\hat{\mathcal{V}}^b=[b_1,b_2,b_3]^T$, the rotation matrix from the inertial to body reference frames $R_n^b$ is defined as:
 
 $$
 \begin{align}
-    \hat{r}^b &= R(\phi)\cdot R(\theta) \cdot R(\psi) \cdot \hat{r}^n \\\\
-    \hat{r}^b &= R_n^b \hat{r}^n \\\\
+    \hat{\mathcal{V}}^b &= R(\phi)\cdot R(\theta) \cdot R(\psi) \cdot \hat{\mathcal{V}}^n \\\\
+    \hat{\mathcal{V}}^b &= R_n^b \hat{\mathcal{V}}^n \\\\
     \begin{bmatrix}
     b_1 \\\\
     b_2 \\\\
@@ -56,15 +71,17 @@ $$
 \end{align}
 $$
 
-Here $c | s$ of $\phi | \theta | \psi$ refer to the cosine and sin respectively.
+Here $c | s$ of $\phi | \theta | \psi$ refer to the cosine and sin respectively. This rotation is useful when looking at forces acting in the body frame from an inertial viewpoint. The above transforms a vector instantaneously between rotated reference frames.
 
-By convention, the right handed coordinate system is followed. The direction of the positive $x$ axis in the body frame ($b_1$) is considered "forward" orientation. The positive $y$ axis ($b_2$) is "left" and the positive $z$ axis ($b_3$) is up. For rotations about each axis, positive rotation is counter-clockwise, looking at the positive rotation axis coming out of the page.
+### Reconciling derivatives in rotating frames
 
-For the body frame with an angular velocity about its axes with respect to the inertial frame $\hat{\omega}=[\omega_x,\omega_y,\omega_z]$, the time-derivative of a vector in a rotating body frame $\hat{\mathcal{V}}^b = \hat{\mathcal{V}} \cdot \hat{b}$ as measured in the inertial frame is given by the Coriolis theorem:
+If, however, the vector is changing while the reference frame is rotating, then the rate of change is not as simple. The rate of change of a vector is due to (1) the changing vector in its own frame itself, and (2) the rate of change of the rotating frame.
+
+That is, in a body frame rotating with instantaneous angular velocity $\hat{\omega}=[\omega_x,\omega_y,\omega_z]$ about its axes, the time-derivative of a vector in a rotating body frame $\hat{\mathcal{V}}^b = \hat{\mathcal{V}} \cdot \hat{b}$ as measured *in the body frame* is given by the [Transport theorem](https://en.wikipedia.org/wiki/Transport_theorem?oldformat=true):
 
 $$
 \begin{align}
-    \frac{d \hat{\mathcal{V}}^n}{d t} &= \frac{d \hat{\mathcal{V}}}{d t} \cdot \hat{b} + \frac{d \hat{b}}{d t} \cdot \hat{\mathcal{V}} \\\\
+    \frac{d \hat{\mathcal{V}}^b}{d t} &= \frac{d \hat{\mathcal{V}}}{d t} \cdot \hat{b} + \frac{d \hat{b}}{d t} \cdot \hat{\mathcal{V}} \\\\
     &= \frac{d \hat{\mathcal{V}}}{d t} \cdot \hat{b} + \hat{\omega} \times \hat{\mathcal{V}}^b \\\\
     &= \frac{d \hat{\mathcal{V}}}{d t} \cdot \hat{b} + 
     \begin{bmatrix}
@@ -75,21 +92,23 @@ $$
 \end{align}
 $$
 
+This can be used to integrate accelerations in the body frame to find body-frame velocity.
+
 ### The state of the vehicle
 
 Tracking the motion of the vehicle requires tracking multiple variables. The variables can be divided into translational and their rotational analogues.
 
 1. $\hat{r}^n=[x,y,z]$ are the navigation coordinates in the inertial frame.
-2. $\hat{v^b}=[\dot{x}, \dot{y}, \dot{z}]$ is the velocity of the vehicle along the body frame axes.
+2. $\hat{v^b}=[\dot{\hat{v^b}_1}, \dot{\hat{v^b}_2}, \dot{\hat{v^b}_3}]$ is the velocity of the vehicle along the body frame axes.
 3. $\hat{\Phi}=[\phi, \theta, \psi] $ is the orientation of the body reference frame $b$ in Euler angles (roll, pitch, yaw) with reference to the inertial reference frame.
-4. $\hat{\omega}=[\omega_x, \omega_y, \omega_z]$ is the roll rate of the three body frame axes with reference to the inertial frame.
+4. $\hat{\omega}=[\omega_x, \omega_y, \omega_z]$ is the roll rate of the three body frame axes.
+
+## Dynamics of multi-rotor UAVs
 
 The state variables above are affected by the forces and torques acting on the body.
 
 1. $\hat{F}^b=[F_{b_1},F_{b_2},F_{b_3}]$ are the net forces along the three body frame axes, where $\hat{F}^b=R_n^b \hat{F}^n$.
 2. $\hat{M}^b=[M_{b_1},M_{b_2},M_{b_3}]$ are the moments along the three body axes, where $\hat{M}^b=R_n^b \hat{M}^n$.
-
-## Dynamics of multi-rotor UAVs
 
 The multirotor is modeled as a rigid body. A rigid body has a constant mass distribution relative to its center of gravity. Fundamental to the dynamics is Newton's second law of motion:
 
@@ -103,26 +122,22 @@ And its rotational analogue:
 
 $$
 \begin{align}
-r \times F = r \times  (m \cdot a) \\\\
-M = I \cdot \omega
+r \times F &= r \times  (m \cdot a) \\\\
+M &= I \cdot \frac{d\omega}{dt}
 \end{align}
 $$
+
+Where $I$ is the moment of inertia, also known as angular mass. These two relationships can be used to calculate how the state variables change over time.
 
 ### Equations of motion
 
-The equations of motion relate the state variables the the dynamics of the system. The equations of motion are derived from Newton's second law of motion. Where, for translational variables:
+The equations of motion relate the state variables to the dynamics of the system. In this case, the equations are solved in the body frame.
+
+The above relationship can be re-written as using the abstraction provided by the Transport Theorem. This will give the force acting on the body according to the inertial frame:
 
 $$
 \begin{align}
-    \hat{F}^b &= m \frac{d \hat{v}^b}{d t} %= m(\hat{\dot{v}}^b + \hat{\omega} \times \hat{v}^b)
-\end{align}
-$$
-
-The above relationship can be re-written as using the abstraction provided by the Coriolis force. This will give the force acting on the body according to the inertial frame:
-
-$$
-\begin{align}
-     \hat{F}^n &= m(\hat{\dot{v}}^b + \hat{\omega} \times \hat{v}^b)
+     \hat{F}^b &= m(\hat{\dot{v}}^b + \hat{\omega} \times \hat{v}^b)
 \end{align}
 $$
 
@@ -130,13 +145,12 @@ For rotational variables a similar analogue exists. Given $M^b$ is the rotating 
 
 $$
 \begin{align}
-    \hat{r}^b \times \hat{F}^b &= m \cdot \hat{r}^b \times \frac{d \hat{v}^b}{d t} \\\\
-    \hat{M}^b &= \hat{I}\frac{d \hat{\omega}}{d t} \\\\
+    \hat{r}^b \times \hat{F}^b &= m \cdot \hat{r}^b \times \hat{\dot{v}}^b \\\\
+    \hat{M}^b &= \hat{I} \hat{\dot{\omega}} \\\\
     \hat{M}^b &= \hat{I}\hat{\dot{\omega}} + \hat{\omega} \times \hat{I}\hat{\omega}
 \end{align}
 $$
 
-Note that while force is measured in the inertial frame, moments are measured in the body frame. This is because the state vector tracks inertial position $\hat{r}^n$, and the rotation and orientation of the body frame.
 
 ### Linear variables
 
