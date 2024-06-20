@@ -1,16 +1,22 @@
 +++
-date = "2020-12-31T23:10:46-06:00"
+date = "2023-12-31T23:10:46-06:00"
 categories = ["Test"]
 tags = ["Test"]
 title = "Test post"
 hasequations = true
 hascode = false
 isexternal = false
-series = []
 description = ""
 draft = true
 tableofcontents = true
 +++
+
+## Embedded JS
+
+<div id="container"></div>
+<script type="module" src="./testd3.js"></script>
+<div id="three_container"></div>
+<script type="module" src="./test3js.js"></script>
 
 ## Markdown stuff
 
@@ -57,26 +63,29 @@ These are some details. Will markdown be rendered?
 **This is bolded**. *This is italicized.*
 </details>
 
-## xorigin iframes:
+
+## iframes
+
+### xorigin iframes:
 
 
 <!-- {{< frame src="http://iahmed.me" >}} -->
 
 
-## local iframes:
+### local iframes:
 
 <!-- {{< frame src="/old_www/index.html" >}} -->
 
-## rendered notebooks (markdown)
+### rendered notebooks (markdown)
 
 <!-- {{< read src="/static/test/sample.md" >}} -->
 
-## rendered notebooks (html)
+### rendered notebooks (html)
 
 <!-- {{< read src="/static/test/sample.html" >}} -->
 
 ## raw code from file
 
 ```python
-{{% read src="/static/test/sample.py" %}}
+{{%read src="/static/test/sample.py"%}}
 ```
