@@ -14,8 +14,37 @@ draft = true
 
 ## Libraries
 
+### Huggingface/Transformers
+
+### ollama
+
+### llmx / litellm
+
+### LlamaIndex
+
+### Langchain
+
 
 ## Models
 
+### Local
+
+#### Llama
+
+##### Mistral
+
+### Cloud
+
+#### OpenAI / Microsoft Azure
+
+#### Anthropic
+
+#### Google
 
 ## Use cases
+
+### Chatbot
+
+### Knowledge retrieval
+
+### Image processing
