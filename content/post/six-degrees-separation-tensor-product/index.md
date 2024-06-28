@@ -1,8 +1,8 @@
 +++
-title = 'My six degrees of separation from tensor products'
+title = 'GenAI and my six degrees of separation from tensor products'
 date = '2024-06-28T09:30:04-05:00'
 description = "My experiences getting up and running with GenAI and views on code interpretability."
-tags = []
+tags = ["LLM"]
 categories = ["Personal"]
 link = ""
 hasequations = false
@@ -15,7 +15,7 @@ Lately I have been working with generative AI applications for work and personal
 
 <figure>
     <img src="./freeway.png">
-    <figcaption>Made with HI (Human Intelligence)</figcaption>
+    <figcaption>Made with GenHI (Human Intelligence)</figcaption>
 </figure>
 
 We are living in a gold rush of foundation models. Every week, new research quickly permeates into user space. Iterations of large language models (LLMs) beat last week's benchmarks. The "state-of-the-art" label has a new, shorter, shelf life.
@@ -44,10 +44,10 @@ Also, natural language processing, perhaps inherently, is a more sophisticated o
 
 ## The dillema
 
-So here was my dillema: I coultn't see my beloved tensor products all the way from popular LLM applications.
+So here was my dillema: I couldn't see my beloved tensor products all the way from popular LLM applications.
 
 Perhaps I didn't need to. But, I'd have liked to.
 
 So, now, I am trying to find a middle ground. Simple, nimble libraries like `llmx`, `litellm` which are llm-model-agnostic, but appear to operate on the level of string in, string out. This is a far cry from wrapping prompts into their own class instance and passing them through clunky pipelines with byzantine logic (llamaindex), or library-specific usage patterns achieved opaquely through operator overloading (langchain). They can also hook up with local model deployments for when I need to follow inputs every step of the the way to outputs.
 
-I think these big production-grade libraries are commendable efforts. I have and will use them when needed. But the person in me who still wants to derive everything from first-principles, they are too much of a compromise.
+I think these big production-grade libraries are commendable efforts. I have and will use them when needed. But the person in me who still wants to derive everything from first-principles, the versatility that comes at the cost of interpretability is too much of a compromise.
