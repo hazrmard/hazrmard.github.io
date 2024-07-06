@@ -32,6 +32,11 @@ The biggest stressor was using the software ecosystem spun up around LLMs for ma
 
 Why? Such high-level tools, by virtue of being so popular, try to capture the most usecases possible. The contributions made to the codebase, and therefore its design, cater to the lowest common denominator in the userbase. These libraries are targetting weekend hacking and production level multi-user, multi-server deployments. I think that necessitates extreme abstraction of logic. If you're looking for a quick Retrieval Augmented Generation application over a directory of plain text documents, great! If you're looking for a function-calling Agent which uses linear logic, great! But if you want to hop of the beaten path, and implement a custom retriever for example, you have to skip through all these layers of abstraction to find the right parts to tweak.
 
+<figure>
+    <img src="./separation.png">
+    <figcaption>My six degrees of separation from tensor products. At the lowest level are tensor manipulation libraries (pytorch, tensorflow, jax). Going all the way up, from transformer model libraries, to cloud hosted models, to prompt engineering libraries. Each layer of abstraction affects my control over interpretability and transparancy of code.</figcaption>
+</figure>
+
 ## The mismatch
 
 This is not a critique calling for action on these libraries. Merely an explanation of fact. I found that such abstractions did not help me reason about what I was making. I had started this journey learning about attention mechanisms and quantization and low-rank adaptors and direct policy optimization. Quickly I had jumped to web applications where the all the backend did was to call `llm.chat('Use wikipdia to explain how reinforcement learning through human feedback works')`.
