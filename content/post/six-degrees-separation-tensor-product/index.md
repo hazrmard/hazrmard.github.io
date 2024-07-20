@@ -47,7 +47,7 @@ This could easily be hindsight bias. I had learned the ins and outs of code I wa
 
 Also, natural language processing, perhaps inherently, is a more sophisticated optimization problem than physical systems. In NLP, uncertainty in outputs is more than noise introducing confidence bounds in outputs. The same input language could have the absolute opposite meaning because the tone was sarcastic. Therefore, there are many more layers of processing and abstraction to dive through.
 
-## The dillema
+## The dilemma
 
 So here was my dillema: I couldn't see my beloved tensor products all the way from popular LLM applications.
 
