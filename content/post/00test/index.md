@@ -17,6 +17,14 @@ tableofcontents = true
 <script type="module" src="./testd3.js"></script>
 <div id="three_container"></div>
 <script type="module" src="./test3js.js"></script>
+<br/>
+<div id="uav_container" width="600" height="600"></div>
+<script type="module" src="./uav.js"></script>
+<script type="module">
+    import {make_UAV, make_scene} from './uav.js';
+    let uav = make_UAV(3);
+    make_scene(uav, "uav_container");
+</script>
 
 ## Markdown stuff
 
