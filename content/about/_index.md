@@ -6,7 +6,7 @@ title = "About Me"
 
 Hi. My name is Ibrahim. I built this website as a teaching aid for myself. I like to sprinkle updates here occasionally.
 
-I am exploring full-time opportunities in research & applied science roles, with a focus on machine learning and controls. See my [resume](/resume) for more details.
+I am pursuing a career focused on machine learning and controls. See my [resume](/resume) for more details. My current projects involve data center design, energy optimization, generative AI for analytics, and HVAC controls.
 
 I have a hobbyist's interest in electronics, web-development, and technical writing for a broad audience.
 
