@@ -1,5 +1,5 @@
 +++
-title = 'A Simple LLM Frameork'
+title = 'LLM Patterns'
 date = '2024-09-06T22:34:32-05:00'
 description = "A minimalist LLM framework for retrieval augmented & agentic workflows."
 tags = []
