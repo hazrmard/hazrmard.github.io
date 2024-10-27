@@ -11,15 +11,15 @@ tableofcontents = false
 draft = false
 +++
 
-I have often been stumped at one stage of personal software projects: sharing with others. It one of two ways:
+I have often been stumped at one stage of personal software projects: sharing with others. It goes one of three ways:
 
-I come up with a fun idea and make a prototype. The repo is up on github. Anyone who wants to use it will clone it, recreate the environment, and execute on their machine. Many times the work to set up the project demo is not worth the utility of the actual demo.
+1. I come up with a fun idea and make a prototype. The repo is up on github. Anyone who wants to use it will clone it, recreate the environment, and execute on their machine. Many times the work to set up the project demo is not worth the utility of the actual demo.
 
-Or, I am setting up a closed-source project, but would love user feedback.
+2. Or, I am setting up a closed-source project, but would love user feedback.
 
-Or, it's a project for myself that I'd like to host publicly (see [here how I wrote a script to get into tennis meetups](./chatgpt-tennis-project/index.md)).
+3. Or, it's a project for myself that I'd like to host publicly (see [here how I wrote a script to get into tennis meetups]({{< ref chatgpt-tennis-project >}})).
 
-In all of the above cases, uploading to a repository host (Github), or some static website builder (vercel, cloudfare, github) is insufficient. Previously, I'd exposed my home server to host projects ([see here how I SSH to my desktop remotely](./Remote%20SSH%20into%20desktop.md)). Server availability in that case is subject to power outages, networking restrictions, and foremost - security.
+In all of the above cases, uploading to a repository host (Github), or some static website builder (vercel, cloudfare, github) is insufficient. Previously, I'd exposed my home server to host projects ([see here how I SSH to my desktop remotely]({{< ref "Remote SSH into desktop">}})). Server availability in that case is subject to power outages, networking restrictions, and foremost - security.
 
 Now, I've taken to using virtual private servers to host some projects. This is how it works:
 
@@ -76,7 +76,7 @@ Use [ddclient](https://ddclient.net/) if you have a hostname already, and want t
 Install ddclient using `sudo apt-get install ddclient` (debian/ubuntu). The docs walk through setting up a configuration file which you can leave alone after the first time.
 
 
-## Reverse Proxy
+## Reverse Proxy (Caddy)
 
 Install [Caddy](https://caddyserver.com/). The docs walk through setting up a configuration file. An example configuration `Caddyfile` may look like this:
 
@@ -90,7 +90,22 @@ HOSTNAME {
     handle_path /app2/* {
         reverse_proxy localhost:1234
     }
+    redir /app3 /app3/
+    handle_path /app3/* {
+        root * /path/to/my/static/site
+        file_server
+    }
 }
 ```
 
-This forwards all requests to `HOSTNAME/app1` to whatever is running on `localhost:8080`, and `HOSTNAME/app2` to whatever is running on `localhost:1234`. See [Caddy Examples](https://caddyexamples.com/) for more usage patterns.
+This forwards all requests to `HOSTNAME/app1` to whatever is running on `localhost:8080`, and `HOSTNAME/app2` to whatever is running on `localhost:1234`, and `HOSTNAME/app3` to a static site. See [Caddy Examples](https://caddyexamples.com/) for more usage patterns.
+
+## Run your projects as usual!
+
+On the VPS, deploy your projects as you would on a local machine.
+
+```bash
+streamlit run mystreamlitproject/app.py --server.port 1234
+python -m flask --app myflaskapp run
+# do nothing for the static site - that's the whole point :)
+```
