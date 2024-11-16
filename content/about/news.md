@@ -13,7 +13,7 @@ draft = false
 
 **News**
 
-**2024-10**: I am speaking at [Applied AI](https://appliedai.mn) conference in November. My talk is on using GenAI to interact with Supply Chains.
+**2024-11**: I spoke at [Applied AI](https://appliedai.mn) conference in November. My talk was on optimizing differentiable supply chains and using GenAI to interact with Supply Chain prediction models.
 
 **2024-04**: I gave a talk at Trane Technologies' Data Science Forum: Reinforcement learning - a theoretical and practical introduction.
 
