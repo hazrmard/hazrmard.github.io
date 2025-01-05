@@ -1,7 +1,7 @@
 +++
-title = 'Feedback control'
+title = 'Feedback control [In Progress]'
 date = '2018-10-29T11:37:39-05:00'
-description = ""
+description = "[In Progress]"
 tags = ["matlab", "control systems"]
 categories = ["engineering"]
 series = ["Control systems"]

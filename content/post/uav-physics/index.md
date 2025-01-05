@@ -1,14 +1,14 @@
 +++
-title = 'The physics of multicopter drones'
+title = 'The physics of multicopter drones [In Progress]'
 date = '2024-01-27T19:22:34-06:00'
-description = ""
-tags = []
-categories = []
+description = "[In Progress] Equations governing flight of a UAV"
+tags = ["UAV", "Simulation"]
+categories = ["Engineering"]
 link = ""
 hasequations = true
 includes = []       # any javascript files to include
-tableofcontents = false
-draft = true
+tableofcontents = true
+draft = false
 +++
 
 This article summarizes the physics governing flight of a drone. It also provides convenient python code for these calculations. This work was adapted from my publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).

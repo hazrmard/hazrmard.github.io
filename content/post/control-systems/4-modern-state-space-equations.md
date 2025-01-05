@@ -86,6 +86,7 @@ $$</div>
 This is a second order ordinary differential equation (ODE). It relates the output variable $y$ (the displacement of the mass) to the input variable $u$ (the external force). The equation can be broken down into two first order differential equations by appointing $n$ state variables for an $n^{th}$ order ODE for the $0^{th}$ through $(n-1)^{th}$ derivatives of the output variable.
 
 <div>$$
+\begin{align*}
 x(t) = 
 \begin{bmatrix}
     x_1(t) \\
@@ -96,6 +97,7 @@ x(t) =
     y(t)    \\
     y'(t)   \\
 \end{bmatrix}
+\end{align*}
 $$</div>
 
 Then differentiating and substituting for state variables.
@@ -112,13 +114,11 @@ x'(t) &=
     x_2(t)    \\
     y''(t)   \\
 \end{bmatrix}   \\
-
 x'(t) &=
 \begin{bmatrix}
     x_2(t) \\
     \frac{1}{m}(u(t) - k \cdot x_1(t) - a \cdot x_2(t)) \\
 \end{bmatrix}   \\
-
 x'(t) &=
 \begin{bmatrix}
     x_2(t)  \\
@@ -129,7 +129,6 @@ x'(t) &=
     0  \\
     \frac{1}{m}u(t)
 \end{bmatrix}   \\
-
 x'(t) &=
 \begin{bmatrix}
     0                   &   1       \\
@@ -148,6 +147,7 @@ $$</div>
 Which gives us for the state equation:
 
 <div>$$
+\begin{align*}
 A = 
 \begin{bmatrix}
     0                   &   1       \\
@@ -158,11 +158,13 @@ B =
     0  \\
     \frac{1}{m}
 \end{bmatrix}
+\end{align*}
 $$</div>
 
 Similarly, knowing that $x_1(t) = y(t)$, we can construct:
 
 <div>$$
+\begin{align*}
 y(t) =
 \begin{bmatrix}
     1                   &   0
@@ -173,6 +175,7 @@ y(t) =
     0
 \end{bmatrix}
 \cdot u(t)
+\end{align*}
 $$</div>
 
 Which gives us for the output equation:

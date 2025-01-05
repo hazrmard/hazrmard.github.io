@@ -14,6 +14,8 @@ I have a professional interest in machine learning, reinforcement learning, opti
 
 ## Research
 
+I am interested in data-driven optimization in physics-based systems. These days I am exploring reinforcement learning, operations research, and scientific ML.
+
 My PhD thesis was on *Adaptive Fault-tolerant Control Using Reinforcement Learning*. [You can read it here][7]. I investigated how to make data-driven control methods more efficient in resource constrained situations where fast adaptation was needed. Specifically, I researched [reinforcement learning for fault-tolerant control in unmanned aerial vehicles][6]. I also dabbled in machine learning for control of [smart buildings][1]. I was part of the [Modeling and Analysis of Complex Systems(MACS)][3] group at Vanderbilt University's [Institute for Software Integrated Systems][4].
 
 At a couple of internships, I worked with privacy-preserving machine learning, and with digital signal processing for machine learning-based prognostics.

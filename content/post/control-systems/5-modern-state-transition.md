@@ -9,7 +9,7 @@ isexternal = false
 hasequations = true
 hascode = true
 includes = []
-draft = true
+draft = false
 +++
 
 The state equation for a linear time-invariant system:
