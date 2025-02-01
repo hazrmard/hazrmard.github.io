@@ -8,7 +8,7 @@ series = []
 isexternal = false
 hasequations = true
 hascode = false
-draft = true
+draft = false
 +++
 
 Reinforcement Learning (RL) is one of the many ways to implement artificial

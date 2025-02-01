@@ -13,6 +13,8 @@ draft = false
 
 **News**
 
+**2025-01**: I gave a talk at Trane Technologies' Data Science Forum on anomaly detection algorithms and presented a case study using data from rooftop refrigeration units.
+
 **2024-11**: I spoke at [Applied AI](https://appliedai.mn) conference in November. My talk was on optimizing differentiable supply chains and using GenAI to interact with Supply Chain prediction models.
 
 **2024-04**: I gave a talk at Trane Technologies' Data Science Forum: Reinforcement learning - a theoretical and practical introduction.
