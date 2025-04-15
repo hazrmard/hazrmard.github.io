@@ -28,55 +28,32 @@
         ]
     },
 
-    "education":    [
-        {
-            "school":   "Vanderbilt University",
-            "year":     "Aug '18 - Aug '23",
-            "degree":   "PhD",
-            "major":    "Electrical Engineering",
-            "thesis":   "Adaptive fault-tolerant control using reinforcement learning.",
-            "gpa":      "3.85/4.00",
-            "courses":  ["Reinforcement Learning"],
-            "tags":     ["education", "courses", "artificial intelligence"]
-        },
-        {
-            "school":   "Vanderbilt University",
-            "year":     "Aug '16 - Aug '18",
-            "degree":   "MS",
-            "major":    "Electrical Engineering",
-            "gpa":      "3.85/4.00",
-            "courses":  ["Neural Networks", "Pattern Recognition", "Project in AI", "Solid State Materials", "Advanced High Performance Computing",
-                        "Advanced Real-time Systems", "Computer Vision", "Advanced Image Processing",
-                        "Embedded Systems"],
-            "tags":     ["education", "courses", "artificial intelligence"]
-        },
-        {
-            "school":   "Vanderbilt University",
-            "year":     "Aug '12 - May '16",
-            "degree":   "BS",
-            "major":    "Electrical Engineering and Physics",
-            "gpa":      "3.70/4.00",
-            "courses":  ["FPGA Design", "Modelling and Simulation", "VLSI Design",
-                        "High Performance Computing", "Algorithms", "Microcontrollers",
-                        "Introductory Applied Machine Learning", "Galactic and Stellar Astrophysics",
-                        "Modern Physics", "Quantum Mechanics"],
-            "tags":     ["education"]
-        }
-    ],
-
     "experience":     [
         {
-            "title":        "Senior Controls Modeling Engineer",
+            "title": "Software Engineer",
+            "workplace": "Google",
+            "time": "Apr '25 - ",
+            "achievements": [],
+            "technologies": [],
+            "links": [],
+            "tags": ["experience", "work"]
+        },
+        {
+            "title":        "Senior Controls Optimization Engineer",
             "workplace":    "Trane Technologies",
-            "time":         "Sep '23 - ",
+            "time":         "Sep '23 - Apr '25",
             "achievements": [
-                "Reduce costs of running intensive workloads in datacenters by developing energy simulations in Modelica to optimize efficiency of building automation systems.",
-                "Enable customers to minimize costs of transporting refrigerated containers by exposing physics and machine learning (ML) models of energy consumption to a python API and using heuristic searches to optimize vehicle configurations in linear time complexity.",
-                "Empower customers to explore ML models by co-developing front-end UI in ReactJS/PlotlyJS with software teams to interactively visualize ML model outputs under confidence bounds."
+                "Sought out research and development opportunities in AI/ML/Controls software across Trane Technologies' business units and productionized research prototypes.",
+                "Applied data-driven model predictive control and reinforcement learning for water-side energy optimization of HVACs.",
+                "Designed LLM Agents for Retrieval-Augmented Generation (RAG), task automation, and analytics pipelines to increase development velocity, reliability, and economy of digital product offerings across multiple business units.",
+                "Designed AI control algorithms for datacenter cost optimization using digital twins.",
+                "Democratized data-center cost optimization by designing 3D datacenter layout tools using three.js for simulating energy characteristics under various demand loads.",
+                "Enabled customers to minimize energy costs of transport refrigeration units by exposing physics-based models to a python API (modelica to FMI) and using Bayesian optimization to automate vehicle configuration.",
+                "Reduced customers' hardware maintenance costs via predictive maintenance by developing unsupervised anomaly detection algorithms for Variable Refrigerant Flow (VRF) units using steady-state and transient dynamics."
             ],
             "technologies": ["Python","Modelica","Javscript"],
             "links":        [],
-            "tags":         ["experience", "work", "controls", "optimization"]
+            "tags":         ["experience", "work", "controls", "optimization", "genai", "hvac", "data center", "data analysis"]
         },
         {
             "title":        "Research Associate",
@@ -186,6 +163,42 @@
             "technologies": ["VHDL"],
             "links":        [],
             "tags":         ["experience", "research", "work"]
+        }
+    ],
+
+    "education":    [
+        {
+            "school":   "Vanderbilt University",
+            "year":     "Aug '18 - Aug '23",
+            "degree":   "PhD",
+            "major":    "Electrical Engineering",
+            "thesis":   "Adaptive fault-tolerant control using reinforcement learning.",
+            "gpa":      "3.85/4.00",
+            "courses":  ["Reinforcement Learning"],
+            "tags":     ["education", "courses", "artificial intelligence"]
+        },
+        {
+            "school":   "Vanderbilt University",
+            "year":     "Aug '16 - Aug '18",
+            "degree":   "MS",
+            "major":    "Electrical Engineering",
+            "gpa":      "3.85/4.00",
+            "courses":  ["Neural Networks", "Pattern Recognition", "Project in AI", "Solid State Materials", "Advanced High Performance Computing",
+                        "Advanced Real-time Systems", "Computer Vision", "Advanced Image Processing",
+                        "Embedded Systems"],
+            "tags":     ["education", "courses", "artificial intelligence"]
+        },
+        {
+            "school":   "Vanderbilt University",
+            "year":     "Aug '12 - May '16",
+            "degree":   "BS",
+            "major":    "Electrical Engineering and Physics",
+            "gpa":      "3.70/4.00",
+            "courses":  ["FPGA Design", "Modelling and Simulation", "VLSI Design",
+                        "High Performance Computing", "Algorithms", "Microcontrollers",
+                        "Introductory Applied Machine Learning", "Galactic and Stellar Astrophysics",
+                        "Modern Physics", "Quantum Mechanics"],
+            "tags":     ["education"]
         }
     ],
 

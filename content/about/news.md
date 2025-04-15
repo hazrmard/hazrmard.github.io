@@ -13,6 +13,8 @@ draft = false
 
 **News**
 
+**2025-04**: I joined Google in a Software Engineer role and moved to the San Francisco Bay area.
+
 **2025-01**: I gave a talk at Trane Technologies' Data Science Forum on anomaly detection algorithms and presented a case study using data from rooftop refrigeration units.
 
 **2024-11**: I spoke at [Applied AI](https://appliedai.mn) conference in November. My talk was on optimizing differentiable supply chains and using GenAI to interact with Supply Chain prediction models.
