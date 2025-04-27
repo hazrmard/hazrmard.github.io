@@ -1,14 +1,14 @@
 +++
-title = 'Classical control: Transforms'
-date = '2018-09-10T13:13:41-05:00'
+title = "Classical control: Transforms"
+date = "2018-09-10T13:13:41-05:00"
 description = ""
-tags = ["control systems"]
-categories = ["engineering"]
-series = ["Control systems"]
+tags = [ "control systems" ]
+categories = [ "Engineering" ]
+series = [ "Control systems" ]
 isexternal = false
 hasequations = true
 hascode = false
-includes = []
+includes = [ ]
 draft = false
 +++
 

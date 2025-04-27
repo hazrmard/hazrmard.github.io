@@ -2,9 +2,9 @@
 title = "A Poor Man's Introduction to Reinforcement Learning"
 date = "2017-11-13T23:19:08-06:00"
 description = ""
-tags = ["artificial intelligence", "reinforcement learning"]
-categories = ["engineering"]
-series = []
+tags = [ "artificial intelligence", "reinforcement learning" ]
+categories = [ "Engineering" ]
+series = [ ]
 isexternal = false
 hasequations = true
 hascode = false

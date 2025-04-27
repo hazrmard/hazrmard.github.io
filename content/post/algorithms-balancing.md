@@ -1,14 +1,13 @@
 +++
 hasequations = true
-categories = ["computer science"]
+categories = [ "Computer Science" ]
 date = "2017-02-06T18:47:26-06:00"
 description = ""
 title = "Algorithms: Balancing"
 hascode = false
 isexternal = false
-tags = ["algorithms", "graphs"]
+tags = [ "algorithms", "graphs" ]
 draft = false
-
 +++
 Balancing in algorithms refers to minimizing the complexity of an algorithm by
 making sure that its constituent parts share the load efficiently. It is _not_ a

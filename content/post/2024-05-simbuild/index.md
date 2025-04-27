@@ -1,12 +1,12 @@
 +++
-title = 'AI+Building Energy Modeling: IBPSA SimBuild 2024 Notes'
-date = '2024-06-02T12:12:03-05:00'
+title = "AI+Building Energy Modeling: IBPSA SimBuild 2024 Notes"
+date = "2024-06-02T12:12:03-05:00"
 description = "Notes from attending the SimBuild conference, especially sessions on data science and modeling."
-tags = ["LLM", "Buildings", "Machine learning"]
-categories = ["Engineering"]
+tags = [ "Buildings", "llm", "machine learning" ]
+categories = [ "Engineering" ]
 link = ""
 hasequations = false
-includes = []       # any javascript files to include
+includes = [ ]
 tableofcontents = true
 draft = false
 +++

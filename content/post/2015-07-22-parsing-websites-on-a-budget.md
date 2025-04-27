@@ -1,7 +1,7 @@
 ---
 title: Parsing websites on a budget
 date: 2015-07-23T01:32:40+00:00
-description : ""
+description: ""
 categories:
   - Developer
 tags:
@@ -9,7 +9,7 @@ tags:
   - web app
   - web development
   - web scraping
-  - YQL
+  - yql
 hasequations: false
 hascode: true
 ---

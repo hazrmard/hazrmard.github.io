@@ -1,14 +1,14 @@
 +++
-title = 'Control Systems: Overview'
-date = '2018-09-10T11:34:21-05:00'
+title = "Control Systems: Overview"
+date = "2018-09-10T11:34:21-05:00"
 description = "A primer for classical control theory."
-tags = ["matlab"]
-categories = ["engineering"]
-series = ["Control Systems"]
+tags = [ "matlab" ]
+categories = [ "Engineering" ]
+series = [ "Control Systems" ]
 isexternal = false
 hasequations = true
 hascode = false
-includes = []
+includes = [ ]
 draft = false
 +++
 

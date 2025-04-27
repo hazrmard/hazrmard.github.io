@@ -1,12 +1,12 @@
 +++
-title = 'ChatGPT x Tennis - a weekend hacking project'
-date = '2023-08-20T14:29:52-05:00'
+title = "ChatGPT x Tennis - a weekend hacking project"
+date = "2023-08-20T14:29:52-05:00"
 description = "Using ChatGPT as my coding assistant to help me play more tennis"
-tags = []
-categories = ["developer"]
+tags = [ ]
+categories = [ "Developer" ]
 link = ""
 hasequations = false
-includes = []       # any javascript files to include
+includes = [ ]
 tableofcontents = true
 draft = false
 +++

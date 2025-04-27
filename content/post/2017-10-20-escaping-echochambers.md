@@ -2,9 +2,13 @@
 title = "Escaping Echochambers"
 date = "2017-10-20T20:59:42-05:00"
 description = ""
-tags = ["machine learning", "principal component analysis", "visualization"]
-categories = ["machine learning"]
-series = []
+tags = [
+  "machine learning",
+  "principal component analysis",
+  "visualization"
+]
+categories = [ "Machine learning" ]
+series = [ ]
 isexternal = false
 hasequations = false
 hascode = true

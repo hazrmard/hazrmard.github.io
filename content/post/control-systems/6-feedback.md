@@ -1,14 +1,14 @@
 +++
-title = 'Feedback control [In Progress]'
-date = '2018-10-29T11:37:39-05:00'
+title = "Feedback control [In Progress]"
+date = "2018-10-29T11:37:39-05:00"
 description = "[In Progress]"
-tags = ["matlab", "control systems"]
-categories = ["engineering"]
-series = ["Control systems"]
+tags = [ "matlab", "control systems" ]
+categories = [ "Engineering" ]
+series = [ "Control systems" ]
 isexternal = false
 hasequations = true
 hascode = true
-includes = []
+includes = [ ]
 draft = true
 +++
 

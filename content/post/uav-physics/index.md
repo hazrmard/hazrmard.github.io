@@ -1,12 +1,12 @@
 +++
-title = 'The physics of multicopter drones [In Progress]'
-date = '2024-01-27T19:22:34-06:00'
+title = "The physics of multicopter drones [In Progress]"
+date = "2024-01-27T19:22:34-06:00"
 description = "[In Progress] Equations governing flight of a UAV"
-tags = ["UAV", "Simulation"]
-categories = ["Engineering"]
+tags = [ "simulation", "uav" ]
+categories = [ "Engineering" ]
 link = ""
 hasequations = true
-includes = []       # any javascript files to include
+includes = [ ]
 tableofcontents = true
 draft = false
 +++

@@ -2,9 +2,9 @@
 title = "Trials and Tribulations of Maintaining a Hugo Blog"
 date = "2017-09-30T17:29:58-05:00"
 description = ""
-tags = ["hugo", "Web development", "Powershell"]
-categories = ["DevOps", "Developer"]
-series = ["Hugo site development"]
+tags = [ "hugo", "powershell", "web development" ]
+categories = [ "DevOps", "Developer" ]
+series = [ "Hugo site development" ]
 isexternal = false
 hasequations = false
 hascode = true

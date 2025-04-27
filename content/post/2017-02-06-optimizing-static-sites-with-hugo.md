@@ -1,15 +1,14 @@
 +++
-categories = ["Developer", "Meta", "DevOps"]
+categories = [ "Developer", "Meta", "DevOps" ]
 date = "2017-02-06T10:07:58-06:00"
 hasequations = false
 title = "Optimizing static sites with hugo"
 hascode = true
 isexternal = false
-series = ["Hugo site development"]
+series = [ "Hugo site development" ]
 description = ""
-tags = ["Javascript", "Hugo", "Web development"]
+tags = [ "hugo", "javascript", "web development" ]
 draft = false
-
 +++
 According to [httparchive](http://httparchive.org/trends.php) the average size of a web page in 2016 was around 2.5MB. Now this may not seem a lot in this age where the internet is the primary media delivery platform - but it is worth noting that most web pages serve text as their primary content. Looking at the report sheds light on what constitutes an average web page:
 

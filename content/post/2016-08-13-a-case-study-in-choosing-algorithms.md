@@ -1,12 +1,12 @@
 ---
 title: A case study in choosing algorithms
 date: 2016-08-14T03:29:23+00:00
-description : ""
+description: ""
 categories:
   - Engineering
   - Physics
 tags:
-  - Algorithms
+  - algorithms
 hasequations: false
 hascode: false
 ---

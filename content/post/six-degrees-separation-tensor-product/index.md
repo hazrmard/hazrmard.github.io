@@ -1,12 +1,12 @@
 +++
-title = 'GenAI and my six degrees of separation from tensor products'
-date = '2024-06-28T09:30:04-05:00'
+title = "GenAI and my six degrees of separation from tensor products"
+date = "2024-06-28T09:30:04-05:00"
 description = "My experiences getting up and running with GenAI and views on code interpretability."
-tags = ["LLM"]
-categories = ["Personal"]
+tags = [ "llm" ]
+categories = [ "Personal" ]
 link = ""
 hasequations = false
-includes = []       # any javascript files to include
+includes = [ ]
 tableofcontents = false
 draft = false
 +++

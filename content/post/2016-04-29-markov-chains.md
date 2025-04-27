@@ -1,11 +1,11 @@
 ---
 title: Markov Chains – Random Text Generation
 date: 2016-04-29T23:23:16+00:00
-description : ""
+description: ""
 categories:
-  - machine learning
+  - Machine learning
 tags:
-  - C++
+  - C/C++
   - hpc
   - markov
 hasequations: false

@@ -1,14 +1,14 @@
 +++
-title = 'Classical control: Transfer functions'
-date = '2018-09-21T15:17:40-05:00'
+title = "Classical control: Transfer functions"
+date = "2018-09-21T15:17:40-05:00"
 description = ""
-tags = ["matlab", "control systems"]
-categories = ["engineering"]
-series = ["Control systems"]
+tags = [ "matlab", "control systems" ]
+categories = [ "Engineering" ]
+series = [ "Control systems" ]
 isexternal = false
 hasequations = true
 hascode = true
-includes = []
+includes = [ ]
 draft = false
 +++
 

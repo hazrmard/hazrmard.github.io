@@ -1,10 +1,10 @@
 +++
-title = 'Hugo and Jupyter Notebooks'
-date = '2018-04-30T02:51:16-05:00'
+title = "Hugo and Jupyter Notebooks"
+date = "2018-04-30T02:51:16-05:00"
 description = ""
-tags = ["hugo", "web development"]
-categories = ["developer"]
-series = ["Hugo site development"]
+tags = [ "hugo", "web development" ]
+categories = [ "Developer" ]
+series = [ "Hugo site development" ]
 isexternal = false
 hasequations = false
 hascode = true
