@@ -57,8 +57,13 @@ ignoreFiles = [".+pptx$"]
         url = "/post/"
         image = "/img/LinkIcons/svg/pencil.svg"
     [[params.menu.main]]
-        name = "Projects"
+        name = "Notes"
         weight = 40
+        url = "/note/"
+        image = "/img/LinkIcons/svg/project.svg"
+    [[params.menu.main]]
+        name = "Projects"
+        weight = 50
         url = "/project/"
         image = "/img/LinkIcons/svg/terminal.svg"
 # ====
