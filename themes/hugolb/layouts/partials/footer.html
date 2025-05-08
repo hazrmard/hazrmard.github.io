@@ -1,7 +1,21 @@
-    <div class="footer">
+<div class="footer">
         <div class="copyright">© {{.Site.Copyright}}</div>
     </div>
 <!-- ending container div from header -->
 </div> 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuIcon = document.querySelector('.menu-icon');
+        const topbar = document.querySelector('.topbar');
+
+        if (menuIcon && topbar) {
+            menuIcon.addEventListener('click', function () {
+                topbar.classList.toggle('mobile-menu-active');
+            });
+        }
+    });
+</script>
+
 </body>
 </html>

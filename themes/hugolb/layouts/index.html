@@ -1,4 +1,4 @@
-{{partial "header.html" .}}
+{{define "main"}}
 <div class="splash">
     <div class="hero">
         <h1>{{.Site.Title}}</h1>
@@ -26,5 +26,4 @@
     <br/> -->
     {{ with .Site.GetPage "/about/news.md" }}{{ .Content }}{{ end }}
 </div>
-{{partial "sidebar.html" .}}
-{{partial "footer.html" .}}
+{{end}}

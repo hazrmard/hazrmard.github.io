@@ -1,7 +1,9 @@
 .splash {
-    width: 85vw;
-    padding-left: 15vw;
+    width: 100%; /* Take full width of its container */
+    padding-left: 0; /* Remove previous offset */
+    padding-top: 5em; /* Add padding to clear the fixed topbar */
     height: 50vh;
+    box-sizing: border-box; /* Include padding in height calculation */
 }
 .splash * {
     margin: 0px;
