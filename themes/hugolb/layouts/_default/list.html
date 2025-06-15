@@ -1,6 +1,16 @@
 {{define "main"}}
 <!-- lists posts by section/taxonomy -->
 <div class="content">
+    {{ if .Params.gdrive_folder_id}}
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script src="/js/gdrive.js"></script>
+        <script>
+        // Wait for the gapi script to load before calling our function.
+        window.onload = function() {
+            populateFromGoogleDrive('content', 'summary {{.Section}}', '{{.Params.gdrive_folder_id}}');
+        };
+        </script>
+    {{ end }}
 
     <h1 class="page-title">
         <!-- If list is of a taxonomy e.g. /categories or /tags, 
@@ -33,7 +43,7 @@
     <!-- break down posts into pages -->
     <!-- each section list only shows pages in that section directory or
     with an explicit "type=SECION" in front matter -->
-    {{ $paginator := .Paginate (.RegularPagesRecursive) }}
+    {{ $paginator := .Paginate (.RegularPages) }}
     {{ range $paginator.Pages }}
         {{.Render "summary"}}
     {{ end }}

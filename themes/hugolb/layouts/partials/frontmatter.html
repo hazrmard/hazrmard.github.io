@@ -4,7 +4,7 @@
     {{if eq .Type "project"}}
         <em>{{dateFormat "Jan 2006" .Date}}</em>
     {{else}}
-        <em>{{dateFormat "Monday, Jan 2, 2006" .Date}}</em>
+        <em>{{dateFormat "Jan 2, 2006" .Date}}</em>
     {{end}}
     <!-- breadcrumb navigation -->
     {{ .Scratch.Set "sections" (slice .)}}
