@@ -70,25 +70,29 @@ async function initializeGapiClient(parentElement, itemClassName, folderId) {
  */
 async function listFiles(parentElement, itemClassName, folderId) {
   try {
-    const response = await gapi.client.drive.files.list({
-      // The query to find files within the specified folder.
-      // 'trashed = false' ensures we don't list deleted files.
-      q: `'${folderId}' in parents and trashed = false`,
-      // The fields parameter specifies which file metadata to retrieve.
-      // This is efficient as it only fetches the data we need.
-      fields: 'files(id, name, webViewLink, iconLink, modifiedTime, createdTime, description, mimeType)',
-      // How many results to return per page.
-      pageSize: 50,
-      // Order by modification time, newest first.
-      orderBy: 'modifiedTime desc',
+    // Get all files recursively from the folder and its subfolders
+    const allFiles = await getAllFilesRecursively(folderId);
+    
+    // Filter for only Google Docs, Markdown, and PDFs
+    const filteredFiles = allFiles.filter(file => {
+      const mimeType = file.mimeType;
+      const fileName = file.name.toLowerCase();
+      
+      return (
+        // Google Docs
+        mimeType === 'application/vnd.google-apps.document' ||
+        // PDFs
+        mimeType === 'application/pdf' ||
+        // Markdown files
+        fileName.endsWith('.md') || fileName.endsWith('.markdown')
+      );
     });
 
-    const files = response.result.files;
-    // Clear the loading message
-    // parentElement.innerHTML = '';
+    // Sort by modification time, newest first
+    filteredFiles.sort((a, b) => new Date(b.modifiedTime) - new Date(a.modifiedTime));
 
-    if (files && files.length > 0) {
-      files.forEach(file => {
+    if (filteredFiles && filteredFiles.length > 0) {
+      filteredFiles.forEach(file => {
         // Create the main container div for the file
         const newItem = document.createElement('div');
         newItem.className = itemClassName; // Use the provided class name
@@ -136,5 +140,41 @@ async function listFiles(parentElement, itemClassName, folderId) {
     console.error('Error fetching files from Google Drive:', error);
     const errorMessage = error.result?.error?.message || 'Check browser console for details.';
     // parentElement.innerHTML = `<p style="color: red;">Error fetching files: ${errorMessage}</p><p>Please ensure the folder is public ("Anyone with the link") and the Folder ID is correct.</p>`;
+  }
+}
+
+/**
+ * Recursively fetches all files from a Google Drive folder and its subfolders.
+ * @param {string} folderId The ID of the folder to search.
+ * @param {Array} allFiles Accumulator array for all files found.
+ * @returns {Promise<Array>} Promise that resolves to an array of all files.
+ */
+async function getAllFilesRecursively(folderId, allFiles = []) {
+  try {
+    const response = await gapi.client.drive.files.list({
+      // Get all items in the current folder
+      q: `'${folderId}' in parents and trashed = false`,
+      fields: 'files(id, name, webViewLink, iconLink, modifiedTime, createdTime, description, mimeType)',
+      pageSize: 1000, // Increase page size for efficiency
+    });
+
+    const items = response.result.files;
+    
+    if (items && items.length > 0) {
+      for (const item of items) {
+        if (item.mimeType === 'application/vnd.google-apps.folder') {
+          // If it's a folder, recursively get its contents
+          await getAllFilesRecursively(item.id, allFiles);
+        } else {
+          // If it's a file, add it to our collection
+          allFiles.push(item);
+        }
+      }
+    }
+    
+    return allFiles;
+  } catch (error) {
+    console.error('Error fetching files recursively:', error);
+    throw error;
   }
 }
