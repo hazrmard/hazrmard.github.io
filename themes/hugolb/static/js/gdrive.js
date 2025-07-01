@@ -125,13 +125,13 @@ async function listFiles(parentElement, itemClassName, folderId) {
               <h3>${file.name} 🡵</h3>
             </a>
             <div class="front-matter">
-                ${modifiedDate}
+                <em class="front-matter-date">${modifiedDate}</em>
             </div>
           </div>
         `;
 
-        // Append the newly created element to the parent container
-        parentElement.appendChild(newItem);
+        // Insert the item in chronological order based on date
+        insertInChronologicalOrder(parentElement, newItem, new Date(file.modifiedTime));
       });
     } else {
       // parentElement.innerHTML = '<p>No files found in the specified folder.</p>';
@@ -176,5 +176,45 @@ async function getAllFilesRecursively(folderId, allFiles = []) {
   } catch (error) {
     console.error('Error fetching files recursively:', error);
     throw error;
+  }
+}
+
+/**
+ * Inserts a new item into the parent element in reverse chronological order
+ * based on the date compared to existing items with front-matter-date elements.
+ * @param {HTMLElement} parentElement The container element.
+ * @param {HTMLElement} newItem The new item to insert.
+ * @param {Date} newItemDate The date of the new item.
+ */
+function insertInChronologicalOrder(parentElement, newItem, newItemDate) {
+  const existingItems = Array.from(parentElement.children);
+  
+  // Find the correct position to insert the new item
+  let insertPosition = -1;
+  
+  for (let i = 0; i < existingItems.length; i++) {
+    const existingItem = existingItems[i];
+    const frontMatterDate = existingItem.querySelector('.front-matter-date');
+    
+    if (frontMatterDate) {
+      // Parse the existing date string back to a Date object
+      const existingDateString = frontMatterDate.textContent.trim();
+      const existingDate = new Date(existingDateString);
+      
+      // If the new item is newer than the existing item, insert before it
+      if (newItemDate > existingDate) {
+        insertPosition = i;
+        break;
+      }
+    }
+  }
+  
+  // Insert the new item at the correct position
+  if (insertPosition === -1) {
+    // New item is oldest, append to the end
+    parentElement.appendChild(newItem);
+  } else {
+    // Insert before the item at insertPosition
+    parentElement.insertBefore(newItem, existingItems[insertPosition]);
   }
 }
