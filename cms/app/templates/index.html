@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hugo CMS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; font-family: sans-serif; background-color: #f0f0f0; }
+        #container { display: flex; height: 100vh; }
+        #file-explorer { width: 25%; overflow-y: auto; background: #fff; border-right: 1px solid #ccc; padding: 10px; position: relative; }
+        #editor-container { width: 40%; display: flex; flex-direction: column; }
+        #preview-panel { width: 35%; }
+        #hugo-preview { width: 100%; height: 100%; border: none; }
+        .CodeMirror { border: 1px solid #eee; height: calc(100% - 80px); }
+        #controls { padding: 10px; background: #f7f7f7; border-bottom: 1px solid #ccc; }
+        #output-console { background: #333; color: #fff; padding: 10px; height: 150px; overflow-y: auto; font-family: monospace; white-space: pre-wrap; }
+
+        /* File Tree Styles */
+        .file-tree ul { list-style-type: none; padding-left: 20px; }
+        .file-tree li { padding: 4px 0; }
+        .tree-node { cursor: pointer; user-select: none; padding: 2px 4px; border-radius: 3px; }
+        .tree-node:hover { background-color: #eee; }
+        .tree-folder > .tree-node::before { content: '▶ '; font-size: 0.8em; }
+        .tree-folder.expanded > .tree-node::before { content: '▼ '; }
+        .tree-file::before { content: '●'; margin-right: 8px; font-size: 0.7em; color: #888; }
+        .tree-folder > ul { display: none; }
+        .tree-folder.expanded > ul { display: block; }
+
+        /* Context Menu Styles */
+        #context-menu { position: absolute; background: #fff; border: 1px solid #ccc; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); padding: 5px 0; display: none; z-index: 1000; }
+        #context-menu ul { list-style: none; padding: 0; margin: 0; }
+        #context-menu li { padding: 8px 15px; cursor: pointer; }
+        #context-menu li:hover { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <div id="file-explorer" class="file-tree">
+        <h3>Files</h3>
+        <div id="file-list-container"></div>
+    </div>
+
+    <div id="editor-container">
+        <div id="controls">
+            <button id="save-btn">Save</button>
+            <button onclick="runCommand('status')">Status</button>
+            <button onclick="runCommand('add')">Add All</button>
+            <button onclick="runCommand('commit')">Commit</button>
+            <button onclick="runCommand('push')">Push</button>
+            <button onclick="runCommand('build')">Build</button>
+            <label style="margin-left: 15px;"><input type="checkbox" id="soft-wrap-toggle"> Soft Wrap</label>
+        </div>
+        <textarea id="editor"></textarea>
+        <div id="output-console"></div>
+    </div>
+
+    <div id="preview-panel">
+        <iframe id="hugo-preview" src="http://localhost:1313"></iframe>
+    </div>
+</div>
+
+<!-- Context Menu -->
+<div id="context-menu">
+    <ul>
+        <li id="ctx-new-file">New File</li>
+        <li id="ctx-upload-file">Upload File</li>
+        <li id="ctx-rename">Rename</li>
+        <li id="ctx-delete">Delete</li>
+    </ul>
+</div>
+<input type="file" id="file-upload-input" style="display: none;" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/markdown/markdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+<script>
+    let currentFilePath = null;
+    let contextPath = null;
+    const editor = CodeMirror.fromTextArea(document.getElementById('editor'), { lineNumbers: true, mode: 'markdown' });
+    const fileListContainer = document.getElementById('file-list-container');
+    const outputConsole = document.getElementById('output-console');
+    const contextMenu = document.getElementById('context-menu');
+    const fileUploadInput = document.getElementById('file-upload-input');
+
+    // --- API Communication ---
+    async function apiCall(endpoint, formData) {
+        const response = await fetch(endpoint, { method: 'POST', body: formData });
+        const result = await response.json();
+        outputConsole.textContent = result.message || result.detail;
+        if (response.ok) {
+            fetchFiles();
+        }
+    }
+
+    // --- File Tree --- 
+    function buildFileTree(paths) {
+        const tree = {};
+        paths.forEach(path => {
+            let currentLevel = tree;
+            const parts = path.split('/');
+            parts.forEach((part, i) => {
+                const isLast = i === parts.length - 1;
+                if (isLast) {
+                    currentLevel[part] = { type: 'file', path: path };
+                } else {
+                    if (!currentLevel[part]) {
+                        currentLevel[part] = { type: 'folder', children: {}, path: parts.slice(0, i + 1).join('/') };
+                    }
+                    currentLevel = currentLevel[part].children;
+                }
+            });
+        });
+        return tree;
+    }
+
+    function renderTree(node, container) {
+        const ul = document.createElement('ul');
+        const sortedKeys = Object.keys(node).sort((a, b) => {
+            const nodeA = node[a];
+            const nodeB = node[b];
+            if (nodeA.type === nodeB.type) return a.localeCompare(b);
+            return nodeA.type === 'folder' ? -1 : 1;
+        });
+
+        for (const key of sortedKeys) {
+            const item = node[key];
+            const li = document.createElement('li');
+            const nodeDiv = document.createElement('div');
+            nodeDiv.className = 'tree-node';
+            nodeDiv.textContent = key;
+            li.appendChild(nodeDiv);
+
+            li.addEventListener('contextmenu', (e) => showContextMenu(e, item.path, item.type));
+
+            if (item.type === 'folder') {
+                li.className = 'tree-folder';
+                nodeDiv.onclick = () => li.classList.toggle('expanded');
+                renderTree(item.children, li);
+            } else {
+                li.className = 'tree-file';
+                nodeDiv.onclick = () => loadFile(item.path);
+            }
+            ul.appendChild(li);
+        }
+        container.appendChild(ul);
+    }
+
+    async function fetchFiles() {
+        const response = await fetch('/api/files');
+        const files = await response.json();
+        const fileTree = buildFileTree(files);
+        fileListContainer.innerHTML = '';
+        renderTree(fileTree, fileListContainer);
+    }
+
+    // --- File Operations ---
+    async function loadFile(path) {
+        currentFilePath = path;
+        const response = await fetch(`/api/files/content?path=${encodeURIComponent(path)}`);
+        const content = await response.text();
+        editor.setValue(content);
+        const mode = path.endsWith('.md') ? 'markdown' : 'htmlmixed';
+        editor.setOption('mode', mode);
+        outputConsole.textContent = `Loaded ${path}`;
+    }
+
+    document.getElementById('save-btn').onclick = async () => {
+        if (!currentFilePath) return;
+        const formData = new FormData();
+        formData.append('path', currentFilePath);
+        formData.append('content', editor.getValue());
+        apiCall('/api/files/content', formData);
+    };
+
+    // --- Context Menu Handlers ---
+    document.getElementById('ctx-new-file').onclick = () => {
+        const fileName = prompt('Enter new file name:', 'new-file.md');
+        if (!fileName) return;
+        const newPath = contextPath + '/' + fileName;
+        const formData = new FormData();
+        formData.append('path', newPath);
+        apiCall('/api/files/create', formData);
+    };
+
+    document.getElementById('ctx-upload-file').onclick = () => {
+        fileUploadInput.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('path', contextPath);
+            formData.append('file', file);
+            apiCall('/api/files/upload', formData);
+            fileUploadInput.value = ''; // Reset for next upload
+        };
+        fileUploadInput.click();
+    };
+
+    document.getElementById('ctx-rename').onclick = () => {
+        const newName = prompt('Enter new name:', contextPath.split('/').pop());
+        if (!newName) return;
+        const newPath = contextPath.substring(0, contextPath.lastIndexOf('/')) + '/' + newName;
+        const formData = new FormData();
+        formData.append('old_path', contextPath);
+        formData.append('new_path', newPath);
+        apiCall('/api/files/rename', formData);
+    };
+
+    document.getElementById('ctx-delete').onclick = () => {
+        if (!confirm(`Are you sure you want to delete '${contextPath}'?`)) return;
+        const formData = new FormData();
+        formData.append('path', contextPath);
+        apiCall('/api/files/delete', formData);
+    };
+
+    // --- UI ---
+    function showContextMenu(event, path, type) {
+        event.preventDefault();
+        event.stopPropagation();
+        contextPath = path;
+        contextMenu.style.top = `${event.clientY}px`;
+        contextMenu.style.left = `${event.clientX}px`;
+        contextMenu.style.display = 'block';
+
+        // Adjust menu items based on type
+        document.getElementById('ctx-new-file').style.display = type === 'folder' ? 'block' : 'none';
+        document.getElementById('ctx-upload-file').style.display = type === 'folder' ? 'block' : 'none';
+        document.getElementById('ctx-rename').style.display = type === 'file' ? 'block' : 'none';
+        document.getElementById('ctx-delete').style.display = type === 'file' ? 'block' : 'none';
+    }
+
+    window.onclick = () => contextMenu.style.display = 'none'; // Hide on click outside
+    fileListContainer.addEventListener('contextmenu', (e) => showContextMenu(e, '', 'folder')); // Right-click on empty space
+
+    document.getElementById('soft-wrap-toggle').addEventListener('change', (e) => {
+        editor.setOption('lineWrapping', e.target.checked);
+    });
+
+    // --- Shell Commands ---
+    async function runCommand(command) {
+        outputConsole.textContent = `Running '${command}'...`;
+        const formData = new FormData();
+        formData.append('command', command);
+        const response = await fetch('/api/commands/run', { method: 'POST', body: formData });
+        const result = await response.json();
+        let output = `> ${command}\n`;
+        if(result.stdout) output += `STDOUT:\n${result.stdout}\n`;
+        if(result.stderr) output += `STDERR:\n${result.stderr}\n`;
+        output += `Exited with code ${result.returncode}`;
+        outputConsole.textContent = output;
+        if (command === 'build') document.getElementById('hugo-preview').src += '';
+    }
+
+    fetchFiles();
+</script>
+
+</body>
+</html>

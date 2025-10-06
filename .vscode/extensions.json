@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "budparr.language-hugo-vscode",
-        "eliostruyf.vscode-front-matter"
+        "eliostruyf.vscode-front-matter",
+        "google.gemini-cli-vscode-ide-companion"
     ]
 }

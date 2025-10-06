@@ -1,0 +1,16 @@
+[project]
+name = "hugo-cms"
+version = "0.1.0"
+description = "A simple CMS for managing a Hugo blog."
+authors = [{name = "Gemini", email = "no-reply@google.com"}]
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "jinja2",
+    "python-multipart",
+    "websockets",
+]
+requires-python = ">=3.8"
+
+[tool.uv]
+dev-dependencies = []
