@@ -84,5 +84,5 @@ ignoreFiles = [".+pptx$"]
         unsafe = true
 
 [services]
-  [services.disqus]
-    shortname = 'iahmed'
+#   [services.disqus]
+#     shortname = 'iahmed'
