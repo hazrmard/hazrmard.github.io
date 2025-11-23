@@ -1,12 +1,12 @@
 +++
 title = 'Index'
-date = '2025-11-23T13:25:23-08:00'
+date = '2024-04-28T11:54:15-05:00'
 description = ""
-link = ""
 tags = []
 categories = []
-includes = []       # any javascript files to include
+link = ""
 hasequations = false
+includes = []       # any javascript files to include
 tableofcontents = false
 draft = true
 +++

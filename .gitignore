@@ -1,6 +1,7 @@
 *.ini
 *~
 .ipynb_checkpoints/
+*egg-info/
 __pycache__/
 .hugo_build.lock
 public/
