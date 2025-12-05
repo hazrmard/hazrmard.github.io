@@ -11,6 +11,8 @@ tableofcontents = true
 draft = false
 +++
 
+🏗️Almost finished🏗️
+
 This article summarizes the physics governing flight of a drone. It also provides convenient python code for these calculations. This work was adapted from my publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
 
 The following topics are covered, in order:

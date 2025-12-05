@@ -9,7 +9,7 @@
 import sys
 import asyncio
 import litellm
-from fastmcp import FastMCP, Client
+from fastmcp import FastMCP, Client, Context
 
 mcp_server = FastMCP("Demo")
 
@@ -17,12 +17,22 @@ mcp_server = FastMCP("Demo")
 
 
 @mcp_server.tool()
-def factorial(number: int) -> int:
+def factorial(number: int, ctx: Context) -> int:
     number = int(number)
     fac = 1
     for _ in range(1, number + 1):
         fac *= _
     return fac
+
+
+@mcp_server.prompt()
+def prompt():
+    pass
+
+
+@mcp_server.resource("version")
+def version():
+    return "1.0.0"
 
 
 print("Imported!")

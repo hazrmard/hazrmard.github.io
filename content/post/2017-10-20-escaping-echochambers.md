@@ -7,7 +7,7 @@ tags = [
   "principal component analysis",
   "visualization"
 ]
-categories = [ "Machine learning" ]
+categories = [ "Machine Learning" ]
 series = [ ]
 isexternal = false
 hasequations = false
