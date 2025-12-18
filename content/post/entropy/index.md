@@ -28,7 +28,7 @@ We want a function, $H(n)$, which measures the uncertainty in a system in which 
 
 Let's say there are $n$ events that can happen, equally likely, and we observe them once. We use the measure $H(n)$ to denote the uncertainty in the system.
 
-Now, let's say add to the system and call it system2. There are $n$ possible events that can happen, and the system2 is composed if $k$ choices, $n_1. n_2, ..., n_k$. In this system2, a combined event is a collection of $k$ choices, each equally likely. Therefore there are $n^k$ possible sequences of events. The measure of uncertainty in this system2 is $H(n^k)$.
+Now, let's say add to the system and call it system2. There are $n$ possible events that can happen in the original system. System2 is composed of $k$ equal choices, $n_1 = n_2, ..., = n_k$ from that pool of events. In this system2, a aggregate event is a collection of $k$ choices, each equally likely. Therefore, there are $N=n^k$ possible aggregate events. The measure of uncertainty in this system2 is $H(n^k)$.
 
 System2 can be broken up into $k$ parts, each with an uncertainty of $H(n)$. Therefore, by (3):
 
@@ -42,20 +42,20 @@ $$
 k \log n = \log n^k
 $$
 
-Now, generalizing to the case where a successive choices do not have equal probabilities. For example, we can break down the guessing a card into (1) guessing the house , and (2) guessing the number. After making our choices, there are still $n$ events than can happen, but we are first choosing a bin/category, and then choosing from inside that category.
+Now, generalizing to the case where a successive choices do not have equal probabilities. When one choice has been made, the pool of available events is different. For example, we can break down the guessing a card into (1) guessing the house (one of $n_1 = 4$), and (2) guessing the number from that house (one of $n_2 = 13$). After making our choices, there are still $N$ events than can happen (in this example, $4\times 13=52$), but we are first choosing a bin/category, and then choosing from inside that category. Each choice has a different probability.
 
-So, if $N=n^k$ is the total number of events
+So, if $N$ is the total number of events in this system:
 
 $$
 \begin{align*}
-H(n) &= H(bins) + \sum_i p_i H(n_i) \\\\
--H(bins) &= \sum_i p_i H(n_i) - H(n) \\\\
+H(N) &= H(bins) + \sum_i p_i H(n_i) \\\\
+-H(bins) &= \sum_i p_i H(n_i) - H(N) \\\\
 &\text{The sum of probabilities is 1, so multiplying by it has no effect} \\\\
--H(bins) &= \sum_i p_i H(n_i) - \sum_i p_i H(n) \\\\
--H(bins) &= \sum_i p_i \left( H(n_i) - H(n) \right) \\\\
--H(bins) &= \sum_i p_i \left( \log n_i - \log n \right) \\\\
--H(bins) &= \sum_i p_i \left( \log (n_i / n) \right) \\\\
-&\text{$n_i/n$ is just the probability of $i^{th}$ choice} \\\\
+-H(bins) &= \sum_i p_i H(n_i) - \sum_i p_i H(N) \\\\
+-H(bins) &= \sum_i p_i \left( H(n_i) - H(N) \right) \\\\
+-H(bins) &= \sum_i p_i \left( \log n_i - \log N \right) \\\\
+-H(bins) &= \sum_i p_i \left( \log (n_i / N) \right) \\\\
+&\text{$n_i/N$ is just the probability of $i^{th}$ choice} \\\\
 H(bins) &= -\sum_i p_i \log p_i
 \end{align*}
 $$
@@ -82,27 +82,36 @@ Which is a bigger number. If there are more states to choose from, everything el
 
 ## A digression on logs
 
-The $\log$ function is interesting. Take $\log_2 8=3$. On face value, it represents the power the base will be raised to to equal the argument.
+Why is the $\log$ function a good fit, intuitively? The $\log$ function is interesting. Take $\log_2 8=3$. On face value, it represents the power the base will be raised to to equal the argument.
 
-On a deeper glance, it represents the minimum number of questions needed to isolate a number, from 1 to the argument. A base of 2 means, at each step a question is asked to rule out 1/2 of the remaining options.
+On a deeper glance, it represents the minimum number of choices needed to find an answer. For example, guessing a number. A base of 2 means, at each step a question is asked to rule out 1/2 of the remaining options.
 
 ```
-(> 4)
-  --Yes--(>6)
-    --Yes--(>7)
-      --Yes--[8]
-      --No---[7]
-    --No---(>5)
-      --Yes--[6]
-      --No---[5]
-  --No--(>2)
-    --Yes--(>3)
-      --Yes--[4]
-      --No---[3]
-    --No---(>1)
-      --Yes--[2]
-      --No---[1]
+graph TD
+    A{Is it > 4?}
+    
+    %% Right Branch (Yes)
+    A -- Yes --> B{Is it > 6?}
+    B -- Yes --> C{Is it > 7?}
+    C -- Yes --> D[Result: 8]
+    C -- No --> E[Result: 7]
+    
+    B -- No --> F{Is it > 5?}
+    F -- Yes --> G[Result: 6]
+    F -- No --> H[Result: 5]
+    
+    %% Left Branch (No)
+    A -- No --> I{Is it > 2?}
+    I -- Yes --> J{Is it > 3?}
+    J -- Yes --> K[Result: 4]
+    J -- No --> L[Result: 3]
+    
+    I -- No --> M{Is it > 1?}
+    M -- Yes --> N[Result: 2]
+    M -- No --> O[Result: 1]
 ```
+
+This makes sense for integer arguments. What about probabilities? Well, a probability is a ratio of an event to the total number of events, $n_i/N$. The log of a probability is the difference between the logs of events: $\log(n_i/N) = \log(n_i) - \log(N)$. This tells us: I need to make only $c$ choices to find an answer in $n_i$, but $C >= c_i$ choices to find an answer in $N$.
 
 ## Representing surprise
 
