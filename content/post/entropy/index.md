@@ -86,7 +86,7 @@ Why is the $\log$ function a good fit, intuitively? The $\log$ function is inter
 
 On a deeper glance, it represents the minimum number of choices needed to find an answer. For example, guessing a number. A base of 2 means, at each step a question is asked to rule out 1/2 of the remaining options.
 
-```
+```mermaid
 graph TD
     A{Is it > 4?}
     
@@ -114,6 +114,8 @@ graph TD
 This makes sense for integer arguments. What about probabilities? Well, a probability is a ratio of an event to the total number of events, $n_i/N$. The log of a probability is the difference between the logs of events: $\log(n_i/N) = \log(n_i) - \log(N)$. This tells us: I need to make only $c$ choices to find an answer in $n_i$, but $C >= c_i$ choices to find an answer in $N$.  The difference is the number of choices I am saved from making. Then, for all categories of events ($n_1, n_2, ..., n_k$), a weighed average of this difference is the expected savings in the choices I have to make.
 
 If an event is more likely to occur, fewer guesses are needed to find it. If the number of events that can occur is small, then fewer guesses are needed to find any event. If there are a lot of events, and they're all unlikely to occur, then a lot of guesses are needed to find all of them. If there are few events, and likely to occur, fewer guesses are needed to find them.
+
+
 
 ## Representing surprise
 
