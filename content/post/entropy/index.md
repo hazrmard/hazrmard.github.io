@@ -1,5 +1,5 @@
 +++
-title = "Surprise? A derivation of entropy"
+title = "Surprise! A derivation of entropy"
 date = "2025-12-04T22:07:36-08:00"
 description = "I explain entropy to myself"
 link = ""
@@ -7,7 +7,7 @@ tags = [ ]
 categories = [ ]
 includes = [ ]
 hasequations = true
-tableofcontents = false
+tableofcontents = true
 draft = false
 slug = "surprise-derivation-entropy"
 +++
@@ -42,7 +42,7 @@ $$
 k \log n = \log n^k
 $$
 
-Now, generalizing to the case where a successive choices do not have equal probabilities. When one choice has been made, the pool of available events is different. For example, we can break down the guessing a card into (1) guessing the suit (one of $n_1 = 4$), and (2) guessing the number from that suit (one of $n_2 = 13$). After making our choices, there are still $N$ events than can happen (in this example, $4\times 13=52$), but we are first choosing a category, and then choosing from inside that category. Each choice has a different pool of outcomes.
+Now, generalizing to the case where a successive choices do not have equal probabilities. When one choice has been made, the pool of available events is different. For example, we can break down the guessing a card into two categories of events: (1) guessing the suit (one of $n_1 = 4$), and (2) guessing the number from that suit (one of $n_2 = 13$). After making our choices, there are still $N$ events than can happen (in this example, $4\times 13=52$), but we are first choosing a category, and then choosing from inside that category. Each category of choice has a different pool of outcomes.
 
 So, if $N$ is the total number of events in this system:
 
@@ -60,7 +60,11 @@ H(\text{categories}) &= -\sum_i p_i \log p_i
 \end{align*}
 $$
 
-In many real-world cases, we care about the category of events - the bigger picture - than the actual events themselves. This *category* is called a macrostate. Why not care about microstates? In many cases, they are fungible states which have significance only in aggregate. For example, the average kinetic energy of particles (temperature) but not the actual velocity of a particle.
+In many real-world cases, we care about the category of events - the bigger picture - than the actual events themselves. This *category* is called a macrostate. Why not care about microstates? In many cases, they are fungible states which have significance only in aggregate. For example, the average kinetic energy of particles (temperature) but not the actual velocity of a particle. We get to pick what we want the macrostate to be.
+
+Also note that the total number of events, $N$, gets subsumed into the probability distribution.
+
+> Entropy does not depend on the number of events (microstates), but the probability of events' categories (macrostates).
 
 $$
 H(macrostates...) = -\sum_i p_i \log p_i
@@ -88,7 +92,7 @@ The last two are bigger numbers. If there are more states to choose from or the 
 
 ## A digression on logs
 
-Why is the $\log$ function a good fit, intuitively? The $\log$ function is interesting. Take $\log_2 8=3$. On face value, it represents the power the base will be raised to to equal the argument.
+Why is the $\log$ function a good fit, intuitively? Take $\log_2 8=3$. On face value, it represents the power the base will be raised to to equal the argument.
 
 On a deeper glance, it represents the minimum number of choices needed to describe an event. For example, guessing a number. A base of 2 means, at each step a choice is made, dividing the events into 2 sets. We can encode each choice with a bit (0, 1). In the following example, there are 8 events. At *least* $\log_2 (8) = 3$ choices, and therefore bits, are needed to represent all events.
 
@@ -117,13 +121,31 @@ graph TD
     M -- No --> O[Result: 1]
 ```
 
-This makes sense for integer arguments. What does it mean when we take a log of probabilities when calculating entropy? Well, a probability is a ratio of a category of events to the total number of events, $n_i/N$. The log of a probability is the difference between the logs of events. We take a negative log, as derived above: $-\log(n_i/N) = \log (N/n_i)= \log(N) - \log(n_i)$. This tells us: I need to make only $c_i$ choices to describe one amongst $n_i$ events, but $C >= c_i$ choices to describe one in $N$ events. The difference is the number of choices I am saved from making. Then, for all categories of events ($n_1, n_2, ..., n_k$), we take a weighed sum to say: I am saved $C - c_1$ choices $n_i/N$ of the time, and $C - c_k$ choices $n_k/N$ of the time and so on, for an everage of:
+This makes sense for integer arguments. What does it mean when we take a log of probabilities when calculating entropy? Well, a probability is a ratio of a category of events to the total number of events, $n_i/N$. The log of a probability is the difference between the logs of events. We take a negative log to measure entropy, as derived above: $-\log(n_i/N) = \log (N/n_i)= \log(N) - \log(n_i)$. This tells us: I need to make only $c_i$ choices to describe one amongst $n_i$ events, but $C >= c_i$ choices to describe one in $N$ events. The difference is the extra choices I have to make to describe $N$ events, compared to just $n_i$ events. Then, for all categories of events ($n_1, n_2, ..., n_k$), we take a weighed sum to say: It costs me $C - c_1$ extra choices $n_i/N$ of the time, and $C - c_k$ etra choices $n_k/N$ of the time and so on, for an everage of
 
 $$
 H() = - \sum_i^k p_i \log p_i
 $$
 
-choices saved for a certain probability distribution of events.
+extra choices for a certain probability distribution over $k$ categories of $N$ events.
+
+Let's revisit the original equation decomposing choices:
+
+$$
+\underbrace{H(N)}_{\text{bits to represent all choices}} =
+$$
+
+$$
+\underbrace{H(\text{categories})}_{\text{bits to represent categories}} +
+$$
+
+$$
+\sum_i \underbrace{p_i \cdot H(n_i)}_{\text{chance of category} \times \text{bits to represent events in category}}
+$$
+
+Here, $H(\text{categories})$ over all $p_1, p_2, ..., p_k$ is the extra bits we need to be able to describe all possible events, if the events inside categories have assigned bits already. It is the measure of *surprise* of this distribution.
+
+> Entropy is the additional bits needed to describe categories of events.
 
 Play around with the widgets below to get an understanding.
 
@@ -133,5 +155,77 @@ Play around with the widgets below to get an understanding.
 {{< read src="post/entropy/entropy.html" >}}
 
 ## Representing surprise
+
+There are several ways $H$ can be used to measure the degree of surprise in a system.
+
+### Information gain
+
+How valuable is a choice already answered when describing events? Is it better to know that a cast die is an even number, or that a drawn card is red/black?
+
+To measure this, we can compare the surprise - unexpectedness - in the system before and after a choice is made.
+
+$$
+I = H(\text{categories}) - H(\text{categories}|\text{choice})
+$$
+
+Given the die example. Let's say we know the number chosen will be even.
+
+$$
+\begin{align*}
+H([\text{composite}, \text{non-composite}]) &= H([4,6], [1,2,3,5]) = - (2/6 \cdot \log 2/6 + 4/6 \cdot \log 4/6)\\\\
+H([\text{composite}, \text{non-composite}] | \text{even?}) &= 0.5 \cdot H([4,6], [2]) + 0.5 \cdot (H[], [1,3,5]) = \\\\ &- 0.5 \cdot (2/3 \cdot \log 2/3 + 1/3 \cdot\log  1/3) - 0.5 \cdot (3/3 \cdot\log  3/3)
+\end{align*}
+$$
+
+```mermaid
+flowchart LR
+    %% Overall direction is Left-to-Right to place initial state on the left
+
+    %% Subgraph 1: Initial State
+    subgraph Initial ["Initial State (High Uncertainty)"]
+        %% Inside the subgraph, flow Top-to-Bottom for the tree structure
+        direction TB
+        A["Die Roll Population:<br>{1, 2, 3, 4, 5, 6}"]
+        
+        %% Showing the mixed targets within the initial population
+        A -- Contains --> B["Composite Target:<br>{4, 6}"]
+        A -- Contains --> C["Non-Composite Target:<br>{1, 2, 3, 5}"]
+    end
+
+    %% Subgraph 2: Split State after the test
+    subgraph Split ["State After Test (Information Gained)"]
+        direction TB
+        D["Die Roll Population"] --> TestNode{"TEST: Even or Odd?"}
+        
+        %% Style command to make the test node larger and bold
+        style TestNode font-size:24px, font-weight:bold, stroke-width:3px
+
+        %% Even Branch - Still mixed, but reduced uncertainty
+        TestNode -- "Result: Even" --> F["Even Subgroup:<br>{2, 4, 6}"]
+        F --> G["Composite:<br>{4, 6}"]
+        F --> H["Non-Composite:<br>{2}"]
+        
+        %% Odd Branch - Pure node, zero uncertainty
+        TestNode -- "Result: Odd" --> I["Odd Subgroup:<br>{1, 3, 5}"]
+        I -- Empty --> J["Composite:<br>(None)"]
+        I -- Pure Group --> K["Non-Composite:<br>{1, 3, 5}"]
+    end
+
+    %% An invisible link to force a gap between the side-by-side graphs if needed in some renderers
+    Initial ~~~ Split
+```
+
+The difference is ~$0.318$ bits of entropy saved when we know whether a number is even. So, it's good to know!
+
+Decision trees use information gain to find splitting on which attribute and which value yields the highest information gain. The more bits we can save with each choice, the fewer total choices we need to make to describe/predict a category.
+
+### Cross-entropy
+
+How many average choices would be needed to describe events, if they occurred differently? What if we had to describe a cast die, but where a six is rolled half the time?
+
+$$
+H(p, q) = - \sum_i^k p_i \log q_i
+$$
+
 
 🚧
