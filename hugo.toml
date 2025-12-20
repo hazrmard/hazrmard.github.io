@@ -5,8 +5,10 @@ theme = "hugolb"
 copyright = "Ibrahim Ahmed"
 
 # hugo build parameters
-paginate = 100
-paginatePath = "p"
+[pagination]
+    pagerSize = 100
+    paginatePath = "p"
+
 ignoreFiles = [".+pptx$"]
 # ====
 

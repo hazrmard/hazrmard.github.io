@@ -16,4 +16,12 @@
         {{ template "_internal/disqus.html" . }}
     </div>  */}}
 </article>
+{{/*  See layouts/_markup/mermaid.html  */}}
+{{ if .Store.Get "hasMermaid" }}
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+    console.info("Mermaid initialized");
+  </script>
+{{ end }}
 {{end}}

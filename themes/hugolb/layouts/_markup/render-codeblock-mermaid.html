@@ -1,0 +1,5 @@
+{{/*  See layouts/_default/single.html for usage  */}}
+<pre class="mermaid">
+  {{ .Inner | htmlEscape | safeHTML }}
+</pre>
+{{ .Page.Store.Set "hasMermaid" true }}
