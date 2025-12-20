@@ -66,15 +66,15 @@
             <label class="control-label">
                 Categories (k) <span id="k-val">50</span>
             </label>
-            <input type="range" id="k-slider" min="2" max="100" value="50">
+            <input type="range" id="k-slider" min="1" max="100" value="50">
 
-            <div class="control-label">Draw PDF Shape</div>
+            <div class="control-label">Draw a probability density over categories</div>
             <div class="canvas-container">
                 <canvas id="dist-canvas"></canvas>
             </div>
             
             <div class="stats-badge">
-                <div><strong>Entropy of custom distribution</strong></div>
+                <div><strong>Choices to describe categories /<br/> Entropy of custom distribution</strong></div>
                 <div style="font-size: 1.4rem; color: #9c27b0; margin: 5px 0;"><span id="current-h">0.00</span> <small style="font-size: 0.7rem; color: #6b7280;">bits</small></div>
             </div>
             
