@@ -5,9 +5,6 @@
             grid-template-columns: 1fr;
             gap: 20px;
         }
-        {{/*  @media (min-width: 900px) {
-            #hugo-entropy-widget .widget-grid { grid-template-columns: 350px 1fr; }
-        }  */}}
         #hugo-entropy-widget .widget-card {
             background: #ffffff;
             border: 1px solid #e5e7eb;
@@ -37,11 +34,6 @@
             height: 180px;
         }
         #hugo-entropy-widget canvas { width: 100%; height: 100%; touch-action: none; }
-        #hugo-entropy-widget .legend-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
         #hugo-entropy-widget .legend-item {
             display: inline-flex;
             align-items: center;
@@ -69,7 +61,7 @@
 
     <div class="widget-grid">
         <div class="widget-card">
-            <h3 style="margin: 0 0 10px 0; font-size: 1.1rem;">Distribution Designer</h3>
+            <h3 style="margin: 0 0 10px 0; font-size: 1.1rem;">Entropy for a distribution</h3>
             
             <label class="control-label">
                 Categories (k) <span id="k-val">50</span>
@@ -82,7 +74,7 @@
             </div>
             
             <div class="stats-badge">
-                <div><strong>Custom Entropy ($N=k$)</strong></div>
+                <div><strong>Entropy of custom distribution</strong></div>
                 <div style="font-size: 1.4rem; color: #9c27b0; margin: 5px 0;"><span id="current-h">0.00</span> <small style="font-size: 0.7rem; color: #6b7280;">bits</small></div>
             </div>
             
@@ -92,14 +84,7 @@
         <div class="widget-card">
             <div class="header">
                 <div>
-                    <h3 style="margin: 0;">Multi-Surface Analysis</h3>
-                    <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 0.85rem;">Comparing four distinct entropy profiles</p>
-                </div>
-                <div class="legend-grid">
-                    <div class="legend-item"><span class="dot" style="background: #1f77b4;"></span> Equal</div>
-                    <div class="legend-item"><span class="dot" style="background: #ff7f0e;"></span> Random</div>
-                    <div class="legend-item"><span class="dot" style="background: #d62728;"></span> Skewed</div>
-                    <div class="legend-item"><span class="dot" style="background: #9c27b0;"></span> Custom</div>
+                    <h3 style="margin: 0;">Entropy comparison</h3>
                 </div>
             </div>
             <div id="entropy-plot-container"></div>
@@ -119,7 +104,7 @@
         const plotContainer = document.getElementById('entropy-plot-container');
         
         let isDrawing = false;
-        let points = new Array(200).fill(0.3); 
+        let points = new Array(200).fill(0.3);
         
         const COLORS = {
             equal: '#1f77b4',
@@ -135,6 +120,7 @@
             drawDesigner();
         }
 
+        // Get mouse or touch position normalized to [0,1]
         function getMousePos(e) {
             const rect = canvas.getBoundingClientRect();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -145,29 +131,46 @@
             };
         }
 
+        // Update array of points if drawing.
         function handleMove(e) {
             if (!isDrawing) return;
             const pos = getMousePos(e);
+            // Get index of bin to update [0, points.length-1]
             const idx = Math.floor(pos.x * (points.length - 1));
             points[idx] = pos.y;
-            for(let i = 1; i < 5; i++) {
-                if(idx - i >= 0) points[idx-i] = (points[idx-i] + pos.y * (1 - i/5)) / (2 - i/5);
-                if(idx + i < points.length) points[idx+i] = (points[idx+i] + pos.y * (1 - i/5)) / (2 - i/5);
-            }
             drawDesigner();
             updatePlot();
         }
 
+        // Return a PDF over k discrete categories after binning N total points
         function getDiscretizedProbs(k) {
             let weights = [];
-            for (let i = 0; i < k; i++) {
-                const sampleIdx = Math.floor(((i + 0.5) / k) * (points.length - 1));
-                weights.push(Math.max(0.0001, points[sampleIdx]));
-            }
+            // for each category, accumulate points that fall in that bin
+            // with linear interpolation at edges
+            const binWidth = points.length / k;
+            const binCenters = d3.range(k).map(i => (i + 0.5) * binWidth);
+            binCenters.forEach((center, idx) => {
+                const leftIdx = Math.floor(center - binWidth / 2);
+                const rightIdx = Math.floor(center + binWidth / 2);
+                let sum = 0;
+                for (let i = leftIdx; i < rightIdx; i++) {
+                    if (i == leftIdx && i > 0) {
+                        const frac = 1 - ((center - binWidth / 2) - leftIdx);
+                        sum += points[i] * frac;
+                    } else if (i == rightIdx - 1 && i < points.length) {
+                        const frac = (center + binWidth / 2) - (rightIdx - 1);
+                        sum += points[i] * frac;
+                    } else if (i >= 0 && i < points.length) {
+                        sum += points[i];
+                    }
+                }
+                weights.push(sum);
+            });
             const sum = weights.reduce((a, b) => a + b, 0);
             return weights.map(w => w / sum);
         }
 
+        // Draw the distribution designer canvas based on points and number of catgories k
         function drawDesigner() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
@@ -211,8 +214,8 @@
             const res = 15; 
             const steps = d3.range(1, res + 1).map(d => d * (100/res));
 
-            const surfaces = ['equal', 'random', 'skewed', 'custom'].map(type => {
-                let z = [];
+            const lines = ['equal', 'random', 'skewed', 'custom'].map(type => {
+                let y = [];
                 steps.forEach(k => {
                     let row = [];
                     let kInt = Math.floor(k);
@@ -226,31 +229,25 @@
                         let s = r.reduce((a,b)=>a+b,0);
                         h = calculateEntropy(r.map(v=>v/s));
                     }
-                    
-                    steps.forEach(N => row.push(k > N ? null : h));
-                    z.push(row);
+                    y.push(h);
                 });
 
                 return {
-                    z: z, x: steps, y: steps,
-                    type: 'surface',
-                    showscale: false,
-                    opacity: type === 'custom' ? 0.9 : 0.3,
+                    y: y, x: steps,
+                    type: 'line',
                     name: type,
-                    colorscale: [[0, COLORS[type]], [1, COLORS[type]]],
-                    hoverinfo: 'z+name'
+                    line: { color: COLORS[type] },
+                    hoverinfo: 'y+name'
                 };
             });
 
-            Plotly.react(plotContainer, surfaces, {
-                scene: {
-                    xaxis: { title: 'N' }, yaxis: { title: 'k' }, zaxis: { title: 'H', range: [0, 7] },
-                    camera: { eye: { x: 1.8, y: 1.8, z: 1.2 } },
-                    aspectratio: { x: 1, y: 1, z: 0.7 }
-                },
-                margin: { l: 0, r: 0, b: 0, t: 0 },
-                showlegend: false,
-                paper_bgcolor: 'rgba(0,0,0,0)'
+            Plotly.newPlot(plotContainer, lines, {
+                    xaxis: { title: {text: 'Categories k'}, automargin: true },
+                    yaxis: { title: {text: 'Entropy H'}, automargin: true },
+                    aspectratio: { x: 1, y: 1 },
+                    margin: { l: -0.1, r: 0, b: -0.1, t: 0 },
+                    showlegend: true,
+                    paper_bgcolor: 'rgba(0,0,0,0)'
             }, {displayModeBar: false});
         }
 
