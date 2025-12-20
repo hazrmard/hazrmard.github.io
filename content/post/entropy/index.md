@@ -63,7 +63,7 @@ $$
 Here, *bins* refers to categories of events. In many real-world cases, we care about the category of events - the bigger picture - than the actual events themselves. This *bin* is called a macrostate. Why not care about microstates? In many cases, they are fungible states which have significant only in aggregate. For example, the average kinetic energy of particles (temperature) but not the actual velocity of a particle.
 
 $$
-H(macrostates...) &= -\sum_i p_i \log p_i
+H(macrostates...) = -\sum_i p_i \log p_i
 $$
 
 The distribution of macrostates and relation to entropy is intuitively understood. There are two outcomes of a coin toss, equally likely. Let's say the state we care about is win or lose. In this case, the there is a 1:1 correspondence between the micro- and macro-states. The entropy of this system is:
@@ -115,7 +115,7 @@ This makes sense for integer arguments. What about probabilities? Well, a probab
 
 If an event is more likely to occur, fewer guesses are needed to find it. If the number of events that can occur is small, then fewer guesses are needed to find any event. If there are a lot of events, and they're all unlikely to occur, then a lot of guesses are needed to find all of them. If there are few events, and likely to occur, fewer guesses are needed to find them.
 
-
+{{< read src="post/entropy/entropy.html" >}}
 
 ## Representing surprise
 
