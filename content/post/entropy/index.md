@@ -3,16 +3,14 @@ title = "Surprise! A derivation of entropy"
 date = "2025-12-04T22:07:36-08:00"
 description = "I explain entropy to myself"
 link = ""
-tags = [ ]
-categories = [ ]
+tags = ["machine learning"]
+categories = ["Machine Learning", "Computer Science"]
 includes = [ ]
 hasequations = true
 tableofcontents = true
 draft = false
 slug = "surprise-derivation-entropy"
 +++
-
-🚧Work in progress🚧
 
 In this post, I will derive entropy from first principles. This requires no more than a high school-level understanding of mathematics. This derivation is based on Shannon's original seminal paper, [*A mathematical theory of communication*](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf).
 
@@ -28,13 +26,15 @@ We want a function, $H(n)$, which measures the uncertainty in a system in which 
 
 Let's say there are $n$ events that can happen, equally likely, and we observe them once. We use the measure $H(n)$ to denote the uncertainty in the system.
 
-Now, let's say add to the system and call it system2. There are $n$ possible events that can happen in the original system. System2 is composed of $k$ choices with, $n_1 = n_2, ..., = n_k$ same possible number of outcomes from that pool of events. In this system2, an (aggregate) event is a collection of $k$ choices, each with same possibilities. Therefore, there are $N=n^k$ possible aggregate events. The measure of uncertainty in this system2 is $H(n^k)$.
+Now, let's add multiple choices to to this system and call it system2. There are $n$ possible events that can happen in the original system. System2 is composed of $k$ choices with, $n_1 = n_2, ..., = n_k$ same possible number of outcomes from that pool of events. In this system2, an (aggregate) event is a collection of $k$ choices, each with same possibilities. Therefore, there are $N=n^k$ possible aggregate events. The measure of uncertainty in this system2 is $H(n^k)$.
 
 System2 can be broken up into $k$ choices, each with an uncertainty of $H(n)$. Therefore, by (3):
 
 $$
 H(n^k) = H(n_1) + H(n_2) + ... = k H(n)
 $$
+
+{{< figure src="entropy-choices.png" caption="A system of $n$ events. We can find the event by making a single choice, or breaking down the system into multiple choices. On the other hand, a system can be made more complex by staking up other independent systems. Whether we look at the aggregate event picked from the system, or each sequential choice - the total uncertainty in the outcome should be the same." >}}
 
 One function which satisfies this relationship is $\log$. This satisfies (1) i.e. continuity.
 
@@ -145,7 +145,7 @@ $$
 
 Here, $H(\text{categories})$ over all $p_1, p_2, ..., p_k$ is the extra bits we need to be able to describe all possible events, if the events inside categories have assigned bits already. It is the measure of *surprise* of this distribution.
 
-> Entropy is the additional bits needed to describe categories of events.
+> Entropy is the minimum additional bits needed to describe categories of events.
 
 Play around with the widgets below to get an understanding.
 
@@ -217,15 +217,34 @@ flowchart LR
 
 The difference is ~$0.318$ bits of entropy saved when we know whether a number is even. So, it's good to know!
 
-Decision trees use information gain to find splitting on which attribute and which value yields the highest information gain. The more bits we can save with each choice, the fewer total choices we need to make to describe/predict a category.
+Decision trees use [information gain](https://en.wikipedia.org/wiki/Information_gain_(decision_tree)) to find splitting on which attribute and which value yields the highest information gain. The more bits we can save with each choice, the fewer total choices we need to make to describe/predict a category.
 
 ### Cross-entropy
 
-How many average choices would be needed to describe events, if they occurred differently? What if we had to describe a cast die, but where a six is rolled half the time?
+Entropy is the minimum number of bits (choices) needed to describe events following a distribution. What if the choices are optimized for another distribution (let's call it the encoding distribution)? In that case, how efficiently will be the actual distribution be represented?
+
+[Cross entropy asks:](https://en.wikipedia.org/wiki/Cross-entropy) how many bits on average will be needed to describe a distribution $p$, given a coding scheme optimized for another distribution, $q$?
 
 $$
 H(p, q) = - \sum_i^k p_i \log q_i
 $$
 
+For example, assume a biased coin flip. The distribution of outcomes, $q$ covers just 2 events, heads & tails with a 90-10 probability. Now consider that we actually have an unbiased coin, which shows heads and tails evenly:
 
-🚧
+$$
+H(\text{unbiased coin sampling}, \text{biased coin distribution}) = - (0.5 \log 0.9 + 0.5 \log 0.1))
+$$
+
+The entropy of the unbiased coin is 1 bits (we need 1 bit to describe heads and tails which are equally likely). The entropy of the biased coin is 0.47 bits (we do not need any bits to describe a certain outcome. In this case it is almost certain at 90%, therefore on average we need fewer than 1 bits). The cross entropy is 1.73 bits.
+
+Intuitively, since the encoding scheme is optimized to represent an all-but-certain outcome of events (90% heads), suddenly using it to represent a more diverse distribution is inefficient.
+
+On the flip side, let's say we assume an unbiased coin flip. And then try to represent a biased coin using the unbiased scheme. Intuitively, an unbiased coin flip will have the highest entropy. The outcomes are evenly spread out, and therefore we will need to describe every event an equal number of times, using up all the bits available. Therefore, the cross entropy - the average number of bits needed to represent a biased die - will be 1 bits.
+
+$$
+H(\text{biased coin sampling}, \text{unbiased coin distribution}) = - (0.9 \log 0.5 + 0.1 \log 0.5))
+$$
+
+Play around with the widget to understand the interaction between actual and encoding distributions. The cross entropy is smallest when distributions are similar. This is used in machine learning as a loss function when optimizing a function that predicts a probability distribution. The desired, encoding, distribution peaks at the currect value. Whereas, the predicted distribution may be random in the beginning.
+
+{{< read src="post/entropy/cross-entropy.html" >}}
