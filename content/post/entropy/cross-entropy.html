@@ -1,0 +1,397 @@
+<div id="hugo-cross-entropy-widget" style="margin: 2rem 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <style>
+        .cross-entropy-widget-shared .widget-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .cross-entropy-widget-shared .widget-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .cross-entropy-widget-shared .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 15px;
+        }
+        .cross-entropy-widget-shared .distribution-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .cross-entropy-widget-shared .canvas-container {
+            position: relative;
+            background: #f9fafb;
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            cursor: crosshair;
+            margin: 10px 0;
+            height: 150px;
+        }
+        .cross-entropy-widget-shared canvas { width: 100%; height: 100%; touch-action: none; }
+        .cross-entropy-widget-shared .control-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .cross-entropy-widget-shared input[type=range] { width: 100%; margin-bottom: 15px; }
+        .cross-entropy-widget-shared .stats-badge {
+            background: #f3f4f6;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 10px;
+        }
+        .cross-entropy-widget-shared .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .cross-entropy-widget-shared .stat-item {
+            background: #fafbfc;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+        .cross-entropy-widget-shared .stat-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        .cross-entropy-widget-shared .stat-value {
+            font-size: 1.2rem;
+            color: #1f77b4;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+        .cross-entropy-widget-shared .plot-container {
+            width: 100%;
+            height: 400px;
+        }
+        .cross-entropy-widget-shared .color-p { color: #1f77b4; }
+        .cross-entropy-widget-shared .color-q { color: #ff7f0e; }
+        #hugo-cross-entropy-widget { /* Legacy styles for backwards compatibility */ }
+    </style>
+
+    <div class="widget-grid cross-entropy-widget-shared">
+        <div class="widget-card">
+            <h3 style="margin: 0 0 15px 0; font-size: 1.1rem;">Cross-Entropy Between Distributions</h3>
+            
+            <div>
+                <label class="control-label">
+                    <span><strong>Number of Bins</strong></span>
+                    <span class="crossent-k-val">2</span>
+                </label>
+                <input type="range" class="crossent-k-slider" min="1" max="50" value="2">
+            </div>
+
+            <div class="distribution-pair">
+                <div>
+                    <label class="control-label">
+                        <span class="color-p"><strong>Distribution p (Actual)</strong></span>
+                    </label>
+                    <div class="control-label" style="border-bottom: none;">Categories</div>
+                    <div class="canvas-container">
+                        <canvas class="crossent-dist-canvas-p"></canvas>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="control-label">
+                        <span class="color-q"><strong>Distribution q (Encoding)</strong></span>
+                    </label>
+                    <div class="control-label" style="border-bottom: none;">Categories</div>
+                    <div class="canvas-container">
+                        <canvas class="crossent-dist-canvas-q"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e5e7eb;">
+                <div class="stat-row">
+                    <div class="stat-item">
+                        <div class="stat-label">Entropy H(p)</div>
+                        <div class="stat-value color-p"><span class="crossent-entropy-p">0.00</span> bits</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Entropy H(q)</div>
+                        <div class="stat-value color-q"><span class="crossent-entropy-q">0.00</span> bits</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Cross-Entropy H(p, q) - avg bits using q to encode p</div>
+                    <div class="stat-value" style="color: #9c27b0; font-size: 1.4rem;"><span class="crossent-cross-entropy">0.00</span> bits</div>
+                </div>
+            </div>
+
+            <button class="crossent-clear-btn" style="width: 100%; margin-top: 15px; padding: 10px; cursor: pointer; border: 1px solid #d1d5db; border-radius: 6px; background: white; font-weight: 500;">Reset All</button>
+        </div>
+
+        <!--<div class="widget-card">
+            <div class="header">
+                <div>
+                    <h3 style="margin: 0;">Cross-Entropy Comparison</h3>
+                </div>
+            </div>
+            <div class="crossent-plot-container"></div>
+        </div>
+        -->
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    
+    <script>
+    // Ensure the shared utility functions are available
+    if (typeof window.EntropyWidgets === 'undefined') {
+        console.error('EntropyWidgets library not loaded. Make sure entropy.html is included first.');
+    }
+
+    EntropyWidgets.createCrossEntropyWidget = function(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const canvasP = container.querySelector('.crossent-dist-canvas-p');
+        const canvasQ = container.querySelector('.crossent-dist-canvas-q');
+        const ctxP = canvasP.getContext('2d');
+        const ctxQ = canvasQ.getContext('2d');
+        
+        const kSlider = container.querySelector('.crossent-k-slider');
+        const kVal = container.querySelector('.crossent-k-val');
+        
+        const entropyP = container.querySelector('.crossent-entropy-p');
+        const entropyQ = container.querySelector('.crossent-entropy-q');
+        const crossEntropy = container.querySelector('.crossent-cross-entropy');
+        
+        const plotContainer = container.querySelector('.crossent-plot-container');
+        const clearBtn = container.querySelector('.crossent-clear-btn');
+        
+        let isDrawingP = false;
+        let isDrawingQ = false;
+        let pointsP = new Array(200).fill(0.5);
+        let pointsQ = new Array(200).fill(0.5);
+        
+        const COLORS = {
+            p: '#1f77b4',
+            q: '#ff7f0e'
+        };
+
+        function resizeCanvases() {
+            const rectP = canvasP.parentElement.getBoundingClientRect();
+            canvasP.width = rectP.width;
+            canvasP.height = rectP.height;
+            
+            const rectQ = canvasQ.parentElement.getBoundingClientRect();
+            canvasQ.width = rectQ.width;
+            canvasQ.height = rectQ.height;
+            
+            drawDesigners();
+        }
+
+        function getMousePos(e, canvas) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: Math.max(0, Math.min(1, (clientX - rect.left) / rect.width)),
+                y: Math.max(0, Math.min(1, 1 - (clientY - rect.top) / rect.height))
+            };
+        }
+
+        function handleMoveP(e) {
+            if (!isDrawingP) return;
+            const pos = getMousePos(e, canvasP);
+            const idx = Math.floor(pos.x * (pointsP.length - 1));
+            pointsP[idx] = pos.y;
+            drawDesigners();
+            updateStats();
+        }
+
+        function handleMoveQ(e) {
+            if (!isDrawingQ) return;
+            const pos = getMousePos(e, canvasQ);
+            const idx = Math.floor(pos.x * (pointsQ.length - 1));
+            pointsQ[idx] = pos.y;
+            drawDesigners();
+            updateStats();
+        }
+
+        function drawDesigner(canvas, ctx, points, k, color) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const binWidth = canvas.width / k;
+            const probs = EntropyWidgets.getDiscretizedProbs(points, k);
+            const maxP = Math.max(...probs, 0.1);
+
+            ctx.fillStyle = color + '26'; // Add transparency
+            probs.forEach((p, i) => {
+                const h = (p / maxP) * (canvas.height * 0.8);
+                ctx.fillRect(i * binWidth, canvas.height, binWidth, -h);
+                ctx.strokeStyle = color + '66';
+                ctx.strokeRect(i * binWidth, canvas.height, binWidth, -h);
+            });
+
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2.5;
+            points.forEach((y, i) => {
+                const x = (i / (points.length - 1)) * canvas.width;
+                const canvasY = (1 - y) * canvas.height;
+                if (i === 0) ctx.moveTo(x, canvasY);
+                else ctx.lineTo(x, canvasY);
+            });
+            ctx.stroke();
+        }
+
+        function drawDesigners() {
+            const k = parseInt(kSlider.value);
+            drawDesigner(canvasP, ctxP, pointsP, k, COLORS.p);
+            drawDesigner(canvasQ, ctxQ, pointsQ, k, COLORS.q);
+        }
+
+        function updateStats() {
+            const k = parseInt(kSlider.value);
+            
+            kVal.textContent = k;
+            
+            const probsP = EntropyWidgets.getDiscretizedProbs(pointsP, k);
+            const probsQ = EntropyWidgets.getDiscretizedProbs(pointsQ, k);
+            
+            const hP = EntropyWidgets.calculateEntropy(probsP);
+            const hQ = EntropyWidgets.calculateEntropy(probsQ);
+            
+            // Cross-entropy: H(p, q) = -sum(p_i * log(q_i))
+            // Need to handle different k values
+            {{/*  const maxK = Math.max(k_p, k_q);  */}}
+            let crossH = 0;
+            for (let i = 0; i < Math.min(probsP.length, probsQ.length); i++) {
+                if (probsQ[i] > 0) {
+                    crossH -= probsP[i] * Math.log2(probsQ[i]);
+                } else if (probsP[i] > 0) {
+                    // If p_i > 0 but q_i = 0, cross-entropy is undefined/infinite
+                    crossH = Infinity;
+                    break;
+                }
+            }
+            
+            entropyP.textContent = hP.toFixed(2);
+            entropyQ.textContent = hQ.toFixed(2);
+            crossEntropy.textContent = isFinite(crossH) ? crossH.toFixed(2) : '∞';
+            
+            {{/*  updatePlot();  */}}
+        }
+
+        function updatePlot() {
+            const k = parseInt(kSlider.value);
+            const probsP = EntropyWidgets.getDiscretizedProbs(pointsP, k);
+            const probsQ = EntropyWidgets.getDiscretizedProbs(pointsQ, k);
+            
+            // Generate comparison showing H(p), H(q), H(p,q), and KL divergence
+            const res = 10;
+            const steps = d3.range(1, res + 1);
+
+            const lines = ['H(p)', 'H(q)', 'H(p,q)', 'KL Divergence'].map((type, idx) => {
+                let y = [];
+                steps.forEach(ratio => {
+                    let val;
+                    const scaleFactor = ratio / res;
+                    
+                    if (type === 'H(p)') {
+                        val = EntropyWidgets.calculateEntropy(probsP);
+                    } else if (type === 'H(q)') {
+                        val = EntropyWidgets.calculateEntropy(probsQ);
+                    } else if (type === 'H(p,q)') {
+                        // Interpolate cross-entropy as q approaches p
+                        let crossH = 0;
+                        for (let i = 0; i < Math.min(probsP.length, probsQ.length); i++) {
+                            const qMix = probsQ[i] * (1 - scaleFactor) + probsP[i] * scaleFactor;
+                            if (qMix > 1e-10) {
+                                crossH -= probsP[i] * Math.log2(qMix);
+                            }
+                        }
+                        val = crossH;
+                    } else if (type === 'KL Divergence') {
+                        // KL(p||q) = sum(p_i * log(p_i / q_i))
+                        let kl = 0;
+                        for (let i = 0; i < Math.min(probsP.length, probsQ.length); i++) {
+                            const qMix = probsQ[i] * (1 - scaleFactor) + probsP[i] * scaleFactor;
+                            if (probsP[i] > 1e-10 && qMix > 1e-10) {
+                                kl += probsP[i] * Math.log2(probsP[i] / qMix);
+                            }
+                        }
+                        val = kl;
+                    }
+                    y.push(val);
+                });
+
+                const colors = ['#1f77b4', '#ff7f0e', '#9c27b0', '#d62728'];
+                return {
+                    y: y, x: steps,
+                    type: 'bar',
+                    name: type,
+                    marker: { color: colors[idx] },
+                    hoverinfo: 'y+name'
+                };
+            });
+
+            Plotly.newPlot(plotContainer, lines, {
+                    xaxis: { title: {text: 'Similarity (q → p)'}, automargin: true },
+                    yaxis: { title: {text: 'Bits'}, automargin: true },
+                    barmode: 'group',
+                    margin: { l: -0.1, r: 0, b: -0.1, t: 0 },
+                    showlegend: true,
+                    paper_bgcolor: 'rgba(0,0,0,0)',
+                    plot_bgcolor: 'rgba(0,0,0,0)'
+            }, {displayModeBar: false});
+        }
+
+        // Event listeners for distribution P
+        canvasP.addEventListener('mousedown', () => isDrawingP = true);
+        canvasP.addEventListener('mousemove', handleMoveP);
+        canvasP.addEventListener('touchstart', (e) => { e.preventDefault(); isDrawingP = true; handleMoveP(e); });
+        canvasP.addEventListener('touchmove', (e) => { e.preventDefault(); handleMoveP(e); });
+        
+        // Event listeners for distribution Q
+        canvasQ.addEventListener('mousedown', () => isDrawingQ = true);
+        canvasQ.addEventListener('mousemove', handleMoveQ);
+        canvasQ.addEventListener('touchstart', (e) => { e.preventDefault(); isDrawingQ = true; handleMoveQ(e); });
+        canvasQ.addEventListener('touchmove', (e) => { e.preventDefault(); handleMoveQ(e); });
+        
+        // Global mouse/touch up
+        window.addEventListener('mouseup', () => { isDrawingP = false; isDrawingQ = false; });
+        window.addEventListener('touchend', () => { isDrawingP = false; isDrawingQ = false; });
+        
+        // Slider updates
+        kSlider.addEventListener('input', () => { drawDesigners(); updateStats(); });
+        
+        // Clear button
+        clearBtn.addEventListener('click', () => {
+            pointsP.fill(0.5);
+            pointsQ.fill(0.5);
+            kSlider.value = 2;
+            drawDesigners();
+            updateStats();
+        });
+
+        window.addEventListener('resize', () => { resizeCanvases(); Plotly.Plots.resize(plotContainer); });
+        setTimeout(() => { resizeCanvases(); updateStats(); }, 100);
+    };
+
+    // Initialize widget on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        EntropyWidgets.createCrossEntropyWidget('hugo-cross-entropy-widget');
+    });
+    </script>
+</div>

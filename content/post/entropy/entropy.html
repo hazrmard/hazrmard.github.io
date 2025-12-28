@@ -1,18 +1,18 @@
 <div id="hugo-entropy-widget" style="margin: 2rem 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
     <style>
-        #hugo-entropy-widget .widget-grid {
+        .entropy-widget-shared .widget-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
         }
-        #hugo-entropy-widget .widget-card {
+        .entropy-widget-shared .widget-card {
             background: #ffffff;
             border: 1px solid #e5e7eb;
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
-        #hugo-entropy-widget .header {
+        .entropy-widget-shared .header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -20,11 +20,11 @@
             border-bottom: 1px solid #e5e7eb;
             padding-bottom: 15px;
         }
-        #hugo-entropy-widget #entropy-plot-container {
+        .entropy-widget-shared .plot-container {
             width: 100%;
             height: 500px;
         }
-        #hugo-entropy-widget .canvas-container {
+        .entropy-widget-shared .canvas-container {
             position: relative;
             background: #f9fafb;
             border: 2px dashed #d1d5db;
@@ -33,23 +33,23 @@
             margin: 10px 0;
             height: 180px;
         }
-        #hugo-entropy-widget canvas { width: 100%; height: 100%; touch-action: none; }
-        #hugo-entropy-widget .legend-item {
+        .entropy-widget-shared canvas { width: 100%; height: 100%; touch-action: none; }
+        .entropy-widget-shared .legend-item {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             font-size: 0.75rem;
         }
-        #hugo-entropy-widget .dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; }
-        #hugo-entropy-widget .control-label {
+        .entropy-widget-shared .dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; }
+        .entropy-widget-shared .control-label {
             display: flex;
             justify-content: space-between;
             font-size: 0.85rem;
             margin-bottom: 5px;
             font-weight: 600;
         }
-        #hugo-entropy-widget input[type=range] { width: 100%; margin-bottom: 15px; }
-        #hugo-entropy-widget .stats-badge {
+        .entropy-widget-shared input[type=range] { width: 100%; margin-bottom: 15px; }
+        .entropy-widget-shared .stats-badge {
             background: #f3f4f6;
             padding: 12px;
             border-radius: 6px;
@@ -57,28 +57,33 @@
             text-align: center;
             border: 1px solid #e5e7eb;
         }
+        #hugo-entropy-widget { /* Legacy styles for backwards compatibility */ }
+        #hugo-entropy-widget .plot-container {
+            width: 100%;
+            height: 500px;
+        }
     </style>
 
-    <div class="widget-grid">
+    <div class="widget-grid entropy-widget-shared">
         <div class="widget-card">
             <h3 style="margin: 0 0 10px 0; font-size: 1.1rem;">Entropy for a distribution</h3>
             
             <label class="control-label">
-                Categories (k) <span id="k-val">50</span>
+                Categories (k) <span class="entropy-k-val">50</span>
             </label>
-            <input type="range" id="k-slider" min="1" max="100" value="2">
+            <input type="range" class="entropy-k-slider" min="1" max="100" value="2">
 
             <div class="control-label">Draw a probability density over categories</div>
             <div class="canvas-container">
-                <canvas id="dist-canvas"></canvas>
+                <canvas class="entropy-dist-canvas"></canvas>
             </div>
             
             <div class="stats-badge">
                 <div><strong>Choices to describe categories /<br/> Entropy of custom distribution</strong></div>
-                <div style="font-size: 1.4rem; color: #9c27b0; margin: 5px 0;"><span id="current-h">0.00</span> <small style="font-size: 0.7rem; color: #6b7280;">bits</small></div>
+                <div style="font-size: 1.4rem; color: #9c27b0; margin: 5px 0;"><span class="entropy-current-h">0.00</span> <small style="font-size: 0.7rem; color: #6b7280;">bits</small></div>
             </div>
             
-            <button id="clear-btn" style="width: 100%; margin-top: 15px; padding: 10px; cursor: pointer; border: 1px solid #d1d5db; border-radius: 6px; background: white; font-weight: 500;">Reset Drawing</button>
+            <button class="entropy-clear-btn" style="width: 100%; margin-top: 15px; padding: 10px; cursor: pointer; border: 1px solid #d1d5db; border-radius: 6px; background: white; font-weight: 500;">Reset Drawing</button>
         </div>
 
         <div class="widget-card">
@@ -87,7 +92,7 @@
                     <h3 style="margin: 0;">Entropy comparison</h3>
                 </div>
             </div>
-            <div id="entropy-plot-container"></div>
+            <div class="entropy-plot-container"></div>
         </div>
     </div>
 
@@ -95,13 +100,49 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     
     <script>
-    (function() {
-        const canvas = document.getElementById('dist-canvas');
+    // Shared utility functions for entropy widgets
+    window.EntropyWidgets = window.EntropyWidgets || {};
+
+    EntropyWidgets.calculateEntropy = function(probs) {
+        return -probs.reduce((acc, p) => p > 0 ? acc + (p * Math.log2(p)) : acc, 0);
+    };
+
+    EntropyWidgets.getDiscretizedProbs = function(points, k) {
+        let weights = [];
+        const binWidth = points.length / k;
+        const binCenters = d3.range(k).map(i => (i + 0.5) * binWidth);
+        binCenters.forEach((center) => {
+            const leftIdx = Math.floor(center - binWidth / 2);
+            const rightIdx = Math.floor(center + binWidth / 2);
+            let sum = 0;
+            for (let i = leftIdx; i < rightIdx; i++) {
+                if (i == leftIdx && i > 0) {
+                    const frac = 1 - ((center - binWidth / 2) - leftIdx);
+                    sum += points[i] * frac;
+                } else if (i == rightIdx - 1 && i < points.length) {
+                    const frac = (center + binWidth / 2) - (rightIdx - 1);
+                    sum += points[i] * frac;
+                } else if (i >= 0 && i < points.length) {
+                    sum += points[i];
+                }
+            }
+            weights.push(sum);
+        });
+        const sum = weights.reduce((a, b) => a + b, 0);
+        return weights.map(w => w / sum);
+    };
+
+    EntropyWidgets.createEntropyWidget = function(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const canvas = container.querySelector('.entropy-dist-canvas');
         const ctx = canvas.getContext('2d');
-        const kSlider = document.getElementById('k-slider');
-        const kValDisplay = document.getElementById('k-val');
-        const hDisplay = document.getElementById('current-h');
-        const plotContainer = document.getElementById('entropy-plot-container');
+        const kSlider = container.querySelector('.entropy-k-slider');
+        const kValDisplay = container.querySelector('.entropy-k-val');
+        const hDisplay = container.querySelector('.entropy-current-h');
+        const plotContainer = container.querySelector('.entropy-plot-container');
+        const clearBtn = container.querySelector('.entropy-clear-btn');
         
         let isDrawing = false;
         let points = new Array(200).fill(0.3);
@@ -120,7 +161,6 @@
             drawDesigner();
         }
 
-        // Get mouse or touch position normalized to [0,1]
         function getMousePos(e) {
             const rect = canvas.getBoundingClientRect();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -131,55 +171,23 @@
             };
         }
 
-        // Update array of points if drawing.
         function handleMove(e) {
             if (!isDrawing) return;
             const pos = getMousePos(e);
-            // Get index of bin to update [0, points.length-1]
             const idx = Math.floor(pos.x * (points.length - 1));
             points[idx] = pos.y;
             drawDesigner();
             updatePlot();
         }
 
-        // Return a PDF over k discrete categories after binning N total points
-        function getDiscretizedProbs(k) {
-            let weights = [];
-            // for each category, accumulate points that fall in that bin
-            // with linear interpolation at edges
-            const binWidth = points.length / k;
-            const binCenters = d3.range(k).map(i => (i + 0.5) * binWidth);
-            binCenters.forEach((center, idx) => {
-                const leftIdx = Math.floor(center - binWidth / 2);
-                const rightIdx = Math.floor(center + binWidth / 2);
-                let sum = 0;
-                for (let i = leftIdx; i < rightIdx; i++) {
-                    if (i == leftIdx && i > 0) {
-                        const frac = 1 - ((center - binWidth / 2) - leftIdx);
-                        sum += points[i] * frac;
-                    } else if (i == rightIdx - 1 && i < points.length) {
-                        const frac = (center + binWidth / 2) - (rightIdx - 1);
-                        sum += points[i] * frac;
-                    } else if (i >= 0 && i < points.length) {
-                        sum += points[i];
-                    }
-                }
-                weights.push(sum);
-            });
-            const sum = weights.reduce((a, b) => a + b, 0);
-            return weights.map(w => w / sum);
-        }
-
-        // Draw the distribution designer canvas based on points and number of catgories k
         function drawDesigner() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             const k = parseInt(kSlider.value);
             const binWidth = canvas.width / k;
-            const probs = getDiscretizedProbs(k);
+            const probs = EntropyWidgets.getDiscretizedProbs(points, k);
             const maxP = Math.max(...probs);
 
-            // Draw bins (the discretized version)
             ctx.fillStyle = 'rgba(156, 39, 176, 0.15)';
             probs.forEach((p, i) => {
                 const h = (p / maxP) * (canvas.height * 0.8);
@@ -188,7 +196,6 @@
                 ctx.strokeRect(i * binWidth, canvas.height, binWidth, -h);
             });
 
-            // Draw the continuous line
             ctx.beginPath();
             ctx.strokeStyle = COLORS.custom;
             ctx.lineWidth = 3;
@@ -201,14 +208,10 @@
             ctx.stroke();
         }
 
-        function calculateEntropy(probs) {
-            return -probs.reduce((acc, p) => p > 0 ? acc + (p * Math.log2(p)) : acc, 0);
-        }
-
         function updatePlot() {
             const kActive = parseInt(kSlider.value);
             kValDisplay.textContent = kActive;
-            const customH = calculateEntropy(getDiscretizedProbs(kActive));
+            const customH = EntropyWidgets.calculateEntropy(EntropyWidgets.getDiscretizedProbs(points, kActive));
             hDisplay.textContent = customH.toFixed(2);
 
             const res = 15; 
@@ -217,17 +220,15 @@
             const lines = ['equal', 'random', 'skewed', 'custom'].map(type => {
                 let y = [];
                 steps.forEach(k => {
-                    let row = [];
-                    let kInt = Math.floor(k);
                     let h;
                     
-                    if (type === 'equal') h = Math.log2(kInt);
-                    else if (type === 'skewed') h = 0; // p1=1, others=0
-                    else if (type === 'custom') h = calculateEntropy(getDiscretizedProbs(kInt));
+                    if (type === 'equal') h = Math.log2(Math.floor(k));
+                    else if (type === 'skewed') h = 0;
+                    else if (type === 'custom') h = EntropyWidgets.calculateEntropy(EntropyWidgets.getDiscretizedProbs(points, Math.floor(k)));
                     else if (type === 'random') {
-                        let r = Array.from({length: kInt}, () => Math.random());
+                        let r = Array.from({length: Math.floor(k)}, () => Math.random());
                         let s = r.reduce((a,b)=>a+b,0);
-                        h = calculateEntropy(r.map(v=>v/s));
+                        h = EntropyWidgets.calculateEntropy(r.map(v=>v/s));
                     }
                     y.push(h);
                 });
@@ -258,10 +259,15 @@
         canvas.addEventListener('touchmove', (e) => { e.preventDefault(); handleMove(e); });
         canvas.addEventListener('touchend', () => isDrawing = false);
         kSlider.addEventListener('input', () => { drawDesigner(); updatePlot(); });
-        document.getElementById('clear-btn').addEventListener('click', () => { points.fill(0.3); drawDesigner(); updatePlot(); });
+        clearBtn.addEventListener('click', () => { points.fill(0.3); drawDesigner(); updatePlot(); });
 
         window.addEventListener('resize', () => { resizeCanvas(); Plotly.Plots.resize(plotContainer); });
         setTimeout(() => { resizeCanvas(); updatePlot(); }, 100);
-    })();
+    };
+
+    // Initialize widget on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        EntropyWidgets.createEntropyWidget('hugo-entropy-widget');
+    });
     </script>
 </div>
