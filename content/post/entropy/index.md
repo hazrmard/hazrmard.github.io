@@ -22,11 +22,11 @@ We want a function, $H(n)$, which measures the uncertainty in a system in which 
 
 2. Monotonicity. If the amount of possible events that can happen in the system increases, so does the measure of uncertainty in our choice. The uncertainty in a roll of a coin ($1/2$) is smaller than the uncertainty in a  roll of a die ($1/6$) which is smaller than the uncertainty of drawing a card from a deck ($1/52$).
 
-3. Additivity. If choice from events can be broken up into multiple choices, then the uncertainties of the parts should add up to the uncertainty of the system. The uncertainty of choosing a card from the deck is the same as the uncertainty of choosing the suit ($1/4$) and then the number on the card ($1/13$).
+3. Additivity. If choice from events can be broken up into a sequnce of multiple choices, then the uncertainties of the constituent choices should add up to the uncertainty of the system. The uncertainty of choosing a card from the deck is the same as the uncertainty of choosing the suit ($1/4$) and then the number on the card ($1/13$).
 
 Let's say there are $n$ events that can happen, equally likely, and we observe them once. We use the measure $H(n)$ to denote the uncertainty in the system.
 
-Now, let's add multiple choices to to this system and call it system2. There are $n$ possible events that can happen in the original system. System2 is composed of $k$ choices with, $n_1 = n_2, ..., = n_k$ same possible number of outcomes from that pool of events. In this system2, an (aggregate) event is a collection of $k$ choices, each with same possibilities. Therefore, there are $N=n^k$ possible aggregate events. The measure of uncertainty in this system2 is $H(n^k)$.
+Now, let's add multiple choices to this system and call it system2. There are $n$ possible events that can happen in the original system. System2 is composed of $k$ choices with, $n_1 = n_2, ..., = n_k$ same number of outcomes from that pool of events. In this system2, an (aggregate) event is a collection of $k$ choices, each with the same possibilities. Therefore, there are $N=n^k$ possible aggregate events. The measure of uncertainty in this system2 is $H(n^k)$.
 
 System2 can be broken up into $k$ choices, each with an uncertainty of $H(n)$. Therefore, by (3):
 
@@ -34,7 +34,7 @@ $$
 H(n^k) = H(n_1) + H(n_2) + ... = k H(n)
 $$
 
-{{< figure src="entropy-choices.png" caption="A system of $n$ events. We can find the event by making a single choice, or breaking down the system into multiple choices. On the other hand, a system can be made more complex by staking up other independent systems. Whether we look at the aggregate event picked from the system, or each sequential choice - the total uncertainty in the outcome should be the same." >}}
+{{< figure src="entropy-choices.png" caption="A system of $n$ events. We can pick from all possibilities. One one hand we can break down events into categories, and choose over the category and then its contents. On the other hand, a system can be made more complex by stacking up other independent systems. Whether we look at the aggregate event picked from the system, or each sequential choice - the total uncertainty in the outcome should be the same." >}}
 
 One function which satisfies this relationship is $\log$. This satisfies (1) i.e. continuity.
 
