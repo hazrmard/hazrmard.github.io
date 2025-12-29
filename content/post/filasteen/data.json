@@ -1,0 +1,30 @@
+[
+    {
+        "datetime_start": "19170420T000000Z",
+        "datetime_end": null,
+        "header": "Balfour Declaration Issued",
+        "content": "The Balfour Declaration was a public statement issued by the British government in 1917, expressing support for the establishment of a national home for the Jewish people in Palestine.",
+        "images": [],
+        "taxonomies": {
+            "name": "country",
+            "value": "UK",
+            "icon": "🇬🇧",
+            "hidden": false
+        },
+        "bgRender": null
+    },
+    {
+        "datetime_start": "19360420T000000Z",
+        "datetime_end": "19390430T235959Z",
+        "header": "Arab Revolt",
+        "content": "The Arab Revolt against the British Mandate.",
+        "images": [],
+        "taxonomies": {
+            "name": "country",
+            "value": "Palestine",
+            "icon": "🇵🇸",
+            "hidden": false
+        },
+        "bgRender": null
+    }
+]

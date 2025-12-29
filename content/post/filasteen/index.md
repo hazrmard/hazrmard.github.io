@@ -1,5 +1,5 @@
 +++
-title = 'A modern history of Palestine'
+title = 'WIP'
 date = '2025-12-26T14:57:29-06:00'
 description = ""
 link = ""
@@ -10,3 +10,6 @@ hasequations = false
 tableofcontents = false
 draft = true
 +++
+
+
+{{< read src="post/filasteen/app.html" >}}
