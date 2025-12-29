@@ -1,4 +1,46 @@
 [
+     {
+        "datetime_start": "1878-01-02",
+        "datetime_end": null,
+        "header": "Palestine has ~500,000 inhabitants",
+        "content": "details/1878-context.details",
+        "images": [],
+        "taxonomies": [
+            {
+                "name": "polity/group",
+                "value": "Ottoman Empire",
+                "icon": "🕌",
+                "hidden": false
+            },
+            {
+                "name": "type",
+                "value": "demographics",
+                "icon": "👥",
+                "hidden": false
+            },
+            {
+                "name": "myth",
+                "value": "Palestine was an empty land"
+            }
+        ],
+        "bgRender": {"color": "#e3f2fd"}
+    },
+     {
+        "datetime_start": "1897-08-29",
+        "datetime_end": null,
+        "header": "Origins of Zionism as a modern political movement",
+        "content": "details/1897-zionist-congress.details",
+        "images": [],
+        "taxonomies": [
+            {
+                "name": "polity/group",
+                "value": "Zionism",
+                "icon": "[✡️]",
+                "hidden": false
+            }
+        ],
+        "bgRender": {"color": "#e3f2fd"}
+    },
     {
         "datetime_start": "1917-11-02",
         "datetime_end": null,
@@ -7,7 +49,7 @@
         "images": [],
         "taxonomies": [
             {
-                "name": "country",
+                "name": "polity/group",
                 "value": "UK",
                 "icon": "🇬🇧",
                 "hidden": false
@@ -29,7 +71,7 @@
         "images": [],
         "taxonomies": [
              {
-                "name": "country",
+                "name": "polity/group",
                 "value": "UK",
                 "icon": "🇬🇧",
                 "hidden": false
@@ -51,7 +93,7 @@
         "images": [],
         "taxonomies": [
             {
-                "name": "country",
+                "name": "polity/group",
                 "value": "Palestine",
                 "icon": "🇵🇸",
                 "hidden": false
@@ -95,7 +137,7 @@
         "images": [],
         "taxonomies": [
              {
-                "name": "country",
+                "name": "polity/group",
                 "value": "Israel",
                 "icon": "🇮🇱",
                 "hidden": false
