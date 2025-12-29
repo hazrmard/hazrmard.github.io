@@ -1,10 +1,10 @@
 # Design document - a contextual geopolitical timeline.
 
-This design document describes an interactive blog post which acts like a scrollable timeline.
+This design document describes an interactive blog post which acts like a scrollable timeline. This is a hugo blog post.
 
 ## Features
 
-1. A JSON object contains an array of objects that will be displayed.
+1. A JSON object (`data.json`) contains an array of objects that will be displayed.
 2. Each object contains the content, any display icons, taxonomies, and background rendering instructions.
 3. The background of the page will transition between the renders in the instructions as the page scrolls down. For example, a map display that zooms to different areas as the page scrolls. This is TBD.
 4. There is a widget to filter the elements in the array by taxonomies.
@@ -28,12 +28,12 @@ This design document describes an interactive blog post which acts like a scroll
         header: // short-form string
         content: // long-form string
         images: [] // relative links to images
-        taxonomies: {
+        taxonomies: {[
             name: // name of taxonomy (i.e. category, country)
             value: // value of taxonomy (i.e. event, USA)
             icon: // optional icon for that value (i.e. 📅)
             hidden: // whether to display this to the user
-        }
+        ]}
         bgRender: // TBD
     }
 ]

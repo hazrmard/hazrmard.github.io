@@ -1,30 +1,112 @@
 [
     {
-        "datetime_start": "19170420T000000Z",
+        "datetime_start": "1917-11-02",
         "datetime_end": null,
         "header": "Balfour Declaration Issued",
         "content": "The Balfour Declaration was a public statement issued by the British government in 1917, expressing support for the establishment of a national home for the Jewish people in Palestine.",
         "images": [],
-        "taxonomies": {
-            "name": "country",
-            "value": "UK",
-            "icon": "🇬🇧",
-            "hidden": false
-        },
-        "bgRender": null
+        "taxonomies": [
+            {
+                "name": "country",
+                "value": "UK",
+                "icon": "🇬🇧",
+                "hidden": false
+            },
+            {
+                "name": "type",
+                "value": "diplomacy",
+                "icon": "📜",
+                "hidden": false
+            }
+        ],
+        "bgRender": "#e3f2fd"
     },
     {
-        "datetime_start": "19360420T000000Z",
-        "datetime_end": "19390430T235959Z",
-        "header": "Arab Revolt",
-        "content": "The Arab Revolt against the British Mandate.",
+        "datetime_start": "1922-07-24",
+        "datetime_end": "1948-05-14",
+        "header": "Mandate for Palestine",
+        "content": "The League of Nations formally approved the British Mandate for Palestine.",
         "images": [],
-        "taxonomies": {
-            "name": "country",
-            "value": "Palestine",
-            "icon": "🇵🇸",
-            "hidden": false
-        },
-        "bgRender": null
+        "taxonomies": [
+             {
+                "name": "country",
+                "value": "UK",
+                "icon": "🇬🇧",
+                "hidden": false
+            },
+            {
+                "name": "organization",
+                "value": "League of Nations",
+                "icon": "🌐",
+                "hidden": false
+            }
+        ],
+        "bgRender": "#e3f2fd"
+    },
+    {
+        "datetime_start": "1936-04-20",
+        "datetime_end": "1939-04-30",
+        "header": "Arab Revolt",
+        "content": "The Arab Revolt against the British Mandate, demanding independence and the end of open-ended Jewish immigration and land purchases.",
+        "images": [],
+        "taxonomies": [
+            {
+                "name": "country",
+                "value": "Palestine",
+                "icon": "🇵🇸",
+                "hidden": false
+            },
+            {
+                "name": "type",
+                "value": "conflict",
+                "icon": "⚔️",
+                "hidden": false
+            }
+        ],
+        "bgRender": "#e8f5e9"
+    },
+    {
+        "datetime_start": "1947-11-29",
+        "datetime_end": null,
+        "header": "UN Partition Plan",
+        "content": "The United Nations General Assembly adopted Resolution 181 (II), which recommended the adoption and implementation of a Plan of Partition with Economic Union.",
+        "images": [],
+        "taxonomies": [
+             {
+                "name": "organization",
+                "value": "UN",
+                "icon": "🇺🇳",
+                "hidden": false
+            },
+            {
+                "name": "type",
+                "value": "diplomacy",
+                "icon": "📜",
+                "hidden": false
+            }
+        ],
+        "bgRender": "#fff3e0"
+    },
+    {
+        "datetime_start": "1948-05-14",
+        "datetime_end": null,
+        "header": "Declaration of Independence",
+        "content": "David Ben-Gurion proclaims the establishment of the State of Israel.",
+        "images": [],
+        "taxonomies": [
+             {
+                "name": "country",
+                "value": "Israel",
+                "icon": "🇮🇱",
+                "hidden": false
+            },
+            {
+                "name": "type",
+                "value": "politics",
+                "icon": "🏛️",
+                "hidden": false
+            }
+        ],
+        "bgRender": "#f3e5f5"
     }
 ]

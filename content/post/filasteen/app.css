@@ -1,0 +1,181 @@
+:root {
+  --timeline-color: #e0e0e0;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --meta-color: #666;
+  --accent-color: #007bff;
+  --spacing: 1rem;
+}
+
+.timeline-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--text-color);
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Controls */
+.timeline-controls {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  padding: var(--spacing);
+  border-bottom: 1px solid var(--timeline-color);
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timeline-search {
+  flex: 1;
+  min-width: 200px;
+}
+
+.timeline-search input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.timeline-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  padding: 0.25rem 0.75rem;
+  background: #f0f0f0;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  user-select: none;
+}
+
+.filter-chip.active {
+  background: var(--accent-color);
+  color: white;
+}
+
+/* Timeline */
+.timeline-container {
+  padding: var(--spacing);
+  position: relative;
+  /* Ensure lines don't overflow if we calculate wrong */
+  /* overflow: hidden; -> No, might clip shadows or tooltips */ 
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+  border-left: 2px solid var(--timeline-color);
+  transition: opacity 0.3s ease;
+  z-index: 2; /* Above duration lines */
+}
+
+.timeline-item.active {
+  border-left-color: var(--accent-color);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -0.6rem;
+  top: 0;
+  width: 1rem;
+  height: 1rem;
+  background: var(--card-bg);
+  border: 2px solid var(--timeline-color);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.timeline-item.active .timeline-dot {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+}
+
+.timeline-date {
+  font-size: 0.85rem;
+  color: var(--meta-color);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  cursor: pointer;
+}
+
+.timeline-header:hover {
+  color: var(--accent-color);
+}
+
+.timeline-content {
+  line-height: 1.6;
+}
+
+.timeline-content.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.timeline-meta {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.taxonomy-badge {
+  background: #f0f0f0;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Duration Lines */
+.duration-line {
+  position: absolute;
+  width: 8px; /* Thicker */
+  border-radius: 4px;
+  opacity: 0.7;
+  pointer-events: auto; /* Allow hover for tooltip */
+  z-index: 1; /* Behind items */
+  /* Left is set in JS */
+  /* BG color is set in JS */
+}
+
+.duration-line:hover {
+  opacity: 1;
+  z-index: 10;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Background Layer */
+.background-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-color: transparent; /* Changed dynamically */
+  transition: background-color 0.5s ease;
+}
+
+@media (max-width: 600px) {
+  .timeline-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

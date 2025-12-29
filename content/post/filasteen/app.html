@@ -1,3 +1,21 @@
-<div>
-    <script type="module" src="./app.js"></script>
+<link rel="stylesheet" href="./app.css">
+
+<div class="timeline-app">
+    <div id="background-layer" class="background-layer"></div>
+
+    <div class="timeline-controls">
+        <div class="timeline-search">
+            <input type="text" id="search-input" placeholder="Search events...">
+        </div>
+        <div id="taxonomy-filters" class="timeline-filters">
+            <!-- Filter chips injected here -->
+        </div>
+        <button id="toggle-all-btn">Expand All</button>
+    </div>
+
+    <div id="timeline-container" class="timeline-container">
+        <!-- Events injected here -->
+    </div>
 </div>
+
+<script type="module" src="./app.js"></script>
