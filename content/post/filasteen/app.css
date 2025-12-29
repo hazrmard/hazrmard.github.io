@@ -42,10 +42,43 @@
   border-radius: 4px;
 }
 
+.timeline-controls button {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.timeline-controls button:hover {
+  background: #f0f0f0;
+}
+
 .timeline-filters {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.filter-group-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #666;
+  font-weight: bold;
+}
+
+.filter-group-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .filter-chip {
@@ -122,11 +155,29 @@
   line-height: 1.6;
 }
 
-.timeline-content.collapsed {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.timeline-details {
+  margin-top: 0.5rem;
+}
+
+.timeline-summary-trigger {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  user-select: none;
+  list-style: none; /* Hide default triangle in some browsers */
+  outline: none;
+}
+
+.timeline-summary-trigger::-webkit-details-marker {
+  display: none; /* Hide default triangle in Chrome/Safari */
+}
+
+.timeline-details[open] .timeline-summary-trigger {
+  display: none;
+}
+
+.timeline-extra-content {
+  margin-top: 0;
 }
 
 .timeline-meta {
@@ -147,7 +198,7 @@
   position: absolute;
   width: 8px; /* Thicker */
   border-radius: 4px;
-  opacity: 0.7;
+  opacity: 0.9;
   pointer-events: auto; /* Allow hover for tooltip */
   z-index: 1; /* Behind items */
   /* Left is set in JS */
