@@ -172,9 +172,9 @@
   display: none; /* Hide default triangle in Chrome/Safari */
 }
 
-.timeline-details[open] .timeline-summary-trigger {
+/* .timeline-details[open] .timeline-summary-trigger {
   display: none;
-}
+} */
 
 .timeline-extra-content {
   margin-top: 0;

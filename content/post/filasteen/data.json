@@ -1,5 +1,16 @@
 [
-     {
+    {
+        "datetime_start": "1878-01-02",
+        "datetime_end": null,
+        "header": "",
+        "content": "null",
+        "images": [],
+        "taxonomies": [],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
         "datetime_start": "1878-01-02",
         "datetime_end": null,
         "header": "Palestine has ~500,000 inhabitants",
@@ -23,23 +34,174 @@
                 "value": "Palestine was an empty land"
             }
         ],
-        "bgRender": {"color": "#e3f2fd"}
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
     },
-     {
+    {
+        "datetime_start": "1881-01-02",
+        "datetime_end": null,
+        "header": "Russian pogroms in Europe. Zionist movement begins to form.",
+        "content": "",
+        "images": [],
+        "taxonomies": [],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
+        "datetime_start": "1882-01-02",
+        "datetime_end": null,
+        "header": "First wave of Jewish immigrants begin to settle (Aliyah) in Palestine.",
+        "content": "Foundation of Rishon Lezion, Zichron Yaacov, and Rosh Pina in Palestine.",
+        "images": [],
+        "taxonomies": [],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
+        "datetime_start": "1890-01-02",
+        "datetime_end": null,
+        "header": "'Zionism' is coined",
+        "content": "First used by Nathan Birnbaum in publications of Kadimah, a Jewish student association in Vienna.\n\nWhile instrumental in the Zionist Congresses, later in life (~1919), Birnbaum would convert to Orthodox Judaism and reject political Zionism in favor of Jewish cultural autonomy.",
+        "images": [],
+        "taxonomies": [
+            {
+                "name": "polity/group",
+                "value": "Jews",
+                "icon": "✡️",
+                "hidden": false
+            },
+            {
+                "name": "ideology",
+                "value": "Zionism",
+                "icon": "[⛺➕🏠➖]",
+                "hidden": false
+            }
+        ],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
+        "datetime_start": "1896-01-02",
+        "datetime_end": null,
+        "header": "Der Judenstaat published by Theodor Herzl",
+        "content": "Popularized the term 'Zionism'. Originally called 'Address to the Rothschilds', the pamphlet advocated for the establishment of a Jewish state as a solution to anti-Semitism in Europe.",
+        "images": [],
+        "taxonomies": [
+            {
+                "name": "polity/group",
+                "value": "Jews",
+                "icon": "✡️",
+                "hidden": false
+            },
+            {
+                "name": "ideology",
+                "value": "Zionism",
+                "icon": "[⛺➕🏠➖]",
+                "hidden": false
+            }
+        ],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
         "datetime_start": "1897-08-29",
         "datetime_end": null,
-        "header": "Origins of Zionism as a modern political movement",
+        "header": "First Zionist Congress held in Basel, Switzerland",
         "content": "details/1897-zionist-congress.details",
         "images": [],
         "taxonomies": [
             {
                 "name": "polity/group",
                 "value": "Zionism",
-                "icon": "[✡️]",
+                "icon": "[⛺➕🏠➖]",
                 "hidden": false
             }
         ],
-        "bgRender": {"color": "#e3f2fd"}
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },{
+        "datetime_start": "1894-01-02",
+        "datetime_end": "1906-01-02",
+        "header": "Dreyfus Affair in France",
+        "content": "A French Jewish army officer is wrongfully convicted of treason, highlighting widespread anti-Semitism in Europe.",
+        "images": [],
+        "taxonomies": [
+            {
+                "name": "polity/group",
+                "value": "Jews",
+                "icon": "✡️",
+                "hidden": false
+            },
+            {
+                "name": "polity/group",
+                "value": "France",
+                "icon": "🇫🇷",
+                "hidden": false
+            }
+        ],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
+        "datetime_start": "1901-01-02",
+        "datetime_end": null,
+        "header": "Jewish National Fund established",
+        "content": "",
+        "images": [],
+        "taxonomies": [
+            {
+                "name": "polity/group",
+                "value": "Zionism",
+                "icon": "[⛺➕🏠➖]",
+                "hidden": false
+            }
+        ],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
+        "datetime_start": "1904-01-02",
+        "datetime_end": "1914-01-02",
+        "header": "Second wave of Jewish migration (Aliyah) from Europe",
+        "content": "",
+        "images": [],
+        "taxonomies": [
+            {
+                "name": "polity/group",
+                "value": "Zionism",
+                "icon": "[⛺➕🏠➖]",
+                "hidden": false
+            }
+        ],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
+        "datetime_start": "1908-01-02",
+        "datetime_end": null,
+        "header": "The Palestine Office is established",
+        "content": "This is the operational arm of the World Zionist Organization. It will later become the Jewish Executive, found the Haganah, and eventually evolve into the Jewish Agency.",
+        "images": [],
+        "taxonomies": [
+            {
+                "name": "polity/group",
+                "value": "Zionism",
+                "icon": "[⛺➕🏠➖]",
+                "hidden": false
+            }
+        ],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
     },
     {
         "datetime_start": "1917-11-02",
@@ -61,7 +223,9 @@
                 "hidden": false
             }
         ],
-        "bgRender": {"color": "#e3f2fd"}
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
     },
     {
         "datetime_start": "1922-07-24",
@@ -70,7 +234,7 @@
         "content": "The League of Nations formally approved the British Mandate for Palestine.",
         "images": [],
         "taxonomies": [
-             {
+            {
                 "name": "polity/group",
                 "value": "UK",
                 "icon": "🇬🇧",
@@ -83,7 +247,9 @@
                 "hidden": false
             }
         ],
-        "bgRender": {"color": "#e3f2fd"}
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
     },
     {
         "datetime_start": "1936-04-20",
@@ -105,7 +271,9 @@
                 "hidden": false
             }
         ],
-        "bgRender": {"color": "#e8f5e9"}
+        "bgRender": {
+            "color": "#e8f5e9"
+        }
     },
     {
         "datetime_start": "1947-11-29",
@@ -114,7 +282,7 @@
         "content": "The United Nations General Assembly adopted Resolution 181 (II), which recommended the adoption and implementation of a Plan of Partition with Economic Union.",
         "images": [],
         "taxonomies": [
-             {
+            {
                 "name": "organization",
                 "value": "UN",
                 "icon": "🇺🇳",
@@ -127,7 +295,9 @@
                 "hidden": false
             }
         ],
-        "bgRender": {"color": "#fff3e0"}
+        "bgRender": {
+            "color": "#fff3e0"
+        }
     },
     {
         "datetime_start": "1948-05-14",
@@ -136,7 +306,7 @@
         "content": "David Ben-Gurion proclaims the establishment of the State of Israel.",
         "images": [],
         "taxonomies": [
-             {
+            {
                 "name": "polity/group",
                 "value": "Israel",
                 "icon": "🇮🇱",
@@ -149,6 +319,8 @@
                 "hidden": false
             }
         ],
-        "bgRender": {"color": "#f3e5f5"}
+        "bgRender": {
+            "color": "#f3e5f5"
+        }
     }
 ]

@@ -1,7 +1,7 @@
 +++
 title = 'WIP'
 date = '2025-12-26T14:57:29-06:00'
-description = ""
+description = "History in context"
 link = ""
 tags = []
 categories = ["History"]
