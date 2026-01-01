@@ -20,9 +20,6 @@ const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.25;
 const PIXELS_PER_YEAR = 50;
 const MIN_MARGIN = 32; // 2rem approx
 
-// App config constants
-const details_extension = '.details';
-
 // Helpers
 function formatDate(isoString) {
     if (!isoString) return '';
@@ -223,11 +220,20 @@ function render() {
         const { intro, rest } = splitContent(entry.contentHtml);
         const hasImages = entry.images && entry.images.length > 0;
         const hasExtra = rest.trim().length > 0 || hasImages;
-
+        
         const imagesHtml = hasImages ? 
             `<div class="timeline-images">
                 ${entry.images.map(src => `<img src="${src}" alt="${entry.header}" style="max-width:100%; margin-top:10px; border-radius:4px;">`).join('')}
             </div>` : '';
+
+        const detailsHtml = (entry.detailsData || []).map(d => `
+            <details class="timeline-details" ${allExpanded ? 'open' : ''}>
+                <summary class="timeline-summary-trigger">${d.title}</summary>
+                <div class="timeline-extra-content">
+                    ${d.html}
+                </div>
+            </details>
+        `).join('');
 
         item.innerHTML = `
             <div class="timeline-dot"></div>
@@ -245,21 +251,25 @@ function render() {
                     </div>
                 </details>
                 ` : ''}
+                ${detailsHtml}
             </div>
         `;
 
-        // Click on header to toggle collapse for single item if details exist
+        // Event listeners for details toggling (redraw lines)
+        const allDetails = item.querySelectorAll('.timeline-details');
         const header = item.querySelector('.timeline-header');
-        const details = item.querySelector('.timeline-details');
         
-        if (details) {
-            header.addEventListener('click', () => {
-                details.open = !details.open;
-            });
-            
-            // Redraw lines when expanded/collapsed
-            details.addEventListener('toggle', () => {
+        allDetails.forEach(det => {
+            det.addEventListener('toggle', () => {
                 requestAnimationFrame(drawDurationLines);
+            });
+        });
+        
+        // Click on header toggles the first details block found (if any)
+        if (allDetails.length > 0) {
+            header.addEventListener('click', () => {
+                const first = allDetails[0];
+                first.open = !first.open;
             });
         }
         
@@ -382,32 +392,38 @@ async function init() {
                     return taxonomies[taxRef] || { name: 'unknown', value: taxRef, hidden: false };
                 });
             }
-            // Populate content
-            let markdownText = entry.content || '';
-            if (markdownText && markdownText.trim().toLowerCase().endsWith(details_extension)) {
-                try {
-                    const mdRes = await fetch(markdownText);
-                    if (mdRes.ok) {
-                        markdownText = await mdRes.text();
-                    } else {
-                        console.warn(`Failed to load markdown file: ${entry.content}`);
-                        markdownText = `*Error loading content.*`;
-                    }
-                } catch (err) {
-                    console.warn(`Error fetching markdown: ${err}`);
-                    markdownText = `*Error loading content.*`;
-                }
-            }
-            
+
+            // Content is strictly text now
             // Render HTML using marked
-            // marked.parse might return a promise or string depending on options/version, 
-            // but the ESM version standard sync usage is marked.parse(string).
-            // However, modern marked *can* be async if using async extensions, but default is sync.
-            entry.contentHtml = marked.parse(markdownText);
+            entry.contentHtml = marked.parse(entry.content || '');
             
             // Update content to be the raw text for search purposes
-            entry.content = markdownText; 
-            
+            entry.content = entry.content || ''; 
+
+            // Process details
+            entry.detailsData = [];
+            if (entry.details && Array.isArray(entry.details)) {
+                entry.detailsData = await Promise.all(entry.details.map(async (url) => {
+                    try {
+                        const res = await fetch(url);
+                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                        const text = await res.text();
+                        
+                        // Extract title (First H1 #)
+                        // Use regex to find first line starting with #
+                        const titleMatch = text.match(/^#+\s+(.*)/m);
+                        const title = titleMatch ? titleMatch[1].trim() : 'Details';
+                        
+                        // Render full content
+                        const html = marked.parse(text);
+                        return { title, html };
+                    } catch (e) {
+                        console.warn(`Failed to load details from ${url}`, e);
+                        return { title: 'Error', html: '<p>Failed to load content.</p>' };
+                    }
+                }));
+            }
+
             return entry;
         }));
 

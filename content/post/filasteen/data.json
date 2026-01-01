@@ -15,7 +15,8 @@
         "datetime_start": "1878-01-02",
         "datetime_end": null,
         "header": "Palestine has ~500,000 inhabitants",
-        "content": "details/1878-context.details",
+        "content": "",
+        "details": ["details/1878-context.details"],
         "images": [],
         "taxonomies": ["ottomans", "myth_empty_land"],
         "bgRender": {
@@ -70,7 +71,8 @@
         "datetime_start": "1897-08-29",
         "datetime_end": null,
         "header": "First Zionist Congress held in Basel, Switzerland",
-        "content": "details/1897-zionist-congress.details",
+        "content": "",
+        "details": ["details/1897-zionist-congress.details"],
         "images": [],
         "taxonomies": ["zionism"],
         "bgRender": {
@@ -124,7 +126,8 @@
         "datetime_start": "1917-11-02",
         "datetime_end": null,
         "header": "Balfour Declaration Issued",
-        "content": "details/1917-balfour.details",
+        "content": "",
+        "details": ["details/1917-balfour.details"],
         "images": [],
         "taxonomies": ["uk"],
         "bgRender": {
