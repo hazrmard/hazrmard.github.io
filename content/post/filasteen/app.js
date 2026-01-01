@@ -243,7 +243,7 @@ function render() {
             <div class="timeline-content">
                 <div class="timeline-intro">${intro}</div>
                 ${hasExtra ? `
-                <details class="timeline-details" ${allExpanded ? 'open' : ''}>
+                <details${allExpanded ? 'open' : ''}>
                     <summary class="timeline-summary-trigger">Read more...</summary>
                     <div class="timeline-extra-content">
                         ${rest}
@@ -414,8 +414,8 @@ async function init() {
                         const titleMatch = text.match(/^#+\s+(.*)/m);
                         const title = titleMatch ? titleMatch[1].trim() : 'Details';
                         
-                        // Render full content
-                        const html = marked.parse(text);
+                        // Render full content, except title
+                        const html = marked.parse(text.slice(titleMatch ? titleMatch[0].length : 0).trim());
                         return { title, html };
                     } catch (e) {
                         console.warn(`Failed to load details from ${url}`, e);

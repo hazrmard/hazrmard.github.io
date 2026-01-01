@@ -157,6 +157,17 @@
         }
     },
     {
+        "datetime_start": "1941-01-02",
+        "datetime_end": null,
+        "header": "The Biltmore Conference - demands for the entirety of Mandatory Palestine",
+        "content": "",
+        "images": [],
+        "taxonomies": ["usjews", "zionism"],
+        "bgRender": {
+            "color": "#f3e5f5"
+        }
+    },
+    {
         "datetime_start": "1947-11-29",
         "datetime_end": null,
         "header": "UN Partition Plan",

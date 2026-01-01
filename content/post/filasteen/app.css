@@ -155,10 +155,6 @@
   line-height: 1.6;
 }
 
-.timeline-details {
-  margin-top: 0.5rem;
-}
-
 .timeline-summary-trigger {
   cursor: pointer;
   color: var(--accent-color);
@@ -171,10 +167,6 @@
 .timeline-summary-trigger::-webkit-details-marker {
   display: none; /* Hide default triangle in Chrome/Safari */
 }
-
-/* .timeline-details[open] .timeline-summary-trigger {
-  display: none;
-} */
 
 .timeline-extra-content {
   margin-top: 0;
