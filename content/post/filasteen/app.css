@@ -230,3 +230,7 @@
     align-items: stretch;
   }
 }
+
+details {
+    border: none !important; /* Override default styles */
+}

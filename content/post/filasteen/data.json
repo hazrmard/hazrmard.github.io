@@ -4,6 +4,7 @@
         "datetime_end": null,
         "header": "",
         "content": "null",
+        "details": null,
         "images": [],
         "taxonomies": [],
         "bgRender": {
@@ -16,24 +17,7 @@
         "header": "Palestine has ~500,000 inhabitants",
         "content": "details/1878-context.details",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Ottoman Empire",
-                "icon": "🕌",
-                "hidden": false
-            },
-            {
-                "name": "type",
-                "value": "demographics",
-                "icon": "👥",
-                "hidden": false
-            },
-            {
-                "name": "myth",
-                "value": "Palestine was an empty land"
-            }
-        ],
+        "taxonomies": ["ottomans", "myth_empty_land"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -44,7 +28,7 @@
         "header": "Russian pogroms in Europe. Zionist movement begins to form.",
         "content": "",
         "images": [],
-        "taxonomies": [],
+        "taxonomies": ["ejews"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -55,7 +39,7 @@
         "header": "First wave of Jewish immigrants begin to settle (Aliyah) in Palestine.",
         "content": "Foundation of Rishon Lezion, Zichron Yaacov, and Rosh Pina in Palestine.",
         "images": [],
-        "taxonomies": [],
+        "taxonomies": ["ejews"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -66,20 +50,7 @@
         "header": "'Zionism' is coined",
         "content": "First used by Nathan Birnbaum in publications of Kadimah, a Jewish student association in Vienna.\n\nWhile instrumental in the Zionist Congresses, later in life (~1919), Birnbaum would convert to Orthodox Judaism and reject political Zionism in favor of Jewish cultural autonomy.",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Jews",
-                "icon": "✡️",
-                "hidden": false
-            },
-            {
-                "name": "ideology",
-                "value": "Zionism",
-                "icon": "[⛺➕🏠➖]",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["ejews", "zionism"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -90,20 +61,7 @@
         "header": "Der Judenstaat published by Theodor Herzl",
         "content": "Popularized the term 'Zionism'. Originally called 'Address to the Rothschilds', the pamphlet advocated for the establishment of a Jewish state as a solution to anti-Semitism in Europe.",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Jews",
-                "icon": "✡️",
-                "hidden": false
-            },
-            {
-                "name": "ideology",
-                "value": "Zionism",
-                "icon": "[⛺➕🏠➖]",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["ejews", "zionism"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -114,14 +72,7 @@
         "header": "First Zionist Congress held in Basel, Switzerland",
         "content": "details/1897-zionist-congress.details",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Zionism",
-                "icon": "[⛺➕🏠➖]",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["zionism"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -131,20 +82,7 @@
         "header": "Dreyfus Affair in France",
         "content": "A French Jewish army officer is wrongfully convicted of treason, highlighting widespread anti-Semitism in Europe.",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Jews",
-                "icon": "✡️",
-                "hidden": false
-            },
-            {
-                "name": "polity/group",
-                "value": "France",
-                "icon": "🇫🇷",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["ejews", "france"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -155,14 +93,7 @@
         "header": "Jewish National Fund established",
         "content": "",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Zionism",
-                "icon": "[⛺➕🏠➖]",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["ejews", "zionism"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -173,14 +104,7 @@
         "header": "Second wave of Jewish migration (Aliyah) from Europe",
         "content": "",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Zionism",
-                "icon": "[⛺➕🏠➖]",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["ejews", "zionism"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -191,14 +115,7 @@
         "header": "The Palestine Office is established",
         "content": "This is the operational arm of the World Zionist Organization. It will later become the Jewish Executive, found the Haganah, and eventually evolve into the Jewish Agency.",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Zionism",
-                "icon": "[⛺➕🏠➖]",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["zionism"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -209,20 +126,7 @@
         "header": "Balfour Declaration Issued",
         "content": "details/1917-balfour.details",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "UK",
-                "icon": "🇬🇧",
-                "hidden": false
-            },
-            {
-                "name": "type",
-                "value": "diplomacy",
-                "icon": "📜",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["uk"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -233,20 +137,7 @@
         "header": "Mandate for Palestine",
         "content": "The League of Nations formally approved the British Mandate for Palestine.",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "UK",
-                "icon": "🇬🇧",
-                "hidden": false
-            },
-            {
-                "name": "organization",
-                "value": "League of Nations",
-                "icon": "🌐",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["uk", "leaguenations"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -257,20 +148,7 @@
         "header": "Arab Revolt",
         "content": "The Arab Revolt against the British Mandate, demanding independence and the end of open-ended Jewish immigration and land purchases.",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Palestine",
-                "icon": "🇵🇸",
-                "hidden": false
-            },
-            {
-                "name": "type",
-                "value": "conflict",
-                "icon": "⚔️",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["palestinians", "uk"],
         "bgRender": {
             "color": "#e8f5e9"
         }
@@ -281,20 +159,7 @@
         "header": "UN Partition Plan",
         "content": "The United Nations General Assembly adopted Resolution 181 (II), which recommended the adoption and implementation of a Plan of Partition with Economic Union.",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "organization",
-                "value": "UN",
-                "icon": "🇺🇳",
-                "hidden": false
-            },
-            {
-                "name": "type",
-                "value": "diplomacy",
-                "icon": "📜",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["un"],
         "bgRender": {
             "color": "#fff3e0"
         }
@@ -305,20 +170,7 @@
         "header": "Declaration of Independence",
         "content": "David Ben-Gurion proclaims the establishment of the State of Israel.",
         "images": [],
-        "taxonomies": [
-            {
-                "name": "polity/group",
-                "value": "Israel",
-                "icon": "🇮🇱",
-                "hidden": false
-            },
-            {
-                "name": "type",
-                "value": "politics",
-                "icon": "🏛️",
-                "hidden": false
-            }
-        ],
+        "taxonomies": ["israel", "zionism"],
         "bgRender": {
             "color": "#f3e5f5"
         }

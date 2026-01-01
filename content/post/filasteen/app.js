@@ -1,7 +1,7 @@
 import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js';
 
 // State
-let allEvents = [];
+let allEntries = [];
 let activeFilters = new Set();
 let searchQuery = '';
 let allExpanded = false;
@@ -19,6 +19,9 @@ const toggleSpacingBtn = document.getElementById('toggle-spacing-btn');
 const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.25;
 const PIXELS_PER_YEAR = 50;
 const MIN_MARGIN = 32; // 2rem approx
+
+// App config constants
+const details_extension = '.details';
 
 // Helpers
 function formatDate(isoString) {
@@ -76,7 +79,7 @@ function drawDurationLines() {
     // Palette for distinct colors
     const palette = ['#e57373', '#81c784', '#64b5f6', '#f06292', '#ffb74d', '#4db6ac', '#ba68c8'];
     
-    // Track occupied lanes. Each lane contains the end date (Date object) of the last event in that lane.
+    // Track occupied lanes. Each lane contains the end date (Date object) of the last entry in that lane.
     const lanes = [];
 
     items.forEach((item, index) => {
@@ -115,7 +118,7 @@ function drawDurationLines() {
         // Assign Lane
         let assignedLane = -1;
         for (let i = 0; i < lanes.length; i++) {
-            // Check if this lane is free (last event in this lane ended before current event starts)
+            // Check if this lane is free (last entry in this lane ended before current entry starts)
             // We use a small buffer if needed, but strict comparison is fine
             if (lanes[i] <= startDate) {
                 assignedLane = i;
@@ -164,15 +167,15 @@ function drawDurationLines() {
 function render() {
     container.innerHTML = '';
     
-    const filtered = allEvents.filter(event => {
+    const filtered = allEntries.filter(entry => {
         // Search filter
-        const matchesSearch = (event.header.toLowerCase().includes(searchQuery) || 
-                               event.content.toLowerCase().includes(searchQuery));
+        const matchesSearch = (entry.header.toLowerCase().includes(searchQuery) || 
+                               entry.content.toLowerCase().includes(searchQuery));
         
         // Taxonomy filter
         let matchesFilter = true;
         if (activeFilters.size > 0) {
-            const taxes = event.taxonomies || [];
+            const taxes = entry.taxonomies || [];
             const hasMatch = taxes.some(tax => {
                 const key = `${tax.name}:${tax.value}`;
                 return activeFilters.has(key);
@@ -184,31 +187,31 @@ function render() {
     });
 
     if (filtered.length === 0) {
-        container.innerHTML = '<p style="text-align:center; padding: 2rem;">No events found.</p>';
+        container.innerHTML = '<p style="text-align:center; padding: 2rem;">No entrys found.</p>';
         return;
     }
 
-    filtered.forEach((event, index) => {
+    filtered.forEach((entry, index) => {
         const item = document.createElement('div');
         item.className = 'timeline-item';
         item.dataset.index = index;
-        item.dataset.bg = JSON.stringify(event.bgRender.color || null);
-        item.dataset.start = event.datetime_start;
-        item.dataset.end = event.datetime_end;
+        item.dataset.bg = JSON.stringify(entry.bgRender.color || null);
+        item.dataset.start = entry.datetime_start;
+        item.dataset.end = entry.datetime_end;
 
-        const taxes = event.taxonomies || [];
+        const taxes = entry.taxonomies || [];
         const taxBadges = taxes
             .filter(t => !t.hidden)
             .map(t => `<span class="taxonomy-badge">${t.icon || ''} ${t.value}</span>`)
             .join(' ');
 
-        const dateStr = formatDate(event.datetime_start);
-        const dateEndStr = event.datetime_end ? ` - ${formatDate(event.datetime_end)}` : '';
+        const dateStr = formatDate(entry.datetime_start);
+        const dateEndStr = entry.datetime_end ? ` - ${formatDate(entry.datetime_end)}` : '';
 
         // Calculate Spacing
         if (index > 0 && isSpaced) {
             const prevDate = new Date(filtered[index - 1].datetime_start);
-            const currDate = new Date(event.datetime_start);
+            const currDate = new Date(entry.datetime_start);
             const diffTime = currDate - prevDate;
             const diffYears = diffTime / MS_PER_YEAR;
             const margin = Math.max(MIN_MARGIN, diffYears * PIXELS_PER_YEAR);
@@ -217,19 +220,19 @@ function render() {
              item.style.marginTop = '';
         }
 
-        const { intro, rest } = splitContent(event.contentHtml);
-        const hasImages = event.images && event.images.length > 0;
+        const { intro, rest } = splitContent(entry.contentHtml);
+        const hasImages = entry.images && entry.images.length > 0;
         const hasExtra = rest.trim().length > 0 || hasImages;
 
         const imagesHtml = hasImages ? 
             `<div class="timeline-images">
-                ${event.images.map(src => `<img src="${src}" alt="${event.header}" style="max-width:100%; margin-top:10px; border-radius:4px;">`).join('')}
+                ${entry.images.map(src => `<img src="${src}" alt="${entry.header}" style="max-width:100%; margin-top:10px; border-radius:4px;">`).join('')}
             </div>` : '';
 
         item.innerHTML = `
             <div class="timeline-dot"></div>
             <div class="timeline-date">${dateStr}${dateEndStr}</div>
-            <h3 class="timeline-header">${event.header}</h3>
+            <h3 class="timeline-header">${entry.header}</h3>
             <div class="timeline-meta">${taxBadges}</div>
             <div class="timeline-content">
                 <div class="timeline-intro">${intro}</div>
@@ -274,9 +277,9 @@ function render() {
 function setupFilters() {
     const taxes = new Map(); // Key: "name:value", Value: {name, value, icon}
 
-    allEvents.forEach(event => {
-        const eventTaxes = event.taxonomies || [];
-        eventTaxes.forEach(tax => {
+    allEntries.forEach(entry => {
+        const entryTaxes = entry.taxonomies || [];
+        entryTaxes.forEach(tax => {
             if (tax && !tax.hidden) {
                 const key = `${tax.name}:${tax.value}`;
                 if (!taxes.has(key)) {
@@ -366,18 +369,28 @@ async function init() {
     try {
         const response = await fetch('./data.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const taxonomiesResponse = await fetch('./taxonomies.json');
+        if (!taxonomiesResponse.ok) throw new Error(`HTTP error! status: ${taxonomiesResponse.status}`);
         const data = await response.json();
-        
+        const taxonomies = await taxonomiesResponse.json();
+
         // Process content (Markdown or File)
-        const processedData = await Promise.all(data.map(async (event) => {
-            let markdownText = event.content || '';
-            if (markdownText && markdownText.trim().toLowerCase().endsWith('.details')) {
+        const processedData = await Promise.all(data.map(async (entry) => {
+            // Dereference taxonomies
+            if (entry.taxonomies) {
+                entry.taxonomies = entry.taxonomies.map(taxRef => {
+                    return taxonomies[taxRef] || { name: 'unknown', value: taxRef, hidden: false };
+                });
+            }
+            // Populate content
+            let markdownText = entry.content || '';
+            if (markdownText && markdownText.trim().toLowerCase().endsWith(details_extension)) {
                 try {
                     const mdRes = await fetch(markdownText);
                     if (mdRes.ok) {
                         markdownText = await mdRes.text();
                     } else {
-                        console.warn(`Failed to load markdown file: ${event.content}`);
+                        console.warn(`Failed to load markdown file: ${entry.content}`);
                         markdownText = `*Error loading content.*`;
                     }
                 } catch (err) {
@@ -390,16 +403,16 @@ async function init() {
             // marked.parse might return a promise or string depending on options/version, 
             // but the ESM version standard sync usage is marked.parse(string).
             // However, modern marked *can* be async if using async extensions, but default is sync.
-            event.contentHtml = marked.parse(markdownText);
+            entry.contentHtml = marked.parse(markdownText);
             
             // Update content to be the raw text for search purposes
-            event.content = markdownText; 
+            entry.content = markdownText; 
             
-            return event;
+            return entry;
         }));
 
         // Normalize and sort
-        allEvents = processedData.sort((a, b) => new Date(a.datetime_start) - new Date(b.datetime_start));
+        allEntries = processedData.sort((a, b) => new Date(a.datetime_start) - new Date(b.datetime_start));
         
         setupFilters();
         render();

@@ -4,12 +4,12 @@ This design document describes an interactive blog post which acts like a scroll
 
 ## Features
 
-1. A JSON object (`data.json`) contains an array of objects that will be displayed.
-2. Each object contains the content, any display icons, taxonomies, and background rendering instructions.
-3. The background of the page will transition between the renders in the instructions as the page scrolls down. For example, a map display that zooms to different areas as the page scrolls. This is TBD.
+1. A JSON object (`data.json`) contains an array of objects that will be displayed, including taxonomy references. Another JSON `taxonomies.json` contains taxonomy details (such as display icon / type.)
+2. Each entry in data JSON contains the content, images, taxonomies, and background rendering instructions.
+3. An entry can have short-form content, or link to an array of files containing details. Both are markdown. If provided, the details content is listed in summary blocks.
 4. There is a widget to filter the elements in the array by taxonomies. Multiple values can be selected. Taxonomies are grouped by name.
 5. The interface is mobile- and SEO-friendly.
-6. The app is aware of the current element being displayed. This can be used for some callbacks which modify elements based on what is being seen.
+6. The app is aware of the current etries(s) being displayed and in the viewport. This can be used for some callbacks which modify elements based on what is being seen.
 7. There is a toggle to compress entries, or to vertically space them proportional to their start times.
 
 ## Constraints
@@ -22,22 +22,28 @@ This design document describes an interactive blog post which acts like a scroll
 ## Data representation
 
 ```
+// data.json
 [
     {
         datetime_start: // ISO formatted datetime used for ordering
         datetime_end: // Optional ISO foramtted datetime for end.
         header: // short-form string
         content: // long-form markdown string or path to markdown
+        details: // list of markdown files to render
         images: [] // relative links to images
-        taxonomies: {[
-            name: // name of taxonomy (i.e. category, country)
-            value: // value of taxonomy (i.e. event, USA)
-            icon: // optional icon for that value (i.e. 📅)
-            hidden: // whether to display this to the user
-        ]}
+        taxonomies: [] // taxonomy references
         bgRender: {color: } // TBD
     }
 ]
+
+// taxonomies.json
+{
+    taxonomy_reference: {
+        name: // type
+        value:
+        icon:
+    }
+}
 ```
 
 ## App configuration

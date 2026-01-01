@@ -1,0 +1,69 @@
+{
+    "ejews": {
+        "name": "polity/group",
+        "value": "European Jewry",
+        "icon": "✡️"
+    },
+    "mjews": {
+        "name": "polity/group",
+        "value": "Mizrahi Jewry",
+        "icon": "🕎"
+    },
+    "usjews": {
+        "name": "polity/group",
+        "value": "US Jewry",
+        "icon": "🗽✡️"
+    },
+    "uk": {
+        "name": "polity/group",
+        "value": "UK",
+        "icon": "🇬🇧"
+    },
+    "us": {
+        "name": "polity/group",
+        "value": "US",
+        "icon": "🇺🇸"
+    },
+    "france": {
+        "name": "polity/group",
+        "value": "France",
+        "icon": "🇫🇷"
+    },
+    "ottomans": {
+        "name": "polity/group",
+        "value": "Ottoman Empire",
+        "icon": "🕌"
+    },
+    "zionism": {
+        "name": "polity/group",
+        "value": "Zionist Movement",
+        "icon": "[⛺➕🏠➖]"
+    },
+    "israel": {
+        "name": "polity/group",
+        "value": "Israel",
+        "icon": "🇮🇱"
+    },
+    "palestinians": {
+        "name": "polity/group",
+        "value": "Palestinians",
+        "icon": "🇵🇸"
+    },
+    "leaguenations": {
+        "name": "organization",
+        "value": "League of Nations",
+        "icon": "🌐"
+    },
+    "un": {
+        "name": "organization",
+        "value": "United Nations",
+        "icon": "🕊️"
+    },
+
+    "myth_empty_land": {
+        "name": "myth",
+        "value": "Empty Land",
+        "icon": "🏜️"
+    }
+
+}
