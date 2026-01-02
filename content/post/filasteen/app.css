@@ -17,7 +17,7 @@
 
 /* Controls */
 .timeline-controls {
-  position: sticky;
+  position: static;
   top: 0;
   background: rgba(255, 255, 255, 0.95);
   padding: var(--spacing);

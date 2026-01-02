@@ -184,7 +184,7 @@ function render() {
     });
 
     if (filtered.length === 0) {
-        container.innerHTML = '<p style="text-align:center; padding: 2rem;">No entrys found.</p>';
+        container.innerHTML = '<p style="text-align:center; padding: 2rem;">No entries found.</p>';
         return;
     }
 
@@ -192,7 +192,7 @@ function render() {
         const item = document.createElement('div');
         item.className = 'timeline-item';
         item.dataset.index = index;
-        item.dataset.bg = JSON.stringify(entry.bgRender.color || null);
+        item.dataset.bg = entry.bgRender ? JSON.stringify(entry.bgRender.color) : null;
         item.dataset.start = entry.datetime_start;
         item.dataset.end = entry.datetime_end;
 
@@ -219,6 +219,7 @@ function render() {
 
         const { intro, rest } = splitContent(entry.contentHtml);
         const hasImages = entry.images && entry.images.length > 0;
+        const hasIntro = intro.trim().length > 0;
         const hasExtra = rest.trim().length > 0 || hasImages;
         
         const imagesHtml = hasImages ? 
@@ -241,15 +242,17 @@ function render() {
             <h3 class="timeline-header">${entry.header}</h3>
             <div class="timeline-meta">${taxBadges}</div>
             <div class="timeline-content">
-                <div class="timeline-intro">${intro}</div>
-                ${hasExtra ? `
-                <details${allExpanded ? 'open' : ''}>
-                    <summary class="timeline-summary-trigger">Read more...</summary>
-                    <div class="timeline-extra-content">
-                        ${rest}
-                        ${imagesHtml}
-                    </div>
-                </details>
+                ${hasIntro ? `
+                    <div class="timeline-intro">${intro}</div>
+                    ${hasExtra ? `
+                    <details${allExpanded ? 'open' : ''}>
+                        <summary class="timeline-summary-trigger">Read more...</summary>
+                        <div class="timeline-extra-content">
+                            ${rest}
+                            ${imagesHtml}
+                        </div>
+                    </details>
+                    ` : ''}
                 ` : ''}
                 ${detailsHtml}
             </div>
@@ -395,10 +398,10 @@ async function init() {
 
             // Content is strictly text now
             // Render HTML using marked
-            entry.contentHtml = marked.parse(entry.content || '');
+            entry.contentHtml = marked.parse(entry.content ? entry.content : '');
             
             // Update content to be the raw text for search purposes
-            entry.content = entry.content || ''; 
+            entry.content = entry.content ? entry.content : '';
 
             // Process details
             entry.detailsData = [];
