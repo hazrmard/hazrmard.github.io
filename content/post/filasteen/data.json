@@ -16,9 +16,14 @@
         "datetime_end": null,
         "header": "Palestine has ~500,000 inhabitants",
         "content": "",
-        "details": ["details/1878-context.details"],
+        "details": [
+            "details/1878-context.details"
+        ],
         "images": [],
-        "taxonomies": ["ottomans", "myth_empty_land"],
+        "taxonomies": [
+            "ottomans",
+            "myth_empty_land"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -29,7 +34,9 @@
         "header": "Russian pogroms in Europe. Zionist movement begins to form.",
         "content": "",
         "images": [],
-        "taxonomies": ["ejews"],
+        "taxonomies": [
+            "ejews"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -40,7 +47,9 @@
         "header": "First wave of Jewish immigrants begin to settle (Aliyah) in Palestine.",
         "content": "Foundation of Rishon Lezion, Zichron Yaacov, and Rosh Pina in Palestine.",
         "images": [],
-        "taxonomies": ["ejews"],
+        "taxonomies": [
+            "ejews"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -51,7 +60,10 @@
         "header": "'Zionism' is coined",
         "content": "First used by Nathan Birnbaum in publications of Kadimah, a Jewish student association in Vienna.\n\nWhile instrumental in the Zionist Congresses, later in life (~1919), Birnbaum would convert to Orthodox Judaism and reject political Zionism in favor of Jewish cultural autonomy.",
         "images": [],
-        "taxonomies": ["ejews", "zionism"],
+        "taxonomies": [
+            "ejews",
+            "zionism"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -61,9 +73,13 @@
         "datetime_end": null,
         "header": "Jewish Colonization Association (JCA) founded by Baron Maurice de Hirsch",
         "content": "Its aim was to facilitate the mass emigration of Jews from Russia and other Eastern European countries, by settling them in agricultural settlements on lands purchased by the committee in North America (Canada and the United States), South America (Argentina and Brazil) and Palestine (then part of the Ottoman Empire).",
-        "details": ["details/1891-jca-pica-jnf.details"],
+        "details": [
+            "details/1891-jca-pica-jnf.details"
+        ],
         "images": [],
-        "taxonomies": ["ejews"],
+        "taxonomies": [
+            "ejews"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -73,9 +89,15 @@
         "datetime_end": null,
         "header": "Der Judenstaat published by Theodor Herzl",
         "content": "Popularized the term 'Zionism'. Originally called 'Address to the Rothschilds', the pamphlet advocated for the establishment of a Jewish state as a solution to anti-Semitism in Europe.",
-        "details": ["details/1896-der-judenstaat.details"],
+        "details": [
+            "details/1896-der-judenstaat.details"
+        ],
         "images": [],
-        "taxonomies": ["ejews", "zionism", "myth_ethnic_cleansing"],
+        "taxonomies": [
+            "ejews",
+            "zionism",
+            "myth_ethnic_cleansing"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -85,9 +107,13 @@
         "datetime_end": null,
         "header": "First Zionist Congress held in Basel, Switzerland",
         "content": "",
-        "details": ["details/1897-zionist-congress.details"],
+        "details": [
+            "details/1897-zionist-congress.details"
+        ],
         "images": [],
-        "taxonomies": ["zionism"],
+        "taxonomies": [
+            "zionism"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -97,9 +123,14 @@
         "datetime_end": null,
         "header": "Second Zionist Congress held in Basel, Switzerland",
         "content": "Jüdische Kolonialbank (Jewish Colonial Bank) is established (incorporated in London, UK) to support Jewish settlement in Palestine.",
-        "details": ["details/1898-zionist-congress.details"],
+        "details": [
+            "details/1898-zionist-congress.details"
+        ],
         "images": [],
-        "taxonomies": ["zionism", "myth_colonialism"],
+        "taxonomies": [
+            "zionism",
+            "myth_colonialism"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -110,7 +141,10 @@
         "header": "Dreyfus Affair in France",
         "content": "A French Jewish army officer is wrongfully convicted of treason, highlighting widespread anti-Semitism in Europe.",
         "images": [],
-        "taxonomies": ["ejews", "france"],
+        "taxonomies": [
+            "ejews",
+            "france"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -122,7 +156,10 @@
         "content": "",
         "details": [],
         "images": [],
-        "taxonomies": ["ejews", "zionism"],
+        "taxonomies": [
+            "ejews",
+            "zionism"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -133,7 +170,10 @@
         "header": "Second wave of Jewish migration (Aliyah) from Europe",
         "content": "",
         "images": [],
-        "taxonomies": ["ejews", "zionism"],
+        "taxonomies": [
+            "ejews",
+            "zionism"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -144,7 +184,9 @@
         "header": "The Palestine Office is established",
         "content": "This is the operational arm of the World Zionist Organization. It will later become the Jewish Executive, found the Haganah, and eventually evolve into the Jewish Agency.",
         "images": [],
-        "taxonomies": ["zionism"],
+        "taxonomies": [
+            "zionism"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -155,7 +197,9 @@
         "header": "Falastin Newspaper First Published",
         "content": "Founded by two Palestinian Christian brothers, the paper became a leading voice against Zionism.",
         "images": [],
-        "taxonomies": ["palestinians"],
+        "taxonomies": [
+            "palestinians"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -165,9 +209,13 @@
         "datetime_end": "1916-03-01",
         "header": "Husayn-McMahon Correspondence",
         "content": "The correspondence between the British High Commissioner in Egypt and the Sharif of Mecca, promising Arab independence in exchange for support against the Ottoman Empire.",
-        "details": ["details/1915-husayn-mcmahon.details"],
+        "details": [
+            "details/1915-husayn-mcmahon.details"
+        ],
         "images": [],
-        "taxonomies": ["uk"],
+        "taxonomies": [
+            "uk"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -177,9 +225,13 @@
         "datetime_end": null,
         "header": "Balfour Declaration Issued",
         "content": "In a letter from Lord Balfour to Baron Rothschild, the British government avows support for a Jewish state.",
-        "details": ["details/1917-balfour.details"],
+        "details": [
+            "details/1917-balfour.details"
+        ],
         "images": [],
-        "taxonomies": ["uk"],
+        "taxonomies": [
+            "uk"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -190,7 +242,10 @@
         "header": "Mandate for Palestine",
         "content": "The League of Nations formally approved the British Mandate for Palestine.",
         "images": [],
-        "taxonomies": ["uk", "leaguenations"],
+        "taxonomies": [
+            "uk",
+            "leaguenations"
+        ],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -201,7 +256,10 @@
         "header": "Arab Revolt",
         "content": "14-17% of the adult male population is killed/wounded/exiled in the Arab Revolt against the British Mandate, demanding independence and the end of open-ended Jewish immigration and land purchases.",
         "images": [],
-        "taxonomies": ["palestinians", "uk"],
+        "taxonomies": [
+            "palestinians",
+            "uk"
+        ],
         "bgRender": {
             "color": "#e8f5e9"
         }
@@ -211,7 +269,11 @@
         "header": "White Paper of 1939 Ratified",
         "content": "Rejects Peel Commission's recommendation to partition, limits Jewish immigration and land purchases. Zionist groups oppose it and launch militant attacks against British targets.",
         "images": [],
-        "taxonomies": ["palestinians", "uk", "zionism"],
+        "taxonomies": [
+            "palestinians",
+            "uk",
+            "zionism"
+        ],
         "bgRender": {
             "color": "#e8f5e9"
         }
@@ -222,7 +284,10 @@
         "header": "The Biltmore Conference - demands for the entirety of Mandatory Palestine",
         "content": "",
         "images": [],
-        "taxonomies": ["usjews", "zionism"],
+        "taxonomies": [
+            "usjews",
+            "zionism"
+        ],
         "bgRender": {
             "color": "#f3e5f5"
         }
@@ -233,7 +298,9 @@
         "header": "UN Partition Plan",
         "content": "The United Nations General Assembly adopted Resolution 181 (II), which recommended the adoption and implementation of a Plan of Partition with Economic Union.",
         "images": [],
-        "taxonomies": ["un"],
+        "taxonomies": [
+            "un"
+        ],
         "bgRender": {
             "color": "#fff3e0"
         }
@@ -244,7 +311,10 @@
         "header": "Declaration of Independence",
         "content": "David Ben-Gurion proclaims the establishment of the State of Israel.",
         "images": [],
-        "taxonomies": ["israel", "zionism"],
+        "taxonomies": [
+            "israel",
+            "zionism"
+        ],
         "bgRender": {
             "color": "#f3e5f5"
         }
