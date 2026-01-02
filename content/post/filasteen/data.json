@@ -57,12 +57,25 @@
         }
     },
     {
+        "datetime_start": "1891-01-02",
+        "datetime_end": null,
+        "header": "Jewish Colonization Association (JCA) founded by Baron Maurice de Hirsch",
+        "content": "Its aim was to facilitate the mass emigration of Jews from Russia and other Eastern European countries, by settling them in agricultural settlements on lands purchased by the committee in North America (Canada and the United States), South America (Argentina and Brazil) and Palestine (then part of the Ottoman Empire).",
+        "details": ["details/1891-jca-pica-jnf.details"],
+        "images": [],
+        "taxonomies": ["ejews"],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
         "datetime_start": "1896-01-02",
         "datetime_end": null,
         "header": "Der Judenstaat published by Theodor Herzl",
         "content": "Popularized the term 'Zionism'. Originally called 'Address to the Rothschilds', the pamphlet advocated for the establishment of a Jewish state as a solution to anti-Semitism in Europe.",
+        "details": ["details/1896-der-judenstaat.details"],
         "images": [],
-        "taxonomies": ["ejews", "zionism"],
+        "taxonomies": ["ejews", "zionism", "myth_ethnic_cleansing"],
         "bgRender": {
             "color": "#e3f2fd"
         }
@@ -78,7 +91,20 @@
         "bgRender": {
             "color": "#e3f2fd"
         }
-    },{
+    },
+    {
+        "datetime_start": "1898-08-28",
+        "datetime_end": null,
+        "header": "Second Zionist Congress held in Basel, Switzerland",
+        "content": "Jüdische Kolonialbank (Jewish Colonial Bank) is established (incorporated in London, UK) to support Jewish settlement in Palestine.",
+        "details": ["details/1898-zionist-congress.details"],
+        "images": [],
+        "taxonomies": ["zionism", "myth_colonialism"],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
         "datetime_start": "1894-01-02",
         "datetime_end": "1906-01-02",
         "header": "Dreyfus Affair in France",
@@ -92,8 +118,9 @@
     {
         "datetime_start": "1901-01-02",
         "datetime_end": null,
-        "header": "Jewish National Fund established",
+        "header": "Jewish National Fund established at the Fifth Zionist Congress",
         "content": "",
+        "details": [],
         "images": [],
         "taxonomies": ["ejews", "zionism"],
         "bgRender": {
@@ -123,10 +150,33 @@
         }
     },
     {
+        "datetime_start": "1911-01-15",
+        "datetime_end": null,
+        "header": "Falastin Newspaper First Published",
+        "content": "Founded by two Palestinian Christian brothers, the paper became a leading voice against Zionism.",
+        "images": [],
+        "taxonomies": ["palestinians"],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
+        "datetime_start": "1915-07-01",
+        "datetime_end": "1916-03-01",
+        "header": "Husayn-McMahon Correspondence",
+        "content": "The correspondence between the British High Commissioner in Egypt and the Sharif of Mecca, promising Arab independence in exchange for support against the Ottoman Empire.",
+        "details": ["details/1915-husayn-mcmahon.details"],
+        "images": [],
+        "taxonomies": ["uk"],
+        "bgRender": {
+            "color": "#e3f2fd"
+        }
+    },
+    {
         "datetime_start": "1917-11-02",
         "datetime_end": null,
         "header": "Balfour Declaration Issued",
-        "content": "",
+        "content": "In a letter from Lord Balfour to Baron Rothschild, the British government avows support for a Jewish state.",
         "details": ["details/1917-balfour.details"],
         "images": [],
         "taxonomies": ["uk"],
@@ -149,9 +199,19 @@
         "datetime_start": "1936-04-20",
         "datetime_end": "1939-04-30",
         "header": "Arab Revolt",
-        "content": "The Arab Revolt against the British Mandate, demanding independence and the end of open-ended Jewish immigration and land purchases.",
+        "content": "14-17% of the adult male population is killed/wounded/exiled in the Arab Revolt against the British Mandate, demanding independence and the end of open-ended Jewish immigration and land purchases.",
         "images": [],
         "taxonomies": ["palestinians", "uk"],
+        "bgRender": {
+            "color": "#e8f5e9"
+        }
+    },
+    {
+        "datetime_start": "1939-05-23",
+        "header": "White Paper of 1939 Ratified",
+        "content": "Rejects Peel Commission's recommendation to partition, limits Jewish immigration and land purchases. Zionist groups oppose it and launch militant attacks against British targets.",
+        "images": [],
+        "taxonomies": ["palestinians", "uk", "zionism"],
         "bgRender": {
             "color": "#e8f5e9"
         }

@@ -64,6 +64,15 @@
         "name": "myth",
         "value": "Empty Land",
         "icon": "🏜️"
+    },
+    "myth_ethnic_cleansing": {
+        "name": "myth",
+        "value": "Ethnic Cleansing",
+        "icon": "🚫👥"
+    },
+    "myth_colonialism": {
+        "name": "myth",
+        "value": "Zionism != Colonialism",
+        "icon": "🏴‍☠️"
     }
-
 }
