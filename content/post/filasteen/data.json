@@ -192,6 +192,11 @@
         }
     },
     {
+        "datetime_start": "1908-12-01",
+        "header": "Al-Karmil, an anti-Zionist newspaper, is first published.",
+        "content": "The owner/writer was Najib Nassar, a Palestinian Christian. He wrote extensively against Zionist efforts and their collaboration with Ottoman and later British rulers."
+    },
+    {
         "datetime_start": "1911-01-15",
         "datetime_end": null,
         "header": "Falastin Newspaper First Published",
@@ -293,6 +298,12 @@
         }
     },
     {
+        "datetime_start": "1944-02-01",
+        "datetime_end": "1948-05-14",
+        "header": "Jewish insurgency against British rule",
+        "content": "Paramilitary terror campaign against British rule, following the 1939 White Paper. Between 1945-47, 260 deaths and 912 injuries occur. Highest casualties are British (616) and Palestinians (331)."
+    },
+    {
         "datetime_start": "1947-11-29",
         "datetime_end": null,
         "header": "UN Partition Plan",
@@ -304,6 +315,84 @@
         "bgRender": {
             "color": "#fff3e0"
         }
+    },
+    {
+        "datetime_start": "1947-04-22",
+        "header": "Lehi kills 2 Palestinians, 5 British officers, and 3-year old in a train bombing."
+    },
+    {
+        "datetime_start": "1947-05-15",
+        "header": "Lehi bombs Cairo-Haifa train 7 times, killing 2 British officers, injuring several more."
+    },
+    {
+        "datetime_start": "1947-08-09",
+        "header": "Irgun bombs and kills a Jewish engineer on a British train near Lydda."
+    },
+    {
+        "datetime_start": "1947-08-15",
+        "header": "Haganah kills 12 Palestinians (1 woman, 6 children) near Petah Tikva",
+        "content": "Dynamiting houses becomes a common tactic used by Zionist militias going forward."
+    },
+    {
+        "datetime_start": "1947-11-02",
+        "header": "Haganah begins mobilizing for war",
+        "content": "Orders issued for all men between 17-25 to register for military service."
+    },
+    {
+        "datetime_start": "1947-11-12",
+        "header": "Lehi kills 1 British soldier, woulds 3 more near Haifa."
+    },
+    {
+        "datetime_start": "1947-11-13",
+        "header": "Lehi attacks patrons at the Ritz coffee shop, injuring 28 in Jerusalem."
+    },
+    {
+        "datetime_start": "1947-11-15",
+        "header": "Lehi kills 2 British policemen in Jerusalem."
+    },
+    {
+        "datetime_start": "1947-11-19",
+        "header": "Lehi assassinates 5 members of Shubaki Family.",
+        "content": "The assassination was premeditated as a reprisal for for Shubaki family allegedly providing information to the British that led to the capture of Lehi members."
+    },
+    {
+        "datetime_start": "1947-11-30",
+        "header": "Arab militants attack Jewish buses, killing 7.",
+        "content": "Flyers appearing afterwards claimed the attack was in retaliation for the Shubaki family assassination."
+    },
+    {
+        "datetime_start": "1947-12-30",
+        "header": "Irgun kills 6 and wounds 42 Palestinian workers in Haifa by bombing a refinery."
+    },
+    {
+        "datetime_start": "1947-12-30",
+        "header": "Palestinian mob lynches 39 Jewish refinery workers in Haifa in retaliation for the Irgun bombing."
+    },
+    {
+        "datetime_start": "1947-12-31",
+        "header": "Haganah kills 70 Palestinian villagers in Balad al Sheikh, in relation to Haifa refinery attacks.",
+        "content": "The inquiry committee set up by Jewish community in Haifa found the earlier Arab lynching was unpremedidated, and condemned Irgun for their initial attack. It still authorized a reliatory attack."
+    },
+    {
+        "datetime_start": "1947-12-31",
+        "header": "Abd al Qadir al Husayni organizes blockade of Jerusalem's 100k Jewish residents."
+    },
+    {
+        "datetime_start": "1948-01-05",
+        "header": "Haganah bombs and kills 26 at the Semiramis Hotel in Jerusalem.",
+        "content": "The dead include the Spanish vice-consul, Manuel Allende Salazar."
+    },
+    {
+        "datetime_start": "1948-02-1948",
+        "header": "Supporters of Amin al Husayni kill 88 in car bombs, injuring hundreds."
+    },
+    {
+        "datetime_start": "1948-02-29",
+        "header": "Lehi kills 28 British soldiers by mining a train near Rehovot."
+    },
+    {
+        "datetime_start": "1948-03-31",
+        "header": "Lehi bombs and kills 40 Palestinians, injuring 60 on the Cairo-Haifa train near Binyamina"
     },
     {
         "datetime_start": "1948-05-14",
