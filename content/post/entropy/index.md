@@ -16,6 +16,9 @@ In this post, I will derive entropy from first principles. This requires no more
 
 ## A derivation
 
+
+### The conditions
+
 We want a function, $H(n)$, which measures the uncertainty in a system in which we chose one of $n$ events that can occur. We would want it to exhibit the following three properties:
 
 1. Continuity. If the probability of an event changes slightly, the measure of uncertainty in our choice should not suddenly jump.
@@ -24,11 +27,13 @@ We want a function, $H(n)$, which measures the uncertainty in a system in which 
 
 3. Additivity. If choice from events can be broken up into a sequnce of multiple choices, then the uncertainties of the constituent choices should add up to the uncertainty of the system. The uncertainty of choosing a card from the deck is the same as the uncertainty of choosing the suit ($1/4$) and then the number on the card ($1/13$).
 
-Let's say there are $n$ events that can happen, equally likely, and we observe them once. We use the measure $H(n)$ to denote the uncertainty in the system.
+### Deriving entropy by reasoning about conditions
 
-Now, let's add multiple choices to this system and call it system2. There are $n$ possible events that can happen in the original system. System2 is composed of $k$ choices with, $n_1 = n_2, ..., = n_k$ same number of outcomes from that pool of events. In this system2, an (aggregate) event is a collection of $k$ choices, each with the same possibilities. Therefore, there are $N=n^k$ possible aggregate events. The measure of uncertainty in this system2 is $H(n^k)$.
+Let's say uncertainty measures choosing one of $n$ events that can happen, equally likely. We use the measure $H(n)$ to denote the uncertainty in the system. If the number of events that can happen changes, $n + \delta$, the measure $H(n+\delta)$ should change finitely too.
 
-System2 can be broken up into $k$ choices, each with an uncertainty of $H(n)$. Therefore, by (3):
+What if there are multiple choices to be made? For example, flipping multiple coins, or picking cards from multiple decks? There are $n$ possible events that can happen in the original system. A new System2 is composed of $k$ choices with, $n_1 = n_2, ..., n_k = n$ same number of outcomes from that pool of events. In this system2, an (aggregate) event is a collection of $k$ choices. Therefore, there are $N=n_1 \cdot n_2 \cdot ... n_k=n^k$ possible aggregate events. The measure of uncertainty in this system2 is $H(n^k)$.
+
+Therfore, whether events are represented in aggregate as $n^k$, or sequentially as as $n_1, n_2,...,n_k$, the uncertainty should be the same. Therefore, by (3):
 
 $$
 H(n^k) = H(n_1) + H(n_2) + ... = k H(n)
@@ -42,7 +47,7 @@ $$
 k \log n = \log n^k
 $$
 
-Now, generalizing to the case where a successive choices do not have equal probabilities. When one choice has been made, the pool of available events is different. For example, we can break down the guessing a card into two categories of events: (1) guessing the suit (one of $n_1 = 4$), and (2) guessing the number from that suit (one of $n_2 = 13$). After making our choices, there are still $N$ events than can happen (in this example, $4\times 13=52$), but we are first choosing a category, and then choosing from inside that category. Each category of choice has a different pool of outcomes.
+Previously, each choice had the same outcomes. Now, generalizing to the case where a successive choices do not have equal probabilities ($n_1 \neq n_2 ...$). For example, we can break down the guessing a card into two categories of events: (1) guessing the suit (one of $n_1 = 4$), and (2) guessing the number from that suit (one of $n_2 = 13$). After making our choices, there are still $N$ events than can happen (in this example, $n_1 \cdot n_2 = 4\times 13=52$), but we are first choosing a category, and then choosing from inside that category. Each category of choice has a different pool of outcomes.
 
 So, if $N$ is the total number of events in this system:
 
@@ -154,7 +159,9 @@ Play around with the widgets below to get an understanding.
 
 {{< read src="post/entropy/entropy.html" >}}
 
-## Representing surprise
+## How to think about entropy?
+
+## How to use entropy?
 
 There are several ways $H$ can be used to measure the degree of surprise in a system.
 
