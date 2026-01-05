@@ -161,6 +161,10 @@ Play around with the widgets below to get an understanding.
 
 ## How to think about entropy?
 
+### Surprise
+
+### Dimensionality
+
 ## How to use entropy?
 
 There are several ways $H$ can be used to measure the degree of surprise in a system.
