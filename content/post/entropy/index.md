@@ -16,7 +16,6 @@ In this post, I will derive entropy from first principles. This requires no more
 
 ## A derivation
 
-
 ### The conditions
 
 We want a function, $H(n)$, which measures the uncertainty in a system in which we chose one of $n$ events that can occur. We would want it to exhibit the following three properties:
@@ -47,7 +46,7 @@ $$
 k \log n = \log n^k
 $$
 
-Previously, each choice had the same outcomes. Now, generalizing to the case where a successive choices do not have equal probabilities ($n_1 \neq n_2 ...$). For example, we can break down the guessing a card into two categories of events: (1) guessing the suit (one of $n_1 = 4$), and (2) guessing the number from that suit (one of $n_2 = 13$). After making our choices, there are still $N$ events than can happen (in this example, $n_1 \cdot n_2 = 4\times 13=52$), but we are first choosing a category, and then choosing from inside that category. Each category of choice has a different pool of outcomes.
+Previously, each choice had the same outcomes. Now, generalizing to the case where successive choices do not have equal probabilities ($n_1 \neq n_2 ...$). For example, we can break down the guessing a card into two categories of events: (1) guessing the suit (one of $n_1 = 4$), and (2) guessing the number from that suit (one of $n_2 = 13$). After making our choices, there are still $N$ events than can happen (in this example, $n_1 \cdot n_2 = 4\times 13=52$), but we are first choosing a category, and then choosing from inside that category. Each category of choice has a different pool of outcomes.
 
 So, if $N$ is the total number of events in this system:
 
@@ -65,11 +64,15 @@ H(\text{categories}) &= -\sum_i p_i \log p_i
 \end{align*}
 $$
 
-In many real-world cases, we care about the category of events - the bigger picture - than the actual events themselves. This *category* is called a macrostate. Why not care about microstates? In many cases, they are fungible states which have significance only in aggregate. For example, the average kinetic energy of particles (temperature) but not the actual velocity of a particle. We get to pick what we want the macrostate to be.
+### Why categories?
 
-Also note that the total number of events, $N$, gets subsumed into the probability distribution.
+The emphasis on breaking a system down into categegories, or sequences of choices, is for the sake of generality. Sometimes, the individual events that can occur are not interesting for the sake of analysis. There may be infinitely many events that can take place. Instead, a combination or range of events is of interest. For example, a game where two dice are thrown and the winner is the throw with the highest sum. There are $6\times6=36$ aggregate events that can occur in this system. If all we cared about was describing these events, then the entropy would be $-\sum^36_1 \frac{1}{36} \log \frac{1}{36}=\log 36$. *However*, we care about the sum. There are 11 distinct sums ranging from 2 (1+1) to 12 (6+6), with non-uniform probabilities. Each sum may contain multiple events. Therefore, the entropy of this system where we care about sums is: $-\sum_1^11 p_i \log p_i$.
 
-> Entropy does not depend on the number of events (microstates), but the probability of events' categories (macrostates).
+This categorization is called the *macrostate*. The actual events are called the *microstate*. Sometimes, the macrostate is the same as the microstate. In many cases, it is not, as we saw earlier. Another example is temperature. Temperature is the average kinetic energy of molecules. The average kinetic energy is made up of indivudual velocities. However, we do not care about these microstates, only the aggregate statistic.
+
+Also note that the total number of events - microstates - $N$, gets subsumed into the probability distribution.
+
+> Entropy does not depend on the number of events (microstates), but the categorization of events (macrostates).
 
 $$
 H(macrostates...) = -\sum_i p_i \log p_i
@@ -87,13 +90,11 @@ $$
 H([1,2,3,4,5,6]) = - 6 * (1/6 \cdot \log 1/6)
 $$
 
-In case of composite vs non-composite numbers. Here macro-states are different:
+In case we care about whether the die landed on composite vs non-composite numbers, the macro-states are different:
 
 $$
 H([\text{composite}, \text{non-composite}]) = H([4,6], [1,2,3,5]) = - (1/3 \cdot \log 1/3 + 2/3 \cdot \log 2/3)
 $$
-
-The last two are bigger numbers. If there are more states to choose from or the states do not exhibit the same probabilities, the uncertainty in the observation will be higher.
 
 ## A digression on logs
 
@@ -163,7 +164,17 @@ Play around with the widgets below to get an understanding.
 
 ### Surprise
 
+Entropy is the unexpectedness in the individual events and the categorization we care about.
+
+If when rolling a die, all we care about was that a number less than 7 was rolled, the entropy is $-\sum 1 \log 1=0$. Each microstate is as fungible as the other. We don't care because any outcome fits the bill.
+
+If, when rolling a die, we care about what the number was, then the entropy is $-\sum_1^6 \frac{1}{6}\log \frac{1}{6} = \log 6 > 0$. We care a lot about each individual microstate.
+
 ### Dimensionality
+
+Entropy is the number of choices needed to describe categories of events. If each choice were a separate axis in a coordinate system, entropy is the dimensionality of the categorization.
+
+We've been taking $\log_2$ for convenience. This means that each choice - axis - has 2 possible values. But, we can extend to any logarithm base to represent the number of values on an axis.
 
 ## How to use entropy?
 
