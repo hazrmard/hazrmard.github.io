@@ -66,7 +66,7 @@ $$
 
 ### Why categories?
 
-The emphasis on breaking a system down into categegories, or sequences of choices, is for the sake of generality. Sometimes, the individual events that can occur are not interesting for the sake of analysis. There may be infinitely many events that can take place. Instead, a combination or range of events is of interest. For example, a game where two dice are thrown and the winner is the throw with the highest sum. There are $6\times6=36$ aggregate events that can occur in this system. If all we cared about was describing these events, then the entropy would be $-\sum^36_1 \frac{1}{36} \log \frac{1}{36}=\log 36$. *However*, we care about the sum. There are 11 distinct sums ranging from 2 (1+1) to 12 (6+6), with non-uniform probabilities. Each sum may contain multiple events. Therefore, the entropy of this system where we care about sums is: $-\sum_1^11 p_i \log p_i$.
+The emphasis on breaking a system down into categegories, or sequences of choices, is for the sake of generality. Sometimes, the individual events that can occur are not interesting for the sake of analysis. There may be infinitely many events that can take place. Instead, a combination or range of events is of interest. For example, a game where two dice are thrown and the winner is the throw with the highest sum. There are $6\times6=36$ aggregate events that can occur in this system. If all we cared about was describing these events, then the entropy would be $-\sum^{36}_1 \frac{1}{36} \log \frac{1}{36}=\log 36$. *However*, we care about the sum. There are 11 distinct sums ranging from 2 (1+1) to 12 (6+6), with non-uniform probabilities. Each sum may contain multiple events. Therefore, the entropy of this system where we care about sums is: $-\sum_1^{11} p_i \log p_i$.
 
 This categorization is called the *macrostate*. The actual events are called the *microstate*. Sometimes, the macrostate is the same as the microstate. In many cases, it is not, as we saw earlier. Another example is temperature. Temperature is the average kinetic energy of molecules. The average kinetic energy is made up of indivudual velocities. However, we do not care about these microstates, only the aggregate statistic.
 
@@ -127,10 +127,10 @@ graph TD
     M -- No --> O[Result: 1]
 ```
 
-This makes sense for integer arguments. What does it mean when we take a log of probabilities when calculating entropy? Well, a probability is a ratio of a category of events to the total number of events, $n_i/N$. The log of a probability is the difference between the logs of events. We take a negative log to measure entropy, as derived above: $-\log(n_i/N) = \log (N/n_i)= \log(N) - \log(n_i)$. This tells us: I need to make only $c_i$ choices to describe one amongst $n_i$ events, but $C >= c_i$ choices to describe one in $N$ events. The difference is the extra choices I have to make to describe $N$ events, compared to just $n_i$ events. Then, for all categories of events ($n_1, n_2, ..., n_k$), we take a weighed sum to say: It costs me $C - c_1$ extra choices $n_i/N$ of the time, and $C - c_k$ etra choices $n_k/N$ of the time and so on, for an everage of
+This makes sense for integer arguments. What does it mean when we take a log of probabilities when calculating entropy? Well, a probability is a ratio of a category of events to the total number of events, $n_i/N$. The log of a probability is the difference between the logs of events. We take a negative log to measure entropy, as derived above: $-\log(n_i/N) = \log (N/n_i)= \log(N) - \log(n_i)$. This tells us: I need to make only $c_i = \log n_i$ choices to describe one amongst $n_i$ events, but $C = \log N >= c_i$ choices to describe one in $N$ events. The difference is the extra choices I have to make to describe $N$ events, compared to just $n_i$ events. Then, for all categories of events ($n_1, n_2, ..., n_k$), we take a weighed sum to say: It costs me $C - c_i$ extra choices $n_i/N$ of the time, and $C - c_k$ etra choices $n_k/N$ of the time and so on, for an everage of
 
 $$
-H() = - \sum_i^k p_i \log p_i
+H(macrostates...) = - \sum_i^k p_i \log p_i
 $$
 
 extra choices for a certain probability distribution over $k$ categories of $N$ events.
