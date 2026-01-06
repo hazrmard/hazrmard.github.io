@@ -29,6 +29,10 @@
         }
     },
     {
+        "datetime_start": "1878-01-02",
+        "header": "First Zionist agricultural colony in Palestine (Petah Tikva) established."
+    },
+    {
         "datetime_start": "1881-01-02",
         "datetime_end": null,
         "header": "Russian pogroms in Europe. Zionist movement begins to form.",
@@ -44,7 +48,7 @@
     {
         "datetime_start": "1882-01-02",
         "datetime_end": null,
-        "header": "First wave of Jewish immigrants begin to settle (Aliyah) in Palestine.",
+        "header": "First wave of Jewish immigrants (25,000) begin to settle (Aliyah) in Palestine.",
         "content": "Foundation of Rishon Lezion, Zichron Yaacov, and Rosh Pina in Palestine.",
         "images": [],
         "taxonomies": [
@@ -119,6 +123,14 @@
         }
     },
     {
+        "datetime_start": "1897-01-02",
+        "header": "Nahman Syrkin calls for evacuation of Palestine for the Jews",
+        "content": "Syrkin, a prominent Zionist thinker, advocates for the evacuation of Palestine for the Jews.",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
         "datetime_start": "1898-08-28",
         "datetime_end": null,
         "header": "Second Zionist Congress held in Basel, Switzerland",
@@ -167,8 +179,8 @@
     {
         "datetime_start": "1904-01-02",
         "datetime_end": "1914-01-02",
-        "header": "Second wave of Jewish migration (Aliyah) from Europe",
-        "content": "",
+        "header": "Second wave of Jewish migration (40,000) from Europe",
+        "content": "Jews total 6% of the population.",
         "images": [],
         "taxonomies": [
             "ejews",
@@ -177,6 +189,18 @@
         "bgRender": {
             "color": "#e3f2fd"
         }
+    },
+    {
+        "datetime_start": "1905-01-02",
+        "header": "Israel Zangwill states Jews must drive out the Arabs.",
+        "content": "... or 'grapple with the problem of a large alien population.'",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
+        "datetime_start": "1907-01-02",
+        "header": "First kibbutz established north of Jaffa"
     },
     {
         "datetime_start": "1908-01-02",
@@ -195,6 +219,17 @@
         "datetime_start": "1908-12-01",
         "header": "Al-Karmil, an anti-Zionist newspaper, is first published.",
         "content": "The owner/writer was Najib Nassar, a Palestinian Christian. He wrote extensively against Zionist efforts and their collaboration with Ottoman and later British rulers."
+    },
+    {
+        "datetime_start": "1909-01-02",
+        "header": "Tel Aviv founded as a Jewish suburb of Jaffa"
+    },
+    {
+        "datetime_start": "1911-01-02",
+        "header": "Memo to Zionist Executive speaks of 'limited population transfer'",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
     },
     {
         "datetime_start": "1911-01-15",
@@ -240,6 +275,52 @@
         "bgRender": {
             "color": "#e3f2fd"
         }
+    },
+    {
+        "datetime_start": "1919-01-02",
+        "header": "Chaim Weizmann calls for Palestine 'as Jewish as England is English'",
+        "content": "Other members of the Zionist Commission to the Paris Peace Conference say 'as many Arabs as possible should be persuaded to emigrate.'",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
+        "datetime_start": "1919-01-02",
+        "header": "First Palestinian National Congress rejects Balfour Declaration, demands independence.",
+        "taxonomies": [
+            "rhetoric_palestinians"
+        ]
+    },
+    {
+        "datetime_start": "1919-01-02",
+        "header": "Winston Churchill pledges support to the Zionist cause",
+        "content": "He writes 'there are Jews, whom we are pledged to introduce into Palestine, and who take it for granted that the local population will be cleared out to suit their convenience.'",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
+        "datetime_start": "1919-01-02",
+        "datetime_end": "1933-01-02",
+        "header": "Third wave of Jewish migration (35,000) from Europe",
+        "content": "Jews make up 12% of the population and hold 3% of land.",
+        "taxonomies": [
+            "statistic_demographics"
+        ]
+    },
+    {
+        "datetime_start": "1920-01-02",
+        "header": "Haganah founded as underground Jewish military organization.",
+        "taxonomies": [
+            "zionism"
+        ]
+    },
+    {
+        "datetime_start": "1921-01-02",
+        "header": "Protests in Jaffa against large-scale Zionist migration.",
+        "taxonomies": [
+            "palestinians"
+        ]
     },
     {
         "datetime_start": "1922-07-24",
@@ -383,22 +464,87 @@
         "content": "The dead include the Spanish vice-consul, Manuel Allende Salazar."
     },
     {
-        "datetime_start": "1948-02-1948",
+        "datetime_start": "1948-01-20",
+        "header": "Britain plans to yield areas to to dominant groups.",
+        "content": ""
+    },
+    {
+        "datetime_start": "1948-02-18",
+        "header": "Haganah calls up 25-35 year olds for military service."
+    },
+    {
+        "datetime_start": "1948-02-22",
         "header": "Supporters of Amin al Husayni kill 88 in car bombs, injuring hundreds."
+    },
+    {
+        "datetime_start": "1948-02-24",
+        "header": "US delegate to UN Security Council proposes peacekeeping rather than enforcing partition."
     },
     {
         "datetime_start": "1948-02-29",
         "header": "Lehi kills 28 British soldiers by mining a train near Rehovot."
     },
     {
+        "datetime_start": "1948-03-06",
+        "header": "Plan Dalet is finalized.",
+        "content": ""
+    },
+    {
+        "datetime_start": "1948-03-18",
+        "header": "US President Truman announces support for the Zionist cause."
+    },
+    {
+        "datetime_start": "1948-03-19",
+        "header": "Arab leaders decide to accept UNSC proposal of truce & trusteeship instead of partition.",
+        "content": "This is rejected by the Zionists."
+    },
+    {
+        "datetime_start": "1948-03-15",
+        "datetime_end": "1948-05-15",
+        "header": "Haganah expels Palestinians from coastal areas between Haifa and Jaffa."
+    },
+    {
         "datetime_start": "1948-03-31",
         "header": "Lehi bombs and kills 40 Palestinians, injuring 60 on the Cairo-Haifa train near Binyamina"
+    },
+    {
+        "datetime_start": "1948-04-01",
+        "header": "Czech arms delivered to Haganah",
+        "content": "4,500 rifles, 200 light machine guns, 5 million rounds of ammunition."
+    },
+    {
+        "datetime_start": "1948-04-04",
+        "header": "Plan Dalet launched by Haganah",
+        "content": "Villages along Tel-Aviv to Jerusalem road captured and residents expelled."
+    },
+    {
+        "datetime_start": "1948-04-09",
+        "header": "Deir Yassin Massacre",
+        "content": "Over 100 Palestinian villagers killed by Irgun and Lehi forces. The attack was part of Plan Dalet to secure the road to Jerusalem."
+    },
+    {
+        "datetime_start": "1948-04-22",
+        "header": "Haifa cleansed of Palestinians"
+    },
+    {
+        "datetime_start": "1948-04-26",
+        "datetime_end": "1948-04-29",
+        "header": "Haganah attacks Jerusalem",
+        "content": "Haganah is forced to hand over East Jerusalem to the British. Haganah captures West Jerusalem and expells all Palestinians."
+    },
+    {
+        "datetime_start": "1948-05-03",
+        "header": "Reports claim 175,000 to 250,000 Palestinians have been forced from homes."
+    },
+    {
+        "datetime_start": "1948-05-13",
+        "header": "Arab Legion attacks Jewish communities in retaliation."
     },
     {
         "datetime_start": "1948-05-14",
         "datetime_end": null,
         "header": "Declaration of Independence",
-        "content": "David Ben-Gurion proclaims the establishment of the State of Israel.",
+        "content": "David Ben-Gurion proclaims the establishment of the State of Israel. US President Truman immediately recognizes the new state.",
         "images": [],
         "taxonomies": [
             "israel",
@@ -407,5 +553,61 @@
         "bgRender": {
             "color": "#f3e5f5"
         }
+    },
+    {
+        "datetime_start": "1948-06-11",
+        "datetime_end": "1948-07-08",
+        "header": "First truce established."
+    },
+    {
+        "datetime_start": "1948-07-08",
+        "datetime_end": "1948-07-18",
+        "header": "Fighting resumes as IDF captures Lydda and Ramle."
+    },
+    {
+        "datetime_start": "1948-07-17",
+        "header": "IDF attacks but fails to capture Old City of Jerusalem."
+    },
+    {
+        "datetime_start": "1948-07-18",
+        "datetime_end": "1948-10-15",
+        "header": "Second truce established.\n        content: IDF breaks truce by capturing several more villages."
+    },
+    {
+        "datetime_start": "1948-09-17",
+        "header": "UN mediator assassinated by Jewish terrorists in Jerusalem."
+    },
+    {
+        "datetime_start": "1948-10-29",
+        "datetime_end": "1948-10-31",
+        "header": "Thousands of Palestinians expelled in Operation Hiram."
+    },
+    {
+        "datetime_start": "1948-11-04",
+        "header": "UNSC Resolution 194 on Palestinian refugee right of return."
+    },
+    {
+        "datetime_start": "1948-11-01",
+        "header": "IDF begins to expel villagers from inside Lebanon."
+    },
+    {
+        "datetime_start": "1949-02-24",
+        "header": "Israeli-Egyptian Armistice"
+    },
+    {
+        "datetime_start": "1949-02-28",
+        "header": "IDF expells 2000-3000 villagers from Faluja."
+    },
+    {
+        "datetime_start": "1949-03-23",
+        "header": "Israeli-Lebanese Armistice"
+    },
+    {
+        "datetime_start": "1949-04-03",
+        "header": "Israeli-Jordanian Armistice"
+    },
+    {
+        "datetime_start": "1949-07-20",
+        "header": "Israeli-Syrian Armistice"
     }
 ]
