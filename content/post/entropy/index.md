@@ -68,7 +68,7 @@ $$
 
 The emphasis on breaking a system down into categegories, or sequences of choices, is for the sake of generality. Sometimes, the individual events that can occur are not interesting for the sake of analysis. There may be infinitely many events that can take place. Instead, a combination or range of events is of interest. For example, a game where two dice are thrown and the winner is the throw with the highest sum. There are $6\times6=36$ aggregate events that can occur in this system. If all we cared about was describing these events, then the entropy would be $-\sum^{36}_1 \frac{1}{36} \log \frac{1}{36}=\log 36$. *However*, we care about the sum. There are 11 distinct sums ranging from 2 (1+1) to 12 (6+6), with non-uniform probabilities. Each sum may contain multiple events. Therefore, the entropy of this system where we care about sums is: $-\sum_1^{11} p_i \log p_i$.
 
-This categorization is called the *macrostate*. The actual events are called the *microstate*. Sometimes, the macrostate is the same as the microstate. In many cases, it is not, as we saw earlier. Another example is temperature. Temperature is the average kinetic energy of molecules. The average kinetic energy is made up of indivudual velocities. However, we do not care about these microstates, only the aggregate statistic.
+This categorization is called the *macrostate*. The actual events are called the *microstate*. Sometimes, the macrostate is the same as the microstate. In many cases, it is not, as we saw earlier. Another example is temperature. Temperature is the average kinetic energy of molecules. The average kinetic energy is made up of indivudual velocities. However, we do not care about these microstates, only the aggregate statistic. (Entropy and temperature's relationship have interesting outcomes, [for example](/post/2017-01-31-is-cold-the-new-hot).)
 
 Also note that the total number of events - microstates - $N$, gets subsumed into the probability distribution.
 
@@ -164,9 +164,9 @@ Play around with the widgets below to get an understanding.
 
 ### Surprise
 
-Entropy is the unexpectedness in the individual events and the categorization we care about.
+Entropy is the unexpectedness in describing categories. If more catgories of events are likely, the more we're surprised by an observation (which may belong to any category!). Conversely, the fewer categories of events are likely, the less we are surprised (by the more obvious outcome.)
 
-If when rolling a die, all we care about was that a number less than 7 was rolled, the entropy is $-\sum 1 \log 1=0$. Each microstate is as fungible as the other. We don't care because any outcome fits the bill.
+If, when rolling a die, all we care about was that a number less than 7 was rolled, the entropy is $-\sum 1 \log 1=0$. Each microstate is as fungible as the other. All rolls belong to the same category. We don't care because any outcome fits the bill.
 
 If, when rolling a die, we care about what the number was, then the entropy is $-\sum_1^6 \frac{1}{6}\log \frac{1}{6} = \log 6 > 0$. We care a lot about each individual microstate.
 
