@@ -124,7 +124,7 @@
     },
     {
         "datetime_start": "1897-01-02",
-        "header": "Nahman Syrkin calls for evacuation of Palestine for the Jews",
+        "header": "[Nahman Syrkin](https://en.wikipedia.org/wiki/Nachman_Syrkin) calls for evacuation of Palestine for the Jews",
         "content": "Syrkin, a prominent Zionist thinker, advocates for the evacuation of Palestine for the Jews.",
         "taxonomies": [
             "rhetoric_zionists"
@@ -165,7 +165,7 @@
         "datetime_start": "1901-01-02",
         "datetime_end": null,
         "header": "Jewish National Fund established at the Fifth Zionist Congress",
-        "content": "",
+        "content": "JNF would acquire land in Palestine. The land was to be worked solely by Jews.",
         "details": [],
         "images": [],
         "taxonomies": [
@@ -192,8 +192,8 @@
     },
     {
         "datetime_start": "1905-01-02",
-        "header": "Israel Zangwill states Jews must drive out the Arabs.",
-        "content": "... or 'grapple with the problem of a large alien population.'",
+        "header": "[Israel Zangwill](https://en.wikipedia.org/wiki/Israel_Zangwill) recognizes that for Zionism entails Jews must drive out the Arabs.",
+        "content": "... or 'grapple with the problem of a large alien population.' Zangwill was a contemporary and supporter of Herzl until 1902. He supported the idea of Jewish colonization of Palestine ('small population of Arabs and fellahin and wandering, lawless, blackmailing Bedouin tribes'). However, by 1904 he came to realize that Palestine already had a people ('the Sanjak of Jerusalem is twice as thickly populated as the United States'). He  broke away from Zionism and founded an alternative Jewish Territorial Organization, supporting Jewish settlement in a land that was avilable.",
         "taxonomies": [
             "rhetoric_zionists"
         ]
@@ -218,7 +218,8 @@
     {
         "datetime_start": "1908-12-01",
         "header": "Al-Karmil, an anti-Zionist newspaper, is first published.",
-        "content": "The owner/writer was Najib Nassar, a Palestinian Christian. He wrote extensively against Zionist efforts and their collaboration with Ottoman and later British rulers."
+        "content": "The owner/writer was Najib Nassar, a Palestinian Christian. He wrote extensively against Zionist efforts and their collaboration with Ottoman and later British rulers.",
+        "taxonomies": ["myth_empty_land", "rhetoric_palestinians"]
     },
     {
         "datetime_start": "1909-01-02",
@@ -238,7 +239,7 @@
         "content": "Founded by two Palestinian Christian brothers, the paper became a leading voice against Zionism.",
         "images": [],
         "taxonomies": [
-            "palestinians"
+            "palestinians", "myth_empty_land", "rhetoric_palestinians"
         ],
         "bgRender": {
             "color": "#e3f2fd"
@@ -335,6 +336,27 @@
         "bgRender": {
             "color": "#e3f2fd"
         }
+    },
+    {
+        "datetime_start": "1922-07-24",
+        "header": "British census of Palestine. 78% Muslim, 11% Jewish, 9.6% Christian. Total population: 757,182",
+        "taxonomies": ["statistic_demographics", "myth_empty_land"]
+    },
+    {
+        "datetime_start": "1924-01-01",
+        "datetime_end": "1928-01-01",
+        "header": "67,000 Zionist immigrants arrive in Palestine. Half are from Poland. Jewish population rises to 16%. Jews own 4% of land.",
+        "taxonomies": ["zionism", "statistic_demographics"]
+    },
+    {
+        "datetime_start": "1924-04-01",
+        "header": "The Revionist Party is founded in Paris by Ze'ev Jabotinsky",
+        "content": "[Revisionist Zionism](https://en.wikipedia.org/wiki/Revisionist_Zionism) is characterized by territorial maximalism and calls for settling on both sides of the Jordan River."
+    },
+    {
+        "datetime_start": "1929-08-23",
+        "header": "Riots in Palestine over access to the Western Wall in Jerusalem.",
+        "content": "116 Arabs and 133 Jews are killed. Hebron massacre (Aug 24), where a mob of Palestinians kills 68 Jews. According to some historians, the uprising was also triggered by the refusal of Zionist leaders to accept British offers of shared representation in Palestine which was accepted by the Arab leadership.[1] According to other historians, the riots were caused by the mufti trying to strengthen his position by rousing fears of a Jewish takeover of the Temple Mount.[2] Scholars have also pointed to the transfer of land to the Jewish National Fund, which, along with rising concerns over land sales and immigration, contributed to socioeconomic anxieties that helped fuel the outbreak."
     },
     {
         "datetime_start": "1936-04-20",
@@ -571,7 +593,8 @@
     {
         "datetime_start": "1948-07-18",
         "datetime_end": "1948-10-15",
-        "header": "Second truce established.\n        content: IDF breaks truce by capturing several more villages."
+        "header": "Second truce established.",
+        "content": "IDF breaks truce by capturing several more villages."
     },
     {
         "datetime_start": "1948-09-17",
