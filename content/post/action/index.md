@@ -36,7 +36,7 @@ Then, the function will have one extreme value $x=x_{ext}$ where $y(x) - y(x_{ex
 Calculus gives us an easy way to find this optimum. The derivative of a function is the rate of change of output with respect to the change in input.
 
 $$
-\frac{d}{dx} y = \limit_{x\rightarrow 0}\frac{f(x+\delta x) - f(x)}{\delta x}
+\frac{d}{dx} y = \lim_{x\rightarrow 0}\frac{f(x+\delta x) - f(x)}{\delta x}
 $$
 
 This works when we want to find a single value that minimizes a function. What happens if we want find multiple values that minimize a function? For example, what is the *angle* and *speed* that a thrown ball will take, maximizing range?
@@ -49,10 +49,10 @@ $$
 y = f(\vec{x}, \theta)
 $$
 
-Each input is its own, independent thing. $x_1$ can be speed, $x_2$ can be angle. That is, they are separate dimensions. The derivative is found by:
+Each input is its own, independent thing. $x_1$ can be speed, $x_2$ can be angle, $x_3$ can be height. That is, they are separate dimensions. The derivative is found by:
 
 $$
-\frac{d}{d\vec{x}} y = \sum_i^n \limit_{x_i\rightarrow 0}\frac{f(\vec{x}+\delta \hat{x_i}) - f(\vec{x})}{\delta \hat{x_i}}
+\frac{d}{d\vec{x}} y = \sum_i^n \lim_{x_i\rightarrow 0}\frac{f(\vec{x}+\delta \hat{x_i}) - f(\vec{x})}{\delta \hat{x_i}}
 $$
 
 Basically:
@@ -62,9 +62,18 @@ $$
 $$
 
 
-Like, before an optimum is found where the derivative is zero.
+Like, before an optimum is found where the derivative is zero. An example problem could be: given some energy budget (kinetic+potential), what is the optimal height, angle, and speed to throw the ball with to ensure maximum range.
 
 ## Functionals
+
+Extending multivariate functions by making two assumptions:
+
+1. A function may map infinitely many inputs to outputs, that is the size of $\vec{x}$ is $\infty$. 
+2. The inputs are related to one another. That is, it makes sense to add $x_1$ to $x_2$. Adding a distance to a distance works, unlike adding an angle to a speed.
+
+For example, the location of a ball at each point in time to ensure maximum range. A problem could be: given some energy budget (kinetic+potential), what is the trajectory of the ball which maximizes its range?
+
+The problem seeks to optimize the range with respect to infinitely many variables which are related to each other. While each location in time is its own variable, the trajectory could be explained by a function. Therefore, instead of solving a system of equations for each location, can the derivative be solved for a function that describes all such locations?
 
 A functional is a function of a function, $J[y]$. It maps a function, $y$ to a scalar. A functional is extreme around some value $y=f$, if $J[y]-J[f]$ have the same signs for all $y$ in the vicinity of $f$.
 
