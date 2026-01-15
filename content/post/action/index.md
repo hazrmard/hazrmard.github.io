@@ -39,9 +39,30 @@ $$
 \frac{d}{dx} y = \limit_{x\rightarrow 0}\frac{f(x+\delta x) - f(x)}{\delta x}
 $$
 
-This works when we want to find a single value that minimizes a function. What happens if we want find multiple values that minimize a function? For example, what is the *path* that a thrown ball will take, maximizing range?
+This works when we want to find a single value that minimizes a function. What happens if we want find multiple values that minimize a function? For example, what is the *angle* and *speed* that a thrown ball will take, maximizing range?
 
 ## Multivariate functions
+
+Multivariate functions are mappings from multiple inputs to outputs. Here, the input is ${x_1, x_2, ..., x_n}$ which can be represented as a vector $\vec{x}$.
+
+$$
+y = f(\vec{x}, \theta)
+$$
+
+Each input is its own, independent thing. $x_1$ can be speed, $x_2$ can be angle. That is, they are separate dimensions. The derivative is found by:
+
+$$
+\frac{d}{d\vec{x}} y = \sum_i^n \limit_{x_i\rightarrow 0}\frac{f(\vec{x}+\delta \hat{x_i}) - f(\vec{x})}{\delta \hat{x_i}}
+$$
+
+Basically:
+
+$$
+\frac{d}{d\vec{x}} y = \hat{x_1}\frac{d}{dx_1} y + \hat{x_2}\frac{d}{dx_2} y + ... \hat{x_n}\frac{d}{dx_n} y
+$$
+
+
+Like, before an optimum is found where the derivative is zero.
 
 ## Functionals
 
