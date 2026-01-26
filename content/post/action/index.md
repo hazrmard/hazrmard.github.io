@@ -26,23 +26,35 @@ Importantly, to optimize a function, two steps are needed:
 If a problem can be posed as finding the minimum/maximum argument $x$ of a function and some parameters,
 
 $$
-y(x) = f(x, \theta)
+y = f(x, \theta)
 $$
 
-Then, the function will have one extreme value $x=x_{ext}$ where $y(x) - y(x_{ext})$ has the same sign in the vicinity of $x_{ext}$. That is, all points around the extreme value are either larger (i.e. $x_{ext}$ is minimum) or smaller (i.e. $x_{ext}$ is maximum).
+Then, the function will have one extreme value $x=x_{ext}$ where $y(x) - y(x_{ext})$ has the same sign in the vicinity of $x_{ext}$. That is, all points around the extreme value are either larger (i.e. $x_{ext}$ is minimum) or smaller (i.e. $x_{ext}$ is maximum). That implies, that $f(x_{ext})$ does not change in that vicinity.
+
+$$
+\text{sign} \left(f(x) - f(x + \delta x)\right) = \text{sign} \left( f(x) - f(x - \delta x) \right)
+$$
+
+Making a linear approximation to predict how the function changes. Assuming a measurement of change in $x, y$ is available $\Delta x, \Delta y$ around $x$, then for a small pertubation of $\delta x$,
+
+$$
+\delta y = \frac{\Delta f(x)}{\Delta x} \cdot \delta x
+$$
+
+Then, $f(x +/- \delta x)$ is $f(x) +/- \frac{\Delta f(x)}{\Delta x} \cdot \delta x$. This implies that for the signs to be the same on both sides of $x$, \$\delta y$ and therefore $\frac{\Delta f(x)}{\Delta x}$ must be zero.
 
 ## Derivatives
 
-Calculus gives us an easy way to find this optimum. The derivative of a function is the rate of change of output with respect to the change in input.
+More rigorously, calculus gives an easy way to find this optimum. The derivative of a function is the rate of change of output with respect to the change in input.
 
 $$
-\frac{d}{dx} y = \lim_{x\rightarrow 0}\frac{f(x+\delta x) - f(x)}{\delta x}
+\frac{d}{dx} y = \lim_{\delta x\rightarrow 0}\frac{f(x+\delta x) - f(x)}{\delta x}
 $$
 
-A derivative is a function too, and in shorthand called $y'(x)$. A derivative of a derivative is $y''(x)$. Expanding $y(x)$ using the [Taylor series](https://en.wikipedia.org/wiki/Taylor_series):
+A derivative is a function too, and in shorthand called $y'=f'(x)$. A derivative of a derivative is $y''=f''(x)$. Expanding $y(x)$ using the [Taylor series](https://en.wikipedia.org/wiki/Taylor_series):
 
 $$
-y(x + \delta x) = y(x) + y'(x)\cdot \delta x + \frac{1}{2} y''(x) \cdot \delta x^2
+f(x + \delta x) = f(x) + f'(x)\cdot \delta x + \frac{1}{2} f''(x) \cdot \delta x^2
 $$
 
 $\delta x^2$ becomes vanishingly small compared to $\delta x$ and that term can be discarded. Recall that the optimality condition is that the sign of $y(x + \delta x)$ should be the same in the vicinity of $x=x_{ext}$. For the sign to remain the same for both $+-\delta x$, it is necessary that $y'(x)\cdot \delta x=0$. And $\delta x$ is not zero. Therefore, for an optimum of a function, a necessary condition is:
@@ -75,20 +87,22 @@ $$
 The derivative is found by:
 
 $$
-\frac{d}{d\vec{x}} y = \sum_i^n \lim_{x_i\rightarrow 0}\frac{f(\vec{x}+\delta \hat{x_i}) - f(\vec{x})}{\delta \hat{x_i}}
+\frac{d}{d\vec{x}} y = \sum_i^n \lim_{\delta x_i\rightarrow 0}\frac{f(\vec{x}+\delta \hat{x_i}) - f(\vec{x})}{\delta \hat{x_i}}
 $$
 
-Basically:
+The definition of a multivariate derivative is:
 
 $$
-\frac{d}{d\vec{x}} y = \hat{x_1}\frac{d}{dx_1} y + \hat{x_2}\frac{d}{dx_2} y + ... \hat{x_n}\frac{d}{dx_n} y
+\frac{d}{d\vec{x}} y = \hat{x_1}\frac{\partial}{\partial x_1} y + \hat{x_2}\frac{\partial}{\partial x_2} y + ... \hat{x_n}\frac{\partial}{\partial x_n} y
 $$
 
+And the *variation* in the function is:
+
 $$
-dy = \sum_i^n \hat{x_i}\frac{d}{dx_i} y \cdot dx_i
+dy = \sum_i^n \hat{x_i}\frac{\partial}{\partial x_i} y \cdot dx_i
 $$
 
-Like, before an optimum is found where the derivative is zero. In this case, the derivative is a vector. A vector being zero means all elements are zero. Therefore there are $n$ simultaneous equations that can be solved for each variable in $\vec{x}$:
+Like, before an optimum is found where the derivative $y'$, and therefore the variation in the function $dy$, is zero. In this case, the derivative is a vector. A vector being zero means all elements are zero. Therefore there are $n$ simultaneous equations that can be solved for each variable in $\vec{x}$:
 
 $$
 \begin{bmatrix}
@@ -124,27 +138,83 @@ $$
 y = f(g(t), \theta)
 $$
 
-Here, $y$ is a function *of* a function. This is called a functional. A functional is extreme around some value $g_{ext}(t)$, if $f[g(t)]-f[g_{ext}(t)]$ have the same signs for all $g$ in the vicinity of $g_{ext}$.
+Here, $y$ is a function *of* a function. This is called a functional. A functional is extreme around input values described by $g_{ext}(t)$, if $f[g(t)]-f[g_{ext}(t)]$ have the same signs for all $g$ in the vicinity of $g_{ext}$.
 
-A functional derivative is
-
-$$
-\frac{dy}{d \\{x_1, x_2, ..., x_n\\}} = \sum_i^n \frac{dy}{dx_i}
-$$
-
-This infinite sum is along a series of points $\delta x$ apart, where $\delta x$ approaches 0.
-
-Which, for infinitely many values, infinitisimally close, can be substituted for with an integral:
+A functional derivative is the sum of infinitely many derivatives evaluated at points infinitisimally close. Each partial derivative about $\vec{x}$ is calculated by adding a perturbation to the $i^{th}$ dimension $\delta x_i$
 
 $$
-\frac{dy}{d g(t)} = \int_{t=a}^{t=b} \frac{dy}{d g(t)} dt
+\frac{dy}{d g(t)}  = \frac{dy}{d \\{x_1, x_2, ..., x_\infty\\}} = \sum_i^\infty \frac{dy}{dx_i} = \sum_i^\infty \lim_{\delta x_i\rightarrow 0}\frac{f(\vec{x}+\delta \hat{x_i}) - f(\vec{x})}{\delta \hat{x_i}}
 $$
 
-The problem seeks to optimize the range with respect to infinitely many variables which are related to each other.
+This can be parametrized as a function:
 
-A functional is a function of a function, $J[y]$. It maps a function, $y$ to a scalar.
+$$
+\frac{dy}{d g(t)} = \sum_{t=a}^{t=b}\lim_{\delta g(t)\rightarrow 0} \frac{f(g(t) + \delta g(t)) - f(g(t))}{\delta g(t)}
+$$
+
+Where $\delta g(t)$ is a small change in $g(t)$, a small perturbation for each of the points along the line. It can be represented as $\epsilon \cdot \eta(t)$, where $\eta(t)$ is a parametric line and $\epsilon$ indicates a small addition of it to $g(t)$. Therefore the limit becomes:
+
+$$
+\frac{dy}{d g(t)} = \sum_{t=a}^{t=b} \lim_{\epsilon \rightarrow 0} \frac{f(g(t) + \epsilon \cdot \eta(t)) - f(g(t))}{\epsilon}
+$$
+
+The argument of the integral is the definition of the partial derivative:
+
+$$
+\frac{dy}{d g(t)} = \sum_{t=a}^{t=b} \frac{\partial y}{\partial g(t)}
+$$
+
+Noting that an optimum is found when a derivative is zero, the following observations can be made: the sum can be multiplied by a constant, without changing the solution.
+
+$$
+\arg_{g(t)} \frac{dy}{d g(t)} = 0 \leftrightarrow \arg_{g(t)} \epsilon \cdot \frac{dy}{d g(t)} = \epsilon \cdot 0
+$$
+
+The multiplier can be made $\epsilon = \delta t$, a smal interval of the parameter describing inputs. Then, the functional derivative becomes:
+
+$$
+\frac{dy}{d g(t)}  = \sum_{t=a}^{t=b} \frac{1}{\delta t} \frac{\partial y}{\partial g(t)} \cdot \delta t
+$$
+
+Which, as $\lim_{\delta t \rightarrow 0}$, infinitisimally close infinitely many points, can be substituted for with an integral. The *variation* becomes:
+
+$$
+dy = \int_{t=a}^{t=b} \left.\frac{\delta y}{\delta g(t)}\right|_{t} dt\\;dg(t)
+$$
+
+{{<aside "Examples of partial derivatives">}}
+
+A functional that evaluates its argument at $3$ and squares it:
+
+$$
+\\begin{align*}
+y &= f(g(t)) \rightarrow g(3)^2 \\\\
+& : f(\sin(t)) \rightarrow \sin^2 (3) \\\\
+& : f(t^3) \rightarrow (3^3)^2 \\\\
+\therefore \frac{\partial y}{\partial g(t)} &= 2 g(t)
+\\end{align*}
+$$
+
+A functional that integrates its argument over the domain:
+
+$$
+\begin{align*}
+y &= f(g(t)) \rightarrow \int g(t) dt \\\\
+&: f(\sin(t)) \rightarrow \int \cos(t) dt \\\\
+\therefore \frac{\partial y}{\partial g(t)} &= \frac{y + dy/dg \cdot \delta g - f}{\delta g} = \frac{\ + }{}
+\end{align*}
+$$
+{{</aside>}}
 
 ## The Euler-Lagrange Equation
+
+Assuming a function is of the  form (notation taken from Physics):
+
+$$
+F[y] = \int L(x, y, y')
+$$
+
+The functional derivative can be solved to give a readily useful identity.
 
 ## Examples
 
