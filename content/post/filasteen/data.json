@@ -387,6 +387,15 @@
         }
     },
     {
+        "datetime_start": "1940-01-02",
+        "header": "Yossef Weitz, head of the Jewish National Fund's land acquisition department, writes 'The only solution is to transfer the Arabs from here to neighbouring countries. Not a single village or a single tribe must be let off.'",
+        "content": "In 1932, when Weitz joined the JNF, there were only 91,000 Jews in Palestine who owned just 2% of the land. Weitz oversaw the program to purchase properties from absentee landlords and run the Palestinian tenant farmers off their land. However it soon became clear that the purchase of small lots of land would not get close to fulfilling the Zionists' dream of creating a Jewish-majority state in the region of Palestine and that it would be necessary to force the exodus of the Arab population. Due to Weitz's role in the expulsion of Palestinian Arabs in 1948, he became known as the 'Architect of Transfer'",
+        "taxonomies": [
+            "rhetoric_zionists",
+            "myth_ethnic_cleansing"
+        ]
+    },
+    {
         "datetime_start": "1941-01-02",
         "datetime_end": null,
         "header": "The Biltmore Conference - demands for the entirety of Mandatory Palestine",
@@ -405,19 +414,6 @@
         "datetime_end": "1948-05-14",
         "header": "Jewish insurgency against British rule",
         "content": "Paramilitary terror campaign against British rule, following the 1939 White Paper. Between 1945-47, 260 deaths and 912 injuries occur. Highest casualties are British (616) and Palestinians (331)."
-    },
-    {
-        "datetime_start": "1947-11-29",
-        "datetime_end": null,
-        "header": "UN Partition Plan",
-        "content": "The United Nations General Assembly adopted Resolution 181 (II), which recommended the adoption and implementation of a Plan of Partition with Economic Union.",
-        "images": [],
-        "taxonomies": [
-            "un"
-        ],
-        "bgRender": {
-            "color": "#fff3e0"
-        }
     },
     {
         "datetime_start": "1947-04-22",
@@ -459,9 +455,41 @@
         "content": "The assassination was premeditated as a reprisal for for Shubaki family allegedly providing information to the British that led to the capture of Lehi members."
     },
     {
+        "datetime_start": "1947-11-29",
+        "datetime_end": null,
+        "header": "UN Partition Plan",
+        "content": "The United Nations General Assembly adopted Resolution 181 (II), which recommended the adoption and implementation of a Plan of Partition with Economic Union.",
+        "images": [],
+        "taxonomies": [
+            "un"
+        ],
+        "bgRender": {
+            "color": "#fff3e0"
+        }
+    },
+    {
         "datetime_start": "1947-11-30",
-        "header": "Arab militants attack Jewish buses, killing 7.",
-        "content": "Flyers appearing afterwards claimed the attack was in retaliation for the Shubaki family assassination."
+        "header": "Arab militants belonging to the Abu Qishq gang attack Jewish buses, killing 7.",
+        "content": "Flyers appearing afterwards claimed the attack was in retaliation for the Shubaki family assassination. It's later reported to Ben Gurion that the attacks were unrelated to the UN Resolution."
+    },
+    {
+        "datetime_start": "1947-12-01",
+        "header": "Irgun and Haganah begin urban terror campaign against 75,000 Palestinians in Haifa.",
+        "content": "Special units of the Haganah comprising of undercover operatives, called mistravim (becoming Arab), use sniper and machine gun fire and barrel bombs to terrorize Arab neighborhoods. The official historian of the Palmach surmises: 'The Palestinians [in Haifa] were from December onwards under siege and intimidation.'"
+    },
+    {
+        "datetime_start": "1947-12-01",
+        "header": "Arab irregulars begin attacking Jewish convoys."
+    },
+    {
+        "datetime_start": "1947-12-18",
+        "header": " 15 Palestinians, including 5 children, are kiled by Palmach special forces assaulting Khisas village.",
+        "content": "The village has a few hundred Muslims and a hundred Christians. The Palmach attack at night and start blowing up houses while the occupants sleep. Ben Gurion later issues a public apology, but later still includes this in his list of successful operations."
+    },
+    {
+        "datetime_start": "1948-12-28",
+        "header": "Haganah attacks a coffee shop in the village of Lifta; Stern Gang fires into a bus nearby.",
+        "content": "The attack started when the Haganah had earlier killed a petrol station owner on a false allegation of inciting attack on Jews. Some villagers in Lifta retaliated by firing on a Jewish bus."
     },
     {
         "datetime_start": "1947-12-30",
@@ -478,7 +506,20 @@
     },
     {
         "datetime_start": "1947-12-31",
+        "header": "Haganah bows up houses in the Haifa neighborhood of Wadi Rushmiya and expels the population.",
+        "content": "Two weeks later, Haganah attacks the Hawasa neighborhood blowing up huts and a local school."
+    },
+    {
+        "datetime_start": "1947-12-31",
         "header": "Abd al Qadir al Husayni organizes blockade of Jerusalem's 100k Jewish residents."
+    },
+    {
+        "datetime_start": "1948-01-02",
+        "header": "The Long Seminar solidifies Zionist strategy for Arab transfer and proactive violence instead of retaliation.",
+        "content": "Ben Gudion acqueises to intentaional collateral damage. 'Every attack has to end with occupation, destruction, and expulsion.'",
+        "details": [
+            "details/1948-long-seminar.details"
+        ]
     },
     {
         "datetime_start": "1948-01-05",
@@ -488,7 +529,18 @@
     {
         "datetime_start": "1948-01-20",
         "header": "Britain plans to yield areas to to dominant groups.",
-        "content": ""
+        "content": "Enforcement of the UN Partition plan no longer is the defacto policy."
+    },
+    {
+        "datetime_start": "1948-01-31",
+        "header": "Ben Gurion orders Jerusalem's militart commander to assuer Jewish contiguity by destroying Sheikh Jarrah.",
+        "content": "Gurion states his mission is to 'settle Jews in every house of an evicted semi-Arab neighborhood, such as Romema'."
+    },
+    {
+        "datetime_start":" 1948-02-07",
+        "header": "Ben Gurion express desire for a demographic change in the country, upon cleansing of Romama neighborhood in Jerusalem.",
+        "content": "He says: \n >When I come now to Jerusalem, I feel I am in a Jewish (Ivrit) city.  This is a feeling I only had in Tel-Aviv or in an agricultural farm. It is  true that not all of Jerusalem is Jewish, but it has in it already a huge  Jewish bloc: when you enter the city through Lifta and Romema,  through Mahaneh Yehuda, King George Street and Mea Shearim —    there are no Arabs. One hundred percent Jews. Ever since Jerusalem  was destroyed by the Romans — the city was not as Jewish as it is now.  In many Arab neighbourhoods in the West you do not see even one  Arab. I do not suppose it will change. And what happened in  Jerusalem and in Haifa — can happen in large parts of the country. If  we persist it is quite possible that in the next six or eight months there  will be considerable changes in the country, very considerable, and to  our advantage. There will certainly be considerable changes in the  demographic composition of the country. ",
+        "taxonomies": ["rhetoric_zionists"]
     },
     {
         "datetime_start": "1948-02-18",
@@ -509,7 +561,10 @@
     {
         "datetime_start": "1948-03-06",
         "header": "Plan Dalet is finalized.",
-        "content": ""
+        "content": "Plan Dalet is a military plan developed by the Haganah to secure the Jewish state, relying on destruction of property and expulsion of Palestinians.",
+        "details": [
+            "details/1948-plan-dalet.details"
+        ]
     },
     {
         "datetime_start": "1948-03-18",
@@ -535,25 +590,55 @@
         "content": "4,500 rifles, 200 light machine guns, 5 million rounds of ammunition."
     },
     {
+        "datetime_start": "1948-04-01",
+        "header": "Palmach special forces receive orders to destroy Arab villages.",
+        "content": "As part of Operation Nachson, 'the principal objective of the operation is the destruction of Arab villages ... [and] the eviction of the villagers so that they would become an economic liability for the general Arab forces'"
+    },
+    {
         "datetime_start": "1948-04-04",
         "header": "Plan Dalet launched by Haganah",
-        "content": "Villages along Tel-Aviv to Jerusalem road captured and residents expelled."
+        "content": "Operation Nachson begins. Villages along Tel-Aviv to Jerusalem road captured and residents expelled."
     },
     {
         "datetime_start": "1948-04-09",
         "header": "Deir Yassin Massacre",
-        "content": "Over 100 Palestinian villagers killed by Irgun and Lehi forces. The attack was part of Plan Dalet to secure the road to Jerusalem."
+        "content": "Over 93 Palestinian villagers killed by Irgun and Lehi forces. The attack was part of Plan Dalet/Operation Nachson to secure the road to Jerusalem.",
+        "details": [
+            "details/1948-deir-yassin-massacre.details"
+        ]
+    },
+    {
+        "datetime_start": "1948-04-09",
+        "header": "Multiple Palestinian villages destroyed during Operation Nachson.",
+        "content": "Qastal, Qalunya, Saris, Beit Surik, and Biddu are among the villages captured and destroyed by Haganah forces. Haganah forces blow up houses and expel villagers."
+    },
+    {
+        "datetime_start": "1948-04-18",
+        "header": "The village of Tiberias is captured and cleansed of Palestinians.",
+        "content": "Haganah uses loudspeakers and barrel bombs to terrorize and expel the population. The British initially offered protection, but later negootiated a general evacuation."
     },
     {
         "datetime_start": "1948-04-22",
-        "header": "Haifa cleansed of Palestinians"
+        "header": "Haifa cleansed of Palestinians in Operation Bi'ur Hametz (Cleansing the Leaven).",
+        "content": "Haganah forces (Carmeli Brigade of 2000 soldiers) expel 50,000 Palestinians from Haifa, after the British Commander Hugh Stockwell withdraws buffer forces.",
+        "details": [
+            "details/1948-haifa-cleansing.details"
+        ]
     },
     {
         "datetime_start": "1948-04-26",
         "datetime_end": "1948-04-29",
         "header": "Haganah attacks Jerusalem",
-        "content": "Haganah is forced to hand over East Jerusalem to the British. Haganah captures West Jerusalem and expells all Palestinians."
+        "content": "Haganah is forced to hand over East Jerusalem to the British. Haganah captures West Jerusalem and expells all Palestinians.",
+        "details":[
+            "details/1948-jerusalem.details"
+        ]
     },
+    {
+        "datetime_start": "1948-05-01",
+        "header": "Safad is cleansed of Palestinians by the Palmach special forces.",
+        "content": "Safad had 9500 Arabs and 2400 Orthodox Jews, uninterested in Zionism. Defences are manned by 400 volunteers. 1000 Palmach soldiers besiege and expel Palestenians, only allowing a 100 old people to stay. They're expelled within the month."
+    }, 
     {
         "datetime_start": "1948-05-03",
         "header": "Reports claim 175,000 to 250,000 Palestinians have been forced from homes."
@@ -575,6 +660,18 @@
         "bgRender": {
             "color": "#f3e5f5"
         }
+    },
+    {
+        "datetime_start": "1948-05-15",
+        "header": "The cleansing of Jerusalem. By mid-May 8 Palestinian neighborhoods and 39 Palestinian villages have been cleansed in the Greater Jerusalem Area.",
+        "details":[
+            "details/1948-jerusalem.details"
+        ]
+    },
+    {
+        "datetime_start": "1948-05-15",
+        "header": "Arab armies from Egypt, Syria, Lebanon, Jordan, and Iraq invade Israel.",
+        "content": "The Arab League sends troops to fight against the newly established State of Israel."
     },
     {
         "datetime_start": "1948-06-11",
