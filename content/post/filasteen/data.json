@@ -527,6 +527,20 @@
         "content": "The dead include the Spanish vice-consul, Manuel Allende Salazar."
     },
     {
+        "datetime_end": "1947-01-09",
+        "header": "First unit of the Arab Liberation Army crosses into Palestine. Jewish settlement of Kefar Sold is assaulted.",
+        "content": "They move into areas alloted for the Arab state. However they attack some Jewish convoys and settlements"
+    },
+    {
+        "datetime_start": "1948-01-14",
+        "header": "Kefar Etzion is attacked and 35 Haganah troops sent to assist are ambushed and killed."
+    },
+    {
+        "datetime_start": "1948-01-31",
+        "header": "By end of January, 1500 Palestinians and 400 Jewish settlers have been killed in attacks.",
+        "taxonomies":["statistic_casualties"]
+    },
+    {
         "datetime_start": "1948-01-20",
         "header": "Britain plans to yield areas to to dominant groups.",
         "content": "Enforcement of the UN Partition plan no longer is the defacto policy."

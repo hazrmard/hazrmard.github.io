@@ -112,6 +112,11 @@
         "value": "Demographics",
         "icon": "👥"
     },
+    "statistic_casualties": {
+        "name": "statistic/type",
+        "value": "Casualties",
+        "icon": "⚰️"
+    },
 
     "rhetoric_zionists": {
         "name": "rhetoric",
