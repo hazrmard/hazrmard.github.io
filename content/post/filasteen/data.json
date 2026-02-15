@@ -219,7 +219,10 @@
         "datetime_start": "1908-12-01",
         "header": "Al-Karmil, an anti-Zionist newspaper, is first published.",
         "content": "The owner/writer was Najib Nassar, a Palestinian Christian. He wrote extensively against Zionist efforts and their collaboration with Ottoman and later British rulers.",
-        "taxonomies": ["myth_empty_land", "rhetoric_palestinians"]
+        "taxonomies": [
+            "myth_empty_land",
+            "rhetoric_palestinians"
+        ]
     },
     {
         "datetime_start": "1909-01-02",
@@ -239,7 +242,9 @@
         "content": "Founded by two Palestinian Christian brothers, the paper became a leading voice against Zionism.",
         "images": [],
         "taxonomies": [
-            "palestinians", "myth_empty_land", "rhetoric_palestinians"
+            "palestinians",
+            "myth_empty_land",
+            "rhetoric_palestinians"
         ],
         "bgRender": {
             "color": "#e3f2fd"
@@ -340,13 +345,19 @@
     {
         "datetime_start": "1922-07-24",
         "header": "British census of Palestine. 78% Muslim, 11% Jewish, 9.6% Christian. Total population: 757,182",
-        "taxonomies": ["statistic_demographics", "myth_empty_land"]
+        "taxonomies": [
+            "statistic_demographics",
+            "myth_empty_land"
+        ]
     },
     {
         "datetime_start": "1924-01-01",
         "datetime_end": "1928-01-01",
         "header": "67,000 Zionist immigrants arrive in Palestine. Half are from Poland. Jewish population rises to 16%. Jews own 4% of land.",
-        "taxonomies": ["zionism", "statistic_demographics"]
+        "taxonomies": [
+            "zionism",
+            "statistic_demographics"
+        ]
     },
     {
         "datetime_start": "1924-04-01",
@@ -479,7 +490,7 @@
     },
     {
         "datetime_start": "1947-12-01",
-        "header": "Arab irregulars begin attacking Jewish convoys."
+        "header": "Arab irregulars of the volunteer Arab Liberation Army begin trickling into Palestine and begin attacking Jewish convoys."
     },
     {
         "datetime_start": "1947-12-18",
@@ -506,7 +517,7 @@
     },
     {
         "datetime_start": "1947-12-31",
-        "header": "Haganah bows up houses in the Haifa neighborhood of Wadi Rushmiya and expels the population.",
+        "header": "Haganah blows up houses in the Haifa neighborhood of Wadi Rushmiya and expels the population.",
         "content": "Two weeks later, Haganah attacks the Hawasa neighborhood blowing up huts and a local school."
     },
     {
@@ -516,9 +527,13 @@
     {
         "datetime_start": "1948-01-02",
         "header": "The Long Seminar solidifies Zionist strategy for Arab transfer and proactive violence instead of retaliation.",
-        "content": "Ben Gudion acqueises to intentaional collateral damage. 'Every attack has to end with occupation, destruction, and expulsion.'",
+        "content": "Ben Gurion acqueises to intentaional collateral damage. 'Every attack has to end with occupation, destruction, and expulsion.'",
         "details": [
             "details/1948-long-seminar.details"
+        ],
+        "taxonomies": [
+            "rhetoric_zionists",
+            "myth_ethnic_cleansing"
         ]
     },
     {
@@ -529,16 +544,18 @@
     {
         "datetime_end": "1947-01-09",
         "header": "First unit of the Arab Liberation Army crosses into Palestine. Jewish settlement of Kefar Sold is assaulted.",
-        "content": "They move into areas alloted for the Arab state. However they attack some Jewish convoys and settlements"
+        "content": "They move into areas alloted for the Arab state and begin securing routes. However they also attack some Jewish convoys and settlements."
     },
     {
         "datetime_start": "1948-01-14",
-        "header": "Kefar Etzion is attacked and 35 Haganah troops sent to assist are ambushed and killed."
+        "header": "Kefar Etzion is attacked by the ALA and 35 Haganah troops sent to assist are ambushed and killed."
     },
     {
         "datetime_start": "1948-01-31",
         "header": "By end of January, 1500 Palestinians and 400 Jewish settlers have been killed in attacks.",
-        "taxonomies":["statistic_casualties"]
+        "taxonomies": [
+            "statistic_casualties"
+        ]
     },
     {
         "datetime_start": "1948-01-20",
@@ -547,18 +564,48 @@
     },
     {
         "datetime_start": "1948-01-31",
-        "header": "Ben Gurion orders Jerusalem's militart commander to assuer Jewish contiguity by destroying Sheikh Jarrah.",
+        "header": "Ben Gurion orders Jerusalem's military commander to assuer Jewish contiguity by destroying Sheikh Jarrah.",
         "content": "Gurion states his mission is to 'settle Jews in every house of an evicted semi-Arab neighborhood, such as Romema'."
     },
     {
-        "datetime_start":" 1948-02-07",
+        "datetime_start": " 1948-02-07",
         "header": "Ben Gurion express desire for a demographic change in the country, upon cleansing of Romama neighborhood in Jerusalem.",
         "content": "He says: \n >When I come now to Jerusalem, I feel I am in a Jewish (Ivrit) city.  This is a feeling I only had in Tel-Aviv or in an agricultural farm. It is  true that not all of Jerusalem is Jewish, but it has in it already a huge  Jewish bloc: when you enter the city through Lifta and Romema,  through Mahaneh Yehuda, King George Street and Mea Shearim —    there are no Arabs. One hundred percent Jews. Ever since Jerusalem  was destroyed by the Romans — the city was not as Jewish as it is now.  In many Arab neighbourhoods in the West you do not see even one  Arab. I do not suppose it will change. And what happened in  Jerusalem and in Haifa — can happen in large parts of the country. If  we persist it is quite possible that in the next six or eight months there  will be considerable changes in the country, very considerable, and to  our advantage. There will certainly be considerable changes in the  demographic composition of the country. ",
-        "taxonomies": ["rhetoric_zionists"]
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
+        "datetime_start": "1948-02-15",
+        "header": "Haganah intelligence reports no more than 3000 Arab Liberation Army volunteers are in Palestine.",
+        "content": "Eliyahu Sasson reports that the force is poorly trained, and the Arab states will send no more fighters if they're not provoked."
+    },
+    {
+        "datetime_start": "1948-02-14",
+        "header": "The Palmach special forces attack the village of Sa'sa at night, killing more than 60 and destroying 35 homes.",
+        "content": "The attack is part of operation Lamed Heh (retaliation for ALA ambush of soldiers in Kefar Etzion). The attack is ordered by Yigal Allon:\n\n>You have to blow up twenty houses and kill as many “warriors” [read: “villagers”] as possible."
+    },
+    {
+        "datetime_start": "1948-02-15",
+        "header": "The village of Qisarya is attacked by Palmach and expelled in its entirety.",
+        "content": "Thirty houses are destroyed in the process. This is the first village to be cleansed in its entirety.\nThree other nearby villages: Barrat Qisarya, Khirbat al Burj, and Atlit were cleansed of Palestinians in the same operation."
     },
     {
         "datetime_start": "1948-02-18",
         "header": "Haganah calls up 25-35 year olds for military service."
+    },
+    {
+        "datetime_start": "1948-02-18",
+        "header": "Haganah sets up Hemed Beit, a special unit to explore chemical and biological warfare.",
+        "content": "The unit is lead by Ephraim Katzir, who would later become the 4th President of Israel. They are responsible for poisoning water wells with Typhoid bacteria in Accre, Gaza, and Galilee."
+    },
+    {
+        "datetime_start": "1948-02-19",
+        "header": "Ben Gurion's advisors relay that rural Palestine shows no wish to fight in the wake of attacks.",
+        "content": "Ben Gurion says\n\n>A small reaction [to Arab hostility] does not impress anyone. A destroyed house — nothing. Destroy a neighborhood, and you begin to make an impression!\n\nHe also says\n\n>to continue to terrorize the rural areas ... through a series of offensives ... so that the same mood of passivity reported ... would prevail.",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
     },
     {
         "datetime_start": "1948-02-22",
@@ -644,7 +691,7 @@
         "datetime_end": "1948-04-29",
         "header": "Haganah attacks Jerusalem",
         "content": "Haganah is forced to hand over East Jerusalem to the British. Haganah captures West Jerusalem and expells all Palestinians.",
-        "details":[
+        "details": [
             "details/1948-jerusalem.details"
         ]
     },
@@ -652,10 +699,24 @@
         "datetime_start": "1948-05-01",
         "header": "Safad is cleansed of Palestinians by the Palmach special forces.",
         "content": "Safad had 9500 Arabs and 2400 Orthodox Jews, uninterested in Zionism. Defences are manned by 400 volunteers. 1000 Palmach soldiers besiege and expel Palestenians, only allowing a 100 old people to stay. They're expelled within the month."
-    }, 
+    },
     {
         "datetime_start": "1948-05-03",
         "header": "Reports claim 175,000 to 250,000 Palestinians have been forced from homes."
+    },
+    {
+        "datetime_start": "1948-05-06",
+        "datetime_end": "1948-05-17",
+        "header": "Acre is occupied by Haganah forces after using biological warfare to poison water wells with typhoid bacteria."
+    },
+    {
+        "datetime_start": "1948-05-11",
+        "header": "The town of Baysan capitulates to the Haganah forces under Palti Sela and its inhabitants are expelled."
+    },
+    {
+        "datetime_start": "1948-05-13",
+        "header": "In Jaffa, 50,000 Palestinians are expelled after an attack by 5000 Haganah and Irgun forces.",
+        "content": "1500 Arab volunteers, led by Michael al-Issa, a local Christian, mount a defense but are defeated after a 3 week siege. This culminates the depopulation of all major towns in Palestine."
     },
     {
         "datetime_start": "1948-05-13",
@@ -678,7 +739,7 @@
     {
         "datetime_start": "1948-05-15",
         "header": "The cleansing of Jerusalem. By mid-May 8 Palestinian neighborhoods and 39 Palestinian villages have been cleansed in the Greater Jerusalem Area.",
-        "details":[
+        "details": [
             "details/1948-jerusalem.details"
         ]
     },
