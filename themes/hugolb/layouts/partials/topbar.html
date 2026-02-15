@@ -1,5 +1,5 @@
 <div class="topbar">
-    <div class="menu-icon" role="button" aria-expanded="false" aria-controls="menu-list" aria-label="Menu"><h2>≡</h2></div>
+    <div class="menu-icon"><h2>≡</h2></div>
     <div class="title"><h1 class="site-name">{{.Site.Title}}</h1>
         {{if .IsHome}}
         {{else}}
@@ -10,10 +10,10 @@
             </div>
         {{end}}
     </div>
-    <ul class="menu-list" id="menu-list" role="menu" aria-labelledby="menu-button">
+    <ul class="menu-list">
         {{range .Site.Params.menu.main}}
             <!-- <a href="{{if eq .name $.Site.Params.blogroot}}#noexist{{else}}{{.url}}{{end}}"> -->
-            <a href="{{.url}}" role="menuitem">
+            <a href="{{.url}}">
             <!-- <li class="sb-option {{if eq .name $.Site.Params.blogroot}}dropdown{{end}}"> -->
             <li class="sb-option">
                 <img src="{{.image}}" alt="{{.name}}"/><span class="menu-option-name">{{.name}}</span>

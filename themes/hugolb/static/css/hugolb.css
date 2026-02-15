@@ -6,8 +6,6 @@ html, body {
     padding: 0px;
     margin: 0px;
     font-family: 'Proza Libre', sans-serif;
-    font-size: 1.1em;
-    line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -221,7 +219,6 @@ details {
     .topbar { /* Reduce padding for a smaller topbar on mobile */
         padding-top: 0.25em;
         padding-bottom: 0.25em;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     .menu-icon h2 { /* Remove default margins from h2 in menu icon */
         margin-top: 0;
@@ -238,20 +235,18 @@ details {
         margin-right: 1em; /* Space between icon and title */
     }
     .menu-list {
-        display: flex; /* keep flex for alignment */
+        display: none; /* Hide menu list by default on small screens */
         flex-direction: column;
         position: absolute;
         top: 100%; /* Position below the topbar */
         left: 0;
         width: 100%;
         background-color: #26596A; /* Match topbar background or as desired */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         z-index: 999; /* Below topbar but above content */
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out;
     }
     .topbar.mobile-menu-active .menu-list {
-        max-height: 500px; /* Adjust as needed */
+        display: flex; /* Show menu when active */
     }
     .menu-list .sb-option {
         width: 100%;
@@ -266,10 +261,6 @@ details {
         padding-left: 1em;
         padding-right: 1em;
         padding-top: 3.5em; /* Adjust top padding for the shorter mobile topbar */
-        transition: padding-top 0.3s ease-in-out;
-    }
-    .topbar.mobile-menu-active ~ .content {
-        padding-top: calc(3.5em + 200px); /* Adjust 200px based on menu height */
     }
 }
 
