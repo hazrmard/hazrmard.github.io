@@ -32,11 +32,14 @@
         {
             "title": "Software Engineer",
             "workplace": "Google",
-            "time": "Apr '25 - ",
-            "achievements": [],
-            "technologies": [],
+            "time": "Apr '25 - Present",
+            "achievements": [
+                "Lead software infrastructure development for Google’s in-house machine learning accelerators (Tensor Processing Units)  to screen for silent data corruption events to strengthen LLM training against hardware faults.",
+                "Develop statistical models of performance/Total Cost of Ownership informed by silent data corruption events."
+            ],
+            "technologies": ["C++", "Python", "SQL"],
             "links": [],
-            "tags": ["experience", "work"]
+            "tags": ["experience", "work", "llm", "data center"]
         },
         {
             "title":        "Senior Controls Optimization Engineer",

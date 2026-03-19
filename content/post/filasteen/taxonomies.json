@@ -63,16 +63,69 @@
     "myth_empty_land": {
         "name": "myth",
         "value": "Empty Land",
-        "icon": "🏜️"
+        "icon": "🏜️",
+        "hidden_in_menu": false,
+        "hidden_in_entry": true
     },
     "myth_ethnic_cleansing": {
         "name": "myth",
         "value": "Ethnic Cleansing",
-        "icon": "🚫👥"
+        "icon": "🚫👥",
+        "hidden_in_menu": false,
+        "hidden_in_entry": true
     },
     "myth_colonialism": {
         "name": "myth",
         "value": "Zionism != Colonialism",
-        "icon": "🏴‍☠️"
+        "icon": "🏴‍☠️",
+        "hidden_in_menu": false,
+        "hidden_in_entry": true
+    },
+
+    "location_jerusalem": {
+        "name": "location",
+        "value": "Jerusalem",
+        "icon": "🏙️",
+        "coords": [31.7683, 35.2137]
+    },
+    "location_tel_aviv": {
+        "name": "location",
+        "value": "Tel Aviv",
+        "icon": "🌆",
+        "coords": [32.0853, 34.7818]
+    },
+    "location_jaffa": {
+        "name": "location",
+        "value": "Jaffa",
+        "icon": "🌊",
+        "coords": [32.0500, 34.7500]
+    },
+    "location_gaza": {
+        "name": "location",
+        "value": "Gaza",
+        "icon": "🏙️",
+        "coords": [31.5000, 34.4667]
+    },
+
+    "statistic_demographics": {
+        "name": "statistic/type",
+        "value": "Demographics",
+        "icon": "👥"
+    },
+    "statistic_casualties": {
+        "name": "statistic/type",
+        "value": "Casualties",
+        "icon": "⚰️"
+    },
+
+    "rhetoric_zionists": {
+        "name": "rhetoric",
+        "value": "Zionist Rhetoric",
+        "icon": "📢"
+    },
+    "rhetoric_palestinians": {
+        "name": "rhetoric",
+        "value": "Palestinian Rhetoric",
+        "icon": "📣"
     }
 }

@@ -29,6 +29,10 @@
         }
     },
     {
+        "datetime_start": "1878-01-02",
+        "header": "First Zionist agricultural colony in Palestine (Petah Tikva) established."
+    },
+    {
         "datetime_start": "1881-01-02",
         "datetime_end": null,
         "header": "Russian pogroms in Europe. Zionist movement begins to form.",
@@ -44,7 +48,7 @@
     {
         "datetime_start": "1882-01-02",
         "datetime_end": null,
-        "header": "First wave of Jewish immigrants begin to settle (Aliyah) in Palestine.",
+        "header": "First wave of Jewish immigrants (25,000) begin to settle (Aliyah) in Palestine.",
         "content": "Foundation of Rishon Lezion, Zichron Yaacov, and Rosh Pina in Palestine.",
         "images": [],
         "taxonomies": [
@@ -119,6 +123,14 @@
         }
     },
     {
+        "datetime_start": "1897-01-02",
+        "header": "[Nahman Syrkin](https://en.wikipedia.org/wiki/Nachman_Syrkin) calls for evacuation of Palestine for the Jews",
+        "content": "Syrkin, a prominent Zionist thinker, advocates for the evacuation of Palestine for the Jews.",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
         "datetime_start": "1898-08-28",
         "datetime_end": null,
         "header": "Second Zionist Congress held in Basel, Switzerland",
@@ -153,7 +165,7 @@
         "datetime_start": "1901-01-02",
         "datetime_end": null,
         "header": "Jewish National Fund established at the Fifth Zionist Congress",
-        "content": "",
+        "content": "JNF would acquire land in Palestine. The land was to be worked solely by Jews.",
         "details": [],
         "images": [],
         "taxonomies": [
@@ -167,8 +179,8 @@
     {
         "datetime_start": "1904-01-02",
         "datetime_end": "1914-01-02",
-        "header": "Second wave of Jewish migration (Aliyah) from Europe",
-        "content": "",
+        "header": "Second wave of Jewish migration (40,000) from Europe",
+        "content": "Jews total 6% of the population.",
         "images": [],
         "taxonomies": [
             "ejews",
@@ -177,6 +189,18 @@
         "bgRender": {
             "color": "#e3f2fd"
         }
+    },
+    {
+        "datetime_start": "1905-01-02",
+        "header": "[Israel Zangwill](https://en.wikipedia.org/wiki/Israel_Zangwill) recognizes that for Zionism entails Jews must drive out the Arabs.",
+        "content": "... or 'grapple with the problem of a large alien population.' Zangwill was a contemporary and supporter of Herzl until 1902. He supported the idea of Jewish colonization of Palestine ('small population of Arabs and fellahin and wandering, lawless, blackmailing Bedouin tribes'). However, by 1904 he came to realize that Palestine already had a people ('the Sanjak of Jerusalem is twice as thickly populated as the United States'). He  broke away from Zionism and founded an alternative Jewish Territorial Organization, supporting Jewish settlement in a land that was avilable.",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
+        "datetime_start": "1907-01-02",
+        "header": "First kibbutz established north of Jaffa"
     },
     {
         "datetime_start": "1908-01-02",
@@ -194,7 +218,22 @@
     {
         "datetime_start": "1908-12-01",
         "header": "Al-Karmil, an anti-Zionist newspaper, is first published.",
-        "content": "The owner/writer was Najib Nassar, a Palestinian Christian. He wrote extensively against Zionist efforts and their collaboration with Ottoman and later British rulers."
+        "content": "The owner/writer was Najib Nassar, a Palestinian Christian. He wrote extensively against Zionist efforts and their collaboration with Ottoman and later British rulers.",
+        "taxonomies": [
+            "myth_empty_land",
+            "rhetoric_palestinians"
+        ]
+    },
+    {
+        "datetime_start": "1909-01-02",
+        "header": "Tel Aviv founded as a Jewish suburb of Jaffa"
+    },
+    {
+        "datetime_start": "1911-01-02",
+        "header": "Memo to Zionist Executive speaks of 'limited population transfer'",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
     },
     {
         "datetime_start": "1911-01-15",
@@ -203,7 +242,9 @@
         "content": "Founded by two Palestinian Christian brothers, the paper became a leading voice against Zionism.",
         "images": [],
         "taxonomies": [
-            "palestinians"
+            "palestinians",
+            "myth_empty_land",
+            "rhetoric_palestinians"
         ],
         "bgRender": {
             "color": "#e3f2fd"
@@ -242,6 +283,52 @@
         }
     },
     {
+        "datetime_start": "1919-01-02",
+        "header": "Chaim Weizmann calls for Palestine 'as Jewish as England is English'",
+        "content": "Other members of the Zionist Commission to the Paris Peace Conference say 'as many Arabs as possible should be persuaded to emigrate.'",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
+        "datetime_start": "1919-01-02",
+        "header": "First Palestinian National Congress rejects Balfour Declaration, demands independence.",
+        "taxonomies": [
+            "rhetoric_palestinians"
+        ]
+    },
+    {
+        "datetime_start": "1919-01-02",
+        "header": "Winston Churchill pledges support to the Zionist cause",
+        "content": "He writes 'there are Jews, whom we are pledged to introduce into Palestine, and who take it for granted that the local population will be cleared out to suit their convenience.'",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
+        "datetime_start": "1919-01-02",
+        "datetime_end": "1933-01-02",
+        "header": "Third wave of Jewish migration (35,000) from Europe",
+        "content": "Jews make up 12% of the population and hold 3% of land.",
+        "taxonomies": [
+            "statistic_demographics"
+        ]
+    },
+    {
+        "datetime_start": "1920-01-02",
+        "header": "Haganah founded as underground Jewish military organization.",
+        "taxonomies": [
+            "zionism"
+        ]
+    },
+    {
+        "datetime_start": "1921-01-02",
+        "header": "Protests in Jaffa against large-scale Zionist migration.",
+        "taxonomies": [
+            "palestinians"
+        ]
+    },
+    {
         "datetime_start": "1922-07-24",
         "datetime_end": "1948-05-14",
         "header": "Mandate for Palestine",
@@ -254,6 +341,33 @@
         "bgRender": {
             "color": "#e3f2fd"
         }
+    },
+    {
+        "datetime_start": "1922-07-24",
+        "header": "British census of Palestine. 78% Muslim, 11% Jewish, 9.6% Christian. Total population: 757,182",
+        "taxonomies": [
+            "statistic_demographics",
+            "myth_empty_land"
+        ]
+    },
+    {
+        "datetime_start": "1924-01-01",
+        "datetime_end": "1928-01-01",
+        "header": "67,000 Zionist immigrants arrive in Palestine. Half are from Poland. Jewish population rises to 16%. Jews own 4% of land.",
+        "taxonomies": [
+            "zionism",
+            "statistic_demographics"
+        ]
+    },
+    {
+        "datetime_start": "1924-04-01",
+        "header": "The Revionist Party is founded in Paris by Ze'ev Jabotinsky",
+        "content": "[Revisionist Zionism](https://en.wikipedia.org/wiki/Revisionist_Zionism) is characterized by territorial maximalism and calls for settling on both sides of the Jordan River."
+    },
+    {
+        "datetime_start": "1929-08-23",
+        "header": "Riots in Palestine over access to the Western Wall in Jerusalem.",
+        "content": "116 Arabs and 133 Jews are killed. Hebron massacre (Aug 24), where a mob of Palestinians kills 68 Jews. According to some historians, the uprising was also triggered by the refusal of Zionist leaders to accept British offers of shared representation in Palestine which was accepted by the Arab leadership.[1] According to other historians, the riots were caused by the mufti trying to strengthen his position by rousing fears of a Jewish takeover of the Temple Mount.[2] Scholars have also pointed to the transfer of land to the Jewish National Fund, which, along with rising concerns over land sales and immigration, contributed to socioeconomic anxieties that helped fuel the outbreak."
     },
     {
         "datetime_start": "1936-04-20",
@@ -284,6 +398,15 @@
         }
     },
     {
+        "datetime_start": "1940-01-02",
+        "header": "Yossef Weitz, head of the Jewish National Fund's land acquisition department, writes 'The only solution is to transfer the Arabs from here to neighbouring countries. Not a single village or a single tribe must be let off.'",
+        "content": "In 1932, when Weitz joined the JNF, there were only 91,000 Jews in Palestine who owned just 2% of the land. Weitz oversaw the program to purchase properties from absentee landlords and run the Palestinian tenant farmers off their land. However it soon became clear that the purchase of small lots of land would not get close to fulfilling the Zionists' dream of creating a Jewish-majority state in the region of Palestine and that it would be necessary to force the exodus of the Arab population. Due to Weitz's role in the expulsion of Palestinian Arabs in 1948, he became known as the 'Architect of Transfer'",
+        "taxonomies": [
+            "rhetoric_zionists",
+            "myth_ethnic_cleansing"
+        ]
+    },
+    {
         "datetime_start": "1941-01-02",
         "datetime_end": null,
         "header": "The Biltmore Conference - demands for the entirety of Mandatory Palestine",
@@ -302,19 +425,6 @@
         "datetime_end": "1948-05-14",
         "header": "Jewish insurgency against British rule",
         "content": "Paramilitary terror campaign against British rule, following the 1939 White Paper. Between 1945-47, 260 deaths and 912 injuries occur. Highest casualties are British (616) and Palestinians (331)."
-    },
-    {
-        "datetime_start": "1947-11-29",
-        "datetime_end": null,
-        "header": "UN Partition Plan",
-        "content": "The United Nations General Assembly adopted Resolution 181 (II), which recommended the adoption and implementation of a Plan of Partition with Economic Union.",
-        "images": [],
-        "taxonomies": [
-            "un"
-        ],
-        "bgRender": {
-            "color": "#fff3e0"
-        }
     },
     {
         "datetime_start": "1947-04-22",
@@ -356,9 +466,41 @@
         "content": "The assassination was premeditated as a reprisal for for Shubaki family allegedly providing information to the British that led to the capture of Lehi members."
     },
     {
+        "datetime_start": "1947-11-29",
+        "datetime_end": null,
+        "header": "UN Partition Plan",
+        "content": "The United Nations General Assembly adopted Resolution 181 (II), which recommended the adoption and implementation of a Plan of Partition with Economic Union.",
+        "images": [],
+        "taxonomies": [
+            "un"
+        ],
+        "bgRender": {
+            "color": "#fff3e0"
+        }
+    },
+    {
         "datetime_start": "1947-11-30",
-        "header": "Arab militants attack Jewish buses, killing 7.",
-        "content": "Flyers appearing afterwards claimed the attack was in retaliation for the Shubaki family assassination."
+        "header": "Arab militants belonging to the Abu Qishq gang attack Jewish buses, killing 7.",
+        "content": "Flyers appearing afterwards claimed the attack was in retaliation for the Shubaki family assassination. It's later reported to Ben Gurion that the attacks were unrelated to the UN Resolution."
+    },
+    {
+        "datetime_start": "1947-12-01",
+        "header": "Irgun and Haganah begin urban terror campaign against 75,000 Palestinians in Haifa.",
+        "content": "Special units of the Haganah comprising of undercover operatives, called mistravim (becoming Arab), use sniper and machine gun fire and barrel bombs to terrorize Arab neighborhoods. The official historian of the Palmach surmises: 'The Palestinians [in Haifa] were from December onwards under siege and intimidation.'"
+    },
+    {
+        "datetime_start": "1947-12-01",
+        "header": "Arab irregulars of the volunteer Arab Liberation Army begin trickling into Palestine and begin attacking Jewish convoys."
+    },
+    {
+        "datetime_start": "1947-12-18",
+        "header": " 15 Palestinians, including 5 children, are kiled by Palmach special forces assaulting Khisas village.",
+        "content": "The village has a few hundred Muslims and a hundred Christians. The Palmach attack at night and start blowing up houses while the occupants sleep. Ben Gurion later issues a public apology, but later still includes this in his list of successful operations."
+    },
+    {
+        "datetime_start": "1948-12-28",
+        "header": "Haganah attacks a coffee shop in the village of Lifta; Stern Gang fires into a bus nearby.",
+        "content": "The attack started when the Haganah had earlier killed a petrol station owner on a false allegation of inciting attack on Jews. Some villagers in Lifta retaliated by firing on a Jewish bus."
     },
     {
         "datetime_start": "1947-12-30",
@@ -375,7 +517,24 @@
     },
     {
         "datetime_start": "1947-12-31",
+        "header": "Haganah blows up houses in the Haifa neighborhood of Wadi Rushmiya and expels the population.",
+        "content": "Two weeks later, Haganah attacks the Hawasa neighborhood blowing up huts and a local school."
+    },
+    {
+        "datetime_start": "1947-12-31",
         "header": "Abd al Qadir al Husayni organizes blockade of Jerusalem's 100k Jewish residents."
+    },
+    {
+        "datetime_start": "1948-01-02",
+        "header": "The Long Seminar solidifies Zionist strategy for Arab transfer and proactive violence instead of retaliation.",
+        "content": "Ben Gurion acqueises to intentaional collateral damage. 'Every attack has to end with occupation, destruction, and expulsion.'",
+        "details": [
+            "details/1948-long-seminar.details"
+        ],
+        "taxonomies": [
+            "rhetoric_zionists",
+            "myth_ethnic_cleansing"
+        ]
     },
     {
         "datetime_start": "1948-01-05",
@@ -383,22 +542,191 @@
         "content": "The dead include the Spanish vice-consul, Manuel Allende Salazar."
     },
     {
-        "datetime_start": "1948-02-1948",
+        "datetime_end": "1947-01-09",
+        "header": "First unit of the Arab Liberation Army crosses into Palestine. Jewish settlement of Kefar Sold is assaulted.",
+        "content": "They move into areas alloted for the Arab state and begin securing routes. However they also attack some Jewish convoys and settlements."
+    },
+    {
+        "datetime_start": "1948-01-14",
+        "header": "Kefar Etzion is attacked by the ALA and 35 Haganah troops sent to assist are ambushed and killed."
+    },
+    {
+        "datetime_start": "1948-01-31",
+        "header": "By end of January, 1500 Palestinians and 400 Jewish settlers have been killed in attacks.",
+        "taxonomies": [
+            "statistic_casualties"
+        ]
+    },
+    {
+        "datetime_start": "1948-01-20",
+        "header": "Britain plans to yield areas to to dominant groups.",
+        "content": "Enforcement of the UN Partition plan no longer is the defacto policy."
+    },
+    {
+        "datetime_start": "1948-01-31",
+        "header": "Ben Gurion orders Jerusalem's military commander to assuer Jewish contiguity by destroying Sheikh Jarrah.",
+        "content": "Gurion states his mission is to 'settle Jews in every house of an evicted semi-Arab neighborhood, such as Romema'."
+    },
+    {
+        "datetime_start": " 1948-02-07",
+        "header": "Ben Gurion express desire for a demographic change in the country, upon cleansing of Romama neighborhood in Jerusalem.",
+        "content": "He says: \n >When I come now to Jerusalem, I feel I am in a Jewish (Ivrit) city.  This is a feeling I only had in Tel-Aviv or in an agricultural farm. It is  true that not all of Jerusalem is Jewish, but it has in it already a huge  Jewish bloc: when you enter the city through Lifta and Romema,  through Mahaneh Yehuda, King George Street and Mea Shearim —    there are no Arabs. One hundred percent Jews. Ever since Jerusalem  was destroyed by the Romans — the city was not as Jewish as it is now.  In many Arab neighbourhoods in the West you do not see even one  Arab. I do not suppose it will change. And what happened in  Jerusalem and in Haifa — can happen in large parts of the country. If  we persist it is quite possible that in the next six or eight months there  will be considerable changes in the country, very considerable, and to  our advantage. There will certainly be considerable changes in the  demographic composition of the country. ",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
+        "datetime_start": "1948-02-15",
+        "header": "Haganah intelligence reports no more than 3000 Arab Liberation Army volunteers are in Palestine.",
+        "content": "Eliyahu Sasson reports that the force is poorly trained, and the Arab states will send no more fighters if they're not provoked."
+    },
+    {
+        "datetime_start": "1948-02-14",
+        "header": "The Palmach special forces attack the village of Sa'sa at night, killing more than 60 and destroying 35 homes.",
+        "content": "The attack is part of operation Lamed Heh (retaliation for ALA ambush of soldiers in Kefar Etzion). The attack is ordered by Yigal Allon:\n\n>You have to blow up twenty houses and kill as many “warriors” [read: “villagers”] as possible."
+    },
+    {
+        "datetime_start": "1948-02-15",
+        "header": "The village of Qisarya is attacked by Palmach and expelled in its entirety.",
+        "content": "Thirty houses are destroyed in the process. This is the first village to be cleansed in its entirety.\nThree other nearby villages: Barrat Qisarya, Khirbat al Burj, and Atlit were cleansed of Palestinians in the same operation."
+    },
+    {
+        "datetime_start": "1948-02-18",
+        "header": "Haganah calls up 25-35 year olds for military service."
+    },
+    {
+        "datetime_start": "1948-02-18",
+        "header": "Haganah sets up Hemed Beit, a special unit to explore chemical and biological warfare.",
+        "content": "The unit is lead by Ephraim Katzir, who would later become the 4th President of Israel. They are responsible for poisoning water wells with Typhoid bacteria in Accre, Gaza, and Galilee."
+    },
+    {
+        "datetime_start": "1948-02-19",
+        "header": "Ben Gurion's advisors relay that rural Palestine shows no wish to fight in the wake of attacks.",
+        "content": "Ben Gurion says\n\n>A small reaction [to Arab hostility] does not impress anyone. A destroyed house — nothing. Destroy a neighborhood, and you begin to make an impression!\n\nHe also says\n\n>to continue to terrorize the rural areas ... through a series of offensives ... so that the same mood of passivity reported ... would prevail.",
+        "taxonomies": [
+            "rhetoric_zionists"
+        ]
+    },
+    {
+        "datetime_start": "1948-02-22",
         "header": "Supporters of Amin al Husayni kill 88 in car bombs, injuring hundreds."
+    },
+    {
+        "datetime_start": "1948-02-24",
+        "header": "US delegate to UN Security Council proposes peacekeeping rather than enforcing partition."
     },
     {
         "datetime_start": "1948-02-29",
         "header": "Lehi kills 28 British soldiers by mining a train near Rehovot."
     },
     {
+        "datetime_start": "1948-03-06",
+        "header": "Plan Dalet is finalized.",
+        "content": "Plan Dalet is a military plan developed by the Haganah to secure the Jewish state, relying on destruction of property and expulsion of Palestinians.",
+        "details": [
+            "details/1948-plan-dalet.details"
+        ]
+    },
+    {
+        "datetime_start": "1948-03-18",
+        "header": "US President Truman announces support for the Zionist cause."
+    },
+    {
+        "datetime_start": "1948-03-19",
+        "header": "Arab leaders decide to accept UNSC proposal of truce & trusteeship instead of partition.",
+        "content": "This is rejected by the Zionists."
+    },
+    {
+        "datetime_start": "1948-03-15",
+        "datetime_end": "1948-05-15",
+        "header": "Haganah expels Palestinians from coastal areas between Haifa and Jaffa."
+    },
+    {
         "datetime_start": "1948-03-31",
         "header": "Lehi bombs and kills 40 Palestinians, injuring 60 on the Cairo-Haifa train near Binyamina"
+    },
+    {
+        "datetime_start": "1948-04-01",
+        "header": "Czech arms delivered to Haganah",
+        "content": "4,500 rifles, 200 light machine guns, 5 million rounds of ammunition."
+    },
+    {
+        "datetime_start": "1948-04-01",
+        "header": "Palmach special forces receive orders to destroy Arab villages.",
+        "content": "As part of Operation Nachson, 'the principal objective of the operation is the destruction of Arab villages ... [and] the eviction of the villagers so that they would become an economic liability for the general Arab forces'"
+    },
+    {
+        "datetime_start": "1948-04-04",
+        "header": "Plan Dalet launched by Haganah",
+        "content": "Operation Nachson begins. Villages along Tel-Aviv to Jerusalem road captured and residents expelled."
+    },
+    {
+        "datetime_start": "1948-04-09",
+        "header": "Deir Yassin Massacre",
+        "content": "Over 93 Palestinian villagers killed by Irgun and Lehi forces. The attack was part of Plan Dalet/Operation Nachson to secure the road to Jerusalem.",
+        "details": [
+            "details/1948-deir-yassin-massacre.details"
+        ]
+    },
+    {
+        "datetime_start": "1948-04-09",
+        "header": "Multiple Palestinian villages destroyed during Operation Nachson.",
+        "content": "Qastal, Qalunya, Saris, Beit Surik, and Biddu are among the villages captured and destroyed by Haganah forces. Haganah forces blow up houses and expel villagers."
+    },
+    {
+        "datetime_start": "1948-04-18",
+        "header": "The village of Tiberias is captured and cleansed of Palestinians.",
+        "content": "Haganah uses loudspeakers and barrel bombs to terrorize and expel the population. The British initially offered protection, but later negootiated a general evacuation."
+    },
+    {
+        "datetime_start": "1948-04-22",
+        "header": "Haifa cleansed of Palestinians in Operation Bi'ur Hametz (Cleansing the Leaven).",
+        "content": "Haganah forces (Carmeli Brigade of 2000 soldiers) expel 50,000 Palestinians from Haifa, after the British Commander Hugh Stockwell withdraws buffer forces.",
+        "details": [
+            "details/1948-haifa-cleansing.details"
+        ]
+    },
+    {
+        "datetime_start": "1948-04-26",
+        "datetime_end": "1948-04-29",
+        "header": "Haganah attacks Jerusalem",
+        "content": "Haganah is forced to hand over East Jerusalem to the British. Haganah captures West Jerusalem and expells all Palestinians.",
+        "details": [
+            "details/1948-jerusalem.details"
+        ]
+    },
+    {
+        "datetime_start": "1948-05-01",
+        "header": "Safad is cleansed of Palestinians by the Palmach special forces.",
+        "content": "Safad had 9500 Arabs and 2400 Orthodox Jews, uninterested in Zionism. Defences are manned by 400 volunteers. 1000 Palmach soldiers besiege and expel Palestenians, only allowing a 100 old people to stay. They're expelled within the month."
+    },
+    {
+        "datetime_start": "1948-05-03",
+        "header": "Reports claim 175,000 to 250,000 Palestinians have been forced from homes."
+    },
+    {
+        "datetime_start": "1948-05-06",
+        "datetime_end": "1948-05-17",
+        "header": "Acre is occupied by Haganah forces after using biological warfare to poison water wells with typhoid bacteria."
+    },
+    {
+        "datetime_start": "1948-05-11",
+        "header": "The town of Baysan capitulates to the Haganah forces under Palti Sela and its inhabitants are expelled."
+    },
+    {
+        "datetime_start": "1948-05-13",
+        "header": "In Jaffa, 50,000 Palestinians are expelled after an attack by 5000 Haganah and Irgun forces.",
+        "content": "1500 Arab volunteers, led by Michael al-Issa, a local Christian, mount a defense but are defeated after a 3 week siege. This culminates the depopulation of all major towns in Palestine."
+    },
+    {
+        "datetime_start": "1948-05-13",
+        "header": "Arab Legion attacks Jewish communities in retaliation."
     },
     {
         "datetime_start": "1948-05-14",
         "datetime_end": null,
         "header": "Declaration of Independence",
-        "content": "David Ben-Gurion proclaims the establishment of the State of Israel.",
+        "content": "David Ben-Gurion proclaims the establishment of the State of Israel. US President Truman immediately recognizes the new state.",
         "images": [],
         "taxonomies": [
             "israel",
@@ -407,5 +735,74 @@
         "bgRender": {
             "color": "#f3e5f5"
         }
+    },
+    {
+        "datetime_start": "1948-05-15",
+        "header": "The cleansing of Jerusalem. By mid-May 8 Palestinian neighborhoods and 39 Palestinian villages have been cleansed in the Greater Jerusalem Area.",
+        "details": [
+            "details/1948-jerusalem.details"
+        ]
+    },
+    {
+        "datetime_start": "1948-05-15",
+        "header": "Arab armies from Egypt, Syria, Lebanon, Jordan, and Iraq invade Israel.",
+        "content": "The Arab League sends troops to fight against the newly established State of Israel."
+    },
+    {
+        "datetime_start": "1948-06-11",
+        "datetime_end": "1948-07-08",
+        "header": "First truce established."
+    },
+    {
+        "datetime_start": "1948-07-08",
+        "datetime_end": "1948-07-18",
+        "header": "Fighting resumes as IDF captures Lydda and Ramle."
+    },
+    {
+        "datetime_start": "1948-07-17",
+        "header": "IDF attacks but fails to capture Old City of Jerusalem."
+    },
+    {
+        "datetime_start": "1948-07-18",
+        "datetime_end": "1948-10-15",
+        "header": "Second truce established.",
+        "content": "IDF breaks truce by capturing several more villages."
+    },
+    {
+        "datetime_start": "1948-09-17",
+        "header": "UN mediator assassinated by Jewish terrorists in Jerusalem."
+    },
+    {
+        "datetime_start": "1948-10-29",
+        "datetime_end": "1948-10-31",
+        "header": "Thousands of Palestinians expelled in Operation Hiram."
+    },
+    {
+        "datetime_start": "1948-11-04",
+        "header": "UNSC Resolution 194 on Palestinian refugee right of return."
+    },
+    {
+        "datetime_start": "1948-11-01",
+        "header": "IDF begins to expel villagers from inside Lebanon."
+    },
+    {
+        "datetime_start": "1949-02-24",
+        "header": "Israeli-Egyptian Armistice"
+    },
+    {
+        "datetime_start": "1949-02-28",
+        "header": "IDF expells 2000-3000 villagers from Faluja."
+    },
+    {
+        "datetime_start": "1949-03-23",
+        "header": "Israeli-Lebanese Armistice"
+    },
+    {
+        "datetime_start": "1949-04-03",
+        "header": "Israeli-Jordanian Armistice"
+    },
+    {
+        "datetime_start": "1949-07-20",
+        "header": "Israeli-Syrian Armistice"
     }
 ]
