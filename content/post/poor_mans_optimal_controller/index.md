@@ -7,6 +7,7 @@ tags = [ ]
 categories = [ "Engineering" ]
 includes = [ ]
 hasequations = false
+haspython = true
 tableofcontents = false
 draft = true
 slug = "poor-man-optimal-controller"
