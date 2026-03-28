@@ -128,7 +128,8 @@ h1, h2, h3, h4, h5, h6 {
 .content .post-title {
     text-align: left;
 }
-.content pre {
+.content pre,
+.content pre > code {
     overflow-x: auto;
 }
 .content img, .content figure {
