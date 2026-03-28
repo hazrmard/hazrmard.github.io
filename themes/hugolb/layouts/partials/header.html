@@ -37,6 +37,9 @@
                   {left: '$', right: '$', display: false}
                 ]});"></script>
         {{ end }}
+        {{ if .Params.haspython }}
+            {{ partial "python.html" . }}
+        {{ end }}
         <!-- include additional js files -->
         {{ range .Params.includes }}
             <script type="text/javascript" async

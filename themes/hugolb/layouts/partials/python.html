@@ -1,0 +1,129 @@
+<script src="https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js" defer></script>
+
+<script>
+async function main() {
+  // 1. Initialize Pyodide
+  let pyodide = await loadPyodide();
+  
+  // 2. Load common packages if needed (optional, or load on demand)
+  await pyodide.loadPackage(["numpy"]);
+
+  // 3. Find all Python code fences
+  const codeBlocks = document.querySelectorAll('pre > code.language-python');
+
+  codeBlocks.forEach((block, index) => {
+    const pre = block.parentElement;
+    
+    // Create UI elements
+    const runBtn = document.createElement('button');
+    runBtn.innerText = 'Run Code';
+    runBtn.className = 'pyodide-run-btn';
+    
+    const output = document.createElement('div');
+    output.className = 'pyodide-output';
+    output.id = `output-${index}`;
+
+    const plotArea = document.createElement('div');
+    plotArea.className = 'pyodide-plot';
+    plotArea.id = `plot-${index}`;
+
+    pre.insertAdjacentElement('afterend', output);
+    output.insertAdjacentElement('afterend', plotArea);
+    pre.insertAdjacentElement('afterend', runBtn);
+
+    runBtn.addEventListener('click', async () => {
+      runBtn.disabled = true;
+      runBtn.innerText = 'Running...';
+      output.innerText = '';
+      plotArea.innerHTML = '';
+
+      // Redirect Python's stdout to our output div
+      pyodide.setStdout({
+        batched: (str) => {
+          output.innerText += str + '\n';
+        }
+      });
+
+      try {
+        const code = block.innerText;
+        
+        // Setup Matplotlib to render in our specific plotArea if the code uses it
+        if (code.includes('matplotlib')) {
+            pyodide.runPython(`
+                import matplotlib.pyplot as plt
+                import io, base64
+                plt.clf() # Clear previous plots
+            `);
+        }
+
+        // Execute the user's code
+        let result = await pyodide.runPythonAsync(code);
+
+        // Handle Matplotlib figures
+        if (code.includes('plt.show()') || code.includes('matplotlib')) {
+            pyodide.runPython(`
+                import matplotlib.pyplot as plt
+                from js import document
+                
+                # Logic to grab the current figure and put it in the DOM
+                def post_plot():
+                    fig = plt.gcf()
+                    buf = io.BytesIO()
+                    fig.savefig(buf, format='png')
+                    buf.seek(0)
+                    img_str = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('UTF-8')
+                    img_tag = document.createElement('img')
+                    img_tag.src = img_str
+                    document.getElementById('plot-${index}').appendChild(img_tag)
+                
+                post_plot()
+            `);
+        }
+
+        if (result !== undefined) {
+          output.innerText += `\nReturn: ${result}`;
+        }
+      } catch (err) {
+        output.innerText += `\nError: ${err}`;
+      } finally {
+        runBtn.disabled = false;
+        runBtn.innerText = 'Run Code';
+      }
+    });
+  });
+}
+
+// Wrap the execution in a DOMContentLoaded listener
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', main);
+} else {
+    // DOM is already ready (e.g., if the script loaded late)
+    main();
+}
+</script>
+
+<style>
+  .pyodide-run-btn {
+    background:#26596A;
+    color: #FFEDAA;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  .pyodide-run-btn:disabled { background: #ccc; }
+  .pyodide-output {
+    background: #f8f9fa;
+    border-left: 3px solid #6C929F;
+    padding: 10px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+  .pyodide-plot img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

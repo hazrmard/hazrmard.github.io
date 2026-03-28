@@ -1,15 +1,23 @@
 +++
-date = "2023-12-31T23:10:46-06:00"
+date = '2026-01-10T13:00:53-08:00'
 categories = ["Test"]
 tags = ["Test"]
 title = "Test post"
 hasequations = true
 hascode = false
+haspython = true
 isexternal = false
 description = ""
 draft = true
 tableofcontents = true
 +++
+
+## python
+
+```python
+for i in range(10):
+    print(i*i)
+```
 
 ## Embedded JS
 

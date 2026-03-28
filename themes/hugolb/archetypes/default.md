@@ -7,6 +7,7 @@ tags = []
 categories = []
 includes = []       # any javascript files to include
 hasequations = false
+haspython = false
 tableofcontents = false
 draft = true
 +++
