@@ -387,4 +387,4 @@ print(f"dz/dx: {x.grad}")
 print(f"dz/dw: {w.grad}")
 ```
 
-Homework: how to take grads of grads? Hint: the `grad` attribute is calculated by the same operations as the original computation graph: add/multiply/exp. Then it can be wrapped in a `Value` too, right? If so, we can call `backward()` on it as well.
+Homework: how to take higher order derivatives? Grads of grads? Hint: the `grad` attribute is calculated by the same operations as the original computation graph: add/multiply/exp. Then, it can be wrapped in a `Value` too, right? If so, we can call `backward()` on it as well.
