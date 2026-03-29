@@ -1,15 +1,15 @@
 +++
 title = "Poor Man's Autograd"
 date = '2026-03-27T22:57:59-07:00'
-description = ""
+description = "Deriving the code for differentiating code. Inspired by microgpt."
 link = ""
-tags = []
-categories = []
+tags = ["neural networks", "llm", "graphs"]
+categories = ["Machine Learning"]
 includes = []       # any javascript files to include
 hasequations = true
 haspython = true
 tableofcontents = false
-draft = true
+draft = false
 +++
 
 I recently came across [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95) - a single-file, python-only training script for a GPT model.
@@ -18,13 +18,42 @@ What stood out to me were 40 or so lines that implemented autograd. That is, cal
 
 No, the reason I was so taken aback was explicitly facing the simplicity of the mechanism that has fueled machine learning for decades now. It's one thing to call `loss.backward()`; it's an entirely different thing to pause and examine what's happening underneath.
 
-The goal of this post is to build up those 40 lines, step by step.
+The goal of this post is to build up those 40 lines, step by step. First, we revisit two rules of differentiation. Then we differentiable value. Finally, we iterate on application of the two rules in code.
 
 ## The Chain Rule
 
+The derivative multiplies over function composition.
+
 $$
-\frac{\partial}{\partial{x}} f(g(x)) = \frac{\partial}{\partial g(x)}f \cdot \frac{\partial}{\partial x} g(x)
+\frac{\partial}{\partial{x}} f(g(x)) = \frac{\partial}{\partial g}f \cdot \frac{\partial}{\partial x} g
 $$
+
+For example:
+
+$$
+f = g(x)^2\\\\
+g(x) = kx \\\\
+\frac{\partial}{\partial{x}}f = \frac{\partial}{\partial g}(g(x)^2)\cdot \frac{\partial}{\partial x} (kx)\\\\
+= (2 \cdot g(x)) \cdot k \\\\
+= 2 k^2 x
+$$
+
+Note:
+
+```mermaid
+graph LR
+
+x[x]
+g["g(x)"]
+f["f(g(x))"]
+
+x --"dg/dx"--> g
+g --"df/dg"--> f
+```
+
+## The distributive property
+
+The derivative is distributive over addition.
 
 For example:
 
@@ -32,7 +61,7 @@ $$
 f = g(x) + 2x \\\\
 g(x) = kx \\\\
 \frac{\partial}{\partial{x}}f = \frac{\partial}{\partial x}(g(x)) + \frac{\partial}{\partial x}(2x) \\\\
-= \frac{\partial}{\partial g}(g(x))\cdot \frac{\partial}{\partial x} (kx) + \frac{\partial}{\partial x}(2x) \\\\
+= \left(\frac{\partial}{\partial g}(g(x))\cdot \frac{\partial}{\partial x} (kx) \right) + \frac{\partial}{\partial x}(2x) \\\\
 = (1 \cdot k) + 2
 $$
 
@@ -46,17 +75,17 @@ g["g(x)"]
 f["f(x)"]
 two["2x"]
 
-x --> g
-g --> f
-x --> two
-two --> f
+x --"dg/dx"--> g
+g --"df/dg"--> f
+x --"d(2x)/dx"--> two
+two --"df/d(2x)"--> f
 ```
 
 Looking at the graph, $x$ affects $f(x)$ twice: once through $g(x)$ and once through $2x$. Visually, the change in $f$ with respect to $x$ should add the change due to each of the two branches.
 
 ## The atomic value
 
-We need to represent each scalar such that we can contain it's value and gradient. Each operation produces a new value.
+We need to represent each scalar such that we can contain its value and gradient. Each operation produces a new value.
 
 ```python
 class Value:
@@ -66,7 +95,7 @@ class Value:
         
     def __add__(self, other):
         result = self.data + other.data
-        result_node = self.__class__(data=result, grad=1)
+        result_node = Value(data=result, grad=1)
         return result_node
 ```
 
@@ -88,16 +117,41 @@ x --"dy/dx"--> y
 x --"dz/dx"--> z
 ```
 
-Now, we need a backward pass. What is `dz/d[w,x,y]`? Note that the gradients of the two edges to `x` get added. Whereas the gradients of the successive edges `y--z` and `x--y` get multiplied.
+Now, we need a backward pass. What is `dz/d[w,x,y]`? Note that each intermediate result, starting from the inputs, is a `Value` object. Also note that the relationships lend themselves to a graph representation. We can call each `Value`, be it input, intermediate, or output, a *node* in the computation graph.
 
-Therefore, we need to track the dependencies of each node. Then we can calculate, for each operation, `d node / d dependency`. For addition, dependencies are the two arguments into the add operation.
+Note that the gradients from the two edges to `x` get added (the distributive property). One path has multiple hops `y--z` and `x--y`. Their gradients get multiplied (the chain rule), before being accumulated into `x`.
 
+Since, there are multiple paths back from `z` to `x`. Therefore, `x` needs to keep track of all the gradients it has accumulated so far. This can be done in the `grad` attribute.
+
+To traverse edges, we need to track the dependencies of each node. Then we can calculate, for each operation (i.e. edge), `d node / d dependency`. For addition, dependencies are the two arguments into the add operation. They can be tracked as a tuple attribute `deps`. The pesudocode for an add operation is:
+
+```py
+ y = w + x
+ z = y + x
+
+ # dz/dx = [dz/dy * dy/dx] + dz/dx 
+ #         \--chain rule--/
+ #         \--distributive property--/
+
+ for dep in z.deps: # i.e. y, x
+     # new gradient =
+     dep.grad = \
+        # current gradient (distributive property)
+        dep.grad + # it's 0 for now \
+        # parent's gradient (dz/dz) * gradient of add operation (chain rule)
+        (z.grad * 1)
+
+ # Then proceeding down the graph to the deps of deps
+ for dep in y.deps: # i.e. w, x
+     # new gradient =
+     dep.grad = \
+        # current gradient (distributive property)
+        dep.grad + # non-zero for x; it was visited earlier ^^ \
+        # parent's gradient (dz/dy) * gradient of add operation (chain rule)
+        (y.grad * 1)
 ```
-z = y + x
 
-for dep in z.dependencies:
-    dep.grad = dep.grad + (z.grad * 1)
-```
+Putting it together:
 
 ```python
 class Value:
@@ -173,7 +227,7 @@ Then:
  partial_exp = lambda self, dep, other_dep: self.data
 ```
 
-This (`dep`, `other_dep`) works because all operations can be represented as a binary tree.
+This size-two tuple (`dep`, `other_dep`) works because all operations can be represented as a binary tree. For example `x * y * z` is `(x * y) * z`.
 
 ```python
 class Value:
@@ -239,7 +293,7 @@ y = w * x
 z = y + x
 # z = (w*x) + x = wx + x
 # dz/dx = w+1, dz/dy = 1, dz/dw = x
-print("z", z)
+print("z", z.data)
 
 z.backward()
 print(f"dz/dz: {z.grad}")
@@ -248,14 +302,21 @@ print(f"dz/dx: {x.grad}")
 print(f"dz/dw: {w.grad}")
 ```
 
-We can clean this up a bit:
+We can clean this up a bit. Creating a class-level attribute to store partial derivative functions for supported operations. There are three kinds of operations:
+
+1. Symmetric binary. The partial function is the same for both dependencies. For example `z = x+y`; `dz/dx = dz/dy = 1`. Same for multiplication; `z = x*y`; `dz/dx=y, dz/dy=x` i.e. `dz/d (one dependency) = other dependency`.
+2. Unary operations. The operation only has one dependency. For example $e^x, \sin(x)$.
+3. Unsymmetric binary. The partial function is different for each dependency. For example $z=x^y$.
 
 ```python
+import math
+
 class Value:
     _partials = {
         '+': lambda self, dep, other: 1,
         '*': lambda self, dep, other: other.data,
-        '^': lambda self, dep, other: other.data * dep.data ** (other.data - 1),
+        '_^': lambda self, dep, other: other.data * dep.data ** (other.data - 1),
+        '^_': lambda self, dep, other: self.data * math.log(other.data),
         'e': lambda self, dep, other: self.data,
     }
     def __init__(self, data, grad=None, deps=(), partials=()):
@@ -277,7 +338,7 @@ class Value:
     def __pow__(self, other):
         data = self.data**other.data
         deps = (self, other)
-        partials = (self._partials['^'], None)
+        partials = (self._partials['_^'], self._partials['^_'])
         return Value(data=data, grad=None, deps=deps, partials=partials)
     def backward(self):
         # The root node: d(root)/d root = 1
@@ -317,7 +378,7 @@ y = w * x
 z = y + x**Value(2)
 # z = (w*x) + x**2 = wx + x
 # dz/dx = w+2x, dz/dy = 1, dz/dw = x
-print("z", z)
+print("z", z.data)
 
 z.backward()
 print(f"dz/dz: {z.grad}")
@@ -325,3 +386,5 @@ print(f"dz/dy: {y.grad}")
 print(f"dz/dx: {x.grad}")
 print(f"dz/dw: {w.grad}")
 ```
+
+Homework: how to take grads of grads? Hint: the `grad` attribute is calculated by the same operations as the original computation graph: add/multiply/exp. Then it can be wrapped in a `Value` too, right? If so, we can call `backward()` on it as well.
