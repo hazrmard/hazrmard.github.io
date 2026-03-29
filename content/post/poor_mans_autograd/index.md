@@ -18,7 +18,7 @@ What stood out to me were 40 or so lines that implemented autograd. That is, cal
 
 No, the reason I was so taken aback was explicitly facing the simplicity of the mechanism that has fueled machine learning for decades now. It's one thing to call `loss.backward()`; it's an entirely different thing to pause and examine what's happening underneath.
 
-The goal of this post is to build up those 40 lines, step by step. First, we revisit two rules of differentiation. Then we differentiable value. Finally, we iterate on application of the two rules in code.
+The goal of this post is to build up those 40 lines, step by step. First, we revisit two rules of differentiation. Then we represent differentiable values in code. Finally, we apply the two rules over a few revisions, each more complex.
 
 ## The Chain Rule
 
