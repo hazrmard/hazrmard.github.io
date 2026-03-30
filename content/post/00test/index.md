@@ -3,14 +3,22 @@ date = '2026-01-10T13:00:53-08:00'
 categories = ["Test"]
 tags = ["Test"]
 title = "Test post"
-hasequations = true
-hascode = false
+description = "this is a sample description"
+link = ""
+includes = []       # any javascript files to include
+hasequations = false
 haspython = true
-isexternal = false
-description = ""
+tableofcontents = false
 draft = true
-tableofcontents = true
+[params]
+    featured_image = "image.png"
 +++
+
+## Frontmatter
+
+{{< param "featured_image" >}}
+
+{{< param "description" >}}
 
 ## python
 

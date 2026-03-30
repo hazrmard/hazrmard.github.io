@@ -111,6 +111,13 @@ if (document.readyState === 'loading') {
     border-radius: 4px;
     cursor: pointer;
     margin: 10px 0;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+  .pyodide-run-btn:hover {
+    background: #6C929F; /* A slightly darker shade of #26596A */
+  }
+  .pyodide-run-btn:active {
+    transform: scale(0.95); /* Shrinks the button by 5% when pressed */
   }
   .pyodide-run-btn:disabled { background: #ccc; }
   .pyodide-output {

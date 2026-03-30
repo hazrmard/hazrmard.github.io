@@ -10,8 +10,7 @@ hasequations = true
 haspython = true
 tableofcontents = false
 draft = false
-[params]
-   featured_image = "thumbnail.jpg"
+image = "thumbnail.jpg"
 +++
 
 {{<figure
@@ -20,11 +19,11 @@ draft = false
 
 I recently came across [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95) - a single-file, python-only training script for a GPT model.
 
-What stood out to me were 40 or so lines that implemented autograd. That is, calculating gradients of computations in native python. Autograd is not novel ([python autograd](https://autograd.readthedocs.io/en/latest/background.html)). It underpins every single deep learning library ([jax](https://docs.jax.dev/en/latest/automatic-differentiation.html), [torch](https://docs.pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html), [tensorflow](https://www.tensorflow.org/guide/autodiff), [and yes, numpy too](https://github.com/HIPS/autograd)).
+What stood out to me were 40 or so lines that implemented autograd. That is, calculating gradients of computations done in code, automatically. Autograd is not novel ([python autograd](https://autograd.readthedocs.io/en/latest/background.html)). It underpins every single deep learning library ([jax](https://docs.jax.dev/en/latest/automatic-differentiation.html), [torch](https://docs.pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html), [tensorflow](https://www.tensorflow.org/guide/autodiff), [and yes, numpy too](https://github.com/HIPS/autograd)).
 
 No, the reason I was so taken aback was explicitly facing the simplicity of the mechanism that has fueled machine learning for decades now. It's one thing to call `loss.backward()`; it's an entirely different thing to pause and examine what's happening underneath.
 
-The goal of this post is to build up those 40 lines, step by step. First, we revisit two rules of differentiation. Then we represent differentiable values in code. Finally, we apply the two rules over a few revisions, each more complex.
+The goal of this post is to build up those 40 lines, step by step. First, we revisit two rules of differentiation. Then we come up with a representation of differentiable values in code. Finally, we apply the two rules over a few revisions, each more complex.
 
 ## The Chain Rule
 
@@ -57,9 +56,15 @@ x --"dg/dx"--> g
 g --"df/dg"--> f
 ```
 
+Looking at the graph, edges defining a path backwards from `f` to `x` are muultiplied. The effect of each function composition is multiplicative.
+
 ## The distributive property
 
 The derivative is distributive over addition.
+
+$$
+\frac{\partial}{\partial x} (f(x) + g(x)) = \frac{\partial}{\partial x} f(x) + \frac{\partial}{\partial x} g(x)
+$$
 
 For example:
 
@@ -89,27 +94,27 @@ two --"df/d(2x)"--> f
 
 Looking at the graph, $x$ affects $f(x)$ twice: once through $g(x)$ and once through $2x$. Visually, the change in $f$ with respect to $x$ should add the change due to each of the two branches.
 
-## The atomic value
+## Representing a differentiable value
 
 We need to represent each scalar such that we can contain its value and gradient. Each operation produces a new value.
 
 ```python
 class Value:
-    def __init__(self, data, grad):
+    def __init__(self, data, grad=None):
         self.data = data
         self.grad = grad
         
     def __add__(self, other):
         result = self.data + other.data
-        result_node = Value(data=result, grad=1)
+        result_node = Value(data=result)
         return result_node
 ```
 
 Let's try it out:
 
 ```python
-w = Value(2, grad=0)
-x = Value(1, grad=0)
+w = Value(2)
+x = Value(1)
 y = w + x
 z = y + x
 print(z.data)
@@ -122,6 +127,8 @@ y --"dz/dy"--> z
 x --"dy/dx"--> y
 x --"dz/dx"--> z
 ```
+
+## Backward pass on the computation graph
 
 Now, we need a backward pass. What is `dz/d[w,x,y]`? Note that each intermediate result, starting from the inputs, is a `Value` object. Also note that the relationships lend themselves to a graph representation. We can call each `Value`, be it input, intermediate, or output, a *node* in the computation graph.
 
@@ -139,6 +146,7 @@ To traverse edges, we need to track the dependencies of each node. Then we can c
  #         \--chain rule--/
  #         \--distributive property--/
 
+ # Starting from the final node 
  for dep in z.deps: # i.e. y, x
      # new gradient =
      dep.grad = \
@@ -157,7 +165,10 @@ To traverse edges, we need to track the dependencies of each node. Then we can c
         (y.grad * 1)
 ```
 
-Putting it together:
+Putting it together as follows. A `backward()` method is defined which calculates the derivative with respect to each node in the computation graph. We make two observations when giving `grad` a default value:
+
+1. When calling `backward()` on a node, the most trivial gradient is that of the node with itself. `d node / d node = 1`. The first thing we check in `bachward()` is whether `grad` is `None`. If so, we know that that node is the root node from which `backward()` was first called.
+2. When looking at a node's dependencies, we want to respect other gradients that may have accumulated from other edges in the computation graph. We check whether the `grad` attribute of a dependency is `None`. If so, it means that that dependency hasn't started accumulating gradients. We set it to 0. (Why not set to 1? We only set 1 for the root node. Since this is necessarily a dependency of some node, therefore it is not the root node.)
 
 ```python
 class Value:
