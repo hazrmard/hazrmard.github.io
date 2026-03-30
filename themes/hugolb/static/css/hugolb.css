@@ -132,6 +132,10 @@ h1, h2, h3, h4, h5, h6 {
 .content pre > code:last-of-type {
     overflow-x: auto;
     max-width: 80ch;
+    /* Fixes iOS font sizing anomaly in Hugo code blocks */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 .content img, .content figure {
     max-width: 95%;
