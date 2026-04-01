@@ -10,6 +10,5 @@ hasequations = false
 haspython = false
 tableofcontents = false
 draft = true
-[params]
-    featured_image = ""
+image = ""
 +++

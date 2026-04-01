@@ -56,7 +56,7 @@ x --"dg/dx"--> g
 g --"df/dg"--> f
 ```
 
-Looking at the graph, edges defining a path backwards from `f` to `x` are muultiplied. The effect of each function composition is multiplicative.
+Looking at the graph, edges defining a path backwards from `f` to `x` are multiplied. The effect of each function composition is multiplicative.
 
 ## The distributive property
 
@@ -167,7 +167,7 @@ To traverse edges, we need to track the dependencies of each node. Then we can c
 
 Putting it together as follows. A `backward()` method is defined which calculates the derivative with respect to each node in the computation graph. We make two observations when giving `grad` a default value:
 
-1. When calling `backward()` on a node, the most trivial gradient is that of the node with itself. `d node / d node = 1`. The first thing we check in `bachward()` is whether `grad` is `None`. If so, we know that that node is the root node from which `backward()` was first called.
+1. When calling `backward()` on a node, the most trivial gradient is that of the node with itself. `d node / d node = 1`. The first thing we check in `backward()` is whether `grad` is `None`. If so, we know that that node is the root node from which `backward()` was first called.
 2. When looking at a node's dependencies, we want to respect other gradients that may have accumulated from other edges in the computation graph. We check whether the `grad` attribute of a dependency is `None`. If so, it means that that dependency hasn't started accumulating gradients. We set it to 0. (Why not set to 1? We only set 1 for the root node. Since this is necessarily a dependency of some node, therefore it is not the root node.)
 
 ```python

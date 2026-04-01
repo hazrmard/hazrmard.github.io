@@ -1,14 +1,20 @@
 <div class="summary {{.Section}}">
     <div class="image"
         {{if .Params.image}}
-            style="background-image: url('{{.Params.image}}')"
+            {{- $image := .Params.image -}}
+            {{- if not (strings.HasPrefix $image "http") -}}
+                {{- if not (strings.HasPrefix $image "/") -}}
+                    {{- $image = printf .RelPermalink $image -}}
+                {{- end -}}
+            {{- end -}}
+            style="background-image: url('{{$image}}')"
         {{else}}
             style="background-image: url('{{.Site.Params.defaultpostimg}}')"
         {{end}}>
     </div>
     <div class="description">
         {{if .Params.link }}
-            <a href="{{ .Params.link }}"><h3>{{.Title}} 🡵</h3></a>
+            <a href="{{ .Params.link }}"><h3>{{.Title}} 🔗</h3></a>
         {{else}}
             <a href="{{ .RelPermalink }}"><h3>{{.Title}}</h3></a>
         {{end}}
