@@ -49,7 +49,7 @@
 {{- if ne $image "" -}}
   {{- if not (strings.HasPrefix $image "http") -}}
     {{- if not (strings.HasPrefix $image "/") -}}
-        {{- $image = printf .RelPermalink $image -}}
+        {{- $image = printf "%s%s" .RelPermalink $image -}}
     {{- end -}}
   {{- end -}}
   <meta property="og:image" content="{{ $image }}" />
