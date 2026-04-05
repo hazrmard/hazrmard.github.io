@@ -1,11 +1,15 @@
 <!-- Shows taxonomies, dates etc. for a post on the post page -->
 <div class="front-matter">
     <!-- Date -->
+    {{ if ne .Lastmod .Date }}
+            <em>(Updated: {{ dateFormat "Monday, Jan 2, 2006" .Lastmod }}</em>),  
+    {{ end }}
     {{if eq .Type "project"}}
         <em>{{dateFormat "Jan 2006" .Date}}</em>
     {{else}}
         <em>{{dateFormat "Jan 2, 2006" .Date}}</em>
     {{end}}
+
     <!-- breadcrumb navigation -->
     {{ .Scratch.Set "sections" (slice .)}}
     <br/>Section: {{partial "breadcrumbs.html" . }}

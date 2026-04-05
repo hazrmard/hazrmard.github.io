@@ -4,12 +4,19 @@ languageCode = "en-us"
 theme = "hugolb"
 copyright = "Ibrahim Ahmed"
 
+# to populate last modification date
+enableGitInfo = true
+
 # hugo build parameters
 [pagination]
     pagerSize = 100
     paginatePath = "p"
 
 ignoreFiles = [".+pptx$"]
+
+[frontmatter]
+  date = ["date", "publishDate", "lastmod"]
+  lastmod = [":git", "date"]
 # ====
 
 [params]

@@ -19,7 +19,13 @@
             <a href="{{ .RelPermalink }}"><h3>{{.Title}}</h3></a>
         {{end}}
         <div class="front-matter">
-            <em class="front-matter-date">{{dateFormat "Jan 2, 2006" .Date}}</em> | {{.ReadingTime}} min read
+            <em class="front-matter-date">
+                {{ if ne .Lastmod .Date }}
+                    (Updated: {{ dateFormat "Jan 2, 2006" .Lastmod }}), 
+                {{ end }}
+                {{dateFormat "Jan 2, 2006" .Date}}
+            </em> | 
+            {{.ReadingTime}} min read
             {{ partial "taxonomies.html" . }}
         </div>
         {{if .Params.description }}
