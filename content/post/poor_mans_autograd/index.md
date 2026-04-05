@@ -405,3 +405,93 @@ print(f"dz/dw: {w.grad}")
 ```
 
 Homework: how to take higher order derivatives? Grads of grads? Hint: the `grad` attribute is calculated by the same operations as the original computation graph: add/multiply/exp. Then, it can be wrapped in a `Value` too, right? If so, we can call `backward()` on it as well.
+
+```python
+import math
+
+class Value:
+    # The derivative operation also returns a Value instance, which
+    # tracks operations for backpropagation:
+    _partials = {
+        '+': lambda self, dep, other: V(1),
+        '*': lambda self, dep, other: V(other.data),
+        '_^': lambda self, dep, other: V(other.data) * V(dep.data) ** (V(other.data - 1)),
+        '^_': lambda self, dep, other: V(self.data) * math.log(V(other.data)),
+        'e': lambda self, dep, other: V(self.data),
+    }
+    def __init__(self, data, grad=None, deps=(), partials=()):
+        self.data = data
+        self.grad = grad
+        self.deps = deps
+        self.partials = partials
+    def __float__(self): return float(self.data)
+    def __repr__(self): return f"V({self.data}, {self.grad})"
+    def __add__(self, other):
+        data = self.data + other.data
+        deps = (self, other)
+        partials = (self._partials['+'], self._partials['+'])
+        return Value(data=data, grad=None, deps=deps, partials=partials)
+    def __mul__(self, other):
+        data = self.data * other.data
+        deps = (self, other)
+        partials = (self._partials['*'], self._partials['*'])
+        return Value(data=data, grad=None, deps=deps, partials=partials)
+    def __pow__(self, other):
+        data = self.data**other.data
+        deps = (self, other)
+        partials = (self._partials['_^'], self._partials['^_'])
+        return Value(data=data, grad=None, deps=deps, partials=partials)
+    def backward(self):
+        # The root node: d(root)/d root = 1
+        if self.grad is None:
+            self.grad = 1
+        if not self.deps:
+            return # root node reached
+        dep, *other = self.deps
+        partial, *other_partial = self.partials
+        
+        if other:
+            other = other[0]
+            other_partial = other_partial[0]
+
+        # This is the first time the dependency is seen.
+        # It does not have any gradients accumulated.
+        if dep.grad is None:
+            dep.grad = 0
+        # accumulating edges = last total + gradient of current edge
+        dep.grad = dep.grad + (self.grad * partial(self, dep, other))
+        dep.backward()
+
+        if other_partial is not None:
+            # This is the first time the dependency is seen.
+            # It does not have any gradients accumulated.
+            if other.grad is None:
+                other.grad = 0
+            # accumulating edges = last total + gradient of current edge
+            other.grad = other.grad + (self.grad * other_partial(self, other, dep))
+            other.backward()
+
+V = Value
+```
+
+```python
+w = Value(2)
+x = Value(2)
+y = w * x
+z = y + x**Value(2)
+# z = (w*x) + x**2 = wx + x
+# dz/dx = w+2x, dz/dy = 1, dz/dw = x
+print("z", z.data)
+
+z.backward()
+print(f"dz/dz: {z.grad}")
+print(f"dz/dy: {y.grad}")
+print(f"dz/dx: {x.grad}")
+print(f"dz/dw: {w.grad}")
+
+z.grad.backward()
+print(f"d2z/dz2: {z.grad}")
+print(f"d2z/dy2: {y.grad}")
+print(f"d2z/dx2: {x.grad}")
+print(f"d2z/dw2: {w.grad}")
+```
