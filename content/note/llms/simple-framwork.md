@@ -19,7 +19,7 @@ In this post I describe a simple framework to get 80% of the way to an agentic, 
 
 ## The framework
 
-<pre class="mermaid">
+```mermaid
 graph TD;
 A[User Input]
 B[router]
@@ -31,7 +31,7 @@ B-->C
 C-->B
 B-->D
 B-->A
-</pre>
+```
 
 The application framework can be seen as a state machine.
 
@@ -39,7 +39,7 @@ Arguably the most development effort goes into the `router`. What is a router?
 
 At the simplest level, it is nothing.
 
-<pre class="mermaid">
+```mermaid
 graph TD;
 A[User Input]
 C[ Large Language Model ]
@@ -47,11 +47,11 @@ D[Output]
 
 A-->C
 C-->D
-</pre>
+```
 
 A more complex router loops back into the LLM:
 
-<pre class="mermaid">
+```mermaid
 graph TD;
 A[User Input]
 C[ Large Language Model ]
@@ -60,11 +60,11 @@ D[Output]
 A-->C
 C-->C
 C-->D
-</pre>
+```
 
 A yet more complex LLM will loop in multiple inputs:
 
-<pre class="mermaid">
+```mermaid
 graph TD;
 A[User Input]
 C[ Large Language Model ]
@@ -74,4 +74,4 @@ A-->C
 C-->C
 C-->A
 C-->D
-</pre>
+```
