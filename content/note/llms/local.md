@@ -32,3 +32,7 @@ Pointers:
 
 - `--reasoning-budget 0` to disable thinking
 - `-ngl 999` to offload all layes to GPU.
+
+
+## Using huggingface transformers
+

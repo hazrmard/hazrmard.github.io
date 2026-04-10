@@ -5,6 +5,7 @@ theme = "hugolb"
 copyright = "Ibrahim Ahmed"
 
 # to populate last modification date
+# for github pages deployment, also need to clone history (see .github/workflows/hugo.yaml)
 enableGitInfo = true
 
 # hugo build parameters
@@ -12,7 +13,7 @@ enableGitInfo = true
     pagerSize = 100
     paginatePath = "p"
 
-ignoreFiles = [".+pptx$"]
+ignoreFiles = [".+pptx$", ".venv"]
 
 [frontmatter]
   date = ["date", "publishDate", "lastmod"]

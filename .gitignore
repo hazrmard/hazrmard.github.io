@@ -5,3 +5,5 @@
 __pycache__/
 .hugo_build.lock
 public/
+.venv/
+node_modules/
