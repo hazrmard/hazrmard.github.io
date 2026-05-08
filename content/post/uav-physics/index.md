@@ -6,12 +6,19 @@ tags = [ "simulation", "uav" ]
 categories = [ "Engineering" ]
 link = ""
 hasequations = true
-includes = [ ]
+haspython = false
+includes = ["https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"]
 tableofcontents = true
 draft = false
 +++
 
-🏗️Almost finished🏗️
+
+<div id="uav_container" width="600" height="600"></div>
+<script type="module">
+    import {make_UAV, make_scene} from './lib_uav.js';
+    let uav = make_UAV(4);
+    make_scene(uav, "uav_container");
+</script>
 
 This article summarizes the physics governing flight of a drone. It also provides convenient python code for these calculations. This work was adapted from my publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
 
@@ -32,18 +39,19 @@ Two reference frames are used for representing the state of the body:
 1. Inertial, nominal reference frame $n$ is the static frame of reference where the axes are aligned with arbitrary, global directions. They are represented as $\hat{n} = [\hat{x}, \hat{y}, \hat{z}]$.
 2. Body-fixed reference frame $b$ has the axes aligned with respect to the center of gravity of the rigid body in motion. They are represented as $\hat{b} = [\hat{b}_1, \hat{b}_2, \hat{b}_3]$. The body frame moves and rotates with the vehicle. Consider the origin of the body frame attached to the center of mass of the drone.
 
+{{<figure src="static/normal_inertial_frames.png" width="200px">}}
+
 ### Position representation
+
+The body-fixed reference frame $b$ is affixed to the center of mass of the vehicle. The position of the velicle therefore is the position vector of $b$ with respect to $n$, $\hat{r}^n$.
 
 ### Orientation representation
 
-![](./static/normal_inertial_frames.png)
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/MISB_ST_0601.8_-_Yaw%2C_Pitch_%26_Roll.png/952px-MISB_ST_0601.8_-_Yaw%2C_Pitch_%26_Roll.png)
-
 Orientation of a body in the inertial reference frame follows the Tait-Bryan angles convention. That is, orientation can be described by three sequential rotations: yaw ($\psi$), pitch ($\theta$), and roll ($\phi$) - *in that order*. The order of rotations matters. Starting from the inertial frame, yaw $\psi$ is rotation $R(\psi)$ of the body frame about the inertial $z$ axis. Pitch $\theta$ is rotation about the $y$ axis after the first rotation of the inertial frame: $R(\theta)\cdot R(\psi)$. And roll $\phi$ is the final rotation about the $x$ axis of the frame after the prior two rotations. The final product is the body reference frame.
 
-By convention, the right handed coordinate system is followed. The direction of the positive $x$ axis in the body frame ($b_1$) is considered "forward"/North orientation. The positive $y$ axis ($b_2$) is "right"/East and the positive $z$ axis ($b_3$) is "down". For rotations about each axis, positive rotation is counter-clockwise, looking at the positive rotation axis coming out of the page.
+By convention, the right handed coordinate system is followed. The direction of the positive $x$ axis in the body frame ($b_1$) is considered "forward"/North orientation. The positive $y$ axis ($b_2$) is "right"/East and the positive $z$ axis ($b_3$) is "down". For rotations about each axis, positive rotation is counter-clockwise, looking at the positive rotation axis coming out of the page. This is also known as the [North-East-Down (NED) system](https://en.wikipedia.org/wiki/Aircraft_principal_axes)
 
-![](./static/tait_bryan_angles.svg)
+{{<figure src="static/tait_bryan_angles.png" width="200px">}}
 
 ### Reconciling inertial and body frames
 
