@@ -32,7 +32,7 @@ The following topics are covered, in order:
 
 ## Describing the vehicle
 
-A multi-rotor UAV is modeled with six degrees of freedom: the three spatial coordinates for position: $x, y, z$, and the three Euler angles for orientation: $\phi, \theta, \psi$.
+A multi-rotor UAV is modeled with six degrees of freedom: the three spatial coordinates for position: $x, y, z$, and the three Euler angles for orientation: $\phi, \theta, \psi$. To use coordinates, a coordinate system needs to be agreed upon. Typically the the [North-East-Down (NED) system](https://en.wikipedia.org/wiki/Aircraft_principal_axes) is used. The direction of the positive $x$ axis is considered "forward"/North orientation. The positive $y$ axis is "right"/East and the positive $z$ axis is "down".This is a right-handed coordinate system; positive rotation about an axis in the direction of the thumb is in the direction of the curled fingers. For example, a positive z-rotation goes from +x to +y.
 
 Two reference frames are used for representing the state of the body:
 
@@ -43,13 +43,11 @@ Two reference frames are used for representing the state of the body:
 
 ### Position representation
 
-The body-fixed reference frame $b$ is affixed to the center of mass of the vehicle. The position of the velicle therefore is the position vector of $b$ with respect to $n$, $\hat{r}^n$.
+The body-fixed reference frame $b$ is affixed to the center of mass of the vehicle. The position of the vehicle therefore is the position vector of $b$ with respect to $n$, $\hat{r}^n$.
 
 ### Orientation representation
 
 Orientation of a body in the inertial reference frame follows the Tait-Bryan angles convention. That is, orientation can be described by three sequential rotations: yaw ($\psi$), pitch ($\theta$), and roll ($\phi$) - *in that order*. The order of rotations matters. Starting from the inertial frame, yaw $\psi$ is rotation $R(\psi)$ of the body frame about the inertial $z$ axis. Pitch $\theta$ is rotation about the $y$ axis after the first rotation of the inertial frame: $R(\theta)\cdot R(\psi)$. And roll $\phi$ is the final rotation about the $x$ axis of the frame after the prior two rotations. The final product is the body reference frame.
-
-By convention, the right handed coordinate system is followed. The direction of the positive $x$ axis in the body frame ($b_1$) is considered "forward"/North orientation. The positive $y$ axis ($b_2$) is "right"/East and the positive $z$ axis ($b_3$) is "down". For rotations about each axis, positive rotation is counter-clockwise, looking at the positive rotation axis coming out of the page. This is also known as the [North-East-Down (NED) system](https://en.wikipedia.org/wiki/Aircraft_principal_axes)
 
 {{<figure src="static/tait_bryan_angles.png" width="200px">}}
 
@@ -57,26 +55,47 @@ By convention, the right handed coordinate system is followed. The direction of 
 
 A body frame may be different from the intertial frame due to (1) displacement and (2) rotation. The body frame's origin is fixed to the origin of the UAV. Therefore, the displacement of the body frame from the inertial frame is the inertial position of the UAV: $\hat{r}^n=[x,y,z]^T$.
 
-A vector relative to the origin of the body frame will appear rotated if displaced to the origin of the inertial frame. Given a vector in the inertial frame $\hat{\mathcal{V}}^n=[x,y,z]^T$ and the same vector displaced to the body frame $\hat{\mathcal{V}}^b=[b_1,b_2,b_3]^T$, the rotation matrix from the inertial to body reference frames $R_n^b$ is defined as:
+A vector relative to the origin of the body frame will appear rotated if displaced to the origin of the inertial frame. Given a vector in the inertial frame $\hat{\mathcal{V}}^n=[x,y,z]^T$ and the same vector displaced to the body frame $\hat{\mathcal{V}}^b=[b_1,b_2,b_3]^T$, the rotation matrix from the body to inertial reference frames $R_n^b$ is defined as,
+
+where each rotation matrix is:
 
 $$
 \begin{align}
-    \hat{\mathcal{V}}^b &= R(\phi)\cdot R(\theta) \cdot R(\psi) \cdot \hat{\mathcal{V}}^n \\\\
-    \hat{\mathcal{V}}^b &= R_n^b \hat{\mathcal{V}}^n \\\\
-    \begin{bmatrix}
-    b_1 \\\\
-    b_2 \\\\
-    b_3
-    \end{bmatrix} &= 
-    \begin{bmatrix}
-    c\theta c\psi & c\theta s\psi & -s\theta \\\\
-    -c\phi s\psi + s\phi s\theta c\psi & c\phi c\psi + s\phi s\theta s\psi & s\psi c\theta \\\\
-    s\phi s\psi + c\phi s\theta c\psi & -s\phi c\psi + c\phi s\theta s\psi & c\psi c\theta
-    \end{bmatrix}
+ R(\phi) = \begin{bmatrix} 1 & 0 & 0 \\\\ 0 & c\phi & -s\phi \\\\ 0 & s\phi & c\phi \end{bmatrix}
+ \end{align}
+$$
+
+$$
+\begin{align}
+ R(\theta) = \begin{bmatrix} c\theta & 0 & s\theta \\\\ 0 & 1 & 0 \\\\ -s\theta & 0 & c\theta \end{bmatrix}
+ \end{align}
+$$
+
+$$
+\begin{align}
+ R(\psi) = \begin{bmatrix} c\psi & -s\psi & 0 \\\\ s\psi & c\psi & 0 \\\\ 0 & 0 & 1 \end{bmatrix}
+ \end{align}
+$$
+
+
+$$
+\begin{align}
+    \hat{\mathcal{V}}^n &= R(\phi)\cdot R(\theta) \cdot R(\psi) \cdot \hat{\mathcal{V}}^b \\\\
+    \hat{\mathcal{V}}^n &= R_b^n \hat{\mathcal{V}}^b \\\\
     \begin{bmatrix}
     x \\\\
     y \\\\
     z
+    \end{bmatrix} &= 
+    \begin{bmatrix}
+cψcθ & sϕsθcψ+sψcϕ & sϕsψ−sθcϕcψ \\\\
+-sψcθ & −sϕsψsθ+cϕcψ & sϕcψ+sψsθcϕ \\\\
+sθ & −sϕcθ & cϕcθ
+\end{bmatrix}
+    \begin{bmatrix}
+    b_1 \\\\
+    b_2 \\\\
+    b_3
     \end{bmatrix}
 \end{align}
 $$
@@ -102,20 +121,28 @@ $$
 \end{align}
 $$
 
-This can be used to integrate accelerations in the body frame to find body-frame velocity.
+<details>
+<summary>Transport theorem and the cross product</summary>
+
+\begin{align}
+
+\end{align}
+</details>
+
+The additive term is a fictitious force that accounts for non-inertial frame. Once that is accounted for, the dynamics can be solved for like an inertial frame. This can be used to integrate accelerations in the body frame to find body-frame velocity.
 
 ### The state of the vehicle
 
-Tracking the motion of the vehicle requires tracking multiple variables. The variables can be divided into translational and their rotational analogues.
+The vehicle dynamics are completely represented by 12 state variables: linear and angular displacement in each dimension, and their time derivatives:
 
-1. $\hat{r}^n=[x,y,z]$ are the navigation coordinates in the inertial frame.
+1. $\hat{r}^n=[x,y,z]$ are the navigation coordinates in the inertial frame. This is the linear displacement of the body frame from the inertial frame.
 2. $\hat{v^b}=[\dot{\hat{v^b}_1}, \dot{\hat{v^b}_2}, \dot{\hat{v^b}_3}]$ is the velocity of the vehicle along the body frame axes.
 3. $\hat{\Phi}=[\phi, \theta, \psi] $ is the orientation of the body reference frame $b$ in Euler angles (roll, pitch, yaw) with reference to the inertial reference frame.
-4. $\hat{\omega}=[\omega_x, \omega_y, \omega_z]$ is the roll rate of the three body frame axes.
+4. $\hat{\omega}=[\omega_x, \omega_y, \omega_z]$ is the instantaneous angular velocity along each of the roll, pitch, yaw axes.
 
 ## Dynamics of multi-rotor UAVs
 
-The state variables above are affected by the forces and torques acting on the body.
+Since state is split into linear and rotational variables, the dynamics equations will be split into linear and rotational equations. The change in state is governed by the forces and moments acting on the body.
 
 1. $\hat{F}^b=[F_{b_1},F_{b_2},F_{b_3}]$ are the net forces along the three body frame axes, where $\hat{F}^b=R_n^b \hat{F}^n$.
 2. $\hat{M}^b=[M_{b_1},M_{b_2},M_{b_3}]$ are the moments along the three body axes, where $\hat{M}^b=R_n^b \hat{M}^n$.
@@ -124,16 +151,17 @@ The multirotor is modeled as a rigid body. A rigid body has a constant mass dist
 
 $$
 \begin{align}
-F = m \cdot a
+    F = m \cdot \frac{d^2}{dt^2}\hat{r}
 \end{align}
 $$
 
-And its rotational analogue:
+And its rotational analogue, as follows. Here, the change in displacement can be approximated by an infinitisemal arc length of a circle originating at the body frame origin. Then, $d\hat{r}=\hat{r} \cdot \hat{\omega}$, and $d^2\hat{r}=\hat{r} \cdot d\hat{\omega}$.
 
 $$
 \begin{align}
-r \times F &= r \times  (m \cdot a) \\\\
-M &= I \cdot \frac{d\omega}{dt}
+    \hat{r} \times F &= \hat{r} \times  (m \cdot \frac{d^2}{dt^2}\hat{r}) \\\\
+    \hat{r} \times F &= \hat{r} \times (m \cdot \hat{r} \cdot \frac{d}{dt}\hat{\omega}) \\\\
+    \hat{M} &= \hat{I} \cdot \frac{d}{dt}\hat{\omega}
 \end{align}
 $$
 
