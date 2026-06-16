@@ -1,5 +1,5 @@
 +++
-title = "The physics of multirotor drones"
+title = "Drone physics"
 date = "2024-01-27T19:22:34-06:00"
 description = "Equations governing dynamics and control of a multirotor UAV"
 tags = [ "simulation", "uav" ]
@@ -10,6 +10,7 @@ haspython = false
 includes = ["https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"]
 tableofcontents = true
 draft = false
+slug = "drone-physics"
 +++
 
 This article describes drone physics. Audience should have familiarity with introductory linear algebra, introductory calculus, and introductory classical mechanics. This work was adapted from [my research in adaptive control](/about/) and publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
@@ -28,6 +29,8 @@ The following topics are covered, in order:
 ## Describing the vehicle
 
 A multi-rotor UAV is modeled with six degrees of freedom: the three linear axes for linear motion: $x, y, z$, and the three angular axes for rotational motion: $\phi, \theta, \psi$. To use coordinates, a coordinate system needs to be agreed upon. Typically the the [North-East-Down (NED) system](https://en.wikipedia.org/wiki/Aircraft_principal_axes) is used. The direction of the positive $x$ axis is considered "forward"/North orientation. The positive $y$ axis is "right"/East and the positive $z$ axis is "down".This is a right-handed coordinate system; positive rotation about an axis in the direction of the thumb is in the direction of the curled fingers. For example, a positive z-rotation goes from +x to +y.
+
+{{<figure src="static/right-handed-coords.png" width="250px">}}
 
 Two reference frames are used for representing the state of the body:
 
@@ -164,6 +167,8 @@ $$
 
 Assume the body frame has instantaneous angular velocity $\hat{\omega}$ about each axis. Each basis vector will see a rotation over a time interval $dt$. For small values of $dt$, the angular displacement is small, $\hat{\omega} dt$, and the arc drawn by the tip of the unit vector can be approximated as a straight line of magnitude $\hat{\omega} dt$:
 
+{{<figure src="static/transport-theorem.png" width="200px">}}
+
 $$
 \hat{x}^b \rightarrow \hat{x}^b + 0\hat{x}^b + \omega_z dt \hat{y}^b - \omega_y dt \hat{z}^b \\\\
 \hat{y}^b \rightarrow \hat{y}^b - \omega_z dt \hat{x}^b + 0 \hat{y}^b + \omega_x dt \hat{z}^b \\\\
@@ -235,8 +240,8 @@ The linear state variables ($\hat{r}^n$, $\hat{v}^b$) are determined primarily b
 
 $$
 \begin{align}
-\hat{F_p}^b + R_n^b \hat{F_g}^n &= m(\hat{\dot{v}}^b + \hat{\omega} \times \hat{v}^b)\\\\
-\hat{\dot{v}}^b &= \frac{\hat{F_p}^b + R_n^b \hat{F_g}^n}{m} - \hat{\omega} \times \hat{v}^b\\\\
+\hat{T} + R_n^b \hat{F_g}^n &= m(\hat{\dot{v}}^b + \hat{\omega} \times \hat{v}^b)\\\\
+\hat{\dot{v}}^b &= \frac{\hat{T} + R_n^b \hat{F_g}^n}{m} - \hat{\omega} \times \hat{v}^b\\\\
 \begin{bmatrix}
 \dot{v}_x \\\\
 \dot{v}_y \\\\
@@ -279,6 +284,8 @@ Where $I$ is the moment of inertia matrix, also known as angular mass.
 
 Assume the force is acting on a point mass $m$ at some distance, $\hat{r}$, from the origin to cause a rotation about an axis of rotation. Only the component of force perpendicular to the position vector will cause rotation. This can be obtained by the cross product. Note that the component paralell to the position vector will cause linear acceleration.
 
+{{<figure src="static/linear-to-angular.png">}}
+
 The infinitesimal displacement $d\hat{r}$ can be approximated by an infinitisemal arc length of a circle originating at the origin. Then, $d\hat{r}=\hat{\omega} \times \hat{r}$.
 
 Given the right-handed coordinate system, the direction vector of angular rotation points along the positive axis of rotation for counter-clockwise rotation. This can be used to simplfy the calculations that follow.
@@ -319,6 +326,8 @@ I_{axis} = \sum_{\text{parts}}I_{part} + m r_{part}^2
 $$
 
 Where $I_{part}$ is the moment of inertia of the part about its center of mass, and $r_{part}$ is the distance from the part's center of mass to the axis of rotation.
+
+{{<figure src="static/parallel-axis.png" width="200px">}}
 
 The moment of inertia matrix is then (assuming axial symmetry):
 
@@ -447,6 +456,8 @@ The previous sections describe how to describe the vehicle, and how the state va
 ### Propellers
 
 When a propeller spins, it pushes air down parallel to the axis of rotation, and to the side perpendicular to the axis of rotation.
+
+{{<figure src="static/propeller-dynamics.png" width="400px">}}
 
 The downward push generates a reactionary force, thrust. Given the propeller geometry parameters, the thrust can be modeled by numerically solving the equation for thrust and propeller induced velocity. An alternate approach, relating the thrust constant (empirically determined) and propeller velocity is used here:
 
