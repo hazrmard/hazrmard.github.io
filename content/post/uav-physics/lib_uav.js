@@ -92,6 +92,7 @@ function makeTextSprite(message, color) {
 // Function to create a scene and render the UAV inside a given div
 export function make_scene(uav, div_id) {
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
     const camera = new THREE.PerspectiveCamera(100, 1, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
 
@@ -114,7 +115,7 @@ export function make_scene(uav, div_id) {
     camera.up.set(0, 0, -1);
 
     // Set camera position to view the UAV
-    camera.position.set(-3, -3, -3);
+    camera.position.set(-2, -1, -4);
     camera.lookAt(0, 0, 0);
 
     // Add orbit controls - this will capture the camera's up vector (0, 0, -1)
