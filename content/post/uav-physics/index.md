@@ -14,6 +14,8 @@ draft = false
 
 This article describes drone physics. Audience should have familiarity with introductory linear algebra, introductory calculus, and introductory classical mechanics. This work was adapted from [my research in adaptive control](/about/) and publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
 
+> For more interactive explainers, see [Poor Man's Autograd]({{< relref "/post/poor_mans_autograd" >}}) and [Surprise! A Derivation of Entropy]({{< relref "/post/entropy" >}}).
+
 The following topics are covered, in order:
 
 1. The coordinate systems used to describe the vehicle.
@@ -48,6 +50,12 @@ The velocity of the vehicle is the velocity of the body frame relative to the in
 ### Angular representation
 
 Orientation of a body in the inertial reference frame follows the Tait-Bryan angles convention. That is, orientation can be described by three sequential rotations: yaw ($\psi$), pitch ($\theta$), and roll ($\phi$) - *in that order*. The order of rotations matters. Starting from the inertial frame $\hat{n}$, yaw $\psi$ is rotation $R(\psi)$ of the body frame about the inertial $z$ axis. Starting from this yaw-ed frame $\hat{n}\_\psi$, pitch $\theta$ is rotation $R(\theta)$ about the new $y$ axis. And starting from this yaw-ed and pitch-ed frame $\hat{n}\_{\psi,\theta}$, roll $\phi$ is the final rotation $R(\phi)$ about the new $x$ axis. The final product, $\hat{n}\_{\psi,\theta,\phi}$ is the body reference frame.
+
+<div id="euler_rotation_container"></div>
+<script type="module">
+    import {make_rotation_scene} from './lib_uav.js';
+    make_rotation_scene("euler_rotation_container");
+</script>
 
 {{<figure src="static/tait_bryan_angles.png" width="200px">}}
 
@@ -87,7 +95,7 @@ $$
 
 A body frame may be different from the intertial frame due to (1) displacement and (2) rotation. The body frame's origin is fixed to the origin of the UAV. Therefore, the displacement of the body frame from the inertial frame is the inertial position of the UAV: $\hat{r}^n=[x,y,z]^T$.
 
-A vector relative to the origin of the body frame will appear rotated if displaced to the origin of the inertial frame. Given a vector in the inertial frame $\hat{\mathcal{V}}^n=[x,y,z]^T$ and the same vector displaced to the body frame $\hat{\mathcal{V}}^b=[b_1,b_2,b_3]^T$, the rotation matrix from the body to inertial reference frames $R_b^n$ is defined as, where each rotation matrix is:
+A vector relative to the origin of the body frame will appear rotated if displaced to the origin of the inertial frame. Given a vector in the inertial frame $\hat{\mathcal{V}}^n=[x^n,y^n,z^n]^T$ and the same vector at the origin of the body frame $\hat{\mathcal{V}}^b=[x^b,y^b,z^b]^T$, the rotation matrix from the body to inertial reference frames $R_b^n$ is defined as, where each rotation matrix is:
 
 $$
 \begin{align}
@@ -113,9 +121,9 @@ $$
     \hat{\mathcal{V}}^n &= R(\phi)\cdot R(\theta) \cdot R(\psi) \cdot \hat{\mathcal{V}}^b \\\\
     \hat{\mathcal{V}}^n &= R_b^n \hat{\mathcal{V}}^b \\\\
     \begin{bmatrix}
-    x \\\\
-    y \\\\
-    z
+    x^n \\\\
+    y^n \\\\
+    z^n
     \end{bmatrix} &= 
     \begin{bmatrix}
 cψcθ & sϕsθcψ+sψcϕ & sϕsψ−sθcϕcψ \\\\
@@ -123,9 +131,9 @@ cψcθ & sϕsθcψ+sψcϕ & sϕsψ−sθcϕcψ \\\\
 sθ & −sϕcθ & cϕcθ
 \end{bmatrix}
     \begin{bmatrix}
-    b_1 \\\\
-    b_2 \\\\
-    b_3
+    x^b \\\\
+    y^b \\\\
+    z^b
     \end{bmatrix}
 \end{align}
 $$
@@ -297,14 +305,31 @@ This can be extended to non-point masses by integrating over mass and position v
 <summary>Moment of Inertia of a drone</summary>
 We can model a drone as a sphere, with cylindrical spokes connected to point masses at the end representing motors.
 
-Moments of inertia for various shapes are as follows.
+Moments of inertia for various shapes are as follows. Drone parts can be approximated with these shapes:
 
 1. Solid sphere of mass $m$ and radius $R$, about center of mass: $\frac{2}{5} m R^2$
 2. Solid cylinder of mass $m$ and radius $R$, and length $L$, about axis of symmetry passing through center of mass: $\frac{1}{2} m R^2$
 3. Solid cylinder of mass $m$, radius $R$, and length $L$, about the axis perpendicular to the axis of symmetry and passing through the center: $\frac{1}{4} m R^2 + \frac{1}{12} m L^2$
 4. Point mass of mass $m$ a distance $r$ from axis of rotation: $m r^2$
 
-Using the parallel axis theorem, the total moment of inertia
+Using the [parallel axis theorem](https://en.wikipedia.org/wiki/Parallel_axis_theorem), the total moment of inertia for each axis is:
+
+$$
+I_{axis} = \sum_{\text{parts}}I_{part} + m r_{part}^2
+$$
+
+Where $I_{part}$ is the moment of inertia of the part about its center of mass, and $r_{part}$ is the distance from the part's center of mass to the axis of rotation.
+
+The moment of inertia matrix is then (assuming axial symmetry):
+
+$$
+I = 
+\begin{bmatrix}
+    I_{xx} & 0 & 0 \\\\
+    0 & I_{yy} & 0 \\\\
+    0 & 0 & I_{zz}
+\end{bmatrix}
+$$
 
 </details>
 
@@ -441,7 +466,7 @@ $$
 
 ### Motors
 
-Propellers are spun by motors. Here, we consider brushless direct current (BLDC) motors. Each motor is parameterized by the back electromotive force constant, $k_e$, and the internal resistance $R_{BLDC}$. The torque constant $k_\tau$ is equal to $k_e$ for an ideal square-wave BLDC. $k_\tau$ determines the driving moment of the motor. Dissipative moments are governed by the dynamic friction constant $k_{DF}$, and the aerodynamic drag constant $k_d$. Finally, the net moments $\tau$ and the moment of inertia $J$ of the motor determine how fast the rotor spins. The state of each motor is its angular velocity $\Omega$, applied voltage $v_{BLDC}$, and drawn current $i_{BLDC}$. The dynamics are given by this equation:
+Propellers are spun by motors. Here, we consider [brushless direct current (BLDC) motors](https://en.wikipedia.org/wiki/Brushless_DC_electric_motor). Each motor is parameterized by the back electromotive force constant, $k_e$, and the internal resistance $R_{BLDC}$. The torque constant $k_\tau$ is equal to $k_e$ for an ideal square-wave BLDC. $k_\tau$ determines the driving moment of the motor. Dissipative moments are governed by the dynamic friction constant $k_{DF}$, and the aerodynamic drag constant $k_d$. Finally, the net moments $\tau$ and the moment of inertia $J$ of the motor determine how fast the rotor spins. The state of each motor is its angular velocity $\Omega$, applied voltage $v_{BLDC}$, and drawn current $i_{BLDC}$. The dynamics are given by this equation:
 
 $$
 \begin{align}
@@ -539,4 +564,12 @@ The standard control logic flow of UAVs is depicted in the following figure. In 
 
 ### Path planning & supervisory control
 
-The next higher level is determining which waypoints to visit. Given the flight envelope, some waypoints may be infeasible.
+The next higher level is determining which waypoints to visit. Given the flight envelope, some waypoints may be infeasible. [S-Curves](https://github.com/hazrmard/py-scurve) and [B-Splines](https://en.wikipedia.org/wiki/B-spline) can be used to construct trajectories that respect vehicle constraints (e.g. min/max velocity, acceleration etc.).
+
+This and and supervisory optimal control (using model-predictive contol, reinforcement learning etc.) are out of scope of this article.
+
+## Where to next
+
+If you're interested in learning more about UAV simulation and control, [ArduPilot](https://ardupilot.org/) is an excellent, open-source, community-driven framework for control and simulation.
+
+If you're interested in multirotors used for human transport (eVTOLs), searching for "Advanced Air Mobility" and "Urban Air Mobility" will point to relevant literature. 
