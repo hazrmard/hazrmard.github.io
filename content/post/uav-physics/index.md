@@ -1,79 +1,147 @@
 +++
-title = "The physics of multicopter drones [In Progress]"
+title = "Drone physics"
 date = "2024-01-27T19:22:34-06:00"
-description = "[In Progress] Equations governing flight of a UAV"
+description = "Equations governing dynamics and control of a multirotor UAV"
 tags = [ "simulation", "uav" ]
 categories = [ "Engineering" ]
 link = ""
 hasequations = true
-includes = [ ]
+haspython = false
+includes = ["https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"]
 tableofcontents = true
 draft = false
+slug = "drone-physics"
 +++
 
-🏗️Almost finished🏗️
+This article describes drone physics. Audience should have familiarity with introductory linear algebra, introductory calculus, and introductory classical mechanics. This work was adapted from [my research in adaptive control](/about/) and publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
 
-This article summarizes the physics governing flight of a drone. It also provides convenient python code for these calculations. This work was adapted from my publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
+> For more interactive explainers, see [Poor Man's Autograd]({{< relref "/post/poor_mans_autograd" >}}) and [Surprise! A Derivation of Entropy]({{< relref "/post/entropy" >}}).
 
 The following topics are covered, in order:
 
-1. The state variables used to describe the vehicle. Accounting for the effects of different reference frames.
-2. The forces and moments acting on the vehicle in its local reference frame.
-3. Using the forces/moments to calculate the change in state variables.
-4. How propellers and motors are able to generate the forces and torques.
-5. Determining exactly how much force and torque to generate to control the vehicle.
+1. The coordinate systems used to describe the vehicle.
+2. The state variables used to describe the vehicle.
+3. The forces and torques acting on the body.
+4. Equations of motion (linear and angular).
+5. How motors and propellers generate forces and torques.
+6. How control systems determine propeller speeds.
 
 ## Describing the vehicle
 
-A multi-rotor UAV is modeled with six degrees of freedom: the three spatial coordinates for position: $x, y, z$, and the three Euler angles for orientation: $\phi, \theta, \psi$.
+A multi-rotor UAV is modeled with six degrees of freedom: the three linear axes for linear motion: $x, y, z$, and the three angular axes for rotational motion: $\phi, \theta, \psi$. To use coordinates, a coordinate system needs to be agreed upon. Typically the the [North-East-Down (NED) system](https://en.wikipedia.org/wiki/Aircraft_principal_axes) is used. The direction of the positive $x$ axis is considered "forward"/North orientation. The positive $y$ axis is "right"/East and the positive $z$ axis is "down".This is a right-handed coordinate system; positive rotation about an axis in the direction of the thumb is in the direction of the curled fingers. For example, a positive z-rotation goes from +x to +y.
+
+{{<figure src="static/right-handed-coords.png" width="250px">}}
 
 Two reference frames are used for representing the state of the body:
 
-1. Inertial, nominal reference frame $n$ is the static frame of reference where the axes are aligned with arbitrary, global directions. They are represented as $\hat{n} = [\hat{x}, \hat{y}, \hat{z}]$.
-2. Body-fixed reference frame $b$ has the axes aligned with respect to the center of gravity of the rigid body in motion. They are represented as $\hat{b} = [\hat{b}_1, \hat{b}_2, \hat{b}_3]$. The body frame moves and rotates with the vehicle. Consider the origin of the body frame attached to the center of mass of the drone.
+1. Inertial, nominal reference frame $n$ is the static frame of reference where the axes are aligned with arbitrary, global directions. They are represented as column vectors $\hat{n} = [\hat{x}^n, \hat{y}^n, \hat{z}^n]^T$.
+2. Body-fixed reference frame $b$ has the axes aligned with respect to the center of gravity of the rigid body in motion. They are represented as column vectors $\hat{b} = [\hat{x}^b, \hat{y}^b, \hat{z}^b]^T$. The body frame moves and rotates with the vehicle. Consider the origin of the body frame attached to the center of mass of the drone.
 
-### Position representation
+<div id="uav_container" width="600" height="600"></div>
+<script type="module">
+    import {make_UAV, make_scene} from './lib_uav.js';
+    let uav = make_UAV(4);
+    make_scene(uav, "uav_container");
+</script>
 
-### Orientation representation
+### Linear representation
 
-![](./static/normal_inertial_frames.png)
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/MISB_ST_0601.8_-_Yaw%2C_Pitch_%26_Roll.png/952px-MISB_ST_0601.8_-_Yaw%2C_Pitch_%26_Roll.png)
+The body-fixed reference frame $b$ is affixed to the center of mass of the vehicle. That is, the displacement of the vehicel from the body frame is always 0. The position of the vehicle is represented by the displacement of the body frame from the inertial frame, $\hat{r}^n$.
 
-Orientation of a body in the inertial reference frame follows the Tait-Bryan angles convention. That is, orientation can be described by three sequential rotations: yaw ($\psi$), pitch ($\theta$), and roll ($\phi$) - *in that order*. The order of rotations matters. Starting from the inertial frame, yaw $\psi$ is rotation $R(\psi)$ of the body frame about the inertial $z$ axis. Pitch $\theta$ is rotation about the $y$ axis after the first rotation of the inertial frame: $R(\theta)\cdot R(\psi)$. And roll $\phi$ is the final rotation about the $x$ axis of the frame after the prior two rotations. The final product is the body reference frame.
+The velocity of the vehicle is the velocity of the body frame relative to the inertial frame. Here, we choose to represent velocity in coordinates of the body frame.
 
-By convention, the right handed coordinate system is followed. The direction of the positive $x$ axis in the body frame ($b_1$) is considered "forward"/North orientation. The positive $y$ axis ($b_2$) is "right"/East and the positive $z$ axis ($b_3$) is "down". For rotations about each axis, positive rotation is counter-clockwise, looking at the positive rotation axis coming out of the page.
+### Angular representation
 
-![](./static/tait_bryan_angles.svg)
+Orientation of a body in the inertial reference frame follows the Tait-Bryan angles convention. That is, orientation can be described by three sequential rotations: yaw ($\psi$), pitch ($\theta$), and roll ($\phi$) - *in that order*. The order of rotations matters. Starting from the inertial frame $\hat{n}$, yaw $\psi$ is rotation $R(\psi)$ of the body frame about the inertial $z$ axis. Starting from this yaw-ed frame $\hat{n}\_\psi$, pitch $\theta$ is rotation $R(\theta)$ about the new $y$ axis. And starting from this yaw-ed and pitch-ed frame $\hat{n}\_{\psi,\theta}$, roll $\phi$ is the final rotation $R(\phi)$ about the new $x$ axis. The final product, $\hat{n}\_{\psi,\theta,\phi}$ is the body reference frame.
+
+<div id="euler_rotation_container"></div>
+<script type="module">
+    import {make_rotation_scene} from './lib_uav.js';
+    make_rotation_scene("euler_rotation_container");
+</script>
+
+{{<figure src="static/tait_bryan_angles.png" width="200px">}}
+
+The angular velocity of the vehicle, $\hat{w}^T=[\omega_x,\omega_y,\omega_z]$, is the instantaneous rotational rate of the body frame about itself. Whereas each angle of orientation is defined in its own reference frame ($\hat{n}, \hat{n}\_{\psi}, \hat{n}\_{\psi,\theta}=\hat{b}$) during a sequence of ordered rotations from the inertial axes to the body frame (yaw, then pitch, then roll).
+
+Roll rotation happens last and the result is the body frame. Therefore, $p$, the rate about the x-axis equals the roll rate, $\dot{\phi}$. Pitch happens after the initial yaw, but before roll. Therefore, $q$, the rate about the y-axis, is the pitch rate in the frame $\hat{n}_{\psi}$ rotated by roll $\phi$ to get the the body frame. Finally, yaw rotation happens first in the inertial frame. Therefore, $r$, the rate about the body frame's z-axis, is the yaw rate in the inertial frame rotated by pitch $\theta$ and roll $\phi$. This can be expressed as a matrix equation:
+
+$$
+    \begin{bmatrix}
+    \omega_x \\\\
+    \omega_y \\\\
+    \omega_z
+    \end{bmatrix} = R(\phi)\cdot R(\theta) \begin{bmatrix}
+        0 \\\\ 0 \\\\ \dot{\psi}
+    \end{bmatrix} + 
+    R(\phi) \begin{bmatrix}
+    0 \\\\ \dot{\theta} \\\\ 0
+    \end{bmatrix} + 
+    \begin{bmatrix}
+    \dot{\phi} \\\\ 0 \\\\ 0
+    \end{bmatrix}
+$$
+
+$$
+    \begin{bmatrix}
+    \omega_x \\\\ 
+    \omega_y \\\\ 
+    \omega_z
+    \end{bmatrix} = \begin{bmatrix}
+    \dot{\phi} + \dot{\psi} \sin{\theta}\\\\
+    - \dot{\psi} \sin{\phi} \cos{\theta} + \dot{\theta}\\\\
+    \dot{\psi} \cos{\phi} \cos{\theta}
+    \end{bmatrix}
+$$
 
 ### Reconciling inertial and body frames
 
 A body frame may be different from the intertial frame due to (1) displacement and (2) rotation. The body frame's origin is fixed to the origin of the UAV. Therefore, the displacement of the body frame from the inertial frame is the inertial position of the UAV: $\hat{r}^n=[x,y,z]^T$.
 
-A vector relative to the origin of the body frame will appear rotated if displaced to the origin of the inertial frame. Given a vector in the inertial frame $\hat{\mathcal{V}}^n=[x,y,z]^T$ and the same vector displaced to the body frame $\hat{\mathcal{V}}^b=[b_1,b_2,b_3]^T$, the rotation matrix from the inertial to body reference frames $R_n^b$ is defined as:
+A vector relative to the origin of the body frame will appear rotated if displaced to the origin of the inertial frame. Given a vector in the inertial frame $\hat{\mathcal{V}}^n=[x^n,y^n,z^n]^T$ and the same vector at the origin of the body frame $\hat{\mathcal{V}}^b=[x^b,y^b,z^b]^T$, the rotation matrix from the body to inertial reference frames $R_b^n$ is defined as, where each rotation matrix is:
 
 $$
 \begin{align}
-    \hat{\mathcal{V}}^b &= R(\phi)\cdot R(\theta) \cdot R(\psi) \cdot \hat{\mathcal{V}}^n \\\\
-    \hat{\mathcal{V}}^b &= R_n^b \hat{\mathcal{V}}^n \\\\
+ R(\phi) = \begin{bmatrix} 1 & 0 & 0 \\\\ 0 & c\phi & -s\phi \\\\ 0 & s\phi & c\phi \end{bmatrix}
+ \end{align}
+$$
+
+$$
+\begin{align}
+ R(\theta) = \begin{bmatrix} c\theta & 0 & s\theta \\\\ 0 & 1 & 0 \\\\ -s\theta & 0 & c\theta \end{bmatrix}
+ \end{align}
+$$
+
+$$
+\begin{align}
+ R(\psi) = \begin{bmatrix} c\psi & -s\psi & 0 \\\\ s\psi & c\psi & 0 \\\\ 0 & 0 & 1 \end{bmatrix}
+ \end{align}
+$$
+
+
+$$
+\begin{align}
+    \hat{\mathcal{V}}^n &= R(\phi)\cdot R(\theta) \cdot R(\psi) \cdot \hat{\mathcal{V}}^b \\\\
+    \hat{\mathcal{V}}^n &= R_b^n \hat{\mathcal{V}}^b \\\\
     \begin{bmatrix}
-    b_1 \\\\
-    b_2 \\\\
-    b_3
+    x^n \\\\
+    y^n \\\\
+    z^n
     \end{bmatrix} &= 
     \begin{bmatrix}
-    c\theta c\psi & c\theta s\psi & -s\theta \\\\
-    -c\phi s\psi + s\phi s\theta c\psi & c\phi c\psi + s\phi s\theta s\psi & s\psi c\theta \\\\
-    s\phi s\psi + c\phi s\theta c\psi & -s\phi c\psi + c\phi s\theta s\psi & c\psi c\theta
-    \end{bmatrix}
+cψcθ & sϕsθcψ+sψcϕ & sϕsψ−sθcϕcψ \\\\
+-sψcθ & −sϕsψsθ+cϕcψ & sϕcψ+sψsθcϕ \\\\
+sθ & −sϕcθ & cϕcθ
+\end{bmatrix}
     \begin{bmatrix}
-    x \\\\
-    y \\\\
-    z
+    x^b \\\\
+    y^b \\\\
+    z^b
     \end{bmatrix}
 \end{align}
 $$
 
-Here $c | s$ of $\phi | \theta | \psi$ refer to the cosine and sin respectively. This rotation is useful when looking at forces acting in the body frame from an inertial viewpoint. The above transforms a vector instantaneously between rotated reference frames.
+Here $c | s$ of $\phi | \theta | \psi$ refer to the cosine and sine respectively. This rotation is useful when looking at forces acting in the body frame from an inertial viewpoint. The above transforms a vector instantaneously between rotated reference frames.
 
 ### Reconciling derivatives in rotating frames
 
@@ -94,48 +162,73 @@ $$
 \end{align}
 $$
 
-This can be used to integrate accelerations in the body frame to find body-frame velocity.
+<details>
+<summary>Transport theorem and the cross product</summary>
+
+Assume the body frame has instantaneous angular velocity $\hat{\omega}$ about each axis. Each basis vector will see a rotation over a time interval $dt$. For small values of $dt$, the angular displacement is small, $\hat{\omega} dt$, and the arc drawn by the tip of the unit vector can be approximated as a straight line of magnitude $\hat{\omega} dt$:
+
+{{<figure src="static/transport-theorem.png" width="200px">}}
+
+$$
+\hat{x}^b \rightarrow \hat{x}^b + 0\hat{x}^b + \omega_z dt \hat{y}^b - \omega_y dt \hat{z}^b \\\\
+\hat{y}^b \rightarrow \hat{y}^b - \omega_z dt \hat{x}^b + 0 \hat{y}^b + \omega_x dt \hat{z}^b \\\\
+\hat{z}^b \rightarrow \hat{z}^b + \omega_y dt \hat{x}^b - \omega_x dt \hat{y}^b + 0 \hat{z}^b
+$$
+
+In matrix form, each column vector represents the change to the basis vector:
+$$
+    \hat{b}\_{t+dt} = \hat{b}\_{t} +
+    \begin{bmatrix}
+    0 & -\omega_z & \omega_y \\\\
+    \omega_z & 0 & -\omega_x \\\\
+    -\omega_y & \omega_x & 0
+    \end{bmatrix} dt
+$$
+
+The rate of change of the basis vectors of the reference frame is:
+
+$$
+    \frac{d \hat{b}}{dt} = \begin{bmatrix}
+    0 & -\omega_z & \omega_y \\\\
+    \omega_z & 0 & -\omega_x \\\\
+    -\omega_y & \omega_x & 0
+    \end{bmatrix}
+$$
+
+The matrix multiplication is equivalent to a cross product with the vector $[\omega_x, \omega_y, \omega_z]^T$.
+</details>
+
+The additive term is a fictitious force that accounts for non-inertial frame. Once that is accounted for, the dynamics can be solved for like an inertial frame. This can be used to integrate accelerations in the body frame to find body-frame velocity.
 
 ### The state of the vehicle
 
-Tracking the motion of the vehicle requires tracking multiple variables. The variables can be divided into translational and their rotational analogues.
+The vehicle dynamics are completely represented by 12 state variables: linear and angular displacement in each dimension, and their time derivatives:
 
-1. $\hat{r}^n=[x,y,z]$ are the navigation coordinates in the inertial frame.
-2. $\hat{v^b}=[\dot{\hat{v^b}_1}, \dot{\hat{v^b}_2}, \dot{\hat{v^b}_3}]$ is the velocity of the vehicle along the body frame axes.
-3. $\hat{\Phi}=[\phi, \theta, \psi] $ is the orientation of the body reference frame $b$ in Euler angles (roll, pitch, yaw) with reference to the inertial reference frame.
-4. $\hat{\omega}=[\omega_x, \omega_y, \omega_z]$ is the roll rate of the three body frame axes.
+1. $\hat{r}^n=[x,y,z]^T$ are the navigation coordinates in the inertial frame. This is the linear displacement of the body frame from the inertial frame.
+2. $\hat{v^b}=[v^b_x, v^b_y, v^b_z]^T$ is the velocity of the vehicle along the body frame axes.
+3. $\hat{\Phi}=[\phi, \theta, \psi]^T $ is the orientation of the body reference frame $b$ in Euler angles (roll, pitch, yaw) with reference to the inertial reference frame.
+4. $\hat{\omega}=[\omega_x, \omega_y, \omega_z]^T$ is the instantaneous angular velocity along each of the body frame axes.
 
 ## Dynamics of multi-rotor UAVs
 
-The state variables above are affected by the forces and torques acting on the body.
+The previous section enumerated the variables that describe the vehicle. This section describes how variables change over time. Since state is split into linear and angular variables, the dynamics equations will be split into linear and rotational equations. Here, we choose to represent forces and moments in the body frame coordinates:
 
-1. $\hat{F}^b=[F_{b_1},F_{b_2},F_{b_3}]$ are the net forces along the three body frame axes, where $\hat{F}^b=R_n^b \hat{F}^n$.
-2. $\hat{M}^b=[M_{b_1},M_{b_2},M_{b_3}]$ are the moments along the three body axes, where $\hat{M}^b=R_n^b \hat{M}^n$.
+1. $\hat{F}^b=[F_x^b,F_y^b,F_z^b]^T$ are the net forces along the three body frame axes, where $\hat{F}^b=R_n^b \hat{F}^n$.
+2. $\hat{\tau}^b=[\tau_x^b,\tau_y^b,\tau_z^b]^T$ are the moments along the three body axes, where $\hat{\tau}^b=R_n^b \hat{\tau}^n$.
 
-The multirotor is modeled as a rigid body. A rigid body has a constant mass distribution relative to its center of gravity. Fundamental to the dynamics is Newton's second law of motion:
+The forces acting on the vehicle are thrusts and gravity. Moments are generated when the forces are applied at a distance from the center of gravity. (We can incorporate drag, but we assume it's insubstantial for now.) The force of gravity is $\hat{F_g}^n=[0,0,mg]$ in the inertial reference frame. In the body frame it becomes $\hat{F_g}^b=R^b_n \hat{F_g}^n$. The net force of the $p$ propellers in the body frame (thrust) is $\hat{T}=[0,0,\sum_i^p T_i]^T$, where $T_i$ is the thrust of the $i$th propeller. Thus, the total force acting on the center of mass is $\hat{F}^b=\hat{T} + \hat{F_g}^b$.
 
-$$
-\begin{align}
-F = m \cdot a
-\end{align}
-$$
+The multirotor is modeled as a rigid body. A rigid body has a constant mass distribution relative to its center of gravity.
 
-And its rotational analogue:
+### Linear equations of motion
+
+Fundamental to the dynamics is Newton's second law of motion: force is the rate of change of momentum. Here it is written in terms of body-frame variables.
 
 $$
-\begin{align}
-r \times F &= r \times  (m \cdot a) \\\\
-M &= I \cdot \frac{d\omega}{dt}
-\end{align}
+    \hat{F}^b = \frac{d}{dt}(m\hat{v}^b)
 $$
 
-Where $I$ is the moment of inertia, also known as angular mass. These two relationships can be used to calculate how the state variables change over time.
-
-### Equations of motion
-
-The equations of motion relate the state variables to the dynamics of the system. In this case, the equations are solved in the body frame.
-
-The above relationship can be re-written as using the abstraction provided by the Transport Theorem. This will give the force acting on the body according to the inertial frame:
+The above relationship can be re-written as using the abstraction provided by the Transport Theorem. This will give the force acting on the body according to the inertial frame. The mass is treated as a constant in both frames. That leaves:
 
 $$
 \begin{align}
@@ -143,44 +236,145 @@ $$
 \end{align}
 $$
 
-For rotational variables a similar analogue exists. Given $M^b$ is the rotating body-frame moment, $\omega$ is the angular rate measured in the body frame (subject to the Coriolis effect), and $I$ is the moment of inertia:
+The linear state variables ($\hat{r}^n$, $\hat{v}^b$) are determined primarily by the forces acting on the vehicle.  Thus solving for acceleration $\hat{\dot{v}}^b$ and equating with the acceleration acting on the body frame $\hat{F}^b / m$ yields the rate of change of velocity $\hat{v}^b$ in the body frame.
 
 $$
 \begin{align}
-    \hat{r}^b \times \hat{F}^b &= m \cdot \hat{r}^b \times \hat{\dot{v}}^b \\\\
-    \hat{M}^b &= \hat{I} \hat{\dot{\omega}} \\\\
-    \hat{M}^b &= \hat{I}\hat{\dot{\omega}} + \hat{\omega} \times \hat{I}\hat{\omega}
+\hat{T} + R_n^b \hat{F_g}^n &= m(\hat{\dot{v}}^b + \hat{\omega} \times \hat{v}^b)\\\\
+\hat{\dot{v}}^b &= \frac{\hat{T} + R_n^b \hat{F_g}^n}{m} - \hat{\omega} \times \hat{v}^b\\\\
+\begin{bmatrix}
+\dot{v}_x \\\\
+\dot{v}_y \\\\
+\dot{v}_z
+\end{bmatrix} &=
+\begin{bmatrix}
+    - \omega_y v_z + \omega_z v_y + g \sin{\phi} \sin{\psi} - g \sin{\theta} \cos{\phi} \cos{\psi}\\\\
+    \omega_x v_z - \omega_z v_x + g \sin{\phi} \cos{\psi} + g \sin{\psi} \sin{\theta} \cos{\phi}\\\\
+    - \frac{T}{m} - \omega_x v_y + \omega_y v_x + g \cos{\phi} \cos{\theta}
+\end{bmatrix}
 \end{align}
 $$
 
-
-### Linear variables
-
-The linear state variables ($\hat{r}^n$, $\hat{v}^b$) are determined primarily by the forces acting on the vehicle. The force of gravity $\hat{F_g}^n=[0,0,-mg]$ in the nominal reference frame. In the body frame it becomes $\hat{F_g}^b=R^b_n \hat{F}^n$. The net force of the $p$ propellers in the body frame is $\hat{F_p}^b=[0,0,\sum_i^p T_i]$. Thus, the total force acting on the center of mass is $\hat{F}^b=\hat{F_p}^b + \hat{F_g}^b$. Thus solving for acceleration $\hat{\dot{v}}^b$ and equating with the acceleration acting on the body frame $\hat{F}^b / m$ yields the rate of change of velocity $\hat{v}^b$ in the body frame.
-
 Using $R_b^n$ and the current body frame velocity $\hat{v}^b$ gives the rate of change of position $r^n$ in the inertial frame.
 
-### Angular variables
+$$
+\begin{bmatrix}
+\dot{r}^n_x \\\\
+\dot{r}^n_y \\\\
+\dot{r}^n_z
+\end{bmatrix} = R_b^n \begin{bmatrix}
+    v_x \\\\
+    v_y \\\\
+    v_z
+\end{bmatrix}
+$$
 
-The angular state variables ($\hat{\omega}$, $\hat{\Phi}$) are governed by the moments acting on the body. The moments due to thrust acting on the propeller arm for each propeller are $\hat{M}\_T^b=\sum_i^p r\_i \times T_i$.
-The yaw moments about $b_3$ due to the rotation of the motor are given by $\hat{M}\_\tau^b=\sum_i^p \tau_i$. The total moments about the body are $\hat{M}^b=\hat{M}\_T^b+\hat{M}\_\tau^b$. Solving the torque equation for $\hat{\omega}$, and substituting these moments, yields the rate of change of angular rate $\hat{\omega}$ in the body frame.
+### Angular equations of motion
 
-The rate of change of orientation $\hat{\Phi} = [\dot{\phi}, \dot{\theta}, \dot{\psi}]$ is related to the angular rate $\hat{\omega}$. The angular rate is the instantaneous rotation rate of the body axes. Whereas each angle of orientation is defined in its own reference frame during a sequence of ordered rotations from the inertial axes to the body frame (yaw, pitch, roll). Solving this quation gives the rate of change of orientation.
+Newton's second law can be applied in angular mechanics too. Moment is the rate of change of angular momentum.
 
 $$
-    \begin{bmatrix}
-    p \\\\
-    q \\\\
-    r
-    \end{bmatrix} = R(\phi)\cdot R(\theta) \begin{bmatrix}
-        0 \\\\ 0 \\\\ \dot{\psi}
-    \end{bmatrix} + 
-    R(\phi) \begin{bmatrix}
-    0 \\\\ \dot{\theta} \\\\ 0
-    \end{bmatrix} + 
-    \begin{bmatrix}
-    \dot{\phi} \\\\ 0 \\\\ 0
-    \end{bmatrix}
+\hat{\tau} = \frac{d}{dt}(I\hat{\omega})
+$$
+
+Where $I$ is the moment of inertia matrix, also known as angular mass.
+
+<details>
+<summary>Going from linear to angular motion</summary>
+
+Assume the force is acting on a point mass $m$ at some distance, $\hat{r}$, from the origin to cause a rotation about an axis of rotation. Only the component of force perpendicular to the position vector will cause rotation. This can be obtained by the cross product. Note that the component paralell to the position vector will cause linear acceleration.
+
+{{<figure src="static/linear-to-angular.png">}}
+
+The infinitesimal displacement $d\hat{r}$ can be approximated by an infinitisemal arc length of a circle originating at the origin. Then, $d\hat{r}=\hat{\omega} \times \hat{r}$.
+
+Given the right-handed coordinate system, the direction vector of angular rotation points along the positive axis of rotation for counter-clockwise rotation. This can be used to simplfy the calculations that follow.
+
+Applying the cross product to both sides, and substituting the arc length approximation:
+
+$$
+\begin{align}
+    \hat{r} \times F &= \hat{r} \times  (m \cdot \frac{d^2}{dt^2}\hat{r}) \\\\
+    \hat{r} \times F &= \hat{r} \times (m \cdot \frac{d}{dt}(\hat{\omega} \times \hat{r})) \\\\
+    \hat{r} \times F &= m \cdot \hat{r} \times (\frac{d}{dt}\hat{\omega} \times \hat{r} + \hat{\omega} \times \frac{d}{dt}\hat{r}) \\\\
+    \hat{r} \times F &= m (\hat{r} \times \frac{d}{dt}\hat{\omega} \times \hat{r} + \hat{r}\times \hat{\omega} \times \frac{d}{dt}\hat{r})\\\\
+    \hat{r} \times F &= m (\frac{d}{dt}\hat{\omega}(\hat{r}\cdot\hat{r}) - \underbrace{\hat{r}(\hat{r}\cdot\frac{d}{dt}\hat{\omega}) + \hat{\omega}(\hat{r}\cdot\frac{d}{dt}\hat{r}) - \frac{d}{dt}\hat{r}(\hat{r}\cdot\hat{\omega})}_{=0 \text{ since all vectors are perpendicular}}) \\\\
+    \hat{\tau} &= m |\hat{r}|^2 \cdot \frac{d}{dt}\hat{\omega} = I \frac{d}{dt}\hat{\omega}
+\end{align}
+$$
+
+This can be extended to non-point masses by integrating over mass and position vector to axis of rotation, $\int \int (\hat{r}\cdot\hat{r}) d\hat{r} dm$. Since there are three axes of rotation about any origin, the position vector to each axis is different. Therefore $I$ can be written as a diagonal matrix of angular masses about each axis, $\text{diag}(I_{xx}, I_{yy}, I_{zz})$, matching the angular velocity vector $\hat{\omega}$ containing rotations about all three axes.
+
+(For non-symmetric mass distribution about the three axes, the off-diagonal elements of $I$ will be non-zero. They are called products of inertia.)
+</details>
+
+<details>
+<summary>Moment of Inertia of a drone</summary>
+We can model a drone as a sphere, with cylindrical spokes connected to point masses at the end representing motors.
+
+Moments of inertia for various shapes are as follows. Drone parts can be approximated with these shapes:
+
+1. Solid sphere of mass $m$ and radius $R$, about center of mass: $\frac{2}{5} m R^2$
+2. Solid cylinder of mass $m$ and radius $R$, and length $L$, about axis of symmetry passing through center of mass: $\frac{1}{2} m R^2$
+3. Solid cylinder of mass $m$, radius $R$, and length $L$, about the axis perpendicular to the axis of symmetry and passing through the center: $\frac{1}{4} m R^2 + \frac{1}{12} m L^2$
+4. Point mass of mass $m$ a distance $r$ from axis of rotation: $m r^2$
+
+Using the [parallel axis theorem](https://en.wikipedia.org/wiki/Parallel_axis_theorem), the total moment of inertia for each axis is:
+
+$$
+I_{axis} = \sum_{\text{parts}}I_{part} + m r_{part}^2
+$$
+
+Where $I_{part}$ is the moment of inertia of the part about its center of mass, and $r_{part}$ is the distance from the part's center of mass to the axis of rotation.
+
+{{<figure src="static/parallel-axis.png" width="200px">}}
+
+The moment of inertia matrix is then (assuming axial symmetry):
+
+$$
+I = 
+\begin{bmatrix}
+    I_{xx} & 0 & 0 \\\\
+    0 & I_{yy} & 0 \\\\
+    0 & 0 & I_{zz}
+\end{bmatrix}
+$$
+
+</details>
+
+For rotational variables too, we can "inertialize" the effect of fictitious moments using the transport theorem. Unlike the linear case where mass was constant and could be factored out of the momentum derivative, here, the angular momentum is the time-varying vector: both moment of inertia and angular velocity. Given $M^b$ is the rotating body-frame moment, $\omega$ is the angular rate of the body frame relative to the inertial frame:
+
+$$
+\begin{align}
+    \hat{\tau}^b &= \frac{d}{dt}(I\hat{\omega}) \\\\
+    \hat{\tau}^b &= \frac{d}{dt}(I\hat{\omega}) \hat{b} + \hat{\omega} \times I\hat{\omega} \\\\
+    \hat{\tau}^b &= \underbrace{I\frac{d}{dt}\hat{\omega}}_{I\text{ is constant in the body frame}} + \hat{\omega} \times I\hat{\omega}
+\end{align}
+$$
+
+The angular state variables ($\hat{\omega}$, $\hat{\Phi}$) are governed by the moments acting on the body. There are two kinds of moments:
+
+1. Thrust moments, $\hat{\tau}\_T^b=\sum_i^p r\_i \times T_i$, where $r_i$ is the position vector of the $i$th propeller and $T_i$ is the thrust of the $i$th propeller. These cause pitching and rolling and are due to the thrust of the propellers. 
+2. Yaw moments, $\hat{\tau}\_\tau^b=\sum_i^p \tau_i$, where $\tau_i$ is the torque of the $i$th motor. These cause yawing and are due to the torque of the motors. 
+
+The total moments about the body are $\hat{\tau}^b=\hat{\tau}\_T^b+\hat{\tau}\_\tau^b$. Solving the torque equation for $\hat{\omega}$, and substituting these moments, yields the rate of change of angular rate $\hat{\omega}$ in the body frame.
+
+$$
+\dot{\hat{\omega}} = I^{-1} (\hat{\tau}^b - \hat{\omega} \times I\hat{\omega})
+$$
+
+The rate of change of orientation $\hat{\Phi} = [\dot{\phi}, \dot{\theta}, \dot{\psi}]$ is related to the angular rate $\hat{\omega}$ as described earlier. Solving the equation yields:
+
+$$
+\begin{bmatrix}
+ \dot{\phi}\\\\
+ \dot{\theta}\\\\ 
+ \dot{\psi}
+\end{bmatrix} = \begin{bmatrix}
+\omega_x - \frac{\omega_z \sin{\theta}}{\cos{\phi} \cos{\theta}}\\\\
+\omega_y + \frac{\omega_z \sin{\phi}}{\cos{\phi}}\\\\
+\frac{\omega_z}{\cos{\phi} \cos{\theta}}
+\end{bmatrix}
 $$
 
 The rates of changes of the 12 (linear and angular) state variables can be integrated to track the state of the vehicle.
@@ -188,13 +382,11 @@ The rates of changes of the 12 (linear and angular) state variables can be integ
 $$
 \begin{align}
 \begin{bmatrix}
-\dot{\hat{r^n}_1} \\\\
-\dot{\hat{r^n}_2} \\\\
-\dot{\hat{r^n}_3} \\\\
 \\\\
-\dot{\hat{v^b}_1} \\\\
-\dot{\hat{v^b}_2} \\\\
-\dot{\hat{v^b}_3} \\\\
+\dot{\hat{r}^n} \\\\
+\\\\
+\\\\
+\dot{\hat{v^b}} \\\\
 \\\\
 \dot{\phi} \\\\
 \dot{\theta}\\\\
@@ -202,82 +394,72 @@ $$
 \\\\
 \dot{\hat{\omega}}
 \end{bmatrix} = \begin{bmatrix}
-c\_\theta   c\_\psi \hat{v^b}_1 + (-c\_\phi   s\_\psi + s\_\phi s\_\theta c\_\psi)   \hat{v^b}_2 +  (s\_\phi s\_\psi+c\_\phi s\_\theta c\_\psi)   \hat{v^b}_3 \\\\
-c\_\theta   s\_\psi   \hat{v^b}_1 + (c\_\phi   c\_\psi+s\_\phi   s\_\theta   s\_\psi)   \hat{v^b}_2 +  (-s\_\phi   c\_\psi+c\_\phi   s\_\theta   s\_\psi)   \hat{v^b}_3 \\\\
-(-s\_\theta   \hat{v^b}_1 + s\_\phi   c\_\theta   \hat{v^b}_2 + c\_\phi   c\_\theta   \hat{v^b}_3) \\\\
+R_b^n \begin{bmatrix}
+    v_x \\\\
+    v_y \\\\
+    v_z
+\end{bmatrix}\\\\
 \\\\
-\frac{m}{F_x} + g   s\_\theta          + \omega_3   \hat{v^b}_2 - \omega_2   \hat{v^b}_3 \\\\
-\frac{m}{F_y} - g   s\_\phi   c\_\theta   - \omega_3   \hat{v^b}_1 + \omega_1   \hat{v^b}_3 \\\\
-\frac{m}{F_z}     - g   c\_\phi   c\_\theta   + \omega_2   \hat{v^b}_1 - \omega_1   \hat{v^b}_2 \\\\
+\frac{\hat{F_p}^b + R_n^b \hat{F_g}^n}{m} - \hat{\omega} \times \hat{v}^b\\\\
 \\\\
-\omega_1 + (\omega_2 s\_\phi + \omega_3 c\_\phi)   s\_\theta / c\_\theta \\\\
-\omega_2   c\_\phi - \omega_3   s\_\phi \\\\
-(\omega_2   s\_\phi + \omega_3   c\_\phi) / c\_\theta \\\\
+\omega_x - \frac{\omega_z \sin{\theta}}{\cos{\phi} \cos{\theta}}\\\\
+\omega_y + \frac{\omega_z \sin{\phi}}{\cos{\phi}}\\\\
+\frac{\omega_z}{\cos{\phi} \cos{\theta}}\\\\
 \\\\
-I^{-1} \cdot (\hat{\tau} - \hat{\omega} \times I \cdot \hat{\omega})
+I^{-1} (\hat{\tau}^b - \hat{\omega} \times I\hat{\omega})
 \end{bmatrix}
 \end{align}
 $$
 
-```python
-def get_state_change_from_dynamics(
-    forces, torques, x, g, mass, inertia_matrix
-):
-    # Store state variables in a readable format
-    xI = x[0]       # Inertial frame positions
-    yI = x[1]
-    zI = x[2]
-    ub = x[3]       # linear velocity along body-frame-x-axis b1
-    vb = x[4]       # linear velocity along body-frame-y-axis b2
-    wb = x[5]       # linear velocity along body-frame-z-axis b3
-    phi = x[6]      # Roll
-    theta = x[7]    # Pitch
-    psi = x[8]      # Yaw
-    p = x[9]        # body-frame-x-axis rotation rate
-    q = x[10]       # body-frame-y-axis rotation rate
-    r = x[11]       # body-frame-z-axis rotation rate
-    
-    # Pre-calculate trig values
-    cphi = np.cos(phi);   sphi = np.sin(phi)    # roll
-    cthe = np.cos(theta); sthe = np.sin(theta)  # pitch
-    cpsi = np.cos(psi);   spsi = np.sin(psi)    # yaw
+<details>
+<summary>Expanded</summary>
+Substituting expressions above, we get:
 
-    f1, f2, f3 = forces # in the body frame (b1, b2, b3)
-    t1, t2, t3 = torques
-    inertia_matrix_inv = np.linang.inv(inertia_matrix)
-    
-    xdot = np.zeros_like(x)
+$$
+\begin{bmatrix}
+\dot{r^n_1} \\\\
+\dot{r^n_2} \\\\
+\dot{r^n_3} \\\\
+\\\\
+\dot{v^b_x} \\\\
+\dot{v^b_y} \\\\
+\dot{v^b_z} \\\\
+\\\\
+\dot{\phi} \\\\
+\dot{\theta}\\\\
+\dot{\psi} \\\\
+\\\\
+\dot{\hat{\omega}}
+\end{bmatrix} = \begin{bmatrix}
+v\_x c\psi c\theta - v\_y s\psi c\theta + v\_z s\theta\\\\
+v\_x (s\phi s\theta c\psi + s\psi c\phi) + v\_y (- s\phi s\psi s\theta + c\phi c\psi) - v\_z s\phi c\theta\\\\
+v\_x (s\phi s\psi - s\theta c\phi c\psi) + v\_y (s\phi c\psi + s\psi s\theta c\phi) + v\_z c\phi c\theta\\\\
+\\\\
+-\omega_y v\_z + \omega_z v\_y + g s\phi s\psi - g s\theta c\phi c\psi\\\\
+\omega_x v\_z - \omega_z v\_x + g s\phi c\psi + g s\psi s\theta c\phi\\\\
+-\frac{T}{m} - \omega_x v\_y + \omega_y v\_x + g c\phi c\theta\\\\
+\\\\
+\omega_x - \frac{\omega_z s\theta}{c\phi c\theta}\\\\
+\omega_y + \frac{\omega_z s\phi}{c\phi}\\\\
+\frac{\omega_z}{c\phi c\theta}\\\\
+\\\\
+I^{-1} (\hat{\tau}^b - \hat{\omega} \times I\hat{\omega})
+\end{bmatrix}
+$$
 
-    # velocity = dPosition (inertial frame) / dt (convert body velocity to inertial)
-    xdot[0] = cthe*cpsi*ub + (-cphi * spsi + sphi*sthe*cpsi) * vb + \
-        (sphi*spsi+cphi*sthe*cpsi) * wb  # = xIdot 
-    xdot[1] = cthe*spsi * ub + (cphi*cpsi+sphi*sthe*spsi) * vb + \
-        (-sphi*cpsi+cphi*sthe*spsi) * wb # = yIdot 
-    xdot[2] = (-sthe * ub + sphi*cthe * vb + cphi*cthe * wb) # = zIdot
-
-    # acceleration = dVelocity (body frame) / dt
-    #           External forces     Gravity             Coriolis effect
-    xdot[3] = 1/mass * (f1)     + g * sthe          + r * vb - q * wb  # = udot
-    xdot[4] = 1/mass * (f2)     - g * sphi * cthe   - r * ub + p * wb # = vdot
-    xdot[5] = 1/mass * (f3)     - g * cphi * cthe   + q * ub - p * vb # = wdot
-
-    # Orientation
-    xdot[6] = p + (q*sphi + r*cphi) * sthe / cthe  # = phidot
-    xdot[7] = q * cphi - r * sphi  # = thetadot
-    xdot[8] = (q * sphi + r * cphi) / cthe  # = psidot
-
-    # Angular rate
-    gyro = np.cross(x[9:12], inertia_matrix @ x[9:12])
-    xdot[9:12] = inertia_matrix_inv @ (torques - gyro)
-    
-    return xdot
-```
+</details>
 
 ## Generating forces and torques
 
+The previous sections describe how to describe the vehicle, and how the state variables change. This section describes how to affect these changes.
+
 ### Propellers
 
-Given the propeller geometry parameters, the thrust is modeled by numerically solving the equation for thrust and propeller induced velocity. An alternate approach, relating the thrust constant and propeller velocity can be used as well.
+When a propeller spins, it pushes air down parallel to the axis of rotation, and to the side perpendicular to the axis of rotation.
+
+{{<figure src="static/propeller-dynamics.png" width="400px">}}
+
+The downward push generates a reactionary force, thrust. Given the propeller geometry parameters, the thrust can be modeled by numerically solving the equation for thrust and propeller induced velocity. An alternate approach, relating the thrust constant (empirically determined) and propeller velocity is used here:
 
 $$
 \begin{align}
@@ -285,7 +467,7 @@ T = k\_{T} \cdot \Omega^2
 \end{align}
 $$
 
-Torque about the yaw axis is modeled as aerodynamic drag, which is equal to the net BLDC motor torque $\tau\_{BLDC}$ near hover conditions. Given the drag coefficient $k_d$,
+The sidewards push generates a reactionary force due to aerodynamic drag perpendicular to the axis of rotation: torque. Given the drag coefficient $k_d$,
 
 $$
 \begin{align}
@@ -295,7 +477,7 @@ $$
 
 ### Motors
 
-The environment models brushless direct current (BLDC) motors independently as sub-objects. Each motor is parameterized by the back electromotive force constant, $k_e$, and the internal resistance $R_{BLDC}$. The torque constant $k_\tau$ is equal to $k_e$ for an ideal square-wave BLDC. $k_\tau$ determines the driving moment of the motor. Dissipative moments are governed by the dynamic friction constant $k_{DF}$, and the aerodynamic drag constant $k_d$. Finally, the net moments $\tau$ and the moment of inertia $J$ of the motor determine how fast the rotor spins. The state of each motor is its angular velocity $\Omega$, applied voltage $v_{BLDC}$, and drawn current $i_{BLDC}$. The dynamics are given by this equation:
+Propellers are spun by motors. Here, we consider [brushless direct current (BLDC) motors](https://en.wikipedia.org/wiki/Brushless_DC_electric_motor). Each motor is parameterized by the back electromotive force constant, $k_e$, and the internal resistance $R_{BLDC}$. The torque constant $k_\tau$ is equal to $k_e$ for an ideal square-wave BLDC. $k_\tau$ determines the driving moment of the motor. Dissipative moments are governed by the dynamic friction constant $k_{DF}$, and the aerodynamic drag constant $k_d$. Finally, the net moments $\tau$ and the moment of inertia $J$ of the motor determine how fast the rotor spins. The state of each motor is its angular velocity $\Omega$, applied voltage $v_{BLDC}$, and drawn current $i_{BLDC}$. The dynamics are given by this equation:
 
 $$
 \begin{align}
@@ -306,47 +488,99 @@ $$
 \end{align}
 $$
 
+So, current to the motor produces a gross torque which is dissipated by mechanical friction and aerodynamic drag. The net torque causes the motor to accelerate.
+
 ## Control
 
-Control mixing is the procedure of relating the net dynamics (forces and moments) about the vehicle body $D$, to the rotational speeds of the propellers $\hat{\Omega}$. Due to geometry, the lateral forces on the body from the propeller are zero, thus $F\_{b_2}=F_{b_3}=0$. Moments about $b_1$ and $b_2$ are determined by the moment arm $r_{arm}$ and thrust $r\_{arm} \times T$. Yaw moments about $b_3$ are determined by the torque equation. Putting these relationships together yields the control allocation matrix, and a system of equations linear in $\Omega^2$. Thus, the prescribed dynamics $D$ from the controller can be converted to the prescribed propeller speeds $\Omega$ for each motor:
+Previous sections detailed how dynamics affect state. This section describes how to find the dynamics to achieve the desired state.
+
+### Control Allocation
+
+The first control problem is how much to spin the motors to generate the desired dynamics? The relationship between speeds to dynamics is known. Those equations can be inverted to map desired dynamics to required speeds.
+
+Control mixing is the procedure of relating the net dynamics (forces and torques) about the vehicle body $D$, to the rotational speeds of the propellers $\hat{\Omega}$. Due to geometry, the net lateral forces on the body from the propellers are zero, thus $F^b_x=F^b_y=0$. Moments about $\hat{x}^b$ and $\hat{y}^b$ are determined by the moment arm $r_{arm}$ and thrust $r\_{arm} \times T$. Yaw moments about $\hat{z}^b$ are determined by torque induced by aerodynamic drag. Putting these relationships together yields the control allocation matrix, and a system of equations linear in $\Omega^2$. Thus, the prescribed dynamics $D$ from the controller can be converted to the prescribed propeller speeds $\Omega$ for each motor:
 
 $$
 \begin{align}
     \begin{bmatrix}
-    F_{b_1} \\\\
-    F_{b_2} \\\\
-    F_{b_3} \\\\
-    M_{b_1} \\\\
-    M_{b_2} \\\\
-    M_{b_3}
+    F_x^b \\\
+    F_y^b \\\\
+    F_z^b \\\\
+    \tau_x^b \\\\
+    \tau_y^b \\\\
+    \tau_z^b
     \end{bmatrix}
     &=  \underset{6 \times 1}{D} = \underset{6 \times p}{A} \cdot \underset{p \times 1}{\hat{\Omega}^2} \\\\
     \hat{\Omega} &= \sqrt{A^{-1} \cdot D}
 \end{align}
 $$
 
-For a propeller $p$ with a thrust coefficient $k\_{th,p}$, a drag coefficient $k\_{dr,p}$, at a radius $r_p$ from the center of mass and angle $\theta_p$ from the reference forward direction in the vehicle's frame of reference, and where propellers are alternatively spinning clockwise and counter-clockwise,
+For a propeller $p$ with a thrust coefficient $k\_{T,p}$, a drag coefficient $k\_{d,p}$, at a radius $r_p$ from the center of mass and angle $\theta_p$ from the reference forward direction in the vehicle's frame of reference, and where propellers are alternatively spinning clockwise and counter-clockwise,
 
 $$
 \begin{align}
     A = \begin{bmatrix}
-        \cdots & k\_{th,i} & \cdots \\\\
-        \cdots & k\_{th,i} \cdot r\_p \sin(\theta_i) & \cdots \\\\
-        \cdots & k\_{th,i} \cdot r\_p \cos(\theta_i) & \cdots
+        \cdots & 0 & \cdots \\\\
+        \cdots & 0 & \cdots \\\\
+        \cdots & -k\_{T,p} & \cdots \\\\
+        \cdots & -k\_{T,p} \cdot r\_p \sin(\theta_p) & \cdots \\\\
+        \cdots & k\_{T,p} \cdot r\_p \cos(\theta_p) & \cdots \\\\
+        \cdots & (-1)^p \cdot k\_{d,p} & \cdots \\\\
     \end{bmatrix}
 \end{align}
 $$
 
-A cascaded PID controller is implemented for position and attitude tracking. A supervisory position PID controller tracks measured lateral velocities and outputs the required pitch and roll needed to reach a specified way-point. A lower-level attitude controller then tracks the pitch, roll, and yaw velocities and outputs the required torques. In parallel, a PID controller tracks vertical velocity and outputs the thrust needed. The eventual output of the cascaded PID setup is the prescribed thrust, and the roll, pitch, and yaw torques. These prescribed dynamics are then allocated via control mixing to the motors.
+<details>
+<summary>Inverse of a non-square matrix</summary>
+
+Using the [pseudoinverse](https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse), we can get the least-squares solution to $A \Omega^2 = D$:
+
+$$
+\begin{align}
+    A^+ = A^T (A A^T)^{-1}\\\\
+    \hat{\Omega}^2 = A^+ D
+\end{align}
+$$
+
+However, a matrix inverse may cause numerical instability. Another way is to use singular value decomposition (SVD), invert the order of multiplication, and transpose / reciprocate the diagonal matrix.
+</details>
+
+### Reference tracking
+
+The next higher level of control is to follow a waypoint, $\hat{r}^{n}_{wp}$. Given coordinates, set the desired dynamics to track this reference.
+
+A PID controller is a standard way to follow a reference. It acts on error signals between desired an actual states:
+
+$$
+\begin{align}
+    u\_{PID} = k_P e + k_I \int_0^t e \partial t + k_D \nabla_t e
+\end{align}
+$$
+
+The error, which is calculated over a small time interval, can be thought of as a derivative operation. For lateral motion:
+
+1. Error in x/y position --> desired velocity
+2. Error in velocity --> desired angle of attack
+3. Error in angle of attack --> desired angular velocity
+
+For vertical motion:
+
+1. Error in z position --> desired vertical velocity
+
+A cascaded PID controller can be used to propagate high-level waypoint error into control signals. A supervisory position PID controller tracks measured lateral velocities and outputs the required pitch and roll needed to reach a specified way-point. A lower-level attitude controller then tracks the pitch, roll, and yaw velocities and outputs the required torques. In parallel, a PID controller tracks vertical velocity and outputs the thrust needed. The eventual output of the cascaded PID setup is the prescribed thrust, and the roll, pitch, and yaw torques. These prescribed dynamics are then allocated via control mixing to the motors.
 
 The standard control logic flow of UAVs is depicted in the following figure. In this standard end-to-end approach, the position reference is converted into propeller speed signals
 
 ![](./static/cascaded_pid.png)
 
-The cascaded PID controller converts position/yaw references into the desired dynamics (forces and torques, $F_z,\tau_x,\tau_y,\tau_z$) to achieve that reference position and yaw. The control output $u\_{PID}$ aims to minimize the input error $e=\texttt{reference}-\texttt{measurement}$ with respect to the reference and measured states.:
+### Path planning & supervisory control
 
-$$
-\begin{align}
-    u\_{PID} = k_p e + k_d \nabla_t e + k_i \int_0^t e \partial t
-\end{align}
-$$
+The next higher level is determining which waypoints to visit. Given the flight envelope, some waypoints may be infeasible. [S-Curves](https://github.com/hazrmard/py-scurve) and [B-Splines](https://en.wikipedia.org/wiki/B-spline) can be used to construct trajectories that respect vehicle constraints (e.g. min/max velocity, acceleration etc.).
+
+This and and supervisory optimal control (using model-predictive contol, reinforcement learning etc.) are out of scope of this article.
+
+## Where to next
+
+If you're interested in learning more about UAV simulation and control, [ArduPilot](https://ardupilot.org/) is an excellent, open-source, community-driven framework for control and simulation.
+
+If you're interested in multirotors used for human transport (eVTOLs), searching for "Advanced Air Mobility" and "Urban Air Mobility" will point to relevant literature. 
