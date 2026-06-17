@@ -14,6 +14,8 @@ slug = "drone-physics"
 image = "static/icon.png"
 +++
 
+{{<figure src="static/icon.png" width="250px" caption="A friendly drone capable of awesome feats of aerodynamics.">}}
+
 This article describes drone physics. Audience should have familiarity with introductory linear algebra, introductory calculus, and introductory classical mechanics. This work was adapted from [my research in adaptive control](/about/) and publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
 
 > For more interactive explainers, see [Poor Man's Autograd]({{< relref "/post/poor_mans_autograd" >}}) and [Surprise! A Derivation of Entropy]({{< relref "/post/entropy" >}}).
@@ -65,7 +67,7 @@ Orientation of a body in the inertial reference frame follows the Tait-Bryan ang
 
 The angular velocity of the vehicle, $\hat{w}^T=[\omega_x,\omega_y,\omega_z]$, is the instantaneous rotational rate of the body frame about itself. Whereas each angle of orientation is defined in its own reference frame ($\hat{n}, \hat{n}\_{\psi}, \hat{n}\_{\psi,\theta}=\hat{b}$) during a sequence of ordered rotations from the inertial axes to the body frame (yaw, then pitch, then roll).
 
-Roll rotation happens last and the result is the body frame. Therefore, $p$, the rate about the x-axis equals the roll rate, $\dot{\phi}$. Pitch happens after the initial yaw, but before roll. Therefore, $q$, the rate about the y-axis, is the pitch rate in the frame $\hat{n}_{\psi}$ rotated by roll $\phi$ to get the the body frame. Finally, yaw rotation happens first in the inertial frame. Therefore, $r$, the rate about the body frame's z-axis, is the yaw rate in the inertial frame rotated by pitch $\theta$ and roll $\phi$. This can be expressed as a matrix equation:
+Roll rotation happens last and the result is the body frame. Therefore, $\omega_x$, the rate about the x-axis equals the roll rate, $\dot{\phi}$. Pitch happens after the initial yaw, but before roll. Therefore, $\omega_y$, the rate about the y-axis, is the pitch rate in the frame $\hat{n}_{\psi}$ rotated by roll $\phi$ to get the the body frame. Finally, yaw rotation happens first in the inertial frame. Therefore, $\omega_z$, the rate about the body frame's z-axis, is the yaw rate in the inertial frame rotated by pitch $\theta$ and roll $\phi$. This can be expressed as a matrix equation:
 
 $$
     \begin{bmatrix}
@@ -217,7 +219,7 @@ The previous section enumerated the variables that describe the vehicle. This se
 1. $\hat{F}^b=[F_x^b,F_y^b,F_z^b]^T$ are the net forces along the three body frame axes, where $\hat{F}^b=R_n^b \hat{F}^n$.
 2. $\hat{\tau}^b=[\tau_x^b,\tau_y^b,\tau_z^b]^T$ are the moments along the three body axes, where $\hat{\tau}^b=R_n^b \hat{\tau}^n$.
 
-The forces acting on the vehicle are thrusts and gravity. Moments are generated when the forces are applied at a distance from the center of gravity. (We can incorporate drag, but we assume it's insubstantial for now.) The force of gravity is $\hat{F_g}^n=[0,0,mg]$ in the inertial reference frame. In the body frame it becomes $\hat{F_g}^b=R^b_n \hat{F_g}^n$. The net force of the $p$ propellers in the body frame (thrust) is $\hat{T}=[0,0,\sum_i^p T_i]^T$, where $T_i$ is the thrust of the $i$th propeller. Thus, the total force acting on the center of mass is $\hat{F}^b=\hat{T} + \hat{F_g}^b$.
+The forces acting on the vehicle are thrusts and gravity. Moments are generated when the forces are applied at a distance from the center of gravity. (We can incorporate drag, but we assume it's insubstantial for now.) The force of gravity is $\hat{F_g}^n=[0,0,mg]$ in the inertial reference frame. In the body frame it becomes $\hat{F_g}^b=R^b_n \hat{F_g}^n$. The net force of the $\omega_x$ propellers in the body frame (thrust) is $\hat{T}=[0,0,\sum_i^p T_i]^T$, where $T_i$ is the thrust of the $i$th propeller. Thus, the total force acting on the center of mass is $\hat{F}^b=\hat{T} + \hat{F_g}^b$.
 
 The multirotor is modeled as a rigid body. A rigid body has a constant mass distribution relative to its center of gravity.
 
