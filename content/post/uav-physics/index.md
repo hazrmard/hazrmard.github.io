@@ -405,7 +405,7 @@ R_b^n \begin{bmatrix}
     v_z
 \end{bmatrix}\\\\
 \\\\
-\frac{\hat{F_p}^b + R_n^b \hat{F_g}^n}{m} - \hat{\omega} \times \hat{v}^b\\\\
+\frac{\hat{T}^b + R_n^b \hat{F_g}^n}{m} - \hat{\omega} \times \hat{v}^b\\\\
 \\\\
 \omega_x - \frac{\omega_z \sin{\theta}}{\cos{\phi} \cos{\theta}}\\\\
 \omega_y + \frac{\omega_z \sin{\phi}}{\cos{\phi}}\\\\
