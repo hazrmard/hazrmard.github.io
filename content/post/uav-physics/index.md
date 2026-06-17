@@ -18,6 +18,8 @@ image = "static/icon.png"
 
 This article describes drone physics. Audience should have familiarity with introductory linear algebra, introductory calculus, and introductory classical mechanics. This work was adapted from [my research in adaptive control](/about/) and publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
 
+Join the discussion on [X](https://x.com/hazrmard/status/2067012993003438469), [Reddit](https://www.reddit.com/r/ControlTheory/comments/1u8e4q1/drone_physics_i_wrote_equations_of_motion_and/), [HackerNews](https://news.ycombinator.com/item?id=48562521)
+
 > For more interactive explainers, see [Poor Man's Autograd]({{< relref "/post/poor_mans_autograd" >}}) and [Surprise! A Derivation of Entropy]({{< relref "/post/entropy" >}}).
 
 The following topics are covered, in order:
@@ -49,7 +51,7 @@ Two reference frames are used for representing the state of the body:
 
 ### Linear representation
 
-The body-fixed reference frame $b$ is affixed to the center of mass of the vehicle. That is, the displacement of the vehicel from the body frame is always 0. The position of the vehicle is represented by the displacement of the body frame from the inertial frame, $\hat{r}^n$.
+The body-fixed reference frame $b$ is affixed to the center of mass of the vehicle. That is, the displacement of the vehicle from the body frame is always 0. The position of the vehicle is represented by the displacement of the body frame from the inertial frame, $\hat{r}^n$.
 
 The velocity of the vehicle is the velocity of the body frame relative to the inertial frame. Here, we choose to represent velocity in coordinates of the body frame.
 
@@ -219,7 +221,7 @@ The previous section enumerated the variables that describe the vehicle. This se
 1. $\hat{F}^b=[F_x^b,F_y^b,F_z^b]^T$ are the net forces along the three body frame axes, where $\hat{F}^b=R_n^b \hat{F}^n$.
 2. $\hat{\tau}^b=[\tau_x^b,\tau_y^b,\tau_z^b]^T$ are the moments along the three body axes, where $\hat{\tau}^b=R_n^b \hat{\tau}^n$.
 
-The forces acting on the vehicle are thrusts and gravity. Moments are generated when the forces are applied at a distance from the center of gravity. (We can incorporate drag, but we assume it's insubstantial for now.) The force of gravity is $\hat{F_g}^n=[0,0,mg]$ in the inertial reference frame. In the body frame it becomes $\hat{F_g}^b=R^b_n \hat{F_g}^n$. The net force of the $\omega_x$ propellers in the body frame (thrust) is $\hat{T}=[0,0,\sum_i^p T_i]^T$, where $T_i$ is the thrust of the $i$th propeller. Thus, the total force acting on the center of mass is $\hat{F}^b=\hat{T} + \hat{F_g}^b$.
+The forces acting on the vehicle are thrusts and gravity. Moments are generated when the forces are applied at a distance from the center of gravity. (We can incorporate drag, but we assume it's insubstantial for now.) The force of gravity is $\hat{F_g}^n=[0,0,mg]$ in the inertial reference frame. In the body frame it becomes $\hat{F_g}^b=R^b_n \hat{F_g}^n$. The net force of the $p$ propellers in the body frame (thrust) is $\hat{T}=[0,0,\sum_i^p T_i]^T$, where $T_i$ is the thrust of the $i$th propeller. Thus, the total force acting on the center of mass is $\hat{F}^b=\hat{T} + \hat{F_g}^b$.
 
 The multirotor is modeled as a rigid body. A rigid body has a constant mass distribution relative to its center of gravity.
 
@@ -345,7 +347,7 @@ $$
 
 </details>
 
-For rotational variables too, we can "inertialize" the effect of fictitious moments using the transport theorem. Unlike the linear case where mass was constant and could be factored out of the momentum derivative, here, the angular momentum is the time-varying vector: both moment of inertia and angular velocity. Given $M^b$ is the rotating body-frame moment, $\omega$ is the angular rate of the body frame relative to the inertial frame:
+For rotational variables too, we can "inertialize" the effect of fictitious moments using the transport theorem. Unlike the linear case where mass was constant and could be factored out of the momentum derivative, here, the angular momentum is the time-varying vector: both moment of inertia and angular velocity. Given $\hat{\tau}^b$ is the rotating body-frame moment, $\hat{\omega}$ is the angular rate of the body frame relative to the inertial frame:
 
 $$
 \begin{align}
