@@ -11,9 +11,14 @@ includes = ["https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.mi
 tableofcontents = true
 draft = false
 slug = "drone-physics"
+image = "static/icon.png"
 +++
 
+{{<figure src="static/icon.png" width="250px" caption="A friendly drone capable of awesome feats of aerodynamics.">}}
+
 This article describes drone physics. Audience should have familiarity with introductory linear algebra, introductory calculus, and introductory classical mechanics. This work was adapted from [my research in adaptive control](/about/) and publication at [AIAA DASC 2023](https://ieeexplore.ieee.org/abstract/document/9925862) about [`multirotor`](https://multirotor.readthedocs.io), a python simulation framework for drones. The notation here borrows heavily from the excellent work by [Charles Tytler](https://github.com/charlestytler/QuadcopterSim).
+
+Join the discussion on [X](https://x.com/hazrmard/status/2067012993003438469), [Reddit](https://www.reddit.com/r/ControlTheory/comments/1u8e4q1/drone_physics_i_wrote_equations_of_motion_and/), [HackerNews](https://news.ycombinator.com/item?id=48562521)
 
 > For more interactive explainers, see [Poor Man's Autograd]({{< relref "/post/poor_mans_autograd" >}}) and [Surprise! A Derivation of Entropy]({{< relref "/post/entropy" >}}).
 
@@ -46,7 +51,7 @@ Two reference frames are used for representing the state of the body:
 
 ### Linear representation
 
-The body-fixed reference frame $b$ is affixed to the center of mass of the vehicle. That is, the displacement of the vehicel from the body frame is always 0. The position of the vehicle is represented by the displacement of the body frame from the inertial frame, $\hat{r}^n$.
+The body-fixed reference frame $b$ is affixed to the center of mass of the vehicle. That is, the displacement of the vehicle from the body frame is always 0. The position of the vehicle is represented by the displacement of the body frame from the inertial frame, $\hat{r}^n$.
 
 The velocity of the vehicle is the velocity of the body frame relative to the inertial frame. Here, we choose to represent velocity in coordinates of the body frame.
 
@@ -64,7 +69,7 @@ Orientation of a body in the inertial reference frame follows the Tait-Bryan ang
 
 The angular velocity of the vehicle, $\hat{w}^T=[\omega_x,\omega_y,\omega_z]$, is the instantaneous rotational rate of the body frame about itself. Whereas each angle of orientation is defined in its own reference frame ($\hat{n}, \hat{n}\_{\psi}, \hat{n}\_{\psi,\theta}=\hat{b}$) during a sequence of ordered rotations from the inertial axes to the body frame (yaw, then pitch, then roll).
 
-Roll rotation happens last and the result is the body frame. Therefore, $p$, the rate about the x-axis equals the roll rate, $\dot{\phi}$. Pitch happens after the initial yaw, but before roll. Therefore, $q$, the rate about the y-axis, is the pitch rate in the frame $\hat{n}_{\psi}$ rotated by roll $\phi$ to get the the body frame. Finally, yaw rotation happens first in the inertial frame. Therefore, $r$, the rate about the body frame's z-axis, is the yaw rate in the inertial frame rotated by pitch $\theta$ and roll $\phi$. This can be expressed as a matrix equation:
+Roll rotation happens last and the result is the body frame. Therefore, $\omega_x$, the rate about the x-axis equals the roll rate, $\dot{\phi}$. Pitch happens after the initial yaw, but before roll. Therefore, $\omega_y$, the rate about the y-axis, is the pitch rate in the frame $\hat{n}_{\psi}$ rotated by roll $\phi$ to get the the body frame. Finally, yaw rotation happens first in the inertial frame. Therefore, $\omega_z$, the rate about the body frame's z-axis, is the yaw rate in the inertial frame rotated by pitch $\theta$ and roll $\phi$. This can be expressed as a matrix equation:
 
 $$
     \begin{bmatrix}
@@ -342,7 +347,7 @@ $$
 
 </details>
 
-For rotational variables too, we can "inertialize" the effect of fictitious moments using the transport theorem. Unlike the linear case where mass was constant and could be factored out of the momentum derivative, here, the angular momentum is the time-varying vector: both moment of inertia and angular velocity. Given $M^b$ is the rotating body-frame moment, $\omega$ is the angular rate of the body frame relative to the inertial frame:
+For rotational variables too, we can "inertialize" the effect of fictitious moments using the transport theorem. Unlike the linear case where mass was constant and could be factored out of the momentum derivative, here, the angular momentum is the time-varying vector: both moment of inertia and angular velocity. Given $\hat{\tau}^b$ is the rotating body-frame moment, $\hat{\omega}$ is the angular rate of the body frame relative to the inertial frame:
 
 $$
 \begin{align}
@@ -400,7 +405,7 @@ R_b^n \begin{bmatrix}
     v_z
 \end{bmatrix}\\\\
 \\\\
-\frac{\hat{F_p}^b + R_n^b \hat{F_g}^n}{m} - \hat{\omega} \times \hat{v}^b\\\\
+\frac{\hat{T}^b + R_n^b \hat{F_g}^n}{m} - \hat{\omega} \times \hat{v}^b\\\\
 \\\\
 \omega_x - \frac{\omega_z \sin{\theta}}{\cos{\phi} \cos{\theta}}\\\\
 \omega_y + \frac{\omega_z \sin{\phi}}{\cos{\phi}}\\\\

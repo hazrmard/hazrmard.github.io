@@ -17,6 +17,8 @@ image = "thumbnail.jpg"
     src="thumbnail.jpg"
 >}}
 
+Join the discussion on [X](https://x.com/hazrmard/status/2040526958690447862).
+
 I recently came across [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95) - a single-file, python-only training script for a GPT model.
 
 What stood out to me were 40 or so lines that implemented autograd. That is, calculating gradients of computations done in code, automatically. Autograd is not novel ([python autograd](https://autograd.readthedocs.io/en/latest/background.html)). It underpins every single deep learning library ([jax](https://docs.jax.dev/en/latest/automatic-differentiation.html), [torch](https://docs.pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html), [tensorflow](https://www.tensorflow.org/guide/autodiff), [and yes, numpy too](https://github.com/HIPS/autograd)).

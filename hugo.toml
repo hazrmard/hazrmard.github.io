@@ -1,6 +1,6 @@
 baseurl = "https://iahmed.me/"
 title = "Ibrahim Ahmed"
-languageCode = "en-us"
+locale = "en-us"
 theme = "hugolb"
 copyright = "Ibrahim Ahmed"
 
@@ -14,6 +14,9 @@ enableGitInfo = true
     paginatePath = "p"
 
 ignoreFiles = [".+pptx$", ".venv"]
+
+[security]
+    allowContent = ["^text/html$", "text/markdown"]
 
 [frontmatter]
   date = ["date", "publishDate", "lastmod"]
