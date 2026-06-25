@@ -39,8 +39,8 @@ A multi-rotor UAV is modeled with six degrees of freedom: the three linear axes 
 
 Two reference frames are used for representing the state of the body:
 
-1. Inertial, nominal reference frame $n$ is the static frame of reference where the axes are aligned with arbitrary, global directions. They are represented as column vectors $\hat{n} = [\hat{x}^n, \hat{y}^n, \hat{z}^n]^T$.
-2. Body-fixed reference frame $b$ has the axes aligned with respect to the center of gravity of the rigid body in motion. They are represented as column vectors $\hat{b} = [\hat{x}^b, \hat{y}^b, \hat{z}^b]^T$. The body frame moves and rotates with the vehicle. Consider the origin of the body frame attached to the center of mass of the drone.
+1. Nominal, inertial, reference frame $n$ is the static frame of reference where the axes are aligned with arbitrary, global directions. They are represented as column vectors $\hat{n} = [\hat{x}^n, \hat{y}^n, \hat{z}^n]^T$.
+2. Body-fixed, non-inertial, reference frame $b$ has the axes aligned with respect to the center of gravity of the rigid body in motion. They are represented as column vectors $\hat{b} = [\hat{x}^b, \hat{y}^b, \hat{z}^b]^T$. The body frame moves and rotates with the vehicle. Consider the origin of the body frame attached to the center of mass of the drone.
 
 <div id="uav_container" width="600" height="600"></div>
 <script type="module">
@@ -126,22 +126,22 @@ $$
 
 $$
 \begin{align}
-    \hat{\mathcal{V}}^n &= R(\phi)\cdot R(\theta) \cdot R(\psi) \cdot \hat{\mathcal{V}}^b \\\\
-    \hat{\mathcal{V}}^n &= R_b^n \hat{\mathcal{V}}^b \\\\
-    \begin{bmatrix}
-    x^n \\\\
-    y^n \\\\
-    z^n
-    \end{bmatrix} &= 
-    \begin{bmatrix}
-cψcθ & sϕsθcψ+sψcϕ & sϕsψ−sθcϕcψ \\\\
--sψcθ & −sϕsψsθ+cϕcψ & sϕcψ+sψsθcϕ \\\\
-sθ & −sϕcθ & cϕcθ
-\end{bmatrix}
+    \hat{\mathcal{V}}^b &= R(\phi)\cdot R(\theta) \cdot R(\psi) \cdot \hat{\mathcal{V}}^n \\\\
+    \hat{\mathcal{V}}^b &= R_n^b \hat{\mathcal{V}}^n \\\\
     \begin{bmatrix}
     x^b \\\\
     y^b \\\\
     z^b
+    \end{bmatrix} &=
+    \begin{bmatrix}
+        c\psi c\theta & - s\psi c\theta & s\theta\\\\
+        s\phi s\theta c\psi + s\psi c\phi & - s\phi s\psi s\theta + c\phi c\psi & - s\phi c\theta\\\\
+        s\phi s\psi - s\theta c\phi c\psi & s\phi c\psi + s\psi s\theta c\phi & c\phi c\theta
+    \end{bmatrix}
+    \begin{bmatrix}
+    x^n \\\\
+    y^n \\\\
+    z^n
     \end{bmatrix}
 \end{align}
 $$
@@ -150,15 +150,17 @@ Here $c | s$ of $\phi | \theta | \psi$ refer to the cosine and sine respectively
 
 ### Reconciling derivatives in rotating frames
 
-If, however, the vector is changing while the reference frame is rotating, then the rate of change is not as simple. The rate of change of a vector is due to (1) the changing vector in its own frame itself, and (2) the rate of change of the rotating frame.
+If, however, the vector is changing while the reference frame is rotating, then the rate of change is not as simple. The rate of change of a vector is due to (1) the change of the vector quantity itself in the body frame, and (2) the change of the frame coordinates.
 
-That is, in a body frame rotating with instantaneous angular velocity $\hat{\omega}=[\omega_x,\omega_y,\omega_z]$ about its axes, the time-derivative of a vector in a rotating body frame $\hat{\mathcal{V}}^b = \hat{\mathcal{V}} \cdot \hat{b}$ as measured *in the body frame* is given by the [Transport theorem](https://en.wikipedia.org/wiki/Transport_theorem?oldformat=true):
+{{<figure src="static/fictitious_forces.png" width="250px">}}
+
+That is, in a body frame rotating with instantaneous angular velocity $\hat{\omega}=[\omega_x,\omega_y,\omega_z]$ about its axes, the time-derivative of a vector in the body frame $\hat{\mathcal{V}}^b = \hat{b} \cdot \hat{\mathcal{V}}$ as measured *in a co-located inertial frame* is given by the [Transport theorem](https://en.wikipedia.org/wiki/Transport_theorem?oldformat=true):
 
 $$
 \begin{align}
-    \frac{d \hat{\mathcal{V}}^b}{d t} &= \frac{d \hat{\mathcal{V}}}{d t} \cdot \hat{b} + \frac{d \hat{b}}{d t} \cdot \hat{\mathcal{V}} \\\\
-    &= \frac{d \hat{\mathcal{V}}}{d t} \cdot \hat{b} + \hat{\omega} \times \hat{\mathcal{V}}^b \\\\
-    &= \frac{d \hat{\mathcal{V}}}{d t} \cdot \hat{b} + 
+    \frac{d \hat{\mathcal{V}}^b}{d t} &= \hat{b} \cdot \frac{d \hat{\mathcal{V}}}{d t} + \frac{d \hat{b}}{d t} \cdot \hat{\mathcal{V}} \\\\
+    &= \hat{b} \cdot \frac{d \hat{\mathcal{V}}}{d t} + \hat{\omega} \times \hat{\mathcal{V}}^b \\\\
+    &= \hat{b} \cdot \frac{d \hat{\mathcal{V}}}{d t} +
     \begin{bmatrix}
     0 & -\omega_z & \omega_y \\\\
     \omega_z & 0 & -\omega_x \\\\
@@ -170,7 +172,7 @@ $$
 <details>
 <summary>Transport theorem and the cross product</summary>
 
-Assume the body frame has instantaneous angular velocity $\hat{\omega}$ about each axis. Each basis vector will see a rotation over a time interval $dt$. For small values of $dt$, the angular displacement is small, $\hat{\omega} dt$, and the arc drawn by the tip of the unit vector can be approximated as a straight line of magnitude $\hat{\omega} dt$:
+Assume the body frame has instantaneous angular velocity $\hat{\omega}$ about each axis. Each basis vector will see a rotation over a time interval $dt$. For small values of $dt$, the angular displacement is small, $\hat{\omega} dt$, and the arc drawn by the tip of the unit vector can be approximated as a straight line of magnitude $1 \cdot \hat{\omega} dt$ (arc length equals radius times angle in radians):
 
 {{<figure src="static/transport-theorem.png" width="200px">}}
 
@@ -253,9 +255,9 @@ $$
 \dot{v}_z
 \end{bmatrix} &=
 \begin{bmatrix}
-    - \omega_y v_z + \omega_z v_y + g \sin{\phi} \sin{\psi} - g \sin{\theta} \cos{\phi} \cos{\psi}\\\\
-    \omega_x v_z - \omega_z v_x + g \sin{\phi} \cos{\psi} + g \sin{\psi} \sin{\theta} \cos{\phi}\\\\
-    - \frac{T}{m} - \omega_x v_y + \omega_y v_x + g \cos{\phi} \cos{\theta}
+    - \omega\_{y} v\_{z} + \omega\_{z} v\_{y} + g \sin{\theta}\\\\
+    \omega\_{x} v\_{z} - \omega\_{z} v\_{x} - g \sin{\phi} \cos{\theta}\\\\
+    -\frac{T}{m} - \omega\_{x} v\_{y} + \omega\_{y} v\_{x} + g\cos{\phi} \cos{\theta}
 \end{bmatrix}
 \end{align}
 $$
@@ -436,13 +438,13 @@ $$
 \\\\
 \dot{\hat{\omega}}
 \end{bmatrix} = \begin{bmatrix}
-v\_x c\psi c\theta - v\_y s\psi c\theta + v\_z s\theta\\\\
-v\_x (s\phi s\theta c\psi + s\psi c\phi) + v\_y (- s\phi s\psi s\theta + c\phi c\psi) - v\_z s\phi c\theta\\\\
-v\_x (s\phi s\psi - s\theta c\phi c\psi) + v\_y (s\phi c\psi + s\psi s\theta c\phi) + v\_z c\phi c\theta\\\\
+ v\_{x} c\psi c\theta + v\_{y} (s\phi s\theta c\psi + s\psi c\phi) + v\_{z} (s\phi s\psi - s\theta c\phi c\psi)\\\\
+ -v\_{x} s\psi c\theta + v\_{y} (- s\phi s\psi s\theta + c\phi c\psi) + v\_{z} (s\phi c\psi + s\psi s\theta c\phi)\\\\
+ v\_{x} s\theta - v\_{y} s\phi c\theta + v\_{z} c\phi c\theta\\\\
 \\\\
--\omega_y v\_z + \omega_z v\_y + g s\phi s\psi - g s\theta c\phi c\psi\\\\
-\omega_x v\_z - \omega_z v\_x + g s\phi c\psi + g s\psi s\theta c\phi\\\\
--\frac{T}{m} - \omega_x v\_y + \omega_y v\_x + g c\phi c\theta\\\\
+-\omega\_{y} v\_{z} + \omega\_{z} v\_{y} + g s\theta\\\\
+\omega\_{x} v\_{z} - \omega\_{z} v\_{x} - g s\phi c\theta\\\\
+-\frac{T}{m} - \omega\_{x} v\_{y} + \omega\_{y} v\_{x} + g c\phi c\theta\\\\
 \\\\
 \omega_x - \frac{\omega_z s\theta}{c\phi c\theta}\\\\
 \omega_y + \frac{\omega_z s\phi}{c\phi}\\\\
