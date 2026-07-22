@@ -1,4 +1,5 @@
 +++
+spotlight = true
 title = "Drone physics"
 date = "2024-01-27T19:22:34-06:00"
 description = "Equations governing dynamics and control of a multirotor UAV"

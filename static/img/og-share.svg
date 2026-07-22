@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#26596A"/>
+  <circle cx="600" cy="255" r="90" fill="#104050"/>
+  <text x="600" y="288" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="700" fill="#FFEDAA" text-anchor="middle">IA</text>
+  <text x="600" y="410" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-weight="700" fill="#FFEDAA" text-anchor="middle">Ibrahim Ahmed</text>
+  <text x="600" y="460" font-family="Verdana, Arial, sans-serif" font-size="26" fill="#D4BE6A" text-anchor="middle">Machine Learning &#183; Controls &#183; Research</text>
+</svg>

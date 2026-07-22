@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="footer" data-pagefind-ignore>
         <div class="copyright">© {{.Site.Copyright}}</div>
     </div>
 <!-- ending container div from header -->
@@ -12,6 +12,28 @@
         if (menuIcon && topbar) {
             menuIcon.addEventListener('click', function () {
                 topbar.classList.toggle('mobile-menu-active');
+            });
+        }
+
+        // Assemble mailto: links client-side to keep the address off crawlable text.
+        document.querySelectorAll('.contact-email[data-user][data-domain]').forEach(function (el) {
+            el.setAttribute('href', 'mailto:' + el.dataset.user + '@' + el.dataset.domain);
+        });
+
+        // Dark mode toggle; theme itself is set pre-paint in header.html to avoid a flash.
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            const syncToggle = function (theme) {
+                themeToggle.setAttribute('aria-pressed', theme === 'dark');
+                themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+                themeToggle.querySelector('span').textContent = theme === 'dark' ? '☀' : '☽';
+            };
+            syncToggle(document.documentElement.getAttribute('data-theme'));
+            themeToggle.addEventListener('click', function () {
+                const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                syncToggle(next);
             });
         }
     });

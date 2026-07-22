@@ -1,7 +1,7 @@
 +++
 title = "A Poor Man's Introduction to Reinforcement Learning"
 date = "2017-11-13T23:19:08-06:00"
-description = ""
+description = "A beginner-friendly introduction to reinforcement learning: how agents learn from feedback instead of search or hand-coded rules."
 tags = [ "artificial intelligence", "reinforcement learning" ]
 categories = [ "Engineering" ]
 series = [ ]

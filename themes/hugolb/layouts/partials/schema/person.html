@@ -1,0 +1,34 @@
+{{- $page := .page -}}
+{{- $resume := .resume -}}
+{{- $sameAs := slice -}}
+{{- range $page.Site.Params.links -}}
+  {{- $sameAs = $sameAs | append .URL -}}
+{{- end -}}
+{{- $person := dict
+    "@context" "https://schema.org"
+    "@type" "Person"
+    "name" $page.Site.Title
+    "url" $page.Site.BaseURL
+    "sameAs" $sameAs
+-}}
+{{- if $resume -}}
+  {{- with index $resume.experience 0 -}}
+    {{- $person = merge $person (dict "jobTitle" .title "worksFor" (dict "@type" "Organization" "name" .workplace)) -}}
+  {{- end -}}
+  {{- $alumniOf := slice -}}
+  {{- range $resume.education -}}
+    {{- $alumniOf = $alumniOf | append (dict "@type" "CollegeOrUniversity" "name" .school) -}}
+  {{- end -}}
+  {{- if $alumniOf -}}{{- $person = merge $person (dict "alumniOf" $alumniOf) -}}{{- end -}}
+  {{- $knowsAbout := slice -}}
+  {{- range $resume.skills -}}
+    {{- range .skills -}}{{- $knowsAbout = $knowsAbout | append . -}}{{- end -}}
+  {{- end -}}
+  {{- if $knowsAbout -}}{{- $person = merge $person (dict "knowsAbout" $knowsAbout) -}}{{- end -}}
+  {{- $person = merge $person (dict "url" $page.Permalink) -}}
+{{- else -}}
+  {{- with $page.Site.Params.description -}}
+    {{- $person = merge $person (dict "description" .) -}}
+  {{- end -}}
+{{- end -}}
+<script type="application/ld+json">{{ $person | jsonify | safeJS }}</script>

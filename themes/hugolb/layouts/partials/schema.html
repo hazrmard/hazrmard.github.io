@@ -1,0 +1,10 @@
+{{- if .IsHome -}}
+  {{- partial "schema/person.html" (dict "page" .) -}}
+{{- else if eq .Section "about" -}}
+  {{- partial "schema/person.html" (dict "page" .) -}}
+{{- else if eq .Section "post" -}}
+  {{- partial "schema/blogposting.html" . -}}
+{{- end -}}
+{{- if and .IsPage (ne .Section "resume") -}}
+  {{- partial "schema/breadcrumblist.html" . -}}
+{{- end -}}

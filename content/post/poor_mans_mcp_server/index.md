@@ -1,7 +1,7 @@
 +++
 title = "A poor man's MCP server"
 date = '2025-11-27T09:28:23-08:00'
-description = ""
+description = "A hands-on look at the Model Context Protocol (MCP), the emerging standard for exposing tools to language models."
 link = ""
 tags = []
 categories = []

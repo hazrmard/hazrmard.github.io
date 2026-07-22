@@ -1,5 +1,29 @@
 {{define "main"}}
-<div class="resume" ng-controller="resumeController">
-    {{readFile "themes/hugolb/static/ng-template/resume.html" | safeHTML}}
+{{ $jsonFilePath := printf "static%s" .Params.json }}
+{{ $resume := readFile $jsonFilePath | transform.Unmarshal }}
+<div class="resume">
+    {{ partial "resume/header.html" (merge $resume (dict "page" $)) }}
+    {{ if $resume.education }}{{ partial "resume/education.html" $resume.education }}{{ end }}
+    {{ if $resume.research }}{{ partial "resume/research.html" $resume.research }}{{ end }}
+    {{ if $resume.experience }}{{ partial "resume/experience.html" $resume.experience }}{{ end }}
+    {{ if $resume.projects }}{{ partial "resume/projects.html" $resume.projects }}{{ end }}
+    {{ if $resume.skills }}{{ partial "resume/skills.html" $resume.skills }}{{ end }}
+    {{ if $resume.extracurriculars }}{{ partial "resume/extracurriculars.html" $resume.extracurriculars }}{{ end }}
+    {{ if $resume.honors }}{{ partial "resume/honors.html" $resume.honors }}{{ end }}
+    {{ if $resume.publications }}{{ partial "resume/publications.html" $resume.publications }}{{ end }}
 </div>
+<script>
+(function () {
+    var input = document.getElementById("resume-search");
+    if (!input) return;
+    var subsections = document.querySelectorAll(".resume .subsection");
+    input.addEventListener("input", function () {
+        var q = input.value.trim().toLowerCase();
+        subsections.forEach(function (el) {
+            el.style.display = (q === "" || el.textContent.toLowerCase().indexOf(q) !== -1) ? "" : "none";
+        });
+    });
+})();
+</script>
+{{ partial "schema/person.html" (dict "page" . "resume" $resume) }}
 {{end}}

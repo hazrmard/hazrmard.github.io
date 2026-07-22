@@ -1,4 +1,5 @@
 +++
+spotlight = true
 title = "Poor Man's Autograd"
 date = '2026-03-27T22:57:59-07:00'
 description = "Deriving the code for differentiating code. Inspired by microgpt."

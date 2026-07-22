@@ -1,7 +1,7 @@
 +++
 title = "Classical control: Transfer functions"
 date = "2018-09-21T15:17:40-05:00"
-description = ""
+description = "How to derive and use transfer functions to relate a system's input and output in the Laplace domain, illustrated with a car example."
 tags = [ "matlab", "control systems" ]
 categories = [ "Engineering" ]
 series = [ "Control systems" ]

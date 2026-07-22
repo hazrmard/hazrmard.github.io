@@ -1,6 +1,21 @@
 {{partial "header.html" .}}
 {{partial "topbar.html" .}}
 <div class="content">
-    Link does not exist.
+    <h1 class="page-title">Page not found</h1>
+    <p>The link you followed doesn't exist. Try searching, or head to one of these sections:</p>
+    {{ partial "search-widget.html" "search-404" }}
+    <ul class="terms-list">
+        {{ range .Site.Params.menu.main }}
+            {{ if ne .name "Home" }}
+            <a href="{{ .url }}"><li class="terms">{{ .name }}</li></a>
+            {{ end }}
+        {{ end }}
+    </ul>
+    <h2>Recent posts</h2>
+    <ul class="terms-list">
+        {{ range first 5 (where .Site.RegularPages "Section" "post").ByDate.Reverse }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
 </div>
 {{partial "footer.html" .}}

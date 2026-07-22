@@ -6,7 +6,7 @@ title = "Optimizing static sites with hugo"
 hascode = true
 isexternal = false
 series = [ "Hugo site development" ]
-description = ""
+description = "Cutting page weight on a Hugo static site by trimming JavaScript bloat from third-party libraries like jQuery, code highlighters, and math renderers."
 tags = [ "hugo", "javascript", "web development" ]
 draft = false
 +++

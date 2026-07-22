@@ -4,9 +4,8 @@ locale = "en-us"
 theme = "hugolb"
 copyright = "Ibrahim Ahmed"
 
-# to populate last modification date
-# for github pages deployment, also need to clone history (see .github/workflows/hugo.yaml)
-enableGitInfo = true
+# generate robots.txt (layouts/robots.txt) referencing the sitemap
+enableRobotsTXT = true
 
 # hugo build parameters
 [pagination]
@@ -20,33 +19,42 @@ ignoreFiles = [".+pptx$", ".venv"]
 
 [frontmatter]
   date = ["date", "publishDate", "lastmod"]
-  lastmod = [":git", "date"]
+  # explicit front-matter "lastmod" wins if a post sets one; otherwise falls
+  # back to "date". No longer derived from git history (see .github/workflows/hugo.yml).
+  lastmod = ["lastmod", "date"]
 # ====
 
 [params]
 # Site/Blog/theme specific parameters
 # ====
-    splashSubheading = ""
+    splashSubheading = "Software engineer writing about machine learning, reinforcement learning, and controls."
     blogroot = "Posts"
     keywords = "ML, AI, RL, research, computer science, engineering"
     description = "Ibrahim Ahmed's personal blog on ML, AI, RL, research, computer science, and engineering."
     twitter = "hazrmard"
+    analyticsID = "G-6YPFGDNV4W"
     defaultprojimg = "/img/gear.png"
     defaultpostimg = "/img/quill.jpg"
+    # used to build an obfuscated "get in touch" mailto link (see partials/contact-email.html)
+    email = "ibrahim@iahmed.me"
 
     [[params.links]]
+        name = "LinkedIn"
         URL = "https://www.linkedin.com/in/IbrahimAhmed1"
         image = "/img/LinkIcons/svg/linkedin.svg"
 
     [[params.links]]
+        name = "GitHub"
         URL = "https://github.com/hazrmard"
         image = "/img/LinkIcons/svg/github.svg"
 
     [[params.links]]
+        name = "Google Scholar"
         URL = "https://scholar.google.com/citations?user=_Nn9bWgAAAAJ&hl=en"
         image = "/img/LinkIcons/svg/google-scholar.svg"
 
     [[params.links]]
+        name = "X"
         URL = "https://twitter.com/hazrmard"
         image = "/img/LinkIcons/svg/twitterx.svg"
 
@@ -81,6 +89,11 @@ ignoreFiles = [".+pptx$", ".venv"]
         weight = 50
         url = "/project/"
         image = "/img/LinkIcons/svg/terminal.svg"
+    [[params.menu.main]]
+        name = "Search"
+        weight = 60
+        url = "/search/"
+        image = "/img/LinkIcons/svg/magnifying-glass.svg"
 # ====
 
 # Other hugo configuration options
@@ -94,6 +107,9 @@ ignoreFiles = [".+pptx$", ".venv"]
         codeFences = true
         lineNos = true
         style = "solarized-light"
+        # emit CSS classes instead of inline styles so a dark-mode stylesheet
+        # (static/css/syntax-dark.css) can override colours per data-theme
+        noClasses = false
     [markup.goldmark.renderer]
         # so html tags inside markdown can be rendered
         unsafe = true

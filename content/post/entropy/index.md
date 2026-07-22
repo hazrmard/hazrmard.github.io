@@ -1,4 +1,5 @@
 +++
+spotlight = true
 title = "Surprise! A derivation of entropy"
 date = "2025-12-04T22:07:36-08:00"
 description = "I explain entropy to myself"

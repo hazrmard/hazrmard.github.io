@@ -1,0 +1,35 @@
+{{- $p := . -}}
+{{- $image := "" -}}
+{{- with $p.Params.thumbnail -}}
+  {{- $image = . -}}
+{{- else -}}
+  {{- with $p.Params.image -}}
+    {{- $image = . -}}
+  {{- else -}}
+    {{- with $p.Params.preview -}}
+      {{- $image = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq $image "" -}}
+  {{- $image = $p.Site.Params.defaultpostimg -}}
+{{- end -}}
+{{- if not (strings.HasPrefix $image "http") -}}
+  {{- $image = $image | absURL -}}
+{{- end -}}
+{{- $article := dict
+    "@context" "https://schema.org"
+    "@type" "BlogPosting"
+    "headline" $p.Title
+    "image" $image
+    "url" $p.Permalink
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" $p.Permalink)
+    "author" (dict "@type" "Person" "name" $p.Site.Title "url" $p.Site.BaseURL)
+-}}
+{{- with $p.PublishDate -}}
+  {{- $article = merge $article (dict "datePublished" (.Format "2006-01-02T15:04:05-07:00")) -}}
+{{- end -}}
+{{- with $p.Lastmod -}}
+  {{- $article = merge $article (dict "dateModified" (.Format "2006-01-02T15:04:05-07:00")) -}}
+{{- end -}}
+<script type="application/ld+json">{{ $article | jsonify | safeJS }}</script>

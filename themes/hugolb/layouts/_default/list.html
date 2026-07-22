@@ -25,6 +25,10 @@
     <!-- Anything written in "_index.md" for a particular SECTION listing. -->
     {{ .Content }}
 
+    {{ if eq .Section "about" }}
+        {{ partial "connect.html" (dict "page" . "showPageLinks" true) }}
+    {{ end }}
+
     <!-- Any sub-sections -->
     {{ if (gt (len .Sections) 0) }}
     <details open>
@@ -40,10 +44,14 @@
     </details>
     {{ end }}
 
+    <!-- spotlit items in this list, featured up top as a grid; they also
+    appear again below in their normal place in the dated list -->
+    {{ partial "spotlight_grid.html" .RegularPages }}
+
     <!-- break down posts into pages -->
     <!-- each section list only shows pages in that section directory or
     with an explicit "type=SECION" in front matter -->
-    {{ $paginator := .Paginate (.RegularPages.ByLastmod.Reverse) }}
+    {{ $paginator := .Paginate (.RegularPages.ByDate.Reverse) }}
     {{ range $paginator.Pages }}
         {{.Render "summary"}}
     {{ end }}

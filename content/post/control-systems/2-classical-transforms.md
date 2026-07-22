@@ -1,7 +1,7 @@
 +++
 title = "Classical control: Transforms"
 date = "2018-09-10T13:13:41-05:00"
-description = ""
+description = "An introduction to integral transforms in classical control theory: representing time-domain functions in a more tractable domain."
 tags = [ "control systems" ]
 categories = [ "Engineering" ]
 series = [ "Control systems" ]

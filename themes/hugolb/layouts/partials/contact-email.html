@@ -1,0 +1,5 @@
+{{- $page := . -}}
+{{- with $page.Site.Params.email -}}
+{{- $parts := split . "@" -}}
+<a class="btn contact-email" href="#" data-user="{{ index $parts 0 }}" data-domain="{{ index $parts 1 }}" aria-label="Send Ibrahim an email">Get in touch</a>
+{{- end -}}

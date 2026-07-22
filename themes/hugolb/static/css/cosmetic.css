@@ -13,11 +13,92 @@ colour-scheme {
     #FFEDAA
 }
 
+/* Light theme (default). The topbar/chrome palette (navy/teal) stays fixed
+   across themes; only page background and content-area colours flip. */
+:root {
+    --bg: #FFFFFF;
+    --text: #1A1A1A;
+    --c-navy-dark: #104050;
+    --c-teal: #26596A;
+    --c-teal-light: #6C929F;
+    --c-brown-dark: #554300;
+    --c-brown: #806915;
+    --c-gold-dark: #AA9239;
+    --c-gold: #D4BE6A;
+    --c-gold-light: #FFEDAA;
+    --resume-surface: #FDFEFE;
+    --resume-border: #CACFD2;
+    /* fixed (not redefined in dark theme) light text/icon colour for the
+       teal/navy chrome, which stays constant across themes -- unlike
+       --c-gold-light, which is tuned to flip with the page background and
+       goes dark in dark mode, making it unreadable on the chrome */
+    --c-chrome-text: #FFEDAA;
+}
+
+:root[data-theme="dark"] {
+    --bg: #14181C;
+    --text: #E6E2D8;
+    --c-brown-dark: #E0C46A;
+    --c-brown: #F0D998;
+    --c-gold-dark: #D9BB63;
+    --c-gold: #A98F4A;
+    --c-gold-light: #332B12;
+    --resume-surface: #1B1F24;
+    --resume-border: #3A4149;
+    /* re-theme the Pagefind default search UI (static/css/syntax-dark.css
+       sibling; see themes/hugolb/layouts/partials/search-widget.html) */
+    --pagefind-ui-primary: #E0C46A;
+    --pagefind-ui-text: #E6E2D8;
+    --pagefind-ui-background: #1B1F24;
+    --pagefind-ui-border: #3A4149;
+    --pagefind-ui-tag: #262B31;
+}
+
+/* fall back to the OS-level preference when no toggle choice is stored yet */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --bg: #14181C;
+        --text: #E6E2D8;
+        --pagefind-ui-primary: #E0C46A;
+        --pagefind-ui-text: #E6E2D8;
+        --pagefind-ui-background: #1B1F24;
+        --pagefind-ui-border: #3A4149;
+        --pagefind-ui-tag: #262B31;
+        --c-brown-dark: #E0C46A;
+        --c-brown: #F0D998;
+        --c-gold-dark: #D9BB63;
+        --c-gold: #A98F4A;
+        --c-gold-light: #332B12;
+        --resume-surface: #1B1F24;
+        --resume-border: #3A4149;
+    }
+}
+
+/* the hero and "let's connect" social icons are plain black-glyph SVGs on a
+   transparent background (unlike the topbar's, which always sits on the
+   fixed teal chrome) — invert them only in dark mode so they aren't lost
+   against the dark page background */
+:root[data-theme="dark"] .splash .links img,
+:root[data-theme="dark"] .connect-links img {
+    filter: invert(100%);
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .splash .links img,
+    :root:not([data-theme]) .connect-links img {
+        filter: invert(100%);
+    }
+}
+
+html {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
 .topbar, .submenu {
-    background-color: #26596A;
+    background-color: var(--c-teal);
 }
 .title .site-name {
-    color: #6C929F;
+    color: var(--c-teal-light);
 }
 .sb-option {
     background-color: inherit;
@@ -25,13 +106,31 @@ colour-scheme {
 }
 .sb-option:hover,
 .submenu li:hover {
-    background-color: #104050;
+    background-color: var(--c-navy-dark);
     transition: 0.25s;
 }
 .menu-list a:link,
 .menu-list a:visited {
-    color: #6C929F;
+    color: var(--c-teal-light);
     text-decoration: none;
+}
+
+.theme-toggle {
+    background-color: var(--c-navy-dark);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1.3em;
+    line-height: 1;
+    padding: 0.4em 0.7em;
+    margin: 0 0.75em;
+    color: var(--c-chrome-text);
+    transition: 0.25s;
+    flex-shrink: 0;
+}
+.theme-toggle:hover {
+    background-color: var(--c-chrome-text);
+    color: var(--c-navy-dark);
 }
 
 
@@ -39,48 +138,56 @@ colour-scheme {
 a:link,
 a:visited {
     text-decoration: none;
-    color: #AA9239;
+    color: var(--c-gold-dark);
     transition: 0.25s;
 }
 a:hover {
-    color: #806915;
+    color: var(--c-brown);
     text-decoration: underline;
     transition: 0.25s;
 }
 blockquote {
-    background-color: #FFEDAA;
-    border-left: 1em solid #D4BE6A;
-    padding: 0.25em 0.5em;
-    color: #806915;
+    background-color: var(--resume-surface);
+    border-left: 3px solid var(--c-gold-dark);
+    padding: 0.5em 1em;
+    color: var(--text);
 }
 .outlined {
-    border: 0.2em solid #AA9239;
+    border: 0.2em solid var(--c-gold-dark);
     padding: 0.25em 0.5em;
 }
 .content > p > code,
 .content li > code {
-    background-color: #FFEDAA;
-    padding: 0em 0.25em;
+    background-color: var(--resume-surface);
+    border: 1px solid var(--resume-border);
+    border-radius: 3px;
+    padding: 0.1em 0.35em;
 }
 .prev, .next, .nav-item {
-    color: #806915;
-    background-color: #FFEDAA;
+    color: var(--c-brown);
+    background-color: var(--resume-surface);
+    border: 1px solid var(--resume-border);
     padding: 0.5em;
     transition: 0.25s;
 }
 .prev:hover, .next:hover, .nav-item:hover, .nav-item.highlighted {
-    background-color: #806915;
-    color: #FFEDAA;
+    background-color: var(--c-brown);
+    color: var(--c-gold-light);
+    border-color: var(--c-brown);
     transition: 0.25s;
 }
 
-.summary.post,
-.summary.post .image {
-    background-color: #FFEDAA;
+.summary.post {
+    background-color: var(--resume-surface);
+    border-left: 3px solid var(--c-gold);
 }
-.summary.project,
+.summary.project {
+    background-color: var(--resume-surface);
+    border-left: 3px solid var(--c-teal-light);
+}
+.summary.post .image,
 .summary.project .image {
-    background-color: #6C929F;
+    background-color: var(--resume-surface);
 }
 
 .post-title,
@@ -89,17 +196,33 @@ blockquote {
 .summary .post-title a:visited,
 h1, h2, h3, h4, h5, h6, strong {
     text-decoration: none;
-    color: #554300;
+    color: var(--c-brown-dark);
 }
 .front-matter {
-    color: #D4BE6A;
+    color: var(--c-gold);
 }
 .terms {
     text-decoration: none;
-    color: #806915;
-    background-color: #FFEDAA;
+    color: var(--c-brown);
+    background-color: var(--resume-surface);
+    border: 1px solid var(--resume-border);
 }
 
 details {
-    border: 1px solid #554300;
+    border: 1px solid var(--c-brown-dark);
+}
+
+.connect {
+    border-top: 1px solid var(--c-gold);
+}
+.btn {
+    background-color: transparent;
+    border: 1px solid var(--c-teal-light);
+    color: var(--c-brown) !important;
+}
+.btn:hover {
+    background-color: var(--resume-surface);
+    border-color: var(--c-brown);
+    color: var(--c-brown) !important;
+    text-decoration: none !important;
 }

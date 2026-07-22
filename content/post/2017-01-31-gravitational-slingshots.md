@@ -2,7 +2,7 @@
 categories = ["Physics"]
 tags = ["gravity", "classical mechanics"]
 date = "2017-01-31T10:48:32-06:00"
-description = ""
+description = "An intuitive explanation of gravitational slingshots: how space probes gain speed from a planet's motion without violating energy conservation."
 title = "Gravitational Slingshots"
 isexternal = false
 series = []

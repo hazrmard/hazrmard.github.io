@@ -1,7 +1,7 @@
 +++
 title = "Escaping Echochambers"
 date = "2017-10-20T20:59:42-05:00"
-description = ""
+description = "Using PCA and clustering on Imgur posts to explore how recommendation systems create digital echo chambers, and how to counter them."
 tags = [
   "machine learning",
   "principal component analysis",

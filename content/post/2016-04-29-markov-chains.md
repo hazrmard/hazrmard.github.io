@@ -1,7 +1,7 @@
 ---
 title: Markov Chains – Random Text Generation
 date: 2016-04-29T23:23:16+00:00
-description: ""
+description: "How Markov chains generate grammatically plausible random text from a corpus, and how multi-threading speeds up building the prefix-suffix table."
 categories:
   - Machine Learning
 tags:
@@ -10,7 +10,9 @@ tags:
   - markov
 hasequations: false
 hascode: false
-slug: markov-chains-–-random-text-generation
+slug: markov-chains-random-text-generation
+aliases:
+  - /post/markov-chains-–-random-text-generation/
 ---
 This semester I am taking a course in [High Performance Computing][1] where I get to work with multi-core systems like computing clusters and graphics cards. For my final project I decided to develop a random text generator and see if I could speed it up.
 

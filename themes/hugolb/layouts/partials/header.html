@@ -1,21 +1,36 @@
 <!DOCTYPE html>
-<html {{ if eq .Section "resume" }} ng-app=Resume {{end}}>
+<html>
 <head>
+    <script>
+    // Set the theme before first paint to avoid a light/dark flash.
+    (function () {
+        try {
+            var stored = localStorage.getItem("theme");
+            var theme = stored || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+    })();
+    </script>
     {{ partial "meta_header.html" . }}
+    {{ partial "schema.html" . }}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Proza+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Proza+Libre:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/hugolb.css">
     <link rel="stylesheet" type="text/css" href="/css/cosmetic.css">
+    <link rel="stylesheet" type="text/css" href="/css/syntax-light.css">
+    <link rel="stylesheet" type="text/css" href="/css/syntax-dark.css">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118761164-1"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics (GA4) -->
+    {{ if and .Site.Params.analyticsID hugo.IsProduction }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.analyticsID }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-118761164-1');
+        gtag('config', '{{ .Site.Params.analyticsID }}');
     </script>
+    {{ end }}
 
     
     <!-- Include main page style sheet -->
@@ -49,12 +64,9 @@
         {{ end }}
     {{ end }}
 
-    <!-- for resume, include angular + resume app js file + styles -->
+    <!-- for resume, include stylesheet (résumé is rendered server-side, see layouts/resume/resume.html) -->
     {{ if eq .Section "resume" }}
         <link rel="stylesheet" type="text/css" href="/css/resume.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-        <script>RESUME_JSON_PATH="{{.Params.json}}"</script>
-	    <script src="/js/resume.js"></script>
     {{ end }}
 
     {{ if .IsHome }}

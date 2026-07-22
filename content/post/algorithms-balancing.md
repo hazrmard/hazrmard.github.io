@@ -2,7 +2,7 @@
 hasequations = true
 categories = [ "Computer Science" ]
 date = "2017-02-06T18:47:26-06:00"
-description = ""
+description = "How balancing the workload across an algorithm's recursive subproblems affects its overall time complexity, with worked examples."
 title = "Algorithms: Balancing"
 hascode = false
 isexternal = false

@@ -1,7 +1,7 @@
 +++
 title = 'Remote SSH into your home desktop'
 date = '2023-06-07T09:22:00-05:00'
-description = ""
+description = "Setting up dynamic DNS and router port forwarding so you can SSH into your home desktop from anywhere, without a static IP."
 tags = []
 categories = ["DevOps"]
 link = ""

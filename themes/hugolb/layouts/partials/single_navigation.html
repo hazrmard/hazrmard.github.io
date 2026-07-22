@@ -10,3 +10,14 @@
         </div></a>
     {{end}}
 </div>
+{{ $related := first 3 (.Site.RegularPages.Related .) }}
+{{ if gt (len $related) 0 }}
+<div class="related-posts">
+    <h3>Related</h3>
+    <div class="spotlight-grid">
+        {{ range $related }}
+            {{ .Render "summary" }}
+        {{ end }}
+    </div>
+</div>
+{{ end }}

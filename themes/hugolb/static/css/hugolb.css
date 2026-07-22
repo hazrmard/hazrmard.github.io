@@ -10,6 +10,11 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+strong, b {
+    font-weight: 600;
 }
 
 .container {
@@ -29,6 +34,9 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     padding: 0.5em 1em; /* Basic padding */
     box-sizing: border-box; /* Include padding in width/height */
+    /* not overflow:hidden -- .menu-list (a child) intentionally extends
+       below this box via top:100% when its dropdown is open, and hiding
+       overflow here would clip that too, not just the row itself */
 }
 
 .sidebar {
@@ -47,6 +55,9 @@ h1, h2, h3, h4, h5, h6 {
     filter: invert(100%);
 }
 .sb-links {
+    display: flex; /* keep icons in one row instead of stacking when squeezed */
+    flex-wrap: nowrap;
+    flex-shrink: 0;
     margin-left: 0.5em; /* Add some space to the left of the links */
 }
 .menu-icon {
@@ -54,13 +65,25 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
     font-size: 1.5em; /* Adjust size of hamburger icon */
 }
+.menu-icon h2 {
+    /* overrides the generic h1-h6 content color (cosmetic.css), which is
+       tuned for the page background, not the topbar's fixed teal chrome */
+    color: var(--c-teal-light);
+    /* the default UA h2 margin would otherwise inflate .menu-icon's height
+       (and thus the whole topbar's) well past a single-row height */
+    margin-top: 0;
+    margin-bottom: 0;
+}
 .topbar .title {
     padding: 0em 0.5em;
-    word-wrap: break-word;
     font-size: 75%;
     margin-right: auto; /* Pushes menu-list to the right */
     display: flex; /* To align site-name and sb-links if needed */
     align-items: center;
+    flex-shrink: 0; /* don't let flexbox squeeze this into wrapping internally */
+}
+.site-name {
+    white-space: nowrap;
 }
 .menu-list {
     background-color: inherit;
@@ -70,7 +93,8 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0px; /* Reset margin */
     width: auto; /* Allow it to size based on content */
     display: flex; /* Arrange menu items in a row */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens if needed */
+    flex-wrap: nowrap; /* never wrap to a second row -- .nav-compact (below) takes over instead */
+    flex-shrink: 0;
     list-style: none; /* Remove list bullets */
 }
 .sb-option {
@@ -109,6 +133,47 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
 }
 
+/* Collapses the nav to the hamburger menu whenever the menu items don't fit
+   on one line, regardless of viewport width -- .menu-list is nowrap (above),
+   so overflow means it would otherwise have wrapped to a second row. Applied
+   by the script in topbar.html, which measures actual overflow; the
+   max-width:768px media query further down is a pure-CSS fallback for small
+   viewports in case that script doesn't run. */
+.topbar.nav-compact .title .site-name,
+.topbar.nav-compact .title .sb-links,
+.topbar.nav-compact .menu-option-name {
+    display: none;
+}
+.topbar.nav-compact .sb-option {
+    text-align: center;
+}
+.topbar.nav-compact .menu-icon {
+    display: block;
+    margin-right: 1em;
+}
+.topbar.nav-compact .menu-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--c-teal);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 999;
+}
+.topbar.nav-compact.mobile-menu-active .menu-list {
+    display: flex;
+}
+.topbar.nav-compact .menu-list .sb-option {
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+}
+.topbar.nav-compact.mobile-menu-active .menu-option-name {
+    display: inline !important;
+}
+
 .content,
 .resume {
     margin-left: auto; /* Center content block */
@@ -125,13 +190,27 @@ h1, h2, h3, h4, h5, h6 {
 .content * {
     word-wrap: break-word;
 }
+/* long-form reading comfort: taller line-height and a touch more type size
+   than the site-wide default, plus a slightly wider measure to match --
+   scoped to .content (not .resume, which stays dense/tabular) */
+.content {
+    max-width: 720px;
+    font-size: 1.0625em;
+    line-height: 1.7;
+}
 .content .post-title {
     text-align: left;
 }
+/* .highlight is the outer wrapper Hugo/Chroma emits around every fenced code
+   block; with lineNos=true the code renders as a <table class="lntable">,
+   which sizes itself to its widest (unwrapped) line regardless of the
+   overflow-x set on the inner <pre> — so the scroll container has to be the
+   wrapper, not the <pre>, or a long line blows out the whole page width. */
+.content .highlight,
 .content pre,
 .content pre > code:last-of-type {
     overflow-x: auto;
-    max-width: 80ch;
+    max-width: 100%;
     /* Fixes iOS font sizing anomaly in Hugo code blocks */
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -143,6 +222,18 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     margin: 0px;
     font-size: 80%;
+}
+.content table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+}
+/* KaTeX only adds its own overflow-x:auto to display ($$..$$) equations;
+   a long inline ($..$) formula has no wrapping and can blow out the page
+   width on narrow viewports, so scope the same containment to it here. */
+.content .katex {
+    max-width: 100%;
+    overflow-x: auto;
 }
 .front-matter {
     text-align: left;
@@ -156,7 +247,11 @@ details {
 
 .summary {
     padding: 0.5em;
-    margin: 0.5em 0.5em 0.5em 0em;
+    margin: 0.4em 0.5em 0.4em 0em;
+    /* compact regardless of ancestor -- .content (single posts) and
+       .related-posts both sit above this in the list/single templates and
+       set a looser reading line-height that's too airy for card copy */
+    line-height: 1.4;
 }
 .summary h3 {
     margin: 0px;
@@ -164,17 +259,70 @@ details {
 .summary .image{
     display: inline-block;
     background-color: white;
-    width: 15%;
-    padding-bottom: 15%;
+    width: 12%;
+    padding-bottom: 12%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    margin: auto 0px;
+    margin: auto 1em auto 0px;
 }
 .summary .description {
     display: inline-block;
     vertical-align: top;
-    width: 75%;
+    width: 80%;
+    font-size: 90%;
+}
+.summary .front-matter {
+    font-size: 85%;
+}
+
+/* homepage spotlight: at most 6 panels, laid out so 6 never exceeds 2 rows */
+.spotlight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+    width: 100%;
+    margin: 0.5em 0em 1.5em 0em;
+}
+.spotlight-grid .summary {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+}
+.spotlight-grid .summary .image {
+    display: block;
+    width: 100%;
+    padding-bottom: 28%;
+    margin: 0 0 0.5em 0;
+}
+.spotlight-grid .summary .description {
+    display: block;
+    width: 100%;
+}
+@media screen and (max-width: 768px) {
+    .spotlight-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 480px) {
+    .spotlight-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* "related" section at the end of a post/project, laid out with the same
+   spotlight-grid treatment used on the homepage for a consistent feel */
+.related-posts {
+    margin-top: 1.5em;
+    padding-top: 1em;
+    border-top: 1px solid var(--resume-border);
+    /* back down to the site's base type scale -- .content bumps font-size/
+       line-height up for reading comfort, which is too loose for card copy */
+    font-size: 1rem;
+    line-height: normal;
+}
+.related-posts h3 {
+    margin: 0 0 0.25em 0;
 }
 
 /* navigation */
@@ -204,6 +352,40 @@ details {
     font-size: 125%;
 }
 
+/* "let's connect" / subscribe / contact CTA block, shown at end of posts, home, and about */
+.connect {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 1.5em 0em;
+    margin-top: 1em;
+}
+.connect-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75em;
+    margin-bottom: 1em;
+}
+.connect-links img {
+    width: 32px;
+    height: auto;
+}
+.connect-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75em;
+}
+.btn {
+    display: inline-block;
+    padding: 0.45em 0.95em;
+    border-radius: 6px;
+    font-weight: 400;
+    text-decoration: none !important;
+    transition: 0.25s;
+}
+
 /* bottom of page */
 .footer {
     position: absolute;
@@ -226,10 +408,6 @@ details {
         padding-top: 0.25em;
         padding-bottom: 0.25em;
     }
-    .menu-icon h2 { /* Remove default margins from h2 in menu icon */
-        margin-top: 0;
-        margin-bottom: 0;
-    }
     .title .site-name, .title .sb-links, .menu-option-name {
         display: none;
     }
@@ -247,7 +425,7 @@ details {
         top: 100%; /* Position below the topbar */
         left: 0;
         width: 100%;
-        background-color: #26596A; /* Match topbar background or as desired */
+        background-color: var(--c-teal); /* Match topbar background or as desired */
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         z-index: 999; /* Below topbar but above content */
     }
@@ -262,7 +440,7 @@ details {
     .topbar.mobile-menu-active .menu-option-name { /* Show text in active mobile menu */
         display: inline !important; 
     }
-    .content {
+    .content, .resume {
         width: calc(100% - 2em); /* Adjust content width for smaller screens */
         padding-left: 1em;
         padding-right: 1em;
@@ -271,7 +449,7 @@ details {
 }
 
 @media print {
-     .topbar, .footer, .navigation, .tableofcontents { /* Add .topbar to hidden elements */
+     .topbar, .footer, .navigation, .tableofcontents, .connect { /* Add .topbar to hidden elements */
          display: none !important;
      }
      .content {

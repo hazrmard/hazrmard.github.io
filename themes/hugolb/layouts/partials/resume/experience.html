@@ -1,0 +1,25 @@
+<div class="section">
+    <h2 class="h2">Experience</h2>
+    {{ range . }}
+    <div class="experience subsection">
+        <h3 class="h3 title">{{ .title }}</h3>
+        <h3 class="h3 workplace">{{ .workplace }}</h3>
+        <h3 class="h3 time">{{ .time }}</h3>
+        <div class="details"><ul>
+            {{ range .achievements }}<li>{{ . }}</li>{{ end }}
+        </ul></div>
+        {{ if .links }}
+        <div class="links">
+            <div class="subheading">Link(s): </div>
+            {{ range .links }}<div class="link"><a href="{{ .url }}">{{ .title }}</a></div>{{ end }}
+        </div>
+        {{ end }}
+        {{ if .technologies }}
+        <div class="technologies">
+            <div class="subheading">Technology: </div>
+            {{ range .technologies }}<div class="tech">{{ . }}</div>{{ end }}
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>

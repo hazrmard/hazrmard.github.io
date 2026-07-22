@@ -1,7 +1,7 @@
 ---
 title: A case study in choosing algorithms
 date: 2016-08-14T03:29:23+00:00
-description: ""
+description: "A lesson from parallelizing terabytes of dark matter simulation data: why a dynamic work pool beat a bin-packing pre-partitioning scheme."
 categories:
   - Engineering
   - Physics

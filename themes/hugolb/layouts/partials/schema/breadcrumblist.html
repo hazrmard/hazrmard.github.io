@@ -1,0 +1,16 @@
+{{- $pathComponents := (split .RelPermalink "/") -}}
+{{- $pathLen := len $pathComponents -}}
+{{- $items := slice (dict "name" "Home" "item" (absURL "/")) -}}
+{{- range $idx, $val := $pathComponents -}}
+  {{- if and (gt (len $val) 0) (lt $idx (sub $pathLen 2)) -}}
+    {{- $path := delimit (first (add $idx 1) $pathComponents) "/" -}}
+    {{- $items = $items | append (dict "name" (humanize $val) "item" (absURL $path)) -}}
+  {{- end -}}
+{{- end -}}
+{{- $items = $items | append (dict "name" .Title "item" .Permalink) -}}
+{{- $itemList := slice -}}
+{{- range $i, $it := $items -}}
+  {{- $itemList = $itemList | append (dict "@type" "ListItem" "position" (add $i 1) "name" $it.name "item" $it.item) -}}
+{{- end -}}
+{{- $breadcrumb := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $itemList -}}
+<script type="application/ld+json">{{ $breadcrumb | jsonify | safeJS }}</script>

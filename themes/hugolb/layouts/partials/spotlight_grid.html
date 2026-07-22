@@ -1,0 +1,11 @@
+<!-- renders up to 6 spotlit pages as a grid (never more than 2 rows, see .spotlight-grid CSS).
+     expects a page slice, already scoped to whatever section/taxonomy is calling it. -->
+{{ $spotlight := where . "Params.spotlight" true }}
+{{ $spotlight = first 6 $spotlight.ByDate.Reverse }}
+{{ if gt (len $spotlight) 0 }}
+<div class="spotlight-grid">
+    {{ range $spotlight }}
+        {{ .Render "summary" }}
+    {{ end }}
+</div>
+{{ end }}

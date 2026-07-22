@@ -1,7 +1,7 @@
 ---
 title: Parsing websites on a budget
 date: 2015-07-23T01:32:40+00:00
-description: ""
+description: "How to fetch content from another website client-side using Yahoo Query Language (YQL) as a workaround for the same-origin policy, without a server."
 categories:
   - Developer
 tags:

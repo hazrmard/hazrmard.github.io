@@ -1,7 +1,7 @@
 +++
 title = "Modern control: Solutions & state transition matrices"
 date = "2018-09-24T14:17:46-05:00"
-description = ""
+description = "Solving the linear time-invariant state equation using the state transition matrix, and what it means physically."
 tags = [ "matlab", "control systems" ]
 categories = [ "Engineering" ]
 series = [ "Control systems" ]

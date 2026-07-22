@@ -2,7 +2,8 @@
     width: 100%; /* Take full width of its container */
     padding-left: 0; /* Remove previous offset */
     padding-top: 5em; /* Add padding to clear the fixed topbar */
-    height: 50vh;
+    padding-bottom: 2em;
+    min-height: 50vh; /* grows instead of clipping when hero+sidekick content is tall */
     box-sizing: border-box; /* Include padding in height calculation */
 }
 .splash * {

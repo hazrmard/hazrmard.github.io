@@ -7,12 +7,12 @@
         {{end}}
         <div class="links">
             {{range .Site.Params.links}}
-                <a href="{{.URL}}"><img src="{{.image}}"/></a>
+                <a href="{{.URL}}" target="_blank" rel="noopener noreferrer" aria-label="Follow on {{.name}}"><img src="{{.image}}" alt="{{.name}}"/></a>
             {{end}}
         </div>
     </div>
     <div class="sidekick">
-        {{.Content}} 
+        {{.Content}}
     </div>
 </div>
 <div class="content">
@@ -21,9 +21,13 @@
         data-height="400"
         data-dnt="true"
         data-chrome="no-header"
-        href="https://twitter.com/hazrmard?ref_src=twsrc%5Etfw">Tweets by Ibrahim</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+        href="https://twitter.com/hazrmard?ref_src=twsrc%5Etfw">Tweets by Ibrahim</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
     <br/> -->
+    {{ $homeCandidates := where .Site.RegularPages "Section" "in" (slice "post" "project") }}
+    {{ partial "spotlight_grid.html" $homeCandidates }}
+
     {{ with .Site.GetPage "/about/news.md" }}{{ .Content }}{{ end }}
+    {{ partial "connect.html" (dict "page" .) }}
 </div>
 {{end}}

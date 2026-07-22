@@ -1,0 +1,10 @@
+{{- $id := . | default "search" -}}
+<link href="{{ "pagefind/pagefind-ui.css" | relURL }}" rel="stylesheet">
+<script src="{{ "pagefind/pagefind-ui.js" | relURL }}" defer></script>
+<div id="{{ $id }}" class="pagefind-search"></div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof PagefindUI === "undefined") return;
+    new PagefindUI({ element: "#{{ $id }}", showSubResults: true, showImages: false });
+});
+</script>

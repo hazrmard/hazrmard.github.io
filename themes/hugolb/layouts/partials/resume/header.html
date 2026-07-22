@@ -1,0 +1,22 @@
+<div class="top-inp-pdf">
+    <input type="text" id="resume-search" autofocus="autofocus" placeholder="Search résumé"/>
+    <div class="pdf-download">
+        {{ partial "contact-email.html" .page }}
+        {{ with .pdf_link }}
+        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="btn-download-pdf">Download PDF</a>
+        {{ end }}
+    </div>
+</div></br>
+
+<div class="section head">
+    <h1 class="h1">{{ .personal_info.name }}</h1>
+    {{ with .personal_info.email }}<div class="subheading">{{ . }}</div>{{ end }}
+    {{ with .personal_info.phone }}<div class="subheading">{{ . }}</div>{{ end }}
+    {{ if .personal_info.links }}
+    <div class="links">
+        {{ range .personal_info.links }}
+        <div class="link"><a href="{{ .url }}">{{ .title }}</a></div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>

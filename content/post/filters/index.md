@@ -1,7 +1,7 @@
 +++
 title = 'Filters'
 date = '2026-01-10T13:02:12-08:00'
-description = ""
+description = "Notes on Kalman and Bayesian filtering: the predict-update cycle used to estimate a system's state from noisy measurements."
 link = ""
 tags = []
 categories = ["Engineering"]

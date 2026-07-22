@@ -1,7 +1,7 @@
 +++
 title = "Trials and Tribulations of Maintaining a Hugo Blog"
 date = "2017-09-30T17:29:58-05:00"
-description = ""
+description = "Lessons from restructuring a Hugo site's repository layout to cleanly separate source content from rendered HTML output."
 tags = [ "hugo", "powershell", "web development" ]
 categories = [ "DevOps", "Developer" ]
 series = [ "Hugo site development" ]

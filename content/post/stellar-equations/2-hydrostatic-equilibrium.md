@@ -7,7 +7,7 @@ series = ["The four stellar equations"]
 series_weight = 2
 hasequations = true
 isexternal = false
-description = ""
+description = "How hydrostatic equilibrium keeps a star from collapsing under its own gravity, derived from Newton's third law."
 date = "2017-02-24T12:41:52-06:00"
 draft = true
 +++

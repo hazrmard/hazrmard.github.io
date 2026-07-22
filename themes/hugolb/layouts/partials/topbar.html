@@ -1,11 +1,11 @@
-<div class="topbar">
+<div class="topbar" data-pagefind-ignore>
     <div class="menu-icon"><h2>≡</h2></div>
     <div class="title"><h1 class="site-name">{{.Site.Title}}</h1>
         {{if .IsHome}}
         {{else}}
             <div class="sb-links">
                 {{range .Site.Params.links}}
-                    <a href="{{.URL}}"><img src="{{.image}}"/></a>
+                    <a href="{{.URL}}" target="_blank" rel="noopener noreferrer" aria-label="Follow on {{.name}}"><img src="{{.image}}" alt="{{.name}}"/></a>
                 {{end}}
             </div>
         {{end}}
@@ -31,4 +31,28 @@
             </a>
         {{end}}
     </ul>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+        <span aria-hidden="true">&#9789;</span>
+    </button>
 </div>
+<script>
+(function () {
+    // Enforces a single-row nav: every direct child of .topbar is
+    // flex-shrink:0 (see hugolb.css), so a row that no longer fits doesn't
+    // squeeze/wrap internally -- it overflows horizontally instead, which is
+    // simple to detect here. When it does, collapse to the same hamburger
+    // treatment the max-width:768px media query uses, regardless of
+    // viewport width, so it works whether the overflow is caused by a
+    // narrow screen or by long menu/title content on a wider one.
+    var topbar = document.querySelector(".topbar");
+    if (!topbar) return;
+    function checkNavFit() {
+        topbar.classList.remove("nav-compact");
+        if (topbar.scrollWidth > topbar.clientWidth + 1) {
+            topbar.classList.add("nav-compact");
+        }
+    }
+    checkNavFit();
+    window.addEventListener("resize", checkNavFit);
+})();
+</script>

@@ -1,0 +1,26 @@
+<div class="section">
+    <h2 class="h2">Research</h2>
+    {{ range . }}
+    <div class="research subsection">
+        <div class="details">
+            {{ with .advisor }}<div class="subheading">Advisor: {{ . }}</div>{{ end }}
+            {{ with .description }}<div>{{ . }}</div>{{ end }}
+            {{ if .achievements }}
+            <ul>{{ range .achievements }}<li>{{ . }}</li>{{ end }}</ul>
+            {{ end }}
+        </div>
+        {{ if .links }}
+        <div class="links">
+            <div class="subheading">Link(s): </div>
+            {{ range .links }}<div class="link"><a href="{{ .url }}">{{ .title }}</a></div>{{ end }}
+        </div>
+        {{ end }}
+        {{ if .technologies }}
+        <div class="technologies">
+            <div class="subheading">Technology: </div>
+            {{ range .technologies }}<div class="tech">{{ . }}</div>{{ end }}
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>

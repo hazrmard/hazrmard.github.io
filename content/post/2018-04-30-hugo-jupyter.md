@@ -1,7 +1,7 @@
 +++
 title = "Hugo and Jupyter Notebooks"
 date = "2018-04-30T02:51:16-05:00"
-description = ""
+description = "A script that converts Jupyter notebooks to markdown/HTML so they can be embedded directly as posts on a Hugo static site."
 tags = [ "hugo", "web development" ]
 categories = [ "Developer" ]
 series = [ "Hugo site development" ]

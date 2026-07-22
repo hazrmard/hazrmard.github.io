@@ -1,7 +1,7 @@
 +++
 title = 'Action!'
 date = '2026-01-10T13:00:53-08:00'
-description = ""
+description = "An introduction to optimization problems and the condition for optimality, building toward the physical principle of least action."
 link = ""
 tags = []
 categories = ["Physics"]

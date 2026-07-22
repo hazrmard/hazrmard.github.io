@@ -1,0 +1,23 @@
+<div class="section">
+    <h2 class="h2">Projects</h2>
+    {{ range . }}
+    <div class="projects subsection">
+        <h3 class="h3 title">{{ .title }}</h3>
+        {{ with .time }}<h3 class="h3 time">{{ . }}</h3>{{ end }}
+        {{ with .blurb }}<div class="blurb details">{{ . }}</div>{{ end }}
+        {{ with .description }}<div class="details">{{ . }}</div>{{ end }}
+        {{ if .links }}
+        <div class="links">
+            <div class="subheading">Link(s): </div>
+            {{ range .links }}<div class="link"><a href="{{ .url }}">{{ .title }}</a></div>{{ end }}
+        </div>
+        {{ end }}
+        {{ if .technologies }}
+        <div class="technologies">
+            <div class="subheading">Technology: </div>
+            {{ range .technologies }}<div class="tech">{{ . }}</div>{{ end }}
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>

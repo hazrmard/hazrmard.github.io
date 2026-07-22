@@ -1,0 +1,18 @@
+{{- $page := .page -}}
+{{- $showPageLinks := .showPageLinks -}}
+<div class="connect" id="connect" data-pagefind-ignore>
+    <h2>Let's Connect</h2>
+    <div class="connect-links">
+        {{- range $page.Site.Params.links }}
+        <a href="{{ .URL }}" target="_blank" rel="noopener noreferrer" aria-label="Follow on {{ .name }}"><img src="{{ .image }}" alt="{{ .name }}"/></a>
+        {{- end }}
+    </div>
+    <div class="connect-actions">
+        <a class="btn" href="{{ "index.xml" | absURL }}">Subscribe via RSS</a>
+        {{ partial "contact-email.html" $page }}
+        {{- if $showPageLinks }}
+        <a class="btn" href="/resume/">Read my Résumé</a>
+        <a class="btn" href="/project/">See my Projects</a>
+        {{- end }}
+    </div>
+</div>

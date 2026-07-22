@@ -1,7 +1,7 @@
 +++
 title = 'Datacenters in Space'
 date = '2025-12-13T15:46:26-08:00'
-description = ""
+description = "Modeling heat dissipation and compute power tradeoffs for data centers deployed in space, where the only way to shed heat is radiation."
 link = ""
 tags = []
 categories = []
