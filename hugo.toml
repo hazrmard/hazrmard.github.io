@@ -27,10 +27,10 @@ ignoreFiles = [".+pptx$", ".venv"]
 [params]
 # Site/Blog/theme specific parameters
 # ====
-    splashSubheading = "Software engineer writing about machine learning, reinforcement learning, and controls."
+    splashSubheading = ""
     blogroot = "Posts"
-    keywords = "ML, AI, RL, research, computer science, engineering"
-    description = "Ibrahim Ahmed's personal blog on ML, AI, RL, research, computer science, and engineering."
+    keywords = "machine learning, artificial intelligence, reinforcement learning, research, computer science, engineering, technical expert"
+    description = "Ibrahim Ahmed, PhD's personal blog on Machine learning, Artificial Intelligence (AI), Reinforcement Learning (RL), research, computer science, and engineering."
     twitter = "hazrmard"
     analyticsID = "G-6YPFGDNV4W"
     defaultprojimg = "/img/gear.png"
