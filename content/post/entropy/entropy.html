@@ -1,4 +1,4 @@
-<div id="hugo-entropy-widget" style="margin: 2rem 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<div class="hugo-entropy-widget" style="margin: 2rem 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
     <style>
         .entropy-widget-shared .widget-grid {
             display: grid;
@@ -57,10 +57,12 @@
             text-align: center;
             border: 1px solid #e5e7eb;
         }
-        #hugo-entropy-widget { /* Legacy styles for backwards compatibility */ }
-        #hugo-entropy-widget .plot-container {
+        .hugo-entropy-widget .plot-container {
             width: 100%;
             height: 500px;
+        }
+        .entropy-widget-drawing-only .entropy-comparison-card {
+            display: none;
         }
     </style>
 
@@ -86,7 +88,7 @@
             <button class="entropy-clear-btn" style="width: 100%; margin-top: 15px; padding: 10px; cursor: pointer; border: 1px solid #d1d5db; border-radius: 6px; background: white; font-weight: 500;">Reset Drawing</button>
         </div>
 
-        <div class="widget-card">
+        <div class="widget-card entropy-comparison-card">
             <div class="header">
                 <div>
                     <h3 style="margin: 0;">Entropy comparison</h3>
@@ -96,12 +98,26 @@
         </div>
     </div>
 
-    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-    
     <script>
-    // Shared utility functions for entropy widgets
+    // Shared utility functions for entropy widgets. Idempotent: safe to
+    // include this snippet multiple times on the same page.
     window.EntropyWidgets = window.EntropyWidgets || {};
+
+    // Loads a script exactly once per page, even if this snippet is embedded
+    // multiple times, and returns a promise all instances can await.
+    EntropyWidgets.loadScriptOnce = function(src) {
+        EntropyWidgets._loaded = EntropyWidgets._loaded || {};
+        if (!EntropyWidgets._loaded[src]) {
+            EntropyWidgets._loaded[src] = new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+        return EntropyWidgets._loaded[src];
+    };
 
     EntropyWidgets.calculateEntropy = function(probs) {
         return -probs.reduce((acc, p) => p > 0 ? acc + (p * Math.log2(p)) : acc, 0);
@@ -132,10 +148,10 @@
         return weights.map(w => w / sum);
     };
 
-    EntropyWidgets.createEntropyWidget = function(containerId) {
-        const container = document.getElementById(containerId);
+    EntropyWidgets.createEntropyWidget = function(container) {
         if (!container) return;
 
+        const drawingOnly = !!container.closest('.entropy-widget-drawing-only');
         const canvas = container.querySelector('.entropy-dist-canvas');
         const ctx = canvas.getContext('2d');
         const kSlider = container.querySelector('.entropy-k-slider');
@@ -214,7 +230,9 @@
             const customH = EntropyWidgets.calculateEntropy(EntropyWidgets.getDiscretizedProbs(points, kActive));
             hDisplay.textContent = customH.toFixed(2);
 
-            const res = 15; 
+            if (drawingOnly) return;
+
+            const res = 15;
             const steps = d3.range(res).map(d => d * (100/res) + 1);
 
             const lines = ['equal', 'random', 'skewed', 'custom'].map(type => {
@@ -261,13 +279,19 @@
         kSlider.addEventListener('input', () => { drawDesigner(); updatePlot(); });
         clearBtn.addEventListener('click', () => { points.fill(0.3); drawDesigner(); updatePlot(); });
 
-        window.addEventListener('resize', () => { resizeCanvas(); Plotly.Plots.resize(plotContainer); });
+        window.addEventListener('resize', () => { resizeCanvas(); if (!drawingOnly) Plotly.Plots.resize(plotContainer); });
         setTimeout(() => { resizeCanvas(); updatePlot(); }, 100);
     };
 
-    // Initialize widget on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        EntropyWidgets.createEntropyWidget('hugo-entropy-widget');
-    });
+    // Initialize this specific widget instance once its dependencies are
+    // loaded. `document.currentScript` is captured synchronously here so it
+    // still refers to this <script> tag once the async load resolves.
+    (function() {
+        const container = document.currentScript.closest('.hugo-entropy-widget');
+        Promise.all([
+            EntropyWidgets.loadScriptOnce('https://cdn.plot.ly/plotly-2.24.1.min.js'),
+            EntropyWidgets.loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js')
+        ]).then(() => EntropyWidgets.createEntropyWidget(container));
+    })();
     </script>
 </div>

@@ -1,5 +1,4 @@
 +++
-spotlight = true
 title = "Surprise! A derivation of entropy"
 date = "2025-12-04T22:07:36-08:00"
 description = "I explain entropy to myself"
@@ -11,9 +10,17 @@ hasequations = true
 tableofcontents = true
 draft = false
 slug = "surprise-derivation-entropy"
+image = "./thumbnail.jpg"
+spotlight = true
 +++
 
 In this post, I will derive entropy from first principles. This requires no more than a high school-level understanding of mathematics. This derivation is based on Shannon's original seminal paper, [*A mathematical theory of communication*](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf).
+
+*Play with this widget illustrating entropy. In this post we will figure out how this works.*
+
+<div class="entropy-widget-drawing-only">
+{{< read src="post/entropy/entropy.html" >}}
+</div>
 
 ## A derivation
 
