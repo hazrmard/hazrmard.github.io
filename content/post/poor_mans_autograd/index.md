@@ -1,10 +1,10 @@
 +++
-spotlight = true
+spotlight = false
 title = "Poor Man's Autograd"
 date = '2026-03-27T22:57:59-07:00'
 description = "Deriving the code for differentiating code. Inspired by microgpt."
 link = ""
-tags = ["neural networks", "llm", "graphs"]
+tags = ["neural networks", "graphs"]
 categories = ["Machine Learning"]
 includes = []       # any javascript files to include
 hasequations = true
