@@ -72,7 +72,7 @@ We can pass finer grids. The spatial part is a pointwise transform and the frequ
 
 Cons: needs high quality data, uniform grids. Pros: fast, resolution invariant.
 
-The following widget shows how a 1D differential equation solution can be modelled efficiently by delegating some of the learning to frequency domain. Play around with the knobs and sliders. Look out for the mean squared error (MSE) between a FNO model and a vanilla Multi Layer Perceptron (MLP).
+The following widget shows how a 1D differential equation solution can be modelled efficiently by delegating some of the learning to frequency domain. Play around with the knobs and sliders. Look out for the mean squared error (MSE) between a FNO model and a vanilla Multi Layer Perceptron (MLP). You can single out the prediction of different parts of the FNO model. For example, the frequency branch shows how coefficients for lower modes are learned, whereas higher frequencies are suppressed.
 
 <div class="fno-widget">
 {{< read src="post/neural-operators/widget.html" >}}

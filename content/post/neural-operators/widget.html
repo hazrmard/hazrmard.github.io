@@ -13,6 +13,8 @@
             --fno-green-light: #d1fae5;
             --fno-orange: #d97706;
             --fno-orange-light: #fef3c7;
+            --fno-cyan: #0284c7;
+            --fno-cyan-light: #e0f2fe;
             --fno-card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--fno-text);
@@ -35,6 +37,8 @@
                 --fno-green-light: #064e3b;
                 --fno-orange: #fbbf24;
                 --fno-orange-light: #451a03;
+                --fno-cyan: #38bdf8;
+                --fno-cyan-light: #082f49;
                 --fno-card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.4);
             }
         }
@@ -101,6 +105,11 @@
         .fno-badge-orange {
             background: var(--fno-orange-light);
             color: var(--fno-orange);
+        }
+
+        .fno-badge-cyan {
+            background: var(--fno-cyan-light);
+            color: var(--fno-cyan);
         }
 
         /* Controls Section */
@@ -178,7 +187,6 @@
             background: var(--fno-primary);
             color: #ffffff;
         }
-
         .fno-btn-primary:hover {
             opacity: 0.92;
             transform: translateY(-1px);
@@ -189,7 +197,6 @@
             border-color: var(--fno-border);
             color: var(--fno-text);
         }
-
         .fno-btn-secondary:hover {
             background: var(--fno-surface);
             border-color: var(--fno-text-muted);
@@ -199,6 +206,265 @@
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+        }
+
+        /* Architecture Pipeline Flow Tabs */
+        .fno-pipeline-box {
+            background: var(--fno-surface);
+            border: 1px solid var(--fno-border);
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+        }
+
+        .fno-pipeline-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .fno-pipeline-title strong {
+            font-size: 0.92rem;
+            color: var(--fno-text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .fno-pipeline-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .fno-pipe-tab {
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--fno-border);
+            background: var(--fno-bg);
+            color: var(--fno-text);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }
+
+        .fno-pipe-tab:hover {
+            border-color: var(--fno-primary);
+            color: var(--fno-primary);
+        }
+
+        .fno-pipe-tab.active {
+            background: var(--fno-primary);
+            border-color: var(--fno-primary);
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(124, 58, 237, 0.25);
+        }
+
+        .fno-pipe-explainer {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: var(--fno-bg);
+            border: 1px solid var(--fno-border);
+            font-size: 0.84rem;
+            color: var(--fno-text);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .fno-pipe-explainer code {
+            font-size: 0.82rem;
+            padding: 2px 5px;
+            border-radius: 4px;
+            background: var(--fno-surface);
+            border: 1px solid var(--fno-border);
+            color: var(--fno-primary);
+            font-family: ui-monospace, SFMono-Regular, monospace;
+        }
+
+        /* Frequency Cutoff & Mode Inspector Panel */
+        .fno-freq-inspector {
+            margin-top: 14px;
+            padding: 14px 16px;
+            background: var(--fno-bg);
+            border: 1px solid var(--fno-border);
+            border-radius: 8px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fno-freq-modes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+            gap: 10px;
+        }
+
+        .fno-mode-card {
+            background: var(--fno-surface);
+            border: 1px solid var(--fno-border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: border-color 0.15s ease;
+        }
+
+        .fno-mode-card:hover {
+            border-color: var(--fno-cyan);
+        }
+
+        .fno-mode-card.cutoff {
+            opacity: 0.65;
+            border-style: dashed;
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--fno-surface),
+                var(--fno-surface) 6px,
+                var(--fno-border) 6px,
+                var(--fno-border) 7px
+            );
+        }
+
+        .fno-mode-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .fno-mode-name {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--fno-text);
+        }
+
+        .fno-mode-tag {
+            font-size: 0.68rem;
+            padding: 1px 5px;
+            border-radius: 4px;
+            background: var(--fno-cyan-light);
+            color: var(--fno-cyan);
+            font-weight: 600;
+        }
+
+        .fno-mode-bar-track {
+            position: relative;
+            height: 6px;
+            width: 100%;
+            background: var(--fno-border);
+            border-radius: 9999px;
+            overflow: visible;
+            margin: 2px 0;
+        }
+
+        .fno-mode-bar-fill {
+            height: 100%;
+            background: var(--fno-cyan);
+            border-radius: 9999px;
+            transition: width 0.1s ease;
+        }
+
+        .fno-mode-target-marker {
+            position: absolute;
+            top: -3px;
+            bottom: -3px;
+            width: 2px;
+            background: var(--fno-text);
+            border-radius: 1px;
+            transform: translateX(-50%);
+        }
+
+        .fno-mode-stat-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.74rem;
+            gap: 4px;
+        }
+
+        .fno-mode-stat-lbl {
+            color: var(--fno-text-muted);
+        }
+
+        .fno-mode-val {
+            font-family: ui-monospace, SFMono-Regular, monospace;
+            font-weight: 700;
+            color: var(--fno-text);
+        }
+
+        .fno-mode-target-val {
+            font-size: 0.68rem;
+            color: var(--fno-text-muted);
+            font-family: ui-monospace, SFMono-Regular, monospace;
+        }
+
+        .fno-mode-cutoff-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--fno-text-muted);
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        .fno-mode-cutoff-sub {
+            font-size: 0.68rem;
+            color: var(--fno-text-muted);
+            text-align: center;
+        }
+
+        /* Spatial Bypass Inspector */
+        .fno-spatial-inspector {
+            margin-top: 14px;
+            padding: 14px 16px;
+            background: var(--fno-bg);
+            border: 1px solid var(--fno-border);
+            border-radius: 8px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fno-spatial-tiles {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .fno-spatial-tile {
+            background: var(--fno-surface);
+            border: 1px solid var(--fno-border);
+            border-radius: 6px;
+            padding: 10px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .fno-spatial-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--fno-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .fno-spatial-val {
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: ui-monospace, SFMono-Regular, monospace;
+            color: var(--fno-orange);
+        }
+
+        .fno-spatial-sub {
+            font-size: 0.72rem;
+            color: var(--fno-text-muted);
         }
 
         /* Experiment Resolution Banner */
@@ -390,8 +656,7 @@
         <div class="fno-header">
             <div class="fno-title-box">
                 <h3>Fourier Neural Operator (FNO) Demo</h3>
-                <p>Learn a continuous PDE solution operator and evaluate it zero-shot across arbitrary grid
-                    discretizations.</p>
+                <p>Deconstruct the FNO layer architecture, observe frequency low-pass filtering, and evaluate zero-shot across arbitrary grids.</p>
             </div>
             <div style="display: flex; gap: 8px;">
                 <span class="fno-badge fno-badge-purple">Trained on Grid N = 32</span>
@@ -433,16 +698,13 @@
                 <button class="fno-btn fno-btn-primary" id="fno-train-btn">
                     <span>⚡ Train Models (80 Steps)</span>
                 </button>
-                <button class="fno-btn fno-btn-secondary" id="fno-reset-btn"
-                    title="Reset models to their initial random weights">
+                <button class="fno-btn fno-btn-secondary" id="fno-reset-btn" title="Reset models to their initial random weights">
                     <span>🔄 Reset to Pre-Trained (Random Init)</span>
                 </button>
-                <button class="fno-btn fno-btn-secondary" id="fno-optimal-btn"
-                    title="Load fully converged solution weights">
+                <button class="fno-btn fno-btn-secondary" id="fno-optimal-btn" title="Load fully converged solution weights">
                     <span>✨ Load Converged Weights</span>
                 </button>
-                <button class="fno-btn fno-btn-secondary" id="fno-random-btn"
-                    title="Generate a fresh initial wave condition">
+                <button class="fno-btn fno-btn-secondary" id="fno-random-btn" title="Generate a fresh initial wave condition">
                     <span>🌊 Random Initial Wave u₀</span>
                 </button>
             </div>
@@ -454,13 +716,78 @@
             </div>
         </div>
 
+        <!-- Interactive Architecture Flow Stepper -->
+        <div class="fno-pipeline-box">
+            <div class="fno-pipeline-title">
+                <strong>🏛️ FNO Layer Architecture Deconstruction</strong>
+                <span class="fno-badge fno-badge-purple" id="fno-stage-badge">Stage: Full Output σ(W·x + b + 𝓕⁻¹(R·𝓕(x)))</span>
+            </div>
+
+            <div class="fno-pipeline-nav">
+                <button class="fno-pipe-tab active" data-stage="all">
+                    <span>🔬 Full Model Comparison</span>
+                </button>
+                <button class="fno-pipe-tab" data-stage="u0">
+                    <span>1. Input u₀(x)</span>
+                </button>
+                <button class="fno-pipe-tab" data-stage="freq">
+                    <span>2. Frequency Branch 𝓕⁻¹(R · 𝓕(x))</span>
+                </button>
+                <button class="fno-pipe-tab" data-stage="spatial">
+                    <span>3. Spatial Bypass (W·x + b)</span>
+                </button>
+                <button class="fno-pipe-tab" data-stage="recomb">
+                    <span>4. Sum & Activation σ(·)</span>
+                </button>
+            </div>
+
+            <!-- Explainer text box updating per stage -->
+            <div class="fno-pipe-explainer" id="fno-pipe-explainer">
+                <div style="font-size: 1.1rem; line-height: 1;">💡</div>
+                <div id="fno-explainer-text">
+                    Comparing the <strong>Fourier Neural Operator</strong> against the <strong>Standard NN</strong>. Both were trained on 32 points. Drag the resolution slider below to evaluate zero-shot generalization!
+                </div>
+            </div>
+
+            <!-- Frequency Mode Cutoff Inspector (visible during Frequency Branch stage) -->
+            <div class="fno-freq-inspector" id="fno-freq-inspector">
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem;">
+                    <strong>Fourier Mode Filter & Cutoff Inspector</strong>
+                    <span style="color: var(--fno-text-muted);">Cutoff at Mode k = 5 (Higher frequencies zeroed out)</span>
+                </div>
+                <div class="fno-freq-modes-grid" id="fno-modes-grid">
+                    <!-- Populated dynamically with modes k=1..5 and cutoff k>=6 -->
+                </div>
+            </div>
+
+            <!-- Spatial Bypass Inspector (visible during Spatial Bypass stage) -->
+            <div class="fno-spatial-inspector" id="fno-spatial-inspector">
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem;">
+                    <strong>Local Spatial Bypass Parameters</strong>
+                    <span style="color: var(--fno-text-muted);">Pointwise Transform: W · u₀(x) + b</span>
+                </div>
+                <div class="fno-spatial-tiles">
+                    <div class="fno-spatial-tile">
+                        <span class="fno-spatial-label">Linear Weight (W)</span>
+                        <span class="fno-spatial-val" id="fno-param-w">0.0000</span>
+                        <span class="fno-spatial-sub">Learned pointwise scale</span>
+                    </div>
+                    <div class="fno-spatial-tile">
+                        <span class="fno-spatial-label">Pointwise Bias (b)</span>
+                        <span class="fno-spatial-val" id="fno-param-b">0.0000</span>
+                        <span class="fno-spatial-sub">Learned pointwise bias</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- The Core Aha! Experiment: Resolution Slider -->
         <div class="fno-experiment-box">
             <div class="fno-experiment-header">
                 <div>
                     <strong style="font-size: 0.95rem;">🔬 The Discretization Invariance Experiment</strong>
                     <div style="font-size: 0.8rem; color: var(--fno-text-muted);">
-                        Both models are trained on <strong>N = 32</strong> points. Drag the slider to test
+                        Both models were trained on <strong>N = 32</strong> points. Drag the slider to test
                         <strong>Zero-Shot Super-Resolution</strong>:
                     </div>
                 </div>
@@ -477,14 +804,12 @@
                 <div class="fno-metric-tile">
                     <span class="fno-metric-title">Fourier Neural Operator (FNO)</span>
                     <span class="fno-metric-val" id="fno-err-fno" style="color: var(--fno-primary);">-- MSE</span>
-                    <span class="fno-metric-desc" id="fno-fno-status-desc">Zero-shot continuous operator
-                        evaluation</span>
+                    <span class="fno-metric-desc" id="fno-fno-status-desc">Zero-shot continuous operator evaluation</span>
                 </div>
                 <div class="fno-metric-tile">
                     <span class="fno-metric-title">Standard NN Baseline (MLP)</span>
                     <span class="fno-metric-val" id="fno-err-mlp" style="color: var(--fno-orange);">-- MSE</span>
-                    <span class="fno-metric-desc" id="fno-mlp-status-desc">Fixed grid mapping with spatial
-                        interpolation</span>
+                    <span class="fno-metric-desc" id="fno-mlp-status-desc">Fixed grid mapping with spatial interpolation</span>
                 </div>
             </div>
         </div>
@@ -492,16 +817,12 @@
         <!-- Full-Width Spatial Visualization -->
         <div class="fno-chart-card">
             <div class="fno-chart-header">
-                <span class="fno-chart-title">Spatial Solution Domain: u(x, T)</span>
-                <div class="fno-legend">
-                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: #94a3b8;"></span>
-                        Initial u₀</span>
-                    <span class="fno-legend-item"><span class="fno-legend-dot"
-                            style="background: var(--fno-green);"></span> Ground Truth u(x, T)</span>
-                    <span class="fno-legend-item" id="fno-legend-fno"><span class="fno-legend-dot"
-                            style="background: var(--fno-primary);"></span> Fourier Neural Operator (FNO)</span>
-                    <span class="fno-legend-item" id="fno-legend-mlp"><span class="fno-legend-dot"
-                            style="background: var(--fno-orange);"></span> Standard NN Baseline</span>
+                <span class="fno-chart-title" id="fno-canvas-title">Spatial Solution Domain: u(x, T)</span>
+                <div class="fno-legend" id="fno-canvas-legend">
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: #94a3b8;"></span> Initial u₀</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-green);"></span> Ground Truth u(x, T)</span>
+                    <span class="fno-legend-item" id="fno-legend-fno"><span class="fno-legend-dot" style="background: var(--fno-primary);"></span> Fourier Neural Operator (FNO)</span>
+                    <span class="fno-legend-item" id="fno-legend-mlp"><span class="fno-legend-dot" style="background: var(--fno-orange);"></span> Standard NN Baseline</span>
                 </div>
             </div>
             <div class="fno-canvas-wrapper">
@@ -526,519 +847,661 @@
     </div>
 
     <script>
-        (function () {
-            const PI = Math.PI;
-            const GRID_SIZES = [16, 32, 64, 128, 256];
-            const N_TRAIN = 32;
-            const K_MODES = 6;
+    (function () {
+        const PI = Math.PI;
+        const GRID_SIZES = [16, 32, 64, 128, 256];
+        const N_TRAIN = 32;
+        const K_MODES = 6;
 
-            const container = document.getElementById('fno-lab-container');
-            if (!container) return;
+        const container = document.getElementById('fno-lab-container');
+        if (!container) return;
 
-            const presetSelect = container.querySelector('#fno-preset');
-            const speedSlider = container.querySelector('#fno-speed');
-            const speedVal = container.querySelector('#fno-speed-val');
-            const diffSlider = container.querySelector('#fno-diffusion');
-            const diffVal = container.querySelector('#fno-diffusion-val');
-            const timeSlider = container.querySelector('#fno-time');
-            const timeVal = container.querySelector('#fno-time-val');
-            const resSlider = container.querySelector('#fno-res-slider');
-            const resBadge = container.querySelector('#fno-res-badge');
-            const errFNOEl = container.querySelector('#fno-err-fno');
-            const errMLPEl = container.querySelector('#fno-err-mlp');
-            const fnoDescEl = container.querySelector('#fno-fno-status-desc');
-            const mlpDescEl = container.querySelector('#fno-mlp-status-desc');
-            const statusPill = container.querySelector('#fno-status-pill');
-            const trainBtn = container.querySelector('#fno-train-btn');
-            const resetBtn = container.querySelector('#fno-reset-btn');
-            const optimalBtn = container.querySelector('#fno-optimal-btn');
-            const randomBtn = container.querySelector('#fno-random-btn');
-            const toggleFNO = container.querySelector('#fno-toggle-fno');
-            const toggleMLP = container.querySelector('#fno-toggle-mlp');
-            const toggleU0 = container.querySelector('#fno-toggle-u0');
-            const toggleDots = container.querySelector('#fno-toggle-dots');
-            const fnoLegendItem = container.querySelector('#fno-legend-fno');
-            const mlpLegendItem = container.querySelector('#fno-legend-mlp');
-            const trainingBox = container.querySelector('#fno-training-box');
-            const trainingLabel = container.querySelector('#fno-training-label');
-            const epochCounter = container.querySelector('#fno-epoch-counter');
-            const progressFill = container.querySelector('#fno-progress-fill');
-            const lossFNOText = container.querySelector('#fno-loss-fno-text');
-            const lossMLPText = container.querySelector('#fno-loss-mlp-text');
-            const spatialCanvas = container.querySelector('#fno-spatial-canvas');
-            const spatialCtx = spatialCanvas.getContext('2d');
+        const presetSelect = container.querySelector('#fno-preset');
+        const speedSlider = container.querySelector('#fno-speed');
+        const speedVal = container.querySelector('#fno-speed-val');
+        const diffSlider = container.querySelector('#fno-diffusion');
+        const diffVal = container.querySelector('#fno-diffusion-val');
+        const timeSlider = container.querySelector('#fno-time');
+        const timeVal = container.querySelector('#fno-time-val');
+        const resSlider = container.querySelector('#fno-res-slider');
+        const resBadge = container.querySelector('#fno-res-badge');
+        const errFNOEl = container.querySelector('#fno-err-fno');
+        const errMLPEl = container.querySelector('#fno-err-mlp');
+        const fnoDescEl = container.querySelector('#fno-fno-status-desc');
+        const mlpDescEl = container.querySelector('#fno-mlp-status-desc');
+        const statusPill = container.querySelector('#fno-status-pill');
+        const trainBtn = container.querySelector('#fno-train-btn');
+        const resetBtn = container.querySelector('#fno-reset-btn');
+        const optimalBtn = container.querySelector('#fno-optimal-btn');
+        const randomBtn = container.querySelector('#fno-random-btn');
+        const toggleFNO = container.querySelector('#fno-toggle-fno');
+        const toggleMLP = container.querySelector('#fno-toggle-mlp');
+        const toggleU0 = container.querySelector('#fno-toggle-u0');
+        const toggleDots = container.querySelector('#fno-toggle-dots');
+        const fnoLegendItem = container.querySelector('#fno-legend-fno');
+        const mlpLegendItem = container.querySelector('#fno-legend-mlp');
+        const trainingBox = container.querySelector('#fno-training-box');
+        const trainingLabel = container.querySelector('#fno-training-label');
+        const epochCounter = container.querySelector('#fno-epoch-counter');
+        const progressFill = container.querySelector('#fno-progress-fill');
+        const lossFNOText = container.querySelector('#fno-loss-fno-text');
+        const lossMLPText = container.querySelector('#fno-loss-mlp-text');
+        const spatialCanvas = container.querySelector('#fno-spatial-canvas');
+        const spatialCtx = spatialCanvas.getContext('2d');
+        const stageBadge = container.querySelector('#fno-stage-badge');
+        const explainerText = container.querySelector('#fno-explainer-text');
+        const freqInspector = container.querySelector('#fno-freq-inspector');
+        const spatialInspector = container.querySelector('#fno-spatial-inspector');
+        const paramWEl = container.querySelector('#fno-param-w');
+        const paramBEl = container.querySelector('#fno-param-b');
+        const modesGrid = container.querySelector('#fno-modes-grid');
+        const canvasTitle = container.querySelector('#fno-canvas-title');
+        const canvasLegend = container.querySelector('#fno-canvas-legend');
+        const pipeTabs = container.querySelectorAll('.fno-pipe-tab');
 
-            // Current active wave parameters
-            let currentCoeffs = [
-                { a: 0.85, phi: 0.2 },
-                { a: 0.55, phi: 1.1 },
-                { a: -0.35, phi: 2.3 },
-                { a: 0.22, phi: 0.7 },
-                { a: -0.15, phi: 3.1 }
-            ];
+        // Current active wave parameters
+        let currentCoeffs = [
+            { a: 0.85, phi: 0.2 },
+            { a: 0.55, phi: 1.1 },
+            { a: -0.35, phi: 2.3 },
+            { a: 0.22, phi: 0.7 },
+            { a: -0.15, phi: 3.1 }
+        ];
 
-            let isModelTrained = false;
+        let isModelTrained = false;
+        let currentStage = 'all'; // 'all', 'u0', 'freq', 'spatial', 'recomb'
 
-            // -------------------------------------------------------------
-            // Mathematical Model: 1D Fourier Neural Operator (FNO)
-            // -------------------------------------------------------------
-            class FNO1D {
-                constructor(K = K_MODES) {
-                    this.K = K;
-                    this.R_real = new Float32Array(K);
-                    this.R_imag = new Float32Array(K);
-                    this.W = 0.0;
-                    this.b = 0.0;
-                    this.resetAdam();
-                    this.setRandomWeights();
+        // -------------------------------------------------------------
+        // Mathematical Model: 1D Fourier Neural Operator (FNO)
+        // -------------------------------------------------------------
+        class FNO1D {
+            constructor(K = K_MODES) {
+                this.K = K;
+                this.R_real = new Float32Array(K);
+                this.R_imag = new Float32Array(K);
+                this.W = 0.0;
+                this.b = 0.0;
+                this.resetAdam();
+                this.setRandomWeights();
+            }
+
+            resetAdam() {
+                this.m_R_r = new Float32Array(this.K);
+                this.v_R_r = new Float32Array(this.K);
+                this.m_R_i = new Float32Array(this.K);
+                this.v_R_i = new Float32Array(this.K);
+                this.m_W = 0;
+                this.v_W = 0;
+                this.m_b = 0;
+                this.v_b = 0;
+                this.step = 0;
+            }
+
+            setRandomWeights() {
+                for (let k = 0; k < this.K; k++) {
+                    this.R_real[k] = (Math.random() - 0.5) * 0.45;
+                    this.R_imag[k] = (Math.random() - 0.5) * 0.45;
                 }
+                this.W = (Math.random() - 0.5) * 0.2;
+                this.b = (Math.random() - 0.5) * 0.1;
+                this.resetAdam();
+            }
 
-                resetAdam() {
-                    this.m_R_r = new Float32Array(this.K);
-                    this.v_R_r = new Float32Array(this.K);
-                    this.m_R_i = new Float32Array(this.K);
-                    this.v_R_i = new Float32Array(this.K);
-                    this.m_W = 0;
-                    this.v_W = 0;
-                    this.m_b = 0;
-                    this.v_b = 0;
-                    this.step = 0;
+            setOptimal(c, nu, T) {
+                this.W = 0.0;
+                this.b = 0.0;
+                for (let k = 0; k < this.K; k++) {
+                    const decay = Math.exp(-nu * k * k * T);
+                    const phase = -c * k * T;
+                    this.R_real[k] = decay * Math.cos(phase);
+                    this.R_imag[k] = decay * Math.sin(phase);
                 }
+                this.resetAdam();
+            }
 
-                setRandomWeights() {
-                    for (let k = 0; k < this.K; k++) {
-                        this.R_real[k] = (Math.random() - 0.5) * 0.45;
-                        this.R_imag[k] = (Math.random() - 0.5) * 0.45;
-                    }
-                    this.W = (Math.random() - 0.5) * 0.2;
-                    this.b = (Math.random() - 0.5) * 0.1;
-                    this.resetAdam();
-                }
+            // Forward pass with explicit breakdown into constituent layer streams
+            forwardDecomposed(u, N) {
+                // 1. DFT of u up to K modes (Low-Pass Filter: modes >= K are truncated/zeroed)
+                const Re_hat = new Float32Array(this.K);
+                const Im_hat = new Float32Array(this.K);
 
-                setOptimal(c, nu, T) {
-                    this.W = 0.0;
-                    this.b = 0.0;
-                    for (let k = 0; k < this.K; k++) {
-                        const decay = Math.exp(-nu * k * k * T);
-                        const phase = -c * k * T;
-                        this.R_real[k] = decay * Math.cos(phase);
-                        this.R_imag[k] = decay * Math.sin(phase);
-                    }
-                    this.resetAdam();
-                }
-
-                forward(u, N) {
-                    const Re_hat = new Float32Array(this.K);
-                    const Im_hat = new Float32Array(this.K);
-
-                    for (let k = 0; k < this.K; k++) {
-                        let re = 0, im = 0;
-                        for (let n = 0; n < N; n++) {
-                            const angle = (2 * PI * k * n) / N;
-                            re += u[n] * Math.cos(angle);
-                            im -= u[n] * Math.sin(angle);
-                        }
-                        Re_hat[k] = re / N;
-                        Im_hat[k] = im / N;
-                    }
-
-                    const Out_Re = new Float32Array(this.K);
-                    const Out_Im = new Float32Array(this.K);
-                    for (let k = 0; k < this.K; k++) {
-                        Out_Re[k] = Re_hat[k] * this.R_real[k] - Im_hat[k] * this.R_imag[k];
-                        Out_Im[k] = Re_hat[k] * this.R_imag[k] + Im_hat[k] * this.R_real[k];
-                    }
-
-                    const out = new Float32Array(N);
+                for (let k = 0; k < this.K; k++) {
+                    let re = 0, im = 0;
                     for (let n = 0; n < N; n++) {
-                        let val = Out_Re[0];
-                        for (let k = 1; k < this.K; k++) {
-                            const angle = (2 * PI * k * n) / N;
-                            val += 2 * (Out_Re[k] * Math.cos(angle) - Out_Im[k] * Math.sin(angle));
-                        }
-                        out[n] = val + this.W * u[n] + this.b;
+                        const angle = (2 * PI * k * n) / N;
+                        re += u[n] * Math.cos(angle);
+                        im -= u[n] * Math.sin(angle);
                     }
-
-                    return { out, Re_hat, Im_hat, Out_Re, Out_Im };
+                    Re_hat[k] = re / N;
+                    Im_hat[k] = im / N;
                 }
 
-                trainStep(batchX, batchY, N, lr = 0.035) {
-                    const B = batchX.length;
-                    const grad_R_r = new Float32Array(this.K);
-                    const grad_R_i = new Float32Array(this.K);
-                    let grad_W = 0, grad_b = 0, totalLoss = 0;
+                // 2. Frequency Branch Multiplication: R(k) * \hat{u}(k)
+                const Out_Re = new Float32Array(this.K);
+                const Out_Im = new Float32Array(this.K);
+                for (let k = 0; k < this.K; k++) {
+                    Out_Re[k] = Re_hat[k] * this.R_real[k] - Im_hat[k] * this.R_imag[k];
+                    Out_Im[k] = Re_hat[k] * this.R_imag[k] + Im_hat[k] * this.R_real[k];
+                }
 
-                    for (let b = 0; b < B; b++) {
-                        const u = batchX[b];
-                        const target = batchY[b];
-                        const fwd = this.forward(u, N);
-
-                        const dOut = new Float32Array(N);
-                        for (let n = 0; n < N; n++) {
-                            const diff = fwd.out[n] - target[n];
-                            totalLoss += (diff * diff) / (N * B);
-                            dOut[n] = (2 * diff) / (N * B);
-                            grad_W += dOut[n] * u[n];
-                            grad_b += dOut[n];
-                        }
-
-                        for (let k = 0; k < this.K; k++) {
-                            let dRe = 0, dIm = 0;
-                            const factor = k === 0 ? 1 : 2;
-                            for (let n = 0; n < N; n++) {
-                                const angle = (2 * PI * k * n) / N;
-                                dRe += dOut[n] * factor * Math.cos(angle);
-                                dIm -= dOut[n] * factor * Math.sin(angle);
-                            }
-                            grad_R_r[k] += dRe * fwd.Re_hat[k] + dIm * fwd.Im_hat[k];
-                            grad_R_i[k] += -dRe * fwd.Im_hat[k] + dIm * fwd.Re_hat[k];
-                        }
+                // 3. Inverse DFT back to spatial grid: u_freq(x) = \mathcal{F}^{-1}(R \cdot \mathcal{F}(u))
+                const u_freq = new Float32Array(N);
+                for (let n = 0; n < N; n++) {
+                    let val = Out_Re[0];
+                    for (let k = 1; k < this.K; k++) {
+                        const angle = (2 * PI * k * n) / N;
+                        val += 2 * (Out_Re[k] * Math.cos(angle) - Out_Im[k] * Math.sin(angle));
                     }
+                    u_freq[n] = val;
+                }
 
-                    this.step++;
-                    const beta1 = 0.9, beta2 = 0.999, eps = 1e-8;
-                    const updateParam = (val, grad, m, v, idx) => {
-                        m[idx] = beta1 * m[idx] + (1 - beta1) * grad;
-                        v[idx] = beta2 * v[idx] + (1 - beta2) * grad * grad;
-                        const mHat = m[idx] / (1 - Math.pow(beta1, this.step));
-                        const vHat = v[idx] / (1 - Math.pow(beta2, this.step));
-                        return val - (lr * mHat) / (Math.sqrt(vHat) + eps);
-                    };
+                // 4. Spatial Bypass: u_spatial(x) = W * u(x) + b (Local pointwise linear transform)
+                const u_spatial = new Float32Array(N);
+                for (let n = 0; n < N; n++) {
+                    u_spatial[n] = this.W * u[n] + this.b;
+                }
+
+                // 5. Linear Sum: u_pre(x) = u_freq(x) + u_spatial(x)
+                const u_pre = new Float32Array(N);
+                for (let n = 0; n < N; n++) {
+                    u_pre[n] = u_freq[n] + u_spatial[n];
+                }
+
+                // 6. Activation function: \sigma(u_pre)
+                // In linear advection-diffusion, \sigma is an identity or soft non-linear shaping
+                const u_post = new Float32Array(N);
+                for (let n = 0; n < N; n++) {
+                    u_post[n] = u_pre[n]; // Identical to full output
+                }
+
+                return {
+                    out: u_post,
+                    u_freq,
+                    u_spatial,
+                    u_pre,
+                    u_post,
+                    Re_hat,
+                    Im_hat,
+                    Out_Re,
+                    Out_Im
+                };
+            }
+
+            forward(u, N) {
+                return this.forwardDecomposed(u, N);
+            }
+
+            trainStep(batchX, batchY, N, lr = 0.035) {
+                const B = batchX.length;
+                const grad_R_r = new Float32Array(this.K);
+                const grad_R_i = new Float32Array(this.K);
+                let grad_W = 0, grad_b = 0, totalLoss = 0;
+
+                for (let b = 0; b < B; b++) {
+                    const u = batchX[b];
+                    const target = batchY[b];
+                    const fwd = this.forward(u, N);
+
+                    const dOut = new Float32Array(N);
+                    for (let n = 0; n < N; n++) {
+                        const diff = fwd.out[n] - target[n];
+                        totalLoss += (diff * diff) / (N * B);
+                        dOut[n] = (2 * diff) / (N * B);
+                        grad_W += dOut[n] * u[n];
+                        grad_b += dOut[n];
+                    }
 
                     for (let k = 0; k < this.K; k++) {
-                        this.R_real[k] = updateParam(this.R_real[k], grad_R_r[k], this.m_R_r, this.v_R_r, k);
-                        this.R_imag[k] = updateParam(this.R_imag[k], grad_R_i[k], this.m_R_i, this.v_R_i, k);
+                        let dRe = 0, dIm = 0;
+                        const factor = k === 0 ? 1 : 2;
+                        for (let n = 0; n < N; n++) {
+                            const angle = (2 * PI * k * n) / N;
+                            dRe += dOut[n] * factor * Math.cos(angle);
+                            dIm -= dOut[n] * factor * Math.sin(angle);
+                        }
+                        grad_R_r[k] += dRe * fwd.Re_hat[k] + dIm * fwd.Im_hat[k];
+                        grad_R_i[k] += -dRe * fwd.Im_hat[k] + dIm * fwd.Re_hat[k];
                     }
-
-                    this.m_W = beta1 * this.m_W + (1 - beta1) * grad_W;
-                    this.v_W = beta2 * this.v_W + (1 - beta2) * grad_W * grad_W;
-                    this.W -= (lr * (this.m_W / (1 - Math.pow(beta1, this.step)))) / (Math.sqrt(this.v_W / (1 - Math.pow(beta2, this.step))) + eps);
-
-                    this.m_b = beta1 * this.m_b + (1 - beta1) * grad_b;
-                    this.v_b = beta2 * this.v_b + (1 - beta2) * grad_b * grad_b;
-                    this.b -= (lr * (this.m_b / (1 - Math.pow(beta1, this.step)))) / (Math.sqrt(this.v_b / (1 - Math.pow(beta2, this.step))) + eps);
-
-                    return totalLoss;
                 }
+
+                this.step++;
+                const beta1 = 0.9, beta2 = 0.999, eps = 1e-8;
+                const updateParam = (val, grad, m, v, idx) => {
+                    m[idx] = beta1 * m[idx] + (1 - beta1) * grad;
+                    v[idx] = beta2 * v[idx] + (1 - beta2) * grad * grad;
+                    const mHat = m[idx] / (1 - Math.pow(beta1, this.step));
+                    const vHat = v[idx] / (1 - Math.pow(beta2, this.step));
+                    return val - (lr * mHat) / (Math.sqrt(vHat) + eps);
+                };
+
+                for (let k = 0; k < this.K; k++) {
+                    this.R_real[k] = updateParam(this.R_real[k], grad_R_r[k], this.m_R_r, this.v_R_r, k);
+                    this.R_imag[k] = updateParam(this.R_imag[k], grad_R_i[k], this.m_R_i, this.v_R_i, k);
+                }
+
+                this.m_W = beta1 * this.m_W + (1 - beta1) * grad_W;
+                this.v_W = beta2 * this.v_W + (1 - beta2) * grad_W * grad_W;
+                this.W -= (lr * (this.m_W / (1 - Math.pow(beta1, this.step)))) / (Math.sqrt(this.v_W / (1 - Math.pow(beta2, this.step))) + eps);
+
+                this.m_b = beta1 * this.m_b + (1 - beta1) * grad_b;
+                this.v_b = beta2 * this.v_b + (1 - beta2) * grad_b * grad_b;
+                this.b -= (lr * (this.m_b / (1 - Math.pow(beta1, this.step)))) / (Math.sqrt(this.v_b / (1 - Math.pow(beta2, this.step))) + eps);
+
+                return totalLoss;
+            }
+        }
+
+        // -------------------------------------------------------------
+        // Baseline Model: Standard Non-Operator MLP (fixed to N_TRAIN=32)
+        // -------------------------------------------------------------
+        class BaselineMLP {
+            constructor(N_in = N_TRAIN, hidden = 40, N_out = N_TRAIN) {
+                this.N_in = N_in;
+                this.hidden = hidden;
+                this.N_out = N_out;
+                this.W1 = new Float32Array(hidden * N_in);
+                this.b1 = new Float32Array(hidden);
+                this.W2 = new Float32Array(N_out * hidden);
+                this.b2 = new Float32Array(N_out);
+                this.setRandomWeights();
             }
 
-            // -------------------------------------------------------------
-            // Baseline Model: Standard Non-Operator MLP (fixed to N_TRAIN=32)
-            // -------------------------------------------------------------
-            class BaselineMLP {
-                constructor(N_in = N_TRAIN, hidden = 40, N_out = N_TRAIN) {
-                    this.N_in = N_in;
-                    this.hidden = hidden;
-                    this.N_out = N_out;
-                    this.W1 = new Float32Array(hidden * N_in);
-                    this.b1 = new Float32Array(hidden);
-                    this.W2 = new Float32Array(N_out * hidden);
-                    this.b2 = new Float32Array(N_out);
-                    this.setRandomWeights();
-                }
+            setRandomWeights() {
+                for (let i = 0; i < this.W1.length; i++) this.W1[i] = (Math.random() - 0.5) * 0.25;
+                for (let i = 0; i < this.b1.length; i++) this.b1[i] = 0;
+                for (let i = 0; i < this.W2.length; i++) this.W2[i] = (Math.random() - 0.5) * 0.25;
+                for (let i = 0; i < this.b2.length; i++) this.b2[i] = 0;
 
-                setRandomWeights() {
-                    for (let i = 0; i < this.W1.length; i++) this.W1[i] = (Math.random() - 0.5) * 0.25;
-                    for (let i = 0; i < this.b1.length; i++) this.b1[i] = 0;
-                    for (let i = 0; i < this.W2.length; i++) this.W2[i] = (Math.random() - 0.5) * 0.25;
-                    for (let i = 0; i < this.b2.length; i++) this.b2[i] = 0;
+                this.mW1 = new Float32Array(this.W1.length);
+                this.vW1 = new Float32Array(this.W1.length);
+                this.mW2 = new Float32Array(this.W2.length);
+                this.vW2 = new Float32Array(this.W2.length);
+                this.mb1 = new Float32Array(this.b1.length);
+                this.vb1 = new Float32Array(this.b1.length);
+                this.mb2 = new Float32Array(this.b2.length);
+                this.vb2 = new Float32Array(this.b2.length);
+                this.step = 0;
+            }
 
-                    this.mW1 = new Float32Array(this.W1.length);
-                    this.vW1 = new Float32Array(this.W1.length);
-                    this.mW2 = new Float32Array(this.W2.length);
-                    this.vW2 = new Float32Array(this.W2.length);
-                    this.mb1 = new Float32Array(this.b1.length);
-                    this.vb1 = new Float32Array(this.b1.length);
-                    this.mb2 = new Float32Array(this.b2.length);
-                    this.vb2 = new Float32Array(this.b2.length);
-                    this.step = 0;
-                }
-
-                forward(u) {
-                    let input = u;
-                    if (u.length !== this.N_in) {
-                        input = new Float32Array(this.N_in);
-                        for (let i = 0; i < this.N_in; i++) {
-                            const origIdx = (i / this.N_in) * u.length;
-                            const i0 = Math.floor(origIdx);
-                            const i1 = (i0 + 1) % u.length;
-                            const frac = origIdx - i0;
-                            input[i] = u[i0] * (1 - frac) + u[i1] * frac;
-                        }
-                    }
-
-                    const h = new Float32Array(this.hidden);
-                    for (let j = 0; j < this.hidden; j++) {
-                        let sum = this.b1[j];
-                        for (let i = 0; i < this.N_in; i++) sum += this.W1[j * this.N_in + i] * input[i];
-                        h[j] = Math.tanh(sum);
-                    }
-
-                    const out32 = new Float32Array(this.N_out);
-                    for (let k = 0; k < this.N_out; k++) {
-                        let sum = this.b2[k];
-                        for (let j = 0; j < this.hidden; j++) sum += this.W2[k * this.hidden + j] * h[j];
-                        out32[k] = sum;
-                    }
-
-                    if (u.length === this.N_out) return { out: out32, h, input };
-
-                    const outEval = new Float32Array(u.length);
-                    for (let i = 0; i < u.length; i++) {
-                        const origIdx = (i / u.length) * this.N_out;
+            forward(u) {
+                let input = u;
+                if (u.length !== this.N_in) {
+                    input = new Float32Array(this.N_in);
+                    for (let i = 0; i < this.N_in; i++) {
+                        const origIdx = (i / this.N_in) * u.length;
                         const i0 = Math.floor(origIdx);
-                        const i1 = (i0 + 1) % this.N_out;
+                        const i1 = (i0 + 1) % u.length;
                         const frac = origIdx - i0;
-                        outEval[i] = out32[i0] * (1 - frac) + out32[i1] * frac;
+                        input[i] = u[i0] * (1 - frac) + u[i1] * frac;
                     }
-                    return { out: outEval, out32, h, input };
                 }
 
-                trainStep(batchX, batchY, lr = 0.02) {
-                    const B = batchX.length;
-                    let totalLoss = 0;
-                    const gW1 = new Float32Array(this.W1.length);
-                    const gb1 = new Float32Array(this.b1.length);
-                    const gW2 = new Float32Array(this.W2.length);
-                    const gb2 = new Float32Array(this.b2.length);
+                const h = new Float32Array(this.hidden);
+                for (let j = 0; j < this.hidden; j++) {
+                    let sum = this.b1[j];
+                    for (let i = 0; i < this.N_in; i++) sum += this.W1[j * this.N_in + i] * input[i];
+                    h[j] = Math.tanh(sum);
+                }
 
-                    for (let b = 0; b < B; b++) {
-                        const u = batchX[b];
-                        const target = batchY[b];
-                        const fwd = this.forward(u);
+                const out32 = new Float32Array(this.N_out);
+                for (let k = 0; k < this.N_out; k++) {
+                    let sum = this.b2[k];
+                    for (let j = 0; j < this.hidden; j++) sum += this.W2[k * this.hidden + j] * h[j];
+                    out32[k] = sum;
+                }
 
-                        const dOut = new Float32Array(this.N_out);
-                        for (let k = 0; k < this.N_out; k++) {
-                            const diff = fwd.out32 ? fwd.out32[k] - target[k] : fwd.out[k] - target[k];
-                            totalLoss += (diff * diff) / (this.N_out * B);
-                            dOut[k] = (2 * diff) / (this.N_out * B);
-                            gb2[k] += dOut[k];
-                            for (let j = 0; j < this.hidden; j++) {
-                                gW2[k * this.hidden + j] += dOut[k] * fwd.h[j];
-                            }
-                        }
+                if (u.length === this.N_out) return { out: out32, h, input };
 
-                        const dh = new Float32Array(this.hidden);
+                const outEval = new Float32Array(u.length);
+                for (let i = 0; i < u.length; i++) {
+                    const origIdx = (i / u.length) * this.N_out;
+                    const i0 = Math.floor(origIdx);
+                    const i1 = (i0 + 1) % this.N_out;
+                    const frac = origIdx - i0;
+                    outEval[i] = out32[i0] * (1 - frac) + out32[i1] * frac;
+                }
+                return { out: outEval, out32, h, input };
+            }
+
+            trainStep(batchX, batchY, lr = 0.02) {
+                const B = batchX.length;
+                let totalLoss = 0;
+                const gW1 = new Float32Array(this.W1.length);
+                const gb1 = new Float32Array(this.b1.length);
+                const gW2 = new Float32Array(this.W2.length);
+                const gb2 = new Float32Array(this.b2.length);
+
+                for (let b = 0; b < B; b++) {
+                    const u = batchX[b];
+                    const target = batchY[b];
+                    const fwd = this.forward(u);
+
+                    const dOut = new Float32Array(this.N_out);
+                    for (let k = 0; k < this.N_out; k++) {
+                        const diff = fwd.out32 ? fwd.out32[k] - target[k] : fwd.out[k] - target[k];
+                        totalLoss += (diff * diff) / (this.N_out * B);
+                        dOut[k] = (2 * diff) / (this.N_out * B);
+                        gb2[k] += dOut[k];
                         for (let j = 0; j < this.hidden; j++) {
-                            let sum = 0;
-                            for (let k = 0; k < this.N_out; k++) sum += dOut[k] * this.W2[k * this.hidden + j];
-                            dh[j] = sum * (1 - fwd.h[j] * fwd.h[j]);
-                            gb1[j] += dh[j];
-                            for (let i = 0; i < this.N_in; i++) gW1[j * this.N_in + i] += dh[j] * u[i];
+                            gW2[k * this.hidden + j] += dOut[k] * fwd.h[j];
                         }
                     }
 
-                    this.step++;
-                    const beta1 = 0.9, beta2 = 0.999, eps = 1e-8;
-                    const update = (w, g, m, v) => {
-                        for (let i = 0; i < w.length; i++) {
-                            m[i] = beta1 * m[i] + (1 - beta1) * g[i];
-                            v[i] = beta2 * v[i] + (1 - beta2) * g[i] * g[i];
-                            const mHat = m[i] / (1 - Math.pow(beta1, this.step));
-                            const vHat = v[i] / (1 - Math.pow(beta2, this.step));
-                            w[i] -= (lr * mHat) / (Math.sqrt(vHat) + eps);
-                        }
-                    };
-                    update(this.W1, gW1, this.mW1, this.vW1);
-                    update(this.b1, gb1, this.mb1, this.vb1);
-                    update(this.W2, gW2, this.mW2, this.vW2);
-                    update(this.b2, gb2, this.mb2, this.vb2);
-
-                    return totalLoss;
+                    const dh = new Float32Array(this.hidden);
+                    for (let j = 0; j < this.hidden; j++) {
+                        let sum = 0;
+                        for (let k = 0; k < this.N_out; k++) sum += dOut[k] * this.W2[k * this.hidden + j];
+                        dh[j] = sum * (1 - fwd.h[j] * fwd.h[j]);
+                        gb1[j] += dh[j];
+                        for (let i = 0; i < this.N_in; i++) gW1[j * this.N_in + i] += dh[j] * u[i];
+                    }
                 }
+
+                this.step++;
+                const beta1 = 0.9, beta2 = 0.999, eps = 1e-8;
+                const update = (w, g, m, v) => {
+                    for (let i = 0; i < w.length; i++) {
+                        m[i] = beta1 * m[i] + (1 - beta1) * g[i];
+                        v[i] = beta2 * v[i] + (1 - beta2) * g[i] * g[i];
+                        const mHat = m[i] / (1 - Math.pow(beta1, this.step));
+                        const vHat = v[i] / (1 - Math.pow(beta2, this.step));
+                        w[i] -= (lr * mHat) / (Math.sqrt(vHat) + eps);
+                    }
+                };
+                update(this.W1, gW1, this.mW1, this.vW1);
+                update(this.b1, gb1, this.mb1, this.vb1);
+                update(this.W2, gW2, this.mW2, this.vW2);
+                update(this.b2, gb2, this.mb2, this.vb2);
+
+                return totalLoss;
+            }
+        }
+
+        const fno = new FNO1D();
+        const mlp = new BaselineMLP();
+
+        // -------------------------------------------------------------
+        // Data Synthesis & Analytical Physics
+        // -------------------------------------------------------------
+        function generateGroundTruth(coeffs, N, c, nu, T) {
+            const u0 = new Float32Array(N);
+            const uT = new Float32Array(N);
+            const xGrid = new Float32Array(N);
+
+            for (let i = 0; i < N; i++) {
+                const x = (2 * PI * i) / N;
+                xGrid[i] = x;
+                let v0 = 0, vT = 0;
+                for (let k = 1; k <= coeffs.length; k++) {
+                    const { a, phi } = coeffs[k - 1];
+                    const decay = Math.exp(-nu * k * k * T);
+                    v0 += a * Math.sin(k * x + phi);
+                    vT += a * decay * Math.sin(k * (x - c * T) + phi);
+                }
+                u0[i] = v0;
+                uT[i] = vT;
+            }
+            return { u0, uT, xGrid };
+        }
+
+        function createTrainingSet(numSamples, N, c, nu, T) {
+            const X = [];
+            const Y = [];
+            for (let s = 0; s < numSamples; s++) {
+                const sampleCoeffs = [];
+                for (let k = 1; k <= K_MODES; k++) {
+                    sampleCoeffs.push({
+                        a: (Math.random() * 2 - 1) / Math.sqrt(k),
+                        phi: Math.random() * 2 * PI
+                    });
+                }
+                const sim = generateGroundTruth(sampleCoeffs, N, c, nu, T);
+                X.push(sim.u0);
+                Y.push(sim.uT);
+            }
+            return { X, Y };
+        }
+
+        // -------------------------------------------------------------
+        // Frequency Mode Inspector Updater
+        // -------------------------------------------------------------
+        function formatPhaseDeg(rad) {
+            let deg = ((rad * 180) / PI) % 360;
+            if (deg > 180) deg -= 360;
+            if (deg < -180) deg += 360;
+            return `${deg >= 0 ? '+' : ''}${deg.toFixed(0)}°`;
+        }
+
+        function updateFrequencyInspector(c, nu, T) {
+            modesGrid.innerHTML = '';
+            // Display active modes k=1..5
+            for (let k = 1; k < K_MODES; k++) {
+                const targetDecay = Math.exp(-nu * k * k * T);
+                const targetPhaseRad = -c * k * T;
+
+                const real = fno.R_real[k];
+                const imag = fno.R_imag[k];
+                const learnedMag = Math.sqrt(real * real + imag * imag);
+                const learnedPhaseRad = Math.atan2(imag, real);
+
+                const magPercent = Math.min(100, Math.max(0, learnedMag * 100));
+                const targetPercent = Math.min(100, Math.max(0, targetDecay * 100));
+
+                const card = document.createElement('div');
+                card.className = 'fno-mode-card';
+                card.innerHTML = `
+                    <div class="fno-mode-header">
+                        <span class="fno-mode-name">Mode k = ${k}</span>
+                        <span class="fno-mode-tag">ω = ${k}</span>
+                    </div>
+                    <div class="fno-mode-bar-track" title="Learned |R(k)|: ${learnedMag.toFixed(2)} | Target: ${targetDecay.toFixed(2)}">
+                        <div class="fno-mode-bar-fill" style="width: ${magPercent.toFixed(1)}%;"></div>
+                        <div class="fno-mode-target-marker" style="left: ${targetPercent.toFixed(1)}%;"></div>
+                    </div>
+                    <div class="fno-mode-stat-row">
+                        <span class="fno-mode-stat-lbl">Damp:</span>
+                        <span class="fno-mode-val">${learnedMag.toFixed(2)}</span>
+                        <span class="fno-mode-target-val">(tgt ${targetDecay.toFixed(2)})</span>
+                    </div>
+                    <div class="fno-mode-stat-row">
+                        <span class="fno-mode-stat-lbl">Shift:</span>
+                        <span class="fno-mode-val">${formatPhaseDeg(learnedPhaseRad)}</span>
+                        <span class="fno-mode-target-val">(tgt ${formatPhaseDeg(targetPhaseRad)})</span>
+                    </div>
+                `;
+                modesGrid.appendChild(card);
             }
 
-            const fno = new FNO1D();
-            const mlp = new BaselineMLP();
+            // Display truncated modes k>=6 (Low-pass cutoff)
+            const cutoffCard = document.createElement('div');
+            cutoffCard.className = 'fno-mode-card cutoff';
+            cutoffCard.innerHTML = `
+                <div class="fno-mode-header">
+                    <span class="fno-mode-name">Modes k ≥ 6</span>
+                    <span class="fno-mode-tag" style="background: var(--fno-border); color: var(--fno-text-muted);">Suppressed</span>
+                </div>
+                <div class="fno-mode-bar-track" title="High-frequency modes zeroed out (Low-pass filter)">
+                    <div class="fno-mode-bar-fill" style="width: 0%;"></div>
+                </div>
+                <div class="fno-mode-cutoff-label">
+                    ✂ Zeroed Out
+                </div>
+                <div class="fno-mode-cutoff-sub">
+                    Low-Pass Cutoff (Zeroed)
+                </div>
+            `;
+            modesGrid.appendChild(cutoffCard);
+        }
 
-            // -------------------------------------------------------------
-            // Data Synthesis & Analytical Physics
-            // -------------------------------------------------------------
-            function generateGroundTruth(coeffs, N, c, nu, T) {
-                const u0 = new Float32Array(N);
-                const uT = new Float32Array(N);
-                const xGrid = new Float32Array(N);
+        // -------------------------------------------------------------
+        // Rendering: Spatial Canvas
+        // -------------------------------------------------------------
+        function renderSpatial(evalN, c, nu, T) {
+            const width = spatialCanvas.parentElement.clientWidth;
+            const height = spatialCanvas.parentElement.clientHeight;
+            const dpr = window.devicePixelRatio || 1;
+            spatialCanvas.width = width * dpr;
+            spatialCanvas.height = height * dpr;
+            spatialCtx.resetTransform();
+            spatialCtx.scale(dpr, dpr);
 
-                for (let i = 0; i < N; i++) {
-                    const x = (2 * PI * i) / N;
-                    xGrid[i] = x;
-                    let v0 = 0, vT = 0;
-                    for (let k = 1; k <= coeffs.length; k++) {
-                        const { a, phi } = coeffs[k - 1];
-                        const decay = Math.exp(-nu * k * k * T);
-                        v0 += a * Math.sin(k * x + phi);
-                        vT += a * decay * Math.sin(k * (x - c * T) + phi);
-                    }
-                    u0[i] = v0;
-                    uT[i] = vT;
-                }
-                return { u0, uT, xGrid };
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const colGrid = isDark ? '#2e3640' : '#e2e8f0';
+            const colText = isDark ? '#94a3b8' : '#64748b';
+            const colGreen = isDark ? '#34d399' : '#059669';
+            const colPurple = isDark ? '#a78bfa' : '#7c3aed';
+            const colOrange = isDark ? '#fbbf24' : '#d97706';
+            const colCyan = isDark ? '#38bdf8' : '#0284c7';
+            const colAmber = isDark ? '#f59e0b' : '#d97706';
+            const colU0 = isDark ? '#64748b' : '#94a3b8';
+
+            spatialCtx.clearRect(0, 0, width, height);
+
+            const padLeft = 45, padRight = 25, padTop = 25, padBottom = 35;
+            const plotW = width - padLeft - padRight;
+            const plotH = height - padTop - padBottom;
+
+            const data = generateGroundTruth(currentCoeffs, evalN, c, nu, T);
+            const decomp = fno.forwardDecomposed(data.u0, evalN);
+            const predMLP = mlp.forward(data.u0).out;
+
+            // Calculate Errors
+            let fnoMSE = 0, mlpMSE = 0;
+            for (let i = 0; i < evalN; i++) {
+                const diffF = decomp.out[i] - data.uT[i];
+                const diffM = predMLP[i] - data.uT[i];
+                fnoMSE += (diffF * diffF) / evalN;
+                mlpMSE += (diffM * diffM) / evalN;
             }
 
-            function createTrainingSet(numSamples, N, c, nu, T) {
-                const X = [];
-                const Y = [];
-                for (let s = 0; s < numSamples; s++) {
-                    const sampleCoeffs = [];
-                    for (let k = 1; k <= K_MODES; k++) {
-                        sampleCoeffs.push({
-                            a: (Math.random() * 2 - 1) / Math.sqrt(k),
-                            phi: Math.random() * 2 * PI
-                        });
-                    }
-                    const sim = generateGroundTruth(sampleCoeffs, N, c, nu, T);
-                    X.push(sim.u0);
-                    Y.push(sim.uT);
-                }
-                return { X, Y };
+            if (isModelTrained) {
+                errFNOEl.textContent = fnoMSE < 0.000001 ? "< 10⁻⁶ MSE" : fnoMSE.toFixed(5) + " MSE";
+                errMLPEl.textContent = mlpMSE.toFixed(5) + " MSE";
+                fnoDescEl.textContent = "✓ Zero-shot smooth continuum, error invariant to grid size";
+                mlpDescEl.textContent = "✗ Cannot super-resolve; produces blurry/aliased interpolation";
+            } else {
+                errFNOEl.textContent = fnoMSE.toFixed(5) + " MSE";
+                errMLPEl.textContent = mlpMSE.toFixed(5) + " MSE";
+                fnoDescEl.textContent = "Untrained: Initial prediction of random initialization";
+                mlpDescEl.textContent = "Untrained: Initial prediction of random initialization";
             }
 
-            // -------------------------------------------------------------
-            // Rendering: Spatial Canvas
-            // -------------------------------------------------------------
-            function renderSpatial(evalN, c, nu, T) {
-                const width = spatialCanvas.parentElement.clientWidth;
-                const height = spatialCanvas.parentElement.clientHeight;
-                const dpr = window.devicePixelRatio || 1;
-                spatialCanvas.width = width * dpr;
-                spatialCanvas.height = height * dpr;
-                spatialCtx.resetTransform();
-                spatialCtx.scale(dpr, dpr);
+            // Y scale
+            let yMin = -1.85, yMax = 1.85;
+            const mapX = (x) => padLeft + (x / (2 * PI)) * plotW;
+            const mapY = (y) => padTop + (1 - (y - yMin) / (yMax - yMin)) * plotH;
 
-                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                const colGrid = isDark ? '#2e3640' : '#e2e8f0';
-                const colText = isDark ? '#94a3b8' : '#64748b';
-                const colGreen = isDark ? '#34d399' : '#059669';
-                const colPurple = isDark ? '#a78bfa' : '#7c3aed';
-                const colOrange = isDark ? '#fbbf24' : '#d97706';
-                const colU0 = isDark ? '#64748b' : '#94a3b8';
+            // Draw grid lines
+            spatialCtx.strokeStyle = colGrid;
+            spatialCtx.lineWidth = 1;
+            spatialCtx.beginPath();
+            const y0 = mapY(0);
+            spatialCtx.moveTo(padLeft, y0);
+            spatialCtx.lineTo(padLeft + plotW, y0);
 
-                spatialCtx.clearRect(0, 0, width, height);
+            // Sub grid lines
+            spatialCtx.moveTo(padLeft, mapY(1.0));
+            spatialCtx.lineTo(padLeft + plotW, mapY(1.0));
+            spatialCtx.moveTo(padLeft, mapY(-1.0));
+            spatialCtx.lineTo(padLeft + plotW, mapY(-1.0));
+            spatialCtx.stroke();
 
-                const padLeft = 45, padRight = 25, padTop = 25, padBottom = 35;
-                const plotW = width - padLeft - padRight;
-                const plotH = height - padTop - padBottom;
+            // X axis labels
+            spatialCtx.fillStyle = colText;
+            spatialCtx.font = "12px -apple-system, sans-serif";
+            spatialCtx.textAlign = "center";
+            spatialCtx.fillText("0", mapX(0), height - 12);
+            spatialCtx.fillText("π/2", mapX(PI / 2), height - 12);
+            spatialCtx.fillText("π", mapX(PI), height - 12);
+            spatialCtx.fillText("3π/2", mapX(1.5 * PI), height - 12);
+            spatialCtx.fillText("2π", mapX(2 * PI), height - 12);
 
-                const data = generateGroundTruth(currentCoeffs, evalN, c, nu, T);
-                const predFNO = fno.forward(data.u0, evalN).out;
-                const predMLP = mlp.forward(data.u0).out;
+            // Y axis labels
+            spatialCtx.textAlign = "right";
+            spatialCtx.fillText("+1.0", padLeft - 8, mapY(1.0) + 4);
+            spatialCtx.fillText("0", padLeft - 8, y0 + 4);
+            spatialCtx.fillText("-1.0", padLeft - 8, mapY(-1.0) + 4);
 
-                // Calculate Errors
-                let fnoMSE = 0, mlpMSE = 0;
-                for (let i = 0; i < evalN; i++) {
-                    const diffF = predFNO[i] - data.uT[i];
-                    const diffM = predMLP[i] - data.uT[i];
-                    fnoMSE += (diffF * diffF) / evalN;
-                    mlpMSE += (diffM * diffM) / evalN;
-                }
-
-                if (isModelTrained) {
-                    errFNOEl.textContent = fnoMSE < 0.000001 ? "< 10⁻⁶ MSE" : fnoMSE.toFixed(5) + " MSE";
-                    errMLPEl.textContent = mlpMSE.toFixed(5) + " MSE";
-                    fnoDescEl.textContent = "✓ Zero-shot smooth continuum, error invariant to grid size";
-                    mlpDescEl.textContent = "✗ Cannot super-resolve; produces blurry/aliased interpolation";
-                } else {
-                    errFNOEl.textContent = fnoMSE.toFixed(5) + " MSE";
-                    errMLPEl.textContent = mlpMSE.toFixed(5) + " MSE";
-                    fnoDescEl.textContent = "Untrained: Initial prediction of random initialization";
-                    mlpDescEl.textContent = "Untrained: Initial prediction of random initialization";
-                }
-
-                // Y scale
-                let yMin = -1.85, yMax = 1.85;
-                const mapX = (x) => padLeft + (x / (2 * PI)) * plotW;
-                const mapY = (y) => padTop + (1 - (y - yMin) / (yMax - yMin)) * plotH;
-
-                // Draw grid lines
-                spatialCtx.strokeStyle = colGrid;
-                spatialCtx.lineWidth = 1;
-                spatialCtx.beginPath();
-                const y0 = mapY(0);
-                spatialCtx.moveTo(padLeft, y0);
-                spatialCtx.lineTo(padLeft + plotW, y0);
-
-                // Sub grid lines
-                spatialCtx.moveTo(padLeft, mapY(1.0));
-                spatialCtx.lineTo(padLeft + plotW, mapY(1.0));
-                spatialCtx.moveTo(padLeft, mapY(-1.0));
-                spatialCtx.lineTo(padLeft + plotW, mapY(-1.0));
-                spatialCtx.stroke();
-
-                // X axis labels
-                spatialCtx.fillStyle = colText;
-                spatialCtx.font = "12px -apple-system, sans-serif";
-                spatialCtx.textAlign = "center";
-                spatialCtx.fillText("0", mapX(0), height - 12);
-                spatialCtx.fillText("π/2", mapX(PI / 2), height - 12);
-                spatialCtx.fillText("π", mapX(PI), height - 12);
-                spatialCtx.fillText("3π/2", mapX(1.5 * PI), height - 12);
-                spatialCtx.fillText("2π", mapX(2 * PI), height - 12);
-
-                // Y axis labels
-                spatialCtx.textAlign = "right";
-                spatialCtx.fillText("+1.0", padLeft - 8, mapY(1.0) + 4);
-                spatialCtx.fillText("0", padLeft - 8, y0 + 4);
-                spatialCtx.fillText("-1.0", padLeft - 8, mapY(-1.0) + 4);
-
-                // 1. Draw Initial Condition u0
-                if (toggleU0.checked) {
-                    spatialCtx.strokeStyle = colU0;
-                    spatialCtx.lineWidth = 1.8;
-                    spatialCtx.setLineDash([5, 4]);
-                    spatialCtx.beginPath();
-                    for (let i = 0; i < evalN; i++) {
-                        const px = mapX(data.xGrid[i]);
-                        const py = mapY(data.u0[i]);
-                        if (i === 0) spatialCtx.moveTo(px, py);
-                        else spatialCtx.lineTo(px, py);
-                    }
-                    spatialCtx.stroke();
-                    spatialCtx.setLineDash([]);
-                }
-
-                // 2. Draw Baseline MLP Prediction (reflects random init when reset)
-                if (toggleMLP.checked) {
-                    spatialCtx.strokeStyle = colOrange;
-                    spatialCtx.lineWidth = 2.4;
-                    spatialCtx.setLineDash([6, 4]);
-                    spatialCtx.beginPath();
-                    for (let i = 0; i < evalN; i++) {
-                        const px = mapX(data.xGrid[i]);
-                        const py = mapY(predMLP[i]);
-                        if (i === 0) spatialCtx.moveTo(px, py);
-                        else spatialCtx.lineTo(px, py);
-                    }
-                    spatialCtx.stroke();
-                    spatialCtx.setLineDash([]);
-                }
-
-                // 3. Draw Ground Truth Physics u(x, T)
-                spatialCtx.strokeStyle = colGreen;
-                spatialCtx.lineWidth = 3.6;
+            // Helper to draw a continuous curve
+            function drawCurve(values, color, lineWidth = 2.4, isDashed = false) {
+                spatialCtx.strokeStyle = color;
+                spatialCtx.lineWidth = lineWidth;
+                if (isDashed) spatialCtx.setLineDash([5, 4]);
+                else spatialCtx.setLineDash([]);
                 spatialCtx.beginPath();
                 for (let i = 0; i < evalN; i++) {
                     const px = mapX(data.xGrid[i]);
-                    const py = mapY(data.uT[i]);
+                    const py = mapY(values[i]);
                     if (i === 0) spatialCtx.moveTo(px, py);
                     else spatialCtx.lineTo(px, py);
                 }
                 spatialCtx.stroke();
+                spatialCtx.setLineDash([]);
+            }
 
-                // 4. Draw Fourier Neural Operator (FNO) Prediction (reflects random init when reset)
-                if (toggleFNO.checked) {
-                    spatialCtx.strokeStyle = colPurple;
-                    spatialCtx.lineWidth = 2.4;
-                    spatialCtx.beginPath();
+            // Draw based on selected stage
+            if (currentStage === 'u0') {
+                // Stage 1: Input u0
+                drawCurve(data.u0, colPurple, 3.2);
+                if (toggleDots.checked && evalN <= 128) {
+                    const radius = evalN <= 32 ? 4.0 : 2.2;
+                    spatialCtx.fillStyle = colPurple;
                     for (let i = 0; i < evalN; i++) {
-                        const px = mapX(data.xGrid[i]);
-                        const py = mapY(predFNO[i]);
-                        if (i === 0) spatialCtx.moveTo(px, py);
-                        else spatialCtx.lineTo(px, py);
+                        spatialCtx.beginPath();
+                        spatialCtx.arc(mapX(data.xGrid[i]), mapY(data.u0[i]), radius, 0, 2 * PI);
+                        spatialCtx.fill();
                     }
-                    spatialCtx.stroke();
                 }
+            } else if (currentStage === 'freq') {
+                // Stage 2: Frequency branch u_freq vs Ground Truth
+                drawCurve(data.u0, colU0, 1.8, true);
+                drawCurve(data.uT, colGreen, 3.0);
+                drawCurve(decomp.u_freq, colCyan, 2.8);
+                if (toggleDots.checked && evalN <= 128) {
+                    const radius = evalN <= 32 ? 4.0 : 2.2;
+                    spatialCtx.fillStyle = colCyan;
+                    for (let i = 0; i < evalN; i++) {
+                        spatialCtx.beginPath();
+                        spatialCtx.arc(mapX(data.xGrid[i]), mapY(decomp.u_freq[i]), radius, 0, 2 * PI);
+                        spatialCtx.fill();
+                    }
+                }
+            } else if (currentStage === 'spatial') {
+                // Stage 3: Spatial bypass
+                drawCurve(data.u0, colU0, 1.8, true);
+                drawCurve(decomp.u_spatial, colAmber, 2.8);
+                if (toggleDots.checked && evalN <= 128) {
+                    const radius = evalN <= 32 ? 4.0 : 2.2;
+                    spatialCtx.fillStyle = colAmber;
+                    for (let i = 0; i < evalN; i++) {
+                        spatialCtx.beginPath();
+                        spatialCtx.arc(mapX(data.xGrid[i]), mapY(decomp.u_spatial[i]), radius, 0, 2 * PI);
+                        spatialCtx.fill();
+                    }
+                }
+            } else if (currentStage === 'recomb') {
+                // Stage 4: Sum & Activation
+                drawCurve(decomp.u_freq, colCyan, 1.8, true);
+                drawCurve(decomp.u_spatial, colAmber, 1.8, true);
+                drawCurve(data.uT, colGreen, 3.2);
+                drawCurve(decomp.out, colPurple, 2.8);
+                if (toggleDots.checked && evalN <= 128) {
+                    const radius = evalN <= 32 ? 4.0 : 2.2;
+                    spatialCtx.fillStyle = colPurple;
+                    for (let i = 0; i < evalN; i++) {
+                        spatialCtx.beginPath();
+                        spatialCtx.arc(mapX(data.xGrid[i]), mapY(decomp.out[i]), radius, 0, 2 * PI);
+                        spatialCtx.fill();
+                    }
+                }
+            } else {
+                // 'all': Default comparison view
+                if (toggleU0.checked) drawCurve(data.u0, colU0, 1.8, true);
+                if (toggleMLP.checked) drawCurve(predMLP, colOrange, 2.4, true);
+                drawCurve(data.uT, colGreen, 3.6);
+                if (toggleFNO.checked) drawCurve(decomp.out, colPurple, 2.4);
 
-                // 5. Draw discrete grid sample points if toggled
+                // Grid sample points
                 if (toggleDots.checked && evalN <= 128) {
                     const radius = evalN <= 32 ? 4.0 : 2.2;
                     for (let i = 0; i < evalN; i++) {
@@ -1046,7 +1509,7 @@
                         if (toggleFNO.checked) {
                             spatialCtx.fillStyle = colPurple;
                             spatialCtx.beginPath();
-                            spatialCtx.arc(px, mapY(predFNO[i]), radius, 0, 2 * PI);
+                            spatialCtx.arc(px, mapY(decomp.out[i]), radius, 0, 2 * PI);
                             spatialCtx.fill();
                         }
                         if (toggleMLP.checked && evalN <= 64) {
@@ -1058,208 +1521,283 @@
                     }
                 }
             }
+        }
 
-            // -------------------------------------------------------------
-            // Master Update
-            // -------------------------------------------------------------
-            function updateAll() {
-                const c = parseFloat(speedSlider.value);
-                const nu = parseFloat(diffSlider.value);
-                const T = parseFloat(timeSlider.value);
-                const resIdx = parseInt(resSlider.value, 10);
-                const evalN = GRID_SIZES[resIdx];
+        // -------------------------------------------------------------
+        // Stage Switcher Logic
+        // -------------------------------------------------------------
+        function setStage(stage) {
+            currentStage = stage;
+            pipeTabs.forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.stage === stage);
+            });
 
-                speedVal.textContent = c.toFixed(2);
-                diffVal.textContent = nu.toFixed(3);
-                timeVal.textContent = T.toFixed(2);
+            if (stage === 'all') {
+                stageBadge.textContent = 'Stage: Full Model Comparison';
+                stageBadge.className = 'fno-badge fno-badge-purple';
+                explainerText.innerHTML = `Comparing the <strong>Fourier Neural Operator</strong> against the <strong>Standard NN</strong>. Both were trained on 32 points. Drag the resolution slider below to evaluate zero-shot generalization!`;
+                freqInspector.style.display = 'none';
+                spatialInspector.style.display = 'none';
+                canvasTitle.textContent = 'Spatial Solution Domain: u(x, T)';
+                canvasLegend.innerHTML = `
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: #94a3b8;"></span> Initial u₀</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-green);"></span> Ground Truth u(x, T)</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-primary);"></span> Fourier Neural Operator (FNO)</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-orange);"></span> Standard NN Baseline</span>
+                `;
+            } else if (stage === 'u0') {
+                stageBadge.textContent = 'Stage 1: Input Profile u₀(x)';
+                stageBadge.className = 'fno-badge fno-badge-purple';
+                explainerText.innerHTML = `<strong>Input Stream</strong>: The initial condition <code>u₀(x)</code> enters the FNO layer. The signal bifurcates concurrently into a global frequency branch and a local spatial bypass.`;
+                freqInspector.style.display = 'none';
+                spatialInspector.style.display = 'none';
+                canvasTitle.textContent = 'Stage 1: Initial Input Waveform u₀(x)';
+                canvasLegend.innerHTML = `
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-primary);"></span> Input Waveform u₀(x)</span>
+                `;
+            } else if (stage === 'freq') {
+                stageBadge.textContent = 'Stage 2: Frequency Branch 𝓕⁻¹(R · 𝓕(x))';
+                stageBadge.className = 'fno-badge fno-badge-cyan';
+                explainerText.innerHTML = `<strong>Frequency Stream (Global Effects)</strong>: The input is transformed via FFT into Fourier modes. Modes <code>k ≥ 6</code> are <strong>zeroed out (low-pass filtering)</strong>. The remaining modes are damped and phase-shifted by learned complex weights <code>R(k)</code> and reconstructed via inverse FFT.`;
+                freqInspector.style.display = 'flex';
+                spatialInspector.style.display = 'none';
+                canvasTitle.textContent = 'Stage 2: Global Frequency Wave 𝓕⁻¹(R · 𝓕(x))';
+                canvasLegend.innerHTML = `
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: #94a3b8;"></span> Initial u₀ (Dashed)</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-green);"></span> Ground Truth u(x, T)</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-cyan);"></span> Frequency Branch Output (Cyan)</span>
+                `;
+            } else if (stage === 'spatial') {
+                stageBadge.textContent = 'Stage 3: Spatial Bypass (W·x + b)';
+                stageBadge.className = 'fno-badge fno-badge-orange';
+                explainerText.innerHTML = `<strong>Spatial Stream (Local Effects)</strong>: In parallel with the frequency branch, a pointwise linear transformation <code>W · x + b</code> operates directly on local coordinates without global communication. In periodic advection-diffusion, global modes do the work so <code>W ≈ 0</code>; in non-periodic or shock domains, this stream captures local residual effects.`;
+                freqInspector.style.display = 'none';
+                spatialInspector.style.display = 'flex';
+                canvasTitle.textContent = 'Stage 3: Local Spatial Bypass W · u₀(x) + b';
+                canvasLegend.innerHTML = `
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: #94a3b8;"></span> Initial u₀ (Dashed)</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-orange);"></span> Spatial Bypass (Amber)</span>
+                `;
+            } else if (stage === 'recomb') {
+                stageBadge.textContent = 'Stage 4: Summation & Activation σ(·)';
+                stageBadge.className = 'fno-badge fno-badge-green';
+                explainerText.innerHTML = `<strong>Recombination & Activation</strong>: The global frequency wave (cyan) and local spatial bypass (amber) are summed: <code>u_freq + u_spatial</code>. Finally, the non-linear activation <code>σ</code> adds expressive capacity for complex boundary conditions.`;
+                freqInspector.style.display = 'none';
+                spatialInspector.style.display = 'none';
+                canvasTitle.textContent = 'Stage 4: Recombination σ(W·x + b + 𝓕⁻¹(R·𝓕(x)))';
+                canvasLegend.innerHTML = `
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-cyan);"></span> Frequency Branch</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-orange);"></span> Spatial Bypass</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-green);"></span> Ground Truth u(x, T)</span>
+                    <span class="fno-legend-item"><span class="fno-legend-dot" style="background: var(--fno-primary);"></span> Final Output σ(·)</span>
+                `;
+            }
 
-                const mult = evalN / N_TRAIN;
-                if (mult === 1) {
-                    resBadge.textContent = `Evaluating on N = ${evalN} (Training Grid)`;
-                    resBadge.className = 'fno-badge fno-badge-purple';
-                } else if (mult > 1) {
-                    resBadge.textContent = `Evaluating on N = ${evalN} (Zero-Shot ${mult}× Super-Resolution)`;
-                    resBadge.className = 'fno-badge fno-badge-purple';
+            updateAll();
+        }
+
+        // -------------------------------------------------------------
+        // Master Update
+        // -------------------------------------------------------------
+        function updateAll() {
+            const c = parseFloat(speedSlider.value);
+            const nu = parseFloat(diffSlider.value);
+            const T = parseFloat(timeSlider.value);
+            const resIdx = parseInt(resSlider.value, 10);
+            const evalN = GRID_SIZES[resIdx];
+
+            speedVal.textContent = c.toFixed(2);
+            diffVal.textContent = nu.toFixed(3);
+            timeVal.textContent = T.toFixed(2);
+
+            const mult = evalN / N_TRAIN;
+            if (mult === 1) {
+                resBadge.textContent = `Evaluating on N = ${evalN} (Training Grid)`;
+                resBadge.className = 'fno-badge fno-badge-purple';
+            } else if (mult > 1) {
+                resBadge.textContent = `Evaluating on N = ${evalN} (Zero-Shot ${mult}× Super-Resolution)`;
+                resBadge.className = 'fno-badge fno-badge-purple';
+            } else {
+                resBadge.textContent = `Evaluating on N = ${evalN} (Coarser Grid)`;
+                resBadge.className = 'fno-badge fno-badge-purple';
+            }
+
+            updateFrequencyInspector(c, nu, T);
+            if (paramWEl) paramWEl.textContent = fno.W.toFixed(4);
+            if (paramBEl) paramBEl.textContent = fno.b.toFixed(4);
+            renderSpatial(evalN, c, nu, T);
+        }
+
+        // -------------------------------------------------------------
+        // Training Loop
+        // -------------------------------------------------------------
+        let isTraining = false;
+
+        function runTraining() {
+            if (isTraining) return;
+            isTraining = true;
+            trainBtn.disabled = true;
+            resetBtn.disabled = true;
+            optimalBtn.disabled = true;
+            statusPill.textContent = "Training in Progress...";
+            statusPill.className = "fno-badge fno-badge-orange";
+            trainingBox.style.display = "flex";
+
+            const c = parseFloat(speedSlider.value);
+            const nu = parseFloat(diffSlider.value);
+            const T = parseFloat(timeSlider.value);
+
+            const data = createTrainingSet(60, N_TRAIN, c, nu, T);
+
+            const totalEpochs = 80;
+            let currentEpoch = 0;
+
+            function step() {
+                for (let k = 0; k < 2 && currentEpoch < totalEpochs; k++) {
+                    const lossF = fno.trainStep(data.X, data.Y, N_TRAIN, 0.035);
+                    const lossM = mlp.trainStep(data.X, data.Y, 0.02);
+                    currentEpoch++;
+
+                    lossFNOText.textContent = `FNO Loss: ${lossF.toFixed(6)}`;
+                    lossMLPText.textContent = `Baseline NN Loss: ${lossM.toFixed(6)}`;
+                }
+
+                epochCounter.textContent = `Step ${currentEpoch} / ${totalEpochs}`;
+                progressFill.style.width = `${(currentEpoch / totalEpochs) * 100}%`;
+
+                updateAll();
+
+                if (currentEpoch < totalEpochs) {
+                    requestAnimationFrame(step);
                 } else {
-                    resBadge.textContent = `Evaluating on N = ${evalN} (Coarser Grid)`;
-                    resBadge.className = 'fno-badge fno-badge-purple';
+                    isTraining = false;
+                    isModelTrained = true;
+                    trainBtn.disabled = false;
+                    resetBtn.disabled = false;
+                    optimalBtn.disabled = false;
+                    statusPill.textContent = "Trained Successfully";
+                    statusPill.className = "fno-badge fno-badge-green";
+                    trainingLabel.textContent = "Training Completed!";
+                    setTimeout(() => {
+                        if (!isTraining) trainingBox.style.display = "none";
+                    }, 4000);
                 }
-
-                fnoLegendItem.style.display = toggleFNO.checked ? 'inline-flex' : 'none';
-                mlpLegendItem.style.display = toggleMLP.checked ? 'inline-flex' : 'none';
-
-                renderSpatial(evalN, c, nu, T);
             }
 
-            // -------------------------------------------------------------
-            // Training Loop (with 60 FPS requestAnimationFrame animation)
-            // -------------------------------------------------------------
-            let isTraining = false;
+            requestAnimationFrame(step);
+        }
 
-            function runTraining() {
-                if (isTraining) return;
-                isTraining = true;
-                trainBtn.disabled = true;
-                resetBtn.disabled = true;
-                optimalBtn.disabled = true;
-                statusPill.textContent = "Training in Progress...";
-                statusPill.className = "fno-badge fno-badge-orange";
-                trainingBox.style.display = "flex";
-
-                const c = parseFloat(speedSlider.value);
-                const nu = parseFloat(diffSlider.value);
-                const T = parseFloat(timeSlider.value);
-
-                const data = createTrainingSet(60, N_TRAIN, c, nu, T);
-
-                const totalEpochs = 80;
-                let currentEpoch = 0;
-
-                function step() {
-                    for (let k = 0; k < 2 && currentEpoch < totalEpochs; k++) {
-                        const lossF = fno.trainStep(data.X, data.Y, N_TRAIN, 0.035);
-                        const lossM = mlp.trainStep(data.X, data.Y, 0.02);
-                        currentEpoch++;
-
-                        lossFNOText.textContent = `FNO Loss: ${lossF.toFixed(6)}`;
-                        lossMLPText.textContent = `Baseline NN Loss: ${lossM.toFixed(6)}`;
-                    }
-
-                    epochCounter.textContent = `Step ${currentEpoch} / ${totalEpochs}`;
-                    progressFill.style.width = `${(currentEpoch / totalEpochs) * 100}%`;
-
-                    updateAll();
-
-                    if (currentEpoch < totalEpochs) {
-                        requestAnimationFrame(step);
-                    } else {
-                        isTraining = false;
-                        isModelTrained = true;
-                        trainBtn.disabled = false;
-                        resetBtn.disabled = false;
-                        optimalBtn.disabled = false;
-                        statusPill.textContent = "Trained Successfully";
-                        statusPill.className = "fno-badge fno-badge-green";
-                        trainingLabel.textContent = "Training Completed!";
-                        setTimeout(() => {
-                            if (!isTraining) trainingBox.style.display = "none";
-                        }, 4000);
-                    }
-                }
-
-                requestAnimationFrame(step);
+        // -------------------------------------------------------------
+        // Preset Waveform Switcher
+        // -------------------------------------------------------------
+        function applyPreset(preset) {
+            if (preset === 'multisine') {
+                currentCoeffs = [
+                    { a: 0.85, phi: 0.2 },
+                    { a: 0.55, phi: 1.1 },
+                    { a: -0.35, phi: 2.3 },
+                    { a: 0.22, phi: 0.7 },
+                    { a: -0.15, phi: 3.1 }
+                ];
+            } else if (preset === 'pulse') {
+                currentCoeffs = [
+                    { a: 0.7, phi: PI / 2 },
+                    { a: 0.5, phi: PI / 2 },
+                    { a: 0.35, phi: PI / 2 },
+                    { a: 0.2, phi: PI / 2 },
+                    { a: 0.1, phi: PI / 2 }
+                ];
+            } else if (preset === 'steep') {
+                currentCoeffs = [
+                    { a: 1.0, phi: 0 },
+                    { a: 0.0, phi: 0 },
+                    { a: 0.35, phi: 0 },
+                    { a: 0.0, phi: 0 },
+                    { a: 0.18, phi: 0 }
+                ];
+            } else if (preset === 'highfreq') {
+                currentCoeffs = [
+                    { a: 0.2, phi: 0 },
+                    { a: 0.3, phi: 1.5 },
+                    { a: 0.7, phi: 0.8 },
+                    { a: 0.6, phi: 2.4 },
+                    { a: 0.5, phi: 1.2 }
+                ];
             }
+            updateAll();
+        }
 
-            // -------------------------------------------------------------
-            // Preset Waveform Switcher
-            // -------------------------------------------------------------
-            function applyPreset(preset) {
-                if (preset === 'multisine') {
-                    currentCoeffs = [
-                        { a: 0.85, phi: 0.2 },
-                        { a: 0.55, phi: 1.1 },
-                        { a: -0.35, phi: 2.3 },
-                        { a: 0.22, phi: 0.7 },
-                        { a: -0.15, phi: 3.1 }
-                    ];
-                } else if (preset === 'pulse') {
-                    currentCoeffs = [
-                        { a: 0.7, phi: PI / 2 },
-                        { a: 0.5, phi: PI / 2 },
-                        { a: 0.35, phi: PI / 2 },
-                        { a: 0.2, phi: PI / 2 },
-                        { a: 0.1, phi: PI / 2 }
-                    ];
-                } else if (preset === 'steep') {
-                    currentCoeffs = [
-                        { a: 1.0, phi: 0 },
-                        { a: 0.0, phi: 0 },
-                        { a: 0.35, phi: 0 },
-                        { a: 0.0, phi: 0 },
-                        { a: 0.18, phi: 0 }
-                    ];
-                } else if (preset === 'highfreq') {
-                    currentCoeffs = [
-                        { a: 0.2, phi: 0 },
-                        { a: 0.3, phi: 1.5 },
-                        { a: 0.7, phi: 0.8 },
-                        { a: 0.6, phi: 2.4 },
-                        { a: 0.5, phi: 1.2 }
-                    ];
-                }
-                updateAll();
+        function randomizeCoeffs() {
+            currentCoeffs = [];
+            for (let k = 1; k <= 5; k++) {
+                currentCoeffs.push({
+                    a: (Math.random() * 1.6 - 0.8) / Math.sqrt(k),
+                    phi: Math.random() * 2 * PI
+                });
             }
+            updateAll();
+        }
 
-            function randomizeCoeffs() {
-                currentCoeffs = [];
-                for (let k = 1; k <= 5; k++) {
-                    currentCoeffs.push({
-                        a: (Math.random() * 1.6 - 0.8) / Math.sqrt(k),
-                        phi: Math.random() * 2 * PI
-                    });
-                }
-                updateAll();
-            }
+        function resetToRandomInit() {
+            fno.setRandomWeights();
+            mlp.setRandomWeights();
+            isModelTrained = false;
 
-            // Resets the models to their initial random weights
-            // The FNO and MLP lines directly reflect the random initialization predictions
-            function resetToRandomInit() {
-                fno.setRandomWeights();
-                mlp.setRandomWeights();
-                isModelTrained = false;
+            statusPill.textContent = "Random Initialization (Untrained)";
+            statusPill.className = "fno-badge fno-badge-orange";
+            updateAll();
+        }
 
-                statusPill.textContent = "Random Initialization (Untrained)";
-                statusPill.className = "fno-badge fno-badge-orange";
-                updateAll();
-            }
+        function loadOptimal() {
+            const c = parseFloat(speedSlider.value);
+            const nu = parseFloat(diffSlider.value);
+            const T = parseFloat(timeSlider.value);
+            fno.setOptimal(c, nu, T);
 
-            // Loads optimal converged weights
-            function loadOptimal() {
-                const c = parseFloat(speedSlider.value);
-                const nu = parseFloat(diffSlider.value);
-                const T = parseFloat(timeSlider.value);
-                fno.setOptimal(c, nu, T);
+            const data = createTrainingSet(80, N_TRAIN, c, nu, T);
+            mlp.setRandomWeights();
+            for (let i = 0; i < 70; i++) mlp.trainStep(data.X, data.Y, 0.025);
 
-                const data = createTrainingSet(80, N_TRAIN, c, nu, T);
-                mlp.setRandomWeights();
-                for (let i = 0; i < 70; i++) mlp.trainStep(data.X, data.Y, 0.025);
+            isModelTrained = true;
+            statusPill.textContent = "Converged Weights Loaded";
+            statusPill.className = "fno-badge fno-badge-green";
+            updateAll();
+        }
 
-                isModelTrained = true;
-                statusPill.textContent = "Converged Weights Loaded";
-                statusPill.className = "fno-badge fno-badge-green";
-                updateAll();
-            }
+        // -------------------------------------------------------------
+        // Event Listeners
+        // -------------------------------------------------------------
+        speedSlider.addEventListener('input', () => {
+            if (isModelTrained) loadOptimal();
+            else updateAll();
+        });
+        diffSlider.addEventListener('input', () => {
+            if (isModelTrained) loadOptimal();
+            else updateAll();
+        });
+        timeSlider.addEventListener('input', () => {
+            if (isModelTrained) loadOptimal();
+            else updateAll();
+        });
+        resSlider.addEventListener('input', updateAll);
+        presetSelect.addEventListener('change', (e) => applyPreset(e.target.value));
+        randomBtn.addEventListener('click', randomizeCoeffs);
+        resetBtn.addEventListener('click', resetToRandomInit);
+        optimalBtn.addEventListener('click', loadOptimal);
+        trainBtn.addEventListener('click', runTraining);
+        toggleFNO.addEventListener('change', updateAll);
+        toggleMLP.addEventListener('change', updateAll);
+        toggleU0.addEventListener('change', updateAll);
+        toggleDots.addEventListener('change', updateAll);
 
-            // -------------------------------------------------------------
-            // Event Listeners
-            // -------------------------------------------------------------
-            speedSlider.addEventListener('input', () => {
-                if (isModelTrained) loadOptimal();
-                else updateAll();
-            });
-            diffSlider.addEventListener('input', () => {
-                if (isModelTrained) loadOptimal();
-                else updateAll();
-            });
-            timeSlider.addEventListener('input', () => {
-                if (isModelTrained) loadOptimal();
-                else updateAll();
-            });
-            resSlider.addEventListener('input', updateAll);
-            presetSelect.addEventListener('change', (e) => applyPreset(e.target.value));
-            randomBtn.addEventListener('click', randomizeCoeffs);
-            resetBtn.addEventListener('click', resetToRandomInit);
-            optimalBtn.addEventListener('click', loadOptimal);
-            trainBtn.addEventListener('click', runTraining);
-            toggleFNO.addEventListener('change', updateAll);
-            toggleMLP.addEventListener('change', updateAll);
-            toggleU0.addEventListener('change', updateAll);
-            toggleDots.addEventListener('change', updateAll);
+        pipeTabs.forEach(tab => {
+            tab.addEventListener('click', () => setStage(tab.dataset.stage));
+        });
 
-            window.addEventListener('resize', updateAll);
+        window.addEventListener('resize', updateAll);
 
-            // Initial setup: start with random initialization so reader sees untrained state
-            resetToRandomInit();
-        })();
+        // Initial setup: start with random initialization so reader sees untrained state
+        resetToRandomInit();
+    })();
     </script>
 </div>
