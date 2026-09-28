@@ -13,6 +13,8 @@ draft = false
 
 **News**
 
+**2026-09**: I gave the [opening talk](https://www.youtube.com/live/IB5VRMIRWeA?si=mUgoSzeLKTK_E9ur&t=7490) at the Quran and Science Symposium in Chino, CA on the current state of Artificial Intelligence. I also demoed an AI system built for Q/A against static corpora such as religious scriptures and legal documents.
+
 **2025-04**: I joined Google in a Software Engineer role and moved to the San Francisco Bay area.
 
 **2025-01**: I gave a talk at Trane Technologies' Data Science Forum on anomaly detection algorithms and presented a case study using data from rooftop refrigeration units.
