@@ -20,6 +20,7 @@ import { h } from './views/dom.js';
 import { createScrollView } from './views/scroll.js';
 import { createFilters, toggleFilter } from './views/filters.js';
 import { createDebugPanel, logDiagnostics } from './views/debug.js';
+import { createGlobe } from './views/globe.js';
 
 const STYLE_URL = new URL('./styles.css', import.meta.url).href;
 let instances = 0;
@@ -139,10 +140,38 @@ class GeoTimeline extends HTMLElement {
         if (hashOn) syncHash(store, prefix, defaults);
         if (initial.focus) requestAnimationFrame(() => scroll.scrollToEvent(initial.focus, false));
 
+        const hasPlaces = model.events.some(e => e.where.some(w => w.lat !== null));
+        if (hasPlaces && (model.basemap.world || model.basemap.regions.size)) {
+            ctx.columnRect = () => scroll.el.getBoundingClientRect();
+            createGlobe(ctx).then(globe => {
+                ctx.globe = globe;
+                this.globe = globe;
+                app.prepend(globe.el);
+                globe.start();
+                this.trackGlobeVisibility(globe);
+            }).catch(e => console.warn('geo-timeline: globe unavailable:', e));
+        }
+
         this.model = model;
         this.store = store;
         this.dispatchEvent(new CustomEvent('ready', { detail: { model } }));
     }
 }
+
+// The backdrop globe is shown only while the timeline fills the bottom of
+// the viewport, so it never covers the rest of the page.
+GeoTimeline.prototype.trackGlobeVisibility = function (globe) {
+    let ticking = false;
+    const update = () => {
+        ticking = false;
+        const r = this.getBoundingClientRect();
+        const inView = this.store.get().view === 'geo' || (r.top < innerHeight * 0.5 && r.bottom > innerHeight * 0.95);
+        globe.el.classList.toggle('active', inView);
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener('resize', update, { passive: true });
+    this.store.subscribe(update);
+    update();
+};
 
 if (!customElements.get('geo-timeline')) customElements.define('geo-timeline', GeoTimeline);

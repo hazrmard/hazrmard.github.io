@@ -313,6 +313,28 @@ details > .body { padding: 0.25rem 0 0.25rem 0.9rem; border-left: 1px solid var(
 
 .empty { padding: 2rem 0; text-align: center; color: var(--gt-muted); }
 
+/* ---------------------------------------------------------------- globe */
+
+.timeline { z-index: 1; }
+.timeline { position: relative; }
+.globe {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+.globe.active { opacity: 1; }
+.globe canvas { display: block; width: 100%; height: 100%; }
+.globe[data-layout="strip"] {
+    top: auto;
+    height: 26vh;
+    z-index: 2;
+    background: linear-gradient(to bottom, transparent, var(--gt-bg) 18%);
+}
+.globe[data-layout="strip"].active { pointer-events: auto; }
+
 /* ---------------------------------------------------------------- debug */
 
 .debug {

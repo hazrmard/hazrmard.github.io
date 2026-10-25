@@ -211,15 +211,36 @@ export function createScrollView(ctx) {
         }
     }, { passive: true });
 
+    // Scrolling to an event set elsewhere (a link, the map) must not change
+    // the focus on the way, so scroll-driven focus is paused until the
+    // scroll arrives, the reader takes over, or a fallback timeout passes.
+    let scrollTarget = null;
     function scrollToEvent(id, smooth = true) {
         const li = cards.get(id);
         if (!li || !li.isConnected) return;
-        const top = li.getBoundingClientRect().top + scrollY - innerHeight * FOCUS_LINE + 8;
-        const behavior = smooth && !prefersReducedMotion() ? 'smooth' : 'auto';
-        suppressUntil = performance.now() + (behavior === 'smooth' ? 1200 : 100);
-        scrollTo({ top: Math.max(0, top), behavior });
+        const maxTop = document.documentElement.scrollHeight - innerHeight;
+        const top = Math.max(0, Math.min(maxTop, li.getBoundingClientRect().top + scrollY - innerHeight * FOCUS_LINE + 8));
+        const distance = top - scrollY;
+        const animate = smooth && !prefersReducedMotion();
+        scrollTarget = top;
+        suppressUntil = performance.now() + 4000;
+        // Long distances: jump most of the way, then glide the last screen.
+        if (animate && Math.abs(distance) > innerHeight * 3) {
+            scrollTo({ top: top - Math.sign(distance) * innerHeight, behavior: 'auto' });
+        }
+        scrollTo({ top, behavior: animate ? 'smooth' : 'auto' });
+        if (!animate || Math.abs(scrollY - top) < 2) release();
     }
-    addEventListener('scrollend', () => { suppressUntil = 0; });
+    function release() {
+        scrollTarget = null;
+        suppressUntil = 0;
+    }
+    addEventListener('scroll', () => {
+        if (scrollTarget !== null && Math.abs(scrollY - scrollTarget) < 2) release();
+    }, { passive: true });
+    for (const type of ['wheel', 'touchstart', 'keydown']) {
+        addEventListener(type, () => { if (scrollTarget !== null) release(); }, { passive: true });
+    }
 
     list.addEventListener('click', e => {
         const li = e.target.closest('.card');
