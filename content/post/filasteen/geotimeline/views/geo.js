@@ -5,6 +5,7 @@
 import { h, icon, prefersReducedMotion } from './dom.js';
 import { renderCard } from './card.js';
 import { fromAngles, toAngles } from './versor.js';
+import { threadOrder } from './threads.js';
 
 const PLAY_MS = 2600;
 
@@ -54,13 +55,15 @@ export function createGeoView(ctx) {
 
     // ------------------------------------------------------------- focus
 
+    // Steps follow a thread's own order when one is chosen, else time.
     function step(delta) {
         list = selectable();
-        if (!list.length) return;
-        const i = list.findIndex(e => e.id === store.get().focus);
-        const j = i === -1 ? (delta > 0 ? 0 : list.length - 1) : Math.max(0, Math.min(list.length - 1, i + delta));
-        store.set({ focus: list[j].id }, 'geo');
-        return j < list.length - 1;
+        const order = threadOrder(ctx) ?? list.map(e => e.id);
+        if (!order.length) return;
+        const i = order.indexOf(store.get().focus);
+        const j = i === -1 ? (delta > 0 ? 0 : order.length - 1) : Math.max(0, Math.min(order.length - 1, i + delta));
+        store.set({ focus: order[j] }, 'geo');
+        return j < order.length - 1;
     }
     prev.addEventListener('click', () => { stopPlay(); step(-1); });
     next.addEventListener('click', () => { stopPlay(); step(1); });
@@ -135,8 +138,10 @@ export function createGeoView(ctx) {
         track.setAttribute('aria-valuemax', String(Math.max(0, list.length - 1)));
         track.setAttribute('aria-valuenow', String(Math.max(0, i)));
         track.setAttribute('aria-valuetext', e ? `${e.whenLabel}: ${e.titleText}` : 'No event selected');
-        prev.disabled = i <= 0;
-        next.disabled = i === list.length - 1;
+        const order = threadOrder(ctx) ?? list.map(x => x.id);
+        const k = order.indexOf(id);
+        prev.disabled = k <= 0;
+        next.disabled = k === order.length - 1;
     }
 
     function nearestAt(clientX) {

@@ -160,6 +160,26 @@ summary:focus-visible, .segmented input:focus-visible + span {
 .link-button { border: none; background: none; color: var(--gt-link); cursor: pointer; padding: 0; }
 .link-button:hover { text-decoration: underline; }
 
+/* -------------------------------------------------------------- threads */
+
+.thread-banner {
+    padding: 0.45rem 0.6rem;
+    background: var(--gt-surface);
+    border-bottom: 1px solid var(--gt-border);
+    border-left: 3px solid var(--gt-accent);
+}
+.thread-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.thread-kicker { color: var(--gt-accent); display: inline-flex; }
+.thread-title { flex: 1 1 12rem; font-weight: 600; font-family: var(--gt-heading-font, inherit); font-size: 1.1em; }
+.thread-nav { display: inline-flex; align-items: center; gap: 0.35rem; }
+.thread-position { font-size: 0.8em; color: var(--gt-muted); min-width: 4.5em; text-align: center; font-variant-numeric: tabular-nums; }
+.thread-about { margin: 0.2rem 0 0; }
+.thread-about > summary { font-size: 0.8em; }
+.thread-intro > :first-child { margin-top: 0.25rem; }
+.thread-intro { font-size: 0.9em; max-height: 30vh; overflow: auto; }
+.thread-chip .icon, .thread-link .icon { width: 12px; height: 12px; }
+.card-threads { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.4rem; margin-top: 0.4rem; font-size: 0.78em; color: var(--gt-muted); }
+
 /* ------------------------------------------------------------- timeline */
 
 .timeline {

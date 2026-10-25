@@ -24,6 +24,7 @@ import { createGlobe } from './views/globe.js';
 import { createChartRenderer } from './views/charts.js';
 import { createTracks } from './views/tracks.js';
 import { createGeoView, createViewSwitch } from './views/geo.js';
+import { createThreads } from './views/threads.js';
 
 const STYLE_URL = new URL('./styles.css', import.meta.url).href;
 let instances = 0;
@@ -105,14 +106,17 @@ class GeoTimeline extends HTMLElement {
         };
 
         ctx.renderCharts = createChartRenderer(ctx);
+        const threads = createThreads(ctx);
+        ctx.renderThreads = threads?.renderThreads;
         const filters = createFilters(ctx);
+        if (threads) filters.extra.append(threads.section);
         const scroll = createScrollView(ctx);
         const tracks = createTracks(ctx);
         const hasPlaces = model.events.some(e => e.where.some(w => w.lat !== null))
             && Boolean(model.basemap.world || model.basemap.regions.size);
         const toolbar = h('div', { class: 'toolbar' }, filters.toolbarItems, tracks?.toggle,
             hasPlaces ? createViewSwitch(store) : null);
-        const controls = h('div', { class: 'controls' }, toolbar, filters.panel, tracks?.drawer);
+        const controls = h('div', { class: 'controls' }, toolbar, threads?.banner, filters.panel, tracks?.drawer);
         const app = h('div', { class: 'app', dataset: { view: initial.view } }, controls, scroll.el);
         ctx.controls = controls;
         ctx.restoreControls = () => app.insertBefore(controls, scroll.el);
@@ -125,10 +129,12 @@ class GeoTimeline extends HTMLElement {
         ctx.filters = filters;
         ctx.scroll = scroll;
 
-        // Badges inside cards toggle filters.
+        // Badges inside cards toggle filters; thread links open the thread.
         app.addEventListener('click', e => {
             const badge = e.target.closest('.badge[data-group]');
             if (badge) toggleFilter(store, badge.dataset.group, badge.dataset.value);
+            const link = e.target.closest('.thread-link[data-thread]');
+            if (link) store.set({ thread: link.dataset.thread }, 'threads');
         });
         store.subscribe((state, prev) => {
             if (state.filters !== prev.filters) {
