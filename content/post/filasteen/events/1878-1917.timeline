@@ -1,0 +1,230 @@
+# Events 1878–1917. One event per `---` header; see
+# geotimeline/README.md for the format.
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1878-palestine-has-500-000-inhabitants
+when: 1878
+where: [palestine]  # TODO(migration): matched from the title; verify
+actors: [ottoman-empire]
+threads: [empty-land]
+details:
+  - {src: details/1878-context.details, title: "Ottoman Demographics"}
+---
+## Palestine has ~500,000 inhabitants
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1878-first-zionist-agricultural-colony-in
+when: 1878
+where: [petah-tikva]  # TODO(migration): matched from the title; verify
+---
+## First Zionist agricultural colony in Palestine (Petah Tikva) established.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1881-russian-pogroms-in-europe-zionist
+when: 1881
+actors: [european-jewry]
+---
+## Russian pogroms in Europe. Zionist movement begins to form.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1882-first-wave-of-jewish-immigrants
+when: 1882
+where: [palestine]  # TODO(migration): matched from the title; verify
+actors: [european-jewry]
+---
+## First wave of Jewish immigrants (25,000) begin to settle (Aliyah) in Palestine.
+
+Foundation of Rishon Lezion, Zichron Yaacov, and Rosh Pina in Palestine.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1890-zionism-is-coined
+when: 1890
+actors: [european-jewry, zionist-movement]
+---
+## 'Zionism' is coined
+
+First used by Nathan Birnbaum in publications of Kadimah, a Jewish student association in Vienna.
+
+While instrumental in the Zionist Congresses, later in life (~1919), Birnbaum would convert to Orthodox Judaism and reject political Zionism in favor of Jewish cultural autonomy.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1891-jewish-colonization-association-jca-founded
+when: 1891
+actors: [european-jewry, ottoman-empire]  # auto-tagged from text: ottoman-empire
+details:
+  - {src: details/1891-jca-pica-jnf.details, title: "Funding colonization"}
+---
+## Jewish Colonization Association (JCA) founded by Baron Maurice de Hirsch
+
+Its aim was to facilitate the mass emigration of Jews from Russia and other Eastern European countries, by settling them in agricultural settlements on lands purchased by the committee in North America (Canada and the United States), South America (Argentina and Brazil) and Palestine (then part of the Ottoman Empire).
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1896-der-judenstaat-published-by-theodor
+when: 1896
+actors: [european-jewry, zionist-movement]
+threads: [ethnic-cleansing]
+details:
+  - {src: details/1896-der-judenstaat.details, title: "Theodore Herzl's views"}
+---
+## Der Judenstaat published by Theodor Herzl
+
+Popularized the term 'Zionism'. Originally called 'Address to the Rothschilds', the pamphlet advocated for the establishment of a Jewish state as a solution to anti-Semitism in Europe.
+
+---
+id: 1897-08-29-first-zionist-congress-held-in
+when: 1897-08-29
+where: [basel]  # TODO(migration): matched from the title; verify
+actors: [zionist-movement]
+details:
+  - {src: details/1897-zionist-congress.details, title: "First Zionist Congress"}
+---
+## First Zionist Congress held in Basel, Switzerland
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1897-nahman-syrkin-calls-for-evacuation
+when: 1897
+where: [palestine]  # TODO(migration): matched from the title; verify
+themes: [rhetoric-zionist]
+---
+## [Nahman Syrkin](https://en.wikipedia.org/wiki/Nachman_Syrkin) calls for evacuation of Palestine for the Jews
+
+Syrkin, a prominent Zionist thinker, advocates for the evacuation of Palestine for the Jews.
+
+---
+id: 1898-08-28-second-zionist-congress-held-in
+when: 1898-08-28
+where: [basel]  # TODO(migration): matched from the title; verify
+actors: [zionist-movement, uk]  # auto-tagged from text: uk
+threads: [zionism-colonialism]
+details:
+  - {src: details/1898-zionist-congress.details, title: "Second Zionist Congress"}
+---
+## Second Zionist Congress held in Basel, Switzerland
+
+Jüdische Kolonialbank (Jewish Colonial Bank) is established (incorporated in London, UK) to support Jewish settlement in Palestine.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1894-dreyfus-affair-in-france
+when: 1894/1906
+actors: [european-jewry, france]
+---
+## Dreyfus Affair in France
+
+A French Jewish army officer is wrongfully convicted of treason, highlighting widespread anti-Semitism in Europe.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1901-jewish-national-fund-established-at
+when: 1901
+actors: [european-jewry, zionist-movement]
+---
+## Jewish National Fund established at the Fifth Zionist Congress
+
+JNF would acquire land in Palestine. The land was to be worked solely by Jews.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1904-second-wave-of-jewish-migration
+when: 1904/1914
+actors: [european-jewry, zionist-movement]
+---
+## Second wave of Jewish migration (40,000) from Europe
+
+Jews total 6% of the population.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1905-israel-zangwill-recognizes-that-for
+when: 1905
+themes: [rhetoric-zionist]
+---
+## [Israel Zangwill](https://en.wikipedia.org/wiki/Israel_Zangwill) recognizes that for Zionism entails Jews must drive out the Arabs.
+
+... or 'grapple with the problem of a large alien population.' Zangwill was a contemporary and supporter of Herzl until 1902. He supported the idea of Jewish colonization of Palestine ('small population of Arabs and fellahin and wandering, lawless, blackmailing Bedouin tribes'). However, by 1904 he came to realize that Palestine already had a people ('the Sanjak of Jerusalem is twice as thickly populated as the United States'). He  broke away from Zionism and founded an alternative Jewish Territorial Organization, supporting Jewish settlement in a land that was avilable.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1907-first-kibbutz-established-north-of
+when: 1907
+where: [jaffa]  # TODO(migration): matched from the title; verify
+---
+## First kibbutz established north of Jaffa
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1908-the-palestine-office-is-established
+when: 1908
+where: [palestine]  # TODO(migration): matched from the title; verify
+actors: [zionist-movement, haganah]  # auto-tagged from text: haganah
+---
+## The Palestine Office is established
+
+This is the operational arm of the World Zionist Organization. It will later become the Jewish Executive, found the Haganah, and eventually evolve into the Jewish Agency.
+
+---
+id: 1908-12-01-al-karmil-an-anti-zionist
+when: 1908-12-01
+actors: [uk, ottoman-empire]  # auto-tagged from text: uk, ottoman-empire
+themes: [rhetoric-palestinian]
+threads: [empty-land]
+---
+## Al-Karmil, an anti-Zionist newspaper, is first published.
+
+The owner/writer was Najib Nassar, a Palestinian Christian. He wrote extensively against Zionist efforts and their collaboration with Ottoman and later British rulers.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1909-tel-aviv-founded-as-a
+when: 1909
+where: [jaffa, tel-aviv]  # TODO(migration): matched from the title; verify
+---
+## Tel Aviv founded as a Jewish suburb of Jaffa
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1911-memo-to-zionist-executive-speaks
+when: 1911
+themes: [rhetoric-zionist]
+---
+## Memo to Zionist Executive speaks of 'limited population transfer'
+
+---
+id: 1911-01-15-falastin-newspaper-first-published
+when: 1911-01-15
+actors: [palestinians]
+themes: [rhetoric-palestinian]
+threads: [empty-land]
+---
+## Falastin Newspaper First Published
+
+Founded by two Palestinian Christian brothers, the paper became a leading voice against Zionism.
+
+---
+id: 1915-07-01-husayn-mcmahon-correspondence
+when: 1915-07-01/1916-03-01
+actors: [uk, ottoman-empire]  # auto-tagged from text: ottoman-empire
+details:
+  - {src: details/1915-husayn-mcmahon.details, title: "Evolving interpretations and resulting conflict"}
+---
+## Husayn-McMahon Correspondence
+
+The correspondence between the British High Commissioner in Egypt and the Sharif of Mecca, promising Arab independence in exchange for support against the Ottoman Empire.
+
+---
+id: 1917-11-02-balfour-declaration-issued
+when: 1917-11-02
+actors: [uk]
+details:
+  - {src: details/1917-balfour.details, title: "The Balfour Declaration"}
+---
+## Balfour Declaration Issued
+
+In a letter from Lord Balfour to Baron Rothschild, the British government avows support for a Jewish state.

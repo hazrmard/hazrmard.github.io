@@ -1,0 +1,14 @@
+# TODO(migration): draft periods. The old bgRender colours did not form
+# coherent eras, so these are suggestions; adjust labels, dates and colours.
+- id: ottoman
+  label: Late Ottoman Palestine
+  when: ../1917-12-09
+  color: "#5b8fd6"
+- id: british
+  label: British rule
+  when: 1917-12-09/1948-05-14
+  color: "#4f9a5e"
+- id: war-1947
+  label: 1947–1949 war
+  when: 1947-11-30/1949-07-20
+  color: "#d08a2e"

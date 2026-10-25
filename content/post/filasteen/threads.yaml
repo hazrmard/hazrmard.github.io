@@ -1,0 +1,11 @@
+# Guided threads. Members are the events that list the thread under
+# `threads:`; add `events: [ids]` here to set an explicit order.
+- id: empty-land
+  title: "Empty Land"
+  intro: ""  # TODO(migration): state the claim this thread examines
+- id: ethnic-cleansing
+  title: "Ethnic Cleansing"
+  intro: ""  # TODO(migration): state the claim this thread examines
+- id: zionism-colonialism
+  title: "Zionism != Colonialism"
+  intro: ""  # TODO(migration): state the claim this thread examines
