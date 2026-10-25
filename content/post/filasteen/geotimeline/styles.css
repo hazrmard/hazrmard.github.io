@@ -369,6 +369,85 @@ details.chart > summary .icon { width: 14px; height: 14px; }
 }
 .globe[data-layout="strip"].active { pointer-events: auto; }
 
+/* ------------------------------------------------------------ geo view */
+
+.stage {
+    position: fixed;
+    top: var(--gt-top, 0px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) min(26rem, 38vw);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas: "controls controls" "map sheet" "scrubber scrubber";
+    background: var(--gt-bg);
+}
+.stage-controls { grid-area: controls; }
+.stage-controls .controls { position: static; margin: 0; }
+.stage-map { grid-area: map; position: relative; overflow: hidden; }
+.globe[data-layout="stage"] {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    pointer-events: auto;
+    background: none;
+    touch-action: none;
+}
+.globe[data-layout="stage"] canvas { cursor: grab; }
+.sheet {
+    grid-area: sheet;
+    overflow-y: auto;
+    padding: 0.75rem;
+    border-left: 1px solid var(--gt-faint);
+    background: var(--gt-bg);
+}
+.sheet article {
+    padding: 0.7rem 0.9rem;
+    background: var(--gt-surface);
+    border: 1px solid var(--gt-border);
+    border-left: 3px solid var(--gt-accent);
+    border-radius: var(--gt-radius);
+}
+.sheet .title { font-size: 1.25em; }
+.sheet-empty, .no-place { color: var(--gt-muted); font-size: 0.9em; }
+.no-place { margin: 0.2rem 0 0; font-style: italic; }
+
+.scrubber {
+    grid-area: scrubber;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 0.75rem calc(0.4rem + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--gt-faint);
+    background: var(--gt-bg);
+}
+.scrub-buttons { display: flex; gap: 0.25rem; }
+.tool.icon-only { padding: 0.4rem; }
+.tool:disabled { opacity: 0.4; cursor: default; }
+.scrub-track { flex: 1; min-width: 0; height: 44px; cursor: pointer; touch-action: none; border-radius: var(--gt-radius); }
+.scrub-track:focus-visible { outline: 2px solid var(--gt-accent); outline-offset: 2px; }
+.scrub-axis { display: block; overflow: visible; }
+.scrub-line { stroke: var(--gt-border); stroke-width: 1; }
+.scrub-period { fill: var(--gt-faint); opacity: 0.9; }
+.scrub-tick { stroke: var(--gt-muted); stroke-width: 1; opacity: 0.55; }
+.scrub-tick.focused { stroke: var(--gt-accent); stroke-width: 2; opacity: 1; }
+.scrub-focus { fill: var(--gt-accent); stroke: var(--gt-bg); stroke-width: 2; }
+.scrub-label { fill: var(--gt-muted); font-size: 10px; }
+
+.app[data-view="geo"] .timeline { visibility: hidden; }
+.globe[data-layout="strip"] { cursor: pointer; }
+
+@media (max-width: 760px) {
+    .stage {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr) minmax(0, 42%) auto;
+        grid-template-areas: "controls" "map" "sheet" "scrubber";
+    }
+    .sheet { border-left: none; border-top: 1px solid var(--gt-faint); padding: 0.5rem; }
+}
+
 /* ---------------------------------------------------------------- debug */
 
 .debug {

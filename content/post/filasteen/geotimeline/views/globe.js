@@ -42,6 +42,14 @@ function toGeo(data, topojson) {
     return data;
 }
 
+// Land fill plus, when the file has one, a separate `coast` line layer (so
+// a clipped extract has no false coastline along its clip box).
+function toLand(data, topojson) {
+    const fill = toGeo(data, topojson);
+    const coast = data?.type === 'Topology' && data.objects.coast ? topojson.feature(data, data.objects.coast) : null;
+    return fill ? { fill, coast: coast ?? fill } : null;
+}
+
 function themeColors(el) {
     const s = getComputedStyle(el);
     const v = name => s.getPropertyValue(name).trim();
@@ -65,10 +73,10 @@ export async function createGlobe(ctx) {
     const path = d3.geoPath(projection, g);
     const graticule = d3.geoGraticule10();
 
-    const world = toGeo(await fetchJson(model.basemap.world ?? ''), topojson);
+    const world = toLand(await fetchJson(model.basemap.world ?? ''), topojson);
     const regionLand = new Map();
     for (const r of model.basemap.regions.values()) {
-        if (r.land) fetchJson(r.land).then(data => { regionLand.set(r.key, toGeo(data, topojson)); draw(); });
+        if (r.land) fetchJson(r.land).then(data => { regionLand.set(r.key, toLand(data, topojson)); draw(); });
     }
 
     let layout = 'side';
@@ -172,16 +180,21 @@ export async function createGlobe(ctx) {
         g.lineWidth = 0.6;
         g.stroke();
 
-        // Land: the region's detailed coast when zoomed in on it.
+        // Land: when zoomed in, a region's detailed coast over the world fill
+        // (fills are opaque, so the overlap does not show).
         const fine = view.zoom >= REGION_LAND_ZOOM ? [...regionLand.values()].filter(Boolean) : [];
-        for (const land of fine.length ? fine : [world]) {
-            if (!land) continue;
+        const layers = [world, ...fine].filter(Boolean);
+        g.fillStyle = c.land;
+        for (const land of layers) {
             g.beginPath();
-            path(land);
-            g.fillStyle = c.land;
+            path(land.fill);
             g.fill();
-            g.strokeStyle = c.coast;
-            g.lineWidth = 0.8;
+        }
+        g.strokeStyle = c.coast;
+        g.lineWidth = 0.8;
+        for (const land of fine.length ? fine : layers) {
+            g.beginPath();
+            path(land.coast);
             g.stroke();
         }
 
@@ -261,10 +274,15 @@ export async function createGlobe(ctx) {
     function refreshColors() {
         const t = themeColors(el);
         const a = rgba;
+        // Opaque mix of text into background, for fills that overlap.
+        const mix = k => {
+            const [r1, g1, b1] = toRgb(t.bg), [r2, g2, b2] = toRgb(t.text);
+            return `rgb(${Math.round(r1 + (r2 - r1) * k)}, ${Math.round(g1 + (g2 - g1) * k)}, ${Math.round(b1 + (b2 - b1) * k)})`;
+        };
         colors = {
             ocean: a(t.text, 0.035),
             graticule: a(t.text, 0.06),
-            land: a(t.text, 0.11),
+            land: mix(0.12),
             coast: a(t.text, 0.28),
             atmosphere: a(t.soft, 0.35),
             boundary: a(t.accent, 0.8),
@@ -350,6 +368,10 @@ export async function createGlobe(ctx) {
                 return resize();
             }
         }
+        // A new frame means a new target: a flight planned for the old
+        // geometry would land in the wrong place.
+        cancelAnimationFrame(frame);
+        anim = null;
         const id = store.get().focus;
         const event = id ? model.events.find(e => e.id === id) : null;
         view = viewFor(event) ?? view;

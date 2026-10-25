@@ -23,6 +23,7 @@ import { createDebugPanel, logDiagnostics } from './views/debug.js';
 import { createGlobe } from './views/globe.js';
 import { createChartRenderer } from './views/charts.js';
 import { createTracks } from './views/tracks.js';
+import { createGeoView, createViewSwitch } from './views/geo.js';
 
 const STYLE_URL = new URL('./styles.css', import.meta.url).href;
 let instances = 0;
@@ -107,10 +108,18 @@ class GeoTimeline extends HTMLElement {
         const filters = createFilters(ctx);
         const scroll = createScrollView(ctx);
         const tracks = createTracks(ctx);
-        const toolbar = h('div', { class: 'toolbar' }, filters.toolbarItems, tracks?.toggle);
-        const app = h('div', { class: 'app', dataset: { view: initial.view } },
-            h('div', { class: 'controls' }, toolbar, filters.panel, tracks?.drawer),
-            scroll.el);
+        const hasPlaces = model.events.some(e => e.where.some(w => w.lat !== null))
+            && Boolean(model.basemap.world || model.basemap.regions.size);
+        const toolbar = h('div', { class: 'toolbar' }, filters.toolbarItems, tracks?.toggle,
+            hasPlaces ? createViewSwitch(store) : null);
+        const controls = h('div', { class: 'controls' }, toolbar, filters.panel, tracks?.drawer);
+        const app = h('div', { class: 'app', dataset: { view: initial.view } }, controls, scroll.el);
+        ctx.controls = controls;
+        ctx.restoreControls = () => app.insertBefore(controls, scroll.el);
+        ctx.restoreGlobe = el => app.prepend(el);
+        const geo = hasPlaces ? createGeoView(ctx) : null;
+        if (geo) app.append(geo.el);
+        if (!hasPlaces && initial.view === 'geo') store.set({ view: 'scroll' });
         ctx.app = app;
         ctx.toolbar = toolbar;
         ctx.filters = filters;
@@ -144,15 +153,20 @@ class GeoTimeline extends HTMLElement {
         if (hashOn) syncHash(store, prefix, defaults);
         if (initial.focus) requestAnimationFrame(() => scroll.scrollToEvent(initial.focus, false));
 
-        const hasPlaces = model.events.some(e => e.where.some(w => w.lat !== null));
-        if (hasPlaces && (model.basemap.world || model.basemap.regions.size)) {
+        if (geo && store.get().view === 'geo') geo.enter();
+        if (hasPlaces) {
             ctx.columnRect = () => scroll.el.getBoundingClientRect();
             createGlobe(ctx).then(globe => {
                 ctx.globe = globe;
                 this.globe = globe;
                 app.prepend(globe.el);
                 globe.start();
+                geo.attachGlobe(globe);
                 this.trackGlobeVisibility(globe);
+                // On phones the bottom strip opens the map view.
+                globe.el.addEventListener('click', () => {
+                    if (store.get().view === 'scroll' && globe.el.dataset.layout === 'strip') store.set({ view: 'geo' }, 'strip');
+                });
             }).catch(e => console.warn('geo-timeline: globe unavailable:', e));
         }
 
