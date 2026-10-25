@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "check": "node check.mjs ../../content/post/filasteen/timeline.yaml"
+    "check": "node check.mjs ../../content/post/filasteen/timeline.yaml",
+    "e2e": "node --test e2e/*.test.mjs"
   },
   "devDependencies": {
     "@observablehq/plot": "0.6.16",

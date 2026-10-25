@@ -8,6 +8,9 @@ Writes timeline.yaml, events/*.timeline, facets.yaml, places.yaml,
 periods.yaml, sources.yaml, series.yaml and threads.yaml into the post
 directory. Existing files are overwritten. Everything the script guessed is
 marked with a `TODO(migration)` comment for the author to review.
+
+The inputs were deleted once the migration was done; they are in git history
+(commit cc32820, `content/post/filasteen/data.json` and `taxonomies.json`).
 """
 
 import json
