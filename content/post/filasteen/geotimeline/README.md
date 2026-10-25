@@ -12,11 +12,15 @@ In a Hugo page bundle, `{{< geotimeline src="timeline.yaml" >}}` emits the
 same markup plus a plain list of every event inside the element, for readers
 without JavaScript and for search engines. The renderer does not need Hugo.
 
-- No build step. Dependencies are pinned in `deps.js`.
+- No build step. Dependencies are pinned in `deps.js` and self-hosted under
+  `vendor/` (each with its licence). The page makes no third-party requests.
 - Validate data from the command line:
   `node tools/geotimeline/check.mjs content/post/filasteen/timeline.yaml --info`
   (run `npm install` in `tools/geotimeline` once).
 - On the page, `?debug` lists diagnostics and `?drafts` shows draft events.
+- Views: a scrolling list with a backdrop globe (default), and a map view
+  (List/Map switch, or `v=geo`) with a time scrubber; arrow keys step
+  through events there and Escape returns to the list.
 - State is kept in the URL hash: `#e=<event id>&v=geo&q=<search>&f.<group>=a,b&t=<thread>&m=hide&s=scaled`.
 
 ## Files

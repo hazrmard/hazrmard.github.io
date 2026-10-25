@@ -39,7 +39,7 @@ export function createGeoView(ctx) {
     const prev = h('button', { type: 'button', class: 'tool icon-only', 'aria-label': 'Previous event' }, icon('prev'));
     const play = h('button', { type: 'button', class: 'tool icon-only', 'aria-label': 'Play through events', 'aria-pressed': 'false' }, icon('play'));
     const next = h('button', { type: 'button', class: 'tool icon-only', 'aria-label': 'Next event' }, icon('next'));
-    const sheet = h('aside', { class: 'sheet', 'aria-label': 'Focused event' }, sheetBody);
+    const sheet = h('section', { class: 'sheet', 'aria-label': 'Focused event' }, sheetBody);
     const axis = h('svg:svg', { class: 'scrub-axis', 'aria-hidden': 'true' });
     const track = h('div', { class: 'scrub-track', role: 'slider', tabindex: '0', 'aria-label': 'Timeline', 'aria-valuemin': '0' }, axis);
     const scrubber = h('div', { class: 'scrubber' }, h('div', { class: 'scrub-buttons' }, prev, play, next), track);

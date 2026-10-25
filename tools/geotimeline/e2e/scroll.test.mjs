@@ -25,10 +25,12 @@ const state = page => page.evaluate(() => {
 const shadow = (page, fn, arg) => page.evaluate(([f, a]) => new Function('root', 'arg', `return (${f})(root, arg)`)(document.querySelector('geo-timeline').shadowRoot, a), [fn.toString(), arg]);
 
 test('renders all events without errors', async () => {
-    const { page, errors, context } = await open(browser, origin, PATH);
+    const { page, errors, external, context } = await open(browser, origin, PATH);
     const n = await shadow(page, root => root.querySelectorAll('.card').length);
     assert.equal(n, 110);
     assert.deepEqual(errors, []);
+    await page.waitForFunction(() => document.querySelector('geo-timeline').globe);
+    assert.deepEqual(external, [], 'dependencies are self-hosted');
     await context.close();
 });
 

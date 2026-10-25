@@ -9,7 +9,9 @@
     --gt-border: var(--resume-border, #cacfd2);
     --gt-accent: var(--c-brown, #806915);
     --gt-accent-soft: var(--c-gold, #d4be6a);
-    --gt-link: var(--c-gold-dark, #8a6d1f);
+    /* The theme's own link colour (--c-gold-dark) is 3:1 on light
+       surfaces; --c-brown passes 4.5:1 in both themes. */
+    --gt-link: var(--c-brown, #806915);
     --gt-muted: color-mix(in srgb, var(--gt-text) 62%, transparent);
     --gt-faint: color-mix(in srgb, var(--gt-text) 14%, transparent);
     --gt-radius: 6px;
@@ -27,6 +29,12 @@
 
 a { color: var(--gt-link); text-decoration: none; }
 a:hover { color: var(--gt-accent); text-decoration: underline; }
+/* Links inside text must not rely on colour alone. */
+.card a, .sheet a, .thread-intro a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
 
 button, input { font: inherit; color: inherit; }
 
@@ -317,7 +325,7 @@ details > .body { padding: 0.25rem 0 0.25rem 0.9rem; border-left: 1px solid var(
     padding-bottom: 0.2rem;
     border-bottom: 2px solid var(--period-color, var(--gt-faint));
 }
-.period-label { font-family: var(--gt-heading-font, inherit); font-size: 1.35em; font-weight: 600; }
+.period-label { margin: 0; font-family: var(--gt-heading-font, inherit); font-size: 1.35em; font-weight: 600; line-height: 1.3; }
 .period-when { font-size: 0.8em; color: var(--gt-muted); }
 
 .gap {

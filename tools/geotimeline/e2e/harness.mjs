@@ -67,6 +67,8 @@ export async function open(browser, origin, path, { width = 1280, height = 900, 
     await routeCdn(context);
     const page = await context.newPage();
     const errors = [];
+    const external = [];
+    page.on('request', r => { const host = new URL(r.url()).host; if (host === 'cdn.jsdelivr.net') external.push(r.url()); });
     page.on('pageerror', e => errors.push(String(e)));
     // External hosts other than the CDN are blocked on purpose; only report
     // failures of the site's own files and of the CDN.
@@ -77,5 +79,5 @@ export async function open(browser, origin, path, { width = 1280, height = 900, 
     });
     await page.goto(origin + path);
     await page.waitForFunction(() => document.querySelector('geo-timeline')?.store, null, { timeout: 15000 });
-    return { page, context, errors };
+    return { page, context, errors, external };
 }

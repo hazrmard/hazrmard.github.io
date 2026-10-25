@@ -110,4 +110,4 @@ villages), and datasets for series tracks.
 - [x] Phase 4
 - [x] Phase 5
 - [x] Phase 6
-- [ ] Phase 7
+- [x] Phase 7 (vendored deps, axe audit clean, 1k-event check passes without virtualisation)

@@ -1,8 +1,10 @@
-// Every third-party dependency, pinned to an exact version. Files are the
-// packages' own published builds, so a local copy (vendor/<same path>) is
-// byte-identical; switch BASE to self-host.
+// Every third-party dependency, pinned to an exact version. The files are
+// the packages' own published builds, self-hosted under vendor/ at the same
+// paths the CDN uses, so switching BASE to the CDN serves identical bytes.
+// Licences are next to each file.
 
-const BASE = 'https://cdn.jsdelivr.net/npm/';
+export const CDN = 'https://cdn.jsdelivr.net/npm/';
+const BASE = new URL('./vendor/', import.meta.url).href;
 
 export const FILES = {
     yaml: 'js-yaml@4.1.0/dist/js-yaml.mjs',

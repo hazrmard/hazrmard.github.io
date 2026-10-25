@@ -26,7 +26,8 @@ export function createScrollView(ctx) {
     const root = h('div', { class: 'timeline' }, gutter, list);
 
     for (const event of model.events) {
-        const li = h('li', { class: 'card', dataset: { id: event.id } }, renderCard(event, ctx));
+        // Periods are h2 headings, so events sit under them as h3.
+        const li = h('li', { class: 'card', dataset: { id: event.id } }, renderCard(event, ctx, { headingLevel: model.periods.length ? 3 : 2 }));
         cards.set(event.id, li);
     }
 
@@ -55,7 +56,7 @@ export function createScrollView(ctx) {
                 if (p.t0 <= event.t0 && (prev === null ? true : p.t0 > prev.t0) && p.t1 > event.t0) {
                     periodsStarted.add(p.id);
                     list.append(h('li', { class: 'period-start', style: p.color ? `--period-color: ${p.color}` : null },
-                        h('span', { class: 'period-label' }, p.label), h('span', { class: 'period-when' }, ctx.formatWhen(p.when))));
+                        h('h2', { class: 'period-label' }, p.label), h('span', { class: 'period-when' }, ctx.formatWhen(p.when))));
                 }
             }
             const li = cards.get(event.id);
