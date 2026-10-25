@@ -220,6 +220,15 @@ actors: [haganah, arab-liberation-army]  # auto-tagged from text: haganah, arab-
 id: 1948-01-31-by-end-of-january-1500
 when: 1948-01-31
 themes: [casualties]
+# TODO(data): figures as stated in this entry; add `sources:`
+data:
+  - mark: bar
+    title: Killed by the end of January 1948
+    unit: people
+    table: |
+      group,killed
+      Palestinians,1500
+      Jewish settlers,400
 ---
 ## By end of January, 1500 Palestinians and 400 Jewish settlers have been killed in attacks.
 

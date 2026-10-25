@@ -21,6 +21,8 @@ import { createScrollView } from './views/scroll.js';
 import { createFilters, toggleFilter } from './views/filters.js';
 import { createDebugPanel, logDiagnostics } from './views/debug.js';
 import { createGlobe } from './views/globe.js';
+import { createChartRenderer } from './views/charts.js';
+import { createTracks } from './views/tracks.js';
 
 const STYLE_URL = new URL('./styles.css', import.meta.url).href;
 let instances = 0;
@@ -101,11 +103,13 @@ class GeoTimeline extends HTMLElement {
             },
         };
 
+        ctx.renderCharts = createChartRenderer(ctx);
         const filters = createFilters(ctx);
         const scroll = createScrollView(ctx);
-        const toolbar = h('div', { class: 'toolbar' }, filters.toolbarItems);
+        const tracks = createTracks(ctx);
+        const toolbar = h('div', { class: 'toolbar' }, filters.toolbarItems, tracks?.toggle);
         const app = h('div', { class: 'app', dataset: { view: initial.view } },
-            h('div', { class: 'controls' }, toolbar, filters.panel),
+            h('div', { class: 'controls' }, toolbar, filters.panel, tracks?.drawer),
             scroll.el);
         ctx.app = app;
         ctx.toolbar = toolbar;

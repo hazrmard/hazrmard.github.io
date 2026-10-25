@@ -9,7 +9,7 @@
 //   stage  the geo view: the globe fills its container and can be dragged.
 
 import { loadTopojson } from '../deps.js';
-import { h, prefersReducedMotion } from './dom.js';
+import { h, prefersReducedMotion, toRgb } from './dom.js';
 import { fromAngles, toAngles, slerp, rotationTo } from './versor.js';
 
 const SIDE_MIN_MARGIN = 220;   // px of free space beside the column for `side`
@@ -48,10 +48,9 @@ function themeColors(el) {
     return { text: v('--gt-text') || '#1a1a1a', bg: v('--gt-bg') || '#fff', accent: v('--gt-accent') || '#806915', soft: v('--gt-accent-soft') || '#d4be6a' };
 }
 
-function rgba(color, alpha, probe) {
-    probe.style.color = color;
-    const m = /rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)/.exec(getComputedStyle(probe).color);
-    return m ? `rgba(${m[1]}, ${m[2]}, ${m[3]}, ${alpha})` : color;
+function rgba(color, alpha) {
+    const [r, g, b] = toRgb(color);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
 export async function createGlobe(ctx) {
@@ -60,8 +59,7 @@ export async function createGlobe(ctx) {
     const d3 = globalThis.d3;
 
     const canvas = h('canvas', { class: 'globe-canvas', 'aria-hidden': 'true' });
-    const probe = h('span', { hidden: true });
-    const el = h('div', { class: 'globe', 'data-layout': 'side' }, canvas, probe);
+    const el = h('div', { class: 'globe', 'data-layout': 'side' }, canvas);
     const g = canvas.getContext('2d');
     const projection = d3.geoOrthographic().precision(0.3);
     const path = d3.geoPath(projection, g);
@@ -262,7 +260,7 @@ export async function createGlobe(ctx) {
 
     function refreshColors() {
         const t = themeColors(el);
-        const a = (color, alpha) => rgba(color, alpha, probe);
+        const a = rgba;
         colors = {
             ocean: a(t.text, 0.035),
             graticule: a(t.text, 0.06),

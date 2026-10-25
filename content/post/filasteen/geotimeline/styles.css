@@ -313,6 +313,40 @@ details > .body { padding: 0.25rem 0 0.25rem 0.9rem; border-left: 1px solid var(
 
 .empty { padding: 2rem 0; text-align: center; color: var(--gt-muted); }
 
+/* --------------------------------------------------------------- charts */
+
+details.chart > summary .icon { width: 14px; height: 14px; }
+.chart-body { padding-right: 0; }
+.chart-body svg { max-width: 100%; height: auto; display: block; color: var(--gt-muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 0.2rem 0.9rem; margin: 0.35rem 0; padding: 0; list-style: none; font-size: 0.8em; }
+.legend li, .track-label { display: inline-flex; align-items: center; gap: 0.35rem; }
+.swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+.stat { padding: 0.4rem 0; }
+.stat-value { font-size: 2rem; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat-label, .chart-note { font-size: 0.8em; color: var(--gt-muted); }
+.chart-note { margin: 0.35rem 0 0; }
+.table-view > summary { font-size: 0.8em; }
+.table-scroll { overflow-x: auto; }
+.table-view table { border-collapse: collapse; font-size: 0.8em; margin-top: 0.3rem; font-variant-numeric: tabular-nums; }
+.table-view th, .table-view td { padding: 0.15rem 0.6rem 0.15rem 0; text-align: left; border-bottom: 1px solid var(--gt-faint); }
+.table-view td { text-align: right; }
+
+.tracks {
+    padding: 0.4rem 0.5rem 0.5rem;
+    background: color-mix(in srgb, var(--gt-bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gt-faint);
+}
+.track + .track { margin-top: 0.3rem; }
+.track-label { font-size: 0.75em; width: 100%; }
+.track-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.track-value { color: var(--gt-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.track-plot { display: block; overflow: visible; }
+.track-base { stroke: var(--gt-faint); stroke-width: 1; }
+.track-dot { stroke: var(--gt-bg); stroke-width: 1.5; }
+.track-focus { stroke: var(--gt-accent); stroke-width: 1.5; stroke-dasharray: 3 3; }
+
 /* ---------------------------------------------------------------- globe */
 
 .timeline { z-index: 1; }

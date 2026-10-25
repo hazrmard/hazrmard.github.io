@@ -46,3 +46,16 @@ export function icon(name) {
 export function prefersReducedMotion() {
     return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 }
+
+// Any CSS colour as [r, g, b, a] (0–255, alpha 0–1), via a canvas, which
+// normalises colours without needing the element to be rendered.
+let colorCtx = null;
+export function toRgb(color) {
+    colorCtx ??= document.createElement('canvas').getContext('2d');
+    colorCtx.fillStyle = '#000';
+    colorCtx.fillStyle = color;
+    const v = colorCtx.fillStyle;
+    if (v.startsWith('#')) return [1, 3, 5].map(i => parseInt(v.slice(i, i + 2), 16)).concat(1);
+    const m = /rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?/.exec(v);
+    return m ? [+m[1], +m[2], +m[3], m[4] === undefined ? 1 : +m[4]] : [0, 0, 0, 1];
+}

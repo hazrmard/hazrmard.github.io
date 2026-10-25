@@ -1,2 +1,19 @@
-# Timeline-wide quantitative series (drawn as tracks).
-{}
+# Timeline-wide quantitative series (drawn as tracks and usable from an
+# event with `data: [{series: key}]`).
+#
+# TODO(data): jewish-share is assembled from the percentages stated in the
+# timeline entries (1904–1914 wave: 6%; 1922 census: 11%; 1924–1928 wave:
+# 16%). The "third wave, 1919–1933" entry says 12%, which does not fit
+# between them, so it is left out until the dates and figures are checked
+# against a source.
+jewish-share:
+  label: Jewish share of population
+  mark: line
+  unit: "%"
+  x: year
+  y: share
+  table: |
+    year,share
+    1914,6
+    1922,11
+    1928,16

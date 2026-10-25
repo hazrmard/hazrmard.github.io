@@ -107,7 +107,7 @@ villages), and datasets for series tracks.
 - [x] Phase 1
 - [x] Phase 2
 - [x] Phase 3 (boundary sources pending author decision, D3)
-- [ ] Phase 4
+- [x] Phase 4
 - [ ] Phase 5
 - [ ] Phase 6
 - [ ] Phase 7

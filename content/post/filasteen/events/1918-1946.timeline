@@ -73,6 +73,17 @@ where: [palestine]  # TODO(migration): matched from the title; verify
 actors: [uk]  # auto-tagged from text: uk
 themes: [demographics]
 threads: [empty-land]
+# TODO(data): figures as stated in this entry; add `sources:`
+data:
+  - mark: bar
+    title: Religious composition, 1922 census
+    unit: "%"
+    table: |
+      group,share
+      Muslim,78
+      Jewish,11
+      Christian,9.6
+  - series: jewish-share
 ---
 ## British census of Palestine. 78% Muslim, 11% Jewish, 9.6% Christian. Total population: 757,182
 
@@ -100,6 +111,15 @@ id: 1929-08-23-riots-in-palestine-over-access
 when: 1929-08-23
 where: [jerusalem]  # TODO(migration): matched from the title; verify
 actors: [uk]  # auto-tagged from text: uk
+# TODO(data): figures as stated in this entry; add `sources:`
+data:
+  - mark: bar
+    title: Killed in the 1929 riots
+    unit: people
+    table: |
+      group,killed
+      Arabs,116
+      Jews,133
 ---
 ## Riots in Palestine over access to the Western Wall in Jerusalem.
 
