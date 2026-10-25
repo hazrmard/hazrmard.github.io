@@ -83,16 +83,19 @@ test('hidden once the timeline has scrolled past; a bottom strip on phones', asy
     await context.close();
 });
 
-test('a redraw is cheap enough for smooth rotation', async () => {
-    const { page, context } = await open(browser, origin, `${PATH}#e=${HAIFA}`, { reducedMotion: 'reduce' });
-    await waitGlobe(page);
-    await page.waitForTimeout(300);
-    const ms = await page.evaluate(() => {
-        const globe = document.querySelector('geo-timeline').globe;
-        const t0 = performance.now();
-        for (let i = 0; i < 30; i++) globe.redraw();
-        return (performance.now() - t0) / 30;
-    });
-    assert.ok(ms < 8, `draw takes ${ms.toFixed(2)} ms`);
-    await context.close();
+test('a redraw is cheap enough for smooth rotation, zoomed in and at globe scale', async () => {
+    for (const id of [HAIFA, BASEL]) {
+        const { page, context } = await open(browser, origin, `${PATH}#e=${id}`, { reducedMotion: 'reduce' });
+        await waitGlobe(page);
+        await page.waitForTimeout(300);
+        const ms = await page.evaluate(() => {
+            const globe = document.querySelector('geo-timeline').globe;
+            const t0 = performance.now();
+            for (let i = 0; i < 30; i++) globe.redraw();
+            return (performance.now() - t0) / 30;
+        });
+        console.log(`draw ${id}: ${ms.toFixed(2)} ms`);
+        assert.ok(ms < 8, `draw at ${id} takes ${ms.toFixed(2)} ms`);
+        await context.close();
+    }
 });

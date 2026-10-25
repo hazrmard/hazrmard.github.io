@@ -42,12 +42,36 @@ function toGeo(data, topojson) {
     return data;
 }
 
+// Splits geometry into parts with a bounding cap (centre, angular radius)
+// so parts that cannot be on screen are skipped when drawing.
+function parts(geo, d3) {
+    const out = [];
+    const add = geometry => {
+        const b = d3.geoBounds(geometry);
+        const center = d3.geoCentroid({ type: 'MultiPoint', coordinates: [b[0], b[1]] });
+        const corners = [b[0], b[1], [b[0][0], b[1][1]], [b[1][0], b[0][1]]];
+        const radius = Math.max(...corners.map(c => d3.geoDistance(center, c)));
+        out.push({ geometry, center, radius: Number.isFinite(radius) ? radius : Math.PI });
+    };
+    const walk = g => {
+        if (!g) return;
+        if (g.type === 'FeatureCollection') g.features.forEach(f => walk(f.geometry));
+        else if (g.type === 'Feature') walk(g.geometry);
+        else if (g.type === 'MultiPolygon') g.coordinates.forEach(c => add({ type: 'Polygon', coordinates: c }));
+        else if (g.type === 'MultiLineString') g.coordinates.forEach(c => add({ type: 'LineString', coordinates: c }));
+        else if (g.type === 'GeometryCollection') g.geometries.forEach(walk);
+        else add(g);
+    };
+    walk(geo);
+    return out;
+}
+
 // Land fill plus, when the file has one, a separate `coast` line layer (so
 // a clipped extract has no false coastline along its clip box).
-function toLand(data, topojson) {
+function toLand(data, topojson, d3) {
     const fill = toGeo(data, topojson);
     const coast = data?.type === 'Topology' && data.objects.coast ? topojson.feature(data, data.objects.coast) : null;
-    return fill ? { fill, coast: coast ?? fill } : null;
+    return fill ? { fill: parts(fill, d3), coast: coast ? parts(coast, d3) : null } : null;
 }
 
 function themeColors(el) {
@@ -69,14 +93,15 @@ export async function createGlobe(ctx) {
     const canvas = h('canvas', { class: 'globe-canvas', 'aria-hidden': 'true' });
     const el = h('div', { class: 'globe', 'data-layout': 'side' }, canvas);
     const g = canvas.getContext('2d');
-    const projection = d3.geoOrthographic().precision(0.3);
+    const projection = d3.geoOrthographic().precision(0.6);
     const path = d3.geoPath(projection, g);
-    const graticule = d3.geoGraticule10();
+    const pathString = d3.geoPath(projection);
+    const graticule = d3.geoGraticule().step([15, 15])();
 
-    const world = toLand(await fetchJson(model.basemap.world ?? ''), topojson);
+    const world = toLand(await fetchJson(model.basemap.world ?? ''), topojson, d3);
     const regionLand = new Map();
     for (const r of model.basemap.regions.values()) {
-        if (r.land) fetchJson(r.land).then(data => { regionLand.set(r.key, toLand(data, topojson)); draw(); });
+        if (r.land) fetchJson(r.land).then(data => { regionLand.set(r.key, toLand(data, topojson, d3)); draw(); });
     }
 
     let layout = 'side';
@@ -174,29 +199,34 @@ export async function createGlobe(ctx) {
         g.fillStyle = c.ocean;
         g.fill();
 
-        g.beginPath();
-        path(graticule);
-        g.strokeStyle = c.graticule;
-        g.lineWidth = 0.6;
-        g.stroke();
+        // The graticule helps read the globe; zoomed in it is only noise.
+        if (view.zoom < REGION_LAND_ZOOM) {
+            g.beginPath();
+            path(graticule);
+            g.strokeStyle = c.graticule;
+            g.lineWidth = 0.6;
+            g.stroke();
+        }
 
         // Land: when zoomed in, a region's detailed coast over the world fill
         // (fills are opaque, so the overlap does not show).
         const fine = view.zoom >= REGION_LAND_ZOOM ? [...regionLand.values()].filter(Boolean) : [];
         const layers = [world, ...fine].filter(Boolean);
+        const visible = onScreen();
+        // Each layer is projected once into a Path2D, reused for fill and
+        // stroke when the coast is the fill's own outline.
+        const project = list => {
+            let d = '';
+            for (const part of list) if (visible(part)) d += pathString(part.geometry) ?? '';
+            return new Path2D(d);
+        };
+        const fills = layers.map(land => project(land.fill));
         g.fillStyle = c.land;
-        for (const land of layers) {
-            g.beginPath();
-            path(land.fill);
-            g.fill();
-        }
+        for (const p of fills) g.fill(p);
         g.strokeStyle = c.coast;
         g.lineWidth = 0.8;
-        for (const land of fine.length ? fine : layers) {
-            g.beginPath();
-            path(land.coast);
-            g.stroke();
-        }
+        const stroked = fine.length ? fine : layers;
+        stroked.forEach(land => g.stroke(land.coast ? project(land.coast) : fills[layers.indexOf(land)]));
 
         for (const f of boundaries) {
             g.beginPath();
@@ -211,6 +241,18 @@ export async function createGlobe(ctx) {
         }
 
         drawEvents();
+    }
+
+    // A test for parts that may intersect the canvas: the screen spans at
+    // most (canvas diagonal / radius) radians of arc around its centre point.
+    function onScreen() {
+        const { w, h: ht } = size;
+        const scale = projection.scale();
+        const rot = projection.rotate();
+        const mid = projection.invert([w / 2, ht / 2]);
+        const center = mid && Number.isFinite(mid[0]) ? mid : [-rot[0], -rot[1]];
+        const reach = Math.min(Math.PI, Math.hypot(w, ht) / scale + 0.05);
+        return part => d3.geoDistance(center, part.center) - part.radius <= reach;
     }
 
     function visibleOnGlobe(lon, lat) {

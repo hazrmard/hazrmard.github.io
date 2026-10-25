@@ -13,7 +13,7 @@
   - `npm install` once.
   - `npm test` runs the model unit tests.
   - `npm run check` validates the data.
-  - `HUGO=… node --test e2e/*.test.mjs` runs the browser tests.
+  - `HUGO=… npm run e2e` runs the browser tests.
 
 ## Constraints
 
