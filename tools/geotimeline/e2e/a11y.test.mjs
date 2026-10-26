@@ -9,7 +9,7 @@ import { build, serve, chromium, open } from './harness.mjs';
 
 const require = createRequire(import.meta.url);
 const AXE = require.resolve('axe-core/axe.min.js');
-const PATH = '/post/filasteen/';
+const PATH = '/post/zz-geotimeline-e2e/';  // test page with the plain <geo-timeline> (site/)
 let browser, server, origin;
 
 before(async () => {

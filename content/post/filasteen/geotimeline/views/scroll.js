@@ -37,10 +37,11 @@ export function createScrollView(ctx, opts = {}) {
     gutter.setAttribute('aria-hidden', 'true');
     const root = h('div', { class: 'timeline' }, gutter, list);
 
+    // Cards sit one level under period headings, when the list has any.
+    const hasPeriods = model.periods.some(p => source.some(e => p.t0 <= e.t0 && e.t0 < p.t1));
     for (const event of source) {
-        // Cards sit one level under period headings.
         const li = h('li', { class: event.register === 'story' ? 'card story-event' : 'card', dataset: { id: event.id } },
-            renderCard(event, ctx, { headingLevel: Math.min(6, model.periods.length ? level + 1 : level) }));
+            renderCard(event, ctx, { headingLevel: Math.min(6, hasPeriods ? level + 1 : level) }));
         cards.set(event.id, li);
     }
 

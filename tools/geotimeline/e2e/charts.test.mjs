@@ -5,7 +5,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { build, serve, chromium, open } from './harness.mjs';
 
-const PATH = '/post/filasteen/';
+const PATH = '/post/zz-geotimeline-e2e/';  // test page with the plain <geo-timeline> (site/)
 const CENSUS = '1922-07-24-british-census-of-palestine-78';
 let browser, server, origin;
 

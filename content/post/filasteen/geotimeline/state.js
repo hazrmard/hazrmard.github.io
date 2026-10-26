@@ -23,6 +23,16 @@ export function createStore(initial) {
     };
 }
 
+const KEYS = ['e', 'v', 'q', 'm', 's', 't', 'r'];
+const isOwnKey = (key, prefix) => key.startsWith(prefix)
+    && (KEYS.includes(key.slice(prefix.length)) || key.startsWith(`${prefix}f.`));
+
+// Whether a hash carries timeline state, as opposed to an ordinary anchor
+// such as a footnote (#fn:1) or a heading.
+export function isStateHash(hash, prefix) {
+    return [...new URLSearchParams(hash.replace(/^#/, '')).keys()].some(k => isOwnKey(k, prefix));
+}
+
 export function readHash(hash, prefix, defaults) {
     const params = new URLSearchParams(hash.replace(/^#/, ''));
     const get = key => params.get(prefix + key);
@@ -45,9 +55,12 @@ export function readHash(hash, prefix, defaults) {
 }
 
 export function writeHash(state, prefix, defaults, currentHash) {
-    const params = new URLSearchParams(currentHash.replace(/^#/, ''));
+    // A plain anchor (no key=value pairs) is replaced; other parties' keys
+    // in a state hash are kept.
+    const current = currentHash.replace(/^#/, '');
+    const params = new URLSearchParams(current.includes('=') ? current : '');
     for (const key of [...params.keys()]) {
-        if (key.startsWith(prefix)) params.delete(key);
+        if (isOwnKey(key, prefix)) params.delete(key);
     }
     const put = (key, value) => { if (value) params.set(prefix + key, value); };
     put('e', state.focus);
@@ -80,6 +93,8 @@ export function syncHash(store, prefix, defaults) {
         }, 150);
     });
     addEventListener('hashchange', () => {
+        // Following an in-page anchor must not reset the state.
+        if (!isStateHash(location.hash, prefix)) return;
         writing = true;
         store.set(readHash(location.hash, prefix, defaults), 'hash');
         writing = false;

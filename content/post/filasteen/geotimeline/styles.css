@@ -534,6 +534,7 @@ details.chart > summary .icon { width: 14px; height: 14px; }
 .cutback .events { padding-bottom: 1rem; }
 .cutback-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.25rem 0 0.25rem var(--gutter-width, 2.5rem); }
 .cutback-return { font-size: 0.9em; }
+.cutback-more { white-space: normal; text-align: left; max-width: 100%; }
 .cutback-stub {
     display: flex; align-items: center; gap: 0.4rem; width: 100%;
     margin: 1rem 0; padding: 0.4rem 0.7rem;

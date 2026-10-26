@@ -23,7 +23,9 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/ja
 
 export async function build() {
     const out = await mkdtemp(join(tmpdir(), 'gt-site-'));
-    execFileSync(process.env.HUGO || 'hugo', ['-D', '--quiet', '-d', out, '--baseURL', 'http://localhost/'], { cwd: repo, stdio: 'inherit' });
+    // The overlay config mounts a test page with the plain <geo-timeline>.
+    const config = 'hugo.toml,tools/geotimeline/e2e/site/hugo.test.toml';
+    execFileSync(process.env.HUGO || 'hugo', ['-D', '--quiet', '--config', config, '-d', out, '--baseURL', 'http://localhost/'], { cwd: repo, stdio: 'inherit' });
     return out;
 }
 

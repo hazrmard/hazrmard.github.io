@@ -371,13 +371,11 @@ class GeoStory extends HTMLElement {
         });
     }
 
-    // Opens the explorer, e.g. from a cut-back's "see all" or a popover.
-    openTimeline({ focus = null, filters = null, thread = null } = {}) {
+    // Opens the explorer, e.g. from a cut-back's "see all" or a card's
+    // badge. Filters and thread are replaced, never merged with earlier ones.
+    openTimeline({ focus = null, filters = {}, thread = null } = {}) {
         if (!this.modes.includes('timeline')) return;
-        const patch = {};
-        if (filters) patch.filters = filters;
-        if (thread !== null) patch.thread = thread;
-        if (Object.keys(patch).length) this.store.set(patch, 'story');
+        this.store.set({ filters, thread, query: '' }, 'story');
         this.setReading('timeline', { focus });
     }
 
@@ -482,6 +480,14 @@ class GeoStory extends HTMLElement {
             this.openCard(a, event, true);
         });
         this.cardPop.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+        // Badges and thread links on the card open the timeline with them.
+        this.cardPop.addEventListener('click', e => {
+            const id = this.cardPop.querySelector('article')?.dataset.event;
+            const badge = e.target.closest('.badge[data-group]');
+            const thread = e.target.closest('.thread-link[data-thread]');
+            if (badge) this.openTimeline({ focus: id, filters: { [badge.dataset.group]: new Set([badge.dataset.value]) } });
+            else if (thread) this.openTimeline({ focus: id, thread: thread.dataset.thread });
+        });
         this.cardPop.addEventListener('mouseleave', () => { if (!this.pinned) hideTimer = setTimeout(() => this.closeCard(), 300); });
         addEventListener('keydown', e => { if (e.key === 'Escape' && !this.cardPop.hidden) { this.closeCard(); this.returnFocus(); } });
         addEventListener('pointerdown', e => {
@@ -498,7 +504,9 @@ class GeoStory extends HTMLElement {
         const actions = h('div', { class: 'popover-actions' },
             this.modes.includes('timeline') ? h('button', { type: 'button', class: 'tool', onclick: () => this.openTimeline({ focus: event.id }) }, 'Show in the timeline') : null,
             h('button', { type: 'button', class: 'tool icon-only', 'aria-label': 'Close', onclick: () => { this.closeCard(); this.returnFocus(); } }, icon('close')));
-        this.cardPop.replaceChildren(renderCard(event, { ...this.ctx, idPrefix: `${this.ctx.idPrefix}pop-` }, { headingLevel: 3 }), actions);
+        const card = renderCard(event, { ...this.ctx, idPrefix: `${this.ctx.idPrefix}pop-` }, { headingLevel: 3 });
+        card.dataset.event = event.id;
+        this.cardPop.replaceChildren(card, actions);
         this.cardPop.hidden = false;
         const r = link.getBoundingClientRect();
         const w = Math.min(380, innerWidth - 24);
@@ -616,8 +624,11 @@ class GeoCutback extends HTMLElement {
         const more = sel.all.length > sel.shown.length && story.modes.includes('timeline')
             ? h('button', {
                 type: 'button', class: 'tool cutback-more',
-                onclick: () => story.openTimeline({ focus: sel.all[0].id, filters: Object.keys(this.spec.filters).length ? this.spec.filters : null, thread: this.spec.thread }),
-            }, this.spec.more ?? `See all ${sel.all.length} events from ${spanLabel}`) : null;
+                // The explorer opens at the window's first event, narrowed by
+                // the cut-back's own filters or thread, so its events follow
+                // in order.
+                onclick: () => story.openTimeline({ focus: sel.all[0].id, filters: this.spec.filters, thread: this.spec.thread }),
+            }, this.spec.more ?? `Continue in the timeline: all ${sel.all.length} events from ${spanLabel}`) : null;
 
         const last = span ? span[1] : story.nowT;
         const footText = this.spec.converge

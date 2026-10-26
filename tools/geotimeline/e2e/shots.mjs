@@ -9,7 +9,7 @@ const browser = await chromium.launch();
 try {
     for (const [name, opts] of [['desktop-light', {}], ['desktop-dark', { colorScheme: 'dark' }],
         ['mobile-light', { width: 375, height: 740 }], ['mobile-dark', { width: 375, height: 740, colorScheme: 'dark' }]]) {
-        const { page, errors, context } = await open(browser, origin, '/post/filasteen/' + hash, opts);
+        const { page, errors, context } = await open(browser, origin, '/post/zz-geotimeline-e2e/' + hash, opts);
         await page.waitForTimeout(1500);
         await page.screenshot({ path: `${out}/${name}.png` });
         const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);

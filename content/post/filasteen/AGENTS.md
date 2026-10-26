@@ -1,15 +1,14 @@
 # filasteen: an interactive geo-timeline post
 
-`index.md` embeds `{{< geotimeline src="timeline.yaml" >}}` (shortcode in
-`layouts/shortcodes/geotimeline.html`).
+`index.md` is a story page: placeholder narrative sections woven with
+cut-backs to the timeline (`{{% story %}}`, `{{% cutback %}}`,
+`{{% woven %}}`, shortcodes in `layouts/shortcodes/`). The story's own
+moments are in `story.timeline`. See *Story pages* in
+`geotimeline/README.md`.
 
 - **Data**: `timeline.yaml` and the files it lists (`events/*.timeline`,
   `facets.yaml`, `places.yaml`, `periods.yaml`, `sources.yaml`, `series.yaml`,
   `threads.yaml`, `details/`, `data/`, `geo/`).
-- **Story pages**: `content/post/filasteen-story-demo/` is a draft demo
-  of a narrative that cuts back to this timeline (`{{% story %}}`,
-  `{{% cutback %}}`, `{{% woven %}}`; see *Story pages* in
-  `geotimeline/README.md`). Its text is placeholder.
 - **Renderer**: `geotimeline/`. It is data-agnostic and must stay that way:
   nothing in it may refer to this post's content. The data schema is
   documented in `geotimeline/README.md`.

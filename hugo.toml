@@ -11,7 +11,7 @@ enableRobotsTXT = true
 # [table] it would belong to that table and be ignored.) The geo-timeline
 # bundle's developer notes are markdown with shortcode examples, which Hugo
 # would otherwise parse and expand.
-ignoreFiles = [".+pptx$", ".venv", "filasteen/AGENTS\\.md$", "geotimeline/(README|PLAN)\\.md$", "geo/SOURCES\\.md$"]
+ignoreFiles = [".+pptx$", ".venv", "filasteen/AGENTS\\.md$", "geotimeline/README\\.md$", "geo/SOURCES\\.md$"]
 
 # hugo build parameters
 [pagination]

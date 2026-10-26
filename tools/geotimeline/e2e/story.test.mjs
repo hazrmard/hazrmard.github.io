@@ -8,7 +8,7 @@ import { createRequire } from 'node:module';
 import { build, serve, chromium, routeCdn } from './harness.mjs';
 
 const require = createRequire(import.meta.url);
-const PATH = '/post/filasteen-story-demo/';
+const PATH = '/post/filasteen/';
 let browser, server, origin;
 
 before(async () => {
@@ -24,7 +24,7 @@ after(async () => {
 async function openStory(hash = '', opts = {}) {
     const context = await browser.newContext({ viewport: { width: opts.width ?? 1280, height: opts.height ?? 900 }, reducedMotion: 'reduce', colorScheme: opts.colorScheme ?? 'light' });
     await routeCdn(context);
-    if (opts.stored) await context.addInitScript(v => localStorage.setItem(`geo-story:/post/filasteen-story-demo/:reading`, v), opts.stored);
+    if (opts.stored) await context.addInitScript(v => localStorage.setItem(`geo-story:/post/filasteen/:reading`, v), opts.stored);
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', e => errors.push(String(e)));
@@ -58,9 +58,9 @@ test('woven: prose with cut-backs, each a capped slice of the timeline', async (
     const { page, context, errors } = await openStory();
     const cbs = await cutbacks(page);
     assert.equal(cbs.length, 4);
-    assert.deepEqual(cbs.map(c => c.shown), [8, 3, 8, 7]);
-    assert.equal(cbs[0].total, 22);
-    assert.ok(cbs[0].more && !cbs[1].more);
+    assert.deepEqual(cbs.map(c => c.shown), [10, 10, 12, 2]);
+    assert.deepEqual(cbs.map(c => c.total), [22, 16, 67, 2]);
+    assert.deepEqual(cbs.map(c => c.more), [true, true, true, false]);
     assert.deepEqual(cbs.map(c => c.story), [0, 0, 0, 2], 'only the converging cut-back has story events');
     assert.ok(cbs.every(c => c.body && !c.stub));
     assert.ok(await page.locator('geo-woven').first().isVisible());
@@ -76,7 +76,7 @@ test('the focus follows the reader: story sections hold a scene, cut-backs focus
     await settle(page);
     let s = await state(page);
     assert.equal(s.focus, null);
-    assert.equal(s.scene, 'Rafah');
+    assert.equal(s.scene, 'Gaza');
     assert.ok(await page.evaluate(() => document.querySelector('geo-story').globe.el.classList.contains('quiet')), 'globe quiet in prose');
 
     await scrollToLine(page, `document.querySelectorAll('geo-cutback')[0].shadowRoot.querySelectorAll('.card')[2]`);
@@ -94,7 +94,7 @@ test('the focus follows the reader: story sections hold a scene, cut-backs focus
     await scrollToLine(page, `[...document.querySelectorAll('h2[data-when]')][2]`);
     await settle(page);
     s = await state(page);
-    assert.deepEqual([s.focus, s.scene], [null, 'Khan Yunis']);
+    assert.deepEqual([s.focus, s.scene], [null, 'Jerusalem']);
     const visited = await page.evaluate(() => [...document.querySelectorAll('geo-cutback')].map(c => c.visited));
     assert.deepEqual(visited, [true, true, false, false]);
     assert.equal(await page.evaluate(() => document.querySelector('geo-story').shadowRoot.querySelectorAll('.ribbon-span.visited').length), 2);
@@ -142,12 +142,12 @@ test('switching modes keeps the reader’s place', async () => {
     assert.equal(await page.evaluate(() => document.querySelector('h2[data-when]').checkVisibility()), false, 'prose hidden');
 
     // A story marker in the timeline returns to that section.
-    await page.evaluate(() => [...document.querySelector('geo-story').shadowRoot.querySelectorAll('.story-marker button')].find(b => b.textContent.includes('South')).click());
+    await page.evaluate(() => [...document.querySelector('geo-story').shadowRoot.querySelectorAll('.story-marker button')].find(b => b.textContent.includes('the story moves')).click());
     await page.waitForTimeout(400);
     s = await state(page);
     assert.equal(s.reading, 'woven');
-    const south = await page.evaluate(() => [...document.querySelectorAll('h2[data-when]')].find(h => h.textContent === 'South').getBoundingClientRect().top / innerHeight);
-    assert.ok(Math.abs(south - 0.4) < 0.05, `back at “South” (${south})`);
+    const moved = await page.evaluate(() => [...document.querySelectorAll('h2[data-when]')].find(h => h.textContent.includes('the story moves')).getBoundingClientRect().top / innerHeight);
+    assert.ok(Math.abs(moved - 0.4) < 0.05, `back at that section (${moved})`);
     await context.close();
 });
 
@@ -176,23 +176,23 @@ test('the reader’s choice is remembered when the URL does not say', async () =
 
 test('links in the prose show the event card and open it in the timeline', async () => {
     const { page, context } = await openStory();
-    const link = page.locator('a[href*="#e=1948-05-13"]');
+    const link = page.locator('a[href*="#e=1947-11-29-un-partition-plan"]');
     await link.hover();
     await page.waitForTimeout(150);
     const shown = () => page.evaluate(() => {
         const pop = document.querySelector('geo-story').shadowRoot.querySelector('.popover');
         return pop.hidden ? null : pop.querySelector('.title').textContent;
     });
-    assert.match(await shown(), /^In Jaffa/);
+    assert.match(await shown(), /^UN Partition Plan/);
     await link.click();
-    assert.match(await shown(), /^In Jaffa/, 'pinned on click');
-    assert.equal(await page.evaluate(() => location.hash.includes('1948-05-13')), false, 'no navigation');
+    assert.match(await shown(), /^UN Partition Plan/, 'pinned on click');
+    assert.equal(await page.evaluate(() => location.hash.includes('partition')), false, 'no navigation');
     await page.keyboard.press('Escape');
     assert.equal(await shown(), null);
     await link.click();
     await page.evaluate(() => [...document.querySelector('geo-story').shadowRoot.querySelectorAll('.popover button')].find(b => b.textContent.includes('timeline')).click());
     await page.waitForTimeout(400);
-    assert.deepEqual([(await state(page)).reading, (await state(page)).focus], ['timeline', '1948-05-13-in-jaffa-50-000-palestinians']);
+    assert.deepEqual([(await state(page)).reading, (await state(page)).focus], ['timeline', '1947-11-29-un-partition-plan']);
     await context.close();
 });
 
@@ -215,9 +215,50 @@ test('without JavaScript the story reads woven, with the event lists in place', 
     await routeCdn(context);
     const page = await context.newPage();
     await page.goto(origin + PATH);
-    assert.ok(await page.locator('text=Amal is nine').isVisible());
+    assert.ok(await page.locator('text=Placeholder story text').first().isVisible());
     assert.ok(await page.locator('geo-cutback').first().locator('li').first().isVisible());
-    assert.equal(await page.locator('geo-cutback .geo-timeline-fallback > li').count(), 22 + 3 + 11 + 7);
+    assert.equal(await page.locator('geo-cutback .geo-timeline-fallback > li').count(), 22 + 16 + 67 + 2);
+    await context.close();
+});
+
+test('in-page anchors do not reset the reading', async () => {
+    const { page, context } = await openStory('#r=story');
+    await page.evaluate(() => { location.hash = '#top'; });
+    await page.waitForTimeout(300);
+    assert.equal((await state(page)).reading, 'story');
+    await page.evaluate(() => { location.hash = '#r=timeline'; });
+    await page.waitForTimeout(300);
+    assert.equal((await state(page)).reading, 'timeline', 'state hashes still apply');
+    await context.close();
+});
+
+test('“Continue in the timeline” replaces earlier filters with the cut-back’s own', async () => {
+    const { page, context } = await openStory();
+    await page.evaluate(() => document.querySelector('geo-story').store.set({ filters: { actors: new Set(['lehi']) }, thread: 'empty-land' }));
+    const first = await page.evaluate(() => {
+        const cb = document.querySelector('geo-cutback');
+        cb.shadowRoot.querySelector('.cutback-more').click();
+        return cb.selection.all[0].id;
+    });
+    await page.waitForTimeout(500);
+    const s = await page.evaluate(() => {
+        const st = document.querySelector('geo-story').store.get();
+        return { reading: st.reading, focus: st.focus, filters: Object.keys(st.filters).length, thread: st.thread };
+    });
+    assert.deepEqual(s, { reading: 'timeline', focus: first, filters: 0, thread: null });
+    await context.close();
+});
+
+test('badges on a prose link’s card open the timeline filtered to them', async () => {
+    const { page, context } = await openStory();
+    await page.locator('a[href*="#e=1947-11-29-un-partition-plan"]').click();
+    await page.evaluate(() => document.querySelector('geo-story').shadowRoot.querySelector('.popover .badge[data-group]').click());
+    await page.waitForTimeout(400);
+    const s = await page.evaluate(() => {
+        const st = document.querySelector('geo-story').store.get();
+        return { reading: st.reading, focus: st.focus, filters: Object.fromEntries(Object.entries(st.filters).map(([k, v]) => [k, [...v]])) };
+    });
+    assert.deepEqual(s, { reading: 'timeline', focus: '1947-11-29-un-partition-plan', filters: { actors: ['un'] } });
     await context.close();
 });
 
