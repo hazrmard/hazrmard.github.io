@@ -1,0 +1,33 @@
+# Filterable dimensions. Any group key here can be used in an event header.
+# Emoji flag icons were dropped (they render as letters on Windows).
+actors:
+  label: Actors
+  values:
+    european-jewry: {label: "European Jewry", icon: "✡️"}
+    mizrahi-jewry: {label: "Mizrahi Jewry", icon: "🕎"}
+    us-jewry: {label: "US Jewry", icon: "🗽✡️"}
+    uk: {label: "UK"}
+    us: {label: "US"}
+    france: {label: "France"}
+    ottoman-empire: {label: "Ottoman Empire", icon: "🕌"}
+    zionist-movement: {label: "Zionist Movement"}
+    israel: {label: "Israel"}
+    palestinians: {label: "Palestinians"}
+    league-of-nations: {label: "League of Nations", icon: "🌐"}
+    un: {label: "United Nations", icon: "🕊️"}
+    haganah: {label: "Haganah"}
+    palmach: {label: "Palmach", parent: haganah}
+    irgun: {label: "Irgun"}
+    lehi: {label: "Lehi"}
+    idf: {label: "Israel Defense Forces"}
+    arab-liberation-army: {label: "Arab Liberation Army"}
+    arab-legion: {label: "Arab Legion"}
+    arab-league: {label: "Arab League"}
+themes:
+  label: Themes
+  values:
+    rhetoric: {label: "Rhetoric"}
+    demographics: {label: "Demographics", icon: "👥"}
+    casualties: {label: "Casualties", icon: "⚰️"}
+    rhetoric-zionist: {label: "Zionist Rhetoric", icon: "📢", parent: rhetoric}
+    rhetoric-palestinian: {label: "Palestinian Rhetoric", icon: "📣", parent: rhetoric}

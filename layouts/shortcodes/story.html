@@ -1,0 +1,42 @@
+{{- /*
+  Wraps a narrative that cuts back to a geo-timeline. Use the markdown form so
+  the prose inside is rendered:
+
+    {{% story %}}
+    ## Rafah, October 2023 {data-where="31.29,34.25" data-name="Rafah" data-when="2023-10-09"}
+    Prose…
+    {{% cutback from="1878" to="1917" title="Before the Mandate" max=10 %}}
+    {{% woven %}}Bridging text, shown only in the woven reading.{{% /woven %}}
+    {{% /story %}}
+
+  Settings come from the page's front matter:
+
+    [geotimeline]
+    src = "timeline.yaml"            # manifest (or "/post/bundle/timeline.yaml")
+    now = "2023-10-07"               # the story's present
+    modes = ["woven", "story", "timeline"]
+    default = "woven"
+    converge = true                  # `register: story` events join the timeline
+    cutback_stubs = true             # story mode leaves a one-line marker per cut-back
+    events = ["story.timeline"]      # the story's own events, in this bundle
+
+  Headings with data-where (a place key, or "lat,lon" with data-name) and/or
+  data-when start story sections. See geotimeline/README.md.
+*/ -}}
+{{- $cfg := .Page.Params.geotimeline | default dict -}}
+{{- $src := $cfg.src | default "timeline.yaml" -}}
+{{- $extra := $cfg.events | default slice -}}
+{{- $tl := partialCached "geotimeline/load.html" (dict "page" .Page "src" $src "extra" $extra) .Page.RelPermalink $src -}}
+{{- if not $tl.manifest -}}
+  {{- errorf "story: geotimeline manifest %q not found for %s" $src .Page.File.Path -}}
+{{- end -}}
+{{- $script := $tl.owner.Resources.Get "geotimeline/story.js" -}}
+{{- $urls := slice -}}
+{{- range $tl.extra -}}{{- $urls = $urls | append .RelPermalink -}}{{- end -}}
+{{- $modes := $cfg.modes | default (slice "woven" "story" "timeline") -}}
+<geo-story src="{{ $tl.manifest.RelPermalink }}"{{ with $cfg.now }} now="{{ . }}"{{ end }} modes="{{ delimit $modes "," }}"{{ with $cfg.default }} default="{{ . }}"{{ end }}{{ if $cfg.converge }} converge{{ end }}{{ if $cfg.cutback_stubs }} cutback-stubs{{ end }}{{ with $urls }} events="{{ delimit . "," }}"{{ end }}>
+
+{{ .Inner }}
+
+</geo-story>
+<script type="module" src="{{ $script.RelPermalink }}"></script>

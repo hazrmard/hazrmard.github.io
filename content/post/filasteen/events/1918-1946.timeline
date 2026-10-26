@@ -1,0 +1,173 @@
+# Events 1918–1946. One event per `---` header; see
+# geotimeline/README.md for the format.
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1919-chaim-weizmann-calls-for-palestine
+when: 1919
+where: [palestine]  # TODO(migration): matched from the title; verify
+themes: [rhetoric-zionist]
+---
+## Chaim Weizmann calls for Palestine 'as Jewish as England is English'
+
+Other members of the Zionist Commission to the Paris Peace Conference say 'as many Arabs as possible should be persuaded to emigrate.'
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1919-first-palestinian-national-congress-rejects
+when: 1919
+themes: [rhetoric-palestinian]
+---
+## First Palestinian National Congress rejects Balfour Declaration, demands independence.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1919-winston-churchill-pledges-support-to
+when: 1919
+themes: [rhetoric-zionist]
+---
+## Winston Churchill pledges support to the Zionist cause
+
+He writes 'there are Jews, whom we are pledged to introduce into Palestine, and who take it for granted that the local population will be cleared out to suit their convenience.'
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1919-third-wave-of-jewish-migration
+when: 1919/1933
+themes: [demographics]
+---
+## Third wave of Jewish migration (35,000) from Europe
+
+Jews make up 12% of the population and hold 3% of land.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1920-haganah-founded-as-underground-jewish
+when: 1920
+actors: [zionist-movement, haganah]  # auto-tagged from text: haganah
+---
+## Haganah founded as underground Jewish military organization.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1921-protests-in-jaffa-against-large
+when: 1921
+where: [jaffa]  # TODO(migration): matched from the title; verify
+actors: [palestinians]
+---
+## Protests in Jaffa against large-scale Zionist migration.
+
+---
+id: 1922-07-24-mandate-for-palestine
+when: 1922-07-24/1948-05-14
+where: [palestine]  # TODO(migration): matched from the title; verify
+actors: [uk, league-of-nations]
+---
+## Mandate for Palestine
+
+The League of Nations formally approved the British Mandate for Palestine.
+
+---
+id: 1922-07-24-british-census-of-palestine-78
+when: 1922-07-24
+where: [palestine]  # TODO(migration): matched from the title; verify
+actors: [uk]  # auto-tagged from text: uk
+themes: [demographics]
+threads: [empty-land]
+# TODO(data): figures as stated in this entry; add `sources:`
+data:
+  - mark: bar
+    title: Religious composition, 1922 census
+    unit: "%"
+    table: |
+      group,share
+      Muslim,78
+      Jewish,11
+      Christian,9.6
+  - series: jewish-share
+---
+## British census of Palestine. 78% Muslim, 11% Jewish, 9.6% Christian. Total population: 757,182
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1924-67-000-zionist-immigrants-arrive
+when: 1924/1928
+where: [palestine]  # TODO(migration): matched from the title; verify
+actors: [zionist-movement]
+themes: [demographics]
+---
+## 67,000 Zionist immigrants arrive in Palestine. Half are from Poland. Jewish population rises to 16%. Jews own 4% of land.
+
+---
+id: 1924-04-01-the-revionist-party-is-founded
+when: 1924-04-01
+where: [paris]  # TODO(migration): matched from the title; verify
+---
+## The Revionist Party is founded in Paris by Ze'ev Jabotinsky
+
+[Revisionist Zionism](https://en.wikipedia.org/wiki/Revisionist_Zionism) is characterized by territorial maximalism and calls for settling on both sides of the Jordan River.
+
+---
+id: 1929-08-23-riots-in-palestine-over-access
+when: 1929-08-23
+where: [jerusalem]  # TODO(migration): matched from the title; verify
+actors: [uk]  # auto-tagged from text: uk
+# TODO(data): figures as stated in this entry; add `sources:`
+data:
+  - mark: bar
+    title: Killed in the 1929 riots
+    unit: people
+    table: |
+      group,killed
+      Arabs,116
+      Jews,133
+---
+## Riots in Palestine over access to the Western Wall in Jerusalem.
+
+116 Arabs and 133 Jews are killed. Hebron massacre (Aug 24), where a mob of Palestinians kills 68 Jews. According to some historians, the uprising was also triggered by the refusal of Zionist leaders to accept British offers of shared representation in Palestine which was accepted by the Arab leadership.[1] According to other historians, the riots were caused by the mufti trying to strengthen his position by rousing fears of a Jewish takeover of the Temple Mount.[2] Scholars have also pointed to the transfer of land to the Jewish National Fund, which, along with rising concerns over land sales and immigration, contributed to socioeconomic anxieties that helped fuel the outbreak.
+
+---
+id: 1936-04-20-arab-revolt
+when: 1936-04-20/1939-04-30
+actors: [palestinians, uk]
+---
+## Arab Revolt
+
+14-17% of the adult male population is killed/wounded/exiled in the Arab Revolt against the British Mandate, demanding independence and the end of open-ended Jewish immigration and land purchases.
+
+---
+id: 1939-05-23-white-paper-of-1939-ratified
+when: 1939-05-23
+actors: [palestinians, uk, zionist-movement]
+---
+## White Paper of 1939 Ratified
+
+Rejects Peel Commission's recommendation to partition, limits Jewish immigration and land purchases. Zionist groups oppose it and launch militant attacks against British targets.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1940-yossef-weitz-head-of-the
+when: 1940
+themes: [rhetoric-zionist]
+threads: [ethnic-cleansing]
+---
+## Yossef Weitz, head of the Jewish National Fund's land acquisition department, writes 'The only solution is to transfer the Arabs from here to neighbouring countries. Not a single village or a single tribe must be let off.'
+
+In 1932, when Weitz joined the JNF, there were only 91,000 Jews in Palestine who owned just 2% of the land. Weitz oversaw the program to purchase properties from absentee landlords and run the Palestinian tenant farmers off their land. However it soon became clear that the purchase of small lots of land would not get close to fulfilling the Zionists' dream of creating a Jewish-majority state in the region of Palestine and that it would be necessary to force the exodus of the Arab population. Due to Weitz's role in the expulsion of Palestinian Arabs in 1948, he became known as the 'Architect of Transfer'
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1941-the-biltmore-conference-demands-for
+when: 1941
+where: [palestine, new-york]  # TODO(migration): matched from the title; verify
+actors: [us-jewry, zionist-movement]
+---
+## The Biltmore Conference - demands for the entirety of Mandatory Palestine
+
+---
+id: 1944-02-01-jewish-insurgency-against-british-rule
+when: 1944-02-01/1948-05-14
+actors: [uk]  # auto-tagged from text: uk
+---
+## Jewish insurgency against British rule
+
+Paramilitary terror campaign against British rule, following the 1939 White Paper. Between 1945-47, 260 deaths and 912 injuries occur. Highest casualties are British (616) and Palestinians (331).
