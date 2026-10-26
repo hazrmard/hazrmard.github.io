@@ -8,7 +8,9 @@ export const SECTIONS = ['facets', 'places', 'periods', 'sources', 'series', 'th
 const DATA_EXT = /\.(ya?ml|json)$/i;
 
 // `io` = {fetchText(url) -> Promise<string>, yamlLoad(text) -> any}
-export async function load(manifestUrl, io) {
+// `extraEvents`: further event files given as absolute URLs (a story page's
+// own events); paths inside them resolve against their own location.
+export async function load(manifestUrl, io, { extraEvents = [] } = {}) {
     const base = new URL(manifestUrl, globalThis.location?.href);
     const diagnostics = [];
     const manifestText = await io.fetchText(base.href);
@@ -59,7 +61,16 @@ export async function load(manifestUrl, io) {
         sections[name] = value;
         sectionFiles[name] = file;
     }
-    const streams = await Promise.all(streamJobs);
+    const extraJobs = extraEvents.map(async url => {
+        const file = new URL(url, globalThis.location?.href).pathname;
+        try {
+            return { file, text: await io.fetchText(url), base: new URL(url, globalThis.location?.href).href };
+        } catch (e) {
+            diagnostics.push({ level: 'error', file, line: null, message: `could not load events: ${e.message}` });
+            return { file, text: '' };
+        }
+    });
+    const streams = [...await Promise.all(streamJobs), ...await Promise.all(extraJobs)];
     return { base: base.href, manifest, sections, sectionFiles, streams, diagnostics };
 }
 

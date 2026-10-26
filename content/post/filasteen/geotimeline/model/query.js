@@ -65,6 +65,7 @@ export function selectEvents(model, state) {
     const out = new Set();
     for (const e of model.events) {
         if (e.draft && !showDrafts) continue;
+        if (state.hideStory && e.register === 'story') continue;
         if (inThread && !inThread.has(e.id)) continue;
         if (!matchesQuery(e, terms)) continue;
         if (!matchesFilters(e, state.filters, model.facets)) continue;

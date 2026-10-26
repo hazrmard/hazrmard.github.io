@@ -11,7 +11,7 @@ import { parseWhen, extent, formatWhen, parseDuration } from './dates.js';
 // facet group.
 export const EVENT_KEYS = new Set([
     'id', 'when', 'title', 'where', 'threads', 'sources', 'data', 'images',
-    'details', 'importance', 'draft',
+    'details', 'importance', 'draft', 'register',
 ]);
 
 export const DEFAULT_OPTIONS = {
@@ -346,7 +346,10 @@ export function normalize(loaded, deps) {
     const events = [];
     const ids = new Set();
     let order = 0;
-    for (const { file, text } of loaded.streams) {
+    for (const { file, text, base: streamBase } of loaded.streams) {
+        // Paths inside events resolve against their own file's base when it
+        // has one (event files supplied by a story page), else the manifest.
+        const resolveEvent = streamBase ? path => new URL(String(path), streamBase).href : resolve;
         const { records, diagnostics: d } = splitStream(text, file);
         diagnostics.push(...d);
         for (const rec of records) {
@@ -402,7 +405,7 @@ export function normalize(loaded, deps) {
                         name: w.name ?? null,
                         lat: Number.isFinite(lat) ? lat : null,
                         lon: Number.isFinite(lon) ? lon : null,
-                        geo: w.geo ? resolve(w.geo) : null,
+                        geo: w.geo ? resolveEvent(w.geo) : null,
                         region: w.region && regions.has(w.region) ? w.region : null,
                     });
                 }
@@ -436,17 +439,17 @@ export function normalize(loaded, deps) {
             }).filter(Boolean);
 
             const data = asList(header.data)
-                .map(spec => normalizeChart(spec, file, (level, f, m) => at(m, level), resolve))
+                .map(spec => normalizeChart(spec, file, (level, f, m) => at(m, level), resolveEvent))
                 .filter(Boolean);
 
             const images = asList(header.images).map(img =>
-                typeof img === 'string' ? { src: resolve(img), caption: null, credit: null }
-                    : isMapping(img) && img.src ? { src: resolve(img.src), caption: img.caption ?? null, credit: img.credit ?? null } : null,
+                typeof img === 'string' ? { src: resolveEvent(img), caption: null, credit: null }
+                    : isMapping(img) && img.src ? { src: resolveEvent(img.src), caption: img.caption ?? null, credit: img.credit ?? null } : null,
             ).filter(Boolean);
 
             const details = asList(header.details).map(d =>
-                typeof d === 'string' ? { src: resolve(d), title: null }
-                    : isMapping(d) && d.src ? { src: resolve(d.src), title: d.title ?? null } : null,
+                typeof d === 'string' ? { src: resolveEvent(d), title: null }
+                    : isMapping(d) && d.src ? { src: resolveEvent(d.src), title: d.title ?? null } : null,
             ).filter(Boolean);
 
             const facetText = Object.entries(facetValues)
@@ -477,6 +480,8 @@ export function normalize(loaded, deps) {
                 data,
                 importance: [1, 2, 3].includes(header.importance) ? header.importance : 2,
                 draft: header.draft === true,
+                // 'story' marks the narrative's own moments in a story page.
+                register: header.register === undefined ? 'history' : String(header.register),
                 file,
                 line: rec.line,
                 order: order++,

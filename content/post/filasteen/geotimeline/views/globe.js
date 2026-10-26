@@ -288,6 +288,15 @@ export async function createGlobe(ctx) {
             g.fill();
             if (grp.events.includes(focus)) focused = { x, y, grp };
         }
+        // A story section's place (no event focused): the same marker.
+        const scene = store.get().scene;
+        if (!focused && !focus && scene?.points?.length) {
+            const p = scene.points[0];
+            if (visibleOnGlobe(p.lon, p.lat)) {
+                const [x, y] = projection([p.lon, p.lat]);
+                focused = { x, y, grp: { name: p.name, approximate: false } };
+            }
+        }
         if (focused) {
             const { x, y, grp } = focused;
             g.beginPath();
@@ -384,12 +393,20 @@ export async function createGlobe(ctx) {
     }
 
     function focusChanged() {
-        const id = store.get().focus;
-        const event = id ? model.events.find(e => e.id === id) : null;
-        updateBoundaries(event);
+        const event = currentTarget();
+        updateBoundaries(event?.id ? event : null);
         const next = event ? viewFor(event) : null;
         if (next) flyTo(next);
         else draw();
+    }
+
+    // The focused event, else the story section's scene as a pseudo-event.
+    function currentTarget() {
+        const { focus, scene } = store.get();
+        const event = focus ? model.events.find(e => e.id === focus) : null;
+        if (event) return event;
+        if (scene?.points?.length) return { id: null, t0: scene.when ?? -Infinity, where: scene.points };
+        return null;
     }
 
     // ------------------------------------------------------------- sizing
@@ -414,9 +431,7 @@ export async function createGlobe(ctx) {
         // geometry would land in the wrong place.
         cancelAnimationFrame(frame);
         anim = null;
-        const id = store.get().focus;
-        const event = id ? model.events.find(e => e.id === id) : null;
-        view = viewFor(event) ?? view;
+        view = viewFor(currentTarget()) ?? view;
         draw();
     }
 
@@ -426,7 +441,7 @@ export async function createGlobe(ctx) {
     matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', refreshColors);
 
     store.subscribe((state, prev) => {
-        if (state.focus !== prev.focus) focusChanged();
+        if (state.focus !== prev.focus || state.scene !== prev.scene) focusChanged();
         else if (state.filters !== prev.filters || state.query !== prev.query || state.thread !== prev.thread) draw();
     });
 

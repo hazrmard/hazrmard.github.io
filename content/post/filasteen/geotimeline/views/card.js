@@ -71,7 +71,8 @@ export function renderCard(event, ctx, { headingLevel = 3 } = {}) {
     const titleId = `${ctx.idPrefix}t-${event.id}`;
     const where = event.where.filter(w => w.name);
     const header = h('header', {},
-        h('time', { datetime: event.when.start ? isoOf(event.when.start) : null }, event.whenLabel),
+        h('time', { datetime: event.when.start ? isoOf(event.when.start) : null },
+            event.register === 'story' ? h('span', { class: 'register-label' }, 'The story · ') : null, event.whenLabel),
         h(`h${headingLevel}`, { id: titleId, class: 'title', html: event.titleHtml }),
         (where.length || Object.keys(event.facets).length) ? h('div', { class: 'meta' },
             where.length ? h('span', { class: 'where' }, icon('pin'), where.map(w => w.name).join(', ')) : null,

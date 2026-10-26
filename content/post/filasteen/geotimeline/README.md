@@ -23,6 +23,91 @@ without JavaScript and for search engines. The renderer does not need Hugo.
   through events there and Escape returns to the list.
 - State is kept in the URL hash: `#e=<event id>&v=geo&q=<search>&f.<group>=a,b&t=<thread>&m=hide&s=scaled`.
 
+## Story pages
+
+A narrative post can cut back to a timeline and converge on the present
+(`story.js`, `<geo-story>`). In Hugo:
+
+```markdown
++++
+[geotimeline]
+src = "/post/filasteen/timeline.yaml"   # or a resource of this bundle
+now = "2023-10-07"                      # the story's present
+modes = ["woven", "story", "timeline"]  # which readings to offer, in this order
+default = "woven"
+converge = true                         # `register: story` events join the timeline
+cutback_stubs = true                    # story mode leaves a one-line marker per cut-back
+events = ["story.timeline"]             # the story's own events, in this bundle
++++
+
+{{% story %}}
+
+## Rafah, October 2023 {data-where="31.2969,34.2455" data-name="Rafah" data-region="levant" data-when="2023-10-09"}
+
+Prose. A link like [Jaffa](#e=<event id>) shows that event's card.
+
+{{% woven %}}Bridging text, shown only in the woven reading.{{% /woven %}}
+
+{{% cutback from="1878" to="1917" title="Before the Mandate" max=8 %}}
+
+## South {data-when="2023-10-28"}
+
+{{% cutback from="1949" to="now" converge=true %}}
+
+{{% /story %}}
+```
+
+Use the `{{% %}}` form for all three shortcodes, and put each cut-back on a
+line of its own. With `{{< >}}`, Hugo wraps the element in a paragraph and
+the browser moves its fallback list out of it.
+
+- **Story sections.** A heading with `data-where` and/or `data-when` starts a
+  story section; the prose up to the next such heading or cut-back belongs to
+  it.
+  - `data-where` is a place key, several keys separated by commas, or
+    `"lat,lon"` with `data-name` (and optionally `data-region` to zoom).
+  - A heading that gives only a place or only a date keeps the other from the
+    previous section.
+  - While a story section is under the reader, the globe holds on its place,
+    dimmed and kept out from behind the prose. On phones the map strip steps
+    aside.
+- **Cut-backs.** Each selects events by:
+  - `from` / `to`: dates at any precision. `to` includes all of its year or
+    month. `to="now"` is open-ended.
+  - `thread="id"`: the thread's own order.
+  - `events="id, id"`: that order.
+  - any facet group, e.g. `actors="haganah,uk"`.
+
+  Other attributes:
+  - `max` caps the events shown inline: the most important first, then an
+    even spread. A "See all" button (labelled by `more`) opens the rest in the
+    timeline.
+  - `converge` adds the story's own events (needs `converge = true` on the
+    page).
+- **Readings.** The switch in the sticky ribbon (also `#r=story` /
+  `#r=timeline` in the URL; the reader's choice is remembered):
+  - *woven*: prose and cut-backs.
+  - *story*: prose only; cut-backs become one-line stubs that open in place.
+  - *timeline*: the full explorer, with a "↩ The story" marker per section.
+
+  Switching keeps the reader's place: the same section, the same event, or the
+  nearest by date.
+- **The ribbon** spans the earliest cut-back to the story's present. Cut-backs
+  fill in once read, and a dot shows where the reader is in time.
+- **Story events** are ordinary events with `register: story`, kept in the
+  story's own `.timeline` file (paths in it resolve against that file). They
+  appear only in converging cut-backs and, with `converge`, the timeline.
+- **Diagnostics.** `?debug` also lists cut-backs that select nothing or show
+  more than 15 events without `max`, unknown places in headings, and
+  unparseable dates.
+- **Without JavaScript** the page reads woven, with each cut-back's events as
+  a static list.
+
+Without Hugo, write the elements directly:
+`<geo-story src="…" now="…" converge cutback-stubs events="…">`,
+`<geo-cutback from="…" to="…">`, `<geo-woven>`, and load
+`geotimeline/story.js` as a module.
+
 ## Files
 
 | File | Contents |
@@ -104,6 +189,8 @@ Each `###` heading starts a collapsible section.
 ```
 
 A `## heading` at the top of the body is the title, unless `title:` is set.
+`register: story` marks an event as one of a story page's own moments (see
+*Story pages*).
 Lines starting with `#` before the first `---` are file comments.
 
 ### Dates (`when`)

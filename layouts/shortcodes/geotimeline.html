@@ -3,57 +3,24 @@
 
     {{< geotimeline src="timeline.yaml" >}}
 
-  `src` is a page-bundle resource. Besides the <geo-timeline> element this
-  renders every event as a plain list inside it, so readers without
-  JavaScript and search engines get the content. The JavaScript renderer
-  replaces that list; it does not depend on this shortcode.
+  `src` is a page-bundle resource (or "/section/bundle/file" in another
+  bundle). Besides the <geo-timeline> element this renders every event as a
+  plain list inside it, so readers without JavaScript and search engines get
+  the content. The JavaScript renderer replaces that list; it does not depend
+  on this shortcode.
 
-  Optional: script="path/to/geo-timeline.js" (default: the bundle's
-  geotimeline/geo-timeline.js).
+  Optional: script="path/to/geo-timeline.js" (default: geotimeline/geo-timeline.js
+  in the manifest's bundle).
+
+  For a narrative that cuts back to a timeline, see story.html.
 */ -}}
-{{- $page := .Page -}}
 {{- $src := .Get "src" | default "timeline.yaml" -}}
-{{- $manifest := $page.Resources.Get $src -}}
-{{- if not $manifest -}}
-  {{- errorf "geotimeline: %q is not a resource of %s" $src $page.File.Path -}}
+{{- $tl := partialCached "geotimeline/load.html" (dict "page" .Page "src" $src "extra" slice) .Page.RelPermalink $src -}}
+{{- if not $tl.manifest -}}
+  {{- errorf "geotimeline: %q is not a resource of %s" $src .Page.File.Path -}}
 {{- end -}}
-{{- $script := $page.Resources.Get (.Get "script" | default "geotimeline/geo-timeline.js") -}}
-{{- $m := $manifest | transform.Unmarshal -}}
-{{- $dir := path.Dir $src -}}
-{{- $events := slice -}}
-{{- range $fileIndex, $file := $m.events -}}
-  {{- with $page.Resources.Get (path.Join $dir $file) -}}
-    {{- $text := replace .Content "\r\n" "\n" -}}
-    {{- $chunks := split (printf "\n%s\n" $text) "\n---\n" -}}
-    {{- $header := "" -}}
-    {{- range $i, $chunk := after 1 $chunks -}}
-      {{- if modBool $i 2 -}}
-        {{- $header = $chunk -}}
-      {{- else -}}
-        {{- $h := resources.FromString (printf "geotimeline/%s-%d-%d.yaml" (path.Base $file) $fileIndex $i) $header | transform.Unmarshal -}}
-        {{- if and (reflect.IsMap $h) $h.when -}}
-          {{- $when := $h.when -}}
-          {{- if eq (printf "%T" $when) "time.Time" -}}{{- $when = $when.Format "2006-01-02" -}}{{- end -}}
-          {{- $when = printf "%v" $when -}}
-          {{- $start := strings.TrimPrefix "~" (index (split $when "/") 0) -}}
-          {{- if eq (len $start) 4 -}}{{- $start = printf "%s-00-00" $start -}}{{- else if eq (len $start) 7 -}}{{- $start = printf "%s-00" $start -}}{{- end -}}
-          {{- $key := printf "%s|%04d|%05d" $start $fileIndex $i -}}
-          {{- $events = $events | append (dict "key" $key "when" $when "title" ($h.title | default "") "body" $chunk) -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-  {{- else -}}
-    {{- warnf "geotimeline: events file %q not found in %s" $file $page.File.Path -}}
-  {{- end -}}
-{{- end -}}
-<geo-timeline src="{{ $manifest.RelPermalink }}">
-<ol class="geo-timeline-fallback">
-{{- range sort $events "key" }}
-<li>
-<p><time>{{ .when }}</time>{{ with .title }} — <strong>{{ . }}</strong>{{ end }}</p>
-{{ .body | markdownify }}
-</li>
-{{- end }}
-</ol>
+{{- $script := $tl.owner.Resources.Get (.Get "script" | default "geotimeline/geo-timeline.js") -}}
+<geo-timeline src="{{ $tl.manifest.RelPermalink }}">
+{{ partial "geotimeline/fallback.html" $tl.events }}
 </geo-timeline>
 <script type="module" src="{{ $script.RelPermalink }}"></script>

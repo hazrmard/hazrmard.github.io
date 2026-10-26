@@ -1,0 +1,16 @@
+# The story's own moments (placeholder). `register: story` keeps them out of
+# the history until a converging cut-back or the timeline view brings them in.
+---
+id: story-amal-rafah
+when: 2023-10-09
+where: {lat: 31.2969, lon: 34.2455, name: Rafah, region: levant}
+register: story
+---
+## Amal keeps her shoes by the door
+---
+id: story-amal-south
+when: 2023-10-28
+where: {lat: 31.3462, lon: 34.3063, name: Khan Yunis, region: levant}
+register: story
+---
+## The family walks south

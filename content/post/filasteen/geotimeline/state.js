@@ -2,6 +2,7 @@
 // any state (focused event, view, filters, thread) can be linked to.
 //
 // Hash format: #e=<event id>&v=geo&q=<search>&m=hide&s=scaled&t=<thread>&f.<group>=a,b
+// and, on story pages, r=<reading mode> (woven | story | timeline).
 
 export function createStore(initial) {
     let state = initial;
@@ -39,6 +40,7 @@ export function readHash(hash, prefix, defaults) {
         spacing: get('s') === 'scaled' ? 'scaled' : get('s') === 'compressed' ? 'compressed' : defaults.spacing,
         thread: get('t') || null,
         filters,
+        reading: (defaults.readings ?? []).includes(get('r')) ? get('r') : defaults.reading,
     };
 }
 
@@ -54,6 +56,7 @@ export function writeHash(state, prefix, defaults, currentHash) {
     if (state.mode !== defaults.mode) put('m', state.mode);
     if (state.spacing !== defaults.spacing) put('s', state.spacing);
     put('t', state.thread);
+    if (state.reading && state.reading !== defaults.reading) put('r', state.reading);
     for (const [group, set] of Object.entries(state.filters)) {
         if (set.size) put(`f.${group}`, [...set].join(','));
     }

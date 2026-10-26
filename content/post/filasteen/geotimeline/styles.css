@@ -476,6 +476,111 @@ details.chart > summary .icon { width: 14px; height: 14px; }
     .sheet { border-left: none; border-top: 1px solid var(--gt-faint); padding: 0.5rem; }
 }
 
+/* ---------------------------------------------------------- story pages */
+
+/* <geo-story>: the prose is the page's own light-DOM content, slotted, so it
+   keeps the theme's typography. */
+.story-prose ::slotted(geo-woven), .story-prose ::slotted(geo-cutback) { display: block; }
+.story-prose ::slotted([hidden]) { display: none !important; }
+.story-prose ::slotted(*) { position: relative; z-index: 1; }
+
+.ribbon {
+    position: sticky;
+    top: var(--gt-top, 0px);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 -0.5rem 1rem;
+    padding: 0.3rem 0.5rem;
+    background: color-mix(in srgb, var(--gt-bg) 90%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gt-faint);
+}
+.ribbon-track { flex: 1; min-width: 0; width: 100%; height: 22px; overflow: visible; }
+.ribbon-line { stroke: var(--gt-border); stroke-width: 1; }
+.ribbon-span { fill: none; stroke: var(--gt-accent-soft); stroke-width: 1; }
+.ribbon-span.visited { fill: var(--gt-accent-soft); }
+.ribbon-now { stroke: var(--gt-accent); stroke-width: 2; }
+.ribbon-pos { fill: var(--gt-accent); stroke: var(--gt-bg); stroke-width: 2; }
+.ribbon-label { fill: var(--gt-muted); font-size: 9.5px; }
+.mode-switch { display: inline-flex; flex: none; }
+.mode-switch .tool { border-radius: 0; padding: 0.2rem 0.6rem; font-size: 0.85em; }
+.mode-switch .tool + .tool { margin-left: -1px; }
+.mode-switch .tool:first-child { border-radius: var(--gt-radius) 0 0 var(--gt-radius); }
+.mode-switch .tool:last-child { border-radius: 0 var(--gt-radius) var(--gt-radius) 0; }
+
+.story-explorer { --gt-top: var(--gt-explorer-top, 0px); position: relative; z-index: 1; }
+.story-status { position: relative; z-index: 1; }
+
+/* A cut-back reads as a different register from the prose: the archive. */
+.cutback {
+    margin: 2.5rem -0.5rem;
+    padding: 0.75rem 0.5rem 0.5rem;
+    border-top: 2px solid var(--gt-accent);
+    border-bottom: 1px solid var(--gt-faint);
+}
+.cutback-head { margin-bottom: 0.5rem; }
+.cutback-kicker {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    margin: 0; font-size: 0.72em; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--gt-accent);
+}
+.cutback.converge .cutback-kicker .icon { transform: rotate(180deg); }
+.cutback-title { margin: 0.15rem 0 0; font-family: var(--gt-heading-font, inherit); font-size: 1.6em; line-height: 1.2; }
+.cutback-sub { margin: 0.2rem 0 0; color: var(--gt-muted); font-size: 0.85em; }
+.cutback-skip { font-size: 0.8em; margin-top: 0.3rem; }
+.cutback .events { padding-bottom: 1rem; }
+.cutback-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.25rem 0 0.25rem var(--gutter-width, 2.5rem); }
+.cutback-return { font-size: 0.9em; }
+.cutback-stub {
+    display: flex; align-items: center; gap: 0.4rem; width: 100%;
+    margin: 1rem 0; padding: 0.4rem 0.7rem;
+    border: 1px dashed var(--gt-border); border-radius: var(--gt-radius);
+    background: transparent; color: var(--gt-muted); font-size: 0.85em; text-align: left; cursor: pointer;
+}
+.cutback-stub:hover, .cutback-stub[aria-expanded="true"] { border-color: var(--gt-accent); color: var(--gt-accent); }
+
+/* The story's own moments, among history events. */
+.card.story-event article { border-left-style: dashed; background: color-mix(in srgb, var(--gt-accent-soft) 10%, var(--gt-surface)); }
+.register-label { font-weight: 600; color: var(--gt-accent); }
+.story-marker { margin: 1rem 0 0.25rem; font-size: 0.85em; }
+.story-marker .link-button { font-style: italic; }
+
+.popover {
+    position: fixed;
+    z-index: 950;
+    max-height: min(60vh, 28rem);
+    overflow: auto;
+    padding: 0.5rem;
+    background: var(--gt-surface);
+    border: 1px solid var(--gt-border);
+    border-radius: var(--gt-radius);
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.18);
+}
+.popover article { border: none; box-shadow: none; padding: 0.25rem 0.4rem; }
+.popover-actions { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.4rem 0.4rem 0.1rem; }
+
+/* Quiet globe during story sections: kept out from behind the prose and
+   dimmed; on phones the strip steps aside entirely. */
+.globe.quiet { opacity: 0; }
+.globe.quiet.active { opacity: 0.6; }
+.globe.quiet canvas {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(var(--col-left, 30vw) - 64px), transparent var(--col-left, 30vw), transparent var(--col-right, 70vw), #000 calc(var(--col-right, 70vw) + 64px));
+    mask-image: linear-gradient(to right, #000 calc(var(--col-left, 30vw) - 64px), transparent var(--col-left, 30vw), transparent var(--col-right, 70vw), #000 calc(var(--col-right, 70vw) + 64px));
+}
+.globe[data-layout="strip"].quiet { opacity: 0 !important; pointer-events: none !important; }
+.globe[data-layout="stage"].quiet { opacity: 1; }
+.globe[data-layout="stage"].quiet canvas { -webkit-mask-image: none; mask-image: none; }
+
+@media (max-width: 600px) {
+    .ribbon { flex-wrap: wrap; gap: 0.25rem; }
+    .mode-switch { width: 100%; }
+    .mode-switch .tool { flex: 1; }
+    .cutback-title { font-size: 1.35em; }
+}
+
 /* ---------------------------------------------------------------- debug */
 
 .debug {

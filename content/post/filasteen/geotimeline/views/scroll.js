@@ -16,18 +16,31 @@ function yearsLabel(dt) {
     return months >= 2 ? `${months} months` : '1 month';
 }
 
-export function createScrollView(ctx) {
+// Options (all optional), used by story cut-backs and the story explorer:
+//   events       a fixed subset of events to list (default: all)
+//   fixed        ignore filters/search/display options: list `events` as is
+//   bounded      claim the focus only while the focus line is inside the list
+//   active       () => bool; when false the view neither claims focus nor scrolls
+//   autoScroll   false to not scroll to a focus set elsewhere
+//   markers      [{t, label, onClick}] rows placed at time t (story sections)
+//   headingLevel level of period headings (cards are one deeper); default 2
+//   label        accessible name of the list
+export function createScrollView(ctx, opts = {}) {
     const { model, store } = ctx;
+    const source = opts.events ?? model.events;
+    const active = opts.active ?? (() => true);
+    const level = opts.headingLevel ?? 2;
     const cards = new Map();
-    const list = h('ol', { class: 'events', 'aria-label': 'Events' });
+    const list = h('ol', { class: 'events', 'aria-label': opts.label ?? 'Events' });
     const gutter = document.createElementNS(SVG_NS, 'svg');
     gutter.setAttribute('class', 'gutter');
     gutter.setAttribute('aria-hidden', 'true');
     const root = h('div', { class: 'timeline' }, gutter, list);
 
-    for (const event of model.events) {
-        // Periods are h2 headings, so events sit under them as h3.
-        const li = h('li', { class: 'card', dataset: { id: event.id } }, renderCard(event, ctx, { headingLevel: model.periods.length ? 3 : 2 }));
+    for (const event of source) {
+        // Cards sit one level under period headings.
+        const li = h('li', { class: event.register === 'story' ? 'card story-event' : 'card', dataset: { id: event.id } },
+            renderCard(event, ctx, { headingLevel: Math.min(6, model.periods.length ? level + 1 : level) }));
         cards.set(event.id, li);
     }
 
@@ -40,14 +53,22 @@ export function createScrollView(ctx) {
     // ---------------------------------------------------------------- layout
 
     function rebuild() {
-        const state = store.get();
-        const matched = ctx.matched();
+        const state = opts.fixed ? { ...store.get(), mode: 'hide', spacing: 'compressed' } : store.get();
+        const matched = opts.fixed ? new Set(source.map(e => e.id)) : ctx.matched();
         list.replaceChildren();
-        visible = model.events.filter(e => (!e.draft || ctx.showDrafts) && (state.mode === 'dim' || matched.has(e.id)));
+        visible = source.filter(e => (!e.draft || ctx.showDrafts) && (state.mode === 'dim' || matched.has(e.id)));
         selectable = visible.filter(e => matched.has(e.id));
 
         let prev = null;
         const periodsStarted = new Set();
+        const markers = [...(opts.markers ?? [])].sort((a, b) => a.t - b.t);
+        const placeMarkers = upTo => {
+            while (markers.length && markers[0].t <= upTo) {
+                const m = markers.shift();
+                list.append(h('li', { class: 'story-marker' },
+                    h('button', { type: 'button', class: 'link-button', onclick: m.onClick }, m.label)));
+            }
+        };
         for (const event of visible) {
             // Period headings where a period begins (only for periods that
             // start inside the list, and once each).
@@ -56,7 +77,7 @@ export function createScrollView(ctx) {
                 if (p.t0 <= event.t0 && (prev === null ? true : p.t0 > prev.t0) && p.t1 > event.t0) {
                     periodsStarted.add(p.id);
                     list.append(h('li', { class: 'period-start', style: p.color ? `--period-color: ${p.color}` : null },
-                        h('h2', { class: 'period-label' }, p.label), h('span', { class: 'period-when' }, ctx.formatWhen(p.when))));
+                        h(`h${level}`, { class: 'period-label' }, p.label), h('span', { class: 'period-when' }, ctx.formatWhen(p.when))));
                 }
             }
             const li = cards.get(event.id);
@@ -64,12 +85,14 @@ export function createScrollView(ctx) {
             if (prev && dt >= model.options.gapYears) {
                 list.append(h('li', { class: 'gap', 'aria-hidden': 'true' }, h('span', {}, yearsLabel(dt))));
             }
+            placeMarkers(event.t0);
             li.style.marginTop = state.spacing === 'scaled' && prev
                 ? `${Math.min(SCALED_MAX_GAP, Math.max(0, dt * SCALED_PX_PER_YEAR))}px` : '';
             li.classList.toggle('dim', !matched.has(event.id));
             list.append(li);
             prev = event;
         }
+        placeMarkers(Infinity);
         if (visible.length === 0) {
             list.append(h('li', { class: 'empty' }, 'No events match these filters.'));
         }
@@ -189,11 +212,12 @@ export function createScrollView(ctx) {
     }
 
     function onScroll() {
-        if (!root.isConnected || store.get().view !== 'scroll' || performance.now() < suppressUntil) return;
+        if (!root.isConnected || !active() || store.get().view !== 'scroll' || performance.now() < suppressUntil) return;
         if (!positions.length) return;
         const line = innerHeight * FOCUS_LINE - list.getBoundingClientRect().top;
         // Above the list nothing new is focused; the last focus is kept.
         if (line < positions[0].top) return;
+        if (opts.bounded && line > positions[positions.length - 1].bottom) return;
         // Last card whose top is above the line.
         let lo = 0, hi = positions.length - 1;
         while (lo < hi) {
@@ -252,15 +276,16 @@ export function createScrollView(ctx) {
         scrollToEvent(li.dataset.id);
     });
 
-    store.subscribe((state, prev, source) => {
+    store.subscribe((state, prev, origin) => {
         const filtersChanged = state.filters !== prev.filters || state.query !== prev.query
             || state.mode !== prev.mode || state.spacing !== prev.spacing || state.thread !== prev.thread;
-        if (filtersChanged) rebuild();
+        if (filtersChanged && !opts.fixed) rebuild();
+        const follow = opts.autoScroll !== false && active();
         if (state.focus !== prev.focus) {
             markFocus(state.focus);
-            if (source !== 'scroll' && source !== 'click' && state.view === 'scroll' && state.focus) scrollToEvent(state.focus);
+            if (follow && origin !== 'scroll' && origin !== 'click' && state.view === 'scroll' && state.focus) scrollToEvent(state.focus);
         }
-        if (state.view !== prev.view && state.view === 'scroll' && state.focus) {
+        if (follow && state.view !== prev.view && state.view === 'scroll' && state.focus) {
             requestAnimationFrame(() => scrollToEvent(state.focus, false));
         }
     });
@@ -271,6 +296,8 @@ export function createScrollView(ctx) {
         el: root,
         scrollToEvent,
         relayout: schedule,
+        rebuild,
         card: id => cards.get(id),
+        contains: id => cards.has(id) && cards.get(id).isConnected,
     };
 }
