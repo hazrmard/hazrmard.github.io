@@ -212,6 +212,40 @@ details {
     border: 1px solid var(--c-brown-dark);
 }
 
+details.ai-assistance {
+    border: none;
+}
+.ai-assistance-value {
+    color: var(--c-gold-dark);
+    border-bottom: 1px dotted var(--resume-border);
+    transition: color 0.2s, border-color 0.2s;
+}
+.ai-assistance-summary:hover .ai-assistance-value,
+details.ai-assistance[open] .ai-assistance-value {
+    color: var(--c-brown);
+    border-bottom-color: var(--c-gold-dark);
+}
+.ai-meter-seg {
+    background-color: var(--resume-border);
+    opacity: 0.85;
+}
+.ai-meter-seg.is-filled {
+    background-color: var(--c-gold-dark);
+    opacity: 1;
+}
+.ai-assistance-note {
+    background-color: var(--resume-surface);
+    border-left: 2px solid var(--c-gold);
+    color: var(--text);
+}
+.ai-scale-legend li {
+    color: var(--c-teal-light);
+}
+.ai-scale-legend li.is-current {
+    color: var(--c-brown-dark);
+    font-weight: 600;
+}
+
 .connect {
     border-top: 1px solid var(--c-gold);
 }

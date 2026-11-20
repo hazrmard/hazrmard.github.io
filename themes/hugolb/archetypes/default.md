@@ -12,4 +12,5 @@ haspython = false
 tableofcontents = false
 draft = true
 image = ""
+ai_assistance = "None"  # "None", "AI review", "AI x human co-authors", "AI synthesis from notes"
 +++

@@ -83,6 +83,18 @@
           "title": "spotlight",
           "name": "spotlight",
           "type": "boolean"
+        },
+        {
+          "title": "AI assistance",
+          "name": "ai_assistance",
+          "type": "choice",
+          "default": "None",
+          "choices": [
+            "None",
+            "AI review",
+            "AI x human co-authors",
+            "AI synthesis from notes"
+          ]
         }
       ]
     }
