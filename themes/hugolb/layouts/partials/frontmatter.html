@@ -15,4 +15,7 @@
     <br/>Section: {{partial "breadcrumbs.html" . }}
     <!-- taxonomies -->
     {{partial "taxonomies.html" .}}
+    <!-- provenance & epistemic status disclosures (scales defined in data/meta_scales.toml) -->
+    {{ partial "meta_disclosure.html" (dict "page" . "param" "ai_assistance") }}
+    {{ partial "meta_disclosure.html" (dict "page" . "param" "epistemic_status") }}
 </div>

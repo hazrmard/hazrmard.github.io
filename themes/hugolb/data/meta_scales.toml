@@ -1,0 +1,61 @@
+# Definitions for front-matter provenance & epistemic disclosure scales
+# rendered by themes/hugolb/layouts/partials/meta_disclosure.html.
+#
+# How this file works:
+# - Each top-level table name must match the front-matter key name
+#   (e.g., [ai_assistance] reads .Params.ai_assistance).
+# - [[<param>.levels]] entries are ordered from lowest (0 filled meter bars)
+#   to highest (len(levels) - 1 filled meter bars). Array order IS the scale.
+# - Matching against front-matter values is case-insensitive on `label`.
+# - `desc` is shown inside the click-to-expand <details> disclosure.
+#
+# To add a new scale:
+# 1. Add a table and its ordered [[<param>.levels]] entries below.
+# 2. Render it in layouts/partials/frontmatter.html via meta_disclosure.html.
+# 3. Add the field to archetypes/default.md, archetypes/post.md, and frontmatter.json.
+
+[ai_assistance]
+key = "AI assistance"
+class = "ai-assistance"
+tooltip = "Click for details on the AI assistance scale"
+
+[[ai_assistance.levels]]
+label = "None"
+desc = "Written by the author without AI drafting or editing assistance."
+
+[[ai_assistance.levels]]
+label = "AI review"
+desc = "Written by the author; AI was used for copy-editing, clarity, or technical review."
+
+[[ai_assistance.levels]]
+label = "AI x human co-authors"
+desc = "Written collaboratively by the author and AI through shared drafting and iterative human editing."
+
+[[ai_assistance.levels]]
+label = "AI synthesis from notes"
+desc = "Synthesized and drafted by AI from the author's own notes, ideas, and code, then reviewed by the author."
+
+[epistemic_status]
+key = "Epistemic status"
+class = "epistemic-status"
+tooltip = "Click for details on the epistemic status scale"
+
+[[epistemic_status.levels]]
+label = "Log"
+desc = "Purely observational notes, personal experience, or raw debugging logs without broader claims."
+
+[[epistemic_status.levels]]
+label = "Speculative"
+desc = "Early exploration, untested hypothesis, or architectural brainstorming."
+
+[[epistemic_status.levels]]
+label = "Medium"
+desc = "Working theory or educated synthesis; supported by solid reasoning, though edge cases remain untested."
+
+[[epistemic_status.levels]]
+label = "High"
+desc = "Well-established best practice or backed by strong empirical testing and production experience."
+
+[[epistemic_status.levels]]
+label = "Certain"
+desc = "Verified directly via source code, formal proof, benchmarks, or official specifications."

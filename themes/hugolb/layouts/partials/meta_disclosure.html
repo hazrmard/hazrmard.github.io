@@ -1,0 +1,66 @@
+{{/*
+  Renders an unobtrusive, click-to-expand front-matter scale indicator
+  (e.g., AI assistance, Epistemic status) on single post and note pages.
+
+  Expected input dict:
+    - page:  the current Hugo Page context (.)
+    - param: front-matter key matching a table in data/meta_scales.toml
+
+  Behavior:
+    - Only renders on `post` and `note` content types (omitted on `project`, etc.).
+    - Omitted completely when the front-matter field is absent or blank.
+    - Matches the front-matter value case-insensitively against the scale's
+      ordered `levels` array; the matched 0-based index sets how many of the
+      `len(levels) - 1` meter bars are filled.
+    - If a custom/unrecognized value is supplied, the raw label still renders
+      at level 0, and the expandable note/legend is omitted ($desc remains "").
+    - Tagged `data-pagefind-ignore` so boilerplate legend copy doesn't pollute
+      site search results.
+*/}}
+{{- $page := .page -}}
+{{- $param := .param -}}
+{{- $scale := index site.Data.meta_scales $param -}}
+{{- if and $scale (in (slice "post" "note") $page.Type) -}}
+  {{- with index $page.Params $param -}}
+    {{- $raw := strings.TrimSpace . -}}
+    {{- if ne $raw "" -}}
+      {{- $needle := lower $raw -}}
+      {{- $label := $raw -}}
+      {{- $level := 0 -}}
+      {{- $desc := "" -}}
+      {{/* Locate the matching tier; array index (0..N-1) doubles as the meter fill level. */}}
+      {{- range $idx, $item := $scale.levels -}}
+        {{- if eq (lower $item.label) $needle -}}
+          {{- $label = $item.label -}}
+          {{- $level = $idx -}}
+          {{- $desc = $item.desc -}}
+        {{- end -}}
+      {{- end -}}
+      {{/* Meter has N - 1 segments so index 0 fills 0 bars and the final tier fills all bars. */}}
+      {{- $bars := seq (sub (len $scale.levels) 1) -}}
+      <details class="meta-disclosure {{ $scale.class }}" data-level="{{ $level }}" data-pagefind-ignore>
+        <summary class="meta-disclosure-summary" title="{{ $scale.tooltip }}">
+          <span class="meta-disclosure-key">{{ $scale.key }}:</span>
+          {{/* Group meter + value so they wrap together as one unit on narrow mobile screens. */}}
+          <span class="meta-disclosure-indicator">
+            <span class="meta-meter" aria-hidden="true">
+              {{- range $bars }}<span class="meta-meter-seg{{ if ge $level . }} is-filled{{ end }}"></span>{{ end -}}
+            </span>
+            <span class="meta-disclosure-value">{{ $label }}</span>
+          </span>
+        </summary>
+        {{/* Only render the explanation + scale legend when the value matched a known tier. */}}
+        {{- if $desc }}
+        <div class="meta-disclosure-note">
+          {{ $desc }}
+          <ul class="meta-scale-legend">
+            {{- range $idx, $item := $scale.levels }}
+            <li{{ if eq $level $idx }} class="is-current"{{ end }}><span class="meta-meter" aria-hidden="true">{{- range $bars }}<span class="meta-meter-seg{{ if ge $idx . }} is-filled{{ end }}"></span>{{ end -}}</span> {{ $item.label }}</li>
+            {{- end }}
+          </ul>
+        </div>
+        {{- end }}
+      </details>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
