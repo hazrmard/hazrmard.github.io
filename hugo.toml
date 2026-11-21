@@ -7,12 +7,16 @@ copyright = "Ibrahim Ahmed"
 # generate robots.txt (layouts/robots.txt) referencing the sitemap
 enableRobotsTXT = true
 
+# Files Hugo should not treat as site content. (Top level: placed under a
+# [table] it would belong to that table and be ignored.) The geo-timeline
+# bundle's developer notes are markdown with shortcode examples, which Hugo
+# would otherwise parse and expand.
+ignoreFiles = [".+pptx$", ".venv", "filasteen/AGENTS\\.md$", "geotimeline/README\\.md$", "geo/SOURCES\\.md$"]
+
 # hugo build parameters
 [pagination]
     pagerSize = 100
     paginatePath = "p"
-
-ignoreFiles = [".+pptx$", ".venv"]
 
 [security]
     allowContent = ["^text/html$", "text/markdown"]

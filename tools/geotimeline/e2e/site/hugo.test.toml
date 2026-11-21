@@ -1,0 +1,17 @@
+# Test-only overlay for the e2e build: mounts a page that embeds the plain
+# <geo-timeline> (the real post is a story page). Used by harness.mjs as
+#   hugo --config hugo.toml,tools/geotimeline/e2e/site/hugo.test.toml
+# Declaring mounts replaces Hugo's defaults, so the site's own are listed.
+[module]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "tools/geotimeline/e2e/site/content"
+    target = "content"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "static"
+    target = "static"

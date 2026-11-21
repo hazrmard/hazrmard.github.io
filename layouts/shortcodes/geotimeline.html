@@ -1,0 +1,26 @@
+{{- /*
+  Embeds a geo-timeline (content/post/filasteen/geotimeline/).
+
+    {{< geotimeline src="timeline.yaml" >}}
+
+  `src` is a page-bundle resource (or "/section/bundle/file" in another
+  bundle). Besides the <geo-timeline> element this renders every event as a
+  plain list inside it, so readers without JavaScript and search engines get
+  the content. The JavaScript renderer replaces that list; it does not depend
+  on this shortcode.
+
+  Optional: script="path/to/geo-timeline.js" (default: geotimeline/geo-timeline.js
+  in the manifest's bundle).
+
+  For a narrative that cuts back to a timeline, see story.html.
+*/ -}}
+{{- $src := .Get "src" | default "timeline.yaml" -}}
+{{- $tl := partialCached "geotimeline/load.html" (dict "page" .Page "src" $src "extra" slice) .Page.RelPermalink $src -}}
+{{- if not $tl.manifest -}}
+  {{- errorf "geotimeline: %q is not a resource of %s" $src .Page.File.Path -}}
+{{- end -}}
+{{- $script := $tl.owner.Resources.Get (.Get "script" | default "geotimeline/geo-timeline.js") -}}
+<geo-timeline src="{{ $tl.manifest.RelPermalink }}">
+{{ partial "geotimeline/fallback.html" $tl.events }}
+</geo-timeline>
+<script type="module" src="{{ $script.RelPermalink }}"></script>

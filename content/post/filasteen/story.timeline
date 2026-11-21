@@ -1,0 +1,17 @@
+# The story's own moments. `register: story` keeps them out of the history
+# until the converging cut-back (and the timeline view) brings them in.
+# TODO: replace these placeholders.
+---
+id: story-present
+when: 2023-10-07
+where: gaza
+register: story
+---
+## Placeholder: the story's present
+---
+id: story-now
+when: 2023-11
+where: gaza
+register: story
+---
+## Placeholder: where the story stands today
