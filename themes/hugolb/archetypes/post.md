@@ -14,4 +14,5 @@ draft = true
 image = ""
 spotlight = false   # feature this post in the homepage spotlight grid
 ai_assistance = "None"  # "None", "AI review", "AI x human co-authors", "AI synthesis from notes"
+epistemic_status = ""   # "certain", "high", "medium", "speculative", "log"
 +++

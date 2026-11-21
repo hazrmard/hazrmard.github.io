@@ -23,24 +23,24 @@
         {{- $level = 3 -}}
         {{- $desc = "Synthesized and drafted by AI from the author's own notes, ideas, and code, then reviewed by the author." -}}
       {{- end -}}
-      <details class="ai-assistance" data-ai-level="{{ $level }}" data-pagefind-ignore>
-        <summary class="ai-assistance-summary" title="Click for details on the AI assistance scale">
-          <span class="ai-assistance-key">AI assistance:</span>
-          <span class="ai-meter" aria-hidden="true">
-            <span class="ai-meter-seg{{ if ge $level 1 }} is-filled{{ end }}"></span>
-            <span class="ai-meter-seg{{ if ge $level 2 }} is-filled{{ end }}"></span>
-            <span class="ai-meter-seg{{ if ge $level 3 }} is-filled{{ end }}"></span>
+      <details class="meta-disclosure ai-assistance" data-ai-level="{{ $level }}" data-pagefind-ignore>
+        <summary class="meta-disclosure-summary" title="Click for details on the AI assistance scale">
+          <span class="meta-disclosure-key">AI assistance:</span>
+          <span class="meta-meter" aria-hidden="true">
+            <span class="meta-meter-seg{{ if ge $level 1 }} is-filled{{ end }}"></span>
+            <span class="meta-meter-seg{{ if ge $level 2 }} is-filled{{ end }}"></span>
+            <span class="meta-meter-seg{{ if ge $level 3 }} is-filled{{ end }}"></span>
           </span>
-          <span class="ai-assistance-value">{{ $label }}</span>
+          <span class="meta-disclosure-value">{{ $label }}</span>
         </summary>
         {{- if $desc }}
-        <div class="ai-assistance-note">
+        <div class="meta-disclosure-note">
           {{ $desc }}
-          <ul class="ai-scale-legend">
-            <li{{ if eq $level 0 }} class="is-current"{{ end }}><span class="ai-meter" aria-hidden="true"><span class="ai-meter-seg"></span><span class="ai-meter-seg"></span><span class="ai-meter-seg"></span></span> None</li>
-            <li{{ if eq $level 1 }} class="is-current"{{ end }}><span class="ai-meter" aria-hidden="true"><span class="ai-meter-seg is-filled"></span><span class="ai-meter-seg"></span><span class="ai-meter-seg"></span></span> AI review</li>
-            <li{{ if eq $level 2 }} class="is-current"{{ end }}><span class="ai-meter" aria-hidden="true"><span class="ai-meter-seg is-filled"></span><span class="ai-meter-seg is-filled"></span><span class="ai-meter-seg"></span></span> AI x human co-authors</li>
-            <li{{ if eq $level 3 }} class="is-current"{{ end }}><span class="ai-meter" aria-hidden="true"><span class="ai-meter-seg is-filled"></span><span class="ai-meter-seg is-filled"></span><span class="ai-meter-seg is-filled"></span></span> AI synthesis from notes</li>
+          <ul class="meta-scale-legend">
+            <li{{ if eq $level 0 }} class="is-current"{{ end }}><span class="meta-meter" aria-hidden="true"><span class="meta-meter-seg"></span><span class="meta-meter-seg"></span><span class="meta-meter-seg"></span></span> None</li>
+            <li{{ if eq $level 1 }} class="is-current"{{ end }}><span class="meta-meter" aria-hidden="true"><span class="meta-meter-seg is-filled"></span><span class="meta-meter-seg"></span><span class="meta-meter-seg"></span></span> AI review</li>
+            <li{{ if eq $level 2 }} class="is-current"{{ end }}><span class="meta-meter" aria-hidden="true"><span class="meta-meter-seg is-filled"></span><span class="meta-meter-seg is-filled"></span><span class="meta-meter-seg"></span></span> AI x human co-authors</li>
+            <li{{ if eq $level 3 }} class="is-current"{{ end }}><span class="meta-meter" aria-hidden="true"><span class="meta-meter-seg is-filled"></span><span class="meta-meter-seg is-filled"></span><span class="meta-meter-seg is-filled"></span></span> AI synthesis from notes</li>
           </ul>
         </div>
         {{- end }}
