@@ -30,13 +30,15 @@
       <details class="meta-disclosure epistemic-status" data-epistemic-level="{{ $level }}" data-pagefind-ignore>
         <summary class="meta-disclosure-summary" title="Click for details on the epistemic status scale">
           <span class="meta-disclosure-key">Epistemic status:</span>
-          <span class="meta-meter" aria-hidden="true">
-            <span class="meta-meter-seg{{ if ge $level 1 }} is-filled{{ end }}"></span>
-            <span class="meta-meter-seg{{ if ge $level 2 }} is-filled{{ end }}"></span>
-            <span class="meta-meter-seg{{ if ge $level 3 }} is-filled{{ end }}"></span>
-            <span class="meta-meter-seg{{ if ge $level 4 }} is-filled{{ end }}"></span>
+          <span class="meta-disclosure-indicator">
+            <span class="meta-meter" aria-hidden="true">
+              <span class="meta-meter-seg{{ if ge $level 1 }} is-filled{{ end }}"></span>
+              <span class="meta-meter-seg{{ if ge $level 2 }} is-filled{{ end }}"></span>
+              <span class="meta-meter-seg{{ if ge $level 3 }} is-filled{{ end }}"></span>
+              <span class="meta-meter-seg{{ if ge $level 4 }} is-filled{{ end }}"></span>
+            </span>
+            <span class="meta-disclosure-value">{{ $label }}</span>
           </span>
-          <span class="meta-disclosure-value">{{ $label }}</span>
         </summary>
         {{- if $desc }}
         <div class="meta-disclosure-note">

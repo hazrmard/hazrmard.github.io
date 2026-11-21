@@ -253,19 +253,31 @@ details.meta-disclosure {
 }
 .meta-disclosure-summary {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.45em;
+    gap: 0.1em 0.45em;
     cursor: pointer;
     list-style: none;
     user-select: none;
+    max-width: 100%;
 }
 .meta-disclosure-summary::-webkit-details-marker {
     display: none;
+}
+.meta-disclosure-key {
+    white-space: nowrap;
+}
+.meta-disclosure-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    min-width: 0;
 }
 .meta-meter {
     display: inline-flex;
     align-items: center;
     gap: 3px;
+    flex-shrink: 0;
     vertical-align: middle;
 }
 .meta-meter-seg {
