@@ -1111,7 +1111,7 @@
     // -------------------------------------------------------------------------
     function initRadixTreeWidget(container) {
         const modeButtons = Array.from(container.querySelectorAll("[data-mode]"));
-        let currentMode = "radix";
+        let currentMode = "direct";
 
         const ctrl = createTreeWidget(container, {
             buildModel: () =>
