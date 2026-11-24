@@ -1,0 +1,118 @@
+<div class="nlogn-widget" data-nlogn-widget="floor-explorer">
+    <div class="nw-card">
+        <div class="nw-header">
+            <div>
+                <h4 class="nw-title">The Floor Explorer</h4>
+                <p class="nw-subtitle">Combine how fast the answer space <em>N</em> grows with how many bits one operation extracts.</p>
+            </div>
+        </div>
+
+        <div class="nw-explorer-controls">
+            <div class="nw-choice-group">
+                <div class="nw-choice-title">1. Choices per item (sets <em>N</em> and <em>H</em>(<em>N</em>))</div>
+                <div class="nw-choice-list" role="radiogroup" aria-label="Choices per item">
+                    <button type="button" class="nw-choice-btn" data-choices="2">
+                        <div>
+                            <span class="nw-choice-main">2 choices (binary label)</span>
+                            <span class="nw-choice-meta">N = 2ⁿ &rarr; H(N) = n bits</span>
+                        </div>
+                        <span class="nw-choice-tag">n</span>
+                    </button>
+                    <button type="button" class="nw-choice-btn is-active" data-choices="n">
+                        <div>
+                            <span class="nw-choice-main">n choices (sorting / buckets)</span>
+                            <span class="nw-choice-meta">N = n! &rarr; H(N) &approx; n log₂ n bits</span>
+                        </div>
+                        <span class="nw-choice-tag">n log₂ n</span>
+                    </button>
+                    <button type="button" class="nw-choice-btn" data-choices="2n">
+                        <div>
+                            <span class="nw-choice-main">2ⁿ choices (pairwise rule)</span>
+                            <span class="nw-choice-meta">N = 2^(n²) &rarr; H(N) = n² bits</span>
+                        </div>
+                        <span class="nw-choice-tag">n²</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="nw-choice-group">
+                <div class="nw-choice-title">2. Outcomes per operation (bits / step)</div>
+                <div class="nw-choice-list" role="radiogroup" aria-label="Outcomes per operation">
+                    <button type="button" class="nw-choice-btn is-active" data-outcomes="2">
+                        <div>
+                            <span class="nw-choice-main">2 (yes/no comparison)</span>
+                            <span class="nw-choice-meta">log₂ 2 = 1.00 bit / step</span>
+                        </div>
+                        <span class="nw-choice-tag">1 bit</span>
+                    </button>
+                    <button type="button" class="nw-choice-btn" data-outcomes="10">
+                        <div>
+                            <span class="nw-choice-main">k = 10 (decimal digit)</span>
+                            <span class="nw-choice-meta">log₂ 10 &approx; 3.32 bits / step</span>
+                        </div>
+                        <span class="nw-choice-tag">3.32 bits</span>
+                    </button>
+                    <button type="button" class="nw-choice-btn" data-outcomes="n">
+                        <div>
+                            <span class="nw-choice-main">n (direct memory index)</span>
+                            <span class="nw-choice-meta">log₂ n bits / step</span>
+                        </div>
+                        <span class="nw-choice-tag">log₂ n</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="nw-formula-panel">
+            <div class="nw-formula-top">
+                <span class="nw-formula-lhs">Floor =</span>
+                <div class="nw-fraction" data-role="fraction">
+                    <div class="nw-frac-num" data-role="frac-num">n · log₂ n</div>
+                    <div class="nw-frac-den" data-role="frac-den">1</div>
+                </div>
+                <span class="nw-equals">&approx;</span>
+                <div class="nw-result-box">
+                    <div class="nw-result-sym" data-role="result-sym">O(n log n)</div>
+                    <div class="nw-result-num" data-role="result-num">8,530 min steps at n = 1,000</div>
+                </div>
+            </div>
+
+            <div style="text-align: center;" data-role="cancel-wrap" hidden>
+                <span class="nw-cancel-callout">The log₂ n factors cancel — leaving linear O(n)!</span>
+            </div>
+
+            <div class="nw-explorer-metrics">
+                <div class="nw-stat">
+                    <span class="nw-stat-label">Answer space N</span>
+                    <span class="nw-stat-value" data-role="metric-space">n!</span>
+                    <span class="nw-stat-sub" data-role="metric-space-sub">factorial orderings</span>
+                </div>
+                <div class="nw-stat">
+                    <span class="nw-stat-label">Entropy H(N) at n = 1,000</span>
+                    <span class="nw-stat-value" data-role="metric-entropy">8,529 bits</span>
+                    <span class="nw-stat-sub" data-role="metric-entropy-sub">exact log₂(1000!)</span>
+                </div>
+                <div class="nw-stat">
+                    <span class="nw-stat-label">Info per operation</span>
+                    <span class="nw-stat-value" data-role="metric-bpo">1.00 bit/step</span>
+                    <span class="nw-stat-sub" data-role="metric-bpo-sub">base-2 fork</span>
+                </div>
+            </div>
+
+            <div class="nw-bar-compare">
+                <div class="nw-bar-row">
+                    <span class="nw-bar-label">2-way baseline</span>
+                    <div class="nw-bar-track"><div class="nw-bar-fill is-base" data-role="bar-base" style="width: 100%;"></div></div>
+                    <span class="nw-bar-num" data-role="bar-base-num">8,530 steps</span>
+                </div>
+                <div class="nw-bar-row">
+                    <span class="nw-bar-label">Selected op</span>
+                    <div class="nw-bar-track"><div class="nw-bar-fill is-current" data-role="bar-cur" style="width: 100%;"></div></div>
+                    <span class="nw-bar-num" data-role="bar-cur-num">8,530 steps</span>
+                </div>
+            </div>
+
+            <p class="nw-explorer-note" data-role="explorer-note"></p>
+        </div>
+    </div>
+</div>
