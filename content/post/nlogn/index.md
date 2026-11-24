@@ -21,7 +21,7 @@ Recently, headlines have kept making the rounds about sub-$n \log n$ algorithms�
 
 My first reaction was skepticism. If a problem cares about ordering $n$ items, don't you need $\log n$ choices to uniquely place each item, repeated $n$ times? That gives $n \log n$. How could you possibly do better?
 
-The short answer is that $n \log n$ is not a universal speed limit. It is the speed limit of a very specific game. To see how algorithms beat it, we need to look at what $n \log n$ actually measures—and what happens when you stop playing by its rules.
+The short answer is that $n \log n$ is not a universal speed limit. It is the lower bound of a specific model of computation. To see how algorithms beat it, we need to look at what $n \log n$ actually measures—and which assumptions those algorithms drop.
 
 ## What $n \log n$ Actually Looks Like
 
@@ -33,7 +33,7 @@ Send all $n$ items down a tree of depth $\log_2 n$, and you pay $n \log_2 n$ tot
 
 {{< read src="post/nlogn/widget-binary-tree.html" >}}
 
-## The Hidden Rules of the Game
+## The Hidden Assumptions
 
 That intuition feels airtight, and under two specific conditions, it *is* airtight:
 
@@ -48,7 +48,7 @@ $$
 
 That same lens gives us a hard floor for any algorithm.
 
-Let $N$ be the total number of possible final answers to a problem. When every answer is equally likely (the worst case, $p_i = 1/N$), the entropy of the answer space simplifies to:
+Let $N$ be the total number of possible final answers to a problem. Note that $N$ is a function of the input size $n$, not the input size itself: for an input of $n = 4$ distinct numbers, finding the maximum has $N = n = 4$ possible answers (whichever of the 4 positions holds the largest value), whereas sorting those same 4 numbers has $N = n! = 24$ possible orderings. When every answer is equally likely (the worst case, $p_i = 1/N$), the entropy of the answer space simplifies to:
 
 $$
 H(N) = -\sum_{i=1}^{N} \frac{1}{N} \log_2 \frac{1}{N} = \log_2 N
@@ -87,7 +87,9 @@ One more nuance before we put the full picture together: having $H(N) = \log_2 N
 
 Compare searching a sorted list against finding the maximum of an unsorted list. Both have $N = n$ possible answers, so both have the exact same entropy: $H(n) = \log_2 n$ bits. Yet finding the max takes $n - 1$ comparisons, because each comparison only knocks out one loser—it cannot cut the remaining candidates in half.
 
-You only hit the $H(N) = \log_2 N$ floor when the problem's structure lets each operation split the remaining possibilities roughly in half.
+More generally, to reach $\log_k N = H(N) / \log_2 k$ steps with a $k$-ary operation over $N$ possible outcomes, each step must partition the remaining candidates **symmetrically (evenly)** into $k$ disjoint buckets of roughly $N/k$ outcomes. That is what lets every step shrink the answer space by division ($N \to N/k$) and extract the full $\log_2 k$ bits toward the answer.
+
+When an operation is **asymmetric**—say, checking *"is item $i$ the target?"* on an unsorted list, where one branch isolates $1$ outcome and the other leaves $N - 1$—the worst-case branch shrinks by subtraction ($N \to N - 1$) instead of division, so you never reach $\log_k N$. Finding the maximum runs into a related failure: `a > b` has two equally likely outcomes, yet on the answer space of $N$ candidate maxima it only discards a single loser, leaving $N - 1$ candidates alive either way because the remaining information is spent on relative order we do not need. You only hit the entropy floor when the problem's structure lets each operation carve the remaining answers into roughly equal, disjoint fractions.
 
 ## Bringing It All Together
 
