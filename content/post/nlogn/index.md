@@ -10,9 +10,9 @@ includes = ["./widgets.js"]
 hasequations = true
 haspython = false
 tableofcontents = true
-draft = true
+draft = false
 image = "./thumbnail.jpg"
-spotlight = false
+spotlight = true
 ai_assistance = "AI synthesis from notes"
 epistemic_status = "High"
 +++

@@ -11,7 +11,7 @@ tableofcontents = true
 draft = false
 slug = "surprise-derivation-entropy"
 image = "./thumbnail.jpg"
-spotlight = true
+spotlight = false
 +++
 
 In this post, I will derive entropy from first principles. This requires no more than a high school-level understanding of mathematics. This derivation is based on Shannon's original seminal paper, [*A mathematical theory of communication*](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf).
