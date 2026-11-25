@@ -83,6 +83,30 @@
           "title": "spotlight",
           "name": "spotlight",
           "type": "boolean"
+        },
+        {
+          "title": "AI assistance",
+          "name": "ai_assistance",
+          "type": "choice",
+          "default": "None",
+          "choices": [
+            "None",
+            "AI review",
+            "AI x human co-authors",
+            "AI synthesis from notes"
+          ]
+        },
+        {
+          "title": "Epistemic status",
+          "name": "epistemic_status",
+          "type": "choice",
+          "choices": [
+            "certain",
+            "high",
+            "medium",
+            "speculative",
+            "log"
+          ]
         }
       ]
     }
