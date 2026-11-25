@@ -1,0 +1,69 @@
+{{- /*
+  Reads a geo-timeline for the static fallback lists (the JavaScript renderer
+  parses the same files itself and does not need this).
+
+  Input:  dict "page" <page> "src" <manifest> "extra" <slice of event files>
+    src    a resource of the page ("timeline.yaml"), or "/section/bundle/file"
+           for a manifest in another page bundle
+    extra  event files that are resources of `page` (a story page's own events)
+  Output: dict
+    manifest  the manifest resource (or nil)
+    data      the manifest, unmarshalled
+    owner     the page whose bundle holds the manifest
+    events    slice of dicts {key, id, when, title, body, header, register},
+              sorted by date
+    threads   slice of thread mappings (from the manifest)
+    extra     the extra event resources
+*/ -}}
+{{- $page := .page -}}
+{{- $src := .src -}}
+{{- $owner := $page -}}
+{{- $manifest := $page.Resources.Get $src -}}
+{{- if and (not $manifest) (strings.HasPrefix $src "/") -}}
+  {{- with site.GetPage (path.Dir $src) -}}
+    {{- $owner = . -}}
+    {{- $manifest = .Resources.Get (path.Base $src) -}}
+  {{- end -}}
+{{- end -}}
+{{- $data := dict -}}
+{{- $events := slice -}}
+{{- $threads := slice -}}
+{{- $extra := slice -}}
+{{- if $manifest -}}
+  {{- $data = $manifest | transform.Unmarshal -}}
+  {{- $dir := path.Dir $manifest.Name -}}
+  {{- $files := slice -}}
+  {{- range $data.events -}}
+    {{- with $owner.Resources.Get (path.Join $dir .) -}}{{- $files = $files | append . -}}{{- else -}}{{- warnf "geotimeline: events file %q not found" . -}}{{- end -}}
+  {{- end -}}
+  {{- range .extra -}}
+    {{- with $page.Resources.Get . -}}{{- $files = $files | append . -}}{{- $extra = $extra | append . -}}{{- else -}}{{- warnf "geotimeline: story events file %q not found in %s" . $page.File.Path -}}{{- end -}}
+  {{- end -}}
+  {{- range $fileIndex, $res := $files -}}
+    {{- $text := replace $res.Content "\r\n" "\n" -}}
+    {{- $chunks := split (printf "\n%s\n" $text) "\n---\n" -}}
+    {{- $header := "" -}}
+    {{- range $i, $chunk := after 1 $chunks -}}
+      {{- if modBool $i 2 -}}
+        {{- $header = $chunk -}}
+      {{- else -}}
+        {{- $h := resources.FromString (printf "geotimeline/%s/%s-%d-%d.yaml" $owner.File.Dir (path.Base $res.Name) $fileIndex $i) $header | transform.Unmarshal -}}
+        {{- if and (reflect.IsMap $h) $h.when -}}
+          {{- $when := $h.when -}}
+          {{- if eq (printf "%T" $when) "time.Time" -}}{{- $when = $when.Format "2006-01-02" -}}{{- end -}}
+          {{- $when = printf "%v" $when -}}
+          {{- $start := strings.TrimPrefix "~" (index (split $when "/") 0) -}}
+          {{- if eq (len $start) 4 -}}{{- $start = printf "%s-00-00" $start -}}{{- else if eq (len $start) 7 -}}{{- $start = printf "%s-00" $start -}}{{- end -}}
+          {{- $key := printf "%s|%04d|%05d" $start $fileIndex $i -}}
+          {{- $events = $events | append (dict "key" $key "start" $start "id" (printf "%v" ($h.id | default "")) "when" $when "title" ($h.title | default "") "body" $chunk "header" $h "register" (printf "%v" ($h.register | default "history"))) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $events = sort $events "key" -}}
+  {{- with $data.threads -}}
+    {{- if reflect.IsSlice . -}}{{- $threads = . -}}
+    {{- else -}}{{- with $owner.Resources.Get (path.Join $dir .) -}}{{- $threads = . | transform.Unmarshal -}}{{- end -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return dict "manifest" $manifest "data" $data "owner" $owner "events" $events "threads" $threads "extra" $extra -}}

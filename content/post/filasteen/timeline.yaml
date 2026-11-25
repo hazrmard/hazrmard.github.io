@@ -1,0 +1,22 @@
+schema: 1
+title: Filasteen
+events:
+  - events/1878-1917.timeline
+  - events/1918-1946.timeline
+  - events/1947-1949.timeline
+facets: facets.yaml
+places: places.yaml
+periods: periods.yaml
+sources: sources.yaml
+series: series.yaml
+threads: threads.yaml
+basemap:
+  world: geo/land-110m.json
+  regions:
+    levant: {name: Levant, center: [35.1, 31.9], span: 4.2, land: geo/levant-10m.json}
+options:
+  view: scroll
+  spacing: compressed
+  gap_marker: 2y
+  filter_mode: dim
+  date_locale: en-GB

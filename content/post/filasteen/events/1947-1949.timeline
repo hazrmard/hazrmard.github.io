@@ -1,0 +1,643 @@
+# Events 1947–1949. One event per `---` header; see
+# geotimeline/README.md for the format.
+---
+id: 1947-04-22-lehi-kills-2-palestinians-5
+when: 1947-04-22
+actors: [lehi, uk]  # auto-tagged from text: lehi, uk
+---
+## Lehi kills 2 Palestinians, 5 British officers, and 3-year old in a train bombing.
+
+---
+id: 1947-05-15-lehi-bombs-cairo-haifa-train
+when: 1947-05-15
+actors: [lehi, uk]  # auto-tagged from text: lehi, uk
+---
+## Lehi bombs Cairo-Haifa train 7 times, killing 2 British officers, injuring several more.
+
+---
+id: 1947-08-09-irgun-bombs-and-kills-a
+when: 1947-08-09
+where: [lydda]  # TODO(migration): matched from the title; verify
+actors: [irgun, uk]  # auto-tagged from text: irgun, uk
+---
+## Irgun bombs and kills a Jewish engineer on a British train near Lydda.
+
+---
+id: 1947-08-15-haganah-kills-12-palestinians-1
+when: 1947-08-15
+where: [petah-tikva]  # TODO(migration): matched from the title; verify
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Haganah kills 12 Palestinians (1 woman, 6 children) near Petah Tikva
+
+Dynamiting houses becomes a common tactic used by Zionist militias going forward.
+
+---
+id: 1947-11-02-haganah-begins-mobilizing-for-war
+when: 1947-11-02
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Haganah begins mobilizing for war
+
+Orders issued for all men between 17-25 to register for military service.
+
+---
+id: 1947-11-12-lehi-kills-1-british-soldier
+when: 1947-11-12
+where: [haifa]  # TODO(migration): matched from the title; verify
+actors: [lehi, uk]  # auto-tagged from text: lehi, uk
+---
+## Lehi kills 1 British soldier, woulds 3 more near Haifa.
+
+---
+id: 1947-11-13-lehi-attacks-patrons-at-the
+when: 1947-11-13
+where: [jerusalem]  # TODO(migration): matched from the title; verify
+actors: [lehi]  # auto-tagged from text: lehi
+---
+## Lehi attacks patrons at the Ritz coffee shop, injuring 28 in Jerusalem.
+
+---
+id: 1947-11-15-lehi-kills-2-british-policemen
+when: 1947-11-15
+where: [jerusalem]  # TODO(migration): matched from the title; verify
+actors: [lehi, uk]  # auto-tagged from text: lehi, uk
+---
+## Lehi kills 2 British policemen in Jerusalem.
+
+---
+id: 1947-11-19-lehi-assassinates-5-members-of
+when: 1947-11-19
+actors: [lehi, uk]  # auto-tagged from text: lehi, uk
+---
+## Lehi assassinates 5 members of Shubaki Family.
+
+The assassination was premeditated as a reprisal for for Shubaki family allegedly providing information to the British that led to the capture of Lehi members.
+
+---
+id: 1947-11-29-un-partition-plan
+when: 1947-11-29
+actors: [un]
+---
+## UN Partition Plan
+
+The United Nations General Assembly adopted Resolution 181 (II), which recommended the adoption and implementation of a Plan of Partition with Economic Union.
+
+---
+id: 1947-11-30-arab-militants-belonging-to-the
+when: 1947-11-30
+actors: [un]  # auto-tagged from text: un
+---
+## Arab militants belonging to the Abu Qishq gang attack Jewish buses, killing 7.
+
+Flyers appearing afterwards claimed the attack was in retaliation for the Shubaki family assassination. It's later reported to Ben Gurion that the attacks were unrelated to the UN Resolution.
+
+---
+id: 1947-12-01-irgun-and-haganah-begin-urban
+when: 1947-12-01
+where: [haifa]  # TODO(migration): matched from the title; verify
+actors: [haganah, palmach, irgun]  # auto-tagged from text: haganah, palmach, irgun
+---
+## Irgun and Haganah begin urban terror campaign against 75,000 Palestinians in Haifa.
+
+Special units of the Haganah comprising of undercover operatives, called mistravim (becoming Arab), use sniper and machine gun fire and barrel bombs to terrorize Arab neighborhoods. The official historian of the Palmach surmises: 'The Palestinians [in Haifa] were from December onwards under siege and intimidation.'
+
+---
+id: 1947-12-01-arab-irregulars-of-the-volunteer
+when: 1947-12-01
+where: [palestine]  # TODO(migration): matched from the title; verify
+actors: [arab-liberation-army]  # auto-tagged from text: arab-liberation-army
+---
+## Arab irregulars of the volunteer Arab Liberation Army begin trickling into Palestine and begin attacking Jewish convoys.
+
+---
+id: 1947-12-18-15-palestinians-including-5-children
+when: 1947-12-18
+where: [khisas]  # TODO(migration): matched from the title; verify
+actors: [palmach]  # auto-tagged from text: palmach
+---
+## 15 Palestinians, including 5 children, are kiled by Palmach special forces assaulting Khisas village.
+
+The village has a few hundred Muslims and a hundred Christians. The Palmach attack at night and start blowing up houses while the occupants sleep. Ben Gurion later issues a public apology, but later still includes this in his list of successful operations.
+
+---
+# TODO(migration): dated 1948-12-28 but listed between December 1947 entries; check the year
+id: 1948-12-28-haganah-attacks-a-coffee-shop
+when: 1948-12-28
+where: [lifta]  # TODO(migration): matched from the title; verify
+actors: [haganah, lehi]  # auto-tagged from text: haganah, lehi
+---
+## Haganah attacks a coffee shop in the village of Lifta; Stern Gang fires into a bus nearby.
+
+The attack started when the Haganah had earlier killed a petrol station owner on a false allegation of inciting attack on Jews. Some villagers in Lifta retaliated by firing on a Jewish bus.
+
+---
+id: 1947-12-30-irgun-kills-6-and-wounds
+when: 1947-12-30
+where: [haifa]  # TODO(migration): matched from the title; verify
+actors: [irgun]  # auto-tagged from text: irgun
+---
+## Irgun kills 6 and wounds 42 Palestinian workers in Haifa by bombing a refinery.
+
+---
+id: 1947-12-30-palestinian-mob-lynches-39-jewish
+when: 1947-12-30
+where: [haifa]  # TODO(migration): matched from the title; verify
+actors: [irgun]  # auto-tagged from text: irgun
+---
+## Palestinian mob lynches 39 Jewish refinery workers in Haifa in retaliation for the Irgun bombing.
+
+---
+id: 1947-12-31-haganah-kills-70-palestinian-villagers
+when: 1947-12-31
+where: [haifa, balad-al-sheikh]  # TODO(migration): matched from the title; verify
+actors: [haganah, irgun]  # auto-tagged from text: haganah, irgun
+---
+## Haganah kills 70 Palestinian villagers in Balad al Sheikh, in relation to Haifa refinery attacks.
+
+The inquiry committee set up by Jewish community in Haifa found the earlier Arab lynching was unpremedidated, and condemned Irgun for their initial attack. It still authorized a reliatory attack.
+
+---
+id: 1947-12-31-haganah-blows-up-houses-in
+when: 1947-12-31
+where: [wadi-rushmiya]  # TODO(migration): matched from the title; verify
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Haganah blows up houses in the Haifa neighborhood of Wadi Rushmiya and expels the population.
+
+Two weeks later, Haganah attacks the Hawasa neighborhood blowing up huts and a local school.
+
+---
+id: 1947-12-31-abd-al-qadir-al-husayni
+when: 1947-12-31
+where: [jerusalem]  # TODO(migration): matched from the title; verify
+---
+## Abd al Qadir al Husayni organizes blockade of Jerusalem's 100k Jewish residents.
+
+---
+# TODO(migration): date precision reduced to the year (was a -01-01/-01-02 placeholder)
+id: 1948-the-long-seminar-solidifies-zionist
+when: 1948
+themes: [rhetoric-zionist]
+threads: [ethnic-cleansing]
+details:
+  - {src: details/1948-long-seminar.details, title: "The long seminar"}
+---
+## The Long Seminar solidifies Zionist strategy for Arab transfer and proactive violence instead of retaliation.
+
+Ben Gurion acqueises to intentaional collateral damage. 'Every attack has to end with occupation, destruction, and expulsion.'
+
+---
+id: 1948-01-05-haganah-bombs-and-kills-26
+when: 1948-01-05
+where: [jerusalem]  # TODO(migration): matched from the title; verify
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Haganah bombs and kills 26 at the Semiramis Hotel in Jerusalem.
+
+The dead include the Spanish vice-consul, Manuel Allende Salazar.
+
+---
+# TODO(migration): no start date in data.json (only datetime_end 1947-01-09); used the end date as `when`. Check the year: the surrounding entries are January 1948
+id: 1947-01-09-first-unit-of-the-arab
+when: 1947-01-09
+where: [kfar-szold]  # TODO(migration): matched from the title; verify
+actors: [arab-liberation-army]  # auto-tagged from text: arab-liberation-army
+---
+## First unit of the Arab Liberation Army crosses into Palestine. Jewish settlement of Kefar Sold is assaulted.
+
+They move into areas alloted for the Arab state and begin securing routes. However they also attack some Jewish convoys and settlements.
+
+---
+id: 1948-01-14-kefar-etzion-is-attacked-by
+when: 1948-01-14
+where: [kefar-etzion]  # TODO(migration): matched from the title; verify
+actors: [haganah, arab-liberation-army]  # auto-tagged from text: haganah, arab-liberation-army
+---
+## Kefar Etzion is attacked by the ALA and 35 Haganah troops sent to assist are ambushed and killed.
+
+---
+id: 1948-01-31-by-end-of-january-1500
+when: 1948-01-31
+themes: [casualties]
+# TODO(data): figures as stated in this entry; add `sources:`
+data:
+  - mark: bar
+    title: Killed by the end of January 1948
+    unit: people
+    table: |
+      group,killed
+      Palestinians,1500
+      Jewish settlers,400
+---
+## By end of January, 1500 Palestinians and 400 Jewish settlers have been killed in attacks.
+
+---
+id: 1948-01-20-britain-plans-to-yield-areas
+when: 1948-01-20
+actors: [un, uk]  # auto-tagged from text: un, uk
+---
+## Britain plans to yield areas to to dominant groups.
+
+Enforcement of the UN Partition plan no longer is the defacto policy.
+
+---
+id: 1948-01-31-ben-gurion-orders-jerusalem-s
+when: 1948-01-31
+where: [sheikh-jarrah]  # TODO(migration): matched from the title; verify
+---
+## Ben Gurion orders Jerusalem's military commander to assuer Jewish contiguity by destroying Sheikh Jarrah.
+
+Gurion states his mission is to 'settle Jews in every house of an evicted semi-Arab neighborhood, such as Romema'.
+
+---
+# TODO(migration): removed a leading space from the start date
+id: 1948-02-07-ben-gurion-express-desire-for
+when: 1948-02-07
+where: [romema]  # TODO(migration): matched from the title; verify
+themes: [rhetoric-zionist]
+---
+## Ben Gurion express desire for a demographic change in the country, upon cleansing of Romama neighborhood in Jerusalem.
+
+He says: 
+ >When I come now to Jerusalem, I feel I am in a Jewish (Ivrit) city.  This is a feeling I only had in Tel-Aviv or in an agricultural farm. It is  true that not all of Jerusalem is Jewish, but it has in it already a huge  Jewish bloc: when you enter the city through Lifta and Romema,  through Mahaneh Yehuda, King George Street and Mea Shearim —    there are no Arabs. One hundred percent Jews. Ever since Jerusalem  was destroyed by the Romans — the city was not as Jewish as it is now.  In many Arab neighbourhoods in the West you do not see even one  Arab. I do not suppose it will change. And what happened in  Jerusalem and in Haifa — can happen in large parts of the country. If  we persist it is quite possible that in the next six or eight months there  will be considerable changes in the country, very considerable, and to  our advantage. There will certainly be considerable changes in the  demographic composition of the country.
+
+---
+id: 1948-02-15-haganah-intelligence-reports-no-more
+when: 1948-02-15
+where: [palestine]  # TODO(migration): matched from the title; verify
+actors: [haganah, arab-liberation-army]  # auto-tagged from text: haganah, arab-liberation-army
+---
+## Haganah intelligence reports no more than 3000 Arab Liberation Army volunteers are in Palestine.
+
+Eliyahu Sasson reports that the force is poorly trained, and the Arab states will send no more fighters if they're not provoked.
+
+---
+id: 1948-02-14-the-palmach-special-forces-attack
+when: 1948-02-14
+where: [sasa]  # TODO(migration): matched from the title; verify
+actors: [palmach, arab-liberation-army]  # auto-tagged from text: palmach, arab-liberation-army
+---
+## The Palmach special forces attack the village of Sa'sa at night, killing more than 60 and destroying 35 homes.
+
+The attack is part of operation Lamed Heh (retaliation for ALA ambush of soldiers in Kefar Etzion). The attack is ordered by Yigal Allon:
+
+>You have to blow up twenty houses and kill as many “warriors” [read: “villagers”] as possible.
+
+---
+id: 1948-02-15-the-village-of-qisarya-is
+when: 1948-02-15
+where: [qisarya]  # TODO(migration): matched from the title; verify
+actors: [palmach]  # auto-tagged from text: palmach
+---
+## The village of Qisarya is attacked by Palmach and expelled in its entirety.
+
+Thirty houses are destroyed in the process. This is the first village to be cleansed in its entirety.
+Three other nearby villages: Barrat Qisarya, Khirbat al Burj, and Atlit were cleansed of Palestinians in the same operation.
+
+---
+id: 1948-02-18-haganah-calls-up-25-35
+when: 1948-02-18
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Haganah calls up 25-35 year olds for military service.
+
+---
+id: 1948-02-18-haganah-sets-up-hemed-beit
+when: 1948-02-18
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Haganah sets up Hemed Beit, a special unit to explore chemical and biological warfare.
+
+The unit is lead by Ephraim Katzir, who would later become the 4th President of Israel. They are responsible for poisoning water wells with Typhoid bacteria in Accre, Gaza, and Galilee.
+
+---
+id: 1948-02-19-ben-gurion-s-advisors-relay
+when: 1948-02-19
+where: [palestine]  # TODO(migration): matched from the title; verify
+themes: [rhetoric-zionist]
+---
+## Ben Gurion's advisors relay that rural Palestine shows no wish to fight in the wake of attacks.
+
+Ben Gurion says
+
+>A small reaction [to Arab hostility] does not impress anyone. A destroyed house — nothing. Destroy a neighborhood, and you begin to make an impression!
+
+He also says
+
+>to continue to terrorize the rural areas ... through a series of offensives ... so that the same mood of passivity reported ... would prevail.
+
+---
+id: 1948-02-22-supporters-of-amin-al-husayni
+when: 1948-02-22
+---
+## Supporters of Amin al Husayni kill 88 in car bombs, injuring hundreds.
+
+---
+id: 1948-02-24-us-delegate-to-un-security
+when: 1948-02-24
+actors: [un, us]  # auto-tagged from text: un, us
+---
+## US delegate to UN Security Council proposes peacekeeping rather than enforcing partition.
+
+---
+id: 1948-02-29-lehi-kills-28-british-soldiers
+when: 1948-02-29
+where: [rehovot]  # TODO(migration): matched from the title; verify
+actors: [lehi, uk]  # auto-tagged from text: lehi, uk
+---
+## Lehi kills 28 British soldiers by mining a train near Rehovot.
+
+---
+id: 1948-03-06-plan-dalet-is-finalized
+when: 1948-03-06
+actors: [haganah]  # auto-tagged from text: haganah
+details:
+  - {src: details/1948-plan-dalet.details, title: "Plan Dalet"}
+---
+## Plan Dalet is finalized.
+
+Plan Dalet is a military plan developed by the Haganah to secure the Jewish state, relying on destruction of property and expulsion of Palestinians.
+
+---
+id: 1948-03-18-us-president-truman-announces-support
+when: 1948-03-18
+actors: [us]  # auto-tagged from text: us
+---
+## US President Truman announces support for the Zionist cause.
+
+---
+id: 1948-03-19-arab-leaders-decide-to-accept
+when: 1948-03-19
+actors: [un]  # auto-tagged from text: un
+---
+## Arab leaders decide to accept UNSC proposal of truce & trusteeship instead of partition.
+
+This is rejected by the Zionists.
+
+---
+id: 1948-03-15-haganah-expels-palestinians-from-coastal
+when: 1948-03-15/1948-05-15
+where: [jaffa, haifa]  # TODO(migration): matched from the title; verify
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Haganah expels Palestinians from coastal areas between Haifa and Jaffa.
+
+---
+id: 1948-03-31-lehi-bombs-and-kills-40
+when: 1948-03-31
+where: [binyamina]  # TODO(migration): matched from the title; verify
+actors: [lehi]  # auto-tagged from text: lehi
+---
+## Lehi bombs and kills 40 Palestinians, injuring 60 on the Cairo-Haifa train near Binyamina
+
+---
+id: 1948-04-01-czech-arms-delivered-to-haganah
+when: 1948-04-01
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Czech arms delivered to Haganah
+
+4,500 rifles, 200 light machine guns, 5 million rounds of ammunition.
+
+---
+id: 1948-04-01-palmach-special-forces-receive-orders
+when: 1948-04-01
+actors: [palmach]  # auto-tagged from text: palmach
+---
+## Palmach special forces receive orders to destroy Arab villages.
+
+As part of Operation Nachson, 'the principal objective of the operation is the destruction of Arab villages ... [and] the eviction of the villagers so that they would become an economic liability for the general Arab forces'
+
+---
+id: 1948-04-04-plan-dalet-launched-by-haganah
+when: 1948-04-04
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Plan Dalet launched by Haganah
+
+Operation Nachson begins. Villages along Tel-Aviv to Jerusalem road captured and residents expelled.
+
+---
+id: 1948-04-09-deir-yassin-massacre
+when: 1948-04-09
+where: [deir-yassin]  # TODO(migration): matched from the title; verify
+actors: [irgun, lehi]  # auto-tagged from text: irgun, lehi
+details:
+  - {src: details/1948-deir-yassin-massacre.details, title: "The massacre"}
+---
+## Deir Yassin Massacre
+
+Over 93 Palestinian villagers killed by Irgun and Lehi forces. The attack was part of Plan Dalet/Operation Nachson to secure the road to Jerusalem.
+
+---
+id: 1948-04-09-multiple-palestinian-villages-destroyed-during
+when: 1948-04-09
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Multiple Palestinian villages destroyed during Operation Nachson.
+
+Qastal, Qalunya, Saris, Beit Surik, and Biddu are among the villages captured and destroyed by Haganah forces. Haganah forces blow up houses and expel villagers.
+
+---
+id: 1948-04-18-the-village-of-tiberias-is
+when: 1948-04-18
+where: [tiberias]  # TODO(migration): matched from the title; verify
+actors: [haganah, uk]  # auto-tagged from text: haganah, uk
+---
+## The village of Tiberias is captured and cleansed of Palestinians.
+
+Haganah uses loudspeakers and barrel bombs to terrorize and expel the population. The British initially offered protection, but later negootiated a general evacuation.
+
+---
+id: 1948-04-22-haifa-cleansed-of-palestinians-in
+when: 1948-04-22
+where: [haifa]  # TODO(migration): matched from the title; verify
+actors: [haganah, uk]  # auto-tagged from text: haganah, uk
+details:
+  - {src: details/1948-haifa-cleansing.details, title: "The cleansing of Haifa"}
+---
+## Haifa cleansed of Palestinians in Operation Bi'ur Hametz (Cleansing the Leaven).
+
+Haganah forces (Carmeli Brigade of 2000 soldiers) expel 50,000 Palestinians from Haifa, after the British Commander Hugh Stockwell withdraws buffer forces.
+
+---
+id: 1948-04-26-haganah-attacks-jerusalem
+when: 1948-04-26/1948-04-29
+where: [jerusalem]  # TODO(migration): matched from the title; verify
+actors: [haganah, uk]  # auto-tagged from text: haganah, uk
+details:
+  - {src: details/1948-jerusalem.details, title: "The ethnic cleansing of Jerusalem"}
+---
+## Haganah attacks Jerusalem
+
+Haganah is forced to hand over East Jerusalem to the British. Haganah captures West Jerusalem and expells all Palestinians.
+
+---
+id: 1948-05-01-safad-is-cleansed-of-palestinians
+when: 1948-05-01
+where: [safad]  # TODO(migration): matched from the title; verify
+actors: [palmach]  # auto-tagged from text: palmach
+---
+## Safad is cleansed of Palestinians by the Palmach special forces.
+
+Safad had 9500 Arabs and 2400 Orthodox Jews, uninterested in Zionism. Defences are manned by 400 volunteers. 1000 Palmach soldiers besiege and expel Palestenians, only allowing a 100 old people to stay. They're expelled within the month.
+
+---
+id: 1948-05-03-reports-claim-175-000-to
+when: 1948-05-03
+---
+## Reports claim 175,000 to 250,000 Palestinians have been forced from homes.
+
+---
+id: 1948-05-06-acre-is-occupied-by-haganah
+when: 1948-05-06/1948-05-17
+where: [acre]  # TODO(migration): matched from the title; verify
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## Acre is occupied by Haganah forces after using biological warfare to poison water wells with typhoid bacteria.
+
+---
+id: 1948-05-11-the-town-of-baysan-capitulates
+when: 1948-05-11
+where: [baysan]  # TODO(migration): matched from the title; verify
+actors: [haganah]  # auto-tagged from text: haganah
+---
+## The town of Baysan capitulates to the Haganah forces under Palti Sela and its inhabitants are expelled.
+
+---
+id: 1948-05-13-in-jaffa-50-000-palestinians
+when: 1948-05-13
+where: [jaffa]  # TODO(migration): matched from the title; verify
+actors: [haganah, irgun]  # auto-tagged from text: haganah, irgun
+---
+## In Jaffa, 50,000 Palestinians are expelled after an attack by 5000 Haganah and Irgun forces.
+
+1500 Arab volunteers, led by Michael al-Issa, a local Christian, mount a defense but are defeated after a 3 week siege. This culminates the depopulation of all major towns in Palestine.
+
+---
+id: 1948-05-13-arab-legion-attacks-jewish-communities
+when: 1948-05-13
+actors: [arab-legion]  # auto-tagged from text: arab-legion
+---
+## Arab Legion attacks Jewish communities in retaliation.
+
+---
+id: 1948-05-14-declaration-of-independence
+when: 1948-05-14
+actors: [israel, zionist-movement, us]  # auto-tagged from text: us
+---
+## Declaration of Independence
+
+David Ben-Gurion proclaims the establishment of the State of Israel. US President Truman immediately recognizes the new state.
+
+---
+id: 1948-05-15-the-cleansing-of-jerusalem-by
+when: 1948-05-15
+where: [jerusalem]  # TODO(migration): matched from the title; verify
+details:
+  - {src: details/1948-jerusalem.details, title: "The ethnic cleansing of Jerusalem"}
+---
+## The cleansing of Jerusalem. By mid-May 8 Palestinian neighborhoods and 39 Palestinian villages have been cleansed in the Greater Jerusalem Area.
+
+---
+id: 1948-05-15-arab-armies-from-egypt-syria
+when: 1948-05-15
+where: [lebanon]  # TODO(migration): matched from the title; verify
+actors: [arab-league]  # auto-tagged from text: arab-league
+---
+## Arab armies from Egypt, Syria, Lebanon, Jordan, and Iraq invade Israel.
+
+The Arab League sends troops to fight against the newly established State of Israel.
+
+---
+id: 1948-06-11-first-truce-established
+when: 1948-06-11/1948-07-08
+---
+## First truce established.
+
+---
+id: 1948-07-08-fighting-resumes-as-idf-captures
+when: 1948-07-08/1948-07-18
+where: [lydda, ramle]  # TODO(migration): matched from the title; verify
+actors: [idf]  # auto-tagged from text: idf
+---
+## Fighting resumes as IDF captures Lydda and Ramle.
+
+---
+id: 1948-07-17-idf-attacks-but-fails-to
+when: 1948-07-17
+where: [jerusalem]  # TODO(migration): matched from the title; verify
+actors: [idf]  # auto-tagged from text: idf
+---
+## IDF attacks but fails to capture Old City of Jerusalem.
+
+---
+id: 1948-07-18-second-truce-established
+when: 1948-07-18/1948-10-15
+actors: [idf]  # auto-tagged from text: idf
+---
+## Second truce established.
+
+IDF breaks truce by capturing several more villages.
+
+---
+id: 1948-09-17-un-mediator-assassinated-by-jewish
+when: 1948-09-17
+where: [jerusalem]  # TODO(migration): matched from the title; verify
+actors: [un]  # auto-tagged from text: un
+---
+## UN mediator assassinated by Jewish terrorists in Jerusalem.
+
+---
+id: 1948-10-29-thousands-of-palestinians-expelled-in
+when: 1948-10-29/1948-10-31
+---
+## Thousands of Palestinians expelled in Operation Hiram.
+
+---
+id: 1948-11-04-unsc-resolution-194-on-palestinian
+when: 1948-11-04
+actors: [un]  # auto-tagged from text: un
+---
+## UNSC Resolution 194 on Palestinian refugee right of return.
+
+---
+id: 1948-11-01-idf-begins-to-expel-villagers
+when: 1948-11-01
+where: [lebanon]  # TODO(migration): matched from the title; verify
+actors: [idf]  # auto-tagged from text: idf
+---
+## IDF begins to expel villagers from inside Lebanon.
+
+---
+id: 1949-02-24-israeli-egyptian-armistice
+when: 1949-02-24
+---
+## Israeli-Egyptian Armistice
+
+---
+id: 1949-02-28-idf-expells-2000-3000-villagers
+when: 1949-02-28
+where: [faluja]  # TODO(migration): matched from the title; verify
+actors: [idf]  # auto-tagged from text: idf
+---
+## IDF expells 2000-3000 villagers from Faluja.
+
+---
+id: 1949-03-23-israeli-lebanese-armistice
+when: 1949-03-23
+---
+## Israeli-Lebanese Armistice
+
+---
+id: 1949-04-03-israeli-jordanian-armistice
+when: 1949-04-03
+---
+## Israeli-Jordanian Armistice
+
+---
+id: 1949-07-20-israeli-syrian-armistice
+when: 1949-07-20
+---
+## Israeli-Syrian Armistice

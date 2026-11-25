@@ -1,0 +1,10 @@
+# Bibliography. Cite from an event with `sources: [key]` or
+# `sources: [{key: "p. 95"}]`.
+#
+# example2006:
+#   author: Firstname Lastname
+#   title: Book title
+#   year: 2006
+#   publisher: Publisher
+#   url: https://…
+{}

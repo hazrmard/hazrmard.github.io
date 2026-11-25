@@ -1,0 +1,68 @@
+{{- /*
+  A cut-back to the timeline inside {{% story %}} (see story.html). Use the
+  markdown form, on its own line:
+
+    {{% cutback from="1878" to="1917" title="Before the Mandate" max=10 %}}
+    {{% cutback thread="partition" %}}
+    {{% cutback events="id-1, id-2" %}}
+    {{% cutback from="1947-11" to="1949-07" actors="haganah,palestinians" max=12 more="See every event of the war" %}}
+    {{% cutback from="1949" to="now" converge=true %}}
+
+  Any other parameter naming a facet group filters on it. The selection here
+  only feeds the static fallback list (thread `match` rules are not applied
+  to it); the JavaScript renderer makes the authoritative selection.
+*/ -}}
+{{- $cfg := .Page.Params.geotimeline | default dict -}}
+{{- $src := $cfg.src | default "timeline.yaml" -}}
+{{- $extra := $cfg.events | default slice -}}
+{{- $tl := partialCached "geotimeline/load.html" (dict "page" .Page "src" $src "extra" $extra) .Page.RelPermalink $src -}}
+{{- $reserved := slice "from" "to" "thread" "events" "title" "max" "more" "converge" "id" "class" -}}
+{{- $pad4 := dict "from" "-00-00" "to" "-99-99" -}}
+{{- $pad7 := dict "from" "-00" "to" "-99" -}}
+{{- $now := printf "%v" ($cfg.now | default "9999") -}}
+{{- $bound := dict -}}
+{{- range $edge := slice "from" "to" -}}
+  {{- $v := printf "%v" ($.Get $edge | default "") -}}
+  {{- if eq $v "now" -}}{{- $v = cond (eq $edge "from") $now "" -}}{{- end -}}
+  {{- if $v -}}
+    {{- if eq (len $v) 4 -}}{{- $v = printf "%s%s" $v (index $pad4 $edge) -}}{{- else if eq (len $v) 7 -}}{{- $v = printf "%s%s" $v (index $pad7 $edge) -}}{{- end -}}
+  {{- end -}}
+  {{- $bound = merge $bound (dict $edge $v) -}}
+{{- end -}}
+{{- $converge := and ($cfg.converge | default false) (in (slice "true" true) (.Get "converge")) -}}
+{{- $base := $tl.events -}}
+{{- $ids := slice -}}
+{{- with .Get "thread" -}}
+  {{- $thread := . -}}
+  {{- range $tl.threads -}}{{- if eq (printf "%v" .id) $thread -}}{{- range .events -}}{{- $ids = $ids | append (printf "%v" .) -}}{{- end -}}{{- end -}}{{- end -}}
+  {{- range $tl.events -}}{{- if in (.header.threads | default slice) $thread -}}{{- $ids = $ids | append .id -}}{{- end -}}{{- end -}}
+{{- end -}}
+{{- with .Get "events" -}}
+  {{- range split . "," -}}{{- $ids = $ids | append (trim . " ") -}}{{- end -}}
+{{- end -}}
+{{- if or (.Get "thread") (.Get "events") -}}
+  {{- $base = slice -}}
+  {{- range $id := uniq $ids -}}{{- range $tl.events -}}{{- if eq .id $id -}}{{- $base = $base | append . -}}{{- end -}}{{- end -}}{{- end -}}
+{{- end -}}
+{{- $selected := slice -}}
+{{- range $base -}}
+  {{- $e := . -}}
+  {{- $ok := not (eq (printf "%v" .header.draft) "true") -}}
+  {{- if and (eq .register "story") (not $converge) -}}{{- $ok = false -}}{{- end -}}
+  {{- if and $bound.from (lt .start $bound.from) -}}{{- $ok = false -}}{{- end -}}
+  {{- if and $bound.to (gt .start $bound.to) -}}{{- $ok = false -}}{{- end -}}
+  {{- range $k, $v := $.Params -}}
+    {{- if and $ok (not (in $reserved $k)) -}}
+      {{- $have := $e.header | default dict -}}
+      {{- $values := index $have $k -}}
+      {{- $values = cond (reflect.IsSlice $values) $values (slice $values) -}}
+      {{- $match := false -}}
+      {{- range split (printf "%v" $v) "," -}}{{- if in $values (trim . " ") -}}{{- $match = true -}}{{- end -}}{{- end -}}
+      {{- if not $match -}}{{- $ok = false -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $ok -}}{{- $selected = $selected | append . -}}{{- end -}}
+{{- end }}
+<geo-cutback{{ range $k, $v := .Params }} {{ $k }}="{{ $v }}"{{ end }}>
+{{ partial "geotimeline/fallback.html" $selected }}
+</geo-cutback>

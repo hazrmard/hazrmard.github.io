@@ -1,0 +1,7 @@
+{{- /* A plain list of events (dicts from geotimeline/load.html), with no
+  blank lines, so it is safe inside a markdown HTML block. */ -}}
+<ol class="geo-timeline-fallback">
+{{- range . }}
+<li><p><time>{{ .when }}</time>{{ with .title }} — <strong>{{ . }}</strong>{{ end }}</p>{{ replaceRE "\\n\\s*\\n" "\n" (.body | markdownify) | safeHTML }}</li>
+{{- end }}
+</ol>
