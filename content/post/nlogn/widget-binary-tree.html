@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="./widgets.css">
+<div class="nlogn-widget" data-nlogn-widget="binary-tree">
+    <div class="nw-card">
+        <div class="nw-header">
+            <div>
+                <h4 class="nw-title">The 2-Way Tree</h4>
+                <p class="nw-subtitle">Every item drops through log<sub>2</sub> <em>n</em> yes/no forks (<code>&lt;</code> vs. <code>&gt;</code>) to reach its sorted slot.</p>
+            </div>
+        </div>
+
+        <div class="nw-controls">
+            <div class="nw-btn-group">
+                <button type="button" class="nw-btn nw-btn-primary" data-action="step">Step Item</button>
+                <button type="button" class="nw-btn" data-action="play">Play</button>
+                <button type="button" class="nw-btn" data-action="reset">Reset</button>
+            </div>
+            <div class="nw-slider-wrap">
+                <label for="nw-binary-n-slider">Items (n):</label>
+                <input id="nw-binary-n-slider" type="range" min="0" max="2" step="1" value="1" data-role="n-slider" aria-label="Number of items n (4, 8, or 16)">
+                <span class="nw-slider-val" data-role="n-val">8</span>
+            </div>
+        </div>
+
+        <div class="nw-stage">
+            <svg viewBox="0 0 680 390" role="img" aria-label="Balanced 2-way binary decision tree routing unsorted numbers into sorted slots"></svg>
+        </div>
+
+        <div class="nw-status" data-role="status">
+            <span>Click <strong>Step Item</strong> or <strong>Play</strong> to route items down the 2-way tree.</span>
+            <span class="nw-status-pill" data-role="progress">0 / 8 routed</span>
+        </div>
+
+        <div class="nw-stats">
+            <div class="nw-stat">
+                <span class="nw-stat-label">Branching factor (k)</span>
+                <span class="nw-stat-value" data-stat="branch">2</span>
+                <span class="nw-stat-sub" data-stat="bits">1 bit / step</span>
+            </div>
+            <div class="nw-stat">
+                <span class="nw-stat-label">Tree depth</span>
+                <span class="nw-stat-value" data-stat="depth">3</span>
+                <span class="nw-stat-sub" data-stat="depth-formula">log₂(8) = 3</span>
+            </div>
+            <div class="nw-stat">
+                <span class="nw-stat-label">Steps (this item)</span>
+                <span class="nw-stat-value" data-stat="item-steps">0</span>
+                <span class="nw-stat-sub" data-stat="item-sub">waiting</span>
+            </div>
+            <div class="nw-stat is-accent">
+                <span class="nw-stat-label">Total steps</span>
+                <span class="nw-stat-value" data-stat="total-steps">0 / 24</span>
+                <span class="nw-stat-sub" data-stat="total-sub">n · log₂ n</span>
+            </div>
+        </div>
+    </div>
+</div>

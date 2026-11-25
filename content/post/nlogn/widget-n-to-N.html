@@ -1,0 +1,55 @@
+<div class="nlogn-widget" data-nlogn-widget="n-to-N">
+    <div class="nw-card">
+        <div class="nw-header">
+            <div>
+                <h4 class="nw-title">From Input Size <em>n</em> to Answer Space <em>N</em></h4>
+                <p class="nw-subtitle">The same <em>n</em> input items produce vastly different numbers of possible final answers <em>N</em> depending on the task.</p>
+            </div>
+        </div>
+
+        <div class="nw-controls">
+            <div class="nw-btn-group">
+                <button type="button" class="nw-btn nw-btn-primary" data-action="animate">Animate <em>n</em>: 2 &rarr; 4</button>
+            </div>
+            <div class="nw-slider-wrap">
+                <label for="nw-nton-slider">Input size (n):</label>
+                <input id="nw-nton-slider" type="range" min="2" max="4" step="1" value="3" data-role="n-slider" aria-label="Input size n from 2 to 4">
+                <span class="nw-slider-val" data-role="n-val">3</span>
+            </div>
+        </div>
+
+        <div class="nw-nton-input-bar">
+            <span class="nw-nton-bar-label">Input (<span data-role="input-count">n = 3</span>):</span>
+            <div class="nw-nton-input-items" data-role="input-items"></div>
+        </div>
+
+        <div class="nw-nton-grid">
+            <div class="nw-nton-col">
+                <div class="nw-nton-col-head">
+                    <span class="nw-nton-col-title">Find Max</span>
+                    <span class="nw-nton-formula">N = n</span>
+                </div>
+                <div class="nw-nton-outcomes" data-scenario="max"></div>
+                <div class="nw-nton-col-foot" data-foot="max">N = 3 &middot; H(N) = 1.58 bits</div>
+            </div>
+
+            <div class="nw-nton-col">
+                <div class="nw-nton-col-head">
+                    <span class="nw-nton-col-title">Label Yes / No</span>
+                    <span class="nw-nton-formula">N = 2<sup>n</sup></span>
+                </div>
+                <div class="nw-nton-outcomes" data-scenario="binary"></div>
+                <div class="nw-nton-col-foot" data-foot="binary">N = 8 &middot; H(N) = 3.00 bits</div>
+            </div>
+
+            <div class="nw-nton-col is-factorial">
+                <div class="nw-nton-col-head">
+                    <span class="nw-nton-col-title">Sort All Items</span>
+                    <span class="nw-nton-formula">N = n!</span>
+                </div>
+                <div class="nw-nton-outcomes" data-scenario="sort"></div>
+                <div class="nw-nton-col-foot" data-foot="sort">N = 6 &middot; H(N) = 2.58 bits</div>
+            </div>
+        </div>
+    </div>
+</div>
