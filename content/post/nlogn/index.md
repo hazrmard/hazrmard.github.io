@@ -67,7 +67,11 @@ $$
 
 That same lens gives us a hard floor for any algorithm.
 
-Let $N$ be the total number of possible final answers to a problem. Note that $N$ is a function of the input size $n$, not the input size itself: for an input of $n = 4$ distinct numbers, finding the maximum has $N = n = 4$ possible answers (whichever of the 4 positions holds the largest value), whereas sorting those same 4 numbers has $N = n! = 24$ possible orderings. When every answer is equally likely (the worst case, $p_i = 1/N$), the entropy of the answer space simplifies to:
+Let $N$ be the total number of possible final answers to a problem. Note that $N$ is a function of the input size $n$, not the input size itself: for an input of $n = 4$ distinct numbers, finding the maximum has $N = n = 4$ possible answers (whichever of the 4 positions holds the largest value), whereas sorting those same 4 numbers has $N = n! = 24$ possible orderings.
+
+{{< read src="post/nlogn/widget-n-to-N.html" >}}
+
+When every answer is equally likely (the worst case, $p_i = 1/N$), the entropy of the answer space simplifies to:
 
 $$
 H(N) = -\sum_{i=1}^{N} \frac{1}{N} \log_2 \frac{1}{N} = \log_2 N
@@ -79,18 +83,24 @@ $$
 2^q \ge N \implies q \ge \log_2 N = H(N)
 $$
 
+{{< read src="post/nlogn/widget-transcript-bound.html" >}}
+
 Where does the $\log_2 n$ in $n \log_2 n$ come from? Logarithms turn multiplication into addition:
 
 - If each of $n$ items has **2 choices** (say, valid or invalid), then $N = 2^n$, and $H(2^n) = \log_2(2^n) = n$. No $\log n$ appears.
 - If each of $n$ items has **$n$ choices** (or $N = n!$ total orderings), you are multiplying $n$ numbers that grow with $n$. Taking $H(n!) = \log_2(n!)$ adds up $\log_2 1 + \log_2 2 + \dots + \log_2 n$, which lands at roughly $n \log_2 n$.
 
-Now look at what happens when you drop the black-box assumption. Remember from the [entropy post](/post/surprise-derivation-entropy/#dimensionality) that the base of the logarithm corresponds to how many values a single choice can take. A $k$-way operation yields up to $\log_2 k$ bits per step instead of 1 bit, so $q$ operations can distinguish $k^q$ transcripts:
+Now look at what happens when you widen the branching factor to $k$. Remember from the [entropy post](/post/surprise-derivation-entropy/#dimensionality) that the base of the logarithm corresponds to how many values a single choice can take, so $q$ $k$-ary operations yield $k^q$ transcripts:
 
 $$
 k^q \ge N \implies q \ge \frac{H(N)}{\log_2 k} = \log_k N
 $$
 
-Reading a decimal digit in Radix Sort yields $\log_2 10 \approx 3.32$ bits per step; indexing directly into an array of size $n$ yields $\log_2 n$ bits in a single step—canceling the $\log_2 n$ in $n \log_2 n$ and dropping the floor to $O(n)$. The $\log_2 n$ factor is therefore tied to factorial-scale answer spaces *combined* with constant-outcome operations.
+Notice a crucial distinction here. Any **constant** $k$-ary operation only differs from a binary operation by a constant factor ($1/\log_2 k$): a fixed 10-way decimal lookup trims the work by $\log_2 10 \approx 3.32\times$, and a fixed 256-way byte lookup trims it by $8\times$, yet as $n$ grows both stay locked to $\Theta(n \log n)$ forever.
+
+To actually escape $n \log n$, **$k$ must be a function of $n$** (for example, $k = \sqrt{n}$ or $k = n$). Once $k$ scales with $n$ as $k = n^\alpha$, $\log_2 k = \alpha \log_2 n$ cancels the $\log_2 n$ in $n \log_2 n$, so the complexity is only off from a one-shot $n$-ary operation by a constant factor ($1/\alpha$)—that is, linear $O(n)$. Radix sort achieves this when its base $k$ is chosen relative to the size and range of the numbers (e.g., $k = n$ or $k = \sqrt{n}$): we are using the numerical value of the input itself to inform the algorithm's addressing, piercing the black box.
+
+{{< read src="post/nlogn/widget-k-scaling.html" >}}
 
 ### Entropy Is a Floor, Not a Guarantee
 
@@ -113,7 +123,7 @@ Every complexity claim sits on two axes: how fast the answer space $N$ grows, an
 | **Find max (unsorted)** | $n$ | $\log_2 n$ | $n - 1$ | $O(n)$ (still must inspect all) |
 | **Label each item yes/no** | $2^n$ | $n$ | $n$ | $O(n)$ |
 | **Sort $n$ items** | $n!$ | $\sim n \log_2 n$ | $\sim n \log_2 n$ | $O(n)$ (Radix / Bucket sort) |
-| **Learn any pairwise rule** | $2^{n^2}$ | $n^2$ | $n^2$ | $O(n^2)$ |
+| **Recover an $n \times n$ binary grid** | $2^{n^2}$ | $n^2$ | $n^2$ | $O(n^2)$ |
 
 {{< read src="post/nlogn/widget-floor-explorer.html" >}}
 

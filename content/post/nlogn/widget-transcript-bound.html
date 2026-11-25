@@ -1,0 +1,151 @@
+<div class="nlogn-widget" data-nlogn-widget="transcript-bound">
+    <div class="nw-card">
+        <div class="nw-header">
+            <div>
+                <h4 class="nw-title">Why 2<sup><em>q</em></sup> &ge; <em>N</em> Is a Hard Floor</h4>
+                <p class="nw-subtitle">Sorting <em>n</em> = 3 items (<code>A, B, C</code>) has <em>N</em> = 3! = 6 possible answers. Each leaf is one transcript of <code>Y</code>/<code>N</code> answers.</p>
+            </div>
+        </div>
+
+        <div class="nw-transcript-grid">
+            <!-- Left panel: 2^q < N -->
+            <div class="nw-transcript-panel is-fail">
+                <div class="nw-transcript-head">
+                    <span class="nw-transcript-title"><em>q</em> = 2 questions &rarr; 2<sup>2</sup> = 4 &lt; 6</span>
+                    <span class="nw-transcript-badge is-fail">Fungible answers</span>
+                </div>
+                <svg viewBox="0 0 310 218" role="img" aria-label="Depth 2 binary tree with 4 leaves trying to separate 6 outcomes, causing collisions">
+                    <!-- Edges level 0 -> 1 -->
+                    <path d="M 155 32 C 155 54, 86 54, 86 76" class="nw-edge"/>
+                    <path d="M 155 32 C 155 54, 224 54, 224 76" class="nw-edge"/>
+                    <!-- Edges level 1 -> 2 -->
+                    <path d="M 86 98 C 86 118, 48 118, 48 138" class="nw-edge"/>
+                    <path d="M 86 98 C 86 118, 124 118, 124 138" class="nw-edge is-warn-edge"/>
+                    <path d="M 224 98 C 224 118, 186 118, 186 138" class="nw-edge"/>
+                    <path d="M 224 98 C 224 118, 262 118, 262 138" class="nw-edge is-warn-edge"/>
+
+                    <!-- Branch labels -->
+                    <text x="108" y="54" class="nw-edge-label">Y</text>
+                    <text x="202" y="54" class="nw-edge-label">N</text>
+                    <text x="58" y="118" class="nw-edge-label">Y</text>
+                    <text x="114" y="118" class="nw-edge-label">N</text>
+                    <text x="196" y="118" class="nw-edge-label">Y</text>
+                    <text x="252" y="118" class="nw-edge-label">N</text>
+
+                    <!-- Question nodes -->
+                    <rect x="132" y="10" width="46" height="22" rx="11" class="nw-node-rect"/>
+                    <text x="155" y="21" class="nw-node-text">Q1</text>
+
+                    <rect x="64" y="76" width="44" height="22" rx="11" class="nw-node-rect"/>
+                    <text x="86" y="87" class="nw-node-text">Q2</text>
+
+                    <rect x="202" y="76" width="44" height="22" rx="11" class="nw-node-rect"/>
+                    <text x="224" y="87" class="nw-node-text">Q2</text>
+
+                    <!-- Leaves (4 transcripts for 6 answers) -->
+                    <!-- Leaf 1: YY -> ABC (ok) -->
+                    <text x="48" y="150" class="nw-slot-idx">YY</text>
+                    <rect x="24" y="157" width="48" height="24" rx="6" class="nw-leaf-ok"/>
+                    <text x="48" y="169" class="nw-leaf-text-ok">ABC</text>
+
+                    <!-- Leaf 2: YN -> ACB & BAC (COLLISION!) -->
+                    <text x="124" y="150" class="nw-slot-idx">YN</text>
+                    <rect x="92" y="157" width="64" height="46" rx="7" class="nw-leaf-collide"/>
+                    <text x="124" y="172" class="nw-leaf-text-collide">ACB / BAC</text>
+                    <text x="124" y="191" class="nw-leaf-sub-collide">same path!</text>
+
+                    <!-- Leaf 3: NY -> BCA (ok) -->
+                    <text x="186" y="150" class="nw-slot-idx">NY</text>
+                    <rect x="162" y="157" width="48" height="24" rx="6" class="nw-leaf-ok"/>
+                    <text x="186" y="169" class="nw-leaf-text-ok">BCA</text>
+
+                    <!-- Leaf 4: NN -> CAB & CBA (COLLISION!) -->
+                    <text x="262" y="150" class="nw-slot-idx">NN</text>
+                    <rect x="230" y="157" width="64" height="46" rx="7" class="nw-leaf-collide"/>
+                    <text x="262" y="172" class="nw-leaf-text-collide">CAB / CBA</text>
+                    <text x="262" y="191" class="nw-leaf-sub-collide">same path!</text>
+                </svg>
+                <p class="nw-transcript-caption">Only 4 transcripts exist for 6 orderings—at least two distinct answers share an identical <code>Y/N</code> history and become fungible.</p>
+            </div>
+
+            <!-- Right panel: 2^q >= N -->
+            <div class="nw-transcript-panel is-pass">
+                <div class="nw-transcript-head">
+                    <span class="nw-transcript-title"><em>q</em> = 3 questions &rarr; 2<sup>3</sup> = 8 &ge; 6</span>
+                    <span class="nw-transcript-badge is-pass">All 6 separated</span>
+                </div>
+                <svg viewBox="0 0 310 218" role="img" aria-label="Depth 3 binary tree with 8 leaves cleanly separating all 6 outcomes">
+                    <!-- Edges level 0 -> 1 -->
+                    <path d="M 155 28 C 155 44, 82 44, 82 60" class="nw-edge is-visited"/>
+                    <path d="M 155 28 C 155 44, 228 44, 228 60" class="nw-edge is-visited"/>
+                    <!-- Edges level 1 -> 2 -->
+                    <path d="M 82 78 C 82 94, 46 94, 46 110" class="nw-edge is-visited"/>
+                    <path d="M 82 78 C 82 94, 118 94, 118 110" class="nw-edge is-visited"/>
+                    <path d="M 228 78 C 228 94, 192 94, 192 110" class="nw-edge is-visited"/>
+                    <path d="M 228 78 C 228 94, 264 94, 264 110" class="nw-edge is-visited"/>
+                    <!-- Edges level 2 -> 3 (8 leaves) -->
+                    <path d="M 46 128 C 46 142, 26 142, 26 158" class="nw-edge is-visited"/>
+                    <path d="M 46 128 C 46 142, 64 142, 64 158" class="nw-edge is-muted"/>
+                    <path d="M 118 128 C 118 142, 100 142, 100 158" class="nw-edge is-visited"/>
+                    <path d="M 118 128 C 118 142, 136 142, 136 158" class="nw-edge is-visited"/>
+                    <path d="M 192 128 C 192 142, 174 142, 174 158" class="nw-edge is-visited"/>
+                    <path d="M 192 128 C 192 142, 210 142, 210 158" class="nw-edge is-muted"/>
+                    <path d="M 264 128 C 264 142, 246 142, 246 158" class="nw-edge is-visited"/>
+                    <path d="M 264 128 C 264 142, 284 142, 284 158" class="nw-edge is-visited"/>
+
+                    <!-- Question nodes -->
+                    <rect x="136" y="10" width="38" height="18" rx="9" class="nw-node-rect"/>
+                    <text x="155" y="19" class="nw-node-text" style="font-size: 9.5px;">Q1</text>
+
+                    <rect x="64" y="60" width="36" height="18" rx="9" class="nw-node-rect"/>
+                    <text x="82" y="69" class="nw-node-text" style="font-size: 9.5px;">Q2</text>
+                    <rect x="210" y="60" width="36" height="18" rx="9" class="nw-node-rect"/>
+                    <text x="228" y="69" class="nw-node-text" style="font-size: 9.5px;">Q2</text>
+
+                    <rect x="30" y="110" width="32" height="18" rx="9" class="nw-node-rect"/>
+                    <text x="46" y="119" class="nw-node-text" style="font-size: 9px;">Q3</text>
+                    <rect x="102" y="110" width="32" height="18" rx="9" class="nw-node-rect"/>
+                    <text x="118" y="119" class="nw-node-text" style="font-size: 9px;">Q3</text>
+                    <rect x="176" y="110" width="32" height="18" rx="9" class="nw-node-rect"/>
+                    <text x="192" y="119" class="nw-node-text" style="font-size: 9px;">Q3</text>
+                    <rect x="248" y="110" width="32" height="18" rx="9" class="nw-node-rect"/>
+                    <text x="264" y="119" class="nw-node-text" style="font-size: 9px;">Q3</text>
+
+                    <!-- 8 Leaves -->
+                    <rect x="9" y="160" width="34" height="24" rx="5" class="nw-leaf-ok"/>
+                    <text x="26" y="172" class="nw-leaf-text-ok" style="font-size: 9.5px;">ABC</text>
+                    <text x="26" y="196" class="nw-slot-idx" style="font-size: 7.5px;">YYY</text>
+
+                    <rect x="47" y="160" width="34" height="24" rx="5" class="nw-leaf-empty"/>
+                    <text x="64" y="172" class="nw-leaf-text-empty">&mdash;</text>
+                    <text x="64" y="196" class="nw-slot-idx" style="font-size: 7.5px;">YYN</text>
+
+                    <rect x="83" y="160" width="34" height="24" rx="5" class="nw-leaf-ok"/>
+                    <text x="100" y="172" class="nw-leaf-text-ok" style="font-size: 9.5px;">ACB</text>
+                    <text x="100" y="196" class="nw-slot-idx" style="font-size: 7.5px;">YNY</text>
+
+                    <rect x="119" y="160" width="34" height="24" rx="5" class="nw-leaf-ok"/>
+                    <text x="136" y="172" class="nw-leaf-text-ok" style="font-size: 9.5px;">BAC</text>
+                    <text x="136" y="196" class="nw-slot-idx" style="font-size: 7.5px;">YNN</text>
+
+                    <rect x="157" y="160" width="34" height="24" rx="5" class="nw-leaf-ok"/>
+                    <text x="174" y="172" class="nw-leaf-text-ok" style="font-size: 9.5px;">BCA</text>
+                    <text x="174" y="196" class="nw-slot-idx" style="font-size: 7.5px;">NYY</text>
+
+                    <rect x="193" y="160" width="34" height="24" rx="5" class="nw-leaf-empty"/>
+                    <text x="210" y="172" class="nw-leaf-text-empty">&mdash;</text>
+                    <text x="210" y="196" class="nw-slot-idx" style="font-size: 7.5px;">NYN</text>
+
+                    <rect x="229" y="160" width="34" height="24" rx="5" class="nw-leaf-ok"/>
+                    <text x="246" y="172" class="nw-leaf-text-ok" style="font-size: 9.5px;">CAB</text>
+                    <text x="246" y="196" class="nw-slot-idx" style="font-size: 7.5px;">NNY</text>
+
+                    <rect x="267" y="160" width="34" height="24" rx="5" class="nw-leaf-ok"/>
+                    <text x="284" y="172" class="nw-leaf-text-ok" style="font-size: 9.5px;">CBA</text>
+                    <text x="284" y="196" class="nw-slot-idx" style="font-size: 7.5px;">NNN</text>
+                </svg>
+                <p class="nw-transcript-caption">With 3 questions (&lceil;log<sub>2</sub> 6&rceil; = 3), 8 transcripts give every single ordering its own unambiguous leaf.</p>
+            </div>
+        </div>
+    </div>
+</div>

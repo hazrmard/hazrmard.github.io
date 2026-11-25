@@ -1188,7 +1188,7 @@
             },
             "2n": {
                 space: "2^(n²)",
-                spaceSub: "all pairwise relations",
+                spaceSub: "n×n yes/no binary grid",
                 entropyBits: N_VAL * N_VAL,
                 entropySub: "H(2^(n²)) = n² bits",
                 numHtml: "n²"
@@ -1234,8 +1234,8 @@
                 note: "The classic comparison-sorting wall: factorial entropy (n log₂ n bits) divided by 1 bit per yes/no comparison."
             },
             "n:10": {
-                sym: "Θ(n · log₁₀ n)",
-                note: "Decimal digit lookups cut the step count by log₂ 10 ≈ 3.32× (for fixed-width keys, d digits gives O(d · n) = O(n))."
+                sym: "Θ(n log n)",
+                note: "A fixed constant k = 10 only divides by the constant log₂ 10 ≈ 3.32×—asymptotically still Θ(n log n) unless k grows with n."
             },
             "n:n": {
                 sym: "Θ(n)",
@@ -1244,7 +1244,7 @@
             },
             "2n:2": {
                 sym: "Θ(n²)",
-                note: "With n² independent pairwise bits to determine, 1 bit per step puts a hard quadratic floor at n²."
+                note: "With n² independent cells in an n×n binary grid, 1 bit per step puts a hard quadratic floor at n²."
             },
             "2n:10": {
                 sym: "Θ(n²)",
@@ -1316,10 +1316,372 @@
         render();
     }
 
+    // -------------------------------------------------------------------------
+    // Initialize n -> N Mapping Animation Widget
+    // -------------------------------------------------------------------------
+    function initNtoNWidget(container) {
+        const slider = container.querySelector('[data-role="n-slider"]');
+        const nValEl = container.querySelector('[data-role="n-val"]');
+        const inputCountEl = container.querySelector('[data-role="input-count"]');
+        const inputItemsEl = container.querySelector('[data-role="input-items"]');
+        const btnAnim = container.querySelector('[data-action="animate"]');
+
+        const elMax = container.querySelector('[data-scenario="max"]');
+        const elBin = container.querySelector('[data-scenario="binary"]');
+        const elSort = container.querySelector('[data-scenario="sort"]');
+        const footMax = container.querySelector('[data-foot="max"]');
+        const footBin = container.querySelector('[data-foot="binary"]');
+        const footSort = container.querySelector('[data-foot="sort"]');
+
+        const LETTERS = ["A", "B", "C", "D"];
+        let animTimers = [];
+
+        function permutations(arr) {
+            if (arr.length <= 1) return [arr.slice()];
+            const res = [];
+            for (let i = 0; i < arr.length; i++) {
+                const rest = arr.slice(0, i).concat(arr.slice(i + 1));
+                permutations(rest).forEach((p) => res.push([arr[i]].concat(p)));
+            }
+            return res;
+        }
+
+        function binaryStrings(n) {
+            const total = 1 << n;
+            const res = [];
+            for (let i = 0; i < total; i++) {
+                res.push(i.toString(2).padStart(n, "0"));
+            }
+            return res;
+        }
+
+        function fillChips(targetEl, labels) {
+            while (targetEl.firstChild) targetEl.removeChild(targetEl.firstChild);
+            labels.forEach((txt, idx) => {
+                const span = document.createElement("span");
+                span.className = "nw-nton-chip";
+                span.style.animationDelay = `${Math.min(idx * 18, 280)}ms`;
+                span.textContent = txt;
+                targetEl.appendChild(span);
+            });
+        }
+
+        function render(n) {
+            nValEl.textContent = String(n);
+            inputCountEl.textContent = `n = ${n}`;
+
+            const items = LETTERS.slice(0, n);
+            while (inputItemsEl.firstChild) inputItemsEl.removeChild(inputItemsEl.firstChild);
+            items.forEach((ch, idx) => {
+                const pill = document.createElement("span");
+                pill.className = "nw-nton-item-pill";
+                pill.style.animationDelay = `${idx * 40}ms`;
+                pill.textContent = ch;
+                inputItemsEl.appendChild(pill);
+            });
+
+            const maxOutcomes = items.map((ch) => `max=${ch}`);
+            const binOutcomes = binaryStrings(n);
+            const sortOutcomes = permutations(items).map((p) => p.join(""));
+
+            fillChips(elMax, maxOutcomes);
+            fillChips(elBin, binOutcomes);
+            fillChips(elSort, sortOutcomes);
+
+            footMax.textContent = `N = ${maxOutcomes.length} · H(N) = ${Math.log2(maxOutcomes.length).toFixed(2)} bits`;
+            footBin.textContent = `N = ${binOutcomes.length} · H(N) = ${Math.log2(binOutcomes.length).toFixed(2)} bits`;
+            footSort.textContent = `N = ${sortOutcomes.length} · H(N) = ${Math.log2(sortOutcomes.length).toFixed(2)} bits`;
+        }
+
+        function clearAnim() {
+            animTimers.forEach((id) => clearTimeout(id));
+            animTimers = [];
+        }
+
+        slider.addEventListener("input", () => {
+            clearAnim();
+            render(parseInt(slider.value, 10));
+        });
+
+        btnAnim.addEventListener("click", () => {
+            clearAnim();
+            [2, 3, 4].forEach((nVal, idx) => {
+                const id = setTimeout(() => {
+                    slider.value = String(nVal);
+                    render(nVal);
+                }, idx * 950);
+                animTimers.push(id);
+            });
+        });
+
+        render(parseInt(slider.value, 10) || 3);
+    }
+
+    // -------------------------------------------------------------------------
+    // Initialize Constant k vs n-Dependent k Scaling Chart Widget
+    // -------------------------------------------------------------------------
+    function initKScalingWidget(container) {
+        const svg = container.querySelector("svg");
+        const metricButtons = Array.from(container.querySelectorAll("[data-metric]"));
+        const expSlider = container.querySelector('[data-role="exp-slider"]');
+        const nReadout = container.querySelector('[data-role="n-readout"]');
+        const legendEl = container.querySelector('[data-role="legend"]');
+
+        const W = 680;
+        const H = 310;
+        const PAD = { left: 62, right: 92, top: 22, bottom: 44 };
+        const PLOT_W = W - PAD.left - PAD.right;
+        const PLOT_H = H - PAD.top - PAD.bottom;
+
+        const MIN_EXP = 1; // n = 10
+        const MAX_EXP = 6; // n = 1,000,000
+
+        const SERIES = [
+            {
+                id: "k2",
+                label: "k = 2",
+                sub: "binary (const)",
+                color: "#64748b",
+                dashed: true,
+                ndep: false,
+                perItem: (n) => Math.log2(n)
+            },
+            {
+                id: "k10",
+                label: "k = 10",
+                sub: "decimal (const)",
+                color: "#b48224",
+                dashed: true,
+                ndep: false,
+                perItem: (n) => Math.log2(n) / Math.log2(10)
+            },
+            {
+                id: "k256",
+                label: "k = 256",
+                sub: "byte (const)",
+                color: "#c26d3a",
+                dashed: true,
+                ndep: false,
+                perItem: (n) => Math.log2(n) / 8
+            },
+            {
+                id: "ksqrt",
+                label: "k = √n",
+                sub: "2-pass radix",
+                color: "#2b7a91",
+                dashed: false,
+                ndep: true,
+                perItem: () => 2
+            },
+            {
+                id: "kn",
+                label: "k = n",
+                sub: "direct index",
+                color: "#1f7a68",
+                dashed: false,
+                ndep: true,
+                perItem: () => 1
+            }
+        ];
+
+        let metric = "per-item";
+        let currentExp = parseFloat(expSlider.value) || 4;
+
+        function xForExp(exp) {
+            return PAD.left + ((exp - MIN_EXP) / (MAX_EXP - MIN_EXP)) * PLOT_W;
+        }
+
+        function yForVal(val) {
+            if (metric === "per-item") {
+                const maxY = 22;
+                return PAD.top + PLOT_H - (Math.min(maxY, Math.max(0, val)) / maxY) * PLOT_H;
+            }
+            const minLog = 1; // 10^1
+            const maxLog = 8; // 10^8
+            const lv = Math.log10(Math.max(10, val));
+            return PAD.top + PLOT_H - ((lv - minLog) / (maxLog - minLog)) * PLOT_H;
+        }
+
+        function formatCompact(num) {
+            if (num >= 1e6) return `${(num / 1e6).toFixed(1)}M`;
+            if (num >= 1e3) return `${(num / 1e3).toFixed(1)}k`;
+            return Math.round(num).toLocaleString("en-US");
+        }
+
+        function render() {
+            const nCur = Math.round(Math.pow(10, currentExp));
+            nReadout.textContent = nCur.toLocaleString("en-US");
+
+            while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+            // Gridlines & Y ticks
+            const yTicks = metric === "per-item" ? [0, 5, 10, 15, 20] : [1, 2, 3, 4, 5, 6, 7, 8];
+            yTicks.forEach((tk) => {
+                const y = metric === "per-item" ? yForVal(tk) : yForVal(Math.pow(10, tk));
+                svg.appendChild(svgEl("line", {
+                    x1: PAD.left, y1: y.toFixed(1), x2: PAD.left + PLOT_W, y2: y.toFixed(1),
+                    class: "nw-kscale-gridline"
+                }));
+                const lbl = metric === "per-item" ? String(tk) : `10^${tk}`;
+                svg.appendChild(svgEl("text", {
+                    x: PAD.left - 8, y: y.toFixed(1),
+                    class: "nw-kscale-tick", "text-anchor": "end", "dominant-baseline": "central"
+                }, lbl));
+            });
+
+            // X ticks (10^1 .. 10^6)
+            for (let e = MIN_EXP; e <= MAX_EXP; e++) {
+                const x = xForExp(e);
+                svg.appendChild(svgEl("line", {
+                    x1: x.toFixed(1), y1: PAD.top, x2: x.toFixed(1), y2: PAD.top + PLOT_H,
+                    class: "nw-kscale-gridline"
+                }));
+                const sup = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶"][e] || String(e);
+                svg.appendChild(svgEl("text", {
+                    x: x.toFixed(1), y: PAD.top + PLOT_H + 16,
+                    class: "nw-kscale-tick", "text-anchor": "middle"
+                }, e === 1 ? "10" : `10${sup}`));
+            }
+
+            // Axes
+            svg.appendChild(svgEl("line", {
+                x1: PAD.left, y1: PAD.top + PLOT_H, x2: PAD.left + PLOT_W, y2: PAD.top + PLOT_H,
+                class: "nw-kscale-axis"
+            }));
+            svg.appendChild(svgEl("line", {
+                x1: PAD.left, y1: PAD.top, x2: PAD.left, y2: PAD.top + PLOT_H,
+                class: "nw-kscale-axis"
+            }));
+
+            // Axis titles
+            svg.appendChild(svgEl("text", {
+                x: PAD.left + PLOT_W / 2, y: H - 8,
+                class: "nw-kscale-axis-title", "text-anchor": "middle"
+            }, "Input size n (log scale)"));
+            svg.appendChild(svgEl("text", {
+                x: 16, y: PAD.top + PLOT_H / 2,
+                class: "nw-kscale-axis-title", "text-anchor": "middle",
+                transform: `rotate(-90 16 ${PAD.top + PLOT_H / 2})`
+            }, metric === "per-item" ? "Steps per item (log_k n)" : "Total steps (log scale)"));
+
+            // Curves
+            const SAMPLES = 80;
+            const endLabelYs = [];
+
+            SERIES.forEach((s) => {
+                const pts = [];
+                for (let i = 0; i <= SAMPLES; i++) {
+                    const exp = MIN_EXP + (i / SAMPLES) * (MAX_EXP - MIN_EXP);
+                    const n = Math.pow(10, exp);
+                    const per = s.perItem(n);
+                    const yVal = metric === "per-item" ? per : n * per;
+                    pts.push(`${i === 0 ? "M" : "L"} ${xForExp(exp).toFixed(1)} ${yForVal(yVal).toFixed(1)}`);
+                }
+                svg.appendChild(svgEl("path", {
+                    d: pts.join(" "),
+                    fill: "none",
+                    stroke: s.color,
+                    "stroke-width": s.ndep ? 2.8 : 2,
+                    "stroke-dasharray": s.dashed ? "5 4" : "none"
+                }));
+
+                // End-of-line label (with simple vertical separation to avoid overlap)
+                const nEnd = Math.pow(10, MAX_EXP);
+                const endVal = metric === "per-item" ? s.perItem(nEnd) : nEnd * s.perItem(nEnd);
+                let ly = yForVal(endVal);
+                for (let j = 0; j < endLabelYs.length; j++) {
+                    if (Math.abs(ly - endLabelYs[j]) < 12) {
+                        ly = endLabelYs[j] + 12;
+                    }
+                }
+                endLabelYs.push(ly);
+
+                svg.appendChild(svgEl("text", {
+                    x: PAD.left + PLOT_W + 7,
+                    y: ly.toFixed(1),
+                    class: "nw-kscale-curve-label",
+                    fill: s.color
+                }, s.label));
+            });
+
+            // Vertical inspection cursor
+            const cx = xForExp(currentExp);
+            svg.appendChild(svgEl("line", {
+                x1: cx.toFixed(1), y1: PAD.top, x2: cx.toFixed(1), y2: PAD.top + PLOT_H,
+                class: "nw-kscale-cursor"
+            }));
+
+            const binaryPer = Math.log2(nCur);
+
+            // Legend cards + cursor dots
+            while (legendEl.firstChild) legendEl.removeChild(legendEl.firstChild);
+
+            SERIES.forEach((s) => {
+                const per = s.perItem(nCur);
+                const val = metric === "per-item" ? per : nCur * per;
+                const cy = yForVal(val);
+
+                svg.appendChild(svgEl("circle", {
+                    cx: cx.toFixed(1), cy: cy.toFixed(1), r: s.ndep ? 4.5 : 3.8,
+                    fill: s.color, stroke: "#ffffff", "stroke-width": 1.4
+                }));
+
+                const ratio = binaryPer / per;
+                const item = document.createElement("div");
+                item.className = s.ndep ? "nw-kscale-item is-ndep" : "nw-kscale-item";
+
+                const head = document.createElement("div");
+                head.className = "nw-kscale-item-head";
+                const sw = document.createElement("span");
+                sw.className = s.dashed ? "nw-kscale-swatch is-dashed" : "nw-kscale-swatch";
+                sw.style.color = s.color;
+                sw.style.backgroundColor = s.color;
+                head.appendChild(sw);
+                head.appendChild(document.createTextNode(s.label));
+
+                const valEl = document.createElement("div");
+                valEl.className = "nw-kscale-item-val";
+                valEl.textContent = metric === "per-item" ? `${per.toFixed(2)} / item` : formatCompact(val);
+
+                const ratioEl = document.createElement("div");
+                ratioEl.className = "nw-kscale-item-ratio";
+                if (s.id === "k2") {
+                    ratioEl.textContent = "baseline (1.0×)";
+                } else if (!s.ndep) {
+                    ratioEl.textContent = `${ratio.toFixed(2)}× (fixed)`;
+                } else {
+                    ratioEl.textContent = `${ratio.toFixed(1)}× (grows w/ n)`;
+                }
+
+                item.appendChild(head);
+                item.appendChild(valEl);
+                item.appendChild(ratioEl);
+                legendEl.appendChild(item);
+            });
+        }
+
+        metricButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                metric = btn.getAttribute("data-metric");
+                metricButtons.forEach((b) => b.classList.toggle("is-active", b === btn));
+                render();
+            });
+        });
+
+        expSlider.addEventListener("input", () => {
+            currentExp = parseFloat(expSlider.value);
+            render();
+        });
+
+        render();
+    }
+
     function boot() {
         document.querySelectorAll('[data-nlogn-widget="binary-tree"]').forEach(initBinaryTreeWidget);
         document.querySelectorAll('[data-nlogn-widget="radix-tree"]').forEach(initRadixTreeWidget);
         document.querySelectorAll('[data-nlogn-widget="floor-explorer"]').forEach(initFloorExplorerWidget);
+        document.querySelectorAll('[data-nlogn-widget="n-to-N"]').forEach(initNtoNWidget);
+        document.querySelectorAll('[data-nlogn-widget="k-scaling"]').forEach(initKScalingWidget);
     }
 
     if (document.readyState === "loading") {
