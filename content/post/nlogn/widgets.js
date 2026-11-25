@@ -1183,8 +1183,8 @@
                 space: "n!",
                 spaceSub: "factorial orderings",
                 entropyBits: LOG2_NFACT,
-                entropySub: "exact log₂(1000!)",
-                numHtml: "n · log₂ n"
+                entropySub: "log₂(n!) ≈ n log₂ n − 1.44n",
+                numHtml: "log₂(n!) ≈ n · log₂ n"
             },
             "2n": {
                 space: "2^(n²)",
@@ -1199,60 +1199,60 @@
             "2": {
                 bits: 1,
                 bpoText: "1.00 bit/step",
-                bpoSub: "binary yes/no fork",
+                bpoSub: "2-way comparison fork",
                 denHtml: "1"
             },
             "10": {
                 bits: Math.log2(10),
                 bpoText: "3.32 bits/step",
-                bpoSub: "base-10 digit lookup",
+                bpoSub: "10-way digit lookup",
                 denHtml: "log₂ 10"
             },
             "n": {
                 bits: LOG2_N,
                 bpoText: `${LOG2_N.toFixed(2)} bits/step`,
-                bpoSub: "direct n-way address",
+                bpoSub: "n-way direct address",
                 denHtml: "log₂ n"
             }
         };
 
         const COMBO_INFO = {
             "2:2": {
-                sym: "Θ(n)",
-                note: "Each item needs 1 bit and each yes/no step supplies 1 bit—no log factor ever appears."
+                sym: "O(n)",
+                note: "Each item needs 1 bit and each 2-way step supplies 1 bit—no log factor ever appears."
             },
             "2:10": {
-                sym: "Θ(n)",
-                note: "A constant-width 10-way lookup trims the constant factor by 3.32×, while keeping linear Θ(n) scaling."
+                sym: "O(n)",
+                note: "A constant 10-way lookup trims the constant factor by 3.32×, while keeping linear O(n) scaling."
             },
             "2:n": {
-                sym: "Θ(n / log n)",
-                note: "Packing log₂ n binary labels into a single word-sized index drops the information floor below n."
+                sym: "O(n / log n)",
+                note: "Packing log₂ n yes/no labels into one word-sized index drops the information floor below n."
             },
             "n:2": {
-                sym: "Θ(n log n)",
-                note: "The classic comparison-sorting wall: factorial entropy (n log₂ n bits) divided by 1 bit per yes/no comparison."
+                sym: "O(n log n)",
+                note: "The classic comparison-sorting wall: factorial entropy (log₂(n!) ≈ n log₂ n − 1.44n bits) divided by 1 bit per 2-way step."
             },
             "n:10": {
-                sym: "Θ(n log n)",
-                note: "A fixed constant k = 10 only divides by the constant log₂ 10 ≈ 3.32×—asymptotically still Θ(n log n) unless k grows with n."
+                sym: "O(n log n)",
+                note: "A fixed constant k = 10 only divides by the constant log₂ 10 ≈ 3.32×—asymptotically still O(n log n) unless k grows with n."
             },
             "n:n": {
-                sym: "Θ(n)",
+                sym: "O(n)",
                 cancel: true,
-                note: "When a single memory index resolves 1-of-n buckets (log₂ n bits), the log₂ n factor cancels out completely—leaving linear O(n)."
+                note: "When a single n-way index resolves 1-of-n slots (log₂ n bits), the log₂ n factor cancels out completely—leaving linear O(n)."
             },
             "2n:2": {
-                sym: "Θ(n²)",
-                note: "With n² independent cells in an n×n binary grid, 1 bit per step puts a hard quadratic floor at n²."
+                sym: "O(n²)",
+                note: "With n² independent cells in an n×n binary grid, 1 bit per 2-way step puts a hard quadratic floor at n²."
             },
             "2n:10": {
-                sym: "Θ(n²)",
-                note: "A constant 10-way lookup improves the constant factor by 3.32×, but cannot change the quadratic n² scaling."
+                sym: "O(n²)",
+                note: "A constant 10-way lookup trims the constant factor by 3.32×, but cannot change the quadratic O(n²) scaling."
             },
             "2n:n": {
-                sym: "Θ(n² / log n)",
-                note: "Word-level n-way lookups save a log₂ n factor (the classic Four Russians speedup), though the problem remains near-quadratic."
+                sym: "O(n² / log n)",
+                note: "Word-level n-way lookups save a log₂ n factor (the Four Russians speedup), though the problem remains near-quadratic."
             }
         };
 
@@ -1423,7 +1423,7 @@
     function initKScalingWidget(container) {
         const svg = container.querySelector("svg");
         const metricButtons = Array.from(container.querySelectorAll("[data-metric]"));
-        const expSlider = container.querySelector('[data-role="exp-slider"]');
+        const slider = container.querySelector('[data-role="exp-slider"]');
         const nReadout = container.querySelector('[data-role="n-readout"]');
         const legendEl = container.querySelector('[data-role="legend"]');
 
@@ -1435,39 +1435,37 @@
 
         const MIN_EXP = 1; // n = 10
         const MAX_EXP = 6; // n = 1,000,000
+        const MAX_N = 1000000;
+        const MAX_TOTAL_Y = 21000000; // slightly above 1M * log2(1M) ≈ 19.93M
 
         const SERIES = [
             {
                 id: "k2",
                 label: "k = 2",
-                sub: "binary (const)",
                 color: "#64748b",
                 dashed: true,
                 ndep: false,
-                perItem: (n) => Math.log2(n)
+                perItem: (n) => Math.log2(Math.max(2, n))
             },
             {
                 id: "k10",
                 label: "k = 10",
-                sub: "decimal (const)",
                 color: "#b48224",
                 dashed: true,
                 ndep: false,
-                perItem: (n) => Math.log2(n) / Math.log2(10)
+                perItem: (n) => Math.log2(Math.max(2, n)) / Math.log2(10)
             },
             {
                 id: "k256",
                 label: "k = 256",
-                sub: "byte (const)",
                 color: "#c26d3a",
                 dashed: true,
                 ndep: false,
-                perItem: (n) => Math.log2(n) / 8
+                perItem: (n) => Math.log2(Math.max(2, n)) / 8
             },
             {
                 id: "ksqrt",
                 label: "k = √n",
-                sub: "2-pass radix",
                 color: "#2b7a91",
                 dashed: false,
                 ndep: true,
@@ -1476,7 +1474,6 @@
             {
                 id: "kn",
                 label: "k = n",
-                sub: "direct index",
                 color: "#1f7a68",
                 dashed: false,
                 ndep: true,
@@ -1485,10 +1482,14 @@
         ];
 
         let metric = "per-item";
-        let currentExp = parseFloat(expSlider.value) || 4;
+        let sliderPos = (parseFloat(slider.value) || 60) / 100; // 0..1
 
-        function xForExp(exp) {
+        function xForPerItemExp(exp) {
             return PAD.left + ((exp - MIN_EXP) / (MAX_EXP - MIN_EXP)) * PLOT_W;
+        }
+
+        function xForLinearN(n) {
+            return PAD.left + (Math.min(MAX_N, Math.max(0, n)) / MAX_N) * PLOT_W;
         }
 
         function yForVal(val) {
@@ -1496,51 +1497,78 @@
                 const maxY = 22;
                 return PAD.top + PLOT_H - (Math.min(maxY, Math.max(0, val)) / maxY) * PLOT_H;
             }
-            const minLog = 1; // 10^1
-            const maxLog = 8; // 10^8
-            const lv = Math.log10(Math.max(10, val));
-            return PAD.top + PLOT_H - ((lv - minLog) / (maxLog - minLog)) * PLOT_H;
+            return PAD.top + PLOT_H - (Math.min(MAX_TOTAL_Y, Math.max(0, val)) / MAX_TOTAL_Y) * PLOT_H;
         }
 
         function formatCompact(num) {
-            if (num >= 1e6) return `${(num / 1e6).toFixed(1)}M`;
+            if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`;
             if (num >= 1e3) return `${(num / 1e3).toFixed(1)}k`;
             return Math.round(num).toLocaleString("en-US");
         }
 
         function render() {
-            const nCur = Math.round(Math.pow(10, currentExp));
+            const nCur = metric === "per-item"
+                ? Math.round(Math.pow(10, MIN_EXP + sliderPos * (MAX_EXP - MIN_EXP)))
+                : Math.max(10000, Math.round(sliderPos * MAX_N));
+
             nReadout.textContent = nCur.toLocaleString("en-US");
 
             while (svg.firstChild) svg.removeChild(svg.firstChild);
 
             // Gridlines & Y ticks
-            const yTicks = metric === "per-item" ? [0, 5, 10, 15, 20] : [1, 2, 3, 4, 5, 6, 7, 8];
-            yTicks.forEach((tk) => {
-                const y = metric === "per-item" ? yForVal(tk) : yForVal(Math.pow(10, tk));
-                svg.appendChild(svgEl("line", {
-                    x1: PAD.left, y1: y.toFixed(1), x2: PAD.left + PLOT_W, y2: y.toFixed(1),
-                    class: "nw-kscale-gridline"
-                }));
-                const lbl = metric === "per-item" ? String(tk) : `10^${tk}`;
-                svg.appendChild(svgEl("text", {
-                    x: PAD.left - 8, y: y.toFixed(1),
-                    class: "nw-kscale-tick", "text-anchor": "end", "dominant-baseline": "central"
-                }, lbl));
-            });
+            if (metric === "per-item") {
+                [0, 5, 10, 15, 20].forEach((tk) => {
+                    const y = yForVal(tk);
+                    svg.appendChild(svgEl("line", {
+                        x1: PAD.left, y1: y.toFixed(1), x2: PAD.left + PLOT_W, y2: y.toFixed(1),
+                        class: "nw-kscale-gridline"
+                    }));
+                    svg.appendChild(svgEl("text", {
+                        x: PAD.left - 8, y: y.toFixed(1),
+                        class: "nw-kscale-tick", "text-anchor": "end", "dominant-baseline": "central"
+                    }, String(tk)));
+                });
 
-            // X ticks (10^1 .. 10^6)
-            for (let e = MIN_EXP; e <= MAX_EXP; e++) {
-                const x = xForExp(e);
-                svg.appendChild(svgEl("line", {
-                    x1: x.toFixed(1), y1: PAD.top, x2: x.toFixed(1), y2: PAD.top + PLOT_H,
-                    class: "nw-kscale-gridline"
-                }));
-                const sup = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶"][e] || String(e);
-                svg.appendChild(svgEl("text", {
-                    x: x.toFixed(1), y: PAD.top + PLOT_H + 16,
-                    class: "nw-kscale-tick", "text-anchor": "middle"
-                }, e === 1 ? "10" : `10${sup}`));
+                // X ticks (log scale: 10 .. 10⁶)
+                for (let e = MIN_EXP; e <= MAX_EXP; e++) {
+                    const x = xForPerItemExp(e);
+                    svg.appendChild(svgEl("line", {
+                        x1: x.toFixed(1), y1: PAD.top, x2: x.toFixed(1), y2: PAD.top + PLOT_H,
+                        class: "nw-kscale-gridline"
+                    }));
+                    const sup = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶"][e] || String(e);
+                    svg.appendChild(svgEl("text", {
+                        x: x.toFixed(1), y: PAD.top + PLOT_H + 16,
+                        class: "nw-kscale-tick", "text-anchor": "middle"
+                    }, e === 1 ? "10" : `10${sup}`));
+                }
+            } else {
+                // Linear Y ticks (0 .. 20M)
+                [0, 5e6, 10e6, 15e6, 20e6].forEach((tk) => {
+                    const y = yForVal(tk);
+                    svg.appendChild(svgEl("line", {
+                        x1: PAD.left, y1: y.toFixed(1), x2: PAD.left + PLOT_W, y2: y.toFixed(1),
+                        class: "nw-kscale-gridline"
+                    }));
+                    svg.appendChild(svgEl("text", {
+                        x: PAD.left - 8, y: y.toFixed(1),
+                        class: "nw-kscale-tick", "text-anchor": "end", "dominant-baseline": "central"
+                    }, tk === 0 ? "0" : `${tk / 1e6}M`));
+                });
+
+                // Linear X ticks (0 .. 1M)
+                [0, 200000, 400000, 600000, 800000, 1000000].forEach((tk) => {
+                    const x = xForLinearN(tk);
+                    svg.appendChild(svgEl("line", {
+                        x1: x.toFixed(1), y1: PAD.top, x2: x.toFixed(1), y2: PAD.top + PLOT_H,
+                        class: "nw-kscale-gridline"
+                    }));
+                    const lbl = tk === 0 ? "0" : tk === 1000000 ? "1M" : `${tk / 1000}k`;
+                    svg.appendChild(svgEl("text", {
+                        x: x.toFixed(1), y: PAD.top + PLOT_H + 16,
+                        class: "nw-kscale-tick", "text-anchor": "middle"
+                    }, lbl));
+                });
             }
 
             // Axes
@@ -1557,25 +1585,33 @@
             svg.appendChild(svgEl("text", {
                 x: PAD.left + PLOT_W / 2, y: H - 8,
                 class: "nw-kscale-axis-title", "text-anchor": "middle"
-            }, "Input size n (log scale)"));
+            }, metric === "per-item" ? "Input size n (log scale)" : "Input size n (linear scale)"));
             svg.appendChild(svgEl("text", {
                 x: 16, y: PAD.top + PLOT_H / 2,
                 class: "nw-kscale-axis-title", "text-anchor": "middle",
                 transform: `rotate(-90 16 ${PAD.top + PLOT_H / 2})`
-            }, metric === "per-item" ? "Steps per item (log_k n)" : "Total steps (log scale)"));
+            }, metric === "per-item" ? "Steps per item (logₖ n)" : "Total steps (linear scale)"));
 
             // Curves
             const SAMPLES = 80;
-            const endLabelYs = [];
+            const endLabels = [];
 
             SERIES.forEach((s) => {
                 const pts = [];
                 for (let i = 0; i <= SAMPLES; i++) {
-                    const exp = MIN_EXP + (i / SAMPLES) * (MAX_EXP - MIN_EXP);
-                    const n = Math.pow(10, exp);
-                    const per = s.perItem(n);
-                    const yVal = metric === "per-item" ? per : n * per;
-                    pts.push(`${i === 0 ? "M" : "L"} ${xForExp(exp).toFixed(1)} ${yForVal(yVal).toFixed(1)}`);
+                    const frac = i / SAMPLES;
+                    let x, yVal;
+                    if (metric === "per-item") {
+                        const exp = MIN_EXP + frac * (MAX_EXP - MIN_EXP);
+                        const n = Math.pow(10, exp);
+                        x = xForPerItemExp(exp);
+                        yVal = s.perItem(n);
+                    } else {
+                        const n = frac * MAX_N;
+                        x = xForLinearN(n);
+                        yVal = n === 0 ? 0 : n * s.perItem(n);
+                    }
+                    pts.push(`${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${yForVal(yVal).toFixed(1)}`);
                 }
                 svg.appendChild(svgEl("path", {
                     d: pts.join(" "),
@@ -1585,27 +1621,36 @@
                     "stroke-dasharray": s.dashed ? "5 4" : "none"
                 }));
 
-                // End-of-line label (with simple vertical separation to avoid overlap)
-                const nEnd = Math.pow(10, MAX_EXP);
-                const endVal = metric === "per-item" ? s.perItem(nEnd) : nEnd * s.perItem(nEnd);
-                let ly = yForVal(endVal);
-                for (let j = 0; j < endLabelYs.length; j++) {
-                    if (Math.abs(ly - endLabelYs[j]) < 12) {
-                        ly = endLabelYs[j] + 12;
-                    }
-                }
-                endLabelYs.push(ly);
+                const endVal = metric === "per-item" ? s.perItem(MAX_N) : MAX_N * s.perItem(MAX_N);
+                endLabels.push({ s: s, y: yForVal(endVal) });
+            });
 
+            // De-overlap end-of-line labels cleanly from top to bottom
+            endLabels.sort((a, b) => a.y - b.y);
+            const minGap = 13;
+            for (let i = 1; i < endLabels.length; i++) {
+                if (endLabels[i].y - endLabels[i - 1].y < minGap) {
+                    endLabels[i].y = endLabels[i - 1].y + minGap;
+                }
+            }
+            const maxLabelY = PAD.top + PLOT_H;
+            if (endLabels.length && endLabels[endLabels.length - 1].y > maxLabelY) {
+                const shift = endLabels[endLabels.length - 1].y - maxLabelY;
+                endLabels.forEach((lbl) => { lbl.y -= shift; });
+            }
+            endLabels.forEach((lbl) => {
                 svg.appendChild(svgEl("text", {
                     x: PAD.left + PLOT_W + 7,
-                    y: ly.toFixed(1),
+                    y: lbl.y.toFixed(1),
                     class: "nw-kscale-curve-label",
-                    fill: s.color
-                }, s.label));
+                    fill: lbl.s.color
+                }, lbl.s.label));
             });
 
             // Vertical inspection cursor
-            const cx = xForExp(currentExp);
+            const cx = metric === "per-item"
+                ? xForPerItemExp(MIN_EXP + sliderPos * (MAX_EXP - MIN_EXP))
+                : xForLinearN(nCur);
             svg.appendChild(svgEl("line", {
                 x1: cx.toFixed(1), y1: PAD.top, x2: cx.toFixed(1), y2: PAD.top + PLOT_H,
                 class: "nw-kscale-cursor"
@@ -1664,12 +1709,17 @@
             btn.addEventListener("click", () => {
                 metric = btn.getAttribute("data-metric");
                 metricButtons.forEach((b) => b.classList.toggle("is-active", b === btn));
+                // Default to 500,000 (50%) when switching to linear total view for clear spacing
+                if (metric === "total" && sliderPos < 0.05) {
+                    sliderPos = 0.5;
+                    slider.value = "50";
+                }
                 render();
             });
         });
 
-        expSlider.addEventListener("input", () => {
-            currentExp = parseFloat(expSlider.value);
+        slider.addEventListener("input", () => {
+            sliderPos = (parseFloat(slider.value) || 0) / 100;
             render();
         });
 

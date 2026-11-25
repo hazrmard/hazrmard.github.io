@@ -10,12 +10,12 @@
         <div class="nw-controls">
             <div class="nw-segmented" role="group" aria-label="Chart y-axis metric">
                 <button type="button" class="nw-seg-btn is-active" data-metric="per-item">Steps per item (log<sub>k</sub> n)</button>
-                <button type="button" class="nw-seg-btn" data-metric="total">Total steps (n log<sub>k</sub> n)</button>
+                <button type="button" class="nw-seg-btn" data-metric="total">Total steps (linear axes)</button>
             </div>
             <div class="nw-slider-wrap">
                 <label for="nw-kscale-slider">Inspect <em>n</em>:</label>
-                <input id="nw-kscale-slider" type="range" min="1" max="6" step="0.1" value="4" data-role="exp-slider" aria-label="Log10 of input size n from 10 to 1,000,000">
-                <span class="nw-slider-val" data-role="n-readout" style="min-width: 68px;">10,000</span>
+                <input id="nw-kscale-slider" type="range" min="0" max="100" step="1" value="60" data-role="exp-slider" aria-label="Input size n from 10 to 1,000,000">
+                <span class="nw-slider-val" data-role="n-readout" style="min-width: 72px;">10,000</span>
             </div>
         </div>
 
