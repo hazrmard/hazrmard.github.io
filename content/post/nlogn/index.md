@@ -11,11 +11,13 @@ hasequations = true
 haspython = false
 tableofcontents = true
 draft = true
-image = ""
+image = "./thumbnail.jpg"
 spotlight = false
 ai_assistance = "AI synthesis from notes"
 epistemic_status = "High"
 +++
+
+{{< figure src="thumbnail.jpg" width="256" alt="Cave painting of a fencer piercing a black box filled with numbers" caption="Piercing the black box to break through the $n \log n$ barrier." >}}
 
 Recently, headlines have kept making the rounds about sub-$n \log n$ algorithms—first [Duan et al. breaking Dijkstra's $O(m + n \log n)$ sorting barrier](https://arxiv.org/abs/2504.17033) for directed shortest paths, and then a [preprint claiming sub-$n \log n$ integer multiplication](https://github.com/openai/math/blob/main/preprints/Integer-multiplication-below-n-log-n-September-23-2026/paper.pdf).
 
